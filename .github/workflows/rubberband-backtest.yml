@@ -1,0 +1,36 @@
+name: RubberBand Backtest
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "RubberBand/**"
+
+jobs:
+  backtest:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = (Get-Command python.exe).Source
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+
+      - name: Run Backtest
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          chcp 65001 > $null
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py

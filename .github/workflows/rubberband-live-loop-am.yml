@@ -1,0 +1,93 @@
+name: RubberBand Live Paper (loop AM)
+on:
+  schedule:
+    # Fire twice to reduce GitHub cron jitter impact (UTC)
+    - cron: "25 13 * * 1-5"   # 6:25am PT
+    - cron: "30 13 * * 1-5"   # 6:30am PT
+  workflow_dispatch:
+
+concurrency:
+  group: rubberband-live-paper-loop-am
+  cancel-in-progress: true
+
+jobs:
+  trade:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 600
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = (Get-Command python.exe).Source
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+
+      # NEW: wait guard so the loop begins right at the bell, even if cron is early/late
+      - name: Wait until market open (guard)
+        shell: powershell
+        env:
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: |
+          chcp 65001 > $null
+          $H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }
+          function Get-Clock {
+            Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8
+          }
+          $maxWaitMin = 20
+          $start = Get-Date
+          while ($true) {
+            try {
+              $clk = Get-Clock
+              if ($clk.is_open) { Write-Host "Market is open → proceed."; break }
+              $now = [DateTimeOffset]::UtcNow
+              $nextOpen = [DateTimeOffset]::Parse($clk.next_open)
+              if ($now -lt $nextOpen) {
+                $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)
+                Write-Host "Waiting $sec s until next_open $($clk.next_open)..."
+                Start-Sleep -Seconds $sec
+              } else {
+                Write-Host "Past next_open window; continuing."
+                break
+              }
+              if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {
+                Write-Host "Exceeded $maxWaitMin min wait. Continuing."
+                break
+              }
+            } catch {
+              Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."
+              Start-Sleep -Seconds 15
+            }
+          }
+
+      - name: Run market loop (paper trading)
+        shell: powershell
+        env:
+          # ✅ Correct envs your code actually reads
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+
+          # (Optional) back-compat aliases also understood by your code
+          ALPACA_KEY:   ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
+
+          # Control flags
+          DRY_RUN:  "0"
+          FORCE_RUN: "0"
+
+          PYTHONUNBUFFERED: "1"
+        run: |
+          chcp 65001 > $null
+          # 👇 set PYTHONPATH for THIS step (so Python can import RubberBand)
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py

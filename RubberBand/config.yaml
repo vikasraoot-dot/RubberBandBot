@@ -1,0 +1,93 @@
+# === RubberBand/config.yaml ===
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INTERVALS / PERIODS
+# ──────────────────────────────────────────────────────────────────────────────
+intervals: ["15m"]
+periods:
+  "15m": "10d"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# SESSION / DATA
+# ──────────────────────────────────────────────────────────────────────────────
+timezone: "US/Eastern"
+rth_only: true
+rth_start: "09:30"
+rth_end:   "15:55"
+
+# Entry Windows (Eastern Time) - Avoid first 15m volatility
+entry_windows:
+  - start: "09:45"
+    end: "15:45"
+
+bar_limit: 10000
+feed: "iex"
+
+run:
+  force_run: 0
+  dry_run: 0
+
+# ──────────────────────────────────────────────────────────────────────────────
+# INDICATORS
+# ──────────────────────────────────────────────────────────────────────────────
+keltner_length: 20
+keltner_mult: 2.0
+atr_length: 14
+rsi_length: 14
+
+# ──────────────────────────────────────────────────────────────────────────────
+# RISK CONTROLS
+# ──────────────────────────────────────────────────────────────────────────────
+flatten_minutes_before_close: 15
+entry_cutoff_min: 20
+
+# POSITION / SIZING
+allow_shorts: false
+qty: 10000
+max_shares_per_trade: 10000
+max_notional_per_trade: 2000
+max_open_trades_per_ticker: 1
+
+# ──────────────────────────────────────────────────────────────────────────────
+# BRACKET ORDERS
+# ──────────────────────────────────────────────────────────────────────────────
+brackets:
+  enabled: true
+  atr_mult_sl: 1.5          # Stop Loss = 1.5 ATR
+  take_profit_r: 2.0        # Take Profit = 2.0 ATR (Optimized)
+
+# Breakeven (Optional)
+breakeven:
+  enabled: true
+  trigger_r: 1.0            # Move to BE at 1.0 R
+  bump_ticks: 2
+  tick_size: 0.01
+
+# ──────────────────────────────────────────────────────────────────────────────
+# FILTERS / GATES
+# ──────────────────────────────────────────────────────────────────────────────
+filters:
+  rsi_oversold: 25           # Buy when RSI < 25 (Optimized)
+  rsi_overbought: 70         # (Future use for shorts)
+  min_price: 5.0
+  min_dollar_vol: 5000000    # Liquid stocks only
+  trend_filter_sma: 0        # Disabled (Too restrictive)
+
+# ──────────────────────────────────────────────────────────────────────────────
+# EXIT STRATEGY
+# ──────────────────────────────────────────────────────────────────────────────
+exit_at_mean: true
+exit_at_upper: false
+
+# ──────────────────────────────────────────────────────────────────────────────
+# OUTPUT
+# ──────────────────────────────────────────────────────────────────────────────
+results_dir: "results"
+
+# ──────────────────────────────────────────────────────────────────────────────
+# BROKER
+# ──────────────────────────────────────────────────────────────────────────────
+broker:
+  base_url: "https://paper-api.alpaca.markets"
+  key: ""
+  secret: ""

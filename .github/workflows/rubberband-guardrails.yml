@@ -1,0 +1,41 @@
+name: RubberBand Guardrails
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "RubberBand/**"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "RubberBand/**"
+
+jobs:
+  guardrails:
+    runs-on: [self-hosted, windows]
+    defaults:
+      run:
+        shell: powershell
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set Python path
+        run: echo "PYTHON_EXE=C:\Program Files\Python313\python.exe" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip
+          if (Test-Path "RubberBand\requirements.txt") {
+            & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+          } else {
+            & "$env:PYTHON_EXE" -m pip install pandas requests pyyaml pytz
+          }
+          & "$env:PYTHON_EXE" -m pip install pytest requests-mock
+
+      - name: Run guardrails tests
+        env:
+          ALPACA_API_KEY: "test"
+          ALPACA_API_SECRET: "test"
+          ALPACA_BASE_URL: "https://paper-api.alpaca.markets"
+        run: |
+          & "$env:PYTHON_EXE" -m pytest -k guardrails -q
