@@ -4,7 +4,6 @@ import os, json, time, math, datetime as dt
 from typing import Dict, List, Any, Optional, Iterable, Tuple
 import requests
 import pandas as pd
-
 ISO_UTC = "%Y-%m-%dT%H:%M:%SZ"
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -12,18 +11,14 @@ ISO_UTC = "%Y-%m-%dT%H:%M:%SZ"
 # ──────────────────────────────────────────────────────────────────────────────
 def load_symbols_from_file(path: str) -> list[str]:
     """
-    Compatibility wrapper used by some scripts.
-    Delegates to EMAMerged.src.utils.read_tickers.
+    Read tickers from a file, ignoring comments and empty lines.
     """
     try:
-        from EMAMerged.src.utils import read_tickers
-        return read_tickers(path)
+        with open(path, "r", encoding="utf-8") as f:
+            return [ln.strip() for ln in f if ln.strip() and not ln.startswith("#")]
     except Exception:
         return []
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Small time helpers
-# ──────────────────────────────────────────────────────────────────────────────
 def _now_utc() -> dt.datetime:
     return dt.datetime.now(dt.UTC)
 
