@@ -290,8 +290,32 @@ def main() -> int:
             "long_signal": 1 if long_signal else 0,
             "ref_bar_ts": str(df.index[-1]),
             "last_close": close,
+        }
+        
+        # Gating: Check if already in position
+        if sym in positions:
+            try:
+                log.gate(
+                    symbol=sym, session=session, cid=sig_row["cid"],
+                    decision="BLOCK", reasons=["already in position"]
+                )
+            except Exception:
+                pass
+            continue
+
+        # Gating: Check Signal
+        if not long_signal:
+            # Optional: Log heartbeat for no signal? No, too verbose.
+            continue
+
+        # Log Signal Event
+        try:
+            log.signal(**sig_row)
+        except Exception:
+            pass
+
+        # ATR Calculation
         atr_len = int(cfg.get("atr_length", 14))
-        # Simple ATR from True Range mean over last atr_len
         tr = pd.concat(
             [
                 (df["high"] - df["low"]),
@@ -302,6 +326,15 @@ def main() -> int:
         ).max(axis=1)
         atr = tr.rolling(atr_len, min_periods=atr_len).mean()
         atr_val = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0
+
+        # Bracket Calculation (Match Backtest: TP = Entry + TP_R * ATR)
+        entry = close # Use last close as proxy for entry
+        sl_mult = float(brackets.get("atr_mult_sl", 1.5))
+        tp_r = float(brackets.get("take_profit_r", 2.0))
+        
+        stop_price = round(entry - sl_mult * atr_val, 2)
+        take_profit = round(entry + tp_r * atr_val, 2) # Direct ATR multiple
+        
         if not (stop_price < entry < take_profit):
             print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
             continue

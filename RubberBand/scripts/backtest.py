@@ -235,6 +235,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
                     "pnl": pnl,
                     "result": "WIN" if pnl > 0 else "LOSS",
                     "reason": reason,
+                    "qty": int((entry_px * qty) / entry_px) if entry_px else 0, # Re-calculate qty since it was zeroed out
                     **entry_state
                 })
 
@@ -321,6 +322,68 @@ def main():
     avg_winrate = round((out["trades"] * out["win_rate"] / 100.0).sum() / max(total_trades, 1) * 100.0, 1)
     
     print("\nTOTAL trades={} net={} win_rate={}%".format(total_trades, total_net, avg_winrate))
+
+    # Save summary to JSON for analysis
+    summary_list = []
+    for i in out.index:
+        summary_list.append({
+            "symbol": out.loc[i, "symbol"],
+            "trades": int(out.loc[i, "trades"]),
+            "net": float(out.loc[i, "net"]),
+            "win_rate": float(out.loc[i, "win_rate"])
+        })
+    import json
+    with open("backtest_summary.json", "w") as f:
+        json.dump(summary_list, f, indent=2)
+
+    # Daily Stats Analysis
+    all_trades = []
+    for row in rows:
+        for t in row["detailed_trades"]:
+            all_trades.append(t)
+    
+    if all_trades:
+        df_trades = pd.DataFrame(all_trades)
+        df_trades["exit_time"] = pd.to_datetime(df_trades["exit_time"])
+        df_trades["entry_time"] = pd.to_datetime(df_trades["entry_time"])
+        df_trades["date"] = df_trades["exit_time"].dt.date
+        
+        # Calculate Max Capital Usage per Day
+        events = []
+        for t in all_trades:
+            # Entry event: +Capital
+            # Use 'qty' if available, else approximate
+            qty = t.get("qty", 0)
+            if qty == 0 and t["entry_price"] > 0:
+                 qty = int(2000 / t["entry_price"]) # Fallback approximation
+            
+            cost = t["entry_price"] * qty
+            events.append({"time": t["entry_time"], "change": cost, "type": "entry"})
+            # Exit event: -Capital
+            events.append({"time": t["exit_time"], "change": -cost, "type": "exit"})
+            
+        df_events = pd.DataFrame(events).sort_values("time")
+        df_events["current_capital"] = df_events["change"].cumsum()
+        df_events["date"] = df_events["time"].dt.date
+        
+        # Max capital per day
+        daily_max_cap = df_events.groupby("date")["current_capital"].max()
+        
+        # Group by date for stats
+        daily = df_trades.groupby("date").agg(
+            wins=('pnl', lambda x: (x > 0).sum()),
+            losses=('pnl', lambda x: (x <= 0).sum()),
+            net_pnl=('pnl', 'sum'),
+            trades=('pnl', 'count')
+        ).sort_index()
+        
+        # Join max capital
+        daily = daily.join(daily_max_cap.rename("max_capital"))
+        
+        print("\n=== Daily Win/Loss Stats (Last 10 Days) ===")
+        print(daily.tail(10))
+        daily.to_csv("daily_stats.csv")
+        print("\nSaved daily breakdown to daily_stats.csv")
 
 if __name__ == "__main__":
     main()
