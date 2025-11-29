@@ -77,6 +77,49 @@ def cancel_all_orders(base_url: Optional[str], key: Optional[str], secret: Optio
     return {"ok": True}
 
 def close_all_positions(base_url: Optional[str], key: Optional[str], secret: Optional[str]) -> Dict[str, Any]:
+    base = _base_url_from_env(base_url)
+    r = requests.delete(f"{base}/v2/positions", headers=_alpaca_headers(key, secret), timeout=20)
+    if r.status_code not in (200, 204):
+        r.raise_for_status()
+    return {"ok": True}
+
+# Positions (return a LIST to match live loop usage)
+def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.get(f"{base}/v2/positions", headers=_alpaca_headers(key, secret), timeout=12)
+        if r.status_code == 404:
+            return []
+        r.raise_for_status()
+        arr = r.json() or []
+        # Ensure list-of-dicts
+        return arr if isinstance(arr, list) else []
+    except Exception:
+        return []
+
+def get_daily_fills(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Fetch all filled orders for the current UTC day."""
+    base = _base_url_from_env(base_url)
+    # Start of today UTC
+    today = _now_utc().strftime("%Y-%m-%d")
+    params = {
+        "status": "closed", # We want filled orders (which are 'closed')
+        "limit": 500,
+        "after": f"{today}T00:00:00Z"
+    }
+    try:
+        r = requests.get(f"{base}/v2/orders", headers=_alpaca_headers(key, secret), params=params, timeout=15)
+        r.raise_for_status()
+        orders = r.json() or []
+        # Filter for filled only
+        return [o for o in orders if o.get("status") == "filled" and o.get("filled_qty") is not None]
+    except Exception as e:
+        print(f"[warn] Failed to fetch daily fills: {e}")
+        return []
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Multi-symbol bars (robust shape + pagination)
+# ──────────────────────────────────────────────────────────────────────────────
 def _chunked(seq: List[str], n: int) -> Iterable[List[str]]:
     for i in range(0, len(seq), n):
         yield seq[i:i+n]
@@ -330,38 +373,13 @@ def fetch_latest_bars(
         "when": _iso_utc()
     }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
-    snap = []
-    for s in (syms_with_data[:2] + stale_syms[:1] + syms_empty[:1]):
-        if s in bars_map and not bars_map[s].empty:
-            snap.append({"s": s, "ok": True, "last": str(bars_map[s].index[-1])})
-        else:
-            snap.append({"s": s, "ok": False})
-
-    print(json.dumps({
-        "type": "BARS_FETCH",
-        "requested": len(symbols),
-        "timeframe": timeframe,
-        "history_days": int(history_days),
-        "feed": feed,
+    return bars_map, {
         "http_errors": http_errors,
-        "symbols_with_data": syms_with_data,
-        "symbols_empty": syms_empty,
-        "stale_symbols": stale_syms,
-        "when": _iso_utc()
-    }, separators=(",", ":"), ensure_ascii=False), flush=True)
+        "stale_symbols": stale_syms
+    }
 
-    print(json.dumps({"type": "BARS_SNAPSHOT", "sample": snap},
-                     separators=(",", ":"), ensure_ascii=False), flush=True)
-
-    # >>> Minimal churn change here: return bars_map **and** meta <<<
-    return bars_map, {"http_errors": http_errors, "stale_symbols": stale_syms}
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Order placement — bracket with min-tick guard (avoids 42210000)
-# ──────────────────────────────────────────────────────────────────────────────
 def _round_to_tick(px: float, tick: float = 0.01) -> float:
-    if tick <= 0:
-        return round(float(px), 2)
+    if px <= 0: return 0.0
     steps = math.floor(px / tick + 1e-9)
     return round(steps * tick, 2)
 
