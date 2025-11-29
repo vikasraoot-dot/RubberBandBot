@@ -422,10 +422,48 @@ def main() -> int:
                         session=session,
                         cid=sig_row["cid"],
                         reason="BROKER_ERROR",
-                        details={"error": str(e)},
-                    )
                 except Exception:
                     pass
+
+    # --- Session Summary ---
+    print("\n=== Session Summary ===", flush=True)
+    try:
+        from RubberBand.src.data import get_daily_fills
+        fills = get_daily_fills(base_url, key, secret)
+        
+        if not fills:
+            print("No trades filled today.", flush=True)
+        else:
+            # Calculate PnL
+            pnl = 0.0
+            vol = 0.0
+            trades_by_sym = {}
+            
+            for f in fills:
+                qty = float(f.get("filled_qty", 0))
+                px = float(f.get("filled_avg_price", 0))
+                side = f.get("side")
+                sym = f.get("symbol")
+                
+                cost = qty * px
+                if side == "buy":
+                    pnl -= cost
+                else:
+                    pnl += cost
+                
+                vol += cost
+                trades_by_sym[sym] = trades_by_sym.get(sym, 0) + 1
+
+            print(f"{'Metric':<20} {'Value':<20}", flush=True)
+            print("-" * 40, flush=True)
+            print(f"{'Net PnL':<20} ${pnl:,.2f}", flush=True)
+            print(f"{'Total Volume':<20} ${vol:,.2f}", flush=True)
+            print(f"{'Total Fills':<20} {len(fills)}", flush=True)
+            print(f"{'Tickers Traded':<20} {', '.join(sorted(trades_by_sym.keys()))}", flush=True)
+            print("-" * 40, flush=True)
+
+    except Exception as e:
+        print(f"[warn] Failed to generate summary: {e}", flush=True)
 
     try:
         log.close()

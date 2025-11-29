@@ -77,29 +77,6 @@ def cancel_all_orders(base_url: Optional[str], key: Optional[str], secret: Optio
     return {"ok": True}
 
 def close_all_positions(base_url: Optional[str], key: Optional[str], secret: Optional[str]) -> Dict[str, Any]:
-    base = _base_url_from_env(base_url)
-    r = requests.delete(f"{base}/v2/positions", headers=_alpaca_headers(key, secret), timeout=20)
-    if r.status_code not in (200, 204):
-        r.raise_for_status()
-    return {"ok": True}
-
-# Positions (return a LIST to match live loop usage)
-def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
-    base = _base_url_from_env(base_url)
-    try:
-        r = requests.get(f"{base}/v2/positions", headers=_alpaca_headers(key, secret), timeout=12)
-        if r.status_code == 404:
-            return []
-        r.raise_for_status()
-        arr = r.json() or []
-        # Ensure list-of-dicts
-        return arr if isinstance(arr, list) else []
-    except Exception:
-        return []
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Multi-symbol bars (robust shape + pagination)
-# ──────────────────────────────────────────────────────────────────────────────
 def _chunked(seq: List[str], n: int) -> Iterable[List[str]]:
     for i in range(0, len(seq), n):
         yield seq[i:i+n]
