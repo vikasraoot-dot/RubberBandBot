@@ -420,8 +420,204 @@ def main() -> int:
                     log.entry_reject(
                         symbol=sym,
                         session=session,
+    if not isinstance(res, tuple) or len(res) != 2:
+        print(json.dumps({"type": "BARS_FETCH_ERROR", "reason": "no_result"}), flush=True)
+        return 1
+
+    bars_map, bars_meta = res
+
+    # Summary
+    with_data = sorted([s for s, d in bars_map.items() if isinstance(d, pd.DataFrame) and not d.empty])
+    empty = sorted(list(set(symbols) - set(with_data)))
+    stale = sorted(list((bars_meta or {}).get("stale_symbols", [])))
+    http_errors = (bars_meta or {}).get("http_errors", [])
+
+    print(
+        json.dumps(
+            {
+                "type": "BARS_FETCH_SUMMARY",
+                "requested": len(symbols),
+                "with_data": len(with_data),
+                "empty": len(empty),
+                "stale": len(stale),
+                "sample_with_data": with_data[:4],
+                "sample_empty": empty[:10],
+                "when": now_iso,
+            }
+        ),
+        flush=True,
+    )
+
+    # Current positions (for "already in position" gate)
+    positions_raw = _get_positions_compat(base_url, key, secret) or []
+    positions = {p["symbol"]: p for p in positions_raw}
+
+    # Risk knobs
+    brackets = cfg.get("brackets", {}) or {}
+
+    # Size guard
+    base_qty = int(cfg.get("qty", 1))
+    max_shares = int(cfg.get("max_shares_per_trade", base_qty))
+    max_notional = cfg.get("max_notional_per_trade", None)
+    max_notional = float(max_notional) if max_notional not in (None, "", "0") else None
+
+    # Iterate symbols
+    for sym in symbols:
+        df = bars_map.get(sym)
+        if df is None or df.empty or len(df) < 20: # Need enough data for Keltner(20)
+            continue
+
+        df = attach_verifiers(df, cfg)
+        last = df.iloc[-1]
+
+        # Extract Signal
+        long_signal = bool(last["long_signal"])
+        close = float(last["close"])
+        rsi = float(last["rsi"]) if not pd.isna(last["rsi"]) else None
+        kc_lower = float(last["kc_lower"]) if not pd.isna(last["kc_lower"]) else None
+        
+        # Log Signal
+        sig_row = {
+            "symbol": sym,
+            "session": session,
+            "cid": f"RB_{sym}_{now_utc.strftime('%Y%m%d_%H%M%S')}",
+            "tf": timeframe,
+            "long_signal": 1 if long_signal else 0,
+            "ref_bar_ts": str(df.index[-1]),
+            "last_close": close,
+        }
+        
+        # Gating: Check if already in position
+        if sym in positions:
+            try:
+                log.gate(
+                    symbol=sym, session=session, cid=sig_row["cid"],
+                    decision="BLOCK", reasons=["already in position"]
+                )
+            except Exception:
+                pass
+            continue
+
+        # Gating: Check Signal
+        if not long_signal:
+            # Optional: Log heartbeat for no signal? No, too verbose.
+            continue
+
+        # Log Signal Event
+        try:
+            log.signal(**sig_row)
+        except Exception:
+            pass
+
+        # ATR Calculation
+        atr_len = int(cfg.get("atr_length", 14))
+        tr = pd.concat(
+            [
+                (df["high"] - df["low"]),
+                (df["high"] - df["close"].shift(1)).abs(),
+                (df["low"] - df["close"].shift(1)).abs(),
+            ],
+            axis=1,
+        ).max(axis=1)
+        atr = tr.rolling(atr_len, min_periods=atr_len).mean()
+        atr_val = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0
+
+        # Bracket Calculation (Match Backtest: TP = Entry + TP_R * ATR)
+        entry = close # Use last close as proxy for entry
+        sl_mult = float(brackets.get("atr_mult_sl", 1.5))
+        tp_r = float(brackets.get("take_profit_r", 2.0))
+        
+        stop_price = round(entry - sl_mult * atr_val, 2)
+        take_profit = round(entry + tp_r * atr_val, 2) # Direct ATR multiple
+        
+        if not (stop_price < entry < take_profit):
+            print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
+            continue
+
+        # Size
+        base_qty = int(cfg.get("qty", 1))
+        max_shares = int(cfg.get("max_shares_per_trade", base_qty))
+        qty = max(1, min(base_qty, max_shares))
+        qty = _cap_qty_by_notional(qty, entry, max_notional)
+        if qty < 1:
+            print(f"[order] skip {sym}: qty<1 after notional cap", flush=True)
+            continue
+
+        # Log the planned order
+        try:
+            log.entry_submit(
+                symbol=sym,
+                session=session,
+                cid=sig_row["cid"],
+                qty=qty,
+                side="buy",
+                entry_price=round(entry, 2),
+                stop_loss_price=stop_price,
+                take_profit_price=take_profit,
+                atr=round(atr_val, 4),
+                method="bracket",
+                tif="day",
+                dry_run=bool(args.dry_run),
+            )
+        except Exception:
+            pass
+
+        if args.dry_run:
+            print(
+                f"[order] DRY-RUN: would submit BRACKET {sym} qty={qty} entry≈{entry:.2f} "
+                f"sl={stop_price:.2f} tp={take_profit:.2f} (ATR={atr_val:.3f})",
+                flush=True,
+            )
+            try:
+                log.entry_ack(
+                    symbol=sym,
+                    session=session,
+                    cid=sig_row["cid"],
+                    order_id=None,
+                    client_order_id=None,
+                    broker_resp=None,
+                    dry_run=True,
+                )
+            except Exception:
+                pass
+        else:
+            try:
+                resp = submit_bracket_order(
+                    base_url,
+                    key,
+                    secret,
+                    symbol=sym,
+                    qty=qty,
+                    side="buy",
+                    limit_price=None,  # market entry
+                    take_profit_price=take_profit,
+                    stop_loss_price=stop_price,
+                    tif="day",
+                )
+                print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
+                try:
+                    oid = (resp.get("id") if isinstance(resp, dict) else None)
+                    coid = (resp.get("client_order_id") if isinstance(resp, dict) else None)
+                    log.entry_ack(
+                        symbol=sym,
+                        session=session,
+                        cid=sig_row["cid"],
+                        order_id=oid,
+                        client_order_id=coid,
+                        broker_resp=resp,
+                        dry_run=False,
+                    )
+                except Exception:
+                    pass
+            except Exception as e:
+                print(f"[order] ERROR submitting bracket for {sym}: {e}", flush=True)
+                try:
+                    log.entry_reject(
+                        symbol=sym,
+                        session=session,
                         cid=sig_row["cid"],
                         reason="BROKER_ERROR",
+                    )
                 except Exception:
                     pass
 
@@ -434,33 +630,56 @@ def main() -> int:
         if not fills:
             print("No trades filled today.", flush=True)
         else:
-            # Calculate PnL
-            pnl = 0.0
-            vol = 0.0
-            trades_by_sym = {}
-            
+            # Aggregate per symbol
+            stats = {}
             for f in fills:
+                sym = f.get("symbol")
+                side = f.get("side")
                 qty = float(f.get("filled_qty", 0))
                 px = float(f.get("filled_avg_price", 0))
-                side = f.get("side")
-                sym = f.get("symbol")
                 
-                cost = qty * px
+                if sym not in stats:
+                    stats[sym] = {"buy_qty": 0, "buy_val": 0.0, "sell_qty": 0, "sell_val": 0.0}
+                
                 if side == "buy":
-                    pnl -= cost
-                else:
-                    pnl += cost
-                
-                vol += cost
-                trades_by_sym[sym] = trades_by_sym.get(sym, 0) + 1
+                    stats[sym]["buy_qty"] += qty
+                    stats[sym]["buy_val"] += (qty * px)
+                elif side == "sell":
+                    stats[sym]["sell_qty"] += qty
+                    stats[sym]["sell_val"] += (qty * px)
 
-            print(f"{'Metric':<20} {'Value':<20}", flush=True)
-            print("-" * 40, flush=True)
-            print(f"{'Net PnL':<20} ${pnl:,.2f}", flush=True)
-            print(f"{'Total Volume':<20} ${vol:,.2f}", flush=True)
-            print(f"{'Total Fills':<20} {len(fills)}", flush=True)
-            print(f"{'Tickers Traded':<20} {', '.join(sorted(trades_by_sym.keys()))}", flush=True)
-            print("-" * 40, flush=True)
+            # Print Table
+            # Columns: Ticker | Bought | Avg Ent | Basis | Sold | Avg Ex | PnL
+            header = f"{'Ticker':<8} {'Bought':<8} {'Avg Ent':<10} {'Basis':<12} {'Sold':<8} {'Avg Ex':<10} {'PnL':<10}"
+            print("-" * len(header), flush=True)
+            print(header, flush=True)
+            print("-" * len(header), flush=True)
+
+            total_pnl = 0.0
+            total_vol = 0.0
+
+            for sym in sorted(stats.keys()):
+                s = stats[sym]
+                b_qty = s["buy_qty"]
+                b_val = s["buy_val"]
+                s_qty = s["sell_qty"]
+                s_val = s["sell_val"]
+
+                avg_ent = (b_val / b_qty) if b_qty > 0 else 0.0
+                avg_ex = (s_val / s_qty) if s_qty > 0 else 0.0
+                
+                # Realized PnL = (Avg Exit - Avg Entry) * Sold Qty
+                # (Assuming FIFO/Average Cost for simplicity in this summary)
+                realized_pnl = (avg_ex - avg_ent) * s_qty
+                
+                total_pnl += realized_pnl
+                total_vol += (b_val + s_val)
+
+                print(f"{sym:<8} {int(b_qty):<8} {avg_ent:<10.2f} {b_val:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {realized_pnl:<10.2f}", flush=True)
+
+            print("-" * len(header), flush=True)
+            print(f"TOTAL PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}", flush=True)
+            print("=== End Summary ===", flush=True)
 
     except Exception as e:
         print(f"[warn] Failed to generate summary: {e}", flush=True)
