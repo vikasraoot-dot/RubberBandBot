@@ -104,18 +104,32 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
         if not in_pos:
             # Entry Signal
             if prev.get("long_signal", False):
+                # Filter Gate (New)
+                from RubberBand.src.filters import explain_long_gate
+                ok, reasons = explain_long_gate(prev, cfg)
+                if not ok:
+                    # print(f"FILTER REJECT: {reasons}")
+                    FILTER_REJECTS.update(reasons)
+                    continue
+
                 # Risk Sizing
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
                     print(f"REJECT: ATR={atr_val}")
                     continue
                 
-                stop_dist = max(0.01, atr_mult_sl * atr_val)
-                risk_dollars = equity * float(risk_pct)
-                raw_qty = int(risk_dollars // stop_dist) if stop_dist > 0 else 0
+                # Sizing: Match Live Logic (Fixed Notional Cap)
+                # Live uses: qty = min(base_qty, max_shares, max_notional // price)
+                base_qty = int(cfg.get("qty", 10000))
+                max_shares = int(cfg.get("max_shares_per_trade", 10000))
                 
-                cap_qty = int((max_notional // open_px)) if max_notional > 0 else raw_qty
-                qty = max(1, min(raw_qty, cap_qty))
+                # 1. Base caps
+                qty = max(1, min(base_qty, max_shares))
+                
+                # 2. Notional cap
+                if max_notional > 0 and open_px > 0:
+                    notional_cap_qty = int(max_notional // open_px)
+                    qty = min(qty, notional_cap_qty)
                 
                 if qty <= 0:
                     continue
@@ -155,10 +169,39 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
             hit_mean = exit_at_mean and (cur["high"] >= kc_mid)
             hit_upper = exit_at_upper and (cur["high"] >= kc_upper)
 
+            # 3. Time-Based Exits (EOD or Max Hold)
+            flatten_eod = cfg.get("_flatten_eod", True)
+            max_hold_days = int(cfg.get("_max_hold_days", 0))
+            
+            is_time_exit = False
+            exit_reason_time = ""
+
+            # A. EOD Flattening
+            if flatten_eod:
+                if i < len(df) - 1:
+                    next_bar = df.iloc[i+1]
+                    if next_bar.name.day != cur.name.day:
+                        is_time_exit = True
+                        exit_reason_time = "EOD"
+                else:
+                    is_time_exit = True
+                    exit_reason_time = "EOD"
+            
+            # B. Max Hold Days (if not flattening EOD)
+            elif max_hold_days > 0 and entry_ts:
+                # Calculate days held
+                held_delta = cur.name - entry_ts
+                if held_delta.days >= max_hold_days:
+                    is_time_exit = True
+                    exit_reason_time = f"HOLD_{max_hold_days}D"
+
             exit_px = 0.0
             reason = ""
             
-            if hit_sl:
+            if is_time_exit:
+                exit_px = float(cur["close"])
+                reason = exit_reason_time
+            elif hit_sl:
                 exit_px = stop_px
                 reason = "SL"
             elif hit_tp:
@@ -184,7 +227,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
                 qty = 0
                 
                 detailed_trades.append({
-                    "symbol": "UNKNOWN",
+                    "symbol": cfg.get("_symbol", "UNKNOWN"),
                     "entry_time": entry_ts,
                     "exit_time": cur.name,
                     "entry_price": entry_px,
@@ -224,10 +267,16 @@ def main():
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--rth-only", dest="rth_only", action="store_true")
     ap.add_argument("--no-rth-only", dest="rth_only", action="store_false")
-    ap.set_defaults(rth_only=True)
+    ap.add_argument("--flatten-eod", dest="flatten_eod", action="store_true")
+    ap.add_argument("--no-flatten-eod", dest="flatten_eod", action="store_false")
+    ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
+    ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
     cfg = load_config(args.config)
+    # Override config with CLI args if needed
+    cfg["_flatten_eod"] = args.flatten_eod
+    cfg["_max_hold_days"] = args.max_hold_days
 
     if args.symbols.strip():
         symbols = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
@@ -254,6 +303,8 @@ def main():
             continue
 
         print(f"[{sym}] bars={len(df)}")
+        # Inject symbol for logging
+        cfg["_symbol"] = sym
         res = simulate_mean_reversion(df, cfg, start_cash=args.cash, risk_pct=args.risk)
         rows.append({"symbol": sym, **res})
 

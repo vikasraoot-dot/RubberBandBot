@@ -3,7 +3,7 @@ import os, time, uuid, datetime as dt
 from typing import Optional, Dict, Any, Tuple, List
 import requests
 
-from EMAMerged.src.trade_logger import TradeLogger
+from RubberBand.src.trade_logger import TradeLogger
 
 # Reads standard Alpaca envs already used by your code
 ALPACA_BASE = os.getenv("APCA_BASE_URL", "https://paper-api.alpaca.markets").rstrip("/")

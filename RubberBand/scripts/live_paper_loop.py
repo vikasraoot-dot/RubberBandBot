@@ -290,29 +290,6 @@ def main() -> int:
             "long_signal": 1 if long_signal else 0,
             "ref_bar_ts": str(df.index[-1]),
             "last_close": close,
-            "rsi": rsi,
-            "kc_lower": kc_lower,
-        }
-        TradeLogger.signal(log, **sig_row)
-
-        # Gate
-        reasons = []
-        if not long_signal:
-            reasons.append("no signal (price >= lower_band or rsi >= 30)")
-
-        if sym in positions:
-            reasons = ["already in position"]
-
-        if reasons:
-            log.gate(symbol=sym, session=session, cid=sig_row["cid"], decision="BLOCK", reasons=reasons)
-            continue
-        else:
-            log.gate(symbol=sym, session=session, cid=sig_row["cid"], decision="ALLOW", reasons=[])
-
-        # ATR-based brackets
-        if not brackets.get("enabled", True):
-            continue
-
         atr_len = int(cfg.get("atr_length", 14))
         # Simple ATR from True Range mean over last atr_len
         tr = pd.concat(
@@ -325,20 +302,6 @@ def main() -> int:
         ).max(axis=1)
         atr = tr.rolling(atr_len, min_periods=atr_len).mean()
         atr_val = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0
-
-        entry = float(last["close"])
-        sl_mult = float(brackets.get("atr_mult_sl", 1.5))
-        tp_r = float(brackets.get("take_profit_r", 2.0))
-
-        stop_price = round(entry - sl_mult * atr_val, 2)
-        r = entry - stop_price
-        take_profit = round(entry + tp_r * r, 2)
-
-        # Min-tick guard
-        tick_size = float(brackets.get("min_tick", 0.01))
-        if take_profit <= entry + tick_size - 1e-9:
-            take_profit = round(entry + tick_size, 2)
-
         if not (stop_price < entry < take_profit):
             print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
             continue
