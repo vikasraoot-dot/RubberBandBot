@@ -39,13 +39,24 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     df["rsi_oversold"] = (df["rsi"] < rsi_oversold) & (df["rsi"] >= rsi_min)
     
     # Logic: Time Filter (Lunch Lull)
-    # Exclude 12:00 PM - 1:00 PM ET (approx 17:00 - 18:00 UTC)
-    # Data shows 17:00 UTC is the primary loser (-$115 PnL, 41% WR).
-    # 18:00 UTC is profitable (+$27 PnL, 46% WR), so we keep it.
-    # We assume the index is a DatetimeIndex in UTC.
+    # Exclude entries during 17:00 - 18:00 UTC (12:00 PM - 1:00 PM ET).
+    # Since the backtester enters on the NEXT bar, we must block signals that *lead* to entry in this window.
+    # Forbidden Entry Times: 17:00, 17:15, 17:30, 17:45.
+    # Signals to Block:
+    # - 16:45 (Enters at 17:00)
+    # - 17:00 (Enters at 17:15)
+    # - 17:15 (Enters at 17:30)
+    # - 17:30 (Enters at 17:45)
+    # We ALLOW 17:45 signal because it enters at 18:00 (which is profitable).
     if isinstance(df.index, pd.DatetimeIndex):
-        # Only exclude hour 17
-        df["time_ok"] = ~df.index.hour.isin([17])
+        h = df.index.hour
+        m = df.index.minute
+        # Block 16:45
+        block_pre = (h == 16) & (m == 45)
+        # Block 17:00, 17:15, 17:30
+        block_main = (h == 17) & (m < 45)
+        
+        df["time_ok"] = ~(block_pre | block_main)
     else:
         # Fallback if index is not datetime (should not happen in this pipeline)
         df["time_ok"] = True

@@ -73,7 +73,7 @@ filters:
   min_dollar_vol: 1000000    # Adjusted for IEX feed volume
   trend_filter_sma: 0        # Disabled (Too restrictive)
   # Filter overrides to allow mean reversion (RSI < 25)
-  rsi_min: 0
+  rsi_min: 15
   rsi_max: 100
   adx_threshold: 0           # Disable ADX requirement for now
   slope_threshold_pct: -0.001 # Allow slight pullback slope

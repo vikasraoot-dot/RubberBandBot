@@ -107,12 +107,12 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
             # Entry Signal
             if prev.get("long_signal", False):
                 # Filter Gate (New)
-                from RubberBand.src.filters import explain_long_gate
-                ok, reasons = explain_long_gate(prev, cfg)
-                if not ok:
-                    # print(f"FILTER REJECT: {reasons}")
-                    FILTER_REJECTS.update(reasons)
-                    continue
+                # Legacy filter gate removed to match live_paper_loop.py logic
+                # from RubberBand.src.filters import explain_long_gate
+                # ok, reasons = explain_long_gate(prev, cfg)
+                # if not ok:
+                #     FILTER_REJECTS.update(reasons)
+                #     continue
 
                 # Risk Sizing
                 atr_val = float(prev.get("atr", 0.0))
