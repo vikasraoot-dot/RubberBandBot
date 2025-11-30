@@ -1,26 +1,19 @@
-# === EMAMerged/src/data.py ===
-from __future__ import annotations
-import os, json, time, math, datetime as dt
-from typing import Dict, List, Any, Optional, Iterable, Tuple
+import os
+import json
+import math
+import time
 import requests
 import pandas as pd
+import datetime as dt
+from typing import List, Dict, Any, Optional, Tuple, Iterable
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Global / Constants
+# ──────────────────────────────────────────────────────────────────────────────
 ISO_UTC = "%Y-%m-%dT%H:%M:%SZ"
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Back-compat shim for older callers
-# ──────────────────────────────────────────────────────────────────────────────
-def load_symbols_from_file(path: str) -> list[str]:
-    """
-    Read tickers from a file, ignoring comments and empty lines.
-    """
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            return [ln.strip() for ln in f if ln.strip() and not ln.startswith("#")]
-    except Exception:
-        return []
-
 def _now_utc() -> dt.datetime:
-    return dt.datetime.now(dt.UTC)
+    return dt.datetime.now(dt.timezone.utc)
 
 def _iso_utc(ts: Optional[dt.datetime] = None) -> str:
     ts = ts or _now_utc()
@@ -240,6 +233,7 @@ def fetch_latest_bars(
     secret: Optional[str] = None,
     dollar_vol_window: int = 20,
     dollar_vol_min_periods: int = 7,
+    verbose: bool = True,
 ) -> Tuple[Dict[str, pd.DataFrame], Dict[str, Any]]:
     """
     Robust multi-symbol fetch with pagination & dual-shape handling. Emits rich diagnostics.
@@ -255,12 +249,13 @@ def fetch_latest_bars(
         return bars_map, {"http_errors": [], "stale_symbols": []}
 
     # Universe log (kept to match your current behavior)
-    print(json.dumps({
-        "type": "UNIVERSE",
-        "loaded": len(symbols),
-        "sample": symbols[:10],
-        "when": _iso_utc()
-    }, separators=(",", ":"), ensure_ascii=False), flush=True)
+    if verbose:
+        print(json.dumps({
+            "type": "UNIVERSE",
+            "loaded": len(symbols),
+            "sample": symbols[:10],
+            "when": _iso_utc()
+        }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
     base_data_url = "https://data.alpaca.markets/v2/stocks/bars"
     # Resolve creds from args or env (fixes 401 when args are not provided)
@@ -280,16 +275,17 @@ def fetch_latest_bars(
     end_iso = end.strftime(ISO_UTC)
 
     chunks = list(_chunked([s.upper() for s in symbols], 25))
-    print(json.dumps({
-        "type": "BARS_FETCH_START",
-        "requested": len(symbols),
-        "chunks": len(chunks),
-        "timeframe": timeframe,
-        "feed": feed,
-        "start": start_iso,
-        "end": end_iso,
-        "when": _iso_utc()
-    }, separators=(",", ":"), ensure_ascii=False), flush=True)
+    if verbose:
+        print(json.dumps({
+            "type": "BARS_FETCH_START",
+            "requested": len(symbols),
+            "chunks": len(chunks),
+            "timeframe": timeframe,
+            "feed": feed,
+            "start": start_iso,
+            "end": end_iso,
+            "when": _iso_utc()
+        }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
     for idx, chunk in enumerate(chunks, start=1):
         collected: Dict[str, List[Dict[str, Any]]] = {}
@@ -325,14 +321,15 @@ def fetch_latest_bars(
             if not page_token or pages >= MAX_PAGES:
                 break
 
-        print(json.dumps({
-            "type": "BARS_FETCH_CHUNK_COLLECTED",
-            "chunk_index": idx,
-            "symbols_in_chunk": len(chunk),
-            "pages": pages,
-            "source_shape": shape_seen or "none",
-            "collected_symbols": len(collected)
-        }, separators=(",", ":"), ensure_ascii=False), flush=True)
+        if verbose:
+            print(json.dumps({
+                "type": "BARS_FETCH_CHUNK_COLLECTED",
+                "chunk_index": idx,
+                "symbols_in_chunk": len(chunk),
+                "pages": pages,
+                "source_shape": shape_seen or "none",
+                "collected_symbols": len(collected)
+            }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
         for s in chunk:
             recs = collected.get(s) or []
@@ -362,16 +359,17 @@ def fetch_latest_bars(
             bars_map[s] = df
             syms_with_data.append(s)
 
-    print(json.dumps({
-        "type": "BARS_FETCH_SUMMARY",
-        "requested": len(symbols),
-        "with_data": len(syms_with_data),
-        "empty": len(syms_empty),
-        "stale": len(stale_syms),
-        "sample_with_data": syms_with_data[:4],
-        "sample_empty": syms_empty[:10],
-        "when": _iso_utc()
-    }, separators=(",", ":"), ensure_ascii=False), flush=True)
+    if verbose:
+        print(json.dumps({
+            "type": "BARS_FETCH_SUMMARY",
+            "requested": len(symbols),
+            "with_data": len(syms_with_data),
+            "empty": len(syms_empty),
+            "stale": len(stale_syms),
+            "sample_with_data": syms_with_data[:4],
+            "sample_empty": syms_empty[:10],
+            "when": _iso_utc()
+        }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
     return bars_map, {
         "http_errors": http_errors,

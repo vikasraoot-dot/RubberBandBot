@@ -72,7 +72,8 @@ def main():
             sys.executable, "RubberBand/scripts/backtest.py",
             "--tickers", tmp_file,
             "--days", days_arg,
-            "--config", "RubberBand/config.yaml"
+            "--config", "RubberBand/config.yaml",
+            "--quiet"
         ]
         
         try:

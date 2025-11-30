@@ -25,7 +25,7 @@ from RubberBand.strategy import attach_verifiers
 # Data loading helper
 # ------------------------------------------------------------------
 def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
-                         timeframe_override=None, limit_override=None, rth_only_override=True) -> pd.DataFrame:
+                         timeframe_override=None, limit_override=None, rth_only_override=True, verbose=True) -> pd.DataFrame:
     timeframe = timeframe_override or cfg.get("timeframe", "15Min")
     feed = cfg.get("feed", "iex")
     tz_name = cfg.get("timezone", "US/Eastern")
@@ -49,6 +49,7 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
         bar_limit=bar_limit,
         key=key,
         secret=secret,
+        verbose=verbose
     )
     
     df = bars_map.get(symbol, pd.DataFrame())
@@ -75,7 +76,8 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
     df = attach_verifiers(df, cfg).copy()
     
     # DEBUG: Print last 5 rows with indicators
-    print(df[["close", "kc_lower", "rsi", "long_signal"]].tail())
+    if cfg.get("verbose", True):
+        print(df[["close", "kc_lower", "rsi", "long_signal"]].tail())
 
     # Bracket params
     bcfg = cfg.get("brackets", {})
@@ -271,6 +273,7 @@ def main():
     ap.add_argument("--flatten-eod", dest="flatten_eod", action="store_true")
     ap.add_argument("--no-flatten-eod", dest="flatten_eod", action="store_false")
     ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
+    ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
@@ -295,11 +298,16 @@ def main():
 
     def _load(sym: str) -> pd.DataFrame:
         # Load max history once
+        # Pass verbose=False if quiet mode is on
+        # Note: We need to update load_bars_for_symbol signature or just call fetch_latest_bars directly?
+        # load_bars_for_symbol calls fetch_latest_bars. Let's update load_bars_for_symbol first.
+        # Wait, load_bars_for_symbol is in this file. I need to update it too.
         return load_bars_for_symbol(
             sym, cfg, max_days,
             timeframe_override=args.timeframe,
             limit_override=args.limit,
             rth_only_override=args.rth_only,
+            verbose=not args.quiet
         )
 
     rows = []
@@ -313,7 +321,8 @@ def main():
         if df_full.empty:
             continue
 
-        print(f"[{sym}] loaded bars={len(df_full)} (max_days={max_days})")
+        if not args.quiet:
+            print(f"[{sym}] loaded bars={len(df_full)} (max_days={max_days})")
         
         # Run for each requested timeframe
         for d in days_list:
@@ -328,6 +337,7 @@ def main():
             
             # Inject symbol for logging
             cfg["_symbol"] = sym
+            cfg["verbose"] = not args.quiet # Pass quiet state to simulator
             res = simulate_mean_reversion(df_run, cfg, start_cash=args.cash, risk_pct=args.risk)
             rows.append({"symbol": sym, "days": d, **res})
 
@@ -336,8 +346,9 @@ def main():
         return
 
     out = pd.DataFrame(rows).sort_values(["days", "net"], ascending=[True, False])
-    print("\n=== Backtest Summary (days={}) ===".format(days_list))
-    print(out.to_string(index=False))
+    if not args.quiet:
+        print("\n=== Backtest Summary (days={}) ===".format(days_list))
+        print(out.to_string(index=False))
 
     total_trades = int(out["trades"].sum())
     total_net = round(float(out["net"].sum()), 2)
@@ -403,10 +414,12 @@ def main():
         # Join max capital
         daily = daily.join(daily_max_cap.rename("max_capital"))
         
-        print("\n=== Daily Win/Loss Stats (Last 10 Days) ===")
-        print(daily.tail(10))
+        if not args.quiet:
+            print("\n=== Daily Win/Loss Stats (Last 10 Days) ===")
+            print(daily.tail(10))
         daily.to_csv("daily_stats.csv")
-        print("\nSaved daily breakdown to daily_stats.csv")
+        if not args.quiet:
+            print("\nSaved daily breakdown to daily_stats.csv")
 
 if __name__ == "__main__":
     main()
