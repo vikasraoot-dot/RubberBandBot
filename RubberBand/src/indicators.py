@@ -39,6 +39,8 @@ def ta_add_adx_di(df: pd.DataFrame, period: int = 14) -> pd.DataFrame:
     low = df["low"]
     close = df["close"]
     prev_close = close.shift(1)
+    prev_high = high.shift(1)
+    prev_low = low.shift(1)
 
     up_move = high - prev_high.fillna(0)
     down_move = prev_low.fillna(0) - low
