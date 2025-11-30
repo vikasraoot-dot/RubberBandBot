@@ -261,7 +261,7 @@ def main():
     ap.add_argument("--config", default="RubberBand/config.yaml")
     ap.add_argument("--tickers", default="RubberBand/tickers.txt")
     ap.add_argument("--symbols", default="")
-    ap.add_argument("--days", type=int, default=30)
+    ap.add_argument("--days", default="30", help="Comma-separated list of days to backtest (e.g. 30,90,120)")
     ap.add_argument("--cash", type=float, default=10_000)
     ap.add_argument("--risk", type=float, default=0.01)
     ap.add_argument("--timeframe", default=None)
@@ -284,9 +284,19 @@ def main():
     else:
         symbols = read_tickers(args.tickers)
 
+    # Parse days list
+    try:
+        days_list = [int(d.strip()) for d in str(args.days).split(",") if d.strip()]
+    except ValueError:
+        print("Error: --days must be a comma-separated list of integers")
+        return
+    
+    max_days = max(days_list)
+
     def _load(sym: str) -> pd.DataFrame:
+        # Load max history once
         return load_bars_for_symbol(
-            sym, cfg, args.days,
+            sym, cfg, max_days,
             timeframe_override=args.timeframe,
             limit_override=args.limit,
             rth_only_override=args.rth_only,
@@ -295,26 +305,38 @@ def main():
     rows = []
     for sym in symbols:
         try:
-            df = _load(sym)
+            df_full = _load(sym)
         except Exception as e:
             print(f"[{sym}] data error: {e}")
             continue
 
-        if df.empty:
+        if df_full.empty:
             continue
 
-        print(f"[{sym}] bars={len(df)}")
-        # Inject symbol for logging
-        cfg["_symbol"] = sym
-        res = simulate_mean_reversion(df, cfg, start_cash=args.cash, risk_pct=args.risk)
-        rows.append({"symbol": sym, **res})
+        print(f"[{sym}] loaded bars={len(df_full)} (max_days={max_days})")
+        
+        # Run for each requested timeframe
+        for d in days_list:
+            # Slice approx rows for this window
+            bars_per_day_15m = 390 // 15
+            approx_rows = int(d) * bars_per_day_15m
+            
+            if len(df_full) > approx_rows:
+                df_run = df_full.tail(approx_rows).copy()
+            else:
+                df_run = df_full.copy()
+            
+            # Inject symbol for logging
+            cfg["_symbol"] = sym
+            res = simulate_mean_reversion(df_run, cfg, start_cash=args.cash, risk_pct=args.risk)
+            rows.append({"symbol": sym, "days": d, **res})
 
     if not rows:
         print("No results.")
         return
 
-    out = pd.DataFrame(rows).sort_values("net", ascending=False)
-    print("\n=== Backtest Summary (last {} days) ===".format(args.days))
+    out = pd.DataFrame(rows).sort_values(["days", "net"], ascending=[True, False])
+    print("\n=== Backtest Summary (days={}) ===".format(days_list))
     print(out.to_string(index=False))
 
     total_trades = int(out["trades"].sum())
@@ -328,6 +350,7 @@ def main():
     for i in out.index:
         summary_list.append({
             "symbol": out.loc[i, "symbol"],
+            "days": int(out.loc[i, "days"]),
             "trades": int(out.loc[i, "trades"]),
             "net": float(out.loc[i, "net"]),
             "win_rate": float(out.loc[i, "win_rate"])

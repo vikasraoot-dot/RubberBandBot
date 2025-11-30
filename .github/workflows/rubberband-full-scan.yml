@@ -1,0 +1,56 @@
+name: RubberBand Full Universe Scan
+on:
+  workflow_dispatch:
+
+concurrency:
+  group: rubberband-full-scan
+  cancel-in-progress: true
+
+jobs:
+  scan:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 600 # 10 hours
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = (Get-Command python.exe).Source
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+
+      - name: Run Full Scan
+        shell: powershell
+        env:
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          chcp 65001 > $null
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/full_scan.py
+
+      - name: Analyze Results
+        shell: powershell
+        if: always() # Run even if scan fails partially
+        run: |
+          chcp 65001 > $null
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/analyze_scan.py
+
+      - name: Upload Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: scan-results
+          path: |
+            full_scan_results.json
+            candidate_report.md
