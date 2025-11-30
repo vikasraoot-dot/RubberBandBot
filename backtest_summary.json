@@ -1,9 +1,177 @@
 [
   {
-    "symbol": "AMD",
+    "symbol": "CIFR",
+    "days": 10,
+    "trades": 0,
+    "net": 0.0,
+    "win_rate": 0.0
+  },
+  {
+    "symbol": "ETN",
+    "days": 10,
+    "trades": 6,
+    "net": -23.56,
+    "win_rate": 33.3
+  },
+  {
+    "symbol": "HD",
+    "days": 10,
+    "trades": 7,
+    "net": -45.35,
+    "win_rate": 28.6
+  },
+  {
+    "symbol": "UAL",
+    "days": 10,
+    "trades": 6,
+    "net": -65.92,
+    "win_rate": 16.7
+  },
+  {
+    "symbol": "XPEV",
+    "days": 10,
+    "trades": 8,
+    "net": -88.97,
+    "win_rate": 37.5
+  },
+  {
+    "symbol": "XPEV",
     "days": 30,
+    "trades": 9,
+    "net": -19.09,
+    "win_rate": 55.6
+  },
+  {
+    "symbol": "UAL",
+    "days": 30,
+    "trades": 13,
+    "net": -19.18,
+    "win_rate": 30.8
+  },
+  {
+    "symbol": "HD",
+    "days": 30,
+    "trades": 16,
+    "net": -23.48,
+    "win_rate": 43.8
+  },
+  {
+    "symbol": "ETN",
+    "days": 30,
+    "trades": 9,
+    "net": -57.66,
+    "win_rate": 33.3
+  },
+  {
+    "symbol": "CIFR",
+    "days": 30,
+    "trades": 5,
+    "net": -102.46,
+    "win_rate": 40.0
+  },
+  {
+    "symbol": "CIFR",
+    "days": 90,
     "trades": 12,
-    "net": 109.05,
-    "win_rate": 58.3
+    "net": 288.41,
+    "win_rate": 66.7
+  },
+  {
+    "symbol": "UAL",
+    "days": 90,
+    "trades": 26,
+    "net": 223.87,
+    "win_rate": 53.8
+  },
+  {
+    "symbol": "ETN",
+    "days": 90,
+    "trades": 21,
+    "net": 24.98,
+    "win_rate": 52.4
+  },
+  {
+    "symbol": "HD",
+    "days": 90,
+    "trades": 25,
+    "net": 14.74,
+    "win_rate": 52.0
+  },
+  {
+    "symbol": "XPEV",
+    "days": 90,
+    "trades": 36,
+    "net": -148.09,
+    "win_rate": 44.4
+  },
+  {
+    "symbol": "CIFR",
+    "days": 120,
+    "trades": 16,
+    "net": 439.58,
+    "win_rate": 68.8
+  },
+  {
+    "symbol": "UAL",
+    "days": 120,
+    "trades": 36,
+    "net": 245.68,
+    "win_rate": 52.8
+  },
+  {
+    "symbol": "ETN",
+    "days": 120,
+    "trades": 28,
+    "net": 5.38,
+    "win_rate": 46.4
+  },
+  {
+    "symbol": "HD",
+    "days": 120,
+    "trades": 41,
+    "net": 5.08,
+    "win_rate": 48.8
+  },
+  {
+    "symbol": "XPEV",
+    "days": 120,
+    "trades": 49,
+    "net": -240.37,
+    "win_rate": 38.8
+  },
+  {
+    "symbol": "UAL",
+    "days": 240,
+    "trades": 74,
+    "net": 533.25,
+    "win_rate": 55.4
+  },
+  {
+    "symbol": "CIFR",
+    "days": 240,
+    "trades": 49,
+    "net": 426.33,
+    "win_rate": 53.1
+  },
+  {
+    "symbol": "ETN",
+    "days": 240,
+    "trades": 64,
+    "net": 186.3,
+    "win_rate": 56.2
+  },
+  {
+    "symbol": "HD",
+    "days": 240,
+    "trades": 75,
+    "net": 94.41,
+    "win_rate": 50.7
+  },
+  {
+    "symbol": "XPEV",
+    "days": 240,
+    "trades": 85,
+    "net": 82.52,
+    "win_rate": 48.2
   }
 ]

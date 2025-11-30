@@ -302,8 +302,11 @@ def main():
         # Note: We need to update load_bars_for_symbol signature or just call fetch_latest_bars directly?
         # load_bars_for_symbol calls fetch_latest_bars. Let's update load_bars_for_symbol first.
         # Wait, load_bars_for_symbol is in this file. I need to update it too.
+        # Fetch extra calendar days to ensure we cover the requested trading days (RTH)
+        # 1.6 multiplier covers weekends and holidays (approx 252 trading days / 365 days = 0.69)
+        fetch_days = int(max_days * 1.6)
         return load_bars_for_symbol(
-            sym, cfg, max_days,
+            sym, cfg, fetch_days,
             timeframe_override=args.timeframe,
             limit_override=args.limit,
             rth_only_override=args.rth_only,
