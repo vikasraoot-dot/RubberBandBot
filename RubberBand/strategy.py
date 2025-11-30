@@ -35,7 +35,20 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     
     # Logic: RSI Oversold
     rsi_oversold = float(cfg.get("filters", {}).get("rsi_oversold", 30))
-    df["rsi_oversold"] = df["rsi"] < rsi_oversold
+    rsi_min = float(cfg.get("filters", {}).get("rsi_min", 15)) # Avoid falling knives
+    df["rsi_oversold"] = (df["rsi"] < rsi_oversold) & (df["rsi"] >= rsi_min)
+    
+    # Logic: Time Filter (Lunch Lull)
+    # Exclude 12:00 PM - 1:00 PM ET (approx 17:00 - 18:00 UTC)
+    # Data shows 17:00 UTC is the primary loser (-$115 PnL, 41% WR).
+    # 18:00 UTC is profitable (+$27 PnL, 46% WR), so we keep it.
+    # We assume the index is a DatetimeIndex in UTC.
+    if isinstance(df.index, pd.DatetimeIndex):
+        # Only exclude hour 17
+        df["time_ok"] = ~df.index.hour.isin([17])
+    else:
+        # Fallback if index is not datetime (should not happen in this pipeline)
+        df["time_ok"] = True
     
     # Logic: Trend Filter (SMA)
     # If trend_filter_sma > 0, we require close > sma
@@ -47,6 +60,6 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
         df["trend_ok"] = True
     
     # Combined Signal
-    df["long_signal"] = df["below_lower_band"] & df["rsi_oversold"] & df["trend_ok"]
+    df["long_signal"] = df["below_lower_band"] & df["rsi_oversold"] & df["trend_ok"] & df["time_ok"]
     
     return df
