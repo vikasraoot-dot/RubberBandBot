@@ -35,40 +35,42 @@ def main():
     candidates = []
 
     for sym in symbols:
-        sub = df[df["symbol"] == sym].set_index("days")
-        
-        # Check if we have data for all timeframes (or at least 350)
-        if 350 not in sub.index:
-            continue
+        try:
+            sub = df[df["symbol"] == sym].set_index("days")
             
-        pnl_350 = sub.loc[350, "net"]
-        wr_350 = sub.loc[350, "win_rate"]
-        trades_350 = sub.loc[350, "trades"]
-        
-        pnl_30 = sub.loc[30, "net"] if 30 in sub.index else 0
-        pnl_90 = sub.loc[90, "net"] if 90 in sub.index else 0
-        pnl_120 = sub.loc[120, "net"] if 120 in sub.index else 0
-        pnl_240 = sub.loc[240, "net"] if 240 in sub.index else 0
-        
-        # Scoring Logic
-        score = 0
-        if pnl_350 > 0: score += 1
-        if pnl_90 > 0: score += 1
-        if pnl_30 > 0: score += 1
-        if wr_350 > 50: score += 1
-        if trades_350 > 20: score += 1 # Liquidity/Frequency check
-        
-        # Filter: Must be profitable over 350 days and have decent win rate
-        if pnl_350 > 100 and wr_350 > 45:
-            candidates.append({
-                "sym": sym,
-                "pnl_30": pnl_30,
-                "pnl_90": pnl_90,
-                "pnl_350": pnl_350,
-                "wr_350": wr_350,
-                "trades_350": trades_350,
-                "score": score
-            })
+            # Check if we have data for all timeframes (or at least 350)
+            if 350 not in sub.index:
+                continue
+                
+            pnl_350 = float(sub.loc[350, "net"])
+            wr_350 = float(sub.loc[350, "win_rate"])
+            trades_350 = int(sub.loc[350, "trades"])
+            
+            pnl_30 = float(sub.loc[30, "net"]) if 30 in sub.index else 0.0
+            pnl_90 = float(sub.loc[90, "net"]) if 90 in sub.index else 0.0
+            
+            # Scoring Logic
+            score = 0
+            if pnl_350 > 0: score += 1
+            if pnl_90 > 0: score += 1
+            if pnl_30 > 0: score += 1
+            if wr_350 > 50: score += 1
+            if trades_350 > 20: score += 1 # Liquidity/Frequency check
+            
+            # Filter: Must be profitable over 350 days and have decent win rate
+            if pnl_350 > 100 and wr_350 > 45:
+                candidates.append({
+                    "sym": sym,
+                    "pnl_30": pnl_30,
+                    "pnl_90": pnl_90,
+                    "pnl_350": pnl_350,
+                    "wr_350": wr_350,
+                    "trades_350": trades_350,
+                    "score": score
+                })
+        except Exception as e:
+            print(f"Skipping {sym} due to error: {e}")
+            continue
 
     # Sort by Score then PnL
     candidates.sort(key=lambda x: (x["score"], x["pnl_350"]), reverse=True)
@@ -89,10 +91,12 @@ def main():
         report_lines.append("\n")
 
     # Write report
-    with open("candidate_report.md", "w") as f:
-        f.write("\n".join(report_lines))
-    
-    print("Generated candidate_report.md")
+    try:
+        with open("candidate_report.md", "w") as f:
+            f.write("\n".join(report_lines))
+        print("Generated candidate_report.md")
+    except Exception as e:
+        print(f"Error writing report: {e}")
 
 if __name__ == "__main__":
     main()
