@@ -314,24 +314,8 @@ def main() -> int:
         except Exception:
             pass
 
-        # ATR Calculation
-        atr_len = int(cfg.get("atr_length", 14))
-        tr = pd.concat(
-            [
-                (df["high"] - df["low"]),
-                (df["high"] - df["close"].shift(1)).abs(),
-                (df["low"] - df["close"].shift(1)).abs(),
-            ],
-            axis=1,
-        ).max(axis=1)
-        atr = tr.rolling(atr_len, min_periods=atr_len).mean()
-        atr_val = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else 0.0
-
-        # Bracket Calculation (Match Backtest: TP = Entry + TP_R * ATR)
-        entry = close # Use last close as proxy for entry
-        sl_mult = float(brackets.get("atr_mult_sl", 1.5))
-        tp_r = float(brackets.get("take_profit_r", 2.0))
-        
+        # ATR Calculation (Use pre-calculated from attach_verifiers)
+        atr_val = float(last.get("atr", 0.0))
         stop_price = round(entry - sl_mult * atr_val, 2)
         take_profit = round(entry + tp_r * atr_val, 2) # Direct ATR multiple
         

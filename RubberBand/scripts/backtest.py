@@ -117,7 +117,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
                 # Risk Sizing
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
-                    print(f"REJECT: ATR={atr_val}")
+                    # print(f"REJECT: ATR={atr_val}") # Too verbose
                     continue
                 
                 # Sizing: Match Live Logic (Fixed Notional Cap)

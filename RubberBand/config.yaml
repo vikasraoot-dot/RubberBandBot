@@ -81,7 +81,9 @@ filters:
 # ──────────────────────────────────────────────────────────────────────────────
 # EXIT STRATEGY
 # ──────────────────────────────────────────────────────────────────────────────
-exit_at_mean: true
+# NOTE: Live bot ONLY uses Brackets (TP/SL). 
+# We disable these "smart exits" in backtest to match live reality.
+exit_at_mean: false
 exit_at_upper: false
 
 # ──────────────────────────────────────────────────────────────────────────────
