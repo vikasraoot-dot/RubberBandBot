@@ -13,21 +13,6 @@ from typing import List, Dict, Any, Optional, Tuple, Iterable
 ISO_UTC = "%Y-%m-%dT%H:%M:%SZ"
 
 def _now_utc() -> dt.datetime:
-    return dt.datetime.now(dt.timezone.utc)
-
-def _iso_utc(ts: Optional[dt.datetime] = None) -> str:
-    ts = ts or _now_utc()
-    return ts.strftime(ISO_UTC)
-
-def _minutes(td: dt.timedelta) -> int:
-    return int(td.total_seconds() // 60)
-
-# ──────────────────────────────────────────────────────────────────────────────
-# Creds / Alpaca helpers
-# ──────────────────────────────────────────────────────────────────────────────
-def _resolve_key_secret(key: Optional[str], secret: Optional[str]) -> Tuple[str, str]:
-    """
-    Prefer explicit args; otherwise fall back to common env names.
     """
     k = (key or os.getenv("APCA_API_KEY_ID") or os.getenv("ALPACA_KEY_ID") or "").strip()
     s = (secret or os.getenv("APCA_API_SECRET_KEY") or os.getenv("ALPACA_SECRET_KEY") or "").strip()

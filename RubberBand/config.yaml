@@ -53,8 +53,8 @@ max_open_trades_per_ticker: 1
 # ──────────────────────────────────────────────────────────────────────────────
 brackets:
   enabled: true
-  atr_mult_sl: 1.5          # Stop Loss = 1.5 ATR
-  take_profit_r: 2.0        # Take Profit = 2.0 ATR (Optimized)
+  atr_mult_sl: 2.5          # Stop Loss = 2.5 ATR (Option 2: Consistency)
+  take_profit_r: 1.5        # Take Profit = 1.5 ATR (Option 2: Consistency)
 
 # Breakeven (Optional)
 breakeven:
@@ -67,7 +67,7 @@ breakeven:
 # FILTERS / GATES
 # ──────────────────────────────────────────────────────────────────────────────
 filters:
-  rsi_oversold: 25           # Buy when RSI < 25 (Optimized)
+  rsi_oversold: 25           # Buy when RSI < 25 (Option 2: Consistency)
   rsi_overbought: 70         # (Future use for shorts)
   min_price: 5.0
   min_dollar_vol: 1000000    # Adjusted for IEX feed volume
