@@ -1,0 +1,39 @@
+﻿2025-12-01T14:50:33.4503260Z ##[group]Run chcp 65001 > $null
+2025-12-01T14:50:33.4503493Z [36;1mchcp 65001 > $null[0m
+2025-12-01T14:50:33.4503729Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-01T14:50:33.4503964Z [36;1mfunction Get-Clock {[0m
+2025-12-01T14:50:33.4504159Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-01T14:50:33.4504374Z [36;1m}[0m
+2025-12-01T14:50:33.4504472Z [36;1m$maxWaitMin = 20[0m
+2025-12-01T14:50:33.4504582Z [36;1m$start = Get-Date[0m
+2025-12-01T14:50:33.4504697Z [36;1mwhile ($true) {[0m
+2025-12-01T14:50:33.4504803Z [36;1m  try {[0m
+2025-12-01T14:50:33.4504896Z [36;1m    $clk = Get-Clock[0m
+2025-12-01T14:50:33.4505066Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-01T14:50:33.4505257Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-01T14:50:33.4505434Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-01T14:50:33.4505634Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-01T14:50:33.4505804Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-01T14:50:33.4506025Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-01T14:50:33.4506295Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-01T14:50:33.4506432Z [36;1m    } else {[0m
+2025-12-01T14:50:33.4506772Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-01T14:50:33.4506921Z [36;1m      break[0m
+2025-12-01T14:50:33.4507022Z [36;1m    }[0m
+2025-12-01T14:50:33.4507175Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-01T14:50:33.4507386Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-01T14:50:33.4507550Z [36;1m      break[0m
+2025-12-01T14:50:33.4507647Z [36;1m    }[0m
+2025-12-01T14:50:33.4507739Z [36;1m  } catch {[0m
+2025-12-01T14:50:33.4507913Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-01T14:50:33.4508123Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-01T14:50:33.4508264Z [36;1m  }[0m
+2025-12-01T14:50:33.4508349Z [36;1m}[0m
+2025-12-01T14:50:33.4525269Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-01T14:50:33.4525487Z env:
+2025-12-01T14:50:33.4525725Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-01T14:50:33.4525952Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-01T14:50:33.4526566Z   APCA_API_KEY_ID: ***
+2025-12-01T14:50:33.4526749Z   APCA_API_SECRET_KEY: ***
+2025-12-01T14:50:33.4526866Z ##[endgroup]
+2025-12-01T14:50:34.5686029Z Market is open â†’ proceed.

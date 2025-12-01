@@ -281,6 +281,9 @@ def main() -> int:
         rsi = float(last["rsi"]) if not pd.isna(last["rsi"]) else None
         kc_lower = float(last["kc_lower"]) if not pd.isna(last["kc_lower"]) else None
         
+        # Entry price reference (Close of the signal bar)
+        entry = close
+        
         # Log Signal
         sig_row = {
             "symbol": sym,
