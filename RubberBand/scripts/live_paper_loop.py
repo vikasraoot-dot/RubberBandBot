@@ -405,7 +405,7 @@ def main() -> int:
                         symbol=sym,
                         session=session,
                         cid=sig_row["cid"],
-                        reason="BROKER_ERROR",
+                        reason=str(e),
                     )
                 except Exception:
                     pass
@@ -414,6 +414,7 @@ def main() -> int:
     print("\n=== Session Summary ===", flush=True)
     try:
         from RubberBand.src.data import get_daily_fills
+        # Fetch fills
         fills = get_daily_fills(base_url, key, secret)
         
         if not fills:
@@ -438,7 +439,6 @@ def main() -> int:
                     stats[sym]["sell_val"] += (qty * px)
 
             # Print Table
-            # Columns: Ticker | Bought | Avg Ent | Basis | Sold | Avg Ex | Day PnL
             header = f"{'Ticker':<8} {'Bought':<8} {'Avg Ent':<10} {'Basis':<12} {'Sold':<8} {'Avg Ex':<10} {'Day PnL':<10}"
             print("-" * len(header), flush=True)
             print(header, flush=True)
@@ -467,7 +467,6 @@ def main() -> int:
                 total_pnl += realized_pnl
                 total_vol += (b_val + s_val)
 
-                # Format PnL: show value if matched > 0, else "-"
                 pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
 
                 print(f"{sym:<8} {int(b_qty):<8} {avg_ent:<10.2f} {b_val:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {pnl_str:<10}", flush=True)

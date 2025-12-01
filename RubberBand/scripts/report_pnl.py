@@ -1,123 +1,73 @@
-import os
 import sys
-import requests
-import pandas as pd
-from datetime import datetime
-from zoneinfo import ZoneInfo
+import os
 
-def get_env_var(keys, default=None):
-    for k in keys:
-        val = os.getenv(k)
-        if val: return val
-    return default
+# Add project root to path if running as script
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+from RubberBand.src.data import get_daily_fills
 
 def main():
-    # 1. Setup Credentials
-    key = get_env_var(["ALPACA_KEY_ID", "APCA_API_KEY_ID", "ALPACA_KEY"])
-    secret = get_env_var(["ALPACA_SECRET_KEY", "APCA_API_SECRET_KEY", "ALPACA_SECRET"])
-    base_url = get_env_var(["ALPACA_BASE_URL", "APCA_API_BASE_URL"], "https://paper-api.alpaca.markets").rstrip("/")
-
-    if not key or not secret:
-        print("Error: Alpaca credentials not found in environment.")
-        return
-
-    headers = {
-        "APCA-API-KEY-ID": key,
-        "APCA-API-SECRET-KEY": secret,
-        "Content-Type": "application/json"
-    }
-
-    # 2. Define "Today" in ET
-    et = ZoneInfo("US/Eastern")
-    now = datetime.now(et)
-    today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
-    today_iso = today_start.isoformat()
-
-    print(f"Fetching fills since {today_iso}...")
-
-    # 3. Fetch Account (to check status)
-    try:
-        r = requests.get(f"{base_url}/v2/account", headers=headers, timeout=10)
-        r.raise_for_status()
-    except Exception as e:
-        print(f"Failed to connect to Alpaca: {e}")
-        return
-
-    # 4. Fetch Orders (Closed Today)
-    # We fetch closed orders and filter locally because 'after' param applies to submission time, not fill time.
-    params = {
-        "status": "closed",
-        "limit": 500,
-        "after": today_iso 
-    }
+    print("Fetching daily fills...", flush=True)
+    fills = get_daily_fills()
     
-    try:
-        r = requests.get(f"{base_url}/v2/orders", headers=headers, params=params, timeout=10)
-        r.raise_for_status()
-        orders = r.json()
-    except Exception as e:
-        print(f"Failed to fetch orders: {e}")
+    if not fills:
+        print("No trades filled today.")
         return
 
-    if not orders:
-        print("No closed orders found for today.")
-        return
-
-    # 5. Process Fills
-    trades = []
-    for o in orders:
-        # Check if filled
-        if not o.get("filled_at"):
-            continue
-            
-        # Parse fill time
-        # Alpaca returns UTC ISO strings like '2023-10-27T14:00:00.123456Z'
-        fill_ts = datetime.fromisoformat(o["filled_at"].replace("Z", "+00:00")).astimezone(et)
+    # Aggregate per symbol
+    stats = {}
+    for f in fills:
+        sym = f.get("symbol")
+        side = f.get("side")
+        qty = float(f.get("filled_qty", 0))
+        px = float(f.get("filled_avg_price", 0))
         
-        if fill_ts >= today_start:
-            trades.append({
-                "symbol": o["symbol"],
-                "side": o["side"],
-                "qty": float(o["filled_qty"]),
-                "price": float(o["filled_avg_price"]),
-                "time": fill_ts,
-                "notional": float(o["filled_qty"]) * float(o["filled_avg_price"])
-            })
-
-    if not trades:
-        print("No fills found for today (orders might be cancelled/expired).")
-        return
-
-    df = pd.DataFrame(trades)
-    df.sort_values("time", inplace=True)
-
-    # 6. Calculate PnL
-    pnl_summary = []
-    
-    for sym, group in df.groupby("symbol"):
-        buys = group[group["side"] == "buy"]["notional"].sum()
-        sells = group[group["side"] == "sell"]["notional"].sum()
+        if sym not in stats:
+            stats[sym] = {"buy_qty": 0, "buy_val": 0.0, "sell_qty": 0, "sell_val": 0.0}
         
-        # Net Cash Flow (assuming flat)
-        net_pnl = sells - buys
+        if side == "buy":
+            stats[sym]["buy_qty"] += qty
+            stats[sym]["buy_val"] += (qty * px)
+        elif side == "sell":
+            stats[sym]["sell_qty"] += qty
+            stats[sym]["sell_val"] += (qty * px)
+
+    # Print Table
+    header = f"{'Ticker':<8} {'Bought':<8} {'Avg Ent':<10} {'Basis':<12} {'Sold':<8} {'Avg Ex':<10} {'Day PnL':<10}"
+    print("-" * len(header))
+    print(header)
+    print("-" * len(header))
+
+    total_pnl = 0.0
+    total_vol = 0.0
+
+    for sym in sorted(stats.keys()):
+        s = stats[sym]
+        b_qty = s["buy_qty"]
+        b_val = s["buy_val"]
+        s_qty = s["sell_qty"]
+        s_val = s["sell_val"]
+
+        avg_ent = (b_val / b_qty) if b_qty > 0 else 0.0
+        avg_ex = (s_val / s_qty) if s_qty > 0 else 0.0
         
-        pnl_summary.append({
-            "Ticker": sym,
-            "Trades": len(group),
-            "Cost Basis": buys,
-            "Sell Price": sells,
-            "Net PnL": net_pnl
-        })
+        # Calculate PnL only on matched intraday quantity
+        matched_qty = min(b_qty, s_qty)
+        if matched_qty > 0:
+            realized_pnl = (avg_ex - avg_ent) * matched_qty
+        else:
+            realized_pnl = 0.0
+        
+        total_pnl += realized_pnl
+        total_vol += (b_val + s_val)
 
-    summary_df = pd.DataFrame(pnl_summary)
-    total_pnl = summary_df["Net PnL"].sum()
+        pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
 
-    # 7. Print Report
-    print("\n=== DAILY TRADING REPORT ===")
-    print(summary_df.to_string(index=False, float_format="%.2f"))
-    print("-" * 40)
-    print(f"TOTAL PnL: ${total_pnl:.2f}")
-    print("============================")
+        print(f"{sym:<8} {int(b_qty):<8} {avg_ent:<10.2f} {b_val:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {pnl_str:<10}")
+
+    print("-" * len(header))
+    print(f"TOTAL Day PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}")
+    print("(Note: Day PnL calculated on matched intraday buy/sell quantity)")
 
 if __name__ == "__main__":
     main()
