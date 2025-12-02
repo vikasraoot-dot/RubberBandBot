@@ -72,7 +72,7 @@ def _in_entry_window(now_et: datetime, windows: List[dict]) -> bool:
 
 
 def _cap_qty_by_notional(qty: int, entry: float, max_notional: float | None) -> int:
-    if not max_notional:
+    if max_notional is None or max_notional <= 0:
         return qty
     if entry <= 0:
         return 0
@@ -266,7 +266,12 @@ def main() -> int:
     base_qty = int(cfg.get("qty", 1))
     max_shares = int(cfg.get("max_shares_per_trade", base_qty))
     max_notional = cfg.get("max_notional_per_trade", None)
-    max_notional = float(max_notional) if max_notional not in (None, "", "0") else None
+    try:
+        max_notional = float(max_notional) if max_notional is not None else None
+        if max_notional is not None and max_notional <= 0:
+            max_notional = None
+    except (ValueError, TypeError):
+        max_notional = None
 
     # Iterate symbols
     for sym in symbols:
