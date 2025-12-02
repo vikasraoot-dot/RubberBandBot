@@ -71,7 +71,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
     - Exit: Price > Middle Keltner (Mean) OR Bracket SL/TP
     """
     if df is None or df.empty or len(df) < 30:
-        return dict(trades=0, gross=0.0, net=0.0, win_rate=0.0, ret_pct=0.0, equity=start_cash)
+        return dict(trades=0, gross=0.0, net=0.0, win_rate=0.0, ret_pct=0.0, equity=start_cash, detailed_trades=[])
 
     df = attach_verifiers(df, cfg).copy()
     
