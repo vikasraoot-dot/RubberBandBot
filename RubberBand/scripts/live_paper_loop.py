@@ -259,6 +259,8 @@ def main() -> int:
 
     # Risk knobs
     brackets = cfg.get("brackets", {}) or {}
+    sl_mult = float(brackets.get("atr_mult_sl", 2.5))
+    tp_r = float(brackets.get("take_profit_r", 1.5))
 
     # Size guard
     base_qty = int(cfg.get("qty", 1))
