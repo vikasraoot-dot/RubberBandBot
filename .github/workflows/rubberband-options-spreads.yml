@@ -105,4 +105,4 @@ jobs:
             --tickers RubberBand/tickers_options.txt `
             --dry-run $dryRun `
             --dte $dte `
-            --max-debit 1.00
+            --max-debit 3.00
