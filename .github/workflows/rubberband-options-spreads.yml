@@ -1,0 +1,108 @@
+name: RubberBand Options Spreads (loop AM)
+on:
+  schedule:
+    # Fire 15 mins BEFORE market open (9:15 AM EST)
+    # 14:15 UTC = 9:15 AM EST (Winter) / 10:15 AM EDT (Summer)
+    # The wait guard will hold until market actually opens
+    - cron: "15 14 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (1=simulate, 0=live paper trading)'
+        required: false
+        default: '0'
+      dte:
+        description: 'Days to expiration (1-3)'
+        required: false
+        default: '3'
+
+concurrency:
+  group: rubberband-options-spreads-loop-am
+  cancel-in-progress: true
+
+jobs:
+  trade:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 600
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = (Get-Command python.exe).Source
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+
+      # Wait for market open
+      - name: Wait until market open (guard)
+        shell: powershell
+        env:
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+        run: |
+          chcp 65001 > $null
+          $H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }
+          function Get-Clock {
+            Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8
+          }
+          $maxWaitMin = 20
+          $start = Get-Date
+          while ($true) {
+            try {
+              $clk = Get-Clock
+              if ($clk.is_open) { Write-Host "Market is open → proceed."; break }
+              $now = [DateTimeOffset]::UtcNow
+              $nextOpen = [DateTimeOffset]::Parse($clk.next_open)
+              if ($now -lt $nextOpen) {
+                $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)
+                Write-Host "Waiting $sec s until next_open $($clk.next_open)..."
+                Start-Sleep -Seconds $sec
+              } else {
+                Write-Host "Past next_open window; continuing."
+                break
+              }
+              if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {
+                Write-Host "Exceeded $maxWaitMin min wait. Continuing."
+                break
+              }
+            } catch {
+              Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."
+              Start-Sleep -Seconds 15
+            }
+          }
+
+      # Run options spreads loop every 15 minutes
+      - name: Run options spreads loop (paper trading)
+        shell: powershell
+        env:
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          ALPACA_KEY: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          chcp 65001 > $null
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          
+          # Get inputs with defaults
+          $dryRun = if ("${{ github.event.inputs.dry_run }}" -ne "") { "${{ github.event.inputs.dry_run }}" } else { "0" }
+          $dte = if ("${{ github.event.inputs.dte }}" -ne "") { "${{ github.event.inputs.dte }}" } else { "3" }
+          
+          Write-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"
+          
+          # Run the spreads loop
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `
+            --config RubberBand/config.yaml `
+            --tickers RubberBand/tickers_options.txt `
+            --dry-run $dryRun `
+            --dte $dte `
+            --max-debit 1.00
