@@ -270,19 +270,30 @@ def select_spread_contracts(
     Returns:
         Dict with 'long' (ATM) and 'short' (OTM) contracts, or None
     """
-    # Get expiration date
-    expiration = get_ndte_expiration(dte)
-    
-    # Get current price
+    # Get current price first
     price = get_underlying_price(underlying)
     if price is None:
         print(f"[spreads] Cannot get price for {underlying}")
         return None
     
-    # Fetch all call contracts for this expiration
-    contracts = fetch_option_contracts(underlying, expiration, "call", limit=200)
+    # Try DTE, then DTE-1, DTE-2, DTE+1, DTE+2 to find available expiration
+    dte_attempts = [dte, dte - 1, dte + 1, dte - 2, dte + 2]
+    dte_attempts = [d for d in dte_attempts if d >= 0]  # No negative DTE
+    
+    contracts = None
+    used_expiration = None
+    
+    for try_dte in dte_attempts:
+        expiration = get_ndte_expiration(try_dte)
+        contracts = fetch_option_contracts(underlying, expiration, "call", limit=200)
+        if contracts:
+            used_expiration = expiration
+            if try_dte != dte:
+                print(f"[spreads] Using {try_dte} DTE ({expiration}) instead of {dte} DTE for {underlying}")
+            break
+    
     if not contracts:
-        print(f"[spreads] No contracts for {underlying} exp {expiration}")
+        print(f"[spreads] No contracts for {underlying} in DTE range {min(dte_attempts)}-{max(dte_attempts)}")
         return None
     
     # Filter active, tradable contracts
@@ -342,11 +353,11 @@ def select_spread_contracts(
         print(f"[spreads] Invalid spread width for {underlying}: ATM={atm_strike}, OTM={otm_strike}")
         return None
     
-    print(f"[spreads] {underlying}: Long {atm_strike} / Short {otm_strike} (width=${spread_width:.2f}, exp={expiration})")
+    print(f"[spreads] {underlying}: Long {atm_strike} / Short {otm_strike} (width=${spread_width:.2f}, exp={used_expiration})")
     
     return {
         "underlying": underlying,
-        "expiration": expiration,
+        "expiration": used_expiration,
         "dte": dte,
         "underlying_price": price,
         "long": atm_contract,  # ATM call (buy)
