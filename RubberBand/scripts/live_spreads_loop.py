@@ -90,6 +90,35 @@ def _log(msg: str, data: dict = None):
     print(json.dumps(entry, default=str), flush=True)
 
 
+def _in_entry_window(now_et: datetime, windows: list) -> bool:
+    """
+    Check if current time is within any configured entry window.
+    
+    Windows format: [{"start": "09:45", "end": "15:45"}, ...]
+    Returns True if in window or no windows configured.
+    """
+    if not windows:
+        return True  # No windows = always allow
+    
+    current_time = now_et.time()
+    
+    for w in windows:
+        start_str = w.get("start", "09:30")
+        end_str = w.get("end", "16:00")
+        
+        start_parts = start_str.split(":")
+        end_parts = end_str.split(":")
+        
+        from datetime import time as dt_time
+        start_time = dt_time(int(start_parts[0]), int(start_parts[1]))
+        end_time = dt_time(int(end_parts[0]), int(end_parts[1]))
+        
+        if start_time <= current_time <= end_time:
+            return True
+    
+    return False
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Signal Detection
 # ──────────────────────────────────────────────────────────────────────────────
@@ -355,6 +384,20 @@ def main() -> int:
     # Check market status
     if not alpaca_market_open():
         _log("Market is closed, exiting")
+        return 0
+    
+    # Check entry windows (same as stock trading - skip lunch etc)
+    now_et = _now_et()
+    windows = cfg.get("entry_windows", [])
+    if not _in_entry_window(now_et, windows):
+        _log("Outside entry window, skipping new entries", {
+            "current_time": now_et.strftime("%H:%M"),
+            "windows": windows,
+        })
+        # Still manage positions but don't open new ones
+        dry_run = bool(args.dry_run)
+        tracker = OptionsTradeTracker()
+        manage_positions(spread_cfg, tracker, dry_run)
         return 0
     
     # For 0DTE only: check 3:00 PM cutoff
