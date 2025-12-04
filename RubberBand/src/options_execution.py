@@ -93,28 +93,32 @@ def submit_spread_order(
     max_debit: Optional[float] = None,
 ) -> Dict[str, Any]:
     """
-    Submit a bull call spread order (buy-to-open long, sell-to-open short).
+    Submit a bull call spread order as a multi-leg order.
+    
+    Uses Alpaca's mleg order class to submit both legs together,
+    ensuring the spread is treated as a defined-risk position.
     
     Args:
         long_symbol: OCC symbol for long leg (ATM call)
         short_symbol: OCC symbol for short leg (OTM call)
         qty: Number of spreads
-        max_debit: Max net debit per spread (optional, for validation)
+        max_debit: Max net debit per spread (used as limit price)
     
     Returns:
-        Combined result dict with both leg orders
+        Result dict with order info or error
     """
     from RubberBand.src.options_data import get_option_quote
     
-    # Get quotes for both legs
+    base, key, secret = _resolve_creds()
+    
+    # Get quotes for both legs to determine limit price
     long_quote = get_option_quote(long_symbol)
     short_quote = get_option_quote(short_symbol)
     
     if not long_quote or not short_quote:
         return {"error": True, "message": "Cannot get quotes for spread legs"}
     
-    # Calculate net debit
-    # Buy at ask for long leg, sell at bid for short leg
+    # Calculate net debit: buy long at ask, sell short at bid
     long_ask = long_quote.get("ask", 0)
     short_bid = short_quote.get("bid", 0)
     net_debit = long_ask - short_bid
@@ -125,41 +129,66 @@ def submit_spread_order(
     if max_debit and net_debit > max_debit:
         return {"error": True, "message": f"Spread debit {net_debit} exceeds max {max_debit}"}
     
-    # Submit long leg (buy)
-    long_result = submit_option_order(
-        option_symbol=long_symbol,
-        qty=qty,
-        side="buy",
-        order_type="limit",
-        limit_price=long_ask,
-    )
+    # Use the calculated debit as limit price (positive = debit)
+    limit_price = round(net_debit, 2)
     
-    if long_result.get("error"):
-        return {"error": True, "message": f"Long leg failed: {long_result.get('message')}"}
-    
-    # Submit short leg (sell)
-    short_result = submit_option_order(
-        option_symbol=short_symbol,
-        qty=qty,
-        side="sell",
-        order_type="limit",
-        limit_price=short_bid,
-    )
-    
-    if short_result.get("error"):
-        # Try to cancel the long leg if short fails
-        print(f"[spreads] Short leg failed, long leg may need manual cancel")
-        return {"error": True, "message": f"Short leg failed: {short_result.get('message')}", "long_order": long_result}
-    
-    print(f"[spreads] Spread submitted: Long {long_symbol} @ {long_ask}, Short {short_symbol} @ {short_bid}, Net debit: {net_debit:.2f}")
-    
-    return {
-        "success": True,
-        "long_order": long_result,
-        "short_order": short_result,
-        "net_debit": net_debit,
-        "total_cost": net_debit * 100 * qty,
+    # Build multi-leg order request
+    # Alpaca mleg order: order_class="mleg", legs array with each leg
+    order_payload = {
+        "symbol": long_symbol,  # Primary symbol (required by API, use long leg)
+        "qty": str(qty),
+        "side": "buy",  # Overall direction for debit spread
+        "type": "limit",
+        "time_in_force": "day",
+        "limit_price": str(limit_price),  # Positive = debit to pay
+        "order_class": "mleg",  # Multi-leg order
+        "legs": [
+            {
+                "symbol": long_symbol,
+                "side": "buy",
+                "ratio_qty": "1",
+                "position_intent": "buy_to_open",
+            },
+            {
+                "symbol": short_symbol,
+                "side": "sell",
+                "ratio_qty": "1",
+                "position_intent": "sell_to_open",
+            },
+        ],
     }
+    
+    url = f"{base}/v2/orders"
+    
+    try:
+        print(f"[options] Submitting spread: {long_symbol} (buy) / {short_symbol} (sell) @ ${limit_price} debit")
+        resp = requests.post(
+            url,
+            headers=_headers(key, secret),
+            json=order_payload,
+            timeout=15,
+        )
+        result = resp.json()
+        
+        if resp.status_code >= 400:
+            error_msg = result.get("message", str(result))
+            print(f"[options] Spread order error: {result}")
+            return {"error": True, "message": error_msg}
+        
+        order_id = result.get("id", "")
+        print(f"[options] Spread order submitted: {order_id}")
+        return {
+            "error": False,
+            "order_id": order_id,
+            "long_symbol": long_symbol,
+            "short_symbol": short_symbol,
+            "qty": qty,
+            "limit_price": limit_price,
+            "status": result.get("status", ""),
+        }
+    except Exception as e:
+        print(f"[options] Spread order exception: {e}")
+        return {"error": True, "message": str(e)}
 
 
 def close_option_position(
