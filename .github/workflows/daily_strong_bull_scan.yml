@@ -37,7 +37,7 @@ jobs:
           # Run the scan script
           # Note: Using full list might take time. Adjust limit if needed for CI timeout.
           # For now, we run full list.
-          python RubberBand/scripts/scan_candidates.py --tickers tickers_full_list.txt --output candidates.csv
+          python RubberBand/scripts/scan_strong_bull_candidates.py --tickers tickers_full_list.txt --output candidates.csv
 
       - name: Upload Candidates Artifact
         uses: actions/upload-artifact@v4
