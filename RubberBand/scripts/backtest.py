@@ -354,6 +354,11 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                 else:
                     losses += 1
                 
+                # Calculate hold duration
+                hold_duration = cur.name - entry_ts
+                hold_bars = i - df.index.get_loc(entry_ts)
+                hold_days = hold_duration.total_seconds() / 86400
+                
                 detailed_trades.append({
                     "symbol": sym,
                     "entry_time": entry_ts,
@@ -363,8 +368,13 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                     "exit_price": exit_px,
                     "qty": qty,
                     "pnl": pnl,
-                    "reason": reason,
-                    **entry_state
+                    "exit_reason": reason,
+                    "hold_duration_bars": hold_bars,
+                    "hold_duration_days": round(hold_days, 2),
+                    "entry_rsi": entry_state.get("rsi", 0),
+                    "entry_atr": entry_state.get("atr", 0),
+                    "sl_px": entry_state.get("sl_px", 0),
+                    "tp_px": entry_state.get("tp_px", 0)
                 })
                 
                 in_pos = False
@@ -558,12 +568,29 @@ def main():
         # Join max capital
         daily = daily.join(daily_max_cap.rename("max_capital"))
         
+        
         if not args.quiet:
             print("\n=== Daily Win/Loss Stats (Last 10 Days) ===")
             print(daily.tail(10))
         daily.to_csv("daily_stats.csv")
         if not args.quiet:
             print("\nSaved daily breakdown to daily_stats.csv")
+        
+        # Save detailed trades for loss analysis
+        df_trades_export = df_trades[[
+            "symbol", "date", "entry_time", "exit_time", "side", 
+            "entry_price", "exit_price", "qty", "pnl", "exit_reason",
+            "hold_duration_bars", "hold_duration_days",
+            "entry_rsi", "entry_atr", "sl_px", "tp_px"
+        ]].copy()
+        df_trades_export.to_csv("detailed_trades.csv", index=False)
+        
+        # Save only losing trades for focused analysis
+        df_losses = df_trades_export[df_trades_export["pnl"] <= 0].copy()
+        df_losses.to_csv("loss_analysis.csv", index=False)
+        if not args.quiet:
+            print(f"Saved {len(df_trades_export)} trades to detailed_trades.csv")
+            print(f"Saved {len(df_losses)} losing trades to loss_analysis.csv")
 
 if __name__ == "__main__":
     main()
