@@ -134,8 +134,8 @@ def submit_spread_order(
     
     # Build multi-leg order request
     # Alpaca mleg order: order_class="mleg", legs array with each leg
+    # Note: mleg orders do NOT use top-level "symbol" field
     order_payload = {
-        "symbol": long_symbol,  # Primary symbol (required by API, use long leg)
         "qty": str(qty),
         "side": "buy",  # Overall direction for debit spread
         "type": "limit",
