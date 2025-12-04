@@ -27,6 +27,7 @@ from RubberBand.src.data import (
 )
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.trade_logger import TradeLogger
+from RubberBand.src.ticker_health import TickerHealthManager
 
 
 # -------- helpers --------
@@ -173,6 +174,10 @@ def main() -> int:
     log_path = os.path.join(results_dir, f"live_{_utc_stamp('%Y%m%d')}.jsonl")
     log = TradeLogger(log_path)
 
+    # Health Manager
+    health_file = os.path.join(results_dir, "ticker_health.json")
+    health_mgr = TickerHealthManager(health_file, cfg.get("resilience", {}))
+
     # Broker creds (for market/positions/order calls)
     base_url_raw, key, secret = _broker_creds(cfg)
     base_url = _force_paper_base_url(base_url_raw, now_iso)
@@ -200,7 +205,7 @@ def main() -> int:
         return 0
     print(json.dumps({"type": "HEARTBEAT", "session": session, "market_open": True, "ts": now_iso}))
 
-    # Fetch bars
+    # Fetch bars (Intraday)
     feed = cfg.get("feed", "iex")
     print(
         json.dumps(
@@ -230,6 +235,24 @@ def main() -> int:
         return 1
 
     bars_map, bars_meta = res
+
+    # Fetch Daily Bars for Trend Filter (SMA 200)
+    trend_cfg = cfg.get("trend_filter", {})
+    daily_map = {}
+    if trend_cfg.get("enabled", False):
+        sma_period = int(trend_cfg.get("sma_period", 200))
+        daily_days = max(history_days, int(sma_period * 2.5))
+        try:
+            daily_map, _ = fetch_latest_bars(
+                symbols, 
+                "1Day", 
+                daily_days, 
+                feed, 
+                rth_only=False, # Daily bars have 00:00 timestamp
+                verbose=False
+            )
+        except Exception as e:
+            print(f"[warn] Failed to fetch daily bars for trend filter: {e}", flush=True)
 
     # Summary
     with_data = sorted([s for s, d in bars_map.items() if isinstance(d, pd.DataFrame) and not d.empty])
@@ -261,6 +284,7 @@ def main() -> int:
     brackets = cfg.get("brackets", {}) or {}
     sl_mult = float(brackets.get("atr_mult_sl", 2.5))
     tp_r = float(brackets.get("take_profit_r", 1.5))
+    allow_shorts = cfg.get("allow_shorts", False)
 
     # Size guard
     base_qty = int(cfg.get("qty", 1))
@@ -279,15 +303,84 @@ def main() -> int:
         if df is None or df.empty or len(df) < 20: # Need enough data for Keltner(20)
             continue
 
+        # Resilience Check
+        is_paused, reason = health_mgr.is_paused(sym, now=now_utc)
+        if is_paused:
+            # Log only once per session or if verbose?
+            # For now, just skip silently or with a minimal print if debug needed
+            # print(f"[skip] {sym} is PAUSED: {reason}", flush=True)
+            continue
+
         df = attach_verifiers(df, cfg)
         last = df.iloc[-1]
+        close = float(last["close"])
+
+        # Trend Filter Check
+        is_bull_trend = False
+        is_bear_trend = False
+        is_strong_bull = False
+        
+        if trend_cfg.get("enabled", False):
+            df_daily = daily_map.get(sym, pd.DataFrame())
+            if not df_daily.empty and len(df_daily) >= sma_period:
+                # Calculate SMAs
+                sma_series = df_daily["close"].rolling(window=sma_period).mean()
+                
+                # Secondary SMA (e.g. 22)
+                sma_period_2 = int(trend_cfg.get("secondary_sma_period", 22))
+                sma_series_2 = df_daily["close"].rolling(window=sma_period_2).mean()
+                
+                # FIX: Ensure we use the last CLOSED day's SMA
+                # If the last bar is "today", we must use the previous bar's SMA
+                last_bar_date = df_daily.index[-1].date()
+                current_date = now_et.date()
+                
+                if last_bar_date == current_date:
+                    # Last bar is today (partial), use yesterday's SMA
+                    if len(sma_series) > 1:
+                        trend_sma = sma_series.iloc[-2]
+                        trend_sma_2 = sma_series_2.iloc[-2] if len(sma_series_2) > 1 else float('nan')
+                    else:
+                        trend_sma = float('nan')
+                        trend_sma_2 = float('nan')
+                else:
+                    # Last bar is yesterday (closed), use it
+                    trend_sma = sma_series.iloc[-1]
+                    trend_sma_2 = sma_series_2.iloc[-1]
+                
+                if not pd.isna(trend_sma):
+                    if close > trend_sma:
+                        is_bull_trend = True
+                        # Check Secondary SMA for Strength
+                        if not pd.isna(trend_sma_2) and close > trend_sma_2:
+                            is_strong_bull = True
+                    else:
+                        is_bear_trend = True
+            else:
+                # Fallback if no daily data but filter enabled?
+                # For safety, maybe skip? Or default to Bull?
+                # Backtest logic: skip if filter enabled and no SMA
+                continue
+        else:
+            # Filter disabled -> assume Bull (allow Longs)
+            is_bull_trend = True
 
         # Extract Signal
         long_signal = bool(last["long_signal"])
-        close = float(last["close"])
         rsi = float(last["rsi"]) if not pd.isna(last["rsi"]) else None
         kc_lower = float(last["kc_lower"]) if not pd.isna(last["kc_lower"]) else None
+        kc_upper = float(last["kc_upper"]) if "kc_upper" in last and not pd.isna(last["kc_upper"]) else None
         
+        # Short Signal Logic
+        short_signal = False
+        if allow_shorts and is_bear_trend:
+            if kc_upper and close > kc_upper and rsi is not None and rsi > 70:
+                short_signal = True
+
+        # Filter Long Signal by Trend
+        if long_signal and not is_bull_trend:
+            long_signal = False
+
         # Entry price reference (Close of the signal bar)
         entry = close
         
@@ -298,8 +391,10 @@ def main() -> int:
             "cid": f"RB_{sym}_{now_utc.strftime('%Y%m%d_%H%M%S')}",
             "tf": timeframe,
             "long_signal": 1 if long_signal else 0,
+            "short_signal": 1 if short_signal else 0,
             "ref_bar_ts": str(df.index[-1]),
             "last_close": close,
+            "trend": "BULL" if is_bull_trend else ("BEAR" if is_bear_trend else "NONE")
         }
         
         # Gating: Check if already in position
@@ -314,9 +409,12 @@ def main() -> int:
             continue
 
         # Gating: Check Signal
-        if not long_signal:
+        if not long_signal and not short_signal:
             # Optional: Log heartbeat for no signal? No, too verbose.
             continue
+
+        # Determine Side
+        side = "buy" if long_signal else "sell" # Alpaca 'sell' = short open if no position
 
         # Log Signal Event
         try:
@@ -326,18 +424,33 @@ def main() -> int:
 
         # ATR Calculation (Use pre-calculated from attach_verifiers)
         atr_val = float(last.get("atr", 0.0))
-        stop_price = round(entry - sl_mult * atr_val, 2)
-        take_profit = round(entry + tp_r * atr_val, 2) # Direct ATR multiple
         
-        if not (stop_price < entry < take_profit):
-            print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
-            continue
+        if side == "buy":
+            stop_price = round(entry - sl_mult * atr_val, 2)
+            take_profit = round(entry + tp_r * atr_val, 2)
+            if not (stop_price < entry < take_profit):
+                 print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
+                 continue
+        else: # Short
+            stop_price = round(entry + sl_mult * atr_val, 2)
+            take_profit = round(entry - tp_r * atr_val, 2)
+            if not (take_profit < entry < stop_price):
+                 print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
+                 continue
 
         # Size
         base_qty = int(cfg.get("qty", 1))
         max_shares = int(cfg.get("max_shares_per_trade", base_qty))
         qty = max(1, min(base_qty, max_shares))
-        qty = _cap_qty_by_notional(qty, entry, max_notional)
+        
+        # Dual SMA Sizing Logic
+        # Strong Bull (Price > 120 & > 22) -> Full Size
+        # Weak Bull (Price > 120 & < 22) -> 1/3 Size
+        effective_notional = max_notional
+        if not is_strong_bull and max_notional is not None:
+             effective_notional = max_notional / 3.0
+        
+        qty = _cap_qty_by_notional(qty, entry, effective_notional)
         if qty < 1:
             print(f"[order] skip {sym}: qty<1 after notional cap", flush=True)
             continue
@@ -349,7 +462,7 @@ def main() -> int:
                 session=session,
                 cid=sig_row["cid"],
                 qty=qty,
-                side="buy",
+                side=side,
                 entry_price=round(entry, 2),
                 stop_loss_price=stop_price,
                 take_profit_price=take_profit,
@@ -363,7 +476,7 @@ def main() -> int:
 
         if args.dry_run:
             print(
-                f"[order] DRY-RUN: would submit BRACKET {sym} qty={qty} entry≈{entry:.2f} "
+                f"[order] DRY-RUN: would submit BRACKET {sym} {side.upper()} qty={qty} entry≈{entry:.2f} "
                 f"sl={stop_price:.2f} tp={take_profit:.2f} (ATR={atr_val:.3f})",
                 flush=True,
             )
@@ -387,7 +500,7 @@ def main() -> int:
                     secret,
                     symbol=sym,
                     qty=qty,
-                    side="buy",
+                    side=side,
                     limit_price=None,  # market entry
                     take_profit_price=take_profit,
                     stop_loss_price=stop_price,
@@ -478,6 +591,18 @@ def main() -> int:
                 total_vol += (b_val + s_val)
 
                 pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
+
+                pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
+
+                # Update Health Manager with Realized PnL
+                if matched_qty > 0:
+                    # We use a synthetic trade ID based on date/symbol for now, 
+                    # or just let the manager handle deduping by timestamp if we had it.
+                    # Since this runs once per day/session end, we can just push it.
+                    # Ideally we'd have exact trade IDs. 
+                    # For now, we pass a unique-ish ID for the day's aggregate.
+                    trade_id = f"{sym}_{now_iso[:10]}"
+                    health_mgr.update_trade(sym, realized_pnl, trade_id, now=now_utc)
 
                 print(f"{sym:<8} {int(b_qty):<8} {avg_ent:<10.2f} {b_val:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {pnl_str:<10}", flush=True)
 

@@ -40,6 +40,18 @@ rsi_length: 14
 flatten_minutes_before_close: 15
 entry_cutoff_min: 20
 
+# RESILIENCE (Dynamic Circuit Breaker)
+resilience:
+  enabled: true
+  lookback_trades: 5        # Check last 5 trades
+  max_consecutive_losses: 3 # Pause if 3 losses in a row
+  drawdown_threshold_usd: -100.0 # Pause if net loss < -$100 in lookback
+  probation_period_days: 7  # How long to stay paused
+  
+trend_filter:
+  enabled: true
+  sma_period: 200  # Daily SMA period for trend detection
+
 # POSITION / SIZING
 allow_shorts: false
 qty: 10000

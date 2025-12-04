@@ -20,12 +20,17 @@ if _REPO_ROOT not in sys.path:
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
 from RubberBand.strategy import attach_verifiers
+from RubberBand.src.ticker_health import TickerHealthManager
 
+# ------------------------------------------------------------------
+# Data loading helper
+# ------------------------------------------------------------------
 # ------------------------------------------------------------------
 # Data loading helper
 # ------------------------------------------------------------------
 def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
                          timeframe_override=None, limit_override=None, rth_only_override=True, verbose=True) -> pd.DataFrame:
+    # 1. Fetch Intraday Bars (15m)
     timeframe = timeframe_override or cfg.get("timeframe", "15Min")
     feed = cfg.get("feed", "iex")
     tz_name = cfg.get("timezone", "US/Eastern")
@@ -56,6 +61,65 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
     if df.empty:
         return df
 
+    # 2. Fetch Daily Bars for Trend Filter (SMA 200)
+    # We need more history for SMA 200 (at least 200 days + buffer)
+    trend_cfg = cfg.get("trend_filter", {})
+    if trend_cfg.get("enabled", False):
+        sma_period = int(trend_cfg.get("sma_period", 120))
+        sma_period_2 = int(trend_cfg.get("secondary_sma_period", 22))
+        
+        # Need enough calendar days for trading days SMA
+        # 200 trading days ~= 290 calendar days. Use 2x buffer to be safe.
+        max_sma = max(sma_period, sma_period_2)
+        daily_days = max(history_days, int(max_sma * 2.5)) 
+        
+        daily_map, _ = fetch_latest_bars(
+            symbols=[symbol],
+            timeframe="1Day",
+            history_days=daily_days,
+            feed=feed,
+            rth_only=False, # Daily bars have 00:00 timestamp, RTH filter kills them
+            tz_name=tz_name,
+            key=key,
+            secret=secret,
+            verbose=False # Reduce noise
+        )
+        
+        df_daily = daily_map.get(symbol, pd.DataFrame())
+        if not df_daily.empty:
+            # Calculate SMAs
+            df_daily["trend_sma"] = df_daily["close"].rolling(window=sma_period).mean()
+            df_daily["trend_sma_2"] = df_daily["close"].rolling(window=sma_period_2).mean()
+            
+            # Shift by 1 to avoid lookahead bias in backtest
+            df_daily["trend_sma"] = df_daily["trend_sma"].shift(1)
+            df_daily["trend_sma_2"] = df_daily["trend_sma_2"].shift(1)
+            
+            # Merge into Intraday DF
+            df["date_only"] = df.index.date
+            df_daily["date_only"] = df_daily.index.date
+            
+            # Create mapping dicts
+            sma_map = df_daily.set_index("date_only")["trend_sma"].to_dict()
+            sma_map_2 = df_daily.set_index("date_only")["trend_sma_2"].to_dict()
+            
+            # DEBUG
+            # print(f"=== DAILY BARS: {len(df_daily)} (Requested: {daily_days}) ===")
+            
+            df["trend_sma"] = df["date_only"].map(sma_map)
+            df["trend_sma_2"] = df["date_only"].map(sma_map_2)
+            df.drop(columns=["date_only"], inplace=True)
+            
+            # Check if we have NaNs
+            if df["trend_sma"].isna().all():
+                print("WARNING: All Trend SMA values are NaN!")
+        else:
+            df["trend_sma"] = float('nan')
+            df["trend_sma_2"] = float('nan')
+    else:
+        df["trend_sma"] = float('nan')
+        df["trend_sma_2"] = float('nan')
+
     # Keep approx last N days
     bars_per_day_15m = 390 // 15
     approx_rows = int(days) * bars_per_day_15m
@@ -64,7 +128,7 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
 # ------------------------------------------------------------------
 # Backtest simulator
 # ------------------------------------------------------------------
-def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, risk_pct: float = 0.01):
+def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealthManager, sym: str, start_cash=10_000.0, risk_pct: float = 0.01):
     """
     Mean Reversion Backtest:
     - Entry: Price < Lower Keltner & RSI < 30 (long_signal)
@@ -77,7 +141,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
     
     # DEBUG: Print last 5 rows with indicators
     if cfg.get("verbose", True):
-        print(df[["close", "kc_lower", "rsi", "long_signal"]].tail())
+        print(df[["close", "kc_lower", "rsi", "long_signal", "trend_sma"]].tail())
 
     # Bracket params
     bcfg = cfg.get("brackets", {})
@@ -92,6 +156,7 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
     qty = 0
     entry_px = 0.0
     entry_ts = None
+    side = "LONG" # Default
 
     wins = 0
     losses = 0
@@ -104,31 +169,91 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
         open_px = float(cur["open"])
 
         if not in_pos:
-            # Entry Signal
-            if prev.get("long_signal", False):
-                # Filter Gate (New)
-                # Legacy filter gate removed to match live_paper_loop.py logic
-                # from RubberBand.src.filters import explain_long_gate
-                # ok, reasons = explain_long_gate(prev, cfg)
-                # if not ok:
-                #     FILTER_REJECTS.update(reasons)
-                #     continue
+            # Resilience Check
+            is_paused, reason = health_mgr.is_paused(sym, now=cur.name)
+            if is_paused:
+                continue
 
+            # Trend Filter Check
+            trend_sma = prev.get("trend_sma", float('nan'))
+            trend_sma_2 = prev.get("trend_sma_2", float('nan'))
+            
+            is_bull_trend = False
+            is_bear_trend = False
+            is_strong_bull = False
+            
+            if not pd.isna(trend_sma):
+                if prev["close"] > trend_sma:
+                    is_bull_trend = True
+                    # Check Secondary SMA for Strength
+                    if not pd.isna(trend_sma_2) and prev["close"] > trend_sma_2:
+                        is_strong_bull = True
+                else:
+                    is_bear_trend = True
+            else:
+                # If no SMA (not enough history), default to Bull or Neutral?
+                # For safety, skip if filter enabled and no SMA
+                if cfg.get("trend_filter", {}).get("enabled", False):
+                    continue
+                is_bull_trend = True # Fallback
+
+            # LONG Entry Signal (Only in Bull Trend)
+            if is_bull_trend and prev.get("long_signal", False):
                 # Risk Sizing
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
-                    # print(f"REJECT: ATR={atr_val}") # Too verbose
                     continue
                 
-                # Sizing: Match Live Logic (Fixed Notional Cap)
-                # Live uses: qty = min(base_qty, max_shares, max_notional // price)
+                # Sizing
                 base_qty = int(cfg.get("qty", 10000))
                 max_shares = int(cfg.get("max_shares_per_trade", 10000))
-                
-                # 1. Base caps
                 qty = max(1, min(base_qty, max_shares))
                 
-                # 2. Notional cap
+                # Dual SMA Sizing Logic
+                # Strong Bull (Price > 120 & > 22) -> Full Size
+                # Weak Bull (Price > 120 & < 22) -> 1/3 Size
+                effective_notional = max_notional
+                if not is_strong_bull and max_notional > 0:
+                     effective_notional = max_notional / 3.0
+                
+                if effective_notional > 0 and open_px > 0:
+                    notional_cap_qty = int(effective_notional // open_px)
+                    qty = min(qty, notional_cap_qty)
+                
+                if qty <= 0:
+                    continue
+
+                entry_px = open_px
+                in_pos = True
+                side = "LONG"
+                entry_ts = cur.name
+                
+                entry_state = {
+                    "rsi": float(prev.get("rsi", 0)),
+                    "atr": atr_val,
+                    "sl_px": entry_px - (atr_val * atr_mult_sl) if use_brackets else 0.0,
+                    "tp_px": entry_px + (atr_val * take_profit_r) if use_brackets else 0.0
+                }
+                continue
+
+            # SHORT Entry Signal (Only in Bear Trend)
+            short_signal = False
+            if is_bear_trend and cfg.get("allow_shorts", False):
+                # Short Signal: Close > Upper Band AND RSI > 70
+                # Assuming 'kc_upper' is in df
+                if prev["close"] > prev.get("kc_upper", float('inf')) and prev.get("rsi", 0) > 70:
+                    short_signal = True
+            
+            if short_signal:
+                 # Risk Sizing
+                atr_val = float(prev.get("atr", 0.0))
+                if atr_val <= 0:
+                    continue
+                
+                # Sizing
+                base_qty = int(cfg.get("qty", 10000))
+                max_shares = int(cfg.get("max_shares_per_trade", 10000))
+                qty = max(1, min(base_qty, max_shares))
                 if max_notional > 0 and open_px > 0:
                     notional_cap_qty = int(max_notional // open_px)
                     qty = min(qty, notional_cap_qty)
@@ -138,47 +263,64 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
 
                 entry_px = open_px
                 in_pos = True
+                side = "SHORT"
                 entry_ts = cur.name
                 
                 entry_state = {
                     "rsi": float(prev.get("rsi", 0)),
-                    "kc_lower": float(prev.get("kc_lower", 0)),
                     "atr": atr_val,
+                    "sl_px": entry_px + (atr_val * atr_mult_sl) if use_brackets else 0.0,
+                    "tp_px": entry_px - (atr_val * take_profit_r) if use_brackets else 0.0
                 }
+                continue
 
         else:
-            # Exit Logic
-            atr_val = float(prev.get("atr", 0.0))
+            # In Position - Check Exit
+            # ------------------------
+            exit_signal = False
+            reason = ""
             
-            # 1. Brackets
-            stop_px = None
-            tp_px = None
-            if use_brackets and atr_val > 0:
-                stop_px = max(0.01, entry_px - atr_mult_sl * atr_val)
-                tp_px = entry_px + take_profit_r * atr_val
+            # 1. Bracket Exit (SL/TP)
+            if use_brackets:
+                if side == "LONG":
+                    if cur["low"] <= entry_state["sl_px"]:
+                        exit_signal = True
+                        reason = "SL"
+                        exit_px = entry_state["sl_px"] # Assume fill at SL
+                    elif cur["high"] >= entry_state["tp_px"]:
+                        exit_signal = True
+                        reason = "TP"
+                        exit_px = entry_state["tp_px"]
+                elif side == "SHORT":
+                    if cur["high"] >= entry_state["sl_px"]:
+                        exit_signal = True
+                        reason = "SL"
+                        exit_px = entry_state["sl_px"]
+                    elif cur["low"] <= entry_state["tp_px"]:
+                        exit_signal = True
+                        reason = "TP"
+                        exit_px = entry_state["tp_px"]
 
-            hit_sl = (stop_px is not None) and (cur["low"] <= stop_px)
-            hit_tp = (tp_px is not None) and (cur["high"] >= tp_px)
+            # 2. Technical Exit (Mean Reversion)
+            if not exit_signal:
+                if side == "LONG":
+                    if cur["close"] > cur["kc_middle"]:
+                        exit_signal = True
+                        reason = "MeanRev"
+                        exit_px = cur["close"]
+                elif side == "SHORT":
+                    if cur["close"] < cur["kc_middle"]:
+                        exit_signal = True
+                        reason = "MeanRev"
+                        exit_px = cur["close"]
 
-            # 2. Mean Reversion Exits
-            # Configurable: exit_at_mean (default True), exit_at_upper (optional)
-            exit_at_mean = bool(cfg.get("exit_at_mean", True))
-            exit_at_upper = bool(cfg.get("exit_at_upper", False))
-            
-            kc_mid = float(cur.get("kc_middle", 0.0))
-            kc_upper = float(cur.get("kc_upper", 0.0))
-            
-            hit_mean = exit_at_mean and (cur["high"] >= kc_mid)
-            hit_upper = exit_at_upper and (cur["high"] >= kc_upper)
-
-            # 3. Time-Based Exits (EOD or Max Hold)
+            # 3. Time-Based Exits
             flatten_eod = cfg.get("_flatten_eod", True)
             max_hold_days = int(cfg.get("_max_hold_days", 0))
             
             is_time_exit = False
             exit_reason_time = ""
 
-            # A. EOD Flattening
             if flatten_eod:
                 if i < len(df) - 1:
                     next_bar = df.iloc[i+1]
@@ -188,58 +330,49 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, start_cash=10_000.0, ri
                 else:
                     is_time_exit = True
                     exit_reason_time = "EOD"
-            
-            # B. Max Hold Days (if not flattening EOD)
             elif max_hold_days > 0 and entry_ts:
-                # Calculate days held
                 held_delta = cur.name - entry_ts
                 if held_delta.days >= max_hold_days:
                     is_time_exit = True
                     exit_reason_time = f"HOLD_{max_hold_days}D"
 
-            exit_px = 0.0
-            reason = ""
-            
-            if is_time_exit:
+            if is_time_exit and not exit_signal:
+                exit_signal = True
                 exit_px = float(cur["close"])
                 reason = exit_reason_time
-            elif hit_sl:
-                exit_px = stop_px
-                reason = "SL"
-            elif hit_tp:
-                exit_px = tp_px
-                reason = "TP"
-            elif hit_upper:
-                exit_px = max(open_px, kc_upper)
-                if exit_px > cur["high"]: exit_px = cur["high"]
-                reason = "UPPER"
-            elif hit_mean:
-                exit_px = max(open_px, kc_mid) # Conservative: exit at mean or open
-                if exit_px > cur["high"]: exit_px = cur["high"] # Cap at high
-                reason = "MEAN"
-            
-            if reason:
-                pnl = (exit_px - entry_px) * qty
-                equity += pnl
+
+            if exit_signal:
+                # Calculate PnL
+                if side == "LONG":
+                    pnl = (exit_px - entry_px) * qty
+                else:
+                    pnl = (entry_px - exit_px) * qty
+                
                 gross += pnl
-                if pnl > 0: wins += 1
-                else: losses += 1
+                if pnl > 0:
+                    wins += 1
+                else:
+                    losses += 1
+                
+                detailed_trades.append({
+                    "symbol": sym,
+                    "entry_time": entry_ts,
+                    "exit_time": cur.name,
+                    "side": side,
+                    "entry_price": entry_px,
+                    "exit_price": exit_px,
+                    "qty": qty,
+                    "pnl": pnl,
+                    "reason": reason,
+                    **entry_state
+                })
                 
                 in_pos = False
                 qty = 0
                 
-                detailed_trades.append({
-                    "symbol": cfg.get("_symbol", "UNKNOWN"),
-                    "entry_time": entry_ts,
-                    "exit_time": cur.name,
-                    "entry_price": entry_px,
-                    "exit_price": exit_px,
-                    "pnl": pnl,
-                    "result": "WIN" if pnl > 0 else "LOSS",
-                    "reason": reason,
-                    "qty": int((entry_px * qty) / entry_px) if entry_px else 0, # Re-calculate qty since it was zeroed out
-                    **entry_state
-                })
+                # Update Health Manager
+                trade_id = f"{sym}_{cur.name}"
+                health_mgr.update_trade(sym, pnl, trade_id, now=cur.name)
 
     trades = wins + losses
     net = gross
@@ -296,6 +429,14 @@ def main():
     
     max_days = max(days_list)
 
+    # Initialize Health Manager for Backtest
+    # Use a temp file to avoid messing with live data
+    health_file = "backtest_health.json"
+    if os.path.exists(health_file):
+        os.remove(health_file)
+    
+    health_mgr = TickerHealthManager(health_file, cfg.get("resilience", {}))
+
     def _load(sym: str) -> pd.DataFrame:
         # Load max history once
         # Pass verbose=False if quiet mode is on
@@ -341,7 +482,7 @@ def main():
             # Inject symbol for logging
             cfg["_symbol"] = sym
             cfg["verbose"] = not args.quiet # Pass quiet state to simulator
-            res = simulate_mean_reversion(df_run, cfg, start_cash=args.cash, risk_pct=args.risk)
+            res = simulate_mean_reversion(df_run, cfg, health_mgr, sym, start_cash=args.cash, risk_pct=args.risk)
             rows.append({"symbol": sym, "days": d, **res})
 
     if not rows:
