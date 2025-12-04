@@ -35,7 +35,6 @@ from RubberBand.src.options_data import (
     select_spread_contracts,
     get_option_quote,
     is_options_trading_allowed,
-    get_ndte_expiration,
 )
 from RubberBand.src.options_execution import (
     submit_spread_order,
