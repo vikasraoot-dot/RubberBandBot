@@ -9,7 +9,8 @@ Key Features:
 - Uses 3 DTE by default (90% win rate in backtest)
 - Bull call spreads for defined risk
 - Holds overnight for multi-day DTE
-- Exits at 90% of max profit (like backtest)
+- Comprehensive trade logging with entry/exit reasons
+- EOD summary report
 """
 from __future__ import annotations
 
@@ -17,7 +18,7 @@ import argparse
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, time as dt_time
 from typing import List, Dict, Any
 
 # Ensure repo root is on path
@@ -42,8 +43,8 @@ from RubberBand.src.options_execution import (
     close_option_position,
     flatten_all_option_positions,
     get_position_pnl,
-    OptionsTradeTracker,
 )
+from RubberBand.src.options_trade_logger import OptionsTradeLogger
 
 ET = ZoneInfo("US/Eastern")
 
@@ -82,23 +83,10 @@ def _now_et() -> datetime:
     return datetime.now(ET)
 
 
-def _log(msg: str, data: dict = None):
-    """Structured JSON logging."""
-    entry = {"ts": _now_et().isoformat(), "msg": msg}
-    if data:
-        entry.update(data)
-    print(json.dumps(entry, default=str), flush=True)
-
-
 def _in_entry_window(now_et: datetime, windows: list) -> bool:
-    """
-    Check if current time is within any configured entry window.
-    
-    Windows format: [{"start": "09:45", "end": "15:45"}, ...]
-    Returns True if in window or no windows configured.
-    """
+    """Check if current time is within any configured entry window."""
     if not windows:
-        return True  # No windows = always allow
+        return True
     
     current_time = now_et.time()
     
@@ -109,7 +97,6 @@ def _in_entry_window(now_et: datetime, windows: list) -> bool:
         start_parts = start_str.split(":")
         end_parts = end_str.split(":")
         
-        from datetime import time as dt_time
         start_time = dt_time(int(start_parts[0]), int(start_parts[1]))
         end_time = dt_time(int(end_parts[0]), int(end_parts[1]))
         
@@ -122,13 +109,10 @@ def _in_entry_window(now_et: datetime, windows: list) -> bool:
 # ──────────────────────────────────────────────────────────────────────────────
 # Signal Detection
 # ──────────────────────────────────────────────────────────────────────────────
-def get_long_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
-    """
-    Scan for long signals using existing RubberBandBot strategy.
-    """
+def get_long_signals(symbols: List[str], cfg: dict, logger: OptionsTradeLogger) -> List[Dict[str, Any]]:
+    """Scan for long signals using existing RubberBandBot strategy."""
     signals = []
     
-    # Fetch bars
     timeframe = "15Min"
     history_days = 10
     feed = cfg.get("feed", "iex")
@@ -142,10 +126,9 @@ def get_long_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
             verbose=False,
         )
     except Exception as e:
-        _log("Error fetching bars", {"error": str(e)})
+        logger.error(error=str(e), context="fetch_bars")
         return signals
     
-    # Check each symbol
     for sym in symbols:
         df = bars_map.get(sym)
         if df is None or df.empty or len(df) < 20:
@@ -156,14 +139,38 @@ def get_long_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
             last = df.iloc[-1]
             
             if bool(last.get("long_signal", False)):
+                rsi = float(last.get("rsi", 0))
+                atr = float(last.get("atr", 0))
+                entry_price = float(last["close"])
+                
+                # Build entry reason from signal components
+                entry_reasons = []
+                if last.get("rsi_oversold", False):
+                    entry_reasons.append(f"RSI_oversold({rsi:.1f})")
+                if last.get("ema_ok", False):
+                    entry_reasons.append("EMA_aligned")
+                if last.get("touch", False):
+                    entry_reasons.append("Lower_band_touch")
+                
+                entry_reason = " + ".join(entry_reasons) if entry_reasons else "RubberBand_long_signal"
+                
+                logger.spread_signal(
+                    underlying=sym,
+                    signal_reason=entry_reason,
+                    entry_price=entry_price,
+                    rsi=rsi,
+                    atr=atr
+                )
+                
                 signals.append({
                     "symbol": sym,
-                    "entry_price": float(last["close"]),
-                    "rsi": float(last.get("rsi", 0)),
-                    "atr": float(last.get("atr", 0)),
+                    "entry_price": entry_price,
+                    "rsi": rsi,
+                    "atr": atr,
+                    "entry_reason": entry_reason,
                 })
         except Exception as e:
-            _log(f"Error processing {sym}", {"error": str(e)})
+            logger.error(error=str(e), context=f"process_{sym}")
             continue
     
     return signals
@@ -175,22 +182,21 @@ def get_long_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
 def try_spread_entry(
     signal: Dict[str, Any],
     spread_cfg: dict,
-    tracker: OptionsTradeTracker,
+    logger: OptionsTradeLogger,
     dry_run: bool = True,
 ) -> bool:
-    """
-    Attempt to enter a bull call spread based on a stock signal.
-    """
+    """Attempt to enter a bull call spread based on a stock signal."""
     sym = signal["symbol"]
     dte = spread_cfg.get("dte", 3)
     spread_width_pct = spread_cfg.get("spread_width_pct", 2.0)
-    max_debit = spread_cfg.get("max_debit", 0.50)
+    max_debit = spread_cfg.get("max_debit", 1.00)
     contracts = spread_cfg.get("contracts", 1)
+    entry_reason = signal.get("entry_reason", "RubberBand_signal")
     
     # Select spread contracts
     spread = select_spread_contracts(sym, dte=dte, spread_width_pct=spread_width_pct)
     if not spread:
-        _log(f"No spread available for {sym}")
+        logger.spread_skip(underlying=sym, skip_reason="No_contracts_available")
         return False
     
     long_contract = spread["long"]
@@ -198,52 +204,50 @@ def try_spread_entry(
     long_symbol = long_contract.get("symbol", "")
     short_symbol = short_contract.get("symbol", "")
     
-    # Get quotes to estimate cost
+    # Get quotes
     long_quote = get_option_quote(long_symbol)
     short_quote = get_option_quote(short_symbol)
     
     if not long_quote or not short_quote:
-        _log(f"Cannot get quotes for {sym} spread")
+        logger.spread_skip(underlying=sym, skip_reason="Cannot_get_quotes")
         return False
     
     long_ask = long_quote.get("ask", 0)
     short_bid = short_quote.get("bid", 0)
     net_debit = long_ask - short_bid
     
-    # Validate net debit is positive and within limits
     if net_debit <= 0:
-        _log(f"Invalid spread pricing for {sym}", {
-            "long_ask": long_ask,
-            "short_bid": short_bid,
-            "net_debit": net_debit,
-        })
+        logger.spread_skip(
+            underlying=sym, 
+            skip_reason=f"Invalid_pricing(debit={net_debit:.2f})"
+        )
         return False
     
     if net_debit > max_debit:
-        _log(f"Debit too high for {sym}", {
-            "net_debit": net_debit,
-            "max_debit": max_debit,
-        })
+        logger.spread_skip(
+            underlying=sym,
+            skip_reason=f"Debit_too_high({net_debit:.2f}>{max_debit:.2f})"
+        )
         return False
     
-    # Calculate max profit for this spread
     spread_width = spread["spread_width"]
-    max_profit = spread_width - net_debit  # Max profit per share
-    total_cost = net_debit * 100 * contracts
     
     if dry_run:
-        _log(f"[DRY-RUN] Would open spread for {sym}", {
-            "long_symbol": long_symbol,
-            "short_symbol": short_symbol,
-            "atm_strike": spread["atm_strike"],
-            "otm_strike": spread["otm_strike"],
-            "spread_width": spread_width,
-            "net_debit": round(net_debit, 2),
-            "max_profit": round(max_profit, 2),
-            "total_cost": round(total_cost, 2),
-            "expiration": spread["expiration"],
-            "underlying_signal": signal,
-        })
+        # Log entry even in dry-run mode
+        logger.spread_entry(
+            underlying=sym,
+            long_symbol=long_symbol,
+            short_symbol=short_symbol,
+            atm_strike=spread["atm_strike"],
+            otm_strike=spread["otm_strike"],
+            spread_width=spread_width,
+            net_debit=net_debit,
+            contracts=contracts,
+            expiration=spread["expiration"],
+            entry_reason=f"[DRY-RUN] {entry_reason}",
+            signal_rsi=signal.get("rsi", 0),
+            signal_atr=signal.get("atr", 0),
+        )
     else:
         result = submit_spread_order(
             long_symbol=long_symbol,
@@ -252,26 +256,26 @@ def try_spread_entry(
             max_debit=max_debit,
         )
         if result.get("error"):
-            _log(f"Spread order failed for {sym}", {"result": result})
+            logger.spread_skip(
+                underlying=sym,
+                skip_reason=f"Order_failed: {result.get('message', 'Unknown')}"
+            )
             return False
         
-        _log(f"Spread order submitted for {sym}", {
-            "long_symbol": long_symbol,
-            "short_symbol": short_symbol,
-            "net_debit": round(net_debit, 2),
-            "max_profit": round(max_profit, 2),
-            "total_cost": round(total_cost, 2),
-        })
-    
-    # Track the trade (store max_profit for TP calculation later)
-    tracker.record_entry(
-        underlying=sym,
-        option_symbol=f"{long_symbol}|{short_symbol}",
-        qty=contracts,
-        premium=net_debit,
-        strike=spread["atm_strike"],
-        expiration=spread["expiration"],
-    )
+        logger.spread_entry(
+            underlying=sym,
+            long_symbol=long_symbol,
+            short_symbol=short_symbol,
+            atm_strike=spread["atm_strike"],
+            otm_strike=spread["otm_strike"],
+            spread_width=spread_width,
+            net_debit=net_debit,
+            contracts=contracts,
+            expiration=spread["expiration"],
+            entry_reason=entry_reason,
+            signal_rsi=signal.get("rsi", 0),
+            signal_atr=signal.get("atr", 0),
+        )
     
     return True
 
@@ -279,52 +283,33 @@ def try_spread_entry(
 # ──────────────────────────────────────────────────────────────────────────────
 # Position Management
 # ──────────────────────────────────────────────────────────────────────────────
-def check_spread_exit(
-    position: Dict[str, Any],
-    spread_cfg: dict,
-) -> tuple:
-    """
-    Check if spread should be exited based on P&L.
-    
-    Uses max profit percentage for TP (like backtest), not premium percentage.
-    
-    Returns:
-        (should_exit, reason)
-    """
-    tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 90.0)
-    sl_pct = spread_cfg.get("sl_pct", -80.0)
+def check_spread_exit(position: Dict[str, Any], spread_cfg: dict) -> tuple:
+    """Check if spread should be exited based on P&L."""
+    tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 80.0)
+    sl_pct = spread_cfg.get("sl_pct", -50.0)
     hold_overnight = spread_cfg.get("hold_overnight", True)
     dte = spread_cfg.get("dte", 3)
     
-    # Get current P&L
     pnl, pnl_pct = get_position_pnl(position)
     
-    # For spread, max profit = spread_width - entry_debit
-    # We don't have spread_width stored, so use pnl_pct as approximation
-    # If pnl_pct >= (max_profit / debit) * tp_pct, exit
-    # Simplified: if pnl_pct >= tp_max_profit_pct, exit (since max_profit ≈ debit for tight spreads)
-    
-    # Take profit check
     if pnl_pct >= tp_max_profit_pct:
-        return True, f"TP ({pnl_pct:.1f}% >= {tp_max_profit_pct}% of max profit)"
+        return True, f"TP_hit({pnl_pct:.1f}%>={tp_max_profit_pct}%)"
     
-    # Stop loss check
     if pnl_pct <= sl_pct:
-        return True, f"SL ({pnl_pct:.1f}% <= {sl_pct}%)"
+        return True, f"SL_hit({pnl_pct:.1f}%<={sl_pct}%)"
     
-    # Time-based exit only for 0DTE or if not holding overnight
     if not hold_overnight or dte == 0:
         now_et = _now_et()
         cutoff = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
         if now_et >= cutoff:
-            return True, "TIME (past 3:00 PM ET, 0DTE or no overnight hold)"
+            return True, "EOD_time_exit(3:00PM_cutoff)"
     
     return False, ""
 
 
 def manage_positions(
     spread_cfg: dict,
-    tracker: OptionsTradeTracker,
+    logger: OptionsTradeLogger,
     dry_run: bool = True,
 ):
     """Check open positions and exit if TP/SL conditions met."""
@@ -332,24 +317,40 @@ def manage_positions(
     
     for pos in positions:
         symbol = pos.get("symbol", "")
-        should_exit, reason = check_spread_exit(pos, spread_cfg)
+        should_exit, exit_reason = check_spread_exit(pos, spread_cfg)
         
         if should_exit:
             current_price = float(pos.get("current_price", 0))
             pnl, pnl_pct = get_position_pnl(pos)
             
+            # Extract underlying from OCC symbol
+            underlying = ""
+            for i, c in enumerate(symbol):
+                if c.isdigit():
+                    underlying = symbol[:i]
+                    break
+            
             if dry_run:
-                _log(f"[DRY-RUN] Would exit {symbol}", {
-                    "reason": reason,
-                    "current_price": current_price,
-                    "pnl": round(pnl, 2),
-                    "pnl_pct": round(pnl_pct, 1),
-                })
+                logger.spread_exit(
+                    underlying=underlying,
+                    long_symbol=symbol,
+                    short_symbol="",  # Don't have short symbol in position
+                    exit_value=current_price,
+                    exit_reason=f"[DRY-RUN] {exit_reason}",
+                    pnl=pnl,
+                    pnl_pct=pnl_pct,
+                )
             else:
                 result = close_option_position(symbol)
-                _log(f"Closed {symbol}", {"reason": reason, "result": result})
-            
-            tracker.record_exit(symbol, current_price, reason)
+                logger.spread_exit(
+                    underlying=underlying,
+                    long_symbol=symbol,
+                    short_symbol="",
+                    exit_value=current_price,
+                    exit_reason=exit_reason,
+                    pnl=pnl,
+                    pnl_pct=pnl_pct,
+                )
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -365,62 +366,77 @@ def main() -> int:
     spread_cfg["max_debit"] = args.max_debit
     spread_cfg["contracts"] = args.contracts
     
+    # Setup logging
+    results_dir = cfg.get("results_dir", "results")
+    os.makedirs(results_dir, exist_ok=True)
+    log_path = os.path.join(results_dir, f"options_trades_{_now_et().strftime('%Y%m%d')}.jsonl")
+    logger = OptionsTradeLogger(log_path)
+    
+    dry_run = bool(args.dry_run)
+    
+    logger.heartbeat(
+        event="startup",
+        dry_run=dry_run,
+        dte=spread_cfg["dte"],
+        max_debit=spread_cfg["max_debit"],
+        contracts=spread_cfg["contracts"],
+        tp_pct=spread_cfg["tp_max_profit_pct"],
+        sl_pct=spread_cfg["sl_pct"],
+    )
+    
     # Load tickers
     try:
         symbols = load_symbols_from_file(args.tickers)
     except FileNotFoundError:
-        _log(f"Ticker file not found: {args.tickers}")
+        logger.error(error=f"Ticker file not found: {args.tickers}")
+        logger.close()
         return 1
     except Exception as e:
-        _log(f"Error loading tickers", {"error": str(e)})
+        logger.error(error=str(e), context="load_tickers")
+        logger.close()
         return 1
     
     if not symbols:
-        _log("No symbols loaded from ticker file")
+        logger.error(error="No symbols loaded from ticker file")
+        logger.close()
         return 1
     
-    _log("Loaded symbols", {"count": len(symbols), "sample": symbols[:5]})
+    logger.heartbeat(event="symbols_loaded", count=len(symbols), sample=symbols[:5])
     
     # Check market status
     if not alpaca_market_open():
-        _log("Market is closed, exiting")
+        logger.heartbeat(event="market_closed")
+        logger.eod_summary()
+        logger.close()
         return 0
     
-    # Check entry windows (same as stock trading - skip lunch etc)
+    # Check entry windows
     now_et = _now_et()
     windows = cfg.get("entry_windows", [])
     if not _in_entry_window(now_et, windows):
-        _log("Outside entry window, skipping new entries", {
-            "current_time": now_et.strftime("%H:%M"),
-            "windows": windows,
-        })
-        # Still manage positions but don't open new ones
-        dry_run = bool(args.dry_run)
-        tracker = OptionsTradeTracker()
-        manage_positions(spread_cfg, tracker, dry_run)
+        logger.heartbeat(
+            event="outside_entry_window",
+            current_time=now_et.strftime("%H:%M"),
+        )
+        # Still manage positions
+        manage_positions(spread_cfg, logger, dry_run)
+        logger.eod_summary()
+        logger.close()
         return 0
     
     # For 0DTE only: check 3:00 PM cutoff
     if spread_cfg["dte"] == 0 and not is_options_trading_allowed():
-        _log("Past 3:00 PM ET cutoff for 0DTE, flattening positions")
-        if not args.dry_run:
+        logger.heartbeat(event="0dte_cutoff_reached")
+        if not dry_run:
             flatten_all_option_positions()
+        logger.eod_summary()
+        logger.close()
         return 0
     
-    dry_run = bool(args.dry_run)
-    tracker = OptionsTradeTracker()
-    
-    _log("Starting spread scan", {
-        "dry_run": dry_run,
-        "dte": spread_cfg["dte"],
-        "max_debit": spread_cfg["max_debit"],
-        "contracts": spread_cfg["contracts"],
-        "hold_overnight": spread_cfg["hold_overnight"],
-        "tp_max_profit_pct": spread_cfg["tp_max_profit_pct"],
-    })
+    logger.heartbeat(event="scan_start")
     
     # 1. Check existing positions for exits
-    manage_positions(spread_cfg, tracker, dry_run)
+    manage_positions(spread_cfg, logger, dry_run)
     
     # 2. Get current option positions (to avoid duplicates)
     current_positions = get_option_positions()
@@ -428,41 +444,44 @@ def main() -> int:
     for pos in current_positions:
         sym = pos.get("symbol", "")
         if len(sym) > 10:
-            # Extract underlying from OCC symbol
             for i, c in enumerate(sym):
                 if c.isdigit():
                     position_underlyings.add(sym[:i])
                     break
     
     # 3. Scan for new signals
-    signals = get_long_signals(symbols, cfg)
-    _log(f"Found {len(signals)} long signals", {
-        "signals": [s["symbol"] for s in signals]
-    })
+    signals = get_long_signals(symbols, cfg, logger)
+    
+    logger.heartbeat(
+        event="signals_found",
+        count=len(signals),
+        symbols=[s["symbol"] for s in signals]
+    )
     
     # 4. Enter new spreads
     entries = 0
     for signal in signals:
         if signal["symbol"] in position_underlyings:
-            _log(f"Already have position in {signal['symbol']}, skipping")
+            logger.spread_skip(
+                underlying=signal["symbol"],
+                skip_reason="Already_have_position"
+            )
             continue
         
-        if try_spread_entry(signal, spread_cfg, tracker, dry_run):
+        if try_spread_entry(signal, spread_cfg, logger, dry_run):
             entries += 1
             position_underlyings.add(signal["symbol"])
     
-    # 5. Summary
-    _log("Scan complete", {
-        "signals": len(signals),
-        "new_entries": entries,
-        "total_positions": len(current_positions) + entries,
-    })
+    # 5. EOD Summary
+    logger.heartbeat(
+        event="scan_complete",
+        signals=len(signals),
+        new_entries=entries,
+        total_positions=len(current_positions) + entries,
+    )
     
-    # Save trades log
-    results_dir = cfg.get("results_dir", "results")
-    os.makedirs(results_dir, exist_ok=True)
-    log_path = os.path.join(results_dir, f"spreads_trades_{_now_et().strftime('%Y%m%d')}.json")
-    tracker.to_json(log_path)
+    summary = logger.eod_summary()
+    logger.close()
     
     return 0
 
