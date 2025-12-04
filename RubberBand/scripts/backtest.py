@@ -356,7 +356,10 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                 
                 # Calculate hold duration
                 hold_duration = cur.name - entry_ts
-                hold_bars = i - df.index.get_loc(entry_ts)
+                try:
+                    hold_bars = i - df.index.get_loc(entry_ts)
+                except (KeyError, ValueError):
+                    hold_bars = 0  # Fallback for edge case
                 hold_days = hold_duration.total_seconds() / 86400
                 
                 detailed_trades.append({
@@ -577,20 +580,37 @@ def main():
             print("\nSaved daily breakdown to daily_stats.csv")
         
         # Save detailed trades for loss analysis
-        df_trades_export = df_trades[[
+        required_cols = [
             "symbol", "date", "entry_time", "exit_time", "side", 
             "entry_price", "exit_price", "qty", "pnl", "exit_reason",
             "hold_duration_bars", "hold_duration_days",
             "entry_rsi", "entry_atr", "sl_px", "tp_px"
-        ]].copy()
+        ]
+        
+        # Check for missing columns
+        missing_cols = set(required_cols) - set(df_trades.columns)
+        if missing_cols:
+            if not args.quiet:
+                print(f"WARNING: Missing columns in trades: {missing_cols}")
+            # Use only available columns
+            available_cols = [c for c in required_cols if c in df_trades.columns]
+            df_trades_export = df_trades[available_cols].copy()
+        else:
+            df_trades_export = df_trades[required_cols].copy()
+        
         df_trades_export.to_csv("detailed_trades.csv", index=False)
         
         # Save only losing trades for focused analysis
         df_losses = df_trades_export[df_trades_export["pnl"] <= 0].copy()
-        df_losses.to_csv("loss_analysis.csv", index=False)
-        if not args.quiet:
-            print(f"Saved {len(df_trades_export)} trades to detailed_trades.csv")
-            print(f"Saved {len(df_losses)} losing trades to loss_analysis.csv")
+        if not df_losses.empty:
+            df_losses.to_csv("loss_analysis.csv", index=False)
+            if not args.quiet:
+                print(f"Saved {len(df_trades_export)} trades to detailed_trades.csv")
+                print(f"Saved {len(df_losses)} losing trades to loss_analysis.csv")
+        else:
+            if not args.quiet:
+                print(f"Saved {len(df_trades_export)} trades to detailed_trades.csv")
+                print("No losing trades! All trades were profitable.")
 
 if __name__ == "__main__":
     main()
