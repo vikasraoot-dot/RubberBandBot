@@ -1,10 +1,10 @@
 name: RubberBand Live Paper (loop AM)
 on:
   schedule:
-    # Fire twice to reduce GitHub cron jitter impact (UTC)
-    # 14:25 UTC = 9:25 AM EST (Winter) / 10:25 AM EDT (Summer)
-    - cron: "25 14 * * 1-5"
-    - cron: "30 14 * * 1-5"
+    # Fire 15 mins BEFORE market open (9:15 AM EST)
+    # 14:15 UTC = 9:15 AM EST (Winter) / 10:15 AM EDT (Summer)
+    # The wait guard will hold until market actually opens
+    - cron: "15 14 * * 1-5"
   workflow_dispatch:
 
 concurrency:
@@ -31,7 +31,7 @@ jobs:
           & "$env:PYTHON_EXE" -m pip install --upgrade pip
           & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
 
-      # NEW: wait guard so the loop begins right at the bell, even if cron is early/late
+      # Wait guard so the loop begins right at the bell, even if cron is early/late
       - name: Wait until market open (guard)
         shell: powershell
         env:
@@ -73,22 +73,15 @@ jobs:
       - name: Run market loop (paper trading)
         shell: powershell
         env:
-          # ✅ Correct envs your code actually reads
           APCA_BASE_URL: https://paper-api.alpaca.markets
           APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
           APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
-
-          # (Optional) back-compat aliases also understood by your code
-          ALPACA_KEY:   ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_KEY: ${{ secrets.ALPACA_KEY_ID }}
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
-
-          # Control flags
-          DRY_RUN:  "0"
+          DRY_RUN: "0"
           FORCE_RUN: "0"
-
           PYTHONUNBUFFERED: "1"
         run: |
           chcp 65001 > $null
-          # 👇 set PYTHONPATH for THIS step (so Python can import RubberBand)
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py
