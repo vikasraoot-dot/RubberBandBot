@@ -385,6 +385,26 @@ def main() -> int:
         entry = close
         
         # Log Signal
+        # Build entry reason from signal components
+        entry_reasons = []
+        if long_signal:
+            if rsi is not None and rsi < 30:
+                entry_reasons.append(f"RSI_oversold({rsi:.1f})")
+            if kc_lower and close <= kc_lower:
+                entry_reasons.append("Lower_KC_touch")
+            if is_strong_bull:
+                entry_reasons.append("Strong_bull_trend")
+            elif is_bull_trend:
+                entry_reasons.append("Bull_trend")
+        elif short_signal:
+            if rsi is not None and rsi > 70:
+                entry_reasons.append(f"RSI_overbought({rsi:.1f})")
+            if kc_upper and close >= kc_upper:
+                entry_reasons.append("Upper_KC_touch")
+            entry_reasons.append("Bear_trend")
+        
+        entry_reason = " + ".join(entry_reasons) if entry_reasons else "RubberBand_signal"
+        
         sig_row = {
             "symbol": sym,
             "session": session,
@@ -394,7 +414,8 @@ def main() -> int:
             "short_signal": 1 if short_signal else 0,
             "ref_bar_ts": str(df.index[-1]),
             "last_close": close,
-            "trend": "BULL" if is_bull_trend else ("BEAR" if is_bear_trend else "NONE")
+            "trend": "BULL" if is_bull_trend else ("BEAR" if is_bear_trend else "NONE"),
+            "entry_reason": entry_reason,
         }
         
         # Gating: Check if already in position
@@ -470,6 +491,8 @@ def main() -> int:
                 method="bracket",
                 tif="day",
                 dry_run=bool(args.dry_run),
+                entry_reason=entry_reason,
+                rsi=rsi,
             )
         except Exception:
             pass
@@ -610,6 +633,12 @@ def main() -> int:
             print(f"TOTAL Day PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}", flush=True)
             print("(Note: Day PnL calculated on matched intraday buy/sell quantity)", flush=True)
             print("=== End Summary ===", flush=True)
+            
+            # Emit structured EOD_SUMMARY to JSONL
+            try:
+                log.eod_summary(total_pnl=total_pnl, total_vol=total_vol)
+            except Exception:
+                pass
 
     except Exception as e:
         print(f"[warn] Failed to generate summary: {e}", flush=True)
