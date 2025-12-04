@@ -83,6 +83,13 @@ def main():
         tickers = tickers[:args.limit]
         print(f"Limiting scan to first {args.limit} tickers.")
 
+    # DEBUG: Check for API Keys
+    key = os.getenv("APCA_API_KEY_ID", "")
+    secret = os.getenv("APCA_API_SECRET_KEY", "")
+    print(f"DEBUG: APCA_API_KEY_ID present? {bool(key)}")
+    if key:
+        print(f"DEBUG: Key starts with: {key[:4]}...")
+    
     # Fetch Data (Daily Bars)
     # We need ~200 days to calculate SMA 120 safely with buffer
     print("Fetching daily bars...")
@@ -95,6 +102,12 @@ def main():
         rth_only=False,
         verbose=True
     )
+    
+    # DEBUG: Print Fetch Metadata (Errors)
+    if meta.get("http_errors"):
+        print(f"DEBUG: HTTP Errors: {meta['http_errors']}")
+    if meta.get("stale_symbols"):
+        print(f"DEBUG: Stale Symbols: {len(meta['stale_symbols'])}")
 
     results = []
     print(f"Processing {len(bars_map)} symbols...")
