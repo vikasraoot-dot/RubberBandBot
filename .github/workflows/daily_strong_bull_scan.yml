@@ -30,8 +30,8 @@ jobs:
         env:
           # Use secrets for Alpaca keys if needed for data fetching
           # Note: IEX feed might not need keys for some endpoints, but better to have them
-          APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
-          APCA_API_SECRET_KEY: ${{ secrets.APCA_API_SECRET_KEY }}
+          ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           APCA_API_BASE_URL: https://paper-api.alpaca.markets
         run: |
           # Run the scan script

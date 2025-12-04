@@ -84,9 +84,9 @@ def main():
         print(f"Limiting scan to first {args.limit} tickers.")
 
     # DEBUG: Check for API Keys
-    key = os.getenv("APCA_API_KEY_ID", "")
-    secret = os.getenv("APCA_API_SECRET_KEY", "")
-    print(f"DEBUG: APCA_API_KEY_ID present? {bool(key)}")
+    key = os.getenv("ALPACA_KEY_ID", "") or os.getenv("APCA_API_KEY_ID", "")
+    secret = os.getenv("ALPACA_SECRET_KEY", "") or os.getenv("APCA_API_SECRET_KEY", "")
+    print(f"DEBUG: ALPACA_KEY_ID present? {bool(key)}")
     if key:
         print(f"DEBUG: Key starts with: {key[:4]}...")
     
