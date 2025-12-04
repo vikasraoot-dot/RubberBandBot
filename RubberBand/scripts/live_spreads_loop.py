@@ -353,74 +353,27 @@ def manage_positions(
 
 
 # ──────────────────────────────────────────────────────────────────────────────
-# Main Loop
+# Single Scan Cycle
 # ──────────────────────────────────────────────────────────────────────────────
-def main() -> int:
-    args = _parse_args()
-    cfg = _load_config(args.config)
-    
-    # Spread config
-    spread_cfg = {**DEFAULT_SPREAD_CONFIG}
-    spread_cfg["dte"] = args.dte
-    spread_cfg["max_debit"] = args.max_debit
-    spread_cfg["contracts"] = args.contracts
-    
-    # Setup logging
-    results_dir = cfg.get("results_dir", "results")
-    os.makedirs(results_dir, exist_ok=True)
-    log_path = os.path.join(results_dir, f"options_trades_{_now_et().strftime('%Y%m%d')}.jsonl")
-    logger = OptionsTradeLogger(log_path)
-    
-    dry_run = bool(args.dry_run)
-    
-    logger.heartbeat(
-        event="startup",
-        dry_run=dry_run,
-        dte=spread_cfg["dte"],
-        max_debit=spread_cfg["max_debit"],
-        contracts=spread_cfg["contracts"],
-        tp_pct=spread_cfg["tp_max_profit_pct"],
-        sl_pct=spread_cfg["sl_pct"],
-    )
-    
-    # Load tickers
-    try:
-        symbols = load_symbols_from_file(args.tickers)
-    except FileNotFoundError:
-        logger.error(error=f"Ticker file not found: {args.tickers}")
-        logger.close()
-        return 1
-    except Exception as e:
-        logger.error(error=str(e), context="load_tickers")
-        logger.close()
-        return 1
-    
-    if not symbols:
-        logger.error(error="No symbols loaded from ticker file")
-        logger.close()
-        return 1
-    
-    logger.heartbeat(event="symbols_loaded", count=len(symbols), sample=symbols[:5])
-    
-    # Check market status
-    if not alpaca_market_open():
-        logger.heartbeat(event="market_closed")
-        logger.eod_summary()
-        logger.close()
-        return 0
-    
-    # Check entry windows
-    now_et = _now_et()
+def run_scan_cycle(
+    symbols: List[str],
+    cfg: dict,
+    spread_cfg: dict,
+    logger: OptionsTradeLogger,
+    dry_run: bool,
+) -> int:
+    """Run a single scan cycle. Returns number of new entries."""
     windows = cfg.get("entry_windows", [])
+    now_et = _now_et()
+    
+    # Check entry windows - if outside, only manage positions
     if not _in_entry_window(now_et, windows):
         logger.heartbeat(
             event="outside_entry_window",
             current_time=now_et.strftime("%H:%M"),
         )
-        # Still manage positions
+        # Still manage positions for exits
         manage_positions(spread_cfg, logger, dry_run)
-        logger.eod_summary()
-        logger.close()
         return 0
     
     # For 0DTE only: check 3:00 PM cutoff
@@ -428,11 +381,9 @@ def main() -> int:
         logger.heartbeat(event="0dte_cutoff_reached")
         if not dry_run:
             flatten_all_option_positions()
-        logger.eod_summary()
-        logger.close()
         return 0
     
-    logger.heartbeat(event="scan_start")
+    logger.heartbeat(event="scan_start", current_time=now_et.strftime("%H:%M"))
     
     # 1. Check existing positions for exits
     manage_positions(spread_cfg, logger, dry_run)
@@ -471,7 +422,6 @@ def main() -> int:
             entries += 1
             position_underlyings.add(signal["symbol"])
     
-    # 5. EOD Summary
     logger.heartbeat(
         event="scan_complete",
         signals=len(signals),
@@ -479,11 +429,130 @@ def main() -> int:
         total_positions=len(current_positions) + entries,
     )
     
+    return entries
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Main Loop
+# ──────────────────────────────────────────────────────────────────────────────
+SCAN_INTERVAL_SECONDS = 15 * 60  # 15 minutes between scans
+
+
+def main() -> int:
+    import time
+    
+    args = _parse_args()
+    cfg = _load_config(args.config)
+    
+    # Spread config
+    spread_cfg = {**DEFAULT_SPREAD_CONFIG}
+    spread_cfg["dte"] = args.dte
+    spread_cfg["max_debit"] = args.max_debit
+    spread_cfg["contracts"] = args.contracts
+    
+    # Setup logging
+    results_dir = cfg.get("results_dir", "results")
+    os.makedirs(results_dir, exist_ok=True)
+    log_path = os.path.join(results_dir, f"options_trades_{_now_et().strftime('%Y%m%d')}.jsonl")
+    logger = OptionsTradeLogger(log_path)
+    
+    dry_run = bool(args.dry_run)
+    
+    logger.heartbeat(
+        event="startup",
+        dry_run=dry_run,
+        dte=spread_cfg["dte"],
+        max_debit=spread_cfg["max_debit"],
+        contracts=spread_cfg["contracts"],
+        tp_pct=spread_cfg["tp_max_profit_pct"],
+        sl_pct=spread_cfg["sl_pct"],
+        scan_interval_min=SCAN_INTERVAL_SECONDS // 60,
+    )
+    
+    # Load tickers
+    try:
+        symbols = load_symbols_from_file(args.tickers)
+    except FileNotFoundError:
+        logger.error(error=f"Ticker file not found: {args.tickers}")
+        logger.close()
+        return 1
+    except Exception as e:
+        logger.error(error=str(e), context="load_tickers")
+        logger.close()
+        return 1
+    
+    if not symbols:
+        logger.error(error="No symbols loaded from ticker file")
+        logger.close()
+        return 1
+    
+    logger.heartbeat(event="symbols_loaded", count=len(symbols), sample=symbols[:5])
+    
+    # ──────────────────────────────────────────────────────────────────────────
+    # Main Loop: Run until market close (4:00 PM ET)
+    # ──────────────────────────────────────────────────────────────────────────
+    market_close_hour = 16  # 4:00 PM ET
+    scan_count = 0
+    
+    while True:
+        now_et = _now_et()
+        
+        # Exit if past market close
+        if now_et.hour >= market_close_hour:
+            logger.heartbeat(event="market_close_reached", time=now_et.strftime("%H:%M"))
+            break
+        
+        # Check if market is open
+        if not alpaca_market_open():
+            logger.heartbeat(event="waiting_for_market_open", time=now_et.strftime("%H:%M"))
+            time.sleep(60)  # Wait 1 minute and check again
+            continue
+        
+        # Run scan cycle
+        scan_count += 1
+        logger.heartbeat(event="scan_cycle_start", cycle=scan_count, time=now_et.strftime("%H:%M"))
+        
+        try:
+            entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, dry_run)
+            logger.heartbeat(event="scan_cycle_end", cycle=scan_count, new_entries=entries)
+        except Exception as e:
+            logger.error(error=str(e), context="scan_cycle")
+        
+        # Check if we should exit (past market close after scan)
+        now_et = _now_et()
+        if now_et.hour >= market_close_hour:
+            logger.heartbeat(event="market_close_reached", time=now_et.strftime("%H:%M"))
+            break
+        
+        # Wait until next scan
+        next_scan = now_et.strftime("%H:%M")
+        logger.heartbeat(
+            event="waiting_for_next_scan",
+            next_scan_in_min=SCAN_INTERVAL_SECONDS // 60,
+            current_time=next_scan,
+        )
+        time.sleep(SCAN_INTERVAL_SECONDS)
+    
+    # ──────────────────────────────────────────────────────────────────────────
+    # End of Day
+    # ──────────────────────────────────────────────────────────────────────────
+    logger.heartbeat(event="eod_processing", scan_count=scan_count)
+    
+    # Final position management
+    manage_positions(spread_cfg, logger, dry_run)
+    
+    # EOD Summary
     summary = logger.eod_summary()
     logger.close()
+    
+    print(f"\n{'='*60}", flush=True)
+    print(f"EOD SUMMARY: {summary.get('total_trades', 0)} trades, PnL: ${summary.get('total_pnl', 0):.2f}", flush=True)
+    print(f"Win Rate: {summary.get('win_rate_pct', 0):.1f}%", flush=True)
+    print(f"{'='*60}\n", flush=True)
     
     return 0
 
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
