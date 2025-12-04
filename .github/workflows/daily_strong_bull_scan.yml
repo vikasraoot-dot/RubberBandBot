@@ -40,7 +40,7 @@ jobs:
           python RubberBand/scripts/scan_candidates.py --tickers tickers_full_list.txt --output candidates.csv
 
       - name: Upload Candidates Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: candidates-csv
           path: candidates.csv

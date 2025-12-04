@@ -1,7 +1,11 @@
-# EMAMerged/scripts/flat_eod.py
+# RubberBand/scripts/flat_eod.py
 from __future__ import annotations
 import os, sys
-from EMAMerged.src.data import cancel_all_orders, close_all_positions
+
+# Add project root to path if running as script
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
+from RubberBand.src.data import cancel_all_orders, close_all_positions
 
 def _env(name: str, default: str = "") -> str:
     v = os.environ.get(name)
