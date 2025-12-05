@@ -1,10 +1,10 @@
 name: RubberBand Options Spreads (loop AM)
 on:
   schedule:
-    # Fire 15 mins BEFORE market open (9:15 AM EST)
-    # 14:15 UTC = 9:15 AM EST (Winter) / 10:15 AM EDT (Summer)
+    # Fire 30 mins BEFORE market open (9:00 AM EST)
+    # 14:00 UTC = 9:00 AM EST (Winter) / 10:00 AM EDT (Summer)
     # The wait guard will hold until market actually opens
-    - cron: "15 14 * * 1-5"
+    - cron: "0 14 * * 1-5"
   workflow_dispatch:
     inputs:
       dry_run:
