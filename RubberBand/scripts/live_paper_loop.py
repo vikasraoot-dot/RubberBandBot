@@ -579,8 +579,7 @@ def main() -> int:
     # --- Session Summary ---
     print("\n=== Session Summary ===", flush=True)
     try:
-        from RubberBand.src.data import get_daily_fills
-        # Fetch fills
+        # Fetch fills (get_daily_fills already imported at top of file)
         fills = get_daily_fills(base_url, key, secret)
         
         if not fills:
