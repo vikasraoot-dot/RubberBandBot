@@ -1,0 +1,423 @@
+﻿2025-12-04T15:28:11.0712537Z Current runner version: '2.329.0'
+2025-12-04T15:28:11.0727699Z Runner name: 'OptionsRunner'
+2025-12-04T15:28:11.0729326Z Runner group name: 'Default'
+2025-12-04T15:28:11.0731247Z Machine name: 'VHOMEPC'
+2025-12-04T15:28:11.0739888Z ##[group]GITHUB_TOKEN Permissions
+2025-12-04T15:28:11.0746085Z Contents: read
+2025-12-04T15:28:11.0746953Z Metadata: read
+2025-12-04T15:28:11.0747493Z Packages: read
+2025-12-04T15:28:11.0748413Z ##[endgroup]
+2025-12-04T15:28:11.0751948Z Secret source: Actions
+2025-12-04T15:28:11.0752636Z Prepare workflow directory
+2025-12-04T15:28:11.1537830Z Prepare all required actions
+2025-12-04T15:28:11.1600709Z Getting action download info
+2025-12-04T15:28:11.7920461Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-04T15:28:13.7595131Z Complete job name: trade
+2025-12-04T15:28:13.9323541Z ##[group]Run actions/checkout@v4
+2025-12-04T15:28:13.9326918Z with:
+2025-12-04T15:28:13.9327710Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-04T15:28:13.9330827Z   token: ***
+2025-12-04T15:28:13.9332016Z   ssh-strict: true
+2025-12-04T15:28:13.9333219Z   ssh-user: git
+2025-12-04T15:28:13.9334191Z   persist-credentials: true
+2025-12-04T15:28:13.9334922Z   clean: true
+2025-12-04T15:28:13.9335676Z   sparse-checkout-cone-mode: true
+2025-12-04T15:28:13.9336477Z   fetch-depth: 1
+2025-12-04T15:28:13.9337104Z   fetch-tags: false
+2025-12-04T15:28:13.9338079Z   show-progress: true
+2025-12-04T15:28:13.9338885Z   lfs: false
+2025-12-04T15:28:13.9339520Z   submodules: false
+2025-12-04T15:28:13.9340214Z   set-safe-directory: true
+2025-12-04T15:28:13.9342386Z ##[endgroup]
+2025-12-04T15:28:14.5353644Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-04T15:28:14.5357146Z ##[group]Getting Git version info
+2025-12-04T15:28:14.5358855Z Working directory is 'C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot'
+2025-12-04T15:28:14.5654737Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-04T15:28:14.6348903Z git version 2.52.0.windows.1
+2025-12-04T15:28:14.6404301Z ##[endgroup]
+2025-12-04T15:28:14.6433682Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\b29b1593-2172-4045-8e06-aeb42e3edb19' before making global git config changes
+2025-12-04T15:28:14.6437147Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T15:28:14.6441977Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-04T15:28:14.7211126Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-04T15:28:14.7831397Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-04T15:28:14.7944606Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-04T15:28:14.7957987Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-04T15:28:14.8480375Z refs/heads/main
+2025-12-04T15:28:14.8566691Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-04T15:28:14.9454022Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-04T15:28:14.9455591Z M	RubberBand/__pycache__/strategy.cpython-313.pyc
+2025-12-04T15:28:14.9456716Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-04T15:28:14.9457804Z M	RubberBand/src/__pycache__/data.cpython-313.pyc
+2025-12-04T15:28:14.9458893Z M	RubberBand/src/__pycache__/indicators.cpython-313.pyc
+2025-12-04T15:28:14.9460557Z M	RubberBand/src/__pycache__/options_data.cpython-313.pyc
+2025-12-04T15:28:14.9461837Z M	RubberBand/src/__pycache__/options_execution.cpython-313.pyc
+2025-12-04T15:28:14.9463171Z M	RubberBand/src/__pycache__/options_trade_logger.cpython-313.pyc
+2025-12-04T15:28:14.9464450Z M	results/options_trades_20251204.jsonl
+2025-12-04T15:28:14.9467586Z HEAD is now at 117d22c Increase max-debit to 3.00 for higher-priced stocks
+2025-12-04T15:28:15.0929695Z ##[endgroup]
+2025-12-04T15:28:15.0943152Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-04T15:28:16.3378761Z ##[group]Cleaning the repository
+2025-12-04T15:28:16.3386230Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-04T15:28:16.4021938Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-04T15:28:16.5585897Z HEAD is now at 117d22c Increase max-debit to 3.00 for higher-priced stocks
+2025-12-04T15:28:16.5680816Z ##[endgroup]
+2025-12-04T15:28:16.5685164Z ##[group]Disabling automatic garbage collection
+2025-12-04T15:28:16.5698018Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-04T15:28:16.6470597Z ##[endgroup]
+2025-12-04T15:28:16.6472162Z ##[group]Setting up auth
+2025-12-04T15:28:16.6481976Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T15:28:16.7112362Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-04T15:28:17.9284113Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T15:28:18.0062843Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-04T15:28:19.1582783Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T15:28:19.2254111Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-04T15:28:20.3632764Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-04T15:28:20.4575296Z ##[endgroup]
+2025-12-04T15:28:20.4576119Z ##[group]Fetching the repository
+2025-12-04T15:28:20.4597037Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +ee82478c96e9e93e7b594090d26b556815011556:refs/remotes/origin/main
+2025-12-04T15:28:21.1952467Z From https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-04T15:28:21.1953436Z  + 117d22c...ee82478 ee82478c96e9e93e7b594090d26b556815011556 -> origin/main  (forced update)
+2025-12-04T15:28:21.2352445Z ##[endgroup]
+2025-12-04T15:28:21.2353061Z ##[group]Determining the checkout info
+2025-12-04T15:28:21.2355022Z ##[endgroup]
+2025-12-04T15:28:21.2362304Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-04T15:28:21.3181997Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-04T15:28:21.3888663Z ##[group]Checking out the ref
+2025-12-04T15:28:21.3897266Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-04T15:28:21.5077114Z branch 'main' set up to track 'origin/main'.
+2025-12-04T15:28:21.5077734Z Your branch is up to date with 'origin/main'.
+2025-12-04T15:28:21.5085647Z Previous HEAD position was 117d22c Increase max-debit to 3.00 for higher-priced stocks
+2025-12-04T15:28:21.5086146Z Switched to and reset branch 'main'
+2025-12-04T15:28:21.5193298Z ##[endgroup]
+2025-12-04T15:28:21.5911144Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-04T15:28:21.6423742Z ee82478c96e9e93e7b594090d26b556815011556
+2025-12-04T15:28:21.7080809Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-04T15:28:21.7081148Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-04T15:28:21.7081344Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-04T15:28:21.7105856Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T15:28:21.7106086Z ##[endgroup]
+2025-12-04T15:28:22.3026722Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-04T15:28:22.3027031Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-04T15:28:22.3027248Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-04T15:28:22.3046657Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T15:28:22.3046896Z env:
+2025-12-04T15:28:22.3047040Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T15:28:22.3047200Z ##[endgroup]
+2025-12-04T15:28:23.5573097Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-04T15:28:24.3294931Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-04T15:28:26.6708535Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-04T15:28:27.3620739Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-04T15:28:27.3627868Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-04T15:28:27.3645530Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-04T15:28:27.3660228Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-04T15:28:27.3664589Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-04T15:28:27.3722211Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-04T15:28:27.3739678Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-04T15:28:27.4026922Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-04T15:28:27.4041235Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-04T15:28:27.4054969Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-04T15:28:27.4067491Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-04T15:28:27.4285009Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-04T15:28:27.7981000Z ##[group]Run chcp 65001 > $null
+2025-12-04T15:28:27.7981848Z [36;1mchcp 65001 > $null[0m
+2025-12-04T15:28:27.7982749Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-04T15:28:27.7983523Z [36;1mfunction Get-Clock {[0m
+2025-12-04T15:28:27.7985082Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-04T15:28:27.7985661Z [36;1m}[0m
+2025-12-04T15:28:27.7986036Z [36;1m$maxWaitMin = 20[0m
+2025-12-04T15:28:27.7986316Z [36;1m$start = Get-Date[0m
+2025-12-04T15:28:27.7986556Z [36;1mwhile ($true) {[0m
+2025-12-04T15:28:27.7986776Z [36;1m  try {[0m
+2025-12-04T15:28:27.7987117Z [36;1m    $clk = Get-Clock[0m
+2025-12-04T15:28:27.7987665Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-04T15:28:27.7988025Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-04T15:28:27.7988441Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-04T15:28:27.7988766Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-04T15:28:27.7989093Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-04T15:28:27.7989519Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-04T15:28:27.7989912Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-04T15:28:27.7990156Z [36;1m    } else {[0m
+2025-12-04T15:28:27.7990417Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-04T15:28:27.7990715Z [36;1m      break[0m
+2025-12-04T15:28:27.7990894Z [36;1m    }[0m
+2025-12-04T15:28:27.7991168Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-04T15:28:27.7991586Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-04T15:28:27.7991898Z [36;1m      break[0m
+2025-12-04T15:28:27.7992214Z [36;1m    }[0m
+2025-12-04T15:28:27.7992417Z [36;1m  } catch {[0m
+2025-12-04T15:28:27.7992744Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-04T15:28:27.7993154Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-04T15:28:27.7993437Z [36;1m  }[0m
+2025-12-04T15:28:27.7993608Z [36;1m}[0m
+2025-12-04T15:28:27.8029035Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T15:28:27.8029511Z env:
+2025-12-04T15:28:27.8029957Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T15:28:27.8030431Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-04T15:28:27.8030977Z   APCA_API_KEY_ID: ***
+2025-12-04T15:28:27.8031302Z   APCA_API_SECRET_KEY: ***
+2025-12-04T15:28:27.8031521Z ##[endgroup]
+2025-12-04T15:28:28.7464057Z Market is open â†’ proceed.
+2025-12-04T15:28:28.8594251Z ##[group]Run chcp 65001 > $null
+2025-12-04T15:28:28.8594494Z [36;1mchcp 65001 > $null[0m
+2025-12-04T15:28:28.8602977Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-04T15:28:28.8603150Z [36;1m[0m
+2025-12-04T15:28:28.8603276Z [36;1m# Get inputs with defaults[0m
+2025-12-04T15:28:28.8603463Z [36;1m$dryRun = if ("0" -ne "") { "0" } else { "0" }[0m
+2025-12-04T15:28:28.8603679Z [36;1m$dte = if ("3" -ne "") { "3" } else { "3" }[0m
+2025-12-04T15:28:28.8603970Z [36;1m[0m
+2025-12-04T15:28:28.8604146Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-04T15:28:28.8604354Z [36;1m[0m
+2025-12-04T15:28:28.8604447Z [36;1m# Run the spreads loop[0m
+2025-12-04T15:28:28.8604641Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-04T15:28:28.8604880Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-04T15:28:28.8605090Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-04T15:28:28.8605237Z [36;1m  --dry-run $dryRun `[0m
+2025-12-04T15:28:28.8605362Z [36;1m  --dte $dte `[0m
+2025-12-04T15:28:28.8605480Z [36;1m  --max-debit 3.00[0m
+2025-12-04T15:28:28.8623786Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T15:28:28.8624011Z env:
+2025-12-04T15:28:28.8624148Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T15:28:28.8624336Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-04T15:28:28.8624681Z   APCA_API_KEY_ID: ***
+2025-12-04T15:28:28.8625075Z   APCA_API_SECRET_KEY: ***
+2025-12-04T15:28:28.8625205Z   ALPACA_KEY: ***
+2025-12-04T15:28:28.8625347Z   ALPACA_SECRET: ***
+2025-12-04T15:28:28.8625448Z   PYTHONUNBUFFERED: 1
+2025-12-04T15:28:28.8625557Z ##[endgroup]
+2025-12-04T15:28:29.3291450Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-04T15:28:31.0887212Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-04T15:28:31Z","ts_et":"2025-12-04 10:28:31 ET"}
+2025-12-04T15:28:31.0892201Z {"event":"symbols_loaded","count":30,"sample":["NVDA","AMD","AAPL","MSFT","GOOGL"],"type":"HEARTBEAT","ts":"2025-12-04T15:28:31Z","ts_et":"2025-12-04 10:28:31 ET"}
+2025-12-04T15:28:31.4619867Z {"event":"scan_cycle_start","cycle":1,"time":"10:28","type":"HEARTBEAT","ts":"2025-12-04T15:28:31Z","ts_et":"2025-12-04 10:28:31 ET"}
+2025-12-04T15:28:31.4621399Z {"event":"scan_start","current_time":"10:28","type":"HEARTBEAT","ts":"2025-12-04T15:28:31Z","ts_et":"2025-12-04 10:28:31 ET"}
+2025-12-04T15:28:35.8817296Z {"type":"SPREAD_SIGNAL","underlying":"AMZN","signal_reason":"RSI_oversold(24.1)","entry_price":228.86,"rsi":24.11,"atr":0.8263,"ts":"2025-12-04T15:28:35Z","ts_et":"2025-12-04 10:28:35 ET"}
+2025-12-04T15:28:36.1582299Z {"event":"signals_found","count":1,"symbols":["AMZN"],"type":"HEARTBEAT","ts":"2025-12-04T15:28:36Z","ts_et":"2025-12-04 10:28:36 ET"}
+2025-12-04T15:28:37.9478768Z [spreads] Using 1 DTE (2025-12-05) instead of 3 DTE for AMZN
+2025-12-04T15:28:37.9479796Z [spreads] AMZN: Long 227.5 / Short 232.5 (width=$5.00, exp=2025-12-05)
+2025-12-04T15:28:39.7422499Z [options] Submitting spread: AMZN251205C00227500 (buy) / AMZN251205C00232500 (sell) @ $2.05 debit
+2025-12-04T15:28:40.2907173Z [options] Spread order submitted: 49072b56-ada6-4fda-89f5-3fe91208f497
+2025-12-04T15:28:40.2912687Z {"type":"SPREAD_ENTRY","underlying":"AMZN","long_symbol":"AMZN251205C00227500","short_symbol":"AMZN251205C00232500","atm_strike":227.5,"otm_strike":232.5,"spread_width":5.0,"net_debit":2.04,"total_cost":204.0,"contracts":1,"expiration":"2025-12-05","entry_reason":"RSI_oversold(24.1)","signal_rsi":24.11,"signal_atr":0.8263,"entry_ts":"2025-12-04T15:28:40Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-04T15:28:40Z","ts_et":"2025-12-04 10:28:40 ET"}
+2025-12-04T15:28:40.2917997Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":1,"type":"HEARTBEAT","ts":"2025-12-04T15:28:40Z","ts_et":"2025-12-04 10:28:40 ET"}
+2025-12-04T15:28:40.2919064Z {"event":"scan_cycle_end","cycle":1,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-04T15:28:40Z","ts_et":"2025-12-04 10:28:40 ET"}
+2025-12-04T15:28:40.2919858Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:28","type":"HEARTBEAT","ts":"2025-12-04T15:28:40Z","ts_et":"2025-12-04 10:28:40 ET"}
+2025-12-04T15:43:40.6458543Z {"event":"scan_cycle_start","cycle":2,"time":"10:43","type":"HEARTBEAT","ts":"2025-12-04T15:43:40Z","ts_et":"2025-12-04 10:43:40 ET"}
+2025-12-04T15:43:40.6459123Z {"event":"scan_start","current_time":"10:43","type":"HEARTBEAT","ts":"2025-12-04T15:43:40Z","ts_et":"2025-12-04 10:43:40 ET"}
+2025-12-04T15:43:45.0264032Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(22.9)","entry_price":281.25,"rsi":22.91,"atr":0.9106,"ts":"2025-12-04T15:43:45Z","ts_et":"2025-12-04 10:43:45 ET"}
+2025-12-04T15:43:45.0843904Z {"type":"SPREAD_SIGNAL","underlying":"AMZN","signal_reason":"RSI_oversold(23.8)","entry_price":228.77,"rsi":23.76,"atr":0.8359,"ts":"2025-12-04T15:43:45Z","ts_et":"2025-12-04 10:43:45 ET"}
+2025-12-04T15:43:45.4069223Z {"event":"signals_found","count":2,"symbols":["AAPL","AMZN"],"type":"HEARTBEAT","ts":"2025-12-04T15:43:45Z","ts_et":"2025-12-04 10:43:45 ET"}
+2025-12-04T15:43:46.8896372Z [spreads] Using 1 DTE (2025-12-05) instead of 3 DTE for AAPL
+2025-12-04T15:43:46.8897305Z [spreads] AAPL: Long 282.5 / Short 287.5 (width=$5.00, exp=2025-12-05)
+2025-12-04T15:43:48.0493680Z [options] Submitting spread: AAPL251205C00282500 (buy) / AAPL251205C00287500 (sell) @ $0.91 debit
+2025-12-04T15:43:48.3613128Z [options] Spread order submitted: 55ecb55c-de92-4ad5-9d83-74bdbfe9112b
+2025-12-04T15:43:48.3616934Z {"type":"SPREAD_ENTRY","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"AAPL251205C00287500","atm_strike":282.5,"otm_strike":287.5,"spread_width":5.0,"net_debit":0.91,"total_cost":91.0,"contracts":1,"expiration":"2025-12-05","entry_reason":"RSI_oversold(22.9)","signal_rsi":22.91,"signal_atr":0.9106,"entry_ts":"2025-12-04T15:43:48Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-04T15:43:48Z","ts_et":"2025-12-04 10:43:48 ET"}
+2025-12-04T15:43:48.3618516Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Already_have_position","ts":"2025-12-04T15:43:48Z","ts_et":"2025-12-04 10:43:48 ET"}
+2025-12-04T15:43:48.3619641Z {"event":"scan_complete","signals":2,"new_entries":1,"total_positions":3,"type":"HEARTBEAT","ts":"2025-12-04T15:43:48Z","ts_et":"2025-12-04 10:43:48 ET"}
+2025-12-04T15:43:48.3620410Z {"event":"scan_cycle_end","cycle":2,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-04T15:43:48Z","ts_et":"2025-12-04 10:43:48 ET"}
+2025-12-04T15:43:48.3621181Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:43","type":"HEARTBEAT","ts":"2025-12-04T15:43:48Z","ts_et":"2025-12-04 10:43:48 ET"}
+2025-12-04T15:58:48.6844760Z {"event":"scan_cycle_start","cycle":3,"time":"10:58","type":"HEARTBEAT","ts":"2025-12-04T15:58:48Z","ts_et":"2025-12-04 10:58:48 ET"}
+2025-12-04T15:58:48.6851129Z {"event":"scan_start","current_time":"10:58","type":"HEARTBEAT","ts":"2025-12-04T15:58:48Z","ts_et":"2025-12-04 10:58:48 ET"}
+2025-12-04T15:58:52.8386323Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(24.1)","entry_price":281.345,"rsi":24.14,"atr":0.877,"ts":"2025-12-04T15:58:52Z","ts_et":"2025-12-04 10:58:52 ET"}
+2025-12-04T15:58:52.8846378Z {"type":"SPREAD_SIGNAL","underlying":"AMZN","signal_reason":"RSI_oversold(23.4)","entry_price":228.68,"rsi":23.39,"atr":0.7976,"ts":"2025-12-04T15:58:52Z","ts_et":"2025-12-04 10:58:52 ET"}
+2025-12-04T15:58:53.2405334Z {"event":"signals_found","count":2,"symbols":["AAPL","AMZN"],"type":"HEARTBEAT","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T15:58:53.2406948Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T15:58:53.2412353Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Already_have_position","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T15:58:53.2413804Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T15:58:53.2415075Z {"event":"scan_cycle_end","cycle":3,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T15:58:53.2416356Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:58","type":"HEARTBEAT","ts":"2025-12-04T15:58:53Z","ts_et":"2025-12-04 10:58:53 ET"}
+2025-12-04T16:13:53.5519636Z {"event":"scan_cycle_start","cycle":4,"time":"11:13","type":"HEARTBEAT","ts":"2025-12-04T16:13:53Z","ts_et":"2025-12-04 11:13:53 ET"}
+2025-12-04T16:13:53.5521174Z {"event":"scan_start","current_time":"11:13","type":"HEARTBEAT","ts":"2025-12-04T16:13:53Z","ts_et":"2025-12-04 11:13:53 ET"}
+2025-12-04T16:13:57.5855890Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(21.9)","entry_price":280.77,"rsi":21.86,"atr":0.8922,"ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.6225614Z {"type":"SPREAD_SIGNAL","underlying":"AMZN","signal_reason":"RSI_oversold(19.4)","entry_price":227.595,"rsi":19.45,"atr":0.826,"ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8849263Z {"event":"signals_found","count":2,"symbols":["AAPL","AMZN"],"type":"HEARTBEAT","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8855001Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8856855Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Already_have_position","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8858932Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8860724Z {"event":"scan_cycle_end","cycle":4,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:13:57.8862422Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:13","type":"HEARTBEAT","ts":"2025-12-04T16:13:57Z","ts_et":"2025-12-04 11:13:57 ET"}
+2025-12-04T16:28:58.1877549Z {"event":"scan_cycle_start","cycle":5,"time":"11:28","type":"HEARTBEAT","ts":"2025-12-04T16:28:58Z","ts_et":"2025-12-04 11:28:58 ET"}
+2025-12-04T16:28:58.1883676Z {"event":"scan_start","current_time":"11:28","type":"HEARTBEAT","ts":"2025-12-04T16:28:58Z","ts_et":"2025-12-04 11:28:58 ET"}
+2025-12-04T16:29:02.2888075Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(20.4)","entry_price":280.36,"rsi":20.38,"atr":0.8899,"ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.3613277Z {"type":"SPREAD_SIGNAL","underlying":"AMZN","signal_reason":"RSI_oversold(18.2)","entry_price":227.17,"rsi":18.16,"atr":0.8288,"ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8031794Z {"event":"signals_found","count":2,"symbols":["AAPL","AMZN"],"type":"HEARTBEAT","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8033889Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8034622Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Already_have_position","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8035374Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8037594Z {"event":"scan_cycle_end","cycle":5,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:29:02.8038318Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:29","type":"HEARTBEAT","ts":"2025-12-04T16:29:02Z","ts_et":"2025-12-04 11:29:02 ET"}
+2025-12-04T16:44:03.1131405Z {"event":"scan_cycle_start","cycle":6,"time":"11:44","type":"HEARTBEAT","ts":"2025-12-04T16:44:03Z","ts_et":"2025-12-04 11:44:03 ET"}
+2025-12-04T16:44:03.1161884Z {"event":"scan_start","current_time":"11:44","type":"HEARTBEAT","ts":"2025-12-04T16:44:03Z","ts_et":"2025-12-04 11:44:03 ET"}
+2025-12-04T16:44:07.3427115Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(20.1)","entry_price":280.28,"rsi":20.1,"atr":0.8763,"ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:44:07.7845305Z {"event":"signals_found","count":1,"symbols":["AAPL"],"type":"HEARTBEAT","ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:44:07.7847141Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:44:07.7848950Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:44:07.7850600Z {"event":"scan_cycle_end","cycle":6,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:44:07.7852254Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:44","type":"HEARTBEAT","ts":"2025-12-04T16:44:07Z","ts_et":"2025-12-04 11:44:07 ET"}
+2025-12-04T16:59:08.1144947Z {"event":"scan_cycle_start","cycle":7,"time":"11:59","type":"HEARTBEAT","ts":"2025-12-04T16:59:08Z","ts_et":"2025-12-04 11:59:08 ET"}
+2025-12-04T16:59:08.1146625Z {"event":"scan_start","current_time":"11:59","type":"HEARTBEAT","ts":"2025-12-04T16:59:08Z","ts_et":"2025-12-04 11:59:08 ET"}
+2025-12-04T16:59:12.2434053Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(19.7)","entry_price":280.18,"rsi":19.73,"atr":0.8562,"ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T16:59:12.7427526Z {"event":"signals_found","count":1,"symbols":["AAPL"],"type":"HEARTBEAT","ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T16:59:12.7429752Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T16:59:12.7431566Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T16:59:12.7433274Z {"event":"scan_cycle_end","cycle":7,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T16:59:12.7434919Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:59","type":"HEARTBEAT","ts":"2025-12-04T16:59:12Z","ts_et":"2025-12-04 11:59:12 ET"}
+2025-12-04T17:14:13.0974821Z {"event":"scan_cycle_start","cycle":8,"time":"12:14","type":"HEARTBEAT","ts":"2025-12-04T17:14:13Z","ts_et":"2025-12-04 12:14:13 ET"}
+2025-12-04T17:14:13.0975486Z {"event":"scan_start","current_time":"12:14","type":"HEARTBEAT","ts":"2025-12-04T17:14:13Z","ts_et":"2025-12-04 12:14:13 ET"}
+2025-12-04T17:14:17.7598196Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T17:14:17Z","ts_et":"2025-12-04 12:14:17 ET"}
+2025-12-04T17:14:17.7599117Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T17:14:17Z","ts_et":"2025-12-04 12:14:17 ET"}
+2025-12-04T17:14:17.7599829Z {"event":"scan_cycle_end","cycle":8,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T17:14:17Z","ts_et":"2025-12-04 12:14:17 ET"}
+2025-12-04T17:14:17.7600512Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:14","type":"HEARTBEAT","ts":"2025-12-04T17:14:17Z","ts_et":"2025-12-04 12:14:17 ET"}
+2025-12-04T17:29:18.0717497Z {"event":"scan_cycle_start","cycle":9,"time":"12:29","type":"HEARTBEAT","ts":"2025-12-04T17:29:18Z","ts_et":"2025-12-04 12:29:18 ET"}
+2025-12-04T17:29:18.0719214Z {"event":"scan_start","current_time":"12:29","type":"HEARTBEAT","ts":"2025-12-04T17:29:18Z","ts_et":"2025-12-04 12:29:18 ET"}
+2025-12-04T17:29:22.6306590Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T17:29:22Z","ts_et":"2025-12-04 12:29:22 ET"}
+2025-12-04T17:29:22.6308362Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T17:29:22Z","ts_et":"2025-12-04 12:29:22 ET"}
+2025-12-04T17:29:22.6310091Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T17:29:22Z","ts_et":"2025-12-04 12:29:22 ET"}
+2025-12-04T17:29:22.6311767Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:29","type":"HEARTBEAT","ts":"2025-12-04T17:29:22Z","ts_et":"2025-12-04 12:29:22 ET"}
+2025-12-04T17:44:22.9205917Z {"event":"scan_cycle_start","cycle":10,"time":"12:44","type":"HEARTBEAT","ts":"2025-12-04T17:44:22Z","ts_et":"2025-12-04 12:44:22 ET"}
+2025-12-04T17:44:22.9207663Z {"event":"scan_start","current_time":"12:44","type":"HEARTBEAT","ts":"2025-12-04T17:44:22Z","ts_et":"2025-12-04 12:44:22 ET"}
+2025-12-04T17:44:27.3091387Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T17:44:27Z","ts_et":"2025-12-04 12:44:27 ET"}
+2025-12-04T17:44:27.3092449Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T17:44:27Z","ts_et":"2025-12-04 12:44:27 ET"}
+2025-12-04T17:44:27.3104136Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T17:44:27Z","ts_et":"2025-12-04 12:44:27 ET"}
+2025-12-04T17:44:27.3104840Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:44","type":"HEARTBEAT","ts":"2025-12-04T17:44:27Z","ts_et":"2025-12-04 12:44:27 ET"}
+2025-12-04T17:59:27.5977467Z {"event":"scan_cycle_start","cycle":11,"time":"12:59","type":"HEARTBEAT","ts":"2025-12-04T17:59:27Z","ts_et":"2025-12-04 12:59:27 ET"}
+2025-12-04T17:59:27.5978985Z {"event":"scan_start","current_time":"12:59","type":"HEARTBEAT","ts":"2025-12-04T17:59:27Z","ts_et":"2025-12-04 12:59:27 ET"}
+2025-12-04T17:59:32.0730695Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T17:59:32Z","ts_et":"2025-12-04 12:59:32 ET"}
+2025-12-04T17:59:32.0732093Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-04T17:59:32Z","ts_et":"2025-12-04 12:59:32 ET"}
+2025-12-04T17:59:32.0733454Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T17:59:32Z","ts_et":"2025-12-04 12:59:32 ET"}
+2025-12-04T17:59:32.0734738Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:59","type":"HEARTBEAT","ts":"2025-12-04T17:59:32Z","ts_et":"2025-12-04 12:59:32 ET"}
+2025-12-04T18:14:32.4468643Z {"event":"scan_cycle_start","cycle":12,"time":"13:14","type":"HEARTBEAT","ts":"2025-12-04T18:14:32Z","ts_et":"2025-12-04 13:14:32 ET"}
+2025-12-04T18:14:32.4470098Z {"event":"scan_start","current_time":"13:14","type":"HEARTBEAT","ts":"2025-12-04T18:14:32Z","ts_et":"2025-12-04 13:14:32 ET"}
+2025-12-04T18:14:33.0126131Z [options] Position closed: AAPL251205C00282500
+2025-12-04T18:14:33.0168441Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.44,"exit_reason":"SL_hit(-53.2%<=-50.0%)","pnl":-50.0,"pnl_pct":-53.2,"ts":"2025-12-04T18:14:33Z","ts_et":"2025-12-04 13:14:33 ET"}
+2025-12-04T18:14:37.1056008Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(23.9)","entry_price":41.06,"rsi":23.89,"atr":0.3279,"ts":"2025-12-04T18:14:37Z","ts_et":"2025-12-04 13:14:37 ET"}
+2025-12-04T18:14:37.3719441Z {"event":"signals_found","count":1,"symbols":["INTC"],"type":"HEARTBEAT","ts":"2025-12-04T18:14:37Z","ts_et":"2025-12-04 13:14:37 ET"}
+2025-12-04T18:14:38.8338731Z [spreads] Using 1 DTE (2025-12-05) instead of 3 DTE for INTC
+2025-12-04T18:14:38.8357462Z [spreads] INTC: Long 41.0 / Short 41.5 (width=$0.50, exp=2025-12-05)
+2025-12-04T18:14:40.0788677Z [options] Submitting spread: INTC251205C00041000 (buy) / INTC251205C00041500 (sell) @ $0.19 debit
+2025-12-04T18:14:40.3991915Z [options] Spread order submitted: 766f0e31-20d0-44ed-b817-637b2be0e222
+2025-12-04T18:14:40.4025355Z {"type":"SPREAD_ENTRY","underlying":"INTC","long_symbol":"INTC251205C00041000","short_symbol":"INTC251205C00041500","atm_strike":41.0,"otm_strike":41.5,"spread_width":0.5,"net_debit":0.19,"total_cost":19.0,"contracts":1,"expiration":"2025-12-05","entry_reason":"RSI_oversold(23.9)","signal_rsi":23.89,"signal_atr":0.3279,"entry_ts":"2025-12-04T18:14:40Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-04T18:14:40Z","ts_et":"2025-12-04 13:14:40 ET"}
+2025-12-04T18:14:40.4030655Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-04T18:14:40Z","ts_et":"2025-12-04 13:14:40 ET"}
+2025-12-04T18:14:40.4032365Z {"event":"scan_cycle_end","cycle":12,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-04T18:14:40Z","ts_et":"2025-12-04 13:14:40 ET"}
+2025-12-04T18:14:40.4034018Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:14","type":"HEARTBEAT","ts":"2025-12-04T18:14:40Z","ts_et":"2025-12-04 13:14:40 ET"}
+2025-12-04T18:29:40.6974050Z {"event":"scan_cycle_start","cycle":13,"time":"13:29","type":"HEARTBEAT","ts":"2025-12-04T18:29:40Z","ts_et":"2025-12-04 13:29:40 ET"}
+2025-12-04T18:29:40.6979799Z {"event":"scan_start","current_time":"13:29","type":"HEARTBEAT","ts":"2025-12-04T18:29:40Z","ts_et":"2025-12-04 13:29:40 ET"}
+2025-12-04T18:29:41.3096296Z [options] Position closed: AAPL251205C00282500
+2025-12-04T18:29:41.3098064Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.44,"exit_reason":"SL_hit(-53.2%<=-50.0%)","pnl":-50.0,"pnl_pct":-53.2,"ts":"2025-12-04T18:29:41Z","ts_et":"2025-12-04 13:29:41 ET"}
+2025-12-04T18:29:45.1337247Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(23.4)","entry_price":279.925,"rsi":23.41,"atr":0.7465,"ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.2341959Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(22.6)","entry_price":40.92,"rsi":22.56,"atr":0.323,"ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4085133Z {"event":"signals_found","count":2,"symbols":["AAPL","INTC"],"type":"HEARTBEAT","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4086035Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4086817Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4087659Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4089642Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:29:45.4090426Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:29","type":"HEARTBEAT","ts":"2025-12-04T18:29:45Z","ts_et":"2025-12-04 13:29:45 ET"}
+2025-12-04T18:44:45.6990786Z {"event":"scan_cycle_start","cycle":14,"time":"13:44","type":"HEARTBEAT","ts":"2025-12-04T18:44:45Z","ts_et":"2025-12-04 13:44:45 ET"}
+2025-12-04T18:44:45.6992382Z {"event":"scan_start","current_time":"13:44","type":"HEARTBEAT","ts":"2025-12-04T18:44:45Z","ts_et":"2025-12-04 13:44:45 ET"}
+2025-12-04T18:44:46.3348283Z [options] Position closed: AAPL251205C00282500
+2025-12-04T18:44:46.3350801Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.36,"exit_reason":"SL_hit(-61.7%<=-50.0%)","pnl":-58.0,"pnl_pct":-61.7,"ts":"2025-12-04T18:44:46Z","ts_et":"2025-12-04 13:44:46 ET"}
+2025-12-04T18:44:50.5812592Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T18:44:50Z","ts_et":"2025-12-04 13:44:50 ET"}
+2025-12-04T18:44:50.5814716Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T18:44:50Z","ts_et":"2025-12-04 13:44:50 ET"}
+2025-12-04T18:44:50.5817215Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T18:44:50Z","ts_et":"2025-12-04 13:44:50 ET"}
+2025-12-04T18:44:50.5818908Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:44","type":"HEARTBEAT","ts":"2025-12-04T18:44:50Z","ts_et":"2025-12-04 13:44:50 ET"}
+2025-12-04T18:59:50.8747528Z {"event":"scan_cycle_start","cycle":15,"time":"13:59","type":"HEARTBEAT","ts":"2025-12-04T18:59:50Z","ts_et":"2025-12-04 13:59:50 ET"}
+2025-12-04T18:59:50.8749203Z {"event":"scan_start","current_time":"13:59","type":"HEARTBEAT","ts":"2025-12-04T18:59:50Z","ts_et":"2025-12-04 13:59:50 ET"}
+2025-12-04T18:59:51.4950167Z [options] Position closed: AAPL251205C00282500
+2025-12-04T18:59:51.4953351Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.33,"exit_reason":"SL_hit(-64.9%<=-50.0%)","pnl":-61.0,"pnl_pct":-64.9,"ts":"2025-12-04T18:59:51Z","ts_et":"2025-12-04 13:59:51 ET"}
+2025-12-04T18:59:55.2955259Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(23.8)","entry_price":279.78,"rsi":23.8,"atr":0.6964,"ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T18:59:55.6908109Z {"event":"signals_found","count":1,"symbols":["AAPL"],"type":"HEARTBEAT","ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T18:59:55.6908640Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T18:59:55.6909123Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T18:59:55.6909609Z {"event":"scan_cycle_end","cycle":15,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T18:59:55.6910273Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:59","type":"HEARTBEAT","ts":"2025-12-04T18:59:55Z","ts_et":"2025-12-04 13:59:55 ET"}
+2025-12-04T19:14:56.0019384Z {"event":"scan_cycle_start","cycle":16,"time":"14:14","type":"HEARTBEAT","ts":"2025-12-04T19:14:56Z","ts_et":"2025-12-04 14:14:56 ET"}
+2025-12-04T19:14:56.0028720Z {"event":"scan_start","current_time":"14:14","type":"HEARTBEAT","ts":"2025-12-04T19:14:56Z","ts_et":"2025-12-04 14:14:56 ET"}
+2025-12-04T19:14:56.5682035Z [options] Position closed: AAPL251205C00282500
+2025-12-04T19:14:56.5690574Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.32,"exit_reason":"SL_hit(-66.0%<=-50.0%)","pnl":-62.0,"pnl_pct":-66.0,"ts":"2025-12-04T19:14:56Z","ts_et":"2025-12-04 14:14:56 ET"}
+2025-12-04T19:15:00.2735732Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(21.9)","entry_price":279.45,"rsi":21.93,"atr":0.6895,"ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:15:00.7499195Z {"event":"signals_found","count":1,"symbols":["AAPL"],"type":"HEARTBEAT","ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:15:00.7525729Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:15:00.7527010Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:15:00.7532054Z {"event":"scan_cycle_end","cycle":16,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:15:00.7533825Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:15","type":"HEARTBEAT","ts":"2025-12-04T19:15:00Z","ts_et":"2025-12-04 14:15:00 ET"}
+2025-12-04T19:30:01.0744695Z {"event":"scan_cycle_start","cycle":17,"time":"14:30","type":"HEARTBEAT","ts":"2025-12-04T19:30:01Z","ts_et":"2025-12-04 14:30:01 ET"}
+2025-12-04T19:30:01.0745936Z {"event":"scan_start","current_time":"14:30","type":"HEARTBEAT","ts":"2025-12-04T19:30:01Z","ts_et":"2025-12-04 14:30:01 ET"}
+2025-12-04T19:30:01.7719512Z [options] Position closed: AAPL251205C00282500
+2025-12-04T19:30:01.7723207Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.26,"exit_reason":"SL_hit(-72.3%<=-50.0%)","pnl":-68.0,"pnl_pct":-72.3,"ts":"2025-12-04T19:30:01Z","ts_et":"2025-12-04 14:30:01 ET"}
+2025-12-04T19:30:06.0803602Z {"type":"SPREAD_SIGNAL","underlying":"AAPL","signal_reason":"RSI_oversold(18.8)","entry_price":278.85,"rsi":18.83,"atr":0.6806,"ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.2824796Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(22.9)","entry_price":40.62,"rsi":22.89,"atr":0.2932,"ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4547932Z {"event":"signals_found","count":2,"symbols":["AAPL","INTC"],"type":"HEARTBEAT","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4551782Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Already_have_position","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4552615Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4553472Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4554248Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:30:06.4555136Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:30","type":"HEARTBEAT","ts":"2025-12-04T19:30:06Z","ts_et":"2025-12-04 14:30:06 ET"}
+2025-12-04T19:45:06.7651817Z {"event":"scan_cycle_start","cycle":18,"time":"14:45","type":"HEARTBEAT","ts":"2025-12-04T19:45:06Z","ts_et":"2025-12-04 14:45:06 ET"}
+2025-12-04T19:45:06.7652601Z {"event":"scan_start","current_time":"14:45","type":"HEARTBEAT","ts":"2025-12-04T19:45:06Z","ts_et":"2025-12-04 14:45:06 ET"}
+2025-12-04T19:45:07.3344759Z [options] Position closed: AAPL251205C00282500
+2025-12-04T19:45:07.3348391Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.4,"exit_reason":"SL_hit(-57.4%<=-50.0%)","pnl":-54.0,"pnl_pct":-57.4,"ts":"2025-12-04T19:45:07Z","ts_et":"2025-12-04 14:45:07 ET"}
+2025-12-04T19:45:11.9866831Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(22.8)","entry_price":40.615,"rsi":22.84,"atr":0.293,"ts":"2025-12-04T19:45:11Z","ts_et":"2025-12-04 14:45:11 ET"}
+2025-12-04T19:45:12.3190219Z {"event":"signals_found","count":1,"symbols":["INTC"],"type":"HEARTBEAT","ts":"2025-12-04T19:45:12Z","ts_et":"2025-12-04 14:45:12 ET"}
+2025-12-04T19:45:12.3191287Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-04T19:45:12Z","ts_et":"2025-12-04 14:45:12 ET"}
+2025-12-04T19:45:12.3192226Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T19:45:12Z","ts_et":"2025-12-04 14:45:12 ET"}
+2025-12-04T19:45:12.3193043Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T19:45:12Z","ts_et":"2025-12-04 14:45:12 ET"}
+2025-12-04T19:45:12.3195496Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:45","type":"HEARTBEAT","ts":"2025-12-04T19:45:12Z","ts_et":"2025-12-04 14:45:12 ET"}
+2025-12-04T20:00:12.5992326Z {"event":"scan_cycle_start","cycle":19,"time":"15:00","type":"HEARTBEAT","ts":"2025-12-04T20:00:12Z","ts_et":"2025-12-04 15:00:12 ET"}
+2025-12-04T20:00:12.5994987Z {"event":"scan_start","current_time":"15:00","type":"HEARTBEAT","ts":"2025-12-04T20:00:12Z","ts_et":"2025-12-04 15:00:12 ET"}
+2025-12-04T20:00:13.1689705Z [options] Position closed: AAPL251205C00282500
+2025-12-04T20:00:13.1697899Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.45,"exit_reason":"SL_hit(-52.1%<=-50.0%)","pnl":-49.0,"pnl_pct":-52.1,"ts":"2025-12-04T20:00:13Z","ts_et":"2025-12-04 15:00:13 ET"}
+2025-12-04T20:00:18.1412191Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(21.8)","entry_price":40.515,"rsi":21.77,"atr":0.2824,"ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:00:18.3239280Z {"event":"signals_found","count":1,"symbols":["INTC"],"type":"HEARTBEAT","ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:00:18.3251104Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:00:18.3252580Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:00:18.3253831Z {"event":"scan_cycle_end","cycle":19,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:00:18.3258097Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:00","type":"HEARTBEAT","ts":"2025-12-04T20:00:18Z","ts_et":"2025-12-04 15:00:18 ET"}
+2025-12-04T20:15:18.6101442Z {"event":"scan_cycle_start","cycle":20,"time":"15:15","type":"HEARTBEAT","ts":"2025-12-04T20:15:18Z","ts_et":"2025-12-04 15:15:18 ET"}
+2025-12-04T20:15:18.6102228Z {"event":"scan_start","current_time":"15:15","type":"HEARTBEAT","ts":"2025-12-04T20:15:18Z","ts_et":"2025-12-04 15:15:18 ET"}
+2025-12-04T20:15:19.1996309Z [options] Position closed: AAPL251205C00282500
+2025-12-04T20:15:19.2004663Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.47,"exit_reason":"SL_hit(-50.0%<=-50.0%)","pnl":-47.0,"pnl_pct":-50.0,"ts":"2025-12-04T20:15:19Z","ts_et":"2025-12-04 15:15:19 ET"}
+2025-12-04T20:15:24.1692190Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-04T20:15:24Z","ts_et":"2025-12-04 15:15:24 ET"}
+2025-12-04T20:15:24.1693030Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T20:15:24Z","ts_et":"2025-12-04 15:15:24 ET"}
+2025-12-04T20:15:24.1693797Z {"event":"scan_cycle_end","cycle":20,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T20:15:24Z","ts_et":"2025-12-04 15:15:24 ET"}
+2025-12-04T20:15:24.1694551Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:15","type":"HEARTBEAT","ts":"2025-12-04T20:15:24Z","ts_et":"2025-12-04 15:15:24 ET"}
+2025-12-04T20:30:24.4709770Z {"event":"scan_cycle_start","cycle":21,"time":"15:30","type":"HEARTBEAT","ts":"2025-12-04T20:30:24Z","ts_et":"2025-12-04 15:30:24 ET"}
+2025-12-04T20:30:24.4710425Z {"event":"scan_start","current_time":"15:30","type":"HEARTBEAT","ts":"2025-12-04T20:30:24Z","ts_et":"2025-12-04 15:30:24 ET"}
+2025-12-04T20:30:25.0267483Z [options] Position closed: AAPL251205C00282500
+2025-12-04T20:30:25.0272289Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.43,"exit_reason":"SL_hit(-54.3%<=-50.0%)","pnl":-51.0,"pnl_pct":-54.3,"ts":"2025-12-04T20:30:25Z","ts_et":"2025-12-04 15:30:25 ET"}
+2025-12-04T20:30:29.5475639Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(23.6)","entry_price":40.395,"rsi":23.58,"atr":0.2789,"ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:30:29.8123646Z {"event":"signals_found","count":1,"symbols":["INTC"],"type":"HEARTBEAT","ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:30:29.8124408Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:30:29.8125279Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:30:29.8126410Z {"event":"scan_cycle_end","cycle":21,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:30:29.8127186Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:30","type":"HEARTBEAT","ts":"2025-12-04T20:30:29Z","ts_et":"2025-12-04 15:30:29 ET"}
+2025-12-04T20:45:30.1345982Z {"event":"scan_cycle_start","cycle":22,"time":"15:45","type":"HEARTBEAT","ts":"2025-12-04T20:45:30Z","ts_et":"2025-12-04 15:45:30 ET"}
+2025-12-04T20:45:30.1357839Z {"event":"outside_entry_window","current_time":"15:45","type":"HEARTBEAT","ts":"2025-12-04T20:45:30Z","ts_et":"2025-12-04 15:45:30 ET"}
+2025-12-04T20:45:30.7753782Z [options] Position closed: AAPL251205C00282500
+2025-12-04T20:45:30.7759802Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.38,"exit_reason":"SL_hit(-59.6%<=-50.0%)","pnl":-56.0,"pnl_pct":-59.6,"ts":"2025-12-04T20:45:30Z","ts_et":"2025-12-04 15:45:30 ET"}
+2025-12-04T20:45:31.0616778Z [options] Position closed: INTC251205C00041000
+2025-12-04T20:45:31.0630152Z {"type":"SPREAD_EXIT","underlying":"INTC","long_symbol":"INTC251205C00041000","short_symbol":"","exit_value":0.24,"exit_reason":"SL_hit(-55.6%<=-50.0%)","pnl":-30.0,"pnl_pct":-55.6,"ts":"2025-12-04T20:45:31Z","ts_et":"2025-12-04 15:45:31 ET"}
+2025-12-04T20:45:31.0632091Z {"event":"scan_cycle_end","cycle":22,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-04T20:45:31Z","ts_et":"2025-12-04 15:45:31 ET"}
+2025-12-04T20:45:31.0633453Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:45","type":"HEARTBEAT","ts":"2025-12-04T20:45:31Z","ts_et":"2025-12-04 15:45:31 ET"}
+2025-12-04T21:00:31.0641724Z {"event":"market_close_reached","time":"16:00","type":"HEARTBEAT","ts":"2025-12-04T21:00:31Z","ts_et":"2025-12-04 16:00:31 ET"}
+2025-12-04T21:00:31.0668023Z {"event":"eod_processing","scan_count":22,"type":"HEARTBEAT","ts":"2025-12-04T21:00:31Z","ts_et":"2025-12-04 16:00:31 ET"}
+2025-12-04T21:00:31.6989172Z [options] Position closed: AAPL251205C00282500
+2025-12-04T21:00:31.6990870Z {"type":"SPREAD_EXIT","underlying":"AAPL","long_symbol":"AAPL251205C00282500","short_symbol":"","exit_value":0.41,"exit_reason":"SL_hit(-56.4%<=-50.0%)","pnl":-53.0,"pnl_pct":-56.4,"ts":"2025-12-04T21:00:31Z","ts_et":"2025-12-04 16:00:31 ET"}
+2025-12-04T21:00:31.7017058Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":3,"closed_trades":2,"open_trades":1,"total_pnl":-80.0,"win_count":0,"loss_count":2,"win_rate_pct":0.0,"avg_win":0,"avg_loss":-40.0,"exit_reasons":{"SL_hit(-53.2%<=-50.0%)":{"count":1,"pnl":-50.0},"SL_hit(-55.6%<=-50.0%)":{"count":1,"pnl":-30.0}},"trades":[{"underlying":"AMZN","entry_reason":"RSI_oversold(24.1)","exit_reason":null,"net_debit":2.04,"pnl":null,"pnl_pct":null},{"underlying":"AAPL","entry_reason":"RSI_oversold(22.9)","exit_reason":"SL_hit(-53.2%<=-50.0%)","net_debit":0.91,"pnl":-50.0,"pnl_pct":-53.2},{"underlying":"INTC","entry_reason":"RSI_oversold(23.9)","exit_reason":"SL_hit(-55.6%<=-50.0%)","net_debit":0.19,"pnl":-30.0,"pnl_pct":-55.6}],"ts":"2025-12-04T21:00:31Z","ts_et":"2025-12-04 16:00:31 ET"}
+2025-12-04T21:00:31.7066683Z 
+2025-12-04T21:00:31.7067296Z ============================================================
+2025-12-04T21:00:31.7087793Z EOD SUMMARY: 3 trades, PnL: $-80.00
+2025-12-04T21:00:31.7088538Z Win Rate: 0.0%
+2025-12-04T21:00:31.7092163Z ============================================================
+2025-12-04T21:00:31.7092732Z 
+2025-12-04T21:00:32.9284448Z Post job cleanup.
+2025-12-04T21:00:33.2069690Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-04T21:00:33.2979809Z git version 2.52.0.windows.1
+2025-12-04T21:00:33.3162851Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\97517f82-282a-4c3a-9b4e-a9dc08e0d684' before making global git config changes
+2025-12-04T21:00:33.3164323Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T21:00:33.3172789Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-04T21:00:33.3941046Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T21:00:33.4723003Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-04T21:00:34.7820953Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T21:00:34.8391694Z http.https://github.com/.extraheader
+2025-12-04T21:00:34.8533425Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-04T21:00:34.9344728Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-04T21:00:36.2640930Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T21:00:36.3243630Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-04T21:00:37.5247328Z Cleaning up orphan processes

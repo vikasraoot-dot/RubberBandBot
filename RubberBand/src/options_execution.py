@@ -191,6 +191,129 @@ def submit_spread_order(
         return {"error": True, "message": str(e)}
 
 
+def close_spread(
+    long_symbol: str,
+    short_symbol: str,
+    qty: int = 1,
+) -> Dict[str, Any]:
+    """
+    Close a bull call spread by closing both legs together as a multi-leg order.
+    
+    For a bull call spread:
+    - Sell to close the long leg (the one we bought)
+    - Buy to close the short leg (the one we sold)
+    
+    Args:
+        long_symbol: OCC symbol for long leg (the call we're long)
+        short_symbol: OCC symbol for short leg (the call we're short)
+        qty: Number of spreads to close
+    
+    Returns:
+        Result dict with order info or error
+    """
+    from RubberBand.src.options_data import get_option_quote
+    
+    base, key, secret = _resolve_creds()
+    
+    # Get quotes for both legs to determine credit received
+    long_quote = get_option_quote(long_symbol)
+    short_quote = get_option_quote(short_symbol)
+    
+    if not long_quote or not short_quote:
+        # Fallback to closing legs individually if quotes unavailable
+        print(f"[options] Cannot get quotes, closing legs individually")
+        result_long = close_option_position(long_symbol, qty)
+        result_short = close_option_position(short_symbol, qty)
+        return {
+            "error": result_long.get("error", False) or result_short.get("error", False),
+            "long_result": result_long,
+            "short_result": result_short,
+            "message": "Closed individually",
+        }
+    
+    # For closing: sell long at bid, buy short at ask
+    long_bid = long_quote.get("bid", 0)
+    short_ask = short_quote.get("ask", 0)
+    net_credit = long_bid - short_ask  # Credit received (positive = we receive money)
+    
+    # Use absolute value as limit price (negative = credit to receive)
+    limit_price = round(abs(net_credit), 2)
+    
+    # Build multi-leg close order
+    # Note: mleg orders do NOT use top-level "symbol" field
+    order_payload = {
+        "qty": str(qty),
+        "side": "sell",  # Overall direction for closing a debit spread
+        "type": "limit",
+        "time_in_force": "day",
+        "limit_price": str(limit_price),  # Credit to receive
+        "order_class": "mleg",
+        "legs": [
+            {
+                "symbol": long_symbol,
+                "side": "sell",  # Sell to close the long
+                "ratio_qty": "1",
+                "position_intent": "sell_to_close",
+            },
+            {
+                "symbol": short_symbol,
+                "side": "buy",  # Buy to close the short
+                "ratio_qty": "1",
+                "position_intent": "buy_to_close",
+            },
+        ],
+    }
+    
+    url = f"{base}/v2/orders"
+    
+    try:
+        print(f"[options] Closing spread: {long_symbol} (sell) / {short_symbol} (buy) @ ${limit_price} credit")
+        resp = requests.post(
+            url,
+            headers=_headers(key, secret),
+            json=order_payload,
+            timeout=15,
+        )
+        result = resp.json()
+        
+        if resp.status_code >= 400:
+            error_msg = result.get("message", str(result))
+            print(f"[options] Spread close error: {result}")
+            # Fallback to individual closes
+            print(f"[options] Falling back to individual leg closes")
+            result_long = close_option_position(long_symbol, qty)
+            result_short = close_option_position(short_symbol, qty)
+            return {
+                "error": True,
+                "message": f"mleg failed: {error_msg}, closed individually",
+                "long_result": result_long,
+                "short_result": result_short,
+            }
+        
+        order_id = result.get("id", "")
+        print(f"[options] Spread close order submitted: {order_id}")
+        return {
+            "error": False,
+            "order_id": order_id,
+            "long_symbol": long_symbol,
+            "short_symbol": short_symbol,
+            "qty": qty,
+            "credit": limit_price,
+            "status": result.get("status", ""),
+        }
+    except Exception as e:
+        print(f"[options] Spread close exception: {e}")
+        # Fallback to individual closes
+        result_long = close_option_position(long_symbol, qty)
+        result_short = close_option_position(short_symbol, qty)
+        return {
+            "error": True,
+            "message": str(e),
+            "long_result": result_long,
+            "short_result": result_short,
+        }
+
+
 def close_option_position(
     option_symbol: str,
     qty: Optional[int] = None,

@@ -38,6 +38,7 @@ from RubberBand.src.options_data import (
 )
 from RubberBand.src.options_execution import (
     submit_spread_order,
+    close_spread,
     get_option_positions,
     close_option_position,
     flatten_all_option_positions,
@@ -282,14 +283,81 @@ def try_spread_entry(
 # ──────────────────────────────────────────────────────────────────────────────
 # Position Management
 # ──────────────────────────────────────────────────────────────────────────────
-def check_spread_exit(position: Dict[str, Any], spread_cfg: dict) -> tuple:
-    """Check if spread should be exited based on P&L."""
+def parse_occ_symbol(symbol: str) -> Dict[str, Any]:
+    """
+    Parse OCC option symbol into components.
+    
+    Format: SYMBOL + YYMMDD + C/P + 00000000 (strike * 1000)
+    Example: AAPL251205C00282500 = AAPL Dec 5, 2025 $282.50 Call
+    """
+    result = {"underlying": "", "expiration": "", "type": "", "strike": 0.0, "raw": symbol}
+    
+    if len(symbol) < 15:
+        return result
+    
+    # Find where underlying ends (first digit)
+    for i, c in enumerate(symbol):
+        if c.isdigit():
+            result["underlying"] = symbol[:i]
+            rest = symbol[i:]
+            break
+    else:
+        return result
+    
+    if len(rest) < 15:
+        return result
+    
+    # Parse date: YYMMDD
+    date_str = rest[:6]
+    result["expiration"] = f"20{date_str[:2]}-{date_str[2:4]}-{date_str[4:6]}"
+    
+    # Parse type: C or P
+    result["type"] = rest[6]
+    
+    # Parse strike: 8 digits / 1000
+    strike_str = rest[7:15]
+    try:
+        result["strike"] = int(strike_str) / 1000
+    except ValueError:
+        pass
+    
+    return result
+
+
+def calculate_spread_pnl(
+    long_pos: Dict[str, Any],
+    short_pos: Optional[Dict[str, Any]],
+    entry_debit: float,
+) -> Tuple[float, float]:
+    """
+    Calculate P&L for a spread.
+    
+    Spread value = long_value - short_value
+    P&L = current_spread_value - entry_debit
+    """
+    # Get current values
+    long_value = float(long_pos.get("current_price", 0))
+    short_value = float(short_pos.get("current_price", 0)) if short_pos else 0
+    
+    # Current spread value (what we'd receive if we closed now)
+    current_spread_value = long_value - short_value
+    
+    # P&L vs entry
+    pnl = (current_spread_value - entry_debit) * 100  # Per contract
+    pnl_pct = ((current_spread_value / entry_debit) - 1) * 100 if entry_debit > 0 else 0
+    
+    return pnl, pnl_pct
+
+
+def check_spread_exit_conditions(
+    pnl_pct: float,
+    spread_cfg: dict,
+) -> Tuple[bool, str]:
+    """Check if spread should be exited based on P&L percentage."""
     tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 80.0)
     sl_pct = spread_cfg.get("sl_pct", -50.0)
     hold_overnight = spread_cfg.get("hold_overnight", True)
     dte = spread_cfg.get("dte", 3)
-    
-    pnl, pnl_pct = get_position_pnl(position)
     
     if pnl_pct >= tp_max_profit_pct:
         return True, f"TP_hit({pnl_pct:.1f}%>={tp_max_profit_pct}%)"
@@ -310,46 +378,128 @@ def manage_positions(
     spread_cfg: dict,
     logger: OptionsTradeLogger,
     dry_run: bool = True,
+    active_spreads: Optional[Dict[str, Dict]] = None,
 ):
-    """Check open positions and exit if TP/SL conditions met."""
+    """
+    Check open positions and exit spreads if TP/SL conditions met.
+    
+    Properly pairs long and short legs by underlying + expiration,
+    calculates spread P&L, and closes both legs together.
+    
+    Args:
+        spread_cfg: Spread configuration
+        logger: Trade logger
+        dry_run: If True, don't actually close
+        active_spreads: Dict of {underlying: spread_info} from entries this session
+    """
     positions = get_option_positions()
+    
+    if not positions:
+        return
+    
+    # Group positions by underlying + expiration
+    # Key: "UNDERLYING_YYYYMMDD" -> {long: pos, short: pos}
+    spreads = {}
     
     for pos in positions:
         symbol = pos.get("symbol", "")
-        should_exit, exit_reason = check_spread_exit(pos, spread_cfg)
+        parsed = parse_occ_symbol(symbol)
+        underlying = parsed["underlying"]
+        expiration = parsed["expiration"]
+        strike = parsed["strike"]
+        qty = int(pos.get("qty", 0))
+        
+        key = f"{underlying}_{expiration}"
+        
+        if key not in spreads:
+            spreads[key] = {"underlying": underlying, "expiration": expiration, "long": None, "short": None}
+        
+        # Long position (qty > 0), Short position (qty < 0)
+        if qty > 0:
+            # If we already have a long, keep the lower strike (ATM for bull call spread)
+            if spreads[key]["long"] is None or strike < parse_occ_symbol(spreads[key]["long"]["symbol"])["strike"]:
+                spreads[key]["long"] = pos
+        elif qty < 0:
+            # If we already have a short, keep the higher strike (OTM for bull call spread)
+            if spreads[key]["short"] is None or strike > parse_occ_symbol(spreads[key]["short"]["symbol"])["strike"]:
+                spreads[key]["short"] = pos
+    
+    # Process each spread
+    already_closed = set()
+    
+    for key, spread in spreads.items():
+        underlying = spread["underlying"]
+        long_pos = spread["long"]
+        short_pos = spread["short"]
+        
+        if underlying in already_closed:
+            continue
+        
+        if not long_pos:
+            # Orphaned short leg - close it
+            if short_pos:
+                print(f"[positions] Orphaned short leg for {underlying}, closing")
+                if not dry_run:
+                    close_option_position(short_pos["symbol"])
+            continue
+        
+        # Parse symbols
+        long_symbol = long_pos.get("symbol", "")
+        short_symbol = short_pos.get("symbol", "") if short_pos else ""
+        
+        # Get entry debit from active_spreads if available
+        entry_debit = 1.0  # Default
+        if active_spreads and underlying in active_spreads:
+            entry_debit = active_spreads[underlying].get("net_debit", 1.0)
+        else:
+            # Estimate from cost basis
+            long_cost = float(long_pos.get("cost_basis", 0)) / 100
+            short_cost = abs(float(short_pos.get("cost_basis", 0))) / 100 if short_pos else 0
+            entry_debit = long_cost - short_cost
+            if entry_debit <= 0:
+                entry_debit = long_cost  # Fallback to just long cost
+        
+        # Calculate spread P&L
+        pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)
+        
+        # Check exit conditions
+        should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg)
         
         if should_exit:
-            current_price = float(pos.get("current_price", 0))
-            pnl, pnl_pct = get_position_pnl(pos)
-            
-            # Extract underlying from OCC symbol
-            underlying = ""
-            for i, c in enumerate(symbol):
-                if c.isdigit():
-                    underlying = symbol[:i]
-                    break
+            # Calculate current spread value for logging
+            long_value = float(long_pos.get("current_price", 0))
+            short_value = float(short_pos.get("current_price", 0)) if short_pos else 0
+            exit_value = long_value - short_value
             
             if dry_run:
                 logger.spread_exit(
                     underlying=underlying,
-                    long_symbol=symbol,
-                    short_symbol="",  # Don't have short symbol in position
-                    exit_value=current_price,
+                    long_symbol=long_symbol,
+                    short_symbol=short_symbol,
+                    exit_value=exit_value,
                     exit_reason=f"[DRY-RUN] {exit_reason}",
                     pnl=pnl,
                     pnl_pct=pnl_pct,
                 )
             else:
-                result = close_option_position(symbol)
+                # Close both legs together
+                if short_symbol:
+                    result = close_spread(long_symbol, short_symbol, qty=1)
+                else:
+                    # Only have long leg, close individually
+                    result = close_option_position(long_symbol)
+                
                 logger.spread_exit(
                     underlying=underlying,
-                    long_symbol=symbol,
-                    short_symbol="",
-                    exit_value=current_price,
+                    long_symbol=long_symbol,
+                    short_symbol=short_symbol,
+                    exit_value=exit_value,
                     exit_reason=exit_reason,
                     pnl=pnl,
                     pnl_pct=pnl_pct,
                 )
+            
+            already_closed.add(underlying)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
