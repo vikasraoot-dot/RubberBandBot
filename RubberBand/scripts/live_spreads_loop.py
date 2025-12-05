@@ -19,7 +19,9 @@ import json
 import os
 import sys
 from datetime import datetime, time as dt_time
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional, Tuple
+
+import pandas as pd
 
 # Ensure repo root is on path
 _THIS = os.path.abspath(os.path.dirname(__file__))
@@ -53,6 +55,7 @@ ET = ZoneInfo("US/Eastern")
 # ──────────────────────────────────────────────────────────────────────────────
 DEFAULT_SPREAD_CONFIG = {
     "dte": 3,                      # Days to expiration (3 = 90% WR in backtest)
+    "min_dte": 3,                   # Minimum DTE allowed (skip if DTE fallback goes below)
     "spread_width_pct": 2.0,       # OTM strike = ATM * (1 + this%)
     "max_debit": 1.00,             # Max $ per share for the spread debit ($100/contract)
     "contracts": 1,                # Contracts per signal
@@ -109,13 +112,59 @@ def _in_entry_window(now_et: datetime, windows: list) -> bool:
 # ──────────────────────────────────────────────────────────────────────────────
 # Signal Detection
 # ──────────────────────────────────────────────────────────────────────────────
-def get_long_signals(symbols: List[str], cfg: dict, logger: OptionsTradeLogger) -> List[Dict[str, Any]]:
-    """Scan for long signals using existing RubberBandBot strategy."""
+def get_daily_sma(symbol: str, period: int = 120, feed: str = "iex") -> Optional[float]:
+    """Fetch daily data and calculate SMA for trend filter."""
+    try:
+        daily_map, _ = fetch_latest_bars(
+            symbols=[symbol],
+            timeframe="1Day",
+            history_days=int(period * 1.5),  # Extra history for SMA
+            feed=feed,
+            verbose=False,
+        )
+        df = daily_map.get(symbol)
+        if df is None or df.empty or len(df) < period:
+            return None
+        
+        # Calculate SMA
+        sma = df["close"].rolling(window=period).mean().iloc[-1]
+        return float(sma) if not pd.isna(sma) else None
+    except Exception:
+        return None
+
+
+def get_long_signals(
+    symbols: List[str],
+    cfg: dict,
+    logger: OptionsTradeLogger,
+    min_dte: int = 2,
+) -> List[Dict[str, Any]]:
+    """
+    Scan for long signals using existing RubberBandBot strategy.
+    
+    Enhanced with:
+    - SMA trend filter (skip if close < SMA_120)
+    - Min DTE parameter for caller to enforce
+    
+    Args:
+        symbols: List of symbols to scan
+        cfg: Full config dict
+        logger: Options trade logger
+        min_dte: Minimum DTE required (for logging only, actual enforcement in try_spread_entry)
+    
+    Returns:
+        List of signal dicts
+    """
     signals = []
     
     timeframe = "15Min"
     history_days = 10
     feed = cfg.get("feed", "iex")
+    
+    # Get trend filter settings
+    trend_cfg = cfg.get("trend_filter", {})
+    trend_enabled = trend_cfg.get("enabled", True)  # Default enabled for options
+    sma_period = int(trend_cfg.get("sma_period", 120))  # Use 120 for faster calculation
     
     try:
         bars_map, _ = fetch_latest_bars(
@@ -137,11 +186,23 @@ def get_long_signals(symbols: List[str], cfg: dict, logger: OptionsTradeLogger) 
         try:
             df = attach_verifiers(df, cfg)
             last = df.iloc[-1]
+            close = float(last["close"])
+            
+            # Check trend filter FIRST (before checking signal)
+            if trend_enabled:
+                daily_sma = get_daily_sma(sym, sma_period, feed)
+                if daily_sma is not None and close < daily_sma:
+                    # Skip - in bear trend (below SMA)
+                    logger.spread_skip(
+                        underlying=sym,
+                        skip_reason=f"Bear_trend(close={close:.2f}<SMA{sma_period}={daily_sma:.2f})"
+                    )
+                    continue
             
             if bool(last.get("long_signal", False)):
                 rsi = float(last.get("rsi", 0))
                 atr = float(last.get("atr", 0))
-                entry_price = float(last["close"])
+                entry_price = close
                 
                 # Build entry reason from signal components
                 entry_reasons = []
@@ -188,16 +249,34 @@ def try_spread_entry(
     """Attempt to enter a bull call spread based on a stock signal."""
     sym = signal["symbol"]
     dte = spread_cfg.get("dte", 3)
+    min_dte = spread_cfg.get("min_dte", 2)  # Minimum DTE allowed
     spread_width_pct = spread_cfg.get("spread_width_pct", 2.0)
     max_debit = spread_cfg.get("max_debit", 1.00)
     contracts = spread_cfg.get("contracts", 1)
     entry_reason = signal.get("entry_reason", "RubberBand_signal")
     
-    # Select spread contracts
+    # Select spread contracts (may fallback to different DTE)
     spread = select_spread_contracts(sym, dte=dte, spread_width_pct=spread_width_pct)
     if not spread:
         logger.spread_skip(underlying=sym, skip_reason="No_contracts_available")
         return False
+    
+    # Check actual DTE vs minimum required
+    actual_expiration = spread.get("expiration", "")
+    if actual_expiration:
+        from datetime import datetime as dt_class
+        try:
+            exp_date = dt_class.strptime(actual_expiration, "%Y-%m-%d").date()
+            today = _now_et().date()
+            actual_dte = (exp_date - today).days
+            if actual_dte < min_dte:
+                logger.spread_skip(
+                    underlying=sym,
+                    skip_reason=f"DTE_too_low({actual_dte}<min_dte={min_dte})"
+                )
+                return False
+        except ValueError:
+            pass  # If we can't parse date, continue anyway
     
     long_contract = spread["long"]
     short_contract = spread["short"]

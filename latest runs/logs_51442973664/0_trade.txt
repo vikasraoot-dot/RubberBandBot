@@ -1,0 +1,476 @@
+﻿2025-12-04T14:42:52.0354162Z Current runner version: '2.329.0'
+2025-12-04T14:42:52.0371370Z Runner name: 'VHOMEPC'
+2025-12-04T14:42:52.0372689Z Runner group name: 'Default'
+2025-12-04T14:42:52.0374163Z Machine name: 'VHOMEPC'
+2025-12-04T14:42:52.0380886Z ##[group]GITHUB_TOKEN Permissions
+2025-12-04T14:42:52.0385679Z Contents: read
+2025-12-04T14:42:52.0386555Z Metadata: read
+2025-12-04T14:42:52.0387387Z Packages: read
+2025-12-04T14:42:52.0388252Z ##[endgroup]
+2025-12-04T14:42:52.0392638Z Secret source: Actions
+2025-12-04T14:42:52.0393838Z Prepare workflow directory
+2025-12-04T14:42:52.1191376Z Prepare all required actions
+2025-12-04T14:42:52.1272072Z Getting action download info
+2025-12-04T14:42:52.7449091Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-04T14:42:54.2874565Z Complete job name: trade
+2025-12-04T14:42:54.4736762Z ##[group]Run actions/checkout@v4
+2025-12-04T14:42:54.4739570Z with:
+2025-12-04T14:42:54.4740708Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-04T14:42:54.4742683Z   token: ***
+2025-12-04T14:42:54.4743291Z   ssh-strict: true
+2025-12-04T14:42:54.4743737Z   ssh-user: git
+2025-12-04T14:42:54.4745646Z   persist-credentials: true
+2025-12-04T14:42:54.4746676Z   clean: true
+2025-12-04T14:42:54.4747691Z   sparse-checkout-cone-mode: true
+2025-12-04T14:42:54.4748881Z   fetch-depth: 1
+2025-12-04T14:42:54.4749738Z   fetch-tags: false
+2025-12-04T14:42:54.4750584Z   show-progress: true
+2025-12-04T14:42:54.4751576Z   lfs: false
+2025-12-04T14:42:54.4752481Z   submodules: false
+2025-12-04T14:42:54.4753521Z   set-safe-directory: true
+2025-12-04T14:42:54.4755529Z ##[endgroup]
+2025-12-04T14:42:55.1448951Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-04T14:42:55.1452888Z ##[group]Getting Git version info
+2025-12-04T14:42:55.1455549Z Working directory is 'C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot'
+2025-12-04T14:42:55.1648471Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-04T14:42:55.2610996Z git version 2.52.0.windows.1
+2025-12-04T14:42:55.2731608Z ##[endgroup]
+2025-12-04T14:42:55.2767803Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\4aef1d29-e447-4515-8e22-aca16ed3a2f3' before making global git config changes
+2025-12-04T14:42:55.2771168Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T14:42:55.2774759Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-04T14:42:55.3547267Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-04T14:42:55.4194854Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-04T14:42:55.4337502Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-04T14:42:55.4347729Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-04T14:42:55.5137732Z refs/heads/main
+2025-12-04T14:42:55.5198518Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-04T14:42:55.6212233Z HEAD is now at 989455a Make options workflow loop continuously until 4PM with 15min scan interval
+2025-12-04T14:42:55.8164195Z ##[endgroup]
+2025-12-04T14:42:55.8166785Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-04T14:42:57.5272823Z ##[group]Cleaning the repository
+2025-12-04T14:42:57.5280494Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-04T14:42:57.6087833Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-04T14:42:57.7209475Z HEAD is now at 989455a Make options workflow loop continuously until 4PM with 15min scan interval
+2025-12-04T14:42:57.7340978Z ##[endgroup]
+2025-12-04T14:42:57.7345648Z ##[group]Disabling automatic garbage collection
+2025-12-04T14:42:57.7352512Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-04T14:42:57.8136044Z ##[endgroup]
+2025-12-04T14:42:57.8136638Z ##[group]Setting up auth
+2025-12-04T14:42:57.8137197Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T14:42:57.8942453Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-04T14:42:59.2459975Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T14:42:59.3163761Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-04T14:43:00.5609662Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T14:43:00.6331636Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-04T14:43:01.7936212Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-04T14:43:01.8741613Z ##[endgroup]
+2025-12-04T14:43:01.8743396Z ##[group]Fetching the repository
+2025-12-04T14:43:01.8760539Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +989455a3a99daa37040cf5c6d336b426e1577983:refs/remotes/origin/main
+2025-12-04T14:43:02.6606507Z ##[endgroup]
+2025-12-04T14:43:02.6607524Z ##[group]Determining the checkout info
+2025-12-04T14:43:02.6607922Z ##[endgroup]
+2025-12-04T14:43:02.6617340Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-04T14:43:02.7536239Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-04T14:43:02.8329185Z ##[group]Checking out the ref
+2025-12-04T14:43:02.8336949Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-04T14:43:02.9720464Z branch 'main' set up to track 'origin/main'.
+2025-12-04T14:43:02.9720838Z Your branch is up to date with 'origin/main'.
+2025-12-04T14:43:02.9735842Z Switched to and reset branch 'main'
+2025-12-04T14:43:02.9878817Z ##[endgroup]
+2025-12-04T14:43:03.1544615Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-04T14:43:03.3712664Z 989455a3a99daa37040cf5c6d336b426e1577983
+2025-12-04T14:43:03.4847735Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-04T14:43:03.4848330Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-04T14:43:03.4848669Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-04T14:43:03.4900324Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T14:43:03.4901201Z ##[endgroup]
+2025-12-04T14:43:04.2507740Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-04T14:43:04.2508479Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-04T14:43:04.2508883Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-04T14:43:04.2559076Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T14:43:04.2560052Z env:
+2025-12-04T14:43:04.2560586Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T14:43:04.2561248Z ##[endgroup]
+2025-12-04T14:43:06.4351197Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-04T14:43:07.2610197Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-04T14:43:09.4861987Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-04T14:43:10.2296469Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-04T14:43:10.2301741Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-04T14:43:10.2315225Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-04T14:43:10.2328905Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-04T14:43:10.2337897Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-04T14:43:10.2417616Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-04T14:43:10.2431308Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-04T14:43:10.2689391Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-04T14:43:10.2704837Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-04T14:43:10.2718629Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-04T14:43:10.2729360Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-04T14:43:10.2938340Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-04T14:43:10.7320479Z ##[group]Run chcp 65001 > $null
+2025-12-04T14:43:10.7321149Z [36;1mchcp 65001 > $null[0m
+2025-12-04T14:43:10.7321788Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-04T14:43:10.7322881Z [36;1mfunction Get-Clock {[0m
+2025-12-04T14:43:10.7323763Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-04T14:43:10.7324779Z [36;1m}[0m
+2025-12-04T14:43:10.7325249Z [36;1m$maxWaitMin = 20[0m
+2025-12-04T14:43:10.7325728Z [36;1m$start = Get-Date[0m
+2025-12-04T14:43:10.7326180Z [36;1mwhile ($true) {[0m
+2025-12-04T14:43:10.7326599Z [36;1m  try {[0m
+2025-12-04T14:43:10.7326973Z [36;1m    $clk = Get-Clock[0m
+2025-12-04T14:43:10.7327715Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-04T14:43:10.7328867Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-04T14:43:10.7329696Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-04T14:43:10.7330391Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-04T14:43:10.7331083Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-04T14:43:10.7332058Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-04T14:43:10.7332885Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-04T14:43:10.7334604Z [36;1m    } else {[0m
+2025-12-04T14:43:10.7335156Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-04T14:43:10.7335790Z [36;1m      break[0m
+2025-12-04T14:43:10.7336162Z [36;1m    }[0m
+2025-12-04T14:43:10.7336748Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-04T14:43:10.7337649Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-04T14:43:10.7338618Z [36;1m      break[0m
+2025-12-04T14:43:10.7339017Z [36;1m    }[0m
+2025-12-04T14:43:10.7339380Z [36;1m  } catch {[0m
+2025-12-04T14:43:10.7340041Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-04T14:43:10.7341034Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-04T14:43:10.7341588Z [36;1m  }[0m
+2025-12-04T14:43:10.7341932Z [36;1m}[0m
+2025-12-04T14:43:10.7415626Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T14:43:10.7416503Z env:
+2025-12-04T14:43:10.7416957Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T14:43:10.7417589Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-04T14:43:10.7419139Z   APCA_API_KEY_ID: ***
+2025-12-04T14:43:10.7419799Z   APCA_API_SECRET_KEY: ***
+2025-12-04T14:43:10.7420322Z ##[endgroup]
+2025-12-04T14:43:12.0003990Z Market is open â†’ proceed.
+2025-12-04T14:43:12.1258259Z ##[group]Run chcp 65001 > $null
+2025-12-04T14:43:12.1258877Z [36;1mchcp 65001 > $null[0m
+2025-12-04T14:43:12.1259148Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-04T14:43:12.1259552Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py[0m
+2025-12-04T14:43:12.1318419Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-04T14:43:12.1319361Z env:
+2025-12-04T14:43:12.1319866Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-04T14:43:12.1320627Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-04T14:43:12.1321719Z   APCA_API_KEY_ID: ***
+2025-12-04T14:43:12.1322419Z   APCA_API_SECRET_KEY: ***
+2025-12-04T14:43:12.1322961Z   ALPACA_KEY: ***
+2025-12-04T14:43:12.1323544Z   ALPACA_SECRET: ***
+2025-12-04T14:43:12.1347100Z   DRY_RUN: 0
+2025-12-04T14:43:12.1347715Z   FORCE_RUN: 0
+2025-12-04T14:43:12.1348130Z   PYTHONUNBUFFERED: 1
+2025-12-04T14:43:12.1348595Z ##[endgroup]
+2025-12-04T14:43:12.7578277Z [loop] starting RubberBand AM loop (15m strategy; check every 5m)
+2025-12-04T14:43:12.7579290Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T14:43:15.7624602Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T14:43:15.759090+00:00"}
+2025-12-04T14:43:15.7627023Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T14:43:15.759090+00:00"}
+2025-12-04T14:43:15.9765160Z [loop] live_paper_loop exit code=0
+2025-12-04T14:43:15.9766145Z [loop] sleep 104s → next 5m boundary
+2025-12-04T14:44:59.9771685Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T14:45:02.3558880Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T14:45:02.353769+00:00"}
+2025-12-04T14:45:02.7005184Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T14:45:02.353769+00:00"}
+2025-12-04T14:45:02.7009589Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T14:45:02.353769+00:00", "end": "2025-12-04T14:45:02.353769+00:00", "when": "2025-12-04T14:45:02.353769+00:00"}
+2025-12-04T14:45:02.7010215Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T14:45:02Z"}
+2025-12-04T14:45:02.7011082Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T14:45:02Z","end":"2025-12-04T14:45:02Z","when":"2025-12-04T14:45:02Z"}
+2025-12-04T14:45:05.6755748Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:45:08.0772460Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:45:11.0075294Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T14:45:11.6938617Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T14:45:11.7020889Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T14:45:11Z"}
+2025-12-04T14:45:16.4958661Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T14:45:02.353769+00:00"}
+2025-12-04T14:45:17.1378220Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_144502","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-04 14:30:00+00:00","last_close":224.62,"trend":"BULL","entry_reason":"RSI_oversold(22.5) + Lower_KC_touch + Bull_trend","type":"SIGNAL","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:17.1396462Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_144502","qty":2,"side":"buy","entry_price":224.62,"stop_loss_price":220.14,"take_profit_price":227.31,"atr":1.7908,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(22.5) + Lower_KC_touch + Bull_trend","rsi":22.498851059611965,"type":"ENTRY_SUBMIT","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:17.4785906Z [order] BRACKET submitted for MU: {"id": "e2830a22-5a30-4457-9484-e98a856b7728", "client_order_id": "d474884d-90ab-4c72-97e9-d66325630728", "created_at": "2025-12-04T14:45:17.111796412Z", "updated_at": "2025-12-04T14:45:17.112684372Z", "submitted_at": "2025-12-04T14:45:17.111796412Z", "filled_at": null, "expired_at": null, "canceled
+2025-12-04T14:45:17.4799349Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_144502","order_id":"e2830a22-5a30-4457-9484-e98a856b7728","client_order_id":"d474884d-90ab-4c72-97e9-d66325630728","broker_resp":{"id":"e2830a22-5a30-4457-9484-e98a856b7728","client_order_id":"d474884d-90ab-4c72-97e9-d66325630728","created_at":"2025-12-04T14:45:17.111796412Z","updated_at":"2025-12-04T14:45:17.112684372Z","submitted_at":"2025-12-04T14:45:17.111796412Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"market","type":"market","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":null,"stop_price":null,"status":"pending_new","extended_hours":false,"legs":[{"id":"7da25b7c-55ee-47f7-b25c-c51ae66a3698","client_order_id":"1b3770c9-2d2e-453a-9b22-ed92548f9257","created_at":"2025-12-04T14:45:17.111796412Z","updated_at":"2025-12-04T14:45:17.112639932Z","submitted_at":"2025-12-04T14:45:17.111796412Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"227.31","stop_price":null,"status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},{"id":"b7487ebb-7071-4e5a-80ff-2f761cb33550","client_order_id":"62ad1b6e-9811-4a42-aa8e-e81f5419c1bd","created_at":"2025-12-04T14:45:17.111796412Z","updated_at":"2025-12-04T14:45:17.112659932Z","submitted_at":"2025-12-04T14:45:17.111796412Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"220.14","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:17.6654874Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_144502","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-04 14:30:00+00:00","last_close":275.83,"trend":"BULL","entry_reason":"RSI_oversold(19.4) + Lower_KC_touch + Strong_bull_trend","type":"SIGNAL","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:17.6658259Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_144502","qty":7,"side":"buy","entry_price":275.83,"stop_loss_price":273.74,"take_profit_price":277.08,"atr":0.8351,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(19.4) + Lower_KC_touch + Strong_bull_trend","rsi":19.360651407396702,"type":"ENTRY_SUBMIT","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:17.9671546Z [order] BRACKET submitted for HLT: {"id": "7e2ec4d8-b318-49bd-9aa2-eaff746475d1", "client_order_id": "7bc563fc-9ff7-483a-b1ca-fcd622b710ad", "created_at": "2025-12-04T14:45:17.603993962Z", "updated_at": "2025-12-04T14:45:17.605647852Z", "submitted_at": "2025-12-04T14:45:17.603993962Z", "filled_at": null, "expired_at": null, "canceled
+2025-12-04T14:45:17.9701031Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_144502","order_id":"7e2ec4d8-b318-49bd-9aa2-eaff746475d1","client_order_id":"7bc563fc-9ff7-483a-b1ca-fcd622b710ad","broker_resp":{"id":"7e2ec4d8-b318-49bd-9aa2-eaff746475d1","client_order_id":"7bc563fc-9ff7-483a-b1ca-fcd622b710ad","created_at":"2025-12-04T14:45:17.603993962Z","updated_at":"2025-12-04T14:45:17.605647852Z","submitted_at":"2025-12-04T14:45:17.603993962Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"072e0811-8f84-4acc-bc3b-95761ea08dd6","symbol":"HLT","asset_class":"us_equity","notional":null,"qty":"7","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"market","type":"market","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":null,"stop_price":null,"status":"pending_new","extended_hours":false,"legs":[{"id":"70d934aa-9dee-421e-8756-f74adfe7e437","client_order_id":"274b7709-5bdb-49a7-b499-12727bdd4264","created_at":"2025-12-04T14:45:17.603993962Z","updated_at":"2025-12-04T14:45:17.605580782Z","submitted_at":"2025-12-04T14:45:17.603993962Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"072e0811-8f84-4acc-bc3b-95761ea08dd6","symbol":"HLT","asset_class":"us_equity","notional":null,"qty":"7","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"277.08","stop_price":null,"status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},{"id":"38a06a71-c603-45ac-9328-75a397555148","client_order_id":"1651930d-2fed-47aa-ab64-1549e636c2e8","created_at":"2025-12-04T14:45:17.603993962Z","updated_at":"2025-12-04T14:45:17.605611042Z","submitted_at":"2025-12-04T14:45:17.603993962Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"072e0811-8f84-4acc-bc3b-95761ea08dd6","symbol":"HLT","asset_class":"us_equity","notional":null,"qty":"7","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"273.74","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-04T14:45:17Z","ts_et":"2025-12-04 09:45:17 ET"}
+2025-12-04T14:45:18.4913885Z 
+2025-12-04T14:45:18.4918518Z === Session Summary ===
+2025-12-04T14:45:18.7819935Z ------------------------------------------------------------------------
+2025-12-04T14:45:18.7822128Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T14:45:18.7822991Z ------------------------------------------------------------------------
+2025-12-04T14:45:18.7823750Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T14:45:18.7824424Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T14:45:18.7825087Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T14:45:18.7825802Z ------------------------------------------------------------------------
+2025-12-04T14:45:18.7826515Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,339.66
+2025-12-04T14:45:18.7827239Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T14:45:18.7827926Z === End Summary ===
+2025-12-04T14:45:18.7831674Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":2,"closed_trades":0,"open_trades":2,"total_pnl":0,"total_volume":4339.66,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"symbol":"MU","side":"buy","qty":2,"entry_price":224.62,"exit_price":null,"entry_reason":"RSI_oversold(22.5) + Lower_KC_touch + Bull_trend","exit_reason":null,"pnl":null},{"symbol":"HLT","side":"buy","qty":7,"entry_price":275.83,"exit_price":null,"entry_reason":"RSI_oversold(19.4) + Lower_KC_touch + Strong_bull_trend","exit_reason":null,"pnl":null}],"ts":"2025-12-04T14:45:18Z","ts_et":"2025-12-04 09:45:18 ET"}
+2025-12-04T14:45:18.9074321Z [loop] live_paper_loop exit code=0
+2025-12-04T14:45:18.9075366Z [loop] sleep 281s → next 5m boundary
+2025-12-04T14:49:59.9088829Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T14:50:03.2125376Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T14:50:03.209566+00:00"}
+2025-12-04T14:50:03.5355678Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T14:50:03.209566+00:00"}
+2025-12-04T14:50:03.5356570Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T14:50:03.209566+00:00", "end": "2025-12-04T14:50:03.209566+00:00", "when": "2025-12-04T14:50:03.209566+00:00"}
+2025-12-04T14:50:03.5357524Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T14:50:03Z"}
+2025-12-04T14:50:03.5359146Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T14:50:03Z","end":"2025-12-04T14:50:03Z","when":"2025-12-04T14:50:03Z"}
+2025-12-04T14:50:06.2687968Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:50:08.5487131Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:50:11.3772608Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T14:50:11.9338182Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T14:50:11.9419482Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T14:50:11Z"}
+2025-12-04T14:50:15.7655988Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T14:50:03.209566+00:00"}
+2025-12-04T14:50:16.4099448Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_145003","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T14:50:16Z","ts_et":"2025-12-04 09:50:16 ET"}
+2025-12-04T14:50:16.6994441Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_145003","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T14:50:16Z","ts_et":"2025-12-04 09:50:16 ET"}
+2025-12-04T14:50:17.1630217Z 
+2025-12-04T14:50:17.1630789Z === Session Summary ===
+2025-12-04T14:50:17.4709501Z ------------------------------------------------------------------------
+2025-12-04T14:50:17.4709984Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T14:50:17.4738126Z ------------------------------------------------------------------------
+2025-12-04T14:50:17.4738578Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T14:50:17.4739930Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T14:50:17.4742214Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T14:50:17.4743217Z ------------------------------------------------------------------------
+2025-12-04T14:50:17.4743917Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,339.66
+2025-12-04T14:50:17.4744911Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T14:50:17.4745852Z === End Summary ===
+2025-12-04T14:50:17.4747850Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4339.66,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T14:50:17Z","ts_et":"2025-12-04 09:50:17 ET"}
+2025-12-04T14:50:17.5987441Z [loop] live_paper_loop exit code=0
+2025-12-04T14:50:17.5989597Z [loop] sleep 282s → next 5m boundary
+2025-12-04T14:54:59.5999305Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T14:55:01.4845538Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T14:55:01.482223+00:00"}
+2025-12-04T14:55:01.9108470Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T14:55:01.482223+00:00"}
+2025-12-04T14:55:01.9109385Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T14:55:01.482223+00:00", "end": "2025-12-04T14:55:01.482223+00:00", "when": "2025-12-04T14:55:01.482223+00:00"}
+2025-12-04T14:55:01.9110405Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T14:55:01Z"}
+2025-12-04T14:55:01.9111942Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T14:55:01Z","end":"2025-12-04T14:55:01Z","when":"2025-12-04T14:55:01Z"}
+2025-12-04T14:55:04.6967757Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:55:07.3257890Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T14:55:09.8964796Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T14:55:10.4172507Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T14:55:10.4232643Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T14:55:10Z"}
+2025-12-04T14:55:13.8961753Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T14:55:01.482223+00:00"}
+2025-12-04T14:55:14.4522679Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T14:55:14Z","ts_et":"2025-12-04 09:55:14 ET"}
+2025-12-04T14:55:14.7985497Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T14:55:14Z","ts_et":"2025-12-04 09:55:14 ET"}
+2025-12-04T14:55:15.2100842Z 
+2025-12-04T14:55:15.2101758Z === Session Summary ===
+2025-12-04T14:55:15.5494254Z ------------------------------------------------------------------------
+2025-12-04T14:55:15.5498135Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T14:55:15.5499543Z ------------------------------------------------------------------------
+2025-12-04T14:55:15.5500520Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T14:55:15.5502612Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T14:55:15.5504806Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T14:55:15.5519907Z ------------------------------------------------------------------------
+2025-12-04T14:55:15.5520313Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,339.66
+2025-12-04T14:55:15.5520804Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T14:55:15.5521118Z === End Summary ===
+2025-12-04T14:55:15.5522525Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4339.66,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T14:55:15Z","ts_et":"2025-12-04 09:55:15 ET"}
+2025-12-04T14:55:15.6900526Z [loop] live_paper_loop exit code=0
+2025-12-04T14:55:15.6902575Z [loop] sleep 284s → next 5m boundary
+2025-12-04T14:59:59.6910678Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:00:01.5138021Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:00:01.512017+00:00"}
+2025-12-04T15:00:01.8620305Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:00:01.512017+00:00"}
+2025-12-04T15:00:05.8551663Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:00:01.512017+00:00", "end": "2025-12-04T15:00:01.512017+00:00", "when": "2025-12-04T15:00:01.512017+00:00"}
+2025-12-04T15:00:05.8555211Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:00:01Z"}
+2025-12-04T15:00:05.8556334Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:00:01Z","end":"2025-12-04T15:00:01Z","when":"2025-12-04T15:00:01Z"}
+2025-12-04T15:00:05.8557718Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:00:09.2924844Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:00:13.7334967Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:00:14.5021928Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:00:14.5087036Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:00:14Z"}
+2025-12-04T15:00:19.7853423Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:00:01.512017+00:00"}
+2025-12-04T15:00:20.1495188Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_150001","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-04 14:45:00+00:00","last_close":228.91,"trend":"BULL","entry_reason":"RSI_oversold(24.3) + Lower_KC_touch + Bull_trend","type":"SIGNAL","ts":"2025-12-04T15:00:20Z","ts_et":"2025-12-04 10:00:20 ET"}
+2025-12-04T15:00:20.1501210Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_150001","qty":2,"side":"buy","entry_price":228.91,"stop_loss_price":226.83,"take_profit_price":230.16,"atr":0.8333,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(24.3) + Lower_KC_touch + Bull_trend","rsi":24.29814627714144,"type":"ENTRY_SUBMIT","ts":"2025-12-04T15:00:20Z","ts_et":"2025-12-04 10:00:20 ET"}
+2025-12-04T15:00:20.4306141Z [order] BRACKET submitted for AMZN: {"id": "6f8ae69c-04a2-4630-a187-8e7ce355f3d6", "client_order_id": "d94e5373-4be4-406b-903a-6fe0a6a25ecc", "created_at": "2025-12-04T15:00:20.064101182Z", "updated_at": "2025-12-04T15:00:20.065464592Z", "submitted_at": "2025-12-04T15:00:20.064101182Z", "filled_at": null, "expired_at": null, "canceled
+2025-12-04T15:00:20.4332722Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_150001","order_id":"6f8ae69c-04a2-4630-a187-8e7ce355f3d6","client_order_id":"d94e5373-4be4-406b-903a-6fe0a6a25ecc","broker_resp":{"id":"6f8ae69c-04a2-4630-a187-8e7ce355f3d6","client_order_id":"d94e5373-4be4-406b-903a-6fe0a6a25ecc","created_at":"2025-12-04T15:00:20.064101182Z","updated_at":"2025-12-04T15:00:20.065464592Z","submitted_at":"2025-12-04T15:00:20.064101182Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"f801f835-bfe6-4a9d-a6b1-ccbb84bfd75f","symbol":"AMZN","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"market","type":"market","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":null,"stop_price":null,"status":"pending_new","extended_hours":false,"legs":[{"id":"ceb09ac9-8d7d-42b5-bca2-b58e25c8c4b7","client_order_id":"32c19d08-6095-4fa9-8852-f516d8076717","created_at":"2025-12-04T15:00:20.064101182Z","updated_at":"2025-12-04T15:00:20.065412692Z","submitted_at":"2025-12-04T15:00:20.064101182Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"f801f835-bfe6-4a9d-a6b1-ccbb84bfd75f","symbol":"AMZN","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"230.16","stop_price":null,"status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},{"id":"a1c77a52-90e7-4aba-b24e-c11b2cd05c3d","client_order_id":"3511dc96-ffec-47c5-b602-2f7d28a2cca8","created_at":"2025-12-04T15:00:20.064101182Z","updated_at":"2025-12-04T15:00:20.065435532Z","submitted_at":"2025-12-04T15:00:20.064101182Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"f801f835-bfe6-4a9d-a6b1-ccbb84bfd75f","symbol":"AMZN","asset_class":"us_equity","notional":null,"qty":"2","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"226.83","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-04T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-04T15:00:20Z","ts_et":"2025-12-04 10:00:20 ET"}
+2025-12-04T15:00:20.6713479Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:00:20Z","ts_et":"2025-12-04 10:00:20 ET"}
+2025-12-04T15:00:20.9591560Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:00:20Z","ts_et":"2025-12-04 10:00:20 ET"}
+2025-12-04T15:00:21.3413372Z 
+2025-12-04T15:00:21.3415314Z === Session Summary ===
+2025-12-04T15:00:21.6451176Z ------------------------------------------------------------------------
+2025-12-04T15:00:21.6452084Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:00:21.6453286Z ------------------------------------------------------------------------
+2025-12-04T15:00:21.6455037Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:00:21.6455991Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:00:21.6456338Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T15:00:21.6476201Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:00:21.6476638Z ------------------------------------------------------------------------
+2025-12-04T15:00:21.6476993Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,797.52
+2025-12-04T15:00:21.6482189Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:00:21.6482859Z === End Summary ===
+2025-12-04T15:00:21.6484329Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":1,"closed_trades":0,"open_trades":1,"total_pnl":0,"total_volume":4797.52,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"symbol":"AMZN","side":"buy","qty":2,"entry_price":228.91,"exit_price":null,"entry_reason":"RSI_oversold(24.3) + Lower_KC_touch + Bull_trend","exit_reason":null,"pnl":null}],"ts":"2025-12-04T15:00:21Z","ts_et":"2025-12-04 10:00:21 ET"}
+2025-12-04T15:00:21.8125172Z [loop] live_paper_loop exit code=0
+2025-12-04T15:00:21.8126031Z [loop] sleep 278s → next 5m boundary
+2025-12-04T15:04:59.8138830Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:05:01.5923743Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:05:01.590594+00:00"}
+2025-12-04T15:05:01.9448826Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:05:01.590594+00:00"}
+2025-12-04T15:05:01.9451448Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:05:01.590594+00:00", "end": "2025-12-04T15:05:01.590594+00:00", "when": "2025-12-04T15:05:01.590594+00:00"}
+2025-12-04T15:05:01.9454072Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:05:01Z"}
+2025-12-04T15:05:01.9456388Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:05:01Z","end":"2025-12-04T15:05:01Z","when":"2025-12-04T15:05:01Z"}
+2025-12-04T15:05:04.7658292Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:05:06.9752558Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:05:09.5453736Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:05:10.0376228Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:05:10.0441282Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:05:10Z"}
+2025-12-04T15:05:13.3164754Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:05:01.590594+00:00"}
+2025-12-04T15:05:13.6529882Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_150501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:05:13Z","ts_et":"2025-12-04 10:05:13 ET"}
+2025-12-04T15:05:13.8430612Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_150501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:05:13Z","ts_et":"2025-12-04 10:05:13 ET"}
+2025-12-04T15:05:14.1162372Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_150501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:05:14Z","ts_et":"2025-12-04 10:05:14 ET"}
+2025-12-04T15:05:14.4634749Z 
+2025-12-04T15:05:14.4636667Z === Session Summary ===
+2025-12-04T15:05:14.7677173Z ------------------------------------------------------------------------
+2025-12-04T15:05:14.7677725Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:05:14.7678179Z ------------------------------------------------------------------------
+2025-12-04T15:05:14.7678545Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:05:14.7678926Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:05:14.7679336Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T15:05:14.7679665Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:05:14.7680049Z ------------------------------------------------------------------------
+2025-12-04T15:05:14.7680430Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,797.52
+2025-12-04T15:05:14.7680809Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:05:14.7681112Z === End Summary ===
+2025-12-04T15:05:14.7681890Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4797.52,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T15:05:14Z","ts_et":"2025-12-04 10:05:14 ET"}
+2025-12-04T15:05:14.8776721Z [loop] live_paper_loop exit code=0
+2025-12-04T15:05:14.8777662Z [loop] sleep 285s → next 5m boundary
+2025-12-04T15:09:59.8785362Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:10:01.6470775Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:10:01.645691+00:00"}
+2025-12-04T15:10:01.9797874Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:10:01.645691+00:00"}
+2025-12-04T15:10:01.9799433Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:10:01.645691+00:00", "end": "2025-12-04T15:10:01.645691+00:00", "when": "2025-12-04T15:10:01.645691+00:00"}
+2025-12-04T15:10:01.9800946Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:10:01Z"}
+2025-12-04T15:10:01.9802050Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:10:01Z","end":"2025-12-04T15:10:01Z","when":"2025-12-04T15:10:01Z"}
+2025-12-04T15:10:04.9164342Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:10:07.2772256Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:10:09.7938329Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:10:10.3709429Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:10:10.3787412Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:10:10Z"}
+2025-12-04T15:10:13.6241943Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:10:01.645691+00:00"}
+2025-12-04T15:10:13.9808644Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_151001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:10:13Z","ts_et":"2025-12-04 10:10:13 ET"}
+2025-12-04T15:10:14.1644725Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_151001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:10:14Z","ts_et":"2025-12-04 10:10:14 ET"}
+2025-12-04T15:10:14.4507287Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_151001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:10:14Z","ts_et":"2025-12-04 10:10:14 ET"}
+2025-12-04T15:10:14.8228695Z 
+2025-12-04T15:10:14.8229242Z === Session Summary ===
+2025-12-04T15:10:15.1695698Z ------------------------------------------------------------------------
+2025-12-04T15:10:15.1783138Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:10:15.1783715Z ------------------------------------------------------------------------
+2025-12-04T15:10:15.1785890Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:10:15.1786484Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:10:15.1787617Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T15:10:15.1788174Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:10:15.1788641Z ------------------------------------------------------------------------
+2025-12-04T15:10:15.1789082Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,797.52
+2025-12-04T15:10:15.1789585Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:10:15.1790038Z === End Summary ===
+2025-12-04T15:10:15.1792137Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4797.52,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T15:10:15Z","ts_et":"2025-12-04 10:10:15 ET"}
+2025-12-04T15:10:15.3159298Z [loop] live_paper_loop exit code=0
+2025-12-04T15:10:15.3160545Z [loop] sleep 284s → next 5m boundary
+2025-12-04T15:14:59.3171701Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:15:01.1468877Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:15:01.144988+00:00"}
+2025-12-04T15:15:01.4777767Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:15:01.144988+00:00"}
+2025-12-04T15:15:01.4778696Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:15:01.144988+00:00", "end": "2025-12-04T15:15:01.144988+00:00", "when": "2025-12-04T15:15:01.144988+00:00"}
+2025-12-04T15:15:01.4780844Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:15:01Z"}
+2025-12-04T15:15:01.4781534Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:15:01Z","end":"2025-12-04T15:15:01Z","when":"2025-12-04T15:15:01Z"}
+2025-12-04T15:15:04.5666966Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:15:07.0829824Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:15:09.9103767Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:15:10.5069343Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:15:10.5136962Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:15:10Z"}
+2025-12-04T15:15:14.9393045Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:15:01.144988+00:00"}
+2025-12-04T15:15:15.2700419Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_151501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:15:15Z","ts_et":"2025-12-04 10:15:15 ET"}
+2025-12-04T15:15:15.4368127Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_151501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:15:15Z","ts_et":"2025-12-04 10:15:15 ET"}
+2025-12-04T15:15:15.8130291Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_151501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:15:15Z","ts_et":"2025-12-04 10:15:15 ET"}
+2025-12-04T15:15:16.1970902Z 
+2025-12-04T15:15:16.1974441Z === Session Summary ===
+2025-12-04T15:15:16.5269623Z ------------------------------------------------------------------------
+2025-12-04T15:15:16.5270112Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:15:16.5270483Z ------------------------------------------------------------------------
+2025-12-04T15:15:16.5270933Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:15:16.5271266Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:15:16.5271578Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T15:15:16.5272524Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:15:16.5272843Z ------------------------------------------------------------------------
+2025-12-04T15:15:16.5273156Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,797.52
+2025-12-04T15:15:16.5273648Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:15:16.5274075Z === End Summary ===
+2025-12-04T15:15:16.5476467Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4797.52,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T15:15:16Z","ts_et":"2025-12-04 10:15:16 ET"}
+2025-12-04T15:15:16.6874099Z [loop] live_paper_loop exit code=0
+2025-12-04T15:15:16.6874898Z [loop] sleep 283s → next 5m boundary
+2025-12-04T15:19:59.6891896Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:20:02.3799708Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:20:02.376599+00:00"}
+2025-12-04T15:20:02.7647379Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:20:02.376599+00:00"}
+2025-12-04T15:20:02.7649125Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:20:02.376599+00:00", "end": "2025-12-04T15:20:02.376599+00:00", "when": "2025-12-04T15:20:02.376599+00:00"}
+2025-12-04T15:20:02.7650856Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:20:02Z"}
+2025-12-04T15:20:02.7652261Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:20:02Z","end":"2025-12-04T15:20:02Z","when":"2025-12-04T15:20:02Z"}
+2025-12-04T15:20:05.4545954Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:20:07.7210823Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:20:10.3934139Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:20:10.9319541Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:20:10.9458925Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:20:10Z"}
+2025-12-04T15:20:14.4158533Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:20:02.376599+00:00"}
+2025-12-04T15:20:14.8351539Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_152002","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:20:14Z","ts_et":"2025-12-04 10:20:14 ET"}
+2025-12-04T15:20:15.0505377Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251204_152002","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:20:15Z","ts_et":"2025-12-04 10:20:15 ET"}
+2025-12-04T15:20:15.3038184Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_152002","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:20:15Z","ts_et":"2025-12-04 10:20:15 ET"}
+2025-12-04T15:20:15.7941279Z 
+2025-12-04T15:20:15.7941734Z === Session Summary ===
+2025-12-04T15:20:16.0902717Z ------------------------------------------------------------------------
+2025-12-04T15:20:16.0903228Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:20:16.0905353Z ------------------------------------------------------------------------
+2025-12-04T15:20:16.0905725Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:20:16.0906122Z AMZN251205C00230000 1        1.39       1.39         0        0.00       -         
+2025-12-04T15:20:16.0906538Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:20:16.0906856Z MU       2        225.43     450.86       0        0.00       -         
+2025-12-04T15:20:16.0907169Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:20:16.0908782Z ------------------------------------------------------------------------
+2025-12-04T15:20:16.0909734Z TOTAL Day PnL: $0.00 | TOTAL VOL: $4,798.91
+2025-12-04T15:20:16.0910705Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:20:16.0912769Z === End Summary ===
+2025-12-04T15:20:16.0914803Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4798.91,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T15:20:16Z","ts_et":"2025-12-04 10:20:16 ET"}
+2025-12-04T15:20:16.2608262Z [loop] live_paper_loop exit code=0
+2025-12-04T15:20:16.2610728Z [loop] sleep 283s → next 5m boundary
+2025-12-04T15:24:59.2642726Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-04T15:25:01.4507362Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-04T15:25:01.448215+00:00"}
+2025-12-04T15:25:01.8091662Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-04T15:25:01.448215+00:00"}
+2025-12-04T15:25:01.8093555Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-24T15:25:01.448215+00:00", "end": "2025-12-04T15:25:01.448215+00:00", "when": "2025-12-04T15:25:01.448215+00:00"}
+2025-12-04T15:25:01.8096222Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-04T15:25:01Z"}
+2025-12-04T15:25:01.8097700Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-24T15:25:01Z","end":"2025-12-04T15:25:01Z","when":"2025-12-04T15:25:01Z"}
+2025-12-04T15:25:04.7910937Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:25:07.1740612Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
+2025-12-04T15:25:09.9156818Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":24}
+2025-12-04T15:25:10.4793830Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-04T15:25:10.4868141Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-04T15:25:10Z"}
+2025-12-04T15:25:13.7778407Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-04T15:25:01.448215+00:00"}
+2025-12-04T15:25:14.1672293Z {"symbol":"AMZN","session":"AM","cid":"RB_AMZN_20251204_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:25:14Z","ts_et":"2025-12-04 10:25:14 ET"}
+2025-12-04T15:25:14.6649177Z {"symbol":"HLT","session":"AM","cid":"RB_HLT_20251204_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-04T15:25:14Z","ts_et":"2025-12-04 10:25:14 ET"}
+2025-12-04T15:25:15.1925803Z 
+2025-12-04T15:25:15.1926801Z === Session Summary ===
+2025-12-04T15:25:15.4706398Z ------------------------------------------------------------------------
+2025-12-04T15:25:15.4707802Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-04T15:25:15.4708930Z ------------------------------------------------------------------------
+2025-12-04T15:25:15.4709406Z AMZN     2        228.93     457.86       0        0.00       -         
+2025-12-04T15:25:15.4715534Z AMZN251205C00230000 1        1.39       1.39         1        1.32       -0.07     
+2025-12-04T15:25:15.4716468Z HLT      7        276.22     1933.54      0        0.00       -         
+2025-12-04T15:25:15.4719094Z MU       2        225.43     450.86       2        227.40     3.94      
+2025-12-04T15:25:15.4720091Z NFLX     0        0.00       0.00         19       102.91     -         
+2025-12-04T15:25:15.4781661Z ------------------------------------------------------------------------
+2025-12-04T15:25:15.4797069Z TOTAL Day PnL: $3.87 | TOTAL VOL: $5,255.03
+2025-12-04T15:25:15.4798306Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-04T15:25:15.4799108Z === End Summary ===
+2025-12-04T15:25:15.4801305Z {"type":"EOD_SUMMARY","date":"2025-12-04","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":3.87,"total_volume":5255.03,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-04T15:25:15Z","ts_et":"2025-12-04 10:25:15 ET"}
+2025-12-04T15:25:15.6913107Z [loop] live_paper_loop exit code=0
+2025-12-04T15:25:15.6917388Z [loop] sleep 284s → next 5m boundary
+2025-12-04T15:27:35.9225028Z Traceback (most recent call last):
+2025-12-04T15:27:35.9233533Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\market_loop.py", line 136, in <module>
+2025-12-04T15:27:35.9234403Z     main()
+2025-12-04T15:27:35.9234685Z     ~~~~^^
+2025-12-04T15:27:35.9235356Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\market_loop.py", line 128, in main
+2025-12-04T15:27:35.9235968Z     time.sleep(secs)
+2025-12-04T15:27:35.9236218Z     ~~~~~~~~~~^^^^^^
+2025-12-04T15:27:35.9236506Z KeyboardInterrupt
+2025-12-04T15:27:36.1709030Z ##[error]The operation was canceled.
+2025-12-04T15:27:36.2774406Z Post job cleanup.
+2025-12-04T15:27:37.6448553Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-04T15:27:37.6829033Z git version 2.52.0.windows.1
+2025-12-04T15:27:37.6916995Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\17944c62-6547-4b93-8a43-0a3da0ce37b0' before making global git config changes
+2025-12-04T15:27:37.6917841Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-04T15:27:37.6927569Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-04T15:27:37.7423071Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-04T15:27:37.7897712Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-04T15:27:38.7646322Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-04T15:27:38.7985771Z http.https://github.com/.extraheader
+2025-12-04T15:27:38.8051249Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-04T15:27:38.8555055Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-04T15:27:39.7741794Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-04T15:27:39.8207873Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-04T15:27:40.6967557Z Cleaning up orphan processes

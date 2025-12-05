@@ -24,6 +24,7 @@ from RubberBand.src.data import (
     alpaca_market_open,
     submit_bracket_order,
     get_positions,
+    get_daily_fills,
 )
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.trade_logger import TradeLogger
@@ -280,6 +281,14 @@ def main() -> int:
     positions_raw = _get_positions_compat(base_url, key, secret) or []
     positions = {p["symbol"]: p for p in positions_raw}
 
+    # Daily cooldown: Get all tickers traded today (prevents re-entry after TP/SL)
+    try:
+        daily_fills = get_daily_fills(base_url, key, secret) or []
+        traded_today = set(f.get("symbol") for f in daily_fills if f.get("symbol"))
+    except Exception as e:
+        print(f"[warn] Could not fetch daily fills for cooldown: {e}", flush=True)
+        traded_today = set()
+
     # Risk knobs
     brackets = cfg.get("brackets", {}) or {}
     sl_mult = float(brackets.get("atr_mult_sl", 2.5))
@@ -424,6 +433,17 @@ def main() -> int:
                 log.gate(
                     symbol=sym, session=session, cid=sig_row["cid"],
                     decision="BLOCK", reasons=["already in position"]
+                )
+            except Exception:
+                pass
+            continue
+
+        # Gating: Daily Cooldown - prevent re-entry on tickers traded today
+        if sym in traded_today:
+            try:
+                log.gate(
+                    symbol=sym, session=session, cid=sig_row["cid"],
+                    decision="BLOCK", reasons=["traded_today"]
                 )
             except Exception:
                 pass
