@@ -165,9 +165,9 @@ def main():
                     continue
                 stats["passed_volume_filter"] += 1
                 
-                # HIGH VOLATILITY TREND FILTER: If ATR > 10%, require bullish trend
+                # HIGH VOLATILITY TREND FILTER: If ATR > 8%, require bullish trend
                 trend = indicators.get("trend", 1)
-                if atr_pct > 10.0 and trend == 0:
+                if atr_pct > 8.0 and trend == 0:
                     stats["filtered_by_trend"] += 1
                     continue
                 stats["passed_trend_filter"] += 1
