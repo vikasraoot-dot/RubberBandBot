@@ -27,8 +27,8 @@ from RubberBand.src.data import fetch_latest_bars, load_symbols_from_file
 
 
 def calculate_weekly_indicators(df: pd.DataFrame) -> dict:
-    """Calculate ATR%, Dollar Vol for weekly strategy screening."""
-    if len(df) < 30:
+    """Calculate ATR%, Dollar Vol, and Trend for weekly strategy screening."""
+    if len(df) < 50:  # Need at least 50 days for SMA50
         return {}
 
     close = df["close"]
@@ -48,11 +48,21 @@ def calculate_weekly_indicators(df: pd.DataFrame) -> dict:
 
     current_price = close.iloc[-1]
     
+    # Trend: SMA50 vs SMA200 (or just SMA50 slope if not enough data)
+    sma_50 = close.rolling(window=50).mean().iloc[-1]
+    if len(df) >= 200:
+        sma_200 = close.rolling(window=200).mean().iloc[-1]
+        trend = 1 if sma_50 > sma_200 else 0
+    else:
+        # Fallback: is price above SMA50?
+        trend = 1 if current_price > sma_50 else 0
+    
     return {
         "price": current_price,
         "atr_14": atr_14,
         "atr_pct": (atr_14 / current_price) * 100.0 if current_price > 0 else 0.0,
-        "dollar_vol_m": dollar_vol / 1_000_000  # In millions
+        "dollar_vol_m": dollar_vol / 1_000_000,  # In millions
+        "trend": trend  # 1 = bullish, 0 = bearish/sideways
     }
 
 
@@ -103,6 +113,8 @@ def main():
         "passed_price_filter": 0,
         "passed_atr_filter": 0,
         "passed_volume_filter": 0,
+        "filtered_by_trend": 0,
+        "passed_trend_filter": 0,
     }
 
     for i in range(0, len(tickers), BATCH_SIZE):
@@ -152,12 +164,20 @@ def main():
                 if dollar_vol_m < 50:  # $50M (lowered from $500M)
                     continue
                 stats["passed_volume_filter"] += 1
+                
+                # HIGH VOLATILITY TREND FILTER: If ATR > 10%, require bullish trend
+                trend = indicators.get("trend", 1)
+                if atr_pct > 10.0 and trend == 0:
+                    stats["filtered_by_trend"] += 1
+                    continue
+                stats["passed_trend_filter"] += 1
 
                 candidates.append({
                     "symbol": sym,
                     "price": round(price, 2),
                     "atr_pct": round(atr_pct, 2),
                     "dollar_vol_m": round(dollar_vol_m, 1),
+                    "trend": trend,
                     "is_new": sym not in current_elite
                 })
 
@@ -172,7 +192,9 @@ def main():
     print(f"  Tickers with valid indicators: {stats['tickers_with_indicators']}")
     print(f"  Passed price filter (>$40): {stats['passed_price_filter']}")
     print(f"  Passed ATR filter (>4%): {stats['passed_atr_filter']}")
-    print(f"  Passed volume filter (>$500M): {stats['passed_volume_filter']}")
+    print(f"  Passed volume filter (>$50M): {stats['passed_volume_filter']}")
+    print(f"  Filtered by trend (ATR>10% + bearish): {stats['filtered_by_trend']}")
+    print(f"  FINAL CANDIDATES: {stats['passed_trend_filter']}")
     print(f"{'='*80}")
 
     # Results
