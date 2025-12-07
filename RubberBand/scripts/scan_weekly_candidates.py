@@ -125,7 +125,7 @@ def main():
             bars_map, meta = fetch_latest_bars(
                 symbols=batch,
                 timeframe="1Day",  # Daily bars for scanning
-                history_days=60,   # 60 days for ATR, volume
+                history_days=100,  # 100 calendar days = ~70 trading days (need 50 for SMA50)
                 feed="iex",
                 rth_only=False,    # CRITICAL: Must be False for daily bars
                 verbose=False
