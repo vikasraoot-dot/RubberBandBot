@@ -1,0 +1,45 @@
+name: Weekly Candidate Scanner
+
+on:
+  # Run every Friday at 9 PM ET (01:00 UTC Saturday)
+  schedule:
+    - cron: '0 1 * * 6'  # 01:00 UTC = 9 PM ET on Friday
+  
+  # Allow manual trigger
+  workflow_dispatch:
+
+jobs:
+  scan-candidates:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
+          pip install pandas requests pyyaml numpy
+      
+      - name: Run Weekly Candidate Scanner
+        env:
+          ALPACA_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          ALPACA_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+        run: |
+          python RubberBand/scripts/scan_weekly_candidates.py --tickers tickers_full_list.txt --output weekly_candidates.txt
+      
+      - name: Upload candidate results
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-candidates-${{ github.run_id }}
+          path: |
+            weekly_candidates.txt
+            weekly_candidates.csv
+          if-no-files-found: ignore

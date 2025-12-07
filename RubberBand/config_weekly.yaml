@@ -1,0 +1,58 @@
+# Weekly Mean Reversion Strategy Configuration
+# =============================================
+# Standalone config for weekly timeframe experimentation
+# DO NOT mix with 15-min RubberBandBot config
+
+# --- Core Settings ---
+timeframe: "1Week"
+feed: "iex"
+timezone: "US/Eastern"
+
+# --- Position Sizing ---
+# Since weekly trades are larger swings, we use notional limits
+max_notional_per_trade: 2000   # Max $2000 per position (reduced for live)
+max_shares_per_trade: 100      # Cap at 100 shares
+qty: 100                       # Default quantity
+
+# --- Indicator Settings (Calibrated for Weekly) ---
+indicators:
+  keltner:
+    ema_period: 10          # 10-week EMA (shorter for weekly)
+    atr_period: 10          # 10-week ATR
+    atr_multiplier: 2.0     # Wider bands for weekly volatility
+  rsi:
+    period: 14              # Standard 14-period RSI
+
+# --- Entry Filters (Weekly-Calibrated) ---
+filters:
+  # Weekly RSI rarely drops below 30, so we use 45-50
+  rsi_oversold: 45          # Buy when RSI < 45
+  rsi_overbought: 55        # Short when RSI > 55 (not used)
+  
+  # Mean Deviation: How far below 20-week SMA to trigger (the "stretch")
+  mean_deviation_threshold: -5  # Price must be 5%+ below 20-week SMA
+  
+  # Time windows - not applicable for weekly
+  allowed_windows: []
+
+# --- Brackets (Weekly-Calibrated) ---
+brackets:
+  atr_mult_sl: 2.0          # Stop loss at 2x ATR (wider for weekly)
+  take_profit_r: 2.5        # Risk:Reward 1:2.5
+  
+# --- Trend Filter ---
+trend_filter:
+  enabled: false            # DISABLED for initial testing
+  sma_period: 20            # 20-week SMA (reduced from 50)
+  secondary_sma_period: 10  # 10-week SMA
+
+# --- Resilience ---
+resilience:
+  enabled: false            # Disable for backtest simplicity
+  max_daily_losses: 5
+  consecutive_loss_pause: 3
+  pause_duration_days: 7
+
+# --- Trade Management ---
+allow_shorts: false         # Long-only for now
+max_concurrent_positions: 5
