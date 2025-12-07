@@ -89,7 +89,7 @@ def main():
     print("="*80)
     print("WEEKLY STRATEGY CANDIDATE SCANNER")
     print("="*80)
-    print("Looking for 'Elite DNA': ATR > 4.0%, Avg Vol > $500M, Price > $40")
+    print("Looking for 'Elite DNA': ATR > 4.0%, Avg Vol > $50M, Price > $40")
 
     # Fetch data in batches (Alpaca has rate limits)
     BATCH_SIZE = 50
@@ -149,7 +149,7 @@ def main():
                     continue
                 stats["passed_atr_filter"] += 1
                 
-                if dollar_vol_m < 500:  # $500M
+                if dollar_vol_m < 50:  # $50M (lowered from $500M)
                     continue
                 stats["passed_volume_filter"] += 1
 
