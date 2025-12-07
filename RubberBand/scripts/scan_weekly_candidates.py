@@ -115,6 +115,7 @@ def main():
                 timeframe="1Day",  # Daily bars for scanning
                 history_days=60,   # 60 days for ATR, volume
                 feed="iex",
+                rth_only=False,    # CRITICAL: Must be False for daily bars
                 verbose=False
             )
         except Exception as e:
