@@ -94,13 +94,23 @@ def main():
     # Fetch data in batches (Alpaca has rate limits)
     BATCH_SIZE = 50
     candidates = []
+    
+    # Diagnostic counters
+    stats = {
+        "total_tickers": len(tickers),
+        "tickers_with_data": 0,
+        "tickers_with_indicators": 0,
+        "passed_price_filter": 0,
+        "passed_atr_filter": 0,
+        "passed_volume_filter": 0,
+    }
 
     for i in range(0, len(tickers), BATCH_SIZE):
         batch = tickers[i:i+BATCH_SIZE]
         print(f"Processing batch {i//BATCH_SIZE + 1}/{(len(tickers) + BATCH_SIZE - 1)//BATCH_SIZE} ({len(batch)} tickers)...")
 
         try:
-            bars_map, _ = fetch_latest_bars(
+            bars_map, meta = fetch_latest_bars(
                 symbols=batch,
                 timeframe="1Day",  # Daily bars for scanning
                 history_days=60,   # 60 days for ATR, volume
@@ -116,22 +126,31 @@ def main():
                 df = bars_map.get(sym)
                 if df is None or df.empty:
                     continue
+                
+                stats["tickers_with_data"] += 1
 
                 indicators = calculate_weekly_indicators(df)
                 if not indicators:
                     continue
+                
+                stats["tickers_with_indicators"] += 1
 
                 price = indicators["price"]
                 atr_pct = indicators["atr_pct"]
                 dollar_vol_m = indicators["dollar_vol_m"]
 
-                # Apply filters
+                # Apply filters with tracking
                 if price < 40:
                     continue
+                stats["passed_price_filter"] += 1
+                
                 if atr_pct < 4.0:
                     continue
+                stats["passed_atr_filter"] += 1
+                
                 if dollar_vol_m < 500:  # $500M
                     continue
+                stats["passed_volume_filter"] += 1
 
                 candidates.append({
                     "symbol": sym,
@@ -143,6 +162,17 @@ def main():
 
             except Exception as e:
                 continue
+
+    # Print diagnostic summary
+    print(f"\n{'='*80}")
+    print("DIAGNOSTIC SUMMARY:")
+    print(f"  Total tickers scanned: {stats['total_tickers']}")
+    print(f"  Tickers with data: {stats['tickers_with_data']}")
+    print(f"  Tickers with valid indicators: {stats['tickers_with_indicators']}")
+    print(f"  Passed price filter (>$40): {stats['passed_price_filter']}")
+    print(f"  Passed ATR filter (>4%): {stats['passed_atr_filter']}")
+    print(f"  Passed volume filter (>$500M): {stats['passed_volume_filter']}")
+    print(f"{'='*80}")
 
     # Results
     if not candidates:
