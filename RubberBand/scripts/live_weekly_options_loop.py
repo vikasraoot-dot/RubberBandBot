@@ -44,8 +44,53 @@ from RubberBand.src.options_execution import (
     close_option_position,
     OptionsTradeTracker,
 )
+from RubberBand.src.options_trade_logger import OptionsTradeLogger
 
 ET = ZoneInfo("US/Eastern")
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# OCC Symbol Parsing
+# ──────────────────────────────────────────────────────────────────────────────
+def parse_occ_symbol(symbol: str) -> Dict[str, Any]:
+    """
+    Parse OCC option symbol into components.
+    
+    Format: SYMBOL + YYMMDD + C/P + 00000000 (strike * 1000)
+    Example: AAPL251205C00282500 = AAPL Dec 5, 2025 $282.50 Call
+    """
+    result = {"underlying": "", "expiration": "", "type": "", "strike": 0.0, "raw": symbol}
+    
+    if len(symbol) < 15:
+        return result
+    
+    # Find where underlying ends (first digit)
+    for i, c in enumerate(symbol):
+        if c.isdigit():
+            result["underlying"] = symbol[:i]
+            rest = symbol[i:]
+            break
+    else:
+        return result
+    
+    if len(rest) < 15:
+        return result
+    
+    # Parse date: YYMMDD
+    date_str = rest[:6]
+    result["expiration"] = f"20{date_str[:2]}-{date_str[2:4]}-{date_str[4:6]}"
+    
+    # Parse type: C or P
+    result["type"] = rest[6]
+    
+    # Parse strike: 8 digits / 1000
+    strike_str = rest[7:15]
+    try:
+        result["strike"] = int(strike_str) / 1000
+    except ValueError:
+        pass
+    
+    return result
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Weekly Options Config (V3 Strategy)
@@ -327,24 +372,44 @@ def main() -> int:
     opts_cfg = {**WEEKLY_OPTIONS_CONFIG}
     opts_cfg["max_premium_per_trade"] = args.max_premium
     
+    # Setup logging (JSONL trade logger + simple JSON logger)
+    results_dir = "results"
+    os.makedirs(results_dir, exist_ok=True)
+    log_path = os.path.join(results_dir, f"weekly_options_trades_{_now_et().strftime('%Y%m%d')}.jsonl")
+    logger = OptionsTradeLogger(log_path)
+    
     # Load tickers
     ticker_path = args.tickers
     if not os.path.isabs(ticker_path):
         ticker_path = os.path.join(_REPO_ROOT, ticker_path)
     symbols = load_symbols_from_file(ticker_path)
+    
+    dry_run = bool(args.dry_run)
+    
+    logger.heartbeat(
+        event="startup",
+        dry_run=dry_run,
+        monitor_only=args.monitor_only,
+        max_premium=opts_cfg["max_premium_per_trade"],
+        target_delta=opts_cfg["target_delta"],
+        tickers_count=len(symbols),
+    )
     _log("Weekly Options V3 Started", {"tickers": len(symbols)})
     
     # Check market status
     if not alpaca_market_open():
+        logger.heartbeat(event="market_closed")
         _log("Market is closed, exiting")
+        logger.close()
         return 0
     
     # Check options trading cutoff (no trading after 3:00 PM ET)
     if not is_options_trading_allowed():
+        logger.heartbeat(event="options_cutoff")
         _log("Options trading cutoff reached (after 3:00 PM ET), exiting")
+        logger.close()
         return 0
     
-    dry_run = bool(args.dry_run)
     tracker = OptionsTradeTracker()
     
     _log("Starting weekly options scan", {
@@ -357,32 +422,39 @@ def main() -> int:
     # 1. Check existing positions for exits (always do this)
     manage_weekly_positions(opts_cfg, tracker, dry_run)
     
-    # 2. Get current positions
+    # 2. Get current positions using parse_occ_symbol for proper tracking
     current_positions = get_option_positions()
     position_underlyings = set()
     for pos in current_positions:
         sym = pos.get("symbol", "")
-        if len(sym) > 10:
-            for i, c in enumerate(sym):
-                if c.isdigit():
-                    position_underlyings.add(sym[:i])
-                    break
+        parsed = parse_occ_symbol(sym)
+        if parsed["underlying"]:
+            position_underlyings.add(parsed["underlying"])
     
+    logger.heartbeat(
+        event="positions_checked",
+        position_count=len(position_underlyings),
+        positions=list(position_underlyings),
+    )
     _log(f"Current positions: {len(position_underlyings)}", {
         "positions": list(position_underlyings)
     })
     
     # If monitor-only mode, skip signal scanning and new entries
     if args.monitor_only:
+        logger.heartbeat(event="monitor_only_complete", positions=len(position_underlyings))
         _log("Monitor-only mode: skipping signal scan")
         _log("Weekly options monitor complete", {
             "total_positions": len(position_underlyings),
         })
+        logger.close()
         return 0
     
     # Check max positions limit
     if len(position_underlyings) >= opts_cfg.get("max_positions", 5):
+        logger.heartbeat(event="max_positions_reached", positions=len(position_underlyings))
         _log("Max positions reached, no new entries")
+        logger.close()
         return 0
     
     # 3. Scan for new weekly signals
@@ -407,18 +479,22 @@ def main() -> int:
             break
     
     # 5. Summary
+    logger.heartbeat(
+        event="scan_complete",
+        signals=len(signals),
+        new_entries=entries,
+        total_positions=len(position_underlyings),
+    )
     _log("Weekly options scan complete", {
         "signals": len(signals),
         "new_entries": entries,
         "total_positions": len(position_underlyings),
     })
     
-    # Save trades log
-    results_dir = "results"
-    os.makedirs(results_dir, exist_ok=True)
-    log_path = os.path.join(results_dir, f"weekly_options_trades_{_now_et().strftime('%Y%m%d')}.json")
-    tracker.to_json(log_path)
+    # Save trades log (JSON format for tracker, JSONL already saved by logger)
+    tracker.to_json(log_path.replace(".jsonl", "_tracker.json"))
     
+    logger.close()
     return 0
 
 
