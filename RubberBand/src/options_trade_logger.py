@@ -15,7 +15,7 @@ _ISO = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def _ts() -> str:
-    return dt.datetime.now(dt.UTC).strftime(_ISO)
+    return dt.datetime.now(dt.timezone.utc).strftime(_ISO)
 
 
 def _ts_et() -> str:
