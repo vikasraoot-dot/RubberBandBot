@@ -40,6 +40,7 @@ def submit_option_order(
     side: str = "buy",
     order_type: str = "limit",
     limit_price: Optional[float] = None,
+    client_order_id: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Submit an option order.
@@ -50,6 +51,7 @@ def submit_option_order(
         side: "buy" or "sell"
         order_type: "market" or "limit"
         limit_price: Required if order_type is "limit"
+        client_order_id: Optional unique ID for order attribution (e.g., "WK_OPT_NVDA...")
     
     Returns:
         Order response dict
@@ -63,6 +65,9 @@ def submit_option_order(
         "type": order_type.lower(),
         "time_in_force": "day",
     }
+    
+    if client_order_id:
+        payload["client_order_id"] = client_order_id
     
     if order_type.lower() == "limit":
         if limit_price is None:
@@ -91,6 +96,7 @@ def submit_spread_order(
     short_symbol: str,
     qty: int = 1,
     max_debit: Optional[float] = None,
+    client_order_id: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Submit a bull call spread order as a multi-leg order.
@@ -103,6 +109,7 @@ def submit_spread_order(
         short_symbol: OCC symbol for short leg (OTM call)
         qty: Number of spreads
         max_debit: Max net debit per spread (used as limit price)
+        client_order_id: Optional unique ID for order attribution (e.g., "15M_OPT_NVDA...")
     
     Returns:
         Result dict with order info or error
@@ -157,6 +164,9 @@ def submit_spread_order(
             },
         ],
     }
+    
+    if client_order_id:
+        order_payload["client_order_id"] = client_order_id
     
     url = f"{base}/v2/orders"
     

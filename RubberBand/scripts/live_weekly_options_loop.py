@@ -45,8 +45,12 @@ from RubberBand.src.options_execution import (
     OptionsTradeTracker,
 )
 from RubberBand.src.options_trade_logger import OptionsTradeLogger
+from RubberBand.src.position_registry import PositionRegistry
 
 ET = ZoneInfo("US/Eastern")
+
+# Bot tag for position attribution
+BOT_TAG = "WK_OPT"
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -224,6 +228,7 @@ def try_weekly_option_entry(
     signal: Dict[str, Any],
     opts_cfg: dict,
     tracker: OptionsTradeTracker,
+    registry: PositionRegistry,
     dry_run: bool = True,
 ) -> bool:
     """
@@ -278,12 +283,16 @@ def try_weekly_option_entry(
             "signal": signal,
         })
     else:
+        # Generate client_order_id for position attribution
+        client_order_id = registry.generate_order_id(option_symbol)
+        
         result = submit_option_order(
             option_symbol=option_symbol,
             qty=max_contracts,
             side="buy",
             order_type="limit",
             limit_price=ask_price,
+            client_order_id=client_order_id,
         )
         if result.get("error"):
             _log(f"Order failed for {option_symbol}", {"result": result})
@@ -291,9 +300,20 @@ def try_weekly_option_entry(
         
         _log(f"Order submitted for {option_symbol}", {
             "order_id": result.get("id"),
+            "client_order_id": client_order_id,
             "qty": max_contracts,
             "limit_price": ask_price,
         })
+        
+        # Record in registry for position attribution
+        registry.record_entry(
+            symbol=option_symbol,
+            client_order_id=client_order_id,
+            qty=max_contracts,
+            entry_price=ask_price,
+            underlying=sym,
+            order_id=result.get("id", ""),
+        )
         # NOTE: Order may not fill immediately. Check positions on next run.
     
     # Track
@@ -412,49 +432,58 @@ def main() -> int:
     
     tracker = OptionsTradeTracker()
     
+    # Initialize position registry for this bot
+    registry = PositionRegistry(bot_tag=BOT_TAG)
+    
     _log("Starting weekly options scan", {
         "dry_run": dry_run,
         "monitor_only": args.monitor_only,
         "max_premium": opts_cfg["max_premium_per_trade"],
         "target_delta": opts_cfg["target_delta"],
+        "bot_tag": BOT_TAG,
+        "registry_positions": len(registry.positions),
     })
     
     # 1. Check existing positions for exits (always do this)
     manage_weekly_positions(opts_cfg, tracker, dry_run)
     
-    # 2. Get current positions using parse_occ_symbol for proper tracking
-    current_positions = get_option_positions()
-    position_underlyings = set()
-    for pos in current_positions:
-        sym = pos.get("symbol", "")
-        parsed = parse_occ_symbol(sym)
-        if parsed["underlying"]:
-            position_underlyings.add(parsed["underlying"])
+    # 2. Get ALL option positions, then filter to only THIS BOT'S positions
+    all_option_positions = get_option_positions()
+    
+    # Sync registry with Alpaca - remove positions that no longer exist
+    registry.sync_with_alpaca(all_option_positions)
+    # Get only MY positions (those tracked in my registry)
+    my_positions = registry.filter_positions(all_option_positions)
+    my_underlyings = registry.get_my_underlyings()
     
     logger.heartbeat(
         event="positions_checked",
-        position_count=len(position_underlyings),
-        positions=list(position_underlyings),
+        all_positions=len(all_option_positions),
+        my_positions=len(my_positions),
+        my_underlyings=list(my_underlyings),
     )
-    _log(f"Current positions: {len(position_underlyings)}", {
-        "positions": list(position_underlyings)
+    _log(f"Positions: {len(my_positions)} mine / {len(all_option_positions)} total", {
+        "my_underlyings": list(my_underlyings),
+        "bot_tag": BOT_TAG,
     })
     
     # If monitor-only mode, skip signal scanning and new entries
     if args.monitor_only:
-        logger.heartbeat(event="monitor_only_complete", positions=len(position_underlyings))
+        logger.heartbeat(event="monitor_only_complete", positions=len(my_underlyings))
         _log("Monitor-only mode: skipping signal scan")
         _log("Weekly options monitor complete", {
-            "total_positions": len(position_underlyings),
+            "total_positions": len(my_underlyings),
         })
         logger.close()
+        registry.save()
         return 0
     
     # Check max positions limit
-    if len(position_underlyings) >= opts_cfg.get("max_positions", 5):
-        logger.heartbeat(event="max_positions_reached", positions=len(position_underlyings))
+    if len(my_underlyings) >= opts_cfg.get("max_positions", 5):
+        logger.heartbeat(event="max_positions_reached", positions=len(my_underlyings))
         _log("Max positions reached, no new entries")
         logger.close()
+        registry.save()
         return 0
     
     # 3. Scan for new weekly signals
@@ -466,16 +495,16 @@ def main() -> int:
     # 4. Enter new positions
     entries = 0
     for signal in signals:
-        if signal["symbol"] in position_underlyings:
+        if signal["symbol"] in my_underlyings:
             _log(f"Already have position in {signal['symbol']}, skipping")
             continue
         
-        if try_weekly_option_entry(signal, opts_cfg, tracker, dry_run):
+        if try_weekly_option_entry(signal, opts_cfg, tracker, registry, dry_run):
             entries += 1
-            position_underlyings.add(signal["symbol"])
+            my_underlyings.add(signal["symbol"])
         
         # Respect max positions
-        if len(position_underlyings) >= opts_cfg.get("max_positions", 5):
+        if len(my_underlyings) >= opts_cfg.get("max_positions", 5):
             break
     
     # 5. Summary
@@ -483,17 +512,18 @@ def main() -> int:
         event="scan_complete",
         signals=len(signals),
         new_entries=entries,
-        total_positions=len(position_underlyings),
+        total_positions=len(my_underlyings),
     )
     _log("Weekly options scan complete", {
         "signals": len(signals),
         "new_entries": entries,
-        "total_positions": len(position_underlyings),
+        "total_positions": len(my_underlyings),
     })
     
     # Save trades log (JSON format for tracker, JSONL already saved by logger)
     tracker.to_json(log_path.replace(".jsonl", "_tracker.json"))
     
+    registry.save()
     logger.close()
     return 0
 

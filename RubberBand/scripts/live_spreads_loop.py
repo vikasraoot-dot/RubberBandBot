@@ -47,8 +47,12 @@ from RubberBand.src.options_execution import (
     get_position_pnl,
 )
 from RubberBand.src.options_trade_logger import OptionsTradeLogger
+from RubberBand.src.position_registry import PositionRegistry
 
 ET = ZoneInfo("US/Eastern")
+
+# Bot tag for position attribution
+BOT_TAG = "15M_OPT"
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Config
@@ -244,6 +248,7 @@ def try_spread_entry(
     signal: Dict[str, Any],
     spread_cfg: dict,
     logger: OptionsTradeLogger,
+    registry: PositionRegistry,
     dry_run: bool = True,
 ) -> bool:
     """Attempt to enter a bull call spread based on a stock signal."""
@@ -328,11 +333,15 @@ def try_spread_entry(
             signal_atr=signal.get("atr", 0),
         )
     else:
+        # Generate client_order_id for position attribution
+        client_order_id = registry.generate_order_id(long_symbol)
+        
         result = submit_spread_order(
             long_symbol=long_symbol,
             short_symbol=short_symbol,
             qty=contracts,
             max_debit=max_debit,
+            client_order_id=client_order_id,
         )
         if result.get("error"):
             logger.spread_skip(
@@ -340,6 +349,17 @@ def try_spread_entry(
                 skip_reason=f"Order_failed: {result.get('message', 'Unknown')}"
             )
             return False
+        
+        # Record in registry for position attribution
+        registry.record_entry(
+            symbol=long_symbol,
+            client_order_id=client_order_id,
+            qty=contracts,
+            entry_price=net_debit,
+            underlying=sym,
+            order_id=result.get("order_id", ""),
+            short_symbol=short_symbol,
+        )
         
         logger.spread_entry(
             underlying=sym,
@@ -589,6 +609,7 @@ def run_scan_cycle(
     cfg: dict,
     spread_cfg: dict,
     logger: OptionsTradeLogger,
+    registry: PositionRegistry,
     dry_run: bool,
 ) -> int:
     """Run a single scan cycle. Returns number of new entries."""
@@ -647,7 +668,7 @@ def run_scan_cycle(
             )
             continue
         
-        if try_spread_entry(signal, spread_cfg, logger, dry_run):
+        if try_spread_entry(signal, spread_cfg, logger, registry, dry_run):
             entries += 1
             position_underlyings.add(signal["symbol"])
     
@@ -717,6 +738,16 @@ def main() -> int:
     
     logger.heartbeat(event="symbols_loaded", count=len(symbols), sample=symbols[:5])
     
+    # Initialize position registry for this bot
+    registry = PositionRegistry(bot_tag=BOT_TAG)
+    registry.sync_with_alpaca(get_option_positions())
+    
+    logger.heartbeat(
+        event="registry_loaded",
+        bot_tag=BOT_TAG,
+        my_positions=len(registry.positions),
+    )
+    
     # ──────────────────────────────────────────────────────────────────────────
     # Main Loop: Run until market close (4:00 PM ET)
     # ──────────────────────────────────────────────────────────────────────────
@@ -742,7 +773,7 @@ def main() -> int:
         logger.heartbeat(event="scan_cycle_start", cycle=scan_count, time=now_et.strftime("%H:%M"))
         
         try:
-            entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, dry_run)
+            entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, registry, dry_run)
             logger.heartbeat(event="scan_cycle_end", cycle=scan_count, new_entries=entries)
         except Exception as e:
             logger.error(error=str(e), context="scan_cycle")
@@ -769,6 +800,9 @@ def main() -> int:
     
     # Final position management
     manage_positions(spread_cfg, logger, dry_run)
+    
+    # Save registry
+    registry.save()
     
     # EOD Summary
     summary = logger.eod_summary()
