@@ -4,8 +4,9 @@ Weekly Strategy Candidate Scanner
 
 Scans the full ticker universe for stocks matching the "Elite DNA" criteria:
 1. High Volatility: ATR% > 4.0%
-2. High Liquidity: Avg Dollar Volume > $500M
+2. High Liquidity: Avg Dollar Volume > $50M
 3. Price: > $40
+4. Trend Filter: High volatility tickers (ATR>8%) must be in uptrend
 
 Usage:
     python RubberBand/scripts/scan_weekly_candidates.py --tickers tickers_full_list.txt --output weekly_candidates.csv
