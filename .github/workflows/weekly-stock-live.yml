@@ -1,0 +1,87 @@
+name: Weekly Stock Trading (Paper)
+
+on:
+  schedule:
+    # Monday 9:35 AM ET (14:35 UTC) - Primary entry day
+    - cron: '35 14 * * 1'
+    # Tuesday-Friday 9:35 AM ET - Position monitoring only
+    - cron: '35 14 * * 2-5'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (1=simulate, 0=live paper trading)'
+        required: false
+        default: '0'
+        type: string
+
+concurrency:
+  group: weekly-stock-trading
+  cancel-in-progress: true
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
+          pip install pandas requests pyyaml numpy alpaca-trade-api
+      
+      - name: Download Position Registry
+        uses: actions/download-artifact@v4
+        with:
+          name: position-registry-WK_STK
+          path: .position_registry/
+        continue-on-error: true  # First run won't have artifact
+      
+      - name: Run Weekly Stock Trading
+        env:
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          DRY_RUN=${{ github.event.inputs.dry_run || '0' }}
+          
+          # Determine day of week (Monday = 1)
+          DAY_OF_WEEK=$(TZ=America/New_York date +%u)
+          
+          echo "========================================"
+          echo "Weekly Stock Trading V1"
+          echo "========================================"
+          echo "Day of Week: $DAY_OF_WEEK (1=Monday)"
+          echo "Dry Run: $DRY_RUN"
+          echo "========================================"
+          
+          # Create logs directory
+          mkdir -p logs
+          
+          # Run the weekly stock cycle
+          python RubberBand/scripts/live_weekly_loop.py
+      
+      - name: Upload Trade Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-stock-trades-${{ github.run_id }}
+          path: logs/weekly_live_*.jsonl
+          if-no-files-found: warn
+      
+      - name: Upload Position Registry
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: position-registry-WK_STK
+          path: .position_registry/WK_STK_positions.json
+          if-no-files-found: warn
+          retention-days: 90
+          overwrite: true
