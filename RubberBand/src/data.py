@@ -395,6 +395,7 @@ def submit_bracket_order(
     take_profit_price: float = 0.0,
     stop_loss_price: float = 0.0,
     tif: str = "day",
+    client_order_id: Optional[str] = None,
 ) -> Dict[str, Any]:
     """
     Places a "market/limit + OCO" style bracket.
@@ -410,6 +411,9 @@ def submit_bracket_order(
         "side": side,
         "time_in_force": tif,
     }
+    
+    if client_order_id:
+        payload["client_order_id"] = client_order_id
 
     if limit_price is None:
         payload["type"] = "market"

@@ -46,6 +46,13 @@ jobs:
           if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
           pip install pandas requests pyyaml numpy alpaca-trade-api
       
+      - name: Download Position Registry
+        uses: actions/download-artifact@v4
+        with:
+          name: position-registry-WK_OPT
+          path: .position_registry/
+        continue-on-error: true  # First run won't have artifact
+      
       - name: Run Weekly Options Trading V3
         env:
           APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
@@ -103,3 +110,13 @@ jobs:
           name: weekly-options-trades-${{ github.run_id }}
           path: results/weekly_options_trades_*.json
           if-no-files-found: warn
+      
+      - name: Upload Position Registry
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: position-registry-WK_OPT
+          path: .position_registry/WK_OPT_positions.json
+          if-no-files-found: warn
+          retention-days: 90
+          overwrite: true

@@ -19,6 +19,10 @@ from RubberBand.src.data import (
 )
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
+from RubberBand.src.position_registry import PositionRegistry
+
+# Bot tag for position attribution
+BOT_TAG = "WK_STK"
 
 # Setup Logging
 logging.basicConfig(
@@ -69,6 +73,9 @@ def run_weekly_cycle():
     from datetime import timezone
     log_date = datetime.now(timezone.utc).strftime("%Y%m%d")
     logger = TradeLogger(path=f"logs/weekly_live_{log_date}.jsonl")
+    
+    # Position Registry for this bot
+    registry = PositionRegistry(bot_tag=BOT_TAG)
     
     # Config for exit brackets
     bcfg = cfg.get("brackets", {})
@@ -138,6 +145,9 @@ def run_weekly_cycle():
                 
                 logging.info(f"Submitting Bracket Order: {symbol} x {qty} @ Market, SL={sl_price:.2f}, TP={tp_price:.2f}")
                 
+                # Generate client_order_id for position attribution
+                coid = registry.generate_order_id(symbol)
+                
                 # Submit bracket order (uses env credentials)
                 result = submit_bracket_order(
                     base_url=None,  # Uses APCA_API_BASE_URL env
@@ -149,7 +159,8 @@ def run_weekly_cycle():
                     limit_price=None,  # Market order
                     take_profit_price=tp_price,
                     stop_loss_price=sl_price,
-                    tif="day"
+                    tif="day",
+                    client_order_id=coid,
                 )
                 
                 if result.get("id"):
@@ -162,6 +173,14 @@ def run_weekly_cycle():
                         stop_loss_price=sl_price,
                         take_profit_price=tp_price,
                         entry_reason=f"Weekly RB: RSI={rsi:.1f}, Dev={mean_dev_pct*100:.1f}%"
+                    )
+                    # Record in registry for position attribution
+                    registry.record_entry(
+                        symbol=symbol,
+                        client_order_id=coid,
+                        qty=qty,
+                        entry_price=close,
+                        order_id=result.get("id", ""),
                     )
                     entries_made += 1
                 else:

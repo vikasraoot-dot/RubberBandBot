@@ -79,6 +79,13 @@ jobs:
             }
           }
 
+      - name: Download Position Registry
+        uses: actions/download-artifact@v4
+        with:
+          name: position-registry-15M_OPT
+          path: .position_registry/
+        continue-on-error: true  # First run won't have artifact
+
       # Run options spreads loop every 15 minutes
       - name: Run options spreads loop (paper trading)
         shell: powershell
@@ -106,3 +113,12 @@ jobs:
             --dry-run $dryRun `
             --dte $dte `
             --max-debit 3.00
+      
+      - name: Upload Position Registry
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: position-registry-15M_OPT
+          path: .position_registry/15M_OPT_positions.json
+          if-no-files-found: warn
+          retention-days: 90

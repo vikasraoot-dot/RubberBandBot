@@ -29,6 +29,10 @@ from RubberBand.src.data import (
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.src.ticker_health import TickerHealthManager
+from RubberBand.src.position_registry import PositionRegistry
+
+# Bot tag for position attribution
+BOT_TAG = "15M_STK"
 
 
 # -------- helpers --------
@@ -178,6 +182,9 @@ def main() -> int:
     # Health Manager
     health_file = os.path.join(results_dir, "ticker_health.json")
     health_mgr = TickerHealthManager(health_file, cfg.get("resilience", {}))
+    
+    # Position Registry for this bot
+    registry = PositionRegistry(bot_tag=BOT_TAG)
 
     # Broker creds (for market/positions/order calls)
     base_url_raw, key, secret = _broker_creds(cfg)
@@ -537,6 +544,9 @@ def main() -> int:
                 pass
         else:
             try:
+                # Generate client_order_id for position attribution
+                coid = registry.generate_order_id(sym)
+                
                 resp = submit_bracket_order(
                     base_url,
                     key,
@@ -548,11 +558,11 @@ def main() -> int:
                     take_profit_price=take_profit,
                     stop_loss_price=stop_price,
                     tif="day",
+                    client_order_id=coid,
                 )
                 print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
                 try:
                     oid = (resp.get("id") if isinstance(resp, dict) else None)
-                    coid = (resp.get("client_order_id") if isinstance(resp, dict) else None)
                     log.entry_ack(
                         symbol=sym,
                         session=session,
@@ -562,6 +572,15 @@ def main() -> int:
                         broker_resp=resp,
                         dry_run=False,
                     )
+                    # Record in registry for position attribution
+                    if oid:
+                        registry.record_entry(
+                            symbol=sym,
+                            client_order_id=coid,
+                            qty=qty,
+                            entry_price=entry,
+                            order_id=oid,
+                        )
                 except Exception:
                     pass
             except Exception as e:
