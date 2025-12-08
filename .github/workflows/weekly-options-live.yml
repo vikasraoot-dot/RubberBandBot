@@ -19,7 +19,7 @@ on:
       max_premium:
         description: 'Max premium per contract ($)'
         required: false
-        default: '200'
+        default: '1000'
         type: string
       mode:
         description: 'Run mode (full=scan+trade, monitor=check exits only)'
@@ -58,7 +58,7 @@ jobs:
           else
             DRY_RUN=${{ github.event.inputs.dry_run || '1' }}  # Manual default to simulation
           fi
-          MAX_PREMIUM=${{ github.event.inputs.max_premium || '200' }}
+          MAX_PREMIUM=${{ github.event.inputs.max_premium || '1000' }}
           MODE=${{ github.event.inputs.mode || 'auto' }}
           
           # Determine mode: Monday = full scan, other days = monitor only

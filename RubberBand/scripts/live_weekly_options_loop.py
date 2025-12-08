@@ -80,7 +80,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--config", default="RubberBand/config_weekly.yaml", help="Config file")
     p.add_argument("--tickers", default="RubberBand/tickers_weekly.txt", help="Tickers file")
     p.add_argument("--dry-run", type=int, default=1, help="1=dry run, 0=live")
-    p.add_argument("--max-premium", type=float, default=200.0, help="Max premium per contract")
+    p.add_argument("--max-premium", type=float, default=1000.0, help="Max premium per contract ($)")
     p.add_argument("--monitor-only", action="store_true", help="Only check positions, don't scan for new signals")
     return p.parse_args()
 
