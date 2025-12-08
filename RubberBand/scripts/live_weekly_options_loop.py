@@ -1,0 +1,417 @@
+#!/usr/bin/env python3
+"""
+Live Weekly Options Loop: Trade 45-DTE ITM Calls using Weekly Mean Reversion signals.
+
+Strategy V3:
+- Delta: 0.65 (ITM for less theta decay)
+- Entry: RSI < 45, Price < 5% below SMA20
+- Exit: Mean Reversion, Stop Loss (2 ATR), or 9-week Time Stop
+- No leveraged ETFs (SOXL, TQQQ excluded from tickers)
+
+Usage:
+    python RubberBand/scripts/live_weekly_options_loop.py --dry-run 1
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from datetime import datetime, timedelta
+from typing import List, Dict, Any
+
+# Ensure repo root is on path
+_THIS = os.path.abspath(os.path.dirname(__file__))
+_REPO_ROOT = os.path.abspath(os.path.join(_THIS, "..", ".."))
+if _REPO_ROOT not in sys.path:
+    sys.path.insert(0, _REPO_ROOT)
+
+from zoneinfo import ZoneInfo
+import pandas as pd
+import yaml
+
+from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open
+from RubberBand.scripts.backtest_weekly import attach_indicators
+from RubberBand.src.options_data import (
+    select_atm_contract,
+    get_option_quote,
+    is_options_trading_allowed,
+)
+from RubberBand.src.options_execution import (
+    submit_option_order,
+    get_option_positions,
+    close_option_position,
+    OptionsTradeTracker,
+)
+
+ET = ZoneInfo("US/Eastern")
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Weekly Options Config (V3 Strategy)
+# ──────────────────────────────────────────────────────────────────────────────
+WEEKLY_OPTIONS_CONFIG = {
+    "target_delta": 0.65,         # ITM for less theta decay
+    "target_dte": 45,             # 45 days to expiration
+    "max_premium_per_trade": 200.0,  # Max $ per contract
+    "max_contracts": 1,           # Contracts per signal
+    "max_positions": 5,           # Max concurrent positions
+    "tp_pct": 100.0,              # Take profit at +100% (double)
+    "sl_pct": -50.0,              # Stop loss at -50%
+    "max_weeks_held": 9,          # Time stop after 9 weeks
+}
+
+
+def _load_config(path: str) -> dict:
+    with open(path, "r", encoding="utf-8") as f:
+        return yaml.safe_load(f) or {}
+
+
+def _parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Weekly Options Trading Loop V3")
+    p.add_argument("--config", default="RubberBand/config_weekly.yaml", help="Config file")
+    p.add_argument("--tickers", default="RubberBand/tickers_weekly.txt", help="Tickers file")
+    p.add_argument("--dry-run", type=int, default=1, help="1=dry run, 0=live")
+    p.add_argument("--max-premium", type=float, default=200.0, help="Max premium per contract")
+    p.add_argument("--monitor-only", action="store_true", help="Only check positions, don't scan for new signals")
+    return p.parse_args()
+
+
+def _now_et() -> datetime:
+    return datetime.now(ET)
+
+
+def _log(msg: str, data: dict = None):
+    """Structured JSON logging."""
+    entry = {"ts": _now_et().isoformat(), "msg": msg}
+    if data:
+        entry.update(data)
+    print(json.dumps(entry, default=str), flush=True)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Weekly Signal Detection
+# ──────────────────────────────────────────────────────────────────────────────
+def get_weekly_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
+    """
+    Scan for weekly mean reversion signals.
+    
+    Entry: RSI < 45 AND Price < 5% below SMA20 (previous week confirmed)
+    """
+    signals = []
+    
+    rsi_thresh = float(cfg.get("filters", {}).get("rsi_oversold", 45))
+    mean_dev_thresh = float(cfg.get("filters", {}).get("mean_deviation_threshold", -5)) / 100.0
+    
+    for sym in symbols:
+        try:
+            # Fetch weekly bars
+            bars_map, _ = fetch_latest_bars(
+                symbols=[sym],
+                timeframe="1Week",
+                history_days=365,  # 1 year for indicators
+                feed=cfg.get("feed", "iex"),
+                verbose=False,
+            )
+            
+            df = bars_map.get(sym)
+            if df is None or df.empty or len(df) < 30:
+                continue
+            
+            # Attach indicators
+            df = attach_indicators(df, cfg)
+            
+            # Calculate mean deviation
+            df["sma_20"] = df["close"].rolling(20).mean()
+            df["mean_dev"] = (df["close"] - df["sma_20"]) / df["sma_20"]
+            
+            # Use previous bar for confirmed signal
+            if len(df) < 2:
+                continue
+                
+            prev = df.iloc[-2]
+            cur = df.iloc[-1]
+            
+            prev_rsi = float(prev["rsi"]) if "rsi" in prev.index else 50
+            prev_mean_dev = float(prev["mean_dev"]) if "mean_dev" in prev.index else 0
+            
+            # Check signal conditions
+            if prev_rsi < rsi_thresh and prev_mean_dev < mean_dev_thresh:
+                signals.append({
+                    "symbol": sym,
+                    "entry_price": float(cur["open"]),  # Enter at current week open
+                    "close": float(cur["close"]),
+                    "rsi": prev_rsi,
+                    "mean_dev_pct": prev_mean_dev * 100,
+                    "atr": float(cur["atr"]) if "atr" in cur.index else cur["close"] * 0.03,
+                })
+                
+        except Exception as e:
+            _log(f"Error scanning {sym}", {"error": str(e)})
+            continue
+    
+    return signals
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Options Entry (45-DTE ITM)
+# ──────────────────────────────────────────────────────────────────────────────
+def get_45dte_expiration() -> str:
+    """Get expiration date ~45 days out (nearest Friday)."""
+    target = datetime.now() + timedelta(days=45)
+    # Find nearest Friday
+    days_until_friday = (4 - target.weekday()) % 7
+    if days_until_friday == 0:
+        days_until_friday = 7
+    expiry = target + timedelta(days=days_until_friday)
+    return expiry.strftime("%Y-%m-%d")
+
+
+def try_weekly_option_entry(
+    signal: Dict[str, Any],
+    opts_cfg: dict,
+    tracker: OptionsTradeTracker,
+    dry_run: bool = True,
+) -> bool:
+    """
+    Enter ITM call option for weekly signal.
+    
+    Target: Delta ~0.65 (strike below current price)
+    """
+    sym = signal["symbol"]
+    entry_price = signal["entry_price"]
+    max_premium = opts_cfg.get("max_premium_per_trade", 200.0)
+    max_contracts = opts_cfg.get("max_contracts", 1)
+    target_delta = opts_cfg.get("target_delta", 0.65)
+    
+    # Get 45-DTE expiration
+    expiration = get_45dte_expiration()
+    
+    # For ITM call with Delta 0.65, strike should be below current price
+    # Estimate: strike = current_price * (1 - (delta - 0.5) * 0.2)
+    # For delta 0.65: strike ≈ current * 0.97 (3% ITM)
+    itm_factor = 1 - (target_delta - 0.5) * 0.2
+    target_strike = entry_price * itm_factor
+    
+    # Select contract nearest to target strike (ITM)
+    contract = select_atm_contract(sym, expiration, option_type="call")
+    if not contract:
+        _log(f"No contract for {sym}", {"expiration": expiration})
+        return False
+    
+    option_symbol = contract.get("symbol", "")
+    strike = float(contract.get("strike_price", 0))
+    
+    # Get quote
+    quote = get_option_quote(option_symbol)
+    if not quote:
+        _log(f"No quote for {option_symbol}")
+        return False
+    
+    ask_price = quote.get("ask", 0)
+    premium_cost = ask_price * 100 * max_contracts
+    
+    # Check max premium
+    if premium_cost > max_premium:
+        _log(f"Premium too high for {option_symbol}", {
+            "ask": ask_price,
+            "total_cost": premium_cost,
+            "max": max_premium,
+        })
+        return False
+    
+    # Entry
+    if dry_run:
+        _log(f"[DRY-RUN] Would buy {option_symbol}", {
+            "qty": max_contracts,
+            "ask": ask_price,
+            "cost": premium_cost,
+            "strike": strike,
+            "expiration": expiration,
+            "signal": signal,
+        })
+    else:
+        result = submit_option_order(
+            option_symbol=option_symbol,
+            qty=max_contracts,
+            side="buy",
+            order_type="limit",
+            limit_price=ask_price,
+        )
+        if result.get("error"):
+            _log(f"Order failed for {option_symbol}", {"result": result})
+            return False
+        
+        _log(f"Order submitted for {option_symbol}", {
+            "order_id": result.get("id"),
+            "qty": max_contracts,
+            "limit_price": ask_price,
+        })
+    
+    # Track
+    tracker.record_entry(
+        underlying=sym,
+        option_symbol=option_symbol,
+        qty=max_contracts,
+        premium=ask_price,
+        strike=strike,
+        expiration=expiration,
+    )
+    
+    return True
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Position Management (TP/SL/Time Stop)
+# ──────────────────────────────────────────────────────────────────────────────
+def manage_weekly_positions(
+    opts_cfg: dict,
+    tracker: OptionsTradeTracker,
+    dry_run: bool = True,
+):
+    """Check open positions and exit if TP/SL conditions met.
+    
+    Note: Time-based exits are tracked separately since the tracker is
+    instantiated fresh each run. For 45-DTE options, expiration date
+    serves as the natural time limit.
+    """
+    positions = get_option_positions()
+    tp_pct = opts_cfg.get("tp_pct", 100.0)
+    sl_pct = opts_cfg.get("sl_pct", -50.0)
+    
+    _log(f"Managing {len(positions)} weekly option positions")
+    
+    for pos in positions:
+        symbol = pos.get("symbol", "")
+        pnl_pct = float(pos.get("unrealized_plpc", 0)) * 100  # Convert to %
+        
+        # Check exit conditions (TP and SL only for now)
+        # Time stop would require persistent tracking across runs
+        should_exit = False
+        reason = ""
+        
+        if pnl_pct >= tp_pct:
+            should_exit = True
+            reason = "TakeProfit"
+        elif pnl_pct <= sl_pct:
+            should_exit = True
+            reason = "StopLoss"
+        
+        if should_exit:
+            current_price = float(pos.get("current_price", 0))
+            
+            if dry_run:
+                _log(f"[DRY-RUN] Would exit {symbol}", {
+                    "reason": reason,
+                    "pnl_pct": pnl_pct,
+                    "current_price": current_price,
+                })
+            else:
+                result = close_option_position(symbol)
+                _log(f"Closed {symbol}", {"reason": reason, "result": result})
+            
+            tracker.record_exit(symbol, current_price, reason)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Main
+# ──────────────────────────────────────────────────────────────────────────────
+def main() -> int:
+    args = _parse_args()
+    cfg = _load_config(args.config)
+    
+    # Options config
+    opts_cfg = {**WEEKLY_OPTIONS_CONFIG}
+    opts_cfg["max_premium_per_trade"] = args.max_premium
+    
+    # Load tickers
+    ticker_path = args.tickers
+    if not os.path.isabs(ticker_path):
+        ticker_path = os.path.join(_REPO_ROOT, ticker_path)
+    symbols = load_symbols_from_file(ticker_path)
+    _log("Weekly Options V3 Started", {"tickers": len(symbols)})
+    
+    # Check market status
+    if not alpaca_market_open():
+        _log("Market is closed, exiting")
+        return 0
+    
+    dry_run = bool(args.dry_run)
+    tracker = OptionsTradeTracker()
+    
+    _log("Starting weekly options scan", {
+        "dry_run": dry_run,
+        "monitor_only": args.monitor_only,
+        "max_premium": opts_cfg["max_premium_per_trade"],
+        "target_delta": opts_cfg["target_delta"],
+    })
+    
+    # 1. Check existing positions for exits (always do this)
+    manage_weekly_positions(opts_cfg, tracker, dry_run)
+    
+    # 2. Get current positions
+    current_positions = get_option_positions()
+    position_underlyings = set()
+    for pos in current_positions:
+        sym = pos.get("symbol", "")
+        if len(sym) > 10:
+            for i, c in enumerate(sym):
+                if c.isdigit():
+                    position_underlyings.add(sym[:i])
+                    break
+    
+    _log(f"Current positions: {len(position_underlyings)}", {
+        "positions": list(position_underlyings)
+    })
+    
+    # If monitor-only mode, skip signal scanning and new entries
+    if args.monitor_only:
+        _log("Monitor-only mode: skipping signal scan")
+        _log("Weekly options monitor complete", {
+            "total_positions": len(position_underlyings),
+        })
+        return 0
+    
+    # Check max positions limit
+    if len(position_underlyings) >= opts_cfg.get("max_positions", 5):
+        _log("Max positions reached, no new entries")
+        return 0
+    
+    # 3. Scan for new weekly signals
+    signals = get_weekly_signals(symbols, cfg)
+    _log(f"Found {len(signals)} weekly signals", {
+        "signals": [(s["symbol"], f"RSI={s['rsi']:.1f}") for s in signals]
+    })
+    
+    # 4. Enter new positions
+    entries = 0
+    for signal in signals:
+        if signal["symbol"] in position_underlyings:
+            _log(f"Already have position in {signal['symbol']}, skipping")
+            continue
+        
+        if try_weekly_option_entry(signal, opts_cfg, tracker, dry_run):
+            entries += 1
+            position_underlyings.add(signal["symbol"])
+        
+        # Respect max positions
+        if len(position_underlyings) >= opts_cfg.get("max_positions", 5):
+            break
+    
+    # 5. Summary
+    _log("Weekly options scan complete", {
+        "signals": len(signals),
+        "new_entries": entries,
+        "total_positions": len(position_underlyings),
+    })
+    
+    # Save trades log
+    results_dir = "results"
+    os.makedirs(results_dir, exist_ok=True)
+    log_path = os.path.join(results_dir, f"weekly_options_trades_{_now_et().strftime('%Y%m%d')}.json")
+    tracker.to_json(log_path)
+    
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

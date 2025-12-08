@@ -1,0 +1,99 @@
+name: Weekly Options Live Trading
+
+on:
+  # NEW ENTRIES: Monday 9:35 AM ET (scan + enter positions)
+  # POSITION CHECKS: Mon-Fri at 9:35 AM and 3:00 PM ET (monitor exits)
+  schedule:
+    - cron: '35 14 * * 1'    # Monday 9:35 AM ET - Full scan + entries
+    - cron: '35 14 * * 2-5'  # Tue-Fri 9:35 AM ET - Position checks only
+    - cron: '00 20 * * 1-5'  # Mon-Fri 3:00 PM ET - Afternoon position checks
+  
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (1=simulation, 0=live)'
+        required: false
+        default: '1'
+        type: string
+      max_premium:
+        description: 'Max premium per contract ($)'
+        required: false
+        default: '200'
+        type: string
+      mode:
+        description: 'Run mode (full=scan+trade, monitor=check exits only)'
+        required: false
+        default: 'full'
+        type: string
+
+jobs:
+  trade:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
+          pip install pandas requests pyyaml numpy alpaca-trade-api
+      
+      - name: Run Weekly Options Trading V3
+        env:
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+        run: |
+          DRY_RUN=${{ github.event.inputs.dry_run || '1' }}
+          MAX_PREMIUM=${{ github.event.inputs.max_premium || '200' }}
+          MODE=${{ github.event.inputs.mode || 'auto' }}
+          
+          # Determine mode: Monday = full scan, other days = monitor only
+          DAY_OF_WEEK=$(date +%u)  # 1=Monday, 2=Tuesday, etc.
+          if [ "$MODE" = "auto" ]; then
+            if [ "$DAY_OF_WEEK" = "1" ]; then
+              RUN_MODE="full"
+            else
+              RUN_MODE="monitor"
+            fi
+          else
+            RUN_MODE="$MODE"
+          fi
+          
+          echo "========================================"
+          echo "Weekly Options V3 Live Trading"
+          echo "========================================"
+          echo "Day of Week: $DAY_OF_WEEK"
+          echo "Run Mode: $RUN_MODE"
+          echo "Dry Run: $DRY_RUN"
+          echo "Max Premium: $MAX_PREMIUM"
+          echo "Strategy: Delta 0.65, 45-DTE"
+          echo "========================================"
+          
+          if [ "$RUN_MODE" = "monitor" ]; then
+            echo "📊 MONITOR MODE: Checking positions for exits only"
+            python RubberBand/scripts/live_weekly_options_loop.py \
+              --dry-run $DRY_RUN \
+              --max-premium $MAX_PREMIUM \
+              --monitor-only
+          else
+            echo "🚀 FULL MODE: Scanning for signals + managing positions"
+            python RubberBand/scripts/live_weekly_options_loop.py \
+              --dry-run $DRY_RUN \
+              --max-premium $MAX_PREMIUM
+          fi
+      
+      - name: Upload Trade Logs
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-options-trades-${{ github.run_id }}
+          path: results/weekly_options_trades_*.json
+          if-no-files-found: warn
