@@ -14,7 +14,7 @@ on:
       dry_run:
         description: 'Dry run mode (1=simulation, 0=live)'
         required: false
-        default: '1'
+        default: '0'
         type: string
       max_premium:
         description: 'Max premium per contract ($)'
