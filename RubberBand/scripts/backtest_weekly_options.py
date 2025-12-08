@@ -25,7 +25,7 @@ def simulate_weekly_options(
     """
     Simulate Weekly Options Trading.
     Strategy: Buy ITM Call (~45 DTE) when Weekly Signal hits.
-    Exit: Mean Reversion, Stop Loss, or 4-week Time Stop.
+    Exit: Mean Reversion, Stop Loss, or 9-week Time Stop.
     Model: Delta 0.65, Theta Decay -10% of Extrinsic Value per week.
     """
     if df is None or df.empty or len(df) < 20:
@@ -57,7 +57,7 @@ def simulate_weekly_options(
     # Higher Delta (0.65) = More intrinsic value, less theta decay
     DELTA = 0.65
     THETA_DECAY_WEEKLY = 0.10  # Lose 10% of premium per week due to time
-    LEVERAGE_COST = 0.06       # Premium costs ~6% of stock price (ITM 45DTE)
+    LEVERAGE_COST = 0.05       # Premium costs ~5% of stock price (ITM 45DTE)
     
     in_trade = False
     trade = {}
@@ -142,7 +142,7 @@ def simulate_weekly_options(
                 stock_change_tp = tp_stock_price - trade["entry_price"]
                 current_opt_val = trade["opt_cost"] + (stock_change_tp * DELTA) - theta_loss
 
-            if exit_signal or trade["weeks_held"] > 3: # Time stop - max 4 weeks to reduce theta decay
+            if exit_signal or trade["weeks_held"] > 8: # Time stop - max 9 weeks
                 if not exit_signal: reason = "TimeStop"
                 
                 pnl = current_opt_val - trade["opt_cost"]
