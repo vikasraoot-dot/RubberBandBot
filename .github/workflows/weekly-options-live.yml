@@ -52,7 +52,12 @@ jobs:
           APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           APCA_API_BASE_URL: https://paper-api.alpaca.markets
         run: |
-          DRY_RUN=${{ github.event.inputs.dry_run || '1' }}
+          # Scheduled runs = LIVE, Manual runs = whatever is specified (default simulation)
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            DRY_RUN=0  # Scheduled runs are LIVE
+          else
+            DRY_RUN=${{ github.event.inputs.dry_run || '1' }}  # Manual default to simulation
+          fi
           MAX_PREMIUM=${{ github.event.inputs.max_premium || '200' }}
           MODE=${{ github.event.inputs.mode || 'auto' }}
           
