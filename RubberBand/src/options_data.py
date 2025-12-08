@@ -184,6 +184,79 @@ def select_atm_contract(
     return best
 
 
+def select_itm_contract(
+    underlying: str,
+    expiration_date: Optional[str] = None,
+    option_type: str = "call",
+    target_delta: float = 0.65,
+) -> Optional[Dict[str, Any]]:
+    """
+    Select an In-The-Money (ITM) option contract.
+    
+    For calls: ITM means strike BELOW current price.
+    Target Delta ~0.65 means strike ~3% below current price.
+    
+    Args:
+        underlying: Stock symbol
+        expiration_date: YYYY-MM-DD format
+        option_type: "call" or "put"
+        target_delta: Target delta (0.65 = ~3% ITM for calls)
+    
+    Returns:
+        Contract dict or None
+    """
+    # Get current price
+    price = get_underlying_price(underlying)
+    if price is None:
+        print(f"[options] Cannot get price for {underlying}, cannot select ITM")
+        return None
+    
+    # Calculate target strike based on delta
+    # For Delta 0.65 call, strike should be ~3% below current price
+    # Formula: strike = price * (1 - (delta - 0.5) * 0.2)
+    itm_factor = 1 - (target_delta - 0.5) * 0.2
+    target_strike = price * itm_factor
+    
+    # Fetch contracts
+    contracts = fetch_option_contracts(underlying, expiration_date, option_type)
+    if not contracts:
+        return None
+    
+    # Find strike closest to our ITM target
+    best = None
+    best_diff = float("inf")
+    
+    for c in contracts:
+        if c.get("status") != "active" or not c.get("tradable"):
+            continue
+        try:
+            strike = float(c.get("strike_price", 0))
+            
+            # For calls, we want ITM = strike BELOW current price
+            if option_type.lower() == "call" and strike > price:
+                continue  # Skip OTM strikes
+            # For puts, we want ITM = strike ABOVE current price  
+            if option_type.lower() == "put" and strike < price:
+                continue  # Skip OTM strikes
+                
+            diff = abs(strike - target_strike)
+            if diff < best_diff:
+                best_diff = diff
+                best = c
+        except (ValueError, TypeError):
+            continue
+    
+    if best:
+        selected_strike = float(best.get("strike_price", 0))
+        itm_pct = abs(price - selected_strike) / price * 100
+        print(f"[options] Selected ITM: {best.get('symbol')} strike={selected_strike} ({itm_pct:.1f}% ITM, underlying={price:.2f})")
+    else:
+        print(f"[options] No ITM contract found for {underlying}, falling back to ATM")
+        return select_atm_contract(underlying, expiration_date, option_type)
+    
+    return best
+
+
 def get_option_quote(option_symbol: str) -> Optional[Dict[str, float]]:
     """
     Get real-time quote for an option contract.

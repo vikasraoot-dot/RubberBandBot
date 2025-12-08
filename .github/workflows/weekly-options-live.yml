@@ -62,7 +62,8 @@ jobs:
           MODE=${{ github.event.inputs.mode || 'auto' }}
           
           # Determine mode: Monday = full scan, other days = monitor only
-          DAY_OF_WEEK=$(date +%u)  # 1=Monday, 2=Tuesday, etc.
+          # Use Eastern timezone for correct day detection
+          DAY_OF_WEEK=$(TZ=America/New_York date +%u)  # 1=Monday, 2=Tuesday, etc.
           if [ "$MODE" = "auto" ]; then
             if [ "$DAY_OF_WEEK" = "1" ]; then
               RUN_MODE="full"

@@ -4,8 +4,9 @@ Live Weekly Options Loop: Trade 45-DTE ITM Calls using Weekly Mean Reversion sig
 
 Strategy V3:
 - Delta: 0.65 (ITM for less theta decay)
-- Entry: RSI < 45, Price < 5% below SMA20
-- Exit: Mean Reversion, Stop Loss (2 ATR), or 9-week Time Stop
+- Entry: RSI < 45, Price < 5% below SMA20 (confirmed previous week)
+- Exit: Take Profit (+100%), Stop Loss (-50%)
+- Expiration: 45-DTE options naturally expire ~6-7 weeks (replaces time stop)
 - No leveraged ETFs (SOXL, TQQQ excluded from tickers)
 
 Usage:
@@ -33,7 +34,7 @@ import yaml
 from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.options_data import (
-    select_atm_contract,
+    select_itm_contract,
     get_option_quote,
     is_options_trading_allowed,
 )
@@ -52,18 +53,26 @@ ET = ZoneInfo("US/Eastern")
 WEEKLY_OPTIONS_CONFIG = {
     "target_delta": 0.65,         # ITM for less theta decay
     "target_dte": 45,             # 45 days to expiration
-    "max_premium_per_trade": 200.0,  # Max $ per contract
+    "max_premium_per_trade": 1000.0,  # Max $ per contract (ITM options cost more)
     "max_contracts": 1,           # Contracts per signal
     "max_positions": 5,           # Max concurrent positions
     "tp_pct": 100.0,              # Take profit at +100% (double)
     "sl_pct": -50.0,              # Stop loss at -50%
-    "max_weeks_held": 9,          # Time stop after 9 weeks
+    "max_weeks_held": 9,          # Time stop after 9 weeks (via expiration)
 }
 
 
 def _load_config(path: str) -> dict:
-    with open(path, "r", encoding="utf-8") as f:
-        return yaml.safe_load(f) or {}
+    """Load YAML config file with validation."""
+    if not os.path.exists(path):
+        print(f"Warning: Config file not found at {path}, using defaults")
+        return {}
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f) or {}
+    except yaml.YAMLError as e:
+        print(f"Error parsing config file {path}: {e}")
+        return {}
 
 
 def _parse_args() -> argparse.Namespace:
@@ -179,23 +188,17 @@ def try_weekly_option_entry(
     """
     sym = signal["symbol"]
     entry_price = signal["entry_price"]
-    max_premium = opts_cfg.get("max_premium_per_trade", 200.0)
+    max_premium = opts_cfg.get("max_premium_per_trade", 1000.0)
     max_contracts = opts_cfg.get("max_contracts", 1)
     target_delta = opts_cfg.get("target_delta", 0.65)
     
     # Get 45-DTE expiration
     expiration = get_45dte_expiration()
     
-    # For ITM call with Delta 0.65, strike should be below current price
-    # Estimate: strike = current_price * (1 - (delta - 0.5) * 0.2)
-    # For delta 0.65: strike ≈ current * 0.97 (3% ITM)
-    itm_factor = 1 - (target_delta - 0.5) * 0.2
-    target_strike = entry_price * itm_factor
-    
-    # Select contract nearest to target strike (ITM)
-    contract = select_atm_contract(sym, expiration, option_type="call")
+    # Select ITM contract (Delta ~0.65)
+    contract = select_itm_contract(sym, expiration, option_type="call", target_delta=target_delta)
     if not contract:
-        _log(f"No contract for {sym}", {"expiration": expiration})
+        _log(f"No ITM contract for {sym}", {"expiration": expiration, "target_delta": target_delta})
         return False
     
     option_symbol = contract.get("symbol", "")
@@ -246,6 +249,7 @@ def try_weekly_option_entry(
             "qty": max_contracts,
             "limit_price": ask_price,
         })
+        # NOTE: Order may not fill immediately. Check positions on next run.
     
     # Track
     tracker.record_entry(
@@ -333,6 +337,11 @@ def main() -> int:
     # Check market status
     if not alpaca_market_open():
         _log("Market is closed, exiting")
+        return 0
+    
+    # Check options trading cutoff (no trading after 3:00 PM ET)
+    if not is_options_trading_allowed():
+        _log("Options trading cutoff reached (after 3:00 PM ET), exiting")
         return 0
     
     dry_run = bool(args.dry_run)
