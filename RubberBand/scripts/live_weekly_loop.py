@@ -281,6 +281,10 @@ def run_weekly_cycle():
             logging.info(f"TOTAL Day PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}")
     except Exception as e:
         logging.error(f"Failed to generate summary: {e}")
+    
+    # Force save registry to ensure artifact exists (even if empty)
+    registry.save()
+    
     logging.info("=== End Summary ===")
 
 if __name__ == "__main__":
