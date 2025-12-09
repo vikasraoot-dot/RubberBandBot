@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 
 # Add project root to path if running as script
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
@@ -7,8 +8,15 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")
 from RubberBand.src.data import get_daily_fills
 
 def main():
-    print("Fetching daily fills...", flush=True)
-    fills = get_daily_fills()
+    parser = argparse.ArgumentParser(description="Daily PnL Report")
+    parser.add_argument("--bot-tag", type=str, default=None, 
+                        help="Filter by bot tag (e.g., 15M_STK, 15M_OPT, WK_STK, WK_OPT)")
+    args = parser.parse_args()
+    
+    bot_tag = args.bot_tag
+    tag_msg = f" (filtered by {bot_tag})" if bot_tag else " (ALL bots)"
+    print(f"Fetching daily fills{tag_msg}...", flush=True)
+    fills = get_daily_fills(bot_tag=bot_tag)
     
     if not fills:
         print("No trades filled today.")

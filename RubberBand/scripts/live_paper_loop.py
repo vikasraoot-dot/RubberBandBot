@@ -290,7 +290,7 @@ def main() -> int:
 
     # Daily cooldown: Get all tickers traded today (prevents re-entry after TP/SL)
     try:
-        daily_fills = get_daily_fills(base_url, key, secret) or []
+        daily_fills = get_daily_fills(base_url, key, secret, bot_tag=BOT_TAG) or []
         traded_today = set(f.get("symbol") for f in daily_fills if f.get("symbol"))
     except Exception as e:
         print(f"[warn] Could not fetch daily fills for cooldown: {e}", flush=True)
@@ -599,7 +599,8 @@ def main() -> int:
     print("\n=== Session Summary ===", flush=True)
     try:
         # Fetch fills (get_daily_fills already imported at top of file)
-        fills = get_daily_fills(base_url, key, secret)
+        # Filter by this bot's tag to only show our trades
+        fills = get_daily_fills(base_url, key, secret, bot_tag=BOT_TAG)
         
         if not fills:
             print("No trades filled today.", flush=True)

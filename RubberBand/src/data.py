@@ -97,8 +97,20 @@ def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, sec
     except Exception:
         return []
 
-def get_daily_fills(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
-    """Fetch all filled orders for the current UTC day."""
+def get_daily_fills(
+    base_url: Optional[str] = None, 
+    key: Optional[str] = None, 
+    secret: Optional[str] = None,
+    bot_tag: Optional[str] = None,
+) -> List[Dict[str, Any]]:
+    """Fetch all filled orders for the current UTC day.
+    
+    Args:
+        base_url: Alpaca API base URL
+        key: API key
+        secret: API secret
+        bot_tag: Optional bot tag prefix to filter by client_order_id (e.g., "15M_STK")
+    """
     base = _base_url_from_env(base_url)
     # Start of today UTC
     today = _now_utc().strftime("%Y-%m-%d")
@@ -112,7 +124,13 @@ def get_daily_fills(base_url: Optional[str] = None, key: Optional[str] = None, s
         r.raise_for_status()
         orders = r.json() or []
         # Filter for filled only
-        return [o for o in orders if o.get("status") == "filled" and o.get("filled_qty") is not None]
+        fills = [o for o in orders if o.get("status") == "filled" and o.get("filled_qty") is not None]
+        
+        # Filter by bot_tag prefix if specified
+        if bot_tag:
+            fills = [f for f in fills if (f.get("client_order_id") or "").startswith(f"{bot_tag}_")]
+        
+        return fills
     except Exception as e:
         print(f"[warn] Failed to fetch daily fills: {e}")
         return []
