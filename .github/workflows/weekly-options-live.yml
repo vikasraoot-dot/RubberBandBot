@@ -65,18 +65,15 @@ jobs:
           else
             DRY_RUN=${{ github.event.inputs.dry_run || '1' }}  # Manual default to simulation
           fi
-          MAX_PREMIUM=${{ github.event.inputs.max_premium || '1000' }}
-          MODE=${{ github.event.inputs.mode || 'auto' }}
+          MAX_PREMIUM=${{ github.event.inputs.max_premium || '2000' }}
+          MODE=${{ github.event.inputs.mode || 'full' }}
           
-          # Determine mode: Monday = full scan, other days = monitor only
-          # Use Eastern timezone for correct day detection
+          # Use Eastern timezone for logging
           DAY_OF_WEEK=$(TZ=America/New_York date +%u)  # 1=Monday, 2=Tuesday, etc.
-          if [ "$MODE" = "auto" ]; then
-            if [ "$DAY_OF_WEEK" = "1" ]; then
-              RUN_MODE="full"
-            else
-              RUN_MODE="monitor"
-            fi
+          
+          # ALWAYS run in FULL mode (scan + trade) unless manually set to monitor
+          if [ "$MODE" = "full" ] || [ "$MODE" = "auto" ]; then
+            RUN_MODE="full"
           else
             RUN_MODE="$MODE"
           fi
