@@ -31,7 +31,7 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 import yaml
 
-from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open
+from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open, get_daily_fills
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.options_data import (
     select_itm_contract,
@@ -537,6 +537,55 @@ def main() -> int:
     
     registry.save()
     logger.close()
+    
+    # --- Session Summary ---
+    _log("\n=== Weekly Options Session Summary ===")
+    try:
+        fills = get_daily_fills(bot_tag=BOT_TAG)
+        if not fills:
+            _log("No trades filled today for WK_OPT.")
+        else:
+            stats = {}
+            for f in fills:
+                sym = f.get("symbol")
+                side = f.get("side")
+                qty = float(f.get("filled_qty", 0))
+                px = float(f.get("filled_avg_price", 0))
+                if sym not in stats:
+                    stats[sym] = {"buy_qty": 0, "buy_val": 0.0, "sell_qty": 0, "sell_val": 0.0}
+                if side == "buy":
+                    stats[sym]["buy_qty"] += qty
+                    stats[sym]["buy_val"] += (qty * px)
+                elif side == "sell":
+                    stats[sym]["sell_qty"] += qty
+                    stats[sym]["sell_val"] += (qty * px)
+
+            header = f"{'Symbol':<25} {'Bought':<8} {'Avg Ent':<10} {'Basis':<12} {'Sold':<8} {'Avg Ex':<10} {'Day PnL':<10}"
+            print("-" * len(header), flush=True)
+            print(header, flush=True)
+            print("-" * len(header), flush=True)
+
+            total_pnl = 0.0
+            total_vol = 0.0
+            for sym in sorted(stats.keys()):
+                s = stats[sym]
+                b_qty, b_val = s["buy_qty"], s["buy_val"]
+                s_qty, s_val = s["sell_qty"], s["sell_val"]
+                avg_ent = (b_val / b_qty) if b_qty > 0 else 0.0
+                avg_ex = (s_val / s_qty) if s_qty > 0 else 0.0
+                matched_qty = min(b_qty, s_qty)
+                realized_pnl = (avg_ex - avg_ent) * matched_qty * 100 if matched_qty > 0 else 0.0  # *100 for contracts
+                total_pnl += realized_pnl
+                total_vol += (b_val + s_val) * 100
+                pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
+                print(f"{sym:<25} {int(b_qty):<8} {avg_ent:<10.2f} {b_val*100:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {pnl_str:<10}", flush=True)
+
+            print("-" * len(header), flush=True)
+            print(f"TOTAL Day PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}", flush=True)
+    except Exception as e:
+        _log(f"Failed to generate summary", {"error": str(e)})
+    _log("=== End Summary ===")
+    
     return 0
 
 

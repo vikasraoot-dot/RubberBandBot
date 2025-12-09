@@ -16,6 +16,7 @@ from RubberBand.src.data import (
     alpaca_market_open,
     submit_bracket_order,
     get_positions,
+    get_daily_fills,
 )
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
@@ -209,6 +210,54 @@ def run_weekly_cycle():
         except Exception as e:
             logging.error(f"Error processing {symbol}: {e}")
             traceback.print_exc()
+
+    # --- Session Summary ---
+    logging.info("\n=== Weekly Stock Session Summary ===")
+    try:
+        fills = get_daily_fills(bot_tag=BOT_TAG)
+        if not fills:
+            logging.info("No trades filled today for WK_STK.")
+        else:
+            stats = {}
+            for f in fills:
+                sym = f.get("symbol")
+                side = f.get("side")
+                qty = float(f.get("filled_qty", 0))
+                px = float(f.get("filled_avg_price", 0))
+                if sym not in stats:
+                    stats[sym] = {"buy_qty": 0, "buy_val": 0.0, "sell_qty": 0, "sell_val": 0.0}
+                if side == "buy":
+                    stats[sym]["buy_qty"] += qty
+                    stats[sym]["buy_val"] += (qty * px)
+                elif side == "sell":
+                    stats[sym]["sell_qty"] += qty
+                    stats[sym]["sell_val"] += (qty * px)
+
+            header = f"{'Ticker':<8} {'Bought':<8} {'Avg Ent':<10} {'Basis':<12} {'Sold':<8} {'Avg Ex':<10} {'Day PnL':<10}"
+            logging.info("-" * len(header))
+            logging.info(header)
+            logging.info("-" * len(header))
+
+            total_pnl = 0.0
+            total_vol = 0.0
+            for sym in sorted(stats.keys()):
+                s = stats[sym]
+                b_qty, b_val = s["buy_qty"], s["buy_val"]
+                s_qty, s_val = s["sell_qty"], s["sell_val"]
+                avg_ent = (b_val / b_qty) if b_qty > 0 else 0.0
+                avg_ex = (s_val / s_qty) if s_qty > 0 else 0.0
+                matched_qty = min(b_qty, s_qty)
+                realized_pnl = (avg_ex - avg_ent) * matched_qty if matched_qty > 0 else 0.0
+                total_pnl += realized_pnl
+                total_vol += (b_val + s_val)
+                pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
+                logging.info(f"{sym:<8} {int(b_qty):<8} {avg_ent:<10.2f} {b_val:<12.2f} {int(s_qty):<8} {avg_ex:<10.2f} {pnl_str:<10}")
+
+            logging.info("-" * len(header))
+            logging.info(f"TOTAL Day PnL: ${total_pnl:,.2f} | TOTAL VOL: ${total_vol:,.2f}")
+    except Exception as e:
+        logging.error(f"Failed to generate summary: {e}")
+    logging.info("=== End Summary ===")
 
 if __name__ == "__main__":
     while True:
