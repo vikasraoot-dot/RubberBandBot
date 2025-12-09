@@ -162,17 +162,29 @@ def get_weekly_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
     
     for sym in symbols:
         try:
-            # Fetch weekly bars
+            # Fetch daily bars and resample to weekly (more robust than direct 1Week fetch)
             bars_map, _ = fetch_latest_bars(
                 symbols=[sym],
-                timeframe="1Week",
-                history_days=365,  # 1 year for indicators
+                timeframe="1Day",
+                history_days=400,  # Ensure >52 weeks of data
                 feed=cfg.get("feed", "iex"),
                 verbose=False,
             )
             
-            df = bars_map.get(sym)
-            if df is None or df.empty or len(df) < 30:
+            df_daily = bars_map.get(sym)
+            if df_daily is None or df_daily.empty:
+                continue
+
+            # Resample to Weekly (Ending Friday)
+            df = df_daily.resample('W-FRI').agg({
+                'open': 'first',
+                'high': 'max',
+                'low': 'min',
+                'close': 'last',
+                'volume': 'sum'
+            }).dropna()
+
+            if len(df) < 30:
                 continue
             
             # Attach indicators
