@@ -57,11 +57,42 @@ def run_weekly_cycle():
         logging.info("Market is closed. Skipping cycle.")
         return
 
+    # Initialize Trade Logger
+    from datetime import timezone
+    log_date = datetime.now(timezone.utc).strftime("%Y%m%d")
+    logger = TradeLogger(path=f"logs/weekly_live_{log_date}.jsonl")
+    
+    # Position Registry for this bot
+    registry = PositionRegistry(bot_tag=BOT_TAG)
+
     # 1. Check Existing Positions (using env vars for credentials)
-    positions = get_positions()  # Uses env: APCA_API_BASE_URL, APCA_API_KEY_ID, APCA_API_SECRET_KEY
+    all_positions = get_positions()  # Uses env: APCA_API_BASE_URL, APCA_API_KEY_ID, APCA_API_SECRET_KEY
+    
+    # Sync registry with actual Alpaca positions (removes closed/orphaned)
+    registry.sync_with_alpaca(all_positions)
+    
+    # Filter to only OUR positions
+    positions = registry.filter_positions(all_positions)
     open_symbols = {p.get("symbol") for p in positions if p.get("symbol")}
     
-    logging.info(f"Open Positions: {len(open_symbols)}")
+    logging.info(f"Open Positions ({BOT_TAG}): {len(open_symbols)}")
+
+    if positions:
+        logging.info("--- Current Holdings ---")
+        header = f"{'Ticker':<8} {'Qty':<6} {'Entry':<10} {'Current':<10} {'PnL $':<10} {'PnL %':<8}"
+        logging.info(header)
+        logging.info("-" * len(header))
+        
+        for p in positions:
+            sym = p.get("symbol", "N/A")
+            qty = float(p.get("qty", 0))
+            entry = float(p.get("avg_entry_price", 0))
+            current = float(p.get("current_price", 0))
+            pnl = float(p.get("unrealized_pl", 0))
+            pnl_pct = float(p.get("unrealized_plpc", 0)) * 100
+            
+            logging.info(f"{sym:<8} {int(qty):<6} {entry:<10.2f} {current:<10.2f} {pnl:<10.2f} {pnl_pct:<8.2f}%")
+        logging.info("-" * len(header))
 
     max_capital_per_trade = float(cfg.get("max_notional_per_trade", 2000.0))
     limit_pos = int(cfg.get("max_concurrent_positions", 5))
@@ -70,14 +101,6 @@ def run_weekly_cycle():
         logging.info("Max positions reached. No new entries.")
         return
 
-    # Initialize Trade Logger
-    from datetime import timezone
-    log_date = datetime.now(timezone.utc).strftime("%Y%m%d")
-    logger = TradeLogger(path=f"logs/weekly_live_{log_date}.jsonl")
-    
-    # Position Registry for this bot
-    registry = PositionRegistry(bot_tag=BOT_TAG)
-    
     # Config for exit brackets
     bcfg = cfg.get("brackets", {})
     atr_mult_sl = float(bcfg.get("atr_mult_sl", 2.0))
