@@ -30,16 +30,37 @@ def _creds():
 
 def main():
     base, key, sec = _creds()
+    
+    # 1. First, close 15M Options spreads using the registry (proper spread closing)
+    print("[EOD] Closing 15M_OPT spreads from registry...", flush=True)
+    try:
+        from RubberBand.src.options_execution import flatten_bot_spreads
+        results = flatten_bot_spreads(bot_tag="15M_OPT")
+        for r in results:
+            sym = r.get("symbol", "?")
+            short_sym = r.get("short_symbol", "")
+            err = r.get("error")
+            if err:
+                print(f"[EOD] Error closing {sym}: {err}", flush=True)
+            else:
+                print(f"[EOD] Closed spread: {sym} / {short_sym}", flush=True)
+    except Exception as e:
+        print(f"[EOD] Error in 15M_OPT flatten: {e}", flush=True)
+    
+    # 2. Cancel all open orders
     try:
         cancel_all_orders(base, key, sec)
         print("[EOD] canceled all open orders", flush=True)
     except Exception as e:
         print(f"[EOD] cancel orders error: {e}", flush=True)
+    
+    # 3. Close remaining stock positions (from 15M_STK bot)
     try:
         close_all_positions(base, key, sec)
-        print("[EOD] submitted flatten all positions", flush=True)
+        print("[EOD] submitted flatten all remaining positions", flush=True)
     except Exception as e:
         print(f"[EOD] close positions error: {e}", flush=True)
 
 if __name__ == "__main__":
     main()
+

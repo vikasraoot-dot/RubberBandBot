@@ -455,6 +455,93 @@ def flatten_all_option_positions() -> List[Dict[str, Any]]:
     return results
 
 
+def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry") -> List[Dict[str, Any]]:
+    """
+    Close all option spreads belonging to a specific bot using the position registry.
+    
+    This function reads the bot's position registry to identify spreads (positions with
+    both long and short symbols) and closes them properly using close_spread().
+    For positions without a short_symbol, closes them individually.
+    
+    Args:
+        bot_tag: Bot tag to filter positions (e.g., "15M_OPT")
+        registry_dir: Directory containing position registry files
+        
+    Returns:
+        List of close results for each position
+    """
+    import json
+    import os
+    
+    registry_path = os.path.join(registry_dir, f"{bot_tag}_positions.json")
+    results = []
+    
+    # Load registry
+    if not os.path.exists(registry_path):
+        print(f"[flatten] No registry found at {registry_path}")
+        return results
+    
+    try:
+        with open(registry_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception as e:
+        print(f"[flatten] Error loading registry: {e}")
+        return results
+    
+    positions = data.get("positions", {})
+    if not positions:
+        print(f"[flatten] No positions found for {bot_tag}")
+        return results
+    
+    print(f"[flatten] Found {len(positions)} positions for {bot_tag}")
+    
+    for symbol, pos_data in positions.items():
+        long_symbol = pos_data.get("symbol", symbol)
+        short_symbol = pos_data.get("short_symbol")
+        qty = int(pos_data.get("qty", 1))
+        
+        try:
+            if short_symbol:
+                # This is a spread - close both legs together
+                print(f"[flatten] Closing spread: {long_symbol} (long) / {short_symbol} (short)")
+                result = close_spread(long_symbol, short_symbol, qty)
+            else:
+                # Single option position - close individually
+                print(f"[flatten] Closing single position: {long_symbol}")
+                result = close_option_position(long_symbol, qty)
+            
+            results.append({
+                "symbol": long_symbol,
+                "short_symbol": short_symbol,
+                "qty": qty,
+                "result": result,
+            })
+        except Exception as e:
+            print(f"[flatten] Error closing {long_symbol}: {e}")
+            results.append({
+                "symbol": long_symbol,
+                "short_symbol": short_symbol,
+                "error": str(e),
+            })
+    
+    # Clear the registry after flattening
+    try:
+        data["positions"] = {}
+        from datetime import datetime
+        from zoneinfo import ZoneInfo
+        ET = ZoneInfo("US/Eastern")
+        data["updated_at"] = datetime.now(ET).isoformat()
+        data["closed_positions"] = data.get("closed_positions", [])[-100:]  # Keep last 100
+        
+        with open(registry_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=2, default=str)
+        print(f"[flatten] Registry cleared for {bot_tag}")
+    except Exception as e:
+        print(f"[flatten] Error clearing registry: {e}")
+    
+    return results
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Trade Tracking
 # ──────────────────────────────────────────────────────────────────────────────
