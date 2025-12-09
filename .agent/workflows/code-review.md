@@ -4,121 +4,163 @@ description: Code review checklist for RubberBandBot trading bots - reference th
 
 # RubberBandBot Code Review Checklist
 
-This checklist is compiled from issues discovered during code reviews and **issues reported after live trading** that passed code review. Use this to prevent regressions.
+Use this checklist to identify **patterns of issues**, not just specific bugs. Each pattern is derived from real issues found during reviews or discovered in production.
 
 ---
 
-## 🔴 CRITICAL - Must Check Every Time
+## 🔴 CRITICAL PATTERNS
 
-### 1. Python Version Compatibility
-- [ ] **No `datetime.UTC`** - Use `datetime.timezone.utc` instead (Python 3.10 compatibility)
-- [ ] **No `zoneinfo` without fallback** - GitHub runners may need `backports.zoneinfo`
+### Pattern 1: Cross-Version API Compatibility
+**Root Cause:** Using Python features not available in target runtime version.
+**Example:** `datetime.UTC` only exists in Python 3.11+, but runner uses 3.10.
 
-### 2. Data Fetching
-- [ ] **Weekly bars: Use daily bars + resample** - Direct `1Week` timeframe fails on IEX/Basic plans
-- [ ] **Sufficient history_days** - When resampling daily→weekly, need 400+ days for 52+ weeks
-- [ ] **Feed parameter** - Verify `feed="iex"` or correct feed is specified
-
-### 3. Position Attribution
-- [ ] **client_order_id generated** - All order submissions must include `client_order_id`
-- [ ] **client_order_id passed to API** - Verify it's actually in the payload
-- [ ] **Registry recorded** - After successful order, call `registry.record_entry()`
-- [ ] **Fills filtered by bot_tag** - Summaries/reports must filter by `client_order_id` prefix
-
-### 4. GitHub Actions Workflows
-- [ ] **`overwrite: true`** - All `upload-artifact` steps must have this
-- [ ] **`continue-on-error: true`** - All `download-artifact` steps must have this
-- [ ] **`if: always()`** - Upload steps should run even if job fails
-- [ ] **Correct artifact name** - Must match bot tag (e.g., `position-registry-15M_STK`)
-- [ ] **Correct path** - Download path must match where code expects registry
+**Checklist:**
+- [ ] Any new `datetime` usage - verify compatibility with Python 3.10
+- [ ] Any new stdlib imports - verify the module exists in target version
+- [ ] Any new syntax features (walrus operator, match/case) - verify version support
 
 ---
 
-## 🟡 MEDIUM - Check for Relevant Changes
+### Pattern 2: Data Availability Assumptions
+**Root Cause:** Assuming data is available in a specific format/granularity when it may not be.
+**Example:** `1Week` bars not available on IEX Basic plan.
 
-### 5. API Error Handling
-- [ ] **Check response status** - Don't assume API call succeeded
-- [ ] **Log error details** - Include response body in error logs
-- [ ] **Graceful degradation** - Bot should continue if one ticker fails
-
-### 6. Division by Zero
-- [ ] **Guards on averages** - `if qty > 0` before dividing
-- [ ] **Guards on PnL calculations** - Check matched_qty > 0
-
-### 7. Time/Timezone Handling
-- [ ] **Consistent timezone** - Use `ET` (Eastern Time) for market hours logic
-- [ ] **UTC for API calls** - Alpaca expects UTC timestamps
-- [ ] **Correct DST handling** - Use `ZoneInfo("US/Eastern")` not hardcoded offsets
-
-### 8. Order Parameters
-- [ ] **TIF (Time in Force)** - `day` for intraday, appropriate for swing trades
-- [ ] **Bracket orders** - Verify TP/SL prices are correctly calculated
-- [ ] **Min tick compliance** - Prices rounded to valid ticks (0.01 for stocks)
+**Checklist:**
+- [ ] Any hardcoded timeframes - can the data feed actually provide this?
+- [ ] Any assumptions about data history availability - is there enough data?
+- [ ] Any aggregation that depends on upstream availability - have fallbacks?
+- [ ] When resampling, is there sufficient source data for indicator warm-up?
 
 ---
 
-## 🟢 LOW - Best Practices
+### Pattern 3: Shared Resource Pollution
+**Root Cause:** Multiple components sharing a resource without proper isolation.
+**Example:** All bots sharing one Alpaca account, summaries showing all trades instead of just one bot's.
 
-### 9. Logging
-- [ ] **Structured logging** - Use JSONL for trade logs
-- [ ] **Consistent format** - Match existing logging patterns in file
-- [ ] **No sensitive data** - Don't log API keys or secrets
-
-### 10. Configuration
-- [ ] **Config defaults** - All config values should have sensible defaults
-- [ ] **Config validation** - Check for missing required keys
-
-### 11. Code Style
-- [ ] **Imports at top** - No inline imports in functions (except for conditional imports)
-- [ ] **Type hints** - Functions should have type annotations
-- [ ] **Docstrings** - Public functions should be documented
+**Checklist:**
+- [ ] Any function that fetches "all" of something - does it need filtering?
+- [ ] Any summary/report generation - is it scoped to the correct context?
+- [ ] Any shared state (files, databases, APIs) - are components properly isolated?
+- [ ] Any identifier that should be unique - is it actually unique across all contexts?
 
 ---
 
-## 📋 Issues Discovered AFTER Live Trading (Escaped Code Review)
+### Pattern 4: Workflow State Persistence
+**Root Cause:** CI/CD workflows not properly saving/restoring state between runs.
+**Example:** Missing `overwrite: true` causing artifact upload failures.
 
-These issues passed code review but were found during live trading:
+**Checklist:**
+- [ ] Any `upload-artifact` step - has `overwrite: true` for named artifacts?
+- [ ] Any `download-artifact` step - has `continue-on-error: true`?
+- [ ] Any state files the bot expects - are they in the download path?
+- [ ] Any cleanup steps - do they run `if: always()` to capture state on failure?
 
-| Issue | Root Cause | How to Catch |
+---
+
+### Pattern 5: Silent Failures
+**Root Cause:** Errors caught but not properly surfaced, leading to hidden failures.
+**Example:** API returning error JSON that gets ignored because we only check status code.
+
+**Checklist:**
+- [ ] Any try/except blocks - are errors logged with details?
+- [ ] Any API calls - is the response body checked for error fields?
+- [ ] Any empty return values - is the caller handling empty gracefully?
+- [ ] Any "continue on error" logic - is it too permissive?
+
+---
+
+## 🟡 MEDIUM PATTERNS
+
+### Pattern 6: Numeric Edge Cases
+**Root Cause:** Math operations without proper guards.
+**Example:** Division by zero when no trades occurred.
+
+**Checklist:**
+- [ ] Any division - is the denominator checked for zero?
+- [ ] Any percentage calculations - are bounds checked?
+- [ ] Any financial calculations - are rounding rules correct for the asset type?
+- [ ] Any option contract math - is the *100 multiplier applied correctly?
+
+---
+
+### Pattern 7: Timezone Mismatches
+**Root Cause:** Mixing timezones without proper conversion.
+**Example:** Using local time for market hour checks instead of Eastern time.
+
+**Checklist:**
+- [ ] Any time comparisons - are both sides in the same timezone?
+- [ ] Any market-hour logic - is it using US/Eastern?
+- [ ] Any API timestamps - are they being parsed with correct timezone?
+- [ ] Any log timestamps - are they human-readable in the expected zone?
+
+---
+
+### Pattern 8: Configuration Override Gaps
+**Root Cause:** Config values not propagating to all code paths.
+**Example:** Hardcoded defaults that override user config.
+
+**Checklist:**
+- [ ] Any default values in code - does config override them?
+- [ ] Any new config parameters - are they documented?
+- [ ] Any split between config files - are they consistent?
+- [ ] Any env vars that override config - is precedence correct?
+
+---
+
+### Pattern 9: Order Parameter Validation
+**Root Cause:** Invalid order parameters causing API rejections.
+**Example:** Take profit price not meeting minimum tick requirements.
+
+**Checklist:**
+- [ ] Any limit prices - are they rounded to valid ticks?
+- [ ] Any bracket orders - is TP meaningfully different from entry?
+- [ ] Any quantity calculations - are they positive integers?
+- [ ] Any symbol transformations - is the format correct for the API?
+
+---
+
+## 🟢 LOW PATTERNS
+
+### Pattern 10: Logging Consistency
+**Root Cause:** Inconsistent logging making debugging difficult.
+
+**Checklist:**
+- [ ] Any new log statements - do they follow the file's existing pattern?
+- [ ] Any structured logs (JSONL) - are all required fields present?
+- [ ] Any print statements - should they be proper logging instead?
+
+---
+
+### Pattern 11: Import Organization
+**Root Cause:** Import errors or circular dependencies.
+
+**Checklist:**
+- [ ] Any new imports - are they at the file top (unless conditional)?
+- [ ] Any cross-module imports - could they cause circular dependencies?
+- [ ] Any optional dependencies - are they guarded with try/except?
+
+---
+
+## 📋 Anti-Patterns That Escaped to Production
+
+| Pattern | What Happened | How to Catch |
 |:---|:---|:---|
-| Options tickers in stock bot summary | `get_daily_fills()` returned ALL account fills | Check if filtering by bot_tag when showing summaries |
-| Weekly bot failed to fetch data | `1Week` bars not available on IEX | Test with actual data feed before deploying |
-| Registry not persisting | Missing `overwrite: true` in workflow | Check all upload-artifact steps |
+| **Shared Resource Pollution** | Options tickers showed in stock bot summary | Check if any "get all" function is filtered by context |
+| **Data Availability Assumptions** | Weekly bot couldn't fetch 1Week bars | Ask: "Does this API call work on the actual data plan?" |
+| **Workflow State Persistence** | Registry lost between runs | Check every upload-artifact has overwrite: true |
+| **Cross-Version Compatibility** | dt.UTC broke on Python 3.10 | Search for any Python 3.11+ only features |
 
 ---
 
-## 🔄 Pre-Commit Verification Steps
+## 🔍 Review Methodology
 
-Before approving any commit:
-
-1. **Run locally** - If possible, test the specific change
-2. **Check all modified files** - Not just the main target file
-3. **Verify imports** - New imports must be at correct locations
-4. **Check related files** - If modifying a shared function, check all callers
-5. **Review workflow changes** - YAML syntax is strict, verify format
-
----
-
-## 📝 Bot-Specific Checks
-
-### 15M Stock Bot (`live_paper_loop.py`)
-- [ ] EOD flatten logic in `market_loop.py` will close positions
-- [ ] `BOT_TAG = "15M_STK"`
-
-### 15M Options Bot (`live_spreads_loop.py`)
-- [ ] Options trading cutoff (3:00 PM ET) enforced
-- [ ] `BOT_TAG = "15M_OPT"`
-
-### Weekly Stock Bot (`live_weekly_loop.py`)
-- [ ] Uses daily→weekly resampling (not direct `1Week`)
-- [ ] `BOT_TAG = "WK_STK"`
-
-### Weekly Options Bot (`live_weekly_options_loop.py`)
-- [ ] Uses daily→weekly resampling (not direct `1Week`)
-- [ ] Options values multiplied by 100 for contract calculations
-- [ ] `BOT_TAG = "WK_OPT"`
+1. **Identify the pattern category** - Which of the above patterns does this change touch?
+2. **Check the specific items** - Go through the relevant checklist items
+3. **Test boundary conditions** - What happens with zero, empty, or error cases?
+4. **Follow the data flow** - Trace from source to destination, check each transformation
+5. **Consider multi-bot context** - How does this behave when 4 bots share the account?
 
 ---
 
 *Last Updated: 2024-12-08*
-*Based on: Session d02a1ffc-f661-4828-873b-ea1b913c9ce2*
+*Derived from: Issues found in sessions a535f5b4, d02a1ffc, and live trading observations*
