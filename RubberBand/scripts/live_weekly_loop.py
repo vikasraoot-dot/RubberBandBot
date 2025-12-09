@@ -127,7 +127,8 @@ def run_weekly_cycle():
                 symbols=[symbol], 
                 timeframe="1Day", 
                 history_days=400, # Fetch enough days for >52 weeks
-                feed=cfg.get("feed", "iex")
+                feed=cfg.get("feed", "iex"),
+                rth_only=False # Daily bars have 00:00 timestamp, so RTH filter would kill them
             )
             
             df_daily = bars_map.get(symbol)
