@@ -1,0 +1,592 @@
+Run # Convert weeks to days (add 365 extra days for indicator warmup: 50-week SMA needs ~350 days)
+========================================
+Weekly Strategy Backtest
+========================================
+Weeks: 108
+Days: 756
+Tickers: RubberBand/tickers_weekly.txt
+========================================
+======================================================================
+WEEKLY MEAN REVERSION BACKTEST
+======================================================================
+Symbols: 56
+Days: [756]
+Config: RubberBand/config_weekly.yaml
+RSI Threshold: 45
+======================================================================
+[COIN] Fetching weekly bars (history_days=1176)...
+[COIN] Loaded 168 weekly bars
+  [COIN] Factor breakdown: RSI=31 | MeanDev=30 | Trend=50 | Combined=25
+[MSTR] Fetching weekly bars (history_days=1176)...
+[MSTR] Loaded 168 weekly bars
+  [MSTR] Factor breakdown: RSI=40 | MeanDev=42 | Trend=18 | Combined=38
+   MDT   756       4  468.92  468.92     100.0     4.69 10468.92
+  AMZN   756       4  418.72  418.72      50.0     4.19 10418.72
+  ORCL   756       2  391.11  391.11     100.0     3.91 10391.10
+   AMD   756       7  370.23  370.23      71.4     3.70 10370.23
+  IREN   756       4  339.00  339.00      75.0     3.39 10339.00
+  ADBE   756       9  313.51  313.51      77.8     3.14 10313.51
+    DE   756       4  308.03  308.03      75.0     3.08 10308.03
+  PLTR   756       1  291.18  291.18     100.0     2.91 10291.18
+ CMCSA   756       9  271.61  271.61      77.8     2.72 10271.61
+  TSLA   756       5  223.54  223.54      80.0     2.24 10223.54
+  AMAT   756       6  213.95  213.95      66.7     2.14 10213.95
+    GS   756       3  212.49  212.49      66.7     2.12 10212.49
+    MS   756       2  188.38  188.38      50.0     1.88 10188.38
+   TXN   756       4  178.32  178.32      75.0     1.78 10178.32
+   IBM   756       2  160.92  160.92     100.0     1.61 10160.92
+   BLK   756       3  146.66  146.66      66.7     1.47 10146.66
+   TJX   756       1  143.65  143.65     100.0     1.44 10143.65
+   DHR   756       5   63.09   63.09      60.0     0.63 10063.09
+   CME   756       1   21.40   21.40     100.0     0.21 10021.40
+  MSFT   756       2   21.08   21.08      50.0     0.21 10021.08
+  PYPL   756       5  -26.21  -26.21      60.0    -0.26  9973.78
+    PM   756       1  -40.32  -40.32       0.0    -0.40  9959.68
+   TSM   756       3  -86.75  -86.75      66.7    -0.87  9913.25
+
+======================================================================
+SUMMARY BY PERIOD
+======================================================================
+
+756-Day Window:
+  Total Trades: 262
+  Net PnL: $39,812.91
+  Avg Win Rate: 76.3%
+
+======================================================================
+OVERALL: 262 trades | $39,812.91 net PnL
+======================================================================
+
+Saved summary to weekly_backtest_summary.csv
+Saved 262 trades to weekly_detailed_trades.csv
+
+
+
+
+
+Run # Convert weeks to days (add 365 extra days for indicator warmup: 50-week SMA needs ~350 days)
+========================================
+Weekly Strategy Backtest
+========================================
+Weeks: 52
+Days: 364
+Tickers: RubberBand/tickers_weekly.txt
+========================================
+======================================================================
+WEEKLY MEAN REVERSION BACKTEST
+======================================================================
+Symbols: 56
+Days: [364]
+Config: RubberBand/config_weekly.yaml
+RSI Threshold: 45
+======================================================================
+[COIN] Fetching weekly bars (history_days=784)...
+[COIN] Loaded 112 weekly bars
+  [COIN] Factor breakdown: RSI=14 | MeanDev=8 | Trend=3 | Combined=5
+[MSTR] Fetching weekly bars (history_days=784)...
+[MSTR] Loaded 112 weekly bars
+  [MSTR] Factor breakdown: RSI=22 | MeanDev=16 | Trend=0 | Combined=16
+[SHOP] Fetching weekly bars (history_days=784)...
+[SHOP] Loaded 112 weekly bars
+  [SHOP] Factor breakdown: RSI=8 | MeanDev=2 | Trend=3 | Combined=1
+[CRWD] Fetching weekly bars (history_days=784)...
+[CRWD] Loaded 112 weekly bars
+  [CRWD] Factor breakdown: RSI=5 | MeanDev=3 | Trend=3 | Combined=3
+[MPWR] Fetching weekly bars (history_days=784)...
+[MPWR] Loaded 112 weekly bars
+  [MPWR] Factor breakdown: RSI=3 | MeanDev=0 | Trend=3 | Combined=0
+[MU] Fetching weekly bars (history_days=784)...
+[MU] Loaded 112 weekly bars
+  [MU] Factor breakdown: RSI=6 | MeanDev=2 | Trend=3 | Combined=2
+[UBER] Fetching weekly bars (history_days=784)...
+[UBER] Loaded 112 weekly bars
+  [UBER] Factor breakdown: RSI=2 | MeanDev=2 | Trend=3 | Combined=2
+[SMH] Fetching weekly bars (history_days=784)...
+[SMH] Loaded 112 weekly bars
+  [SMH] Factor breakdown: RSI=9 | MeanDev=2 | Trend=3 | Combined=2
+[NET] Fetching weekly bars (history_days=784)...
+[NET] Loaded 112 weekly bars
+  [NET] Factor breakdown: RSI=0 | MeanDev=3 | Trend=3 | Combined=0
+[NVDA] Fetching weekly bars (history_days=784)...
+[NVDA] Loaded 112 weekly bars
+  [NVDA] Factor breakdown: RSI=8 | MeanDev=3 | Trend=3 | Combined=2
+[VRT] Fetching weekly bars (history_days=784)...
+[VRT] Loaded 112 weekly bars
+  [VRT] Factor breakdown: RSI=10 | MeanDev=3 | Trend=3 | Combined=3
+[WDC] Fetching weekly bars (history_days=784)...
+[WDC] Loaded 112 weekly bars
+  [WDC] Factor breakdown: RSI=12 | MeanDev=3 | Trend=3 | Combined=3
+[APP] Fetching weekly bars (history_days=784)...
+[APP] Loaded 112 weekly bars
+  [APP] Factor breakdown: RSI=6 | MeanDev=2 | Trend=3 | Combined=1
+[AVGO] Fetching weekly bars (history_days=784)...
+[AVGO] Loaded 112 weekly bars
+  [AVGO] Factor breakdown: RSI=8 | MeanDev=1 | Trend=3 | Combined=1
+[RBLX] Fetching weekly bars (history_days=784)...
+[RBLX] Loaded 112 weekly bars
+  [RBLX] Factor breakdown: RSI=7 | MeanDev=6 | Trend=3 | Combined=5
+[C] Fetching weekly bars (history_days=784)...
+[C] Loaded 112 weekly bars
+  [C] Factor breakdown: RSI=8 | MeanDev=1 | Trend=3 | Combined=1
+[QCOM] Fetching weekly bars (history_days=784)...
+[QCOM] Loaded 112 weekly bars
+  [QCOM] Factor breakdown: RSI=10 | MeanDev=5 | Trend=3 | Combined=5
+[SCHW] Fetching weekly bars (history_days=784)...
+[SCHW] Loaded 112 weekly bars
+  [SCHW] Factor breakdown: RSI=5 | MeanDev=0 | Trend=3 | Combined=0
+[APO] Fetching weekly bars (history_days=784)...
+[APO] Loaded 112 weekly bars
+  [APO] Factor breakdown: RSI=21 | MeanDev=11 | Trend=0 | Combined=11
+[TQQQ] Fetching weekly bars (history_days=784)...
+[TQQQ] Loaded 112 weekly bars
+  [TQQQ] Factor breakdown: RSI=15 | MeanDev=6 | Trend=3 | Combined=6
+[MDB] Fetching weekly bars (history_days=784)...
+[MDB] Loaded 112 weekly bars
+  [MDB] Factor breakdown: RSI=13 | MeanDev=6 | Trend=3 | Combined=6
+[ETN] Fetching weekly bars (history_days=784)...
+[ETN] Loaded 112 weekly bars
+  [ETN] Factor breakdown: RSI=11 | MeanDev=4 | Trend=3 | Combined=2
+[ADBE] Fetching weekly bars (history_days=784)...
+[ADBE] Loaded 112 weekly bars
+  [ADBE] Factor breakdown: RSI=29 | MeanDev=19 | Trend=0 | Combined=15
+[MRVL] Fetching weekly bars (history_days=784)...
+[MRVL] Loaded 112 weekly bars
+  [MRVL] Factor breakdown: RSI=13 | MeanDev=10 | Trend=0 | Combined=7
+[DELL] Fetching weekly bars (history_days=784)...
+[DELL] Loaded 112 weekly bars
+  [DELL] Factor breakdown: RSI=9 | MeanDev=4 | Trend=3 | Combined=3
+[MCHP] Fetching weekly bars (history_days=784)...
+[MCHP] Loaded 112 weekly bars
+  [MCHP] Factor breakdown: RSI=18 | MeanDev=9 | Trend=3 | Combined=9
+[AMD] Fetching weekly bars (history_days=784)...
+[AMD] Loaded 112 weekly bars
+  [AMD] Factor breakdown: RSI=9 | MeanDev=2 | Trend=3 | Combined=2
+[BA] Fetching weekly bars (history_days=784)...
+[BA] Loaded 112 weekly bars
+  [BA] Factor breakdown: RSI=9 | MeanDev=6 | Trend=3 | Combined=6
+[WFC] Fetching weekly bars (history_days=784)...
+[WFC] Loaded 112 weekly bars
+  [WFC] Factor breakdown: RSI=8 | MeanDev=0 | Trend=3 | Combined=0
+[AMZN] Fetching weekly bars (history_days=784)...
+[AMZN] Loaded 112 weekly bars
+  [AMZN] Factor breakdown: RSI=15 | MeanDev=3 | Trend=3 | Combined=3
+[TSM] Fetching weekly bars (history_days=784)...
+[TSM] Loaded 112 weekly bars
+  [TSM] Factor breakdown: RSI=9 | MeanDev=2 | Trend=3 | Combined=2
+[ORCL] Fetching weekly bars (history_days=784)...
+[ORCL] Loaded 112 weekly bars
+  [ORCL] Factor breakdown: RSI=14 | MeanDev=6 | Trend=3 | Combined=4
+[SOXL] Fetching weekly bars (history_days=784)...
+[SOXL] Loaded 112 weekly bars
+  [SOXL] Factor breakdown: RSI=13 | MeanDev=6 | Trend=3 | Combined=6
+[ADI] Fetching weekly bars (history_days=784)...
+[ADI] Loaded 112 weekly bars
+  [ADI] Factor breakdown: RSI=9 | MeanDev=1 | Trend=3 | Combined=1
+[DE] Fetching weekly bars (history_days=784)...
+[DE] Loaded 112 weekly bars
+  [DE] Factor breakdown: RSI=14 | MeanDev=8 | Trend=1 | Combined=8
+[UAL] Fetching weekly bars (history_days=784)...
+[UAL] Loaded 112 weekly bars
+  [UAL] Factor breakdown: RSI=15 | MeanDev=7 | Trend=3 | Combined=6
+[META] Fetching weekly bars (history_days=784)...
+[META] Loaded 112 weekly bars
+  [META] Factor breakdown: RSI=14 | MeanDev=7 | Trend=3 | Combined=7
+[MDT] Fetching weekly bars (history_days=784)...
+[MDT] Loaded 112 weekly bars
+  [MDT] Factor breakdown: RSI=11 | MeanDev=2 | Trend=3 | Combined=2
+[GS] Fetching weekly bars (history_days=784)...
+[GS] Loaded 112 weekly bars
+  [GS] Factor breakdown: RSI=8 | MeanDev=1 | Trend=3 | Combined=1
+[MARA] Fetching weekly bars (history_days=784)...
+[MARA] Loaded 112 weekly bars
+  [MARA] Factor breakdown: RSI=14 | MeanDev=8 | Trend=3 | Combined=6
+[PYPL] Fetching weekly bars (history_days=784)...
+[PYPL] Loaded 112 weekly bars
+  [PYPL] Factor breakdown: RSI=22 | MeanDev=9 | Trend=0 | Combined=8
+[PLTR] Fetching weekly bars (history_days=784)...
+[PLTR] Loaded 112 weekly bars
+  [PLTR] Factor breakdown: RSI=1 | MeanDev=1 | Trend=3 | Combined=1
+[TXN] Fetching weekly bars (history_days=784)...
+[TXN] Loaded 112 weekly bars
+  [TXN] Factor breakdown: RSI=22 | MeanDev=14 | Trend=1 | Combined=13
+[CMCSA] Fetching weekly bars (history_days=784)...
+[CMCSA] Loaded 112 weekly bars
+  [CMCSA] Factor breakdown: RSI=27 | MeanDev=15 | Trend=0 | Combined=15
+[BLK] Fetching weekly bars (history_days=784)...
+[BLK] Loaded 112 weekly bars
+  [BLK] Factor breakdown: RSI=14 | MeanDev=4 | Trend=3 | Combined=4
+[MS] Fetching weekly bars (history_days=784)...
+[MS] Loaded 112 weekly bars
+  [MS] Factor breakdown: RSI=10 | MeanDev=1 | Trend=3 | Combined=1
+[AMAT] Fetching weekly bars (history_days=784)...
+[AMAT] Loaded 112 weekly bars
+  [AMAT] Factor breakdown: RSI=12 | MeanDev=1 | Trend=3 | Combined=1
+[DHR] Fetching weekly bars (history_days=784)...
+[DHR] Loaded 112 weekly bars
+  [DHR] Factor breakdown: RSI=17 | MeanDev=7 | Trend=1 | Combined=7
+[IREN] Fetching weekly bars (history_days=784)...
+[IREN] Loaded 112 weekly bars
+  [IREN] Factor breakdown: RSI=12 | MeanDev=3 | Trend=3 | Combined=3
+[INTC] Fetching weekly bars (history_days=784)...
+[INTC] Loaded 112 weekly bars
+  [INTC] Factor breakdown: RSI=5 | MeanDev=5 | Trend=3 | Combined=3
+[TSLA] Fetching weekly bars (history_days=784)...
+[TSLA] Loaded 112 weekly bars
+  [TSLA] Factor breakdown: RSI=9 | MeanDev=3 | Trend=3 | Combined=3
+[IBM] Fetching weekly bars (history_days=784)...
+[IBM] Loaded 112 weekly bars
+  [IBM] Factor breakdown: RSI=6 | MeanDev=4 | Trend=3 | Combined=2
+[TJX] Fetching weekly bars (history_days=784)...
+[TJX] Loaded 112 weekly bars
+  [TJX] Factor breakdown: RSI=4 | MeanDev=0 | Trend=3 | Combined=0
+[CME] Fetching weekly bars (history_days=784)...
+[CME] Loaded 112 weekly bars
+  [CME] Factor breakdown: RSI=10 | MeanDev=0 | Trend=3 | Combined=0
+[PM] Fetching weekly bars (history_days=784)...
+[PM] Loaded 112 weekly bars
+  [PM] Factor breakdown: RSI=16 | MeanDev=11 | Trend=3 | Combined=10
+[MSFT] Fetching weekly bars (history_days=784)...
+[MSFT] Loaded 112 weekly bars
+  [MSFT] Factor breakdown: RSI=10 | MeanDev=1 | Trend=3 | Combined=1
+
+======================================================================
+RESULTS BY SYMBOL
+======================================================================
+symbol  days  trades   gross     net  win_rate  ret_pct   equity
+  SOXL   364       3  925.50  925.50      66.7     9.25 10925.50
+  MCHP   364       3  609.07  609.07      66.7     6.09 10609.07
+  COIN   364       1  526.32  526.32     100.0     5.26 10526.32
+  ADBE   364       4  460.94  460.94     100.0     4.61 10460.94
+  MRVL   364       2  458.54  458.54     100.0     4.59 10458.54
+   MDB   364       3  369.90  369.90     100.0     3.70 10369.90
+   APP   364       1  345.17  345.17     100.0     3.45 10345.17
+   WDC   364       2  313.39  313.39     100.0     3.13 10313.39
+  CRWD   364       1  307.36  307.36     100.0     3.07 10307.36
+  PLTR   364       1  291.18  291.18     100.0     2.91 10291.18
+   UAL   364       3  268.58  268.58      66.7     2.69 10268.58
+  DELL   364       2  268.24  268.24     100.0     2.68 10268.24
+   APO   364       3  227.56  227.56     100.0     2.28 10227.56
+   VRT   364       2  225.70  225.70     100.0     2.26 10225.70
+  TQQQ   364       2  200.08  200.08     100.0     2.00 10200.08
+  IREN   364       1  193.50  193.50     100.0     1.93 10193.50
+   TSM   364       2  187.29  187.29     100.0     1.87 10187.29
+    MU   364       1  186.25  186.25     100.0     1.86 10186.25
+  AVGO   364       1  174.60  174.60     100.0     1.75 10174.60
+  UBER   364       1  163.88  163.88     100.0     1.64 10163.88
+  META   364       2  160.90  160.90     100.0     1.61 10160.91
+  TSLA   364       2  159.00  159.00     100.0     1.59 10159.00
+  ORCL   364       1  150.50  150.50     100.0     1.50 10150.50
+   AMD   364       1  145.00  145.00     100.0     1.45 10145.00
+   TXN   364       2  143.61  143.61     100.0     1.44 10143.62
+   MDT   364       1  143.40  143.40     100.0     1.43 10143.40
+  MARA   364       1  139.00  139.00     100.0     1.39 10139.00
+   DHR   364       2  136.95  136.95      50.0     1.37 10136.95
+   ADI   364       1  134.05  134.05     100.0     1.34 10134.05
+  NVDA   364       1  124.56  124.56     100.0     1.25 10124.56
+  PYPL   364       3  119.01  119.01      66.7     1.19 10119.01
+   ETN   364       1  116.97  116.97     100.0     1.17 10116.97
+   SMH   364       1  115.02  115.02     100.0     1.15 10115.02
+    MS   364       1   98.52   98.52     100.0     0.99 10098.52
+   IBM   364       1   91.56   91.56     100.0     0.92 10091.56
+  QCOM   364       2   82.48   82.48     100.0     0.82 10082.48
+     C   364       1   80.91   80.91     100.0     0.81 10080.91
+    GS   364       1   64.63   64.63     100.0     0.65 10064.64
+    DE   364       2   63.68   63.68      50.0     0.64 10063.68
+  AMAT   364       1   62.27   62.27     100.0     0.62 10062.27
+  INTC   364       1   61.11   61.11     100.0     0.61 10061.11
+    BA   364       2   16.45   16.45      50.0     0.16 10016.45
+   BLK   364       1   11.20   11.20     100.0     0.11 10011.20
+  MPWR   364       0    0.00    0.00       0.0     0.00 10000.00
+   NET   364       0    0.00    0.00       0.0     0.00 10000.00
+  RBLX   364       0    0.00    0.00       0.0     0.00 10000.00
+  SCHW   364       0    0.00    0.00       0.0     0.00 10000.00
+   WFC   364       0    0.00    0.00       0.0     0.00 10000.00
+   TJX   364       0    0.00    0.00       0.0     0.00 10000.00
+   CME   364       0    0.00    0.00       0.0     0.00 10000.00
+  MSFT   364       0    0.00    0.00       0.0     0.00 10000.00
+ CMCSA   364       3  -23.99  -23.99      66.7    -0.24  9976.01
+    PM   364       1  -40.32  -40.32       0.0    -0.40  9959.68
+  SHOP   364       1  -47.97  -47.97       0.0    -0.48  9952.02
+  AMZN   364       2  -56.41  -56.41      50.0    -0.56  9943.58
+  MSTR   364       3 -862.13 -862.13      33.3    -8.62  9137.87
+
+======================================================================
+SUMMARY BY PERIOD
+======================================================================
+
+364-Day Window:
+  Total Trades: 81
+  Net PnL: $8,093.01
+  Avg Win Rate: 84.0%
+
+======================================================================
+OVERALL: 81 trades | $8,093.01 net PnL
+======================================================================
+
+Saved summary to weekly_backtest_summary.csv
+Saved 81 trades to weekly_detailed_trades.csv
+
+
+
+
+Run # Convert weeks to days (add 365 extra days for indicator warmup: 50-week SMA needs ~350 days)
+========================================
+Weekly Strategy Backtest
+========================================
+Weeks: 26
+Days: 182
+Tickers: RubberBand/tickers_weekly.txt
+========================================
+======================================================================
+WEEKLY MEAN REVERSION BACKTEST
+======================================================================
+Symbols: 56
+Days: [182]
+Config: RubberBand/config_weekly.yaml
+RSI Threshold: 45
+======================================================================
+[COIN] Fetching weekly bars (history_days=602)...
+[COIN] Loaded 86 weekly bars
+  [COIN] Factor breakdown: RSI=5 | MeanDev=5 | Trend=0 | Combined=2
+[MSTR] Fetching weekly bars (history_days=602)...
+[MSTR] Loaded 86 weekly bars
+  [MSTR] Factor breakdown: RSI=13 | MeanDev=7 | Trend=0 | Combined=7
+[SHOP] Fetching weekly bars (history_days=602)...
+[SHOP] Loaded 86 weekly bars
+  [SHOP] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[CRWD] Fetching weekly bars (history_days=602)...
+[CRWD] Loaded 86 weekly bars
+  [CRWD] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[MPWR] Fetching weekly bars (history_days=602)...
+[MPWR] Loaded 86 weekly bars
+  [MPWR] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[MU] Fetching weekly bars (history_days=602)...
+[MU] Loaded 86 weekly bars
+  [MU] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[UBER] Fetching weekly bars (history_days=602)...
+[UBER] Loaded 86 weekly bars
+  [UBER] Factor breakdown: RSI=2 | MeanDev=2 | Trend=0 | Combined=2
+[SMH] Fetching weekly bars (history_days=602)...
+[SMH] Loaded 86 weekly bars
+  [SMH] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[NET] Fetching weekly bars (history_days=602)...
+[NET] Loaded 86 weekly bars
+  [NET] Factor breakdown: RSI=0 | MeanDev=3 | Trend=0 | Combined=0
+[NVDA] Fetching weekly bars (history_days=602)...
+[NVDA] Loaded 86 weekly bars
+  [NVDA] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[VRT] Fetching weekly bars (history_days=602)...
+[VRT] Loaded 86 weekly bars
+  [VRT] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[WDC] Fetching weekly bars (history_days=602)...
+[WDC] Loaded 86 weekly bars
+  [WDC] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[APP] Fetching weekly bars (history_days=602)...
+[APP] Loaded 86 weekly bars
+  [APP] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[AVGO] Fetching weekly bars (history_days=602)...
+[AVGO] Loaded 86 weekly bars
+  [AVGO] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[RBLX] Fetching weekly bars (history_days=602)...
+[RBLX] Loaded 86 weekly bars
+  [RBLX] Factor breakdown: RSI=5 | MeanDev=6 | Trend=0 | Combined=5
+[C] Fetching weekly bars (history_days=602)...
+[C] Loaded 86 weekly bars
+  [C] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[QCOM] Fetching weekly bars (history_days=602)...
+[QCOM] Loaded 86 weekly bars
+  [QCOM] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[SCHW] Fetching weekly bars (history_days=602)...
+[SCHW] Loaded 86 weekly bars
+  [SCHW] Factor breakdown: RSI=4 | MeanDev=0 | Trend=0 | Combined=0
+[APO] Fetching weekly bars (history_days=602)...
+[APO] Loaded 86 weekly bars
+  [APO] Factor breakdown: RSI=7 | MeanDev=2 | Trend=0 | Combined=2
+[TQQQ] Fetching weekly bars (history_days=602)...
+[TQQQ] Loaded 86 weekly bars
+  [TQQQ] Factor breakdown: RSI=3 | MeanDev=3 | Trend=0 | Combined=3
+[MDB] Fetching weekly bars (history_days=602)...
+[MDB] Loaded 86 weekly bars
+  [MDB] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[ETN] Fetching weekly bars (history_days=602)...
+[ETN] Loaded 86 weekly bars
+  [ETN] Factor breakdown: RSI=3 | MeanDev=3 | Trend=0 | Combined=1
+[ADBE] Fetching weekly bars (history_days=602)...
+[ADBE] Loaded 86 weekly bars
+  [ADBE] Factor breakdown: RSI=10 | MeanDev=4 | Trend=0 | Combined=3
+[MRVL] Fetching weekly bars (history_days=602)...
+[MRVL] Loaded 86 weekly bars
+  [MRVL] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[DELL] Fetching weekly bars (history_days=602)...
+[DELL] Loaded 86 weekly bars
+  [DELL] Factor breakdown: RSI=1 | MeanDev=1 | Trend=0 | Combined=1
+[MCHP] Fetching weekly bars (history_days=602)...
+[MCHP] Loaded 86 weekly bars
+  [MCHP] Factor breakdown: RSI=10 | MeanDev=6 | Trend=0 | Combined=6
+[AMD] Fetching weekly bars (history_days=602)...
+[AMD] Loaded 86 weekly bars
+  [AMD] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[BA] Fetching weekly bars (history_days=602)...
+[BA] Loaded 86 weekly bars
+  [BA] Factor breakdown: RSI=7 | MeanDev=6 | Trend=0 | Combined=6
+[WFC] Fetching weekly bars (history_days=602)...
+[WFC] Loaded 86 weekly bars
+  [WFC] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[AMZN] Fetching weekly bars (history_days=602)...
+[AMZN] Loaded 86 weekly bars
+  [AMZN] Factor breakdown: RSI=3 | MeanDev=0 | Trend=0 | Combined=0
+[TSM] Fetching weekly bars (history_days=602)...
+[TSM] Loaded 86 weekly bars
+  [TSM] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[ORCL] Fetching weekly bars (history_days=602)...
+[ORCL] Loaded 86 weekly bars
+  [ORCL] Factor breakdown: RSI=3 | MeanDev=5 | Trend=0 | Combined=3
+[SOXL] Fetching weekly bars (history_days=602)...
+[SOXL] Loaded 86 weekly bars
+  [SOXL] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[ADI] Fetching weekly bars (history_days=602)...
+[ADI] Loaded 86 weekly bars
+  [ADI] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[DE] Fetching weekly bars (history_days=602)...
+[DE] Loaded 86 weekly bars
+  [DE] Factor breakdown: RSI=11 | MeanDev=1 | Trend=0 | Combined=1
+[UAL] Fetching weekly bars (history_days=602)...
+[UAL] Loaded 86 weekly bars
+  [UAL] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[META] Fetching weekly bars (history_days=602)...
+[META] Loaded 86 weekly bars
+  [META] Factor breakdown: RSI=6 | MeanDev=6 | Trend=0 | Combined=6
+[MDT] Fetching weekly bars (history_days=602)...
+[MDT] Loaded 86 weekly bars
+  [MDT] Factor breakdown: RSI=1 | MeanDev=0 | Trend=0 | Combined=0
+[GS] Fetching weekly bars (history_days=602)...
+[GS] Loaded 86 weekly bars
+  [GS] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[MARA] Fetching weekly bars (history_days=602)...
+[MARA] Loaded 86 weekly bars
+  [MARA] Factor breakdown: RSI=4 | MeanDev=5 | Trend=0 | Combined=4
+[PYPL] Fetching weekly bars (history_days=602)...
+[PYPL] Loaded 86 weekly bars
+  [PYPL] Factor breakdown: RSI=10 | MeanDev=5 | Trend=0 | Combined=4
+[PLTR] Fetching weekly bars (history_days=602)...
+[PLTR] Loaded 86 weekly bars
+  [PLTR] Factor breakdown: RSI=1 | MeanDev=1 | Trend=0 | Combined=1
+[TXN] Fetching weekly bars (history_days=602)...
+[TXN] Loaded 86 weekly bars
+  [TXN] Factor breakdown: RSI=13 | MeanDev=6 | Trend=0 | Combined=6
+[CMCSA] Fetching weekly bars (history_days=602)...
+[CMCSA] Loaded 86 weekly bars
+  [CMCSA] Factor breakdown: RSI=13 | MeanDev=7 | Trend=0 | Combined=7
+[BLK] Fetching weekly bars (history_days=602)...
+[BLK] Loaded 86 weekly bars
+  [BLK] Factor breakdown: RSI=5 | MeanDev=3 | Trend=0 | Combined=3
+[MS] Fetching weekly bars (history_days=602)...
+[MS] Loaded 86 weekly bars
+  [MS] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[AMAT] Fetching weekly bars (history_days=602)...
+[AMAT] Loaded 86 weekly bars
+  [AMAT] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[DHR] Fetching weekly bars (history_days=602)...
+[DHR] Loaded 86 weekly bars
+  [DHR] Factor breakdown: RSI=2 | MeanDev=0 | Trend=0 | Combined=0
+[IREN] Fetching weekly bars (history_days=602)...
+[IREN] Loaded 86 weekly bars
+  [IREN] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[INTC] Fetching weekly bars (history_days=602)...
+[INTC] Loaded 86 weekly bars
+  [INTC] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[TSLA] Fetching weekly bars (history_days=602)...
+[TSLA] Loaded 86 weekly bars
+  [TSLA] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[IBM] Fetching weekly bars (history_days=602)...
+[IBM] Loaded 86 weekly bars
+  [IBM] Factor breakdown: RSI=3 | MeanDev=0 | Trend=0 | Combined=0
+[TJX] Fetching weekly bars (history_days=602)...
+[TJX] Loaded 86 weekly bars
+  [TJX] Factor breakdown: RSI=0 | MeanDev=0 | Trend=0 | Combined=0
+[CME] Fetching weekly bars (history_days=602)...
+[CME] Loaded 86 weekly bars
+  [CME] Factor breakdown: RSI=6 | MeanDev=0 | Trend=0 | Combined=0
+[PM] Fetching weekly bars (history_days=602)...
+[PM] Loaded 86 weekly bars
+  [PM] Factor breakdown: RSI=13 | MeanDev=5 | Trend=0 | Combined=5
+[MSFT] Fetching weekly bars (history_days=602)...
+[MSFT] Loaded 86 weekly bars
+  [MSFT] Factor breakdown: RSI=3 | MeanDev=1 | Trend=0 | Combined=1
+
+======================================================================
+RESULTS BY SYMBOL
+======================================================================
+symbol  days  trades    gross      net  win_rate  ret_pct   equity
+  PLTR   182       1   291.18   291.18     100.0     2.91 10291.18
+  DELL   182       1   234.96   234.96     100.0     2.35 10234.96
+  UBER   182       1   163.88   163.88     100.0     1.64 10163.88
+   TXN   182       1   145.53   145.53     100.0     1.46 10145.53
+  ADBE   182       1   107.49   107.49     100.0     1.07 10107.49
+   APO   182       1    82.05    82.05     100.0     0.82 10082.05
+    DE   182       1    68.64    68.64     100.0     0.69 10068.64
+  META   182       1    50.25    50.25     100.0     0.50 10050.25
+    BA   182       2    16.45    16.45      50.0     0.16 10016.45
+    PM   182       1     8.94     8.94     100.0     0.09 10008.94
+  COIN   182       0     0.00     0.00       0.0     0.00 10000.00
+  SHOP   182       0     0.00     0.00       0.0     0.00 10000.00
+  CRWD   182       0     0.00     0.00       0.0     0.00 10000.00
+  MPWR   182       0     0.00     0.00       0.0     0.00 10000.00
+    MU   182       0     0.00     0.00       0.0     0.00 10000.00
+   SMH   182       0     0.00     0.00       0.0     0.00 10000.00
+   NET   182       0     0.00     0.00       0.0     0.00 10000.00
+  NVDA   182       0     0.00     0.00       0.0     0.00 10000.00
+   VRT   182       0     0.00     0.00       0.0     0.00 10000.00
+   WDC   182       0     0.00     0.00       0.0     0.00 10000.00
+   APP   182       0     0.00     0.00       0.0     0.00 10000.00
+  AVGO   182       0     0.00     0.00       0.0     0.00 10000.00
+  RBLX   182       0     0.00     0.00       0.0     0.00 10000.00
+     C   182       0     0.00     0.00       0.0     0.00 10000.00
+  QCOM   182       0     0.00     0.00       0.0     0.00 10000.00
+  SCHW   182       0     0.00     0.00       0.0     0.00 10000.00
+  TQQQ   182       0     0.00     0.00       0.0     0.00 10000.00
+   MDB   182       0     0.00     0.00       0.0     0.00 10000.00
+   ETN   182       0     0.00     0.00       0.0     0.00 10000.00
+  MRVL   182       0     0.00     0.00       0.0     0.00 10000.00
+   AMD   182       0     0.00     0.00       0.0     0.00 10000.00
+   WFC   182       0     0.00     0.00       0.0     0.00 10000.00
+  AMZN   182       0     0.00     0.00       0.0     0.00 10000.00
+   TSM   182       0     0.00     0.00       0.0     0.00 10000.00
+  ORCL   182       0     0.00     0.00       0.0     0.00 10000.00
+  SOXL   182       0     0.00     0.00       0.0     0.00 10000.00
+   ADI   182       0     0.00     0.00       0.0     0.00 10000.00
+   UAL   182       0     0.00     0.00       0.0     0.00 10000.00
+   MDT   182       0     0.00     0.00       0.0     0.00 10000.00
+    GS   182       0     0.00     0.00       0.0     0.00 10000.00
+  MARA   182       0     0.00     0.00       0.0     0.00 10000.00
+  PYPL   182       0     0.00     0.00       0.0     0.00 10000.00
+   BLK   182       0     0.00     0.00       0.0     0.00 10000.00
+    MS   182       0     0.00     0.00       0.0     0.00 10000.00
+  AMAT   182       0     0.00     0.00       0.0     0.00 10000.00
+   DHR   182       0     0.00     0.00       0.0     0.00 10000.00
+  IREN   182       0     0.00     0.00       0.0     0.00 10000.00
+  INTC   182       0     0.00     0.00       0.0     0.00 10000.00
+  TSLA   182       0     0.00     0.00       0.0     0.00 10000.00
+   IBM   182       0     0.00     0.00       0.0     0.00 10000.00
+   TJX   182       0     0.00     0.00       0.0     0.00 10000.00
+   CME   182       0     0.00     0.00       0.0     0.00 10000.00
+  MSFT   182       0     0.00     0.00       0.0     0.00 10000.00
+  MCHP   182       2   -30.42   -30.42      50.0    -0.30  9969.58
+ CMCSA   182       1  -168.78  -168.78       0.0    -1.69  9831.22
+  MSTR   182       2 -1111.13 -1111.13       0.0   -11.11  8888.87
+
+======================================================================
+SUMMARY BY PERIOD
+======================================================================
+
+182-Day Window:
+  Total Trades: 16
+  Net PnL: $-140.96
+  Avg Win Rate: 68.8%
+
+======================================================================
+OVERALL: 16 trades | $-140.96 net PnL
+======================================================================
+
+Saved summary to weekly_backtest_summary.csv
+Saved 16 trades to weekly_detailed_trades.csv

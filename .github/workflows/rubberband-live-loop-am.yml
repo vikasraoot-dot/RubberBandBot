@@ -31,6 +31,13 @@ jobs:
           & "$env:PYTHON_EXE" -m pip install --upgrade pip
           & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
 
+      - name: Download Position Registry
+        uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: position-registry-15M_STK
+          path: RubberBand/.position_registry
+
       # Wait guard so the loop begins right at the bell, even if cron is early/late
       - name: Wait until market open (guard)
         shell: powershell
@@ -85,3 +92,12 @@ jobs:
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py
+
+      - name: Upload Position Registry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: position-registry-15M_STK
+          path: RubberBand/.position_registry
+          retention-days: 90
+          overwrite: true

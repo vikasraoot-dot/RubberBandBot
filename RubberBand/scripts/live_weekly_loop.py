@@ -97,18 +97,35 @@ def run_weekly_cycle():
 
             logging.info(f"Analyzing {symbol}...")
 
-            # 3. Fetch Weekly Data
+            # 3. Fetch Daily Data and Resample to Weekly
+            # '1Week' bars often fail on IEX/free plans, so we build them from 1Day
             bars_map, meta = fetch_latest_bars(
                 symbols=[symbol], 
-                timeframe="1Week", 
-                history_days=365,
+                timeframe="1Day", 
+                history_days=400, # Fetch enough days for >52 weeks
                 feed=cfg.get("feed", "iex")
             )
             
-            df = bars_map.get(symbol)
-            if df is None or df.empty or len(df) < 30:
-                logging.warning(f"No sufficient data for {symbol}")
+            df_daily = bars_map.get(symbol)
+            if df_daily is None or df_daily.empty:
+                logging.warning(f"No daily data for {symbol}")
                 continue
+
+            # Resample to Weekly (Ending Friday)
+            df_weekly = df_daily.resample('W-FRI').agg({
+                'open': 'first',
+                'high': 'max',
+                'low': 'min',
+                'close': 'last',
+                'volume': 'sum'
+            }).dropna()
+
+            if len(df_weekly) < 30:
+                logging.warning(f"Not enough weekly bars for {symbol} (found {len(df_weekly)})")
+                continue
+            
+            # Use resampled weekly dataframe
+            df = df_weekly
 
             # 4. Attach Indicators
             df = attach_indicators(df, cfg)
