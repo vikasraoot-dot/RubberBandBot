@@ -455,26 +455,34 @@ def flatten_all_option_positions() -> List[Dict[str, Any]]:
     return results
 
 
-def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry") -> List[Dict[str, Any]]:
+def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry", max_dte_to_close: int = 1) -> List[Dict[str, Any]]:
     """
-    Close all option spreads belonging to a specific bot using the position registry.
+    Close option spreads belonging to a specific bot that are expiring soon.
     
-    This function reads the bot's position registry to identify spreads (positions with
-    both long and short symbols) and closes them properly using close_spread().
-    For positions without a short_symbol, closes them individually.
+    This function reads the bot's position registry, checks DTE for each position,
+    and only closes positions with DTE <= max_dte_to_close. Positions with more
+    time remaining are kept open.
     
     Args:
         bot_tag: Bot tag to filter positions (e.g., "15M_OPT")
         registry_dir: Directory containing position registry files
+        max_dte_to_close: Maximum DTE to close (default=1 = expiring tomorrow)
         
     Returns:
-        List of close results for each position
+        List of close results for each position closed
     """
     import json
     import os
+    import re
+    from datetime import datetime, date
+    from zoneinfo import ZoneInfo
+    
+    ET = ZoneInfo("US/Eastern")
+    today = datetime.now(ET).date()
     
     registry_path = os.path.join(registry_dir, f"{bot_tag}_positions.json")
     results = []
+    positions_to_keep = {}
     
     # Load registry
     if not os.path.exists(registry_path):
@@ -495,25 +503,50 @@ def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry") 
     
     print(f"[flatten] Found {len(positions)} positions for {bot_tag}")
     
+    def parse_expiry_from_occ(symbol: str) -> date:
+        """Parse expiry date from OCC symbol like AAPL251212C00150000"""
+        # Format: SYMBOL + YYMMDD + C/P + STRIKE
+        match = re.search(r'(\d{6})[CP]', symbol)
+        if match:
+            date_str = match.group(1)  # YYMMDD
+            year = 2000 + int(date_str[:2])
+            month = int(date_str[2:4])
+            day = int(date_str[4:6])
+            return date(year, month, day)
+        return today  # Fallback to today if can't parse
+    
     for symbol, pos_data in positions.items():
         long_symbol = pos_data.get("symbol", symbol)
         short_symbol = pos_data.get("short_symbol")
         qty = int(pos_data.get("qty", 1))
         
+        # Parse expiry and calculate DTE
+        expiry = parse_expiry_from_occ(long_symbol)
+        dte = (expiry - today).days
+        
+        print(f"[flatten] {long_symbol}: Expiry={expiry}, DTE={dte}")
+        
+        # Only close if DTE <= max_dte_to_close
+        if dte > max_dte_to_close:
+            print(f"[flatten] Keeping {long_symbol} (DTE={dte} > {max_dte_to_close})")
+            positions_to_keep[symbol] = pos_data
+            continue
+        
         try:
             if short_symbol:
                 # This is a spread - close both legs together
-                print(f"[flatten] Closing spread: {long_symbol} (long) / {short_symbol} (short)")
+                print(f"[flatten] Closing spread (DTE={dte}): {long_symbol} / {short_symbol}")
                 result = close_spread(long_symbol, short_symbol, qty)
             else:
                 # Single option position - close individually
-                print(f"[flatten] Closing single position: {long_symbol}")
+                print(f"[flatten] Closing single position (DTE={dte}): {long_symbol}")
                 result = close_option_position(long_symbol, qty)
             
             results.append({
                 "symbol": long_symbol,
                 "short_symbol": short_symbol,
                 "qty": qty,
+                "dte": dte,
                 "result": result,
             })
         except Exception as e:
@@ -524,20 +557,29 @@ def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry") 
                 "error": str(e),
             })
     
-    # Clear the registry after flattening
+    # Update registry - keep positions that weren't closed
     try:
-        data["positions"] = {}
-        from datetime import datetime
-        from zoneinfo import ZoneInfo
-        ET = ZoneInfo("US/Eastern")
+        data["positions"] = positions_to_keep
         data["updated_at"] = datetime.now(ET).isoformat()
-        data["closed_positions"] = data.get("closed_positions", [])[-100:]  # Keep last 100
+        # Track closed positions
+        closed_list = data.get("closed_positions", [])
+        for r in results:
+            if not r.get("error"):
+                closed_list.append({
+                    "symbol": r["symbol"],
+                    "short_symbol": r.get("short_symbol"),
+                    "closed_at": datetime.now(ET).isoformat(),
+                })
+        data["closed_positions"] = closed_list[-100:]  # Keep last 100
         
         with open(registry_path, "w", encoding="utf-8") as f:
             json.dump(data, f, indent=2, default=str)
-        print(f"[flatten] Registry cleared for {bot_tag}")
+        
+        kept = len(positions_to_keep)
+        closed = len([r for r in results if not r.get("error")])
+        print(f"[flatten] Registry updated: {closed} closed, {kept} kept (DTE > {max_dte_to_close})")
     except Exception as e:
-        print(f"[flatten] Error clearing registry: {e}")
+        print(f"[flatten] Error updating registry: {e}")
     
     return results
 
