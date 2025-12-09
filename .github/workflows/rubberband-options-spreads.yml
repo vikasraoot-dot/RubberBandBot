@@ -122,3 +122,4 @@ jobs:
           path: .position_registry/15M_OPT_positions.json
           if-no-files-found: warn
           retention-days: 90
+          overwrite: true
