@@ -25,7 +25,7 @@ entry_filters:
 # --- Risk Management ---
 risk:
   trailing_stop_enabled: true   # Enable trailing stop
-  trailing_stop_pct: 0.08       # 8% trailing stop (tightened from 10%)
+  trailing_stop_pct: 0.12       # 12% trailing stop (testing wider stop)
   max_drawdown_pct: 0.35        # 35% max drawdown tolerance
 
 # --- Position Sizing ---
