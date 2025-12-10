@@ -7,8 +7,8 @@ assets:
 
 # --- Indicator Settings ---
 indicators:
-  sma_fast: 55       # Entry trigger (55-day for fewer false breakouts)
-  sma_exit: 55       # Exit trigger (symmetric with entry)
+  sma_fast: 50       # Entry trigger (50-day - reverted from 55)
+  sma_exit: 50       # Exit trigger (symmetric with entry)
   sma_slow: 200      # Regime filter (SPY > 200 SMA)
   roc_period: 14     # Rate of Change for profit-taking
   roc_threshold: 0.15  # 15% threshold for taking profits
@@ -25,7 +25,7 @@ entry_filters:
 # --- Risk Management ---
 risk:
   trailing_stop_enabled: true   # Enable trailing stop
-  trailing_stop_pct: 0.10       # 10% trailing stop from peak
+  trailing_stop_pct: 0.08       # 8% trailing stop (tightened from 10%)
   max_drawdown_pct: 0.35        # 35% max drawdown tolerance
 
 # --- Position Sizing ---
