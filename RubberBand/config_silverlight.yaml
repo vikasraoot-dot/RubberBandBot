@@ -16,7 +16,7 @@ indicators:
 
 # --- Entry Filters ---
 entry_filters:
-  require_positive_roc: true    # Only enter if ROC(14) > 0 (momentum confirmation)
+  require_positive_roc: false   # Disabled - allow entries without momentum confirmation
   vix_filter_enabled: true      # Enable VIX-based filter
   # NOTE: VIXY is an ETF that trades ~$10-50, NOT the VIX index (~10-80).
   # Threshold of 25 is calibrated for VIXY's price range.
