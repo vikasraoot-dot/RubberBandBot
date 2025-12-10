@@ -58,6 +58,18 @@ def main():
     try:
         close_all_positions(base, key, sec)
         print("[EOD] submitted flatten all remaining positions", flush=True)
+        
+        # 4. Clear the 15M_STK registry (sync with Alpaca's empty positions)
+        try:
+            from RubberBand.src.position_registry import PositionRegistry
+            registry = PositionRegistry("15M_STK")
+            if registry.positions:
+                print(f"[EOD] Clearing {len(registry.positions)} stale 15M_STK positions from registry...", flush=True)
+                registry.sync_with_alpaca([])  # Pass empty list = all positions are closed
+                print("[EOD] 15M_STK registry cleared", flush=True)
+        except Exception as e:
+            print(f"[EOD] Error clearing 15M_STK registry: {e}", flush=True)
+            
     except Exception as e:
         print(f"[EOD] close positions error: {e}", flush=True)
 
