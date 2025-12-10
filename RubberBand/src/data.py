@@ -110,6 +110,7 @@ def get_daily_fills(
         key: API key
         secret: API secret
         bot_tag: Optional bot tag prefix to filter by client_order_id (e.g., "15M_STK")
+                 Also includes sells for symbols that have tagged buys (for bracket orders)
     """
     base = _base_url_from_env(base_url)
     # Start of today UTC
@@ -128,7 +129,24 @@ def get_daily_fills(
         
         # Filter by bot_tag prefix if specified
         if bot_tag:
-            fills = [f for f in fills if (f.get("client_order_id") or "").startswith(f"{bot_tag}_")]
+            # Step 1: Find fills with the bot_tag prefix (tagged orders)
+            tagged_fills = [f for f in fills if (f.get("client_order_id") or "").startswith(f"{bot_tag}_")]
+            
+            # Step 2: Find symbols that have tagged BUY orders
+            tagged_buy_symbols = set()
+            for f in tagged_fills:
+                if f.get("side") == "buy":
+                    tagged_buy_symbols.add(f.get("symbol", ""))
+            
+            # Step 3: Include sells for those symbols (bracket order exits without bot tag)
+            additional_sells = []
+            for f in fills:
+                if f.get("side") == "sell" and f.get("symbol", "") in tagged_buy_symbols:
+                    coid = f.get("client_order_id") or ""
+                    if not coid.startswith(f"{bot_tag}_"):  # Not already in tagged_fills
+                        additional_sells.append(f)
+            
+            fills = tagged_fills + additional_sells
         
         return fills
     except Exception as e:
