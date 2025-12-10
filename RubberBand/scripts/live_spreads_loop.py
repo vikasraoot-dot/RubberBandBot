@@ -478,6 +478,7 @@ def manage_positions(
     logger: OptionsTradeLogger,
     dry_run: bool = True,
     active_spreads: Optional[Dict[str, Dict]] = None,
+    registry: Optional["PositionRegistry"] = None,
 ):
     """
     Check open positions and exit spreads if TP/SL conditions met.
@@ -490,6 +491,7 @@ def manage_positions(
         logger: Trade logger
         dry_run: If True, don't actually close
         active_spreads: Dict of {underlying: spread_info} from entries this session
+        registry: Position registry to update on successful close
     """
     positions = get_option_positions()
     
@@ -580,6 +582,7 @@ def manage_positions(
                     pnl=pnl,
                     pnl_pct=pnl_pct,
                 )
+                already_closed.add(underlying)
             else:
                 # Close both legs together
                 if short_symbol:
@@ -588,6 +591,17 @@ def manage_positions(
                     # Only have long leg, close individually
                     result = close_option_position(long_symbol)
                 
+                # Check if close was successful before logging and updating registry
+                if result.get("error"):
+                    print(f"[positions] ERROR closing {underlying} spread: {result.get('message', 'Unknown error')}")
+                    logger.error(
+                        error=f"Spread close failed: {result.get('message', 'Unknown')}",
+                        context=f"close_{underlying}",
+                    )
+                    # Don't mark as closed - will retry next cycle
+                    continue
+                
+                # Close was successful
                 logger.spread_exit(
                     underlying=underlying,
                     long_symbol=long_symbol,
@@ -597,8 +611,18 @@ def manage_positions(
                     pnl=pnl,
                     pnl_pct=pnl_pct,
                 )
-            
-            already_closed.add(underlying)
+                
+                # Update registry to remove closed position
+                if registry and long_symbol in registry.positions:
+                    registry.record_exit(
+                        symbol=long_symbol,
+                        exit_price=exit_value,
+                        exit_reason=exit_reason,
+                        pnl=pnl,
+                    )
+                    print(f"[positions] Registry updated: removed {long_symbol}")
+                
+                already_closed.add(underlying)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -623,7 +647,7 @@ def run_scan_cycle(
             current_time=now_et.strftime("%H:%M"),
         )
         # Still manage positions for exits
-        manage_positions(spread_cfg, logger, dry_run)
+        manage_positions(spread_cfg, logger, dry_run, registry=registry)
         return 0
     
     # For 0DTE only: check 3:00 PM cutoff
@@ -636,7 +660,7 @@ def run_scan_cycle(
     logger.heartbeat(event="scan_start", current_time=now_et.strftime("%H:%M"))
     
     # 1. Check existing positions for exits
-    manage_positions(spread_cfg, logger, dry_run)
+    manage_positions(spread_cfg, logger, dry_run, registry=registry)
     
     # 2. Get current option positions (to avoid duplicates)
     current_positions = get_option_positions()
@@ -799,7 +823,7 @@ def main() -> int:
     logger.heartbeat(event="eod_processing", scan_count=scan_count)
     
     # Final position management
-    manage_positions(spread_cfg, logger, dry_run)
+    manage_positions(spread_cfg, logger, dry_run, registry=registry)
     
     # Save registry
     registry.save()
