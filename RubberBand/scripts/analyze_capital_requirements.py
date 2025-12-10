@@ -206,10 +206,15 @@ def main():
     bars_map, _ = fetch_latest_bars(
         symbols=symbols,
         timeframe="1Day",
-        history_days=2500,
+        history_days=1500,  # Reduced from 2500 to avoid API rate limits
         feed="iex",
         verbose=True
     )
+    
+    # Check if we got data
+    if not bars_map:
+        print("ERROR: No data returned from API (possible rate limit)")
+        return
     
     # Filter to 2020+
     for sym in list(bars_map.keys()):
