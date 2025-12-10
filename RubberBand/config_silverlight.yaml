@@ -1,40 +1,38 @@
-# Silver Light Bot Configuration
-# ================================
-# Trend-following strategy for TQQQ/SQQQ leveraged ETFs.
-# Completely isolated from Rubber Band bots.
-
 # --- Assets ---
 assets:
   long: "TQQQ"       # 3x Long NASDAQ
   short: "SQQQ"      # 3x Short NASDAQ
   regime_index: "SPY"  # Market regime filter (S&P 500)
+  volatility_index: "VIXY"  # VIX proxy ETF (VIX itself isn't tradeable via Alpaca)
 
 # --- Indicator Settings ---
 indicators:
   sma_fast: 50       # Entry trigger (price crosses above)
-  sma_exit: 20       # Exit trigger (price crosses below) - faster than entry!
+  sma_exit: 50       # Exit trigger (reverted to 50 - symmetric)
   sma_slow: 200      # Regime filter (SPY > 200 SMA)
   roc_period: 14     # Rate of Change for profit-taking
   roc_threshold: 0.15  # 15% threshold for taking profits
   velocity_period: 5   # For sizing acceleration
+
+# --- Entry Filters ---
+entry_filters:
+  require_positive_roc: true    # Only enter if ROC(14) > 0 (momentum confirmation)
+  vix_filter_enabled: true      # Enable VIX-based filter
+  # NOTE: VIXY is an ETF that trades ~$10-50, NOT the VIX index (~10-80).
+  # Threshold of 25 is calibrated for VIXY's price range.
+  vix_threshold: 25             # Don't enter if VIXY > $25
+
+# --- Risk Management ---
+risk:
+  trailing_stop_enabled: true   # Enable trailing stop
+  trailing_stop_pct: 0.10       # 10% trailing stop from peak
+  max_drawdown_pct: 0.35        # 35% max drawdown tolerance
 
 # --- Position Sizing ---
 sizing:
   max_position_pct: 1.0       # 100% allocation when fully invested
   reduced_position_pct: 0.5   # 50% when velocity decelerating or trimming
   min_cash_buffer: 0.0        # Keep 0% in cash (fully invested)
-
-# --- Execution ---
-execution:
-  timeframe: "1Day"           # Daily bars
-  execution_time: "15:50"     # 3:50 PM ET (before market close)
-  feed: "iex"                 # Free data feed
-
-# --- Risk Management ---
-risk:
-  max_drawdown_pct: 0.35      # 35% max drawdown tolerance
-  vix_threshold: 30           # Optional VIX-based exit (if VIX > 30)
-  use_vix_filter: false       # Disabled by default
 
 # --- Backtesting Defaults ---
 backtest:

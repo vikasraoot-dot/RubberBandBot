@@ -27,6 +27,10 @@ class Signal(Enum):
     CASH = "CASH"       # No position
 
 
+# Float comparison tolerance (avoid precision artifacts)
+PRICE_EPSILON = 0.0001
+
+
 def compute_sma(series: pd.Series, period: int) -> pd.Series:
     """Calculate Simple Moving Average."""
     return series.rolling(window=period, min_periods=period).mean()
@@ -89,7 +93,8 @@ def attach_indicators(df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
 def generate_signal(
     asset_df: pd.DataFrame,
     regime_df: pd.DataFrame,
-    config: Dict[str, Any]
+    config: Dict[str, Any],
+    vix_value: Optional[float] = None
 ) -> Tuple[Signal, Dict[str, Any]]:
     """
     Generate trading signal based on current market state.
@@ -98,6 +103,7 @@ def generate_signal(
         asset_df: DataFrame for TQQQ with indicators attached
         regime_df: DataFrame for SPY (regime filter) with indicators attached
         config: Strategy configuration
+        vix_value: Current VIX value (optional, for volatility filter)
         
     Returns:
         Tuple of (Signal, metadata dict with reasoning)
@@ -110,52 +116,54 @@ def generate_signal(
     regime_row = regime_df.iloc[-1]
     
     ind_cfg = config.get("indicators", {})
-    roc_threshold = float(ind_cfg.get("roc_threshold", 0.15))
+    entry_cfg = config.get("entry_filters", {})
     
     # Extract values
     price = float(asset_row["close"])
     sma_fast = float(asset_row["sma_fast"]) if not pd.isna(asset_row["sma_fast"]) else 0
-    sma_exit = float(asset_row["sma_exit"]) if not pd.isna(asset_row["sma_exit"]) else 0
     roc = float(asset_row["roc"]) if not pd.isna(asset_row["roc"]) else 0
     regime_above_200 = bool(regime_row["above_sma_slow"]) if not pd.isna(regime_row["above_sma_slow"]) else True
+    
+    # Entry filter settings
+    require_positive_roc = entry_cfg.get("require_positive_roc", True)
+    vix_filter_enabled = entry_cfg.get("vix_filter_enabled", True)
+    vix_threshold = float(entry_cfg.get("vix_threshold", 25))
     
     metadata = {
         "price": price,
         "sma_fast": sma_fast,
-        "sma_exit": sma_exit,
         "roc": roc,
         "roc_pct": roc * 100,
         "regime_bullish": regime_above_200,
+        "vix": vix_value,
     }
     
-    # --- Decision Logic (Asymmetric SMA) ---
-    # Entry: Price > 50 SMA (slow, confirm trend)
-    # Exit: Price < 20 SMA (fast, lock in profits)
+    # --- Decision Logic (with Entry Filters) ---
     
     # 1. Check Regime Filter (SPY > 200 SMA)
     if not regime_above_200:
         metadata["reason"] = "BEARISH REGIME: SPY below 200 SMA"
-        return Signal.CASH, metadata  # Could be SQQQ for aggressive short
-    
-    # 2. Check exit condition first (faster 20 SMA)
-    # Guard: Only check if sma_exit is valid (not 0 from NaN fallback)
-    if sma_exit > 0 and price < sma_exit:
-        metadata["reason"] = f"FAST EXIT: Price {price:.2f} below 20 SMA {sma_exit:.2f}"
         return Signal.CASH, metadata
     
-    # 3. Check entry condition (slower 50 SMA)
-    if price > sma_fast:
-        # In uptrend - check for profit-taking
-        if roc > float(config.get("indicators", {}).get("roc_threshold", 0.15)):
-            metadata["reason"] = f"OVERHEATED: ROC {roc*100:.1f}% > threshold. Trim position."
-            return Signal.LONG, metadata
-        else:
-            metadata["reason"] = f"BULLISH: Price above 50 SMA. ROC={roc*100:.1f}%"
-            return Signal.LONG, metadata
+    # 2. Check VIX Filter (avoid entering in high volatility)
+    if vix_filter_enabled and vix_value is not None and vix_value > vix_threshold:
+        metadata["reason"] = f"HIGH VOLATILITY: VIX {vix_value:.1f} > {vix_threshold}. Staying out."
+        return Signal.CASH, metadata
+    
+    # 3. Check entry condition (Price > 50 SMA with epsilon tolerance)
+    if price > sma_fast + PRICE_EPSILON:
+        # 4. Check momentum confirmation (ROC > 0)
+        if require_positive_roc and roc <= PRICE_EPSILON:
+            metadata["reason"] = f"WEAK MOMENTUM: ROC {roc*100:.1f}% <= 0. Waiting for acceleration."
+            return Signal.CASH, metadata
+        
+        # All conditions met - GO LONG
+        metadata["reason"] = f"BULLISH: Price > 50 SMA, ROC={roc*100:.1f}%"
+        return Signal.LONG, metadata
     else:
-        # Price between 20 and 50 SMA - hold if already in, don't enter if not
-        metadata["reason"] = f"NEUTRAL ZONE: Price between 20 SMA ({sma_exit:.2f}) and 50 SMA ({sma_fast:.2f})"
-        return Signal.CASH, metadata  # Conservative: don't enter in neutral zone
+        # Price below 50 SMA - exit or stay out
+        metadata["reason"] = f"TREND BREAK: Price {price:.2f} below 50 SMA {sma_fast:.2f}"
+        return Signal.CASH, metadata
 
 
 def calculate_position_size(

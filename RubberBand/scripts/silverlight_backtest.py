@@ -110,11 +110,17 @@ def run_backtest(
     long_sym = assets_cfg.get("long", "TQQQ")
     short_sym = assets_cfg.get("short", "SQQQ")
     regime_sym = assets_cfg.get("regime_index", "SPY")
+    vix_sym = assets_cfg.get("volatility_index", "VIXY")
     
     # Get slippage/commission
     bt_cfg = config.get("backtest", {})
     slippage_pct = float(bt_cfg.get("slippage_pct", 0.001))
     commission = float(bt_cfg.get("commission_per_trade", 0.0))
+    
+    # Get risk management settings
+    risk_cfg = config.get("risk", {})
+    trailing_stop_enabled = risk_cfg.get("trailing_stop_enabled", True)
+    trailing_stop_pct = float(risk_cfg.get("trailing_stop_pct", 0.10))
     
     # Prepare data with indicators
     if long_sym not in data or regime_sym not in data:
@@ -123,10 +129,18 @@ def run_backtest(
     tqqq_df = attach_indicators(data[long_sym], config)
     spy_df = attach_indicators(data[regime_sym], config)
     
+    # VIX data (optional)
+    vix_df = data.get(vix_sym, None)
+    if vix_df is not None:
+        vix_df = vix_df.copy()
+    
     # Align dates
     common_dates = tqqq_df.index.intersection(spy_df.index)
     tqqq_df = tqqq_df.loc[common_dates]
     spy_df = spy_df.loc[common_dates]
+    if vix_df is not None:
+        vix_common = common_dates.intersection(vix_df.index)
+        vix_df = vix_df.loc[vix_common]
     
     # Skip first 200 days (need SMA200 to be valid)
     warmup = 200
@@ -142,24 +156,34 @@ def run_backtest(
     position_symbol = None
     entry_price = 0.0
     entry_date = None
+    peak_price = 0.0  # For trailing stop
     
     trades = []
     equity_curve = []
     
     for i, (dt, tqqq_row) in enumerate(tqqq_df.iterrows()):
         spy_row = spy_df.loc[dt]
+        current_price = float(tqqq_row["close"])
+        
+        # Get VIX value if available
+        vix_value = None
+        if vix_df is not None and dt in vix_df.index:
+            vix_value = float(vix_df.loc[dt]["close"])
         
         # Get signal
         signal, meta = generate_signal(
             tqqq_df.loc[:dt],
             spy_df.loc[:dt],
-            config
+            config,
+            vix_value=vix_value
         )
         
         # Current equity
         if position_qty > 0 and position_symbol:
-            current_price = float(tqqq_row["close"])
             equity = cash + (position_qty * current_price)
+            # Update peak price for trailing stop
+            if current_price > peak_price:
+                peak_price = current_price
         else:
             equity = cash
         
@@ -174,10 +198,24 @@ def run_backtest(
         
         # If currently in a position
         if position_qty > 0:
-            # Check if we should exit
-            if signal != Signal.LONG:
+            exit_triggered = False
+            exit_reason = ""
+            
+            # Check trailing stop first
+            if trailing_stop_enabled and peak_price > 0:
+                stop_price = peak_price * (1 - trailing_stop_pct)
+                if current_price < stop_price:
+                    exit_triggered = True
+                    exit_reason = f"TRAILING STOP: Price {current_price:.2f} < {stop_price:.2f} (10% from peak {peak_price:.2f})"
+            
+            # Check signal-based exit
+            if not exit_triggered and signal != Signal.LONG:
+                exit_triggered = True
+                exit_reason = meta.get("reason", "Signal changed")
+            
+            if exit_triggered:
                 # EXIT
-                exit_price = float(tqqq_row["close"]) * (1 - slippage_pct)
+                exit_price = current_price * (1 - slippage_pct)
                 proceeds = position_qty * exit_price - commission
                 pnl = proceeds - (position_qty * entry_price)
                 
@@ -190,12 +228,13 @@ def run_backtest(
                     "exit_price": exit_price,
                     "pnl": round(pnl, 2),
                     "pnl_pct": round((exit_price / entry_price - 1) * 100, 2),
-                    "exit_reason": meta.get("reason", "")
+                    "exit_reason": exit_reason
                 })
                 
                 cash += proceeds
                 position_qty = 0
                 position_symbol = None
+                peak_price = 0.0
         
         # If not in position and signal is LONG
         elif signal == Signal.LONG:
@@ -203,7 +242,7 @@ def run_backtest(
             target_size = calculate_position_size(
                 signal, tqqq_df.loc[:dt], config, cash
             )
-            entry_price = float(tqqq_row["close"]) * (1 + slippage_pct)
+            entry_price = current_price * (1 + slippage_pct)
             position_qty = int(target_size // entry_price)
             
             if position_qty > 0:
@@ -212,6 +251,7 @@ def run_backtest(
                     cash -= cost
                     position_symbol = long_sym
                     entry_date = dt
+                    peak_price = entry_price  # Initialize peak at entry
                 else:
                     position_qty = 0
     
@@ -369,7 +409,8 @@ def main():
     symbols = [
         assets_cfg.get("long", "TQQQ"),
         assets_cfg.get("short", "SQQQ"),
-        assets_cfg.get("regime_index", "SPY")
+        assets_cfg.get("regime_index", "SPY"),
+        assets_cfg.get("volatility_index", "VIXY"),  # VIX proxy for volatility filter
     ]
     
     data = fetch_historical_data(

@@ -23,7 +23,7 @@ from zoneinfo import ZoneInfo
 ET = ZoneInfo("US/Eastern")
 
 # Valid bot tags
-BOT_TAGS = {"15M_STK", "15M_OPT", "WK_STK", "WK_OPT"}
+BOT_TAGS = {"15M_STK", "15M_OPT", "WK_STK", "WK_OPT", "SL_ETF"}
 
 # Default registry directory
 DEFAULT_REGISTRY_DIR = ".position_registry"
