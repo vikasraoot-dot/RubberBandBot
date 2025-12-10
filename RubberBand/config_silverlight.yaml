@@ -12,6 +12,7 @@ assets:
 # --- Indicator Settings ---
 indicators:
   sma_fast: 50       # Entry trigger (price crosses above)
+  sma_exit: 20       # Exit trigger (price crosses below) - faster than entry!
   sma_slow: 200      # Regime filter (SPY > 200 SMA)
   roc_period: 14     # Rate of Change for profit-taking
   roc_threshold: 0.15  # 15% threshold for taking profits

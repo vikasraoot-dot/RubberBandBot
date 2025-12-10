@@ -65,20 +65,23 @@ def attach_indicators(df: pd.DataFrame, config: Dict[str, Any]) -> pd.DataFrame:
     
     # Get config values
     ind_cfg = config.get("indicators", {})
-    sma_fast = int(ind_cfg.get("sma_fast", 50))
-    sma_slow = int(ind_cfg.get("sma_slow", 200))
+    sma_fast = int(ind_cfg.get("sma_fast", 50))    # Entry trigger
+    sma_exit = int(ind_cfg.get("sma_exit", 20))    # Exit trigger (faster!)
+    sma_slow = int(ind_cfg.get("sma_slow", 200))   # Regime filter
     roc_period = int(ind_cfg.get("roc_period", 14))
     velocity_period = int(ind_cfg.get("velocity_period", 5))
     
     # Calculate indicators
-    df["sma_fast"] = compute_sma(df["close"], sma_fast)
-    df["sma_slow"] = compute_sma(df["close"], sma_slow)
+    df["sma_fast"] = compute_sma(df["close"], sma_fast)   # 50-day for entry
+    df["sma_exit"] = compute_sma(df["close"], sma_exit)   # 20-day for exit
+    df["sma_slow"] = compute_sma(df["close"], sma_slow)   # 200-day regime
     df["roc"] = compute_roc(df["close"], roc_period)
     df["velocity"] = compute_velocity(df["close"], velocity_period)
     
     # Signal conditions
-    df["above_sma_fast"] = df["close"] > df["sma_fast"]
-    df["above_sma_slow"] = df["close"] > df["sma_slow"]
+    df["above_sma_fast"] = df["close"] > df["sma_fast"]   # Entry condition
+    df["above_sma_exit"] = df["close"] > df["sma_exit"]   # Exit condition
+    df["above_sma_slow"] = df["close"] > df["sma_slow"]   # Regime condition
     
     return df
 
@@ -112,38 +115,46 @@ def generate_signal(
     # Extract values
     price = float(asset_row["close"])
     sma_fast = float(asset_row["sma_fast"]) if not pd.isna(asset_row["sma_fast"]) else 0
+    sma_exit = float(asset_row["sma_exit"]) if not pd.isna(asset_row["sma_exit"]) else 0
     roc = float(asset_row["roc"]) if not pd.isna(asset_row["roc"]) else 0
     regime_above_200 = bool(regime_row["above_sma_slow"]) if not pd.isna(regime_row["above_sma_slow"]) else True
     
     metadata = {
         "price": price,
         "sma_fast": sma_fast,
+        "sma_exit": sma_exit,
         "roc": roc,
         "roc_pct": roc * 100,
         "regime_bullish": regime_above_200,
     }
     
-    # --- Decision Logic ---
+    # --- Decision Logic (Asymmetric SMA) ---
+    # Entry: Price > 50 SMA (slow, confirm trend)
+    # Exit: Price < 20 SMA (fast, lock in profits)
     
     # 1. Check Regime Filter (SPY > 200 SMA)
     if not regime_above_200:
         metadata["reason"] = "BEARISH REGIME: SPY below 200 SMA"
         return Signal.CASH, metadata  # Could be SQQQ for aggressive short
     
-    # 2. Check if price is above 50 SMA (trend confirmation)
+    # 2. Check exit condition first (faster 20 SMA)
+    if price < sma_exit:
+        metadata["reason"] = f"FAST EXIT: Price {price:.2f} below 20 SMA {sma_exit:.2f}"
+        return Signal.CASH, metadata
+    
+    # 3. Check entry condition (slower 50 SMA)
     if price > sma_fast:
         # In uptrend - check for profit-taking
-        if roc > roc_threshold:
-            metadata["reason"] = f"OVERHEATED: ROC {roc*100:.1f}% > {roc_threshold*100}%. Trim position."
-            # Still LONG but will reduce size in sizing function
+        if roc > float(config.get("indicators", {}).get("roc_threshold", 0.15)):
+            metadata["reason"] = f"OVERHEATED: ROC {roc*100:.1f}% > threshold. Trim position."
             return Signal.LONG, metadata
         else:
             metadata["reason"] = f"BULLISH: Price above 50 SMA. ROC={roc*100:.1f}%"
             return Signal.LONG, metadata
     else:
-        # Price below 50 SMA - exit
-        metadata["reason"] = f"TREND BREAK: Price {price:.2f} below 50 SMA {sma_fast:.2f}"
-        return Signal.CASH, metadata
+        # Price between 20 and 50 SMA - hold if already in, don't enter if not
+        metadata["reason"] = f"NEUTRAL ZONE: Price between 20 SMA ({sma_exit:.2f}) and 50 SMA ({sma_fast:.2f})"
+        return Signal.CASH, metadata  # Conservative: don't enter in neutral zone
 
 
 def calculate_position_size(
