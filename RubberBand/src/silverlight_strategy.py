@@ -138,7 +138,8 @@ def generate_signal(
         return Signal.CASH, metadata  # Could be SQQQ for aggressive short
     
     # 2. Check exit condition first (faster 20 SMA)
-    if price < sma_exit:
+    # Guard: Only check if sma_exit is valid (not 0 from NaN fallback)
+    if sma_exit > 0 and price < sma_exit:
         metadata["reason"] = f"FAST EXIT: Price {price:.2f} below 20 SMA {sma_exit:.2f}"
         return Signal.CASH, metadata
     
