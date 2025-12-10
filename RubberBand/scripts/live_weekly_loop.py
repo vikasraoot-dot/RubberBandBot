@@ -64,6 +64,11 @@ def run_weekly_cycle():
     
     # Position Registry for this bot
     registry = PositionRegistry(bot_tag=BOT_TAG)
+    
+    # Debug: Log registry state
+    logging.info(f"Registry loaded: {len(registry.positions)} positions in {BOT_TAG} registry")
+    if registry.positions:
+        logging.debug(f"Registry symbols: {list(registry.positions.keys())}")
 
     # 1. Check Existing Positions (using env vars for credentials)
     all_positions = get_positions()  # Uses env: APCA_API_BASE_URL, APCA_API_KEY_ID, APCA_API_SECRET_KEY
@@ -71,8 +76,23 @@ def run_weekly_cycle():
     # Sync registry with actual Alpaca positions (removes closed/orphaned)
     registry.sync_with_alpaca(all_positions)
     
-    # Filter to only OUR positions
+    # Filter to only OUR positions (based on registry)
     positions = registry.filter_positions(all_positions)
+    
+    # Additional validation: Only show positions that have WK_STK client_order_id
+    # This catches cases where registry may have been contaminated
+    validated_positions = []
+    for p in positions:
+        sym = p.get("symbol", "")
+        # Try to find client_order_id from our registry
+        reg_entry = registry.positions.get(sym, {})
+        coid = reg_entry.get("client_order_id", "")
+        if coid.startswith(f"{BOT_TAG}_"):
+            validated_positions.append(p)
+        else:
+            logging.warning(f"Skipping {sym}: client_order_id '{coid}' does not match {BOT_TAG}")
+    
+    positions = validated_positions
     open_symbols = {p.get("symbol") for p in positions if p.get("symbol")}
     
     logging.info(f"Open Positions ({BOT_TAG}): {len(open_symbols)}")
