@@ -1,0 +1,129 @@
+name: Silver Light Bot
+
+on:
+  schedule:
+    # Run at 3:50 PM ET (19:50 UTC) Monday-Friday
+    - cron: '50 19 * * 1-5'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: 'Mode: backtest or live'
+        required: true
+        default: 'backtest'
+        type: choice
+        options:
+          - backtest
+          - live
+      start_date:
+        description: 'Backtest start date (YYYY-MM-DD)'
+        required: false
+        default: '2020-01-01'
+        type: string
+      end_date:
+        description: 'Backtest end date (YYYY-MM-DD)'
+        required: false
+        default: '2024-12-31'
+        type: string
+      dry_run:
+        description: 'Dry run mode (1=paper trading, 0=live trading)'
+        required: false
+        default: '1'
+        type: string
+
+concurrency:
+  group: silverlight-bot
+  cancel-in-progress: true
+
+jobs:
+  backtest:
+    if: ${{ github.event.inputs.mode == 'backtest' || github.event_name == 'workflow_dispatch' && github.event.inputs.mode == 'backtest' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
+          pip install pandas requests pyyaml numpy
+      
+      - name: Run Silver Light Backtest
+        env:
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          PYTHONPATH: ${{ github.workspace }}
+        run: |
+          echo "========================================"
+          echo "Silver Light Backtest"
+          echo "========================================"
+          echo "Start Date: ${{ github.event.inputs.start_date || '2020-01-01' }}"
+          echo "End Date: ${{ github.event.inputs.end_date || '2024-12-31' }}"
+          echo "========================================"
+          
+          python RubberBand/scripts/silverlight_backtest.py \
+            --start-date "${{ github.event.inputs.start_date || '2020-01-01' }}" \
+            --end-date "${{ github.event.inputs.end_date || '2024-12-31' }}" \
+            --output silverlight_backtest_results.csv
+      
+      - name: Upload Backtest Results
+        uses: actions/upload-artifact@v4
+        with:
+          name: silverlight-backtest-${{ github.run_id }}
+          path: |
+            silverlight_backtest_results.csv
+            silverlight_backtest_results_equity.csv
+          if-no-files-found: warn
+          overwrite: true
+
+  live:
+    if: ${{ github.event.inputs.mode == 'live' || github.event_name == 'schedule' }}
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
+          pip install pandas requests pyyaml numpy
+      
+      - name: Run Silver Light Live Trading
+        env:
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          PYTHONPATH: ${{ github.workspace }}
+          DRY_RUN: ${{ github.event.inputs.dry_run || '1' }}
+        run: |
+          echo "========================================"
+          echo "Silver Light Live Trading"
+          echo "========================================"
+          echo "Dry Run: $DRY_RUN"
+          echo "========================================"
+          
+          mkdir -p logs
+          python RubberBand/scripts/silverlight_live.py
+      
+      - name: Upload Trade Logs
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: silverlight-logs-${{ github.run_id }}
+          path: logs/silverlight_live_*.jsonl
+          if-no-files-found: warn
+          overwrite: true

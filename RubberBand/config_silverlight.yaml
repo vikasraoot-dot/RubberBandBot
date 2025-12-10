@@ -1,0 +1,44 @@
+# Silver Light Bot Configuration
+# ================================
+# Trend-following strategy for TQQQ/SQQQ leveraged ETFs.
+# Completely isolated from Rubber Band bots.
+
+# --- Assets ---
+assets:
+  long: "TQQQ"       # 3x Long NASDAQ
+  short: "SQQQ"      # 3x Short NASDAQ
+  regime_index: "SPY"  # Market regime filter (S&P 500)
+
+# --- Indicator Settings ---
+indicators:
+  sma_fast: 50       # Entry trigger (price crosses above)
+  sma_slow: 200      # Regime filter (SPY > 200 SMA)
+  roc_period: 14     # Rate of Change for profit-taking
+  roc_threshold: 0.15  # 15% threshold for taking profits
+  velocity_period: 5   # For sizing acceleration
+
+# --- Position Sizing ---
+sizing:
+  max_position_pct: 1.0       # 100% allocation when fully invested
+  reduced_position_pct: 0.5   # 50% when velocity decelerating or trimming
+  min_cash_buffer: 0.0        # Keep 0% in cash (fully invested)
+
+# --- Execution ---
+execution:
+  timeframe: "1Day"           # Daily bars
+  execution_time: "15:50"     # 3:50 PM ET (before market close)
+  feed: "iex"                 # Free data feed
+
+# --- Risk Management ---
+risk:
+  max_drawdown_pct: 0.35      # 35% max drawdown tolerance
+  vix_threshold: 30           # Optional VIX-based exit (if VIX > 30)
+  use_vix_filter: false       # Disabled by default
+
+# --- Backtesting Defaults ---
+backtest:
+  start_date: "2015-01-01"
+  end_date: "2024-12-31"
+  initial_capital: 10000
+  commission_per_trade: 0.0   # Most brokers are commission-free
+  slippage_pct: 0.001         # 0.1% slippage estimate
