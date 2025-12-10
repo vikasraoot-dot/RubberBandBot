@@ -194,7 +194,7 @@ def run_single_ticker_backtest(
             "symbol": symbol,
             "final_equity": initial_capital,
             "total_return": 0,
-            "max_drawdown": 0,  # FIX: Add missing key
+            "max_drawdown": 0,
             "total_trades": 0,
             "wins": 0,
             "losses": 0,
@@ -202,6 +202,8 @@ def run_single_ticker_backtest(
             "total_pnl": 0,
             "avg_win": 0,
             "avg_loss": 0,
+            "avg_hold_win": 0,   # FIX: Add missing key
+            "avg_hold_loss": 0,  # FIX: Add missing key
         }
     
     wins = trades_df[trades_df["pnl"] > 0]
