@@ -207,6 +207,17 @@ def run_single_ticker_backtest(
     wins = trades_df[trades_df["pnl"] > 0]
     losses = trades_df[trades_df["pnl"] <= 0]
     
+    # Calculate hold times
+    trades_df["entry_date"] = pd.to_datetime(trades_df["entry_date"])
+    trades_df["exit_date"] = pd.to_datetime(trades_df["exit_date"])
+    trades_df["hold_days"] = (trades_df["exit_date"] - trades_df["entry_date"]).dt.days
+    
+    wins_with_days = trades_df[trades_df["pnl"] > 0]
+    losses_with_days = trades_df[trades_df["pnl"] <= 0]
+    
+    avg_hold_win = wins_with_days["hold_days"].mean() if len(wins_with_days) > 0 else 0
+    avg_hold_loss = losses_with_days["hold_days"].mean() if len(losses_with_days) > 0 else 0
+    
     # Max drawdown
     equity_df = pd.DataFrame(equity_curve)
     equity_df["peak"] = equity_df["equity"].cummax()
@@ -225,6 +236,8 @@ def run_single_ticker_backtest(
         "total_pnl": round(trades_df["pnl"].sum(), 2),
         "avg_win": round(wins["pnl"].mean(), 2) if len(wins) > 0 else 0,
         "avg_loss": round(losses["pnl"].mean(), 2) if len(losses) > 0 else 0,
+        "avg_hold_win": round(avg_hold_win, 1),
+        "avg_hold_loss": round(avg_hold_loss, 1),
     }
 
 
@@ -300,12 +313,12 @@ def main():
             results.append(result)
     
     # Summary table
-    print("\n" + "=" * 80)
+    print("\n" + "=" * 120)
     print("RESULTS BY TICKER")
-    print("=" * 80)
+    print("=" * 120)
     
-    print(f"\n{'Symbol':<8} {'Return%':>10} {'MaxDD%':>8} {'Trades':>8} {'Wins':>6} {'Losses':>8} {'WinRate':>8} {'TotalPnL':>12} {'AvgWin':>10} {'AvgLoss':>10}")
-    print("-" * 100)
+    print(f"\n{'Symbol':<8} {'Return%':>8} {'MaxDD%':>7} {'Trades':>7} {'Wins':>5} {'Losses':>7} {'WinRate':>8} {'TotalPnL':>11} {'AvgWin':>9} {'AvgLoss':>9} {'HoldWin':>8} {'HoldLoss':>9}")
+    print("-" * 120)
     
     total_pnl = 0
     total_trades = 0
@@ -313,14 +326,14 @@ def main():
     total_losses = 0
     
     for r in results:
-        print(f"{r['symbol']:<8} {r['total_return']:>+10.1f} {r['max_drawdown']:>8.1f} {r['total_trades']:>8} {r['wins']:>6} {r['losses']:>8} {r['win_rate']:>7.0f}% ${r['total_pnl']:>11,.2f} ${r['avg_win']:>9,.2f} ${r['avg_loss']:>9,.2f}")
+        print(f"{r['symbol']:<8} {r['total_return']:>+8.1f} {r['max_drawdown']:>7.1f} {r['total_trades']:>7} {r['wins']:>5} {r['losses']:>7} {r['win_rate']:>7.0f}% ${r['total_pnl']:>10,.0f} ${r['avg_win']:>8,.0f} ${r['avg_loss']:>8,.0f} {r['avg_hold_win']:>7.0f}d {r['avg_hold_loss']:>8.0f}d")
         total_pnl += r['total_pnl']
         total_trades += r['total_trades']
         total_wins += r['wins']
         total_losses += r['losses']
     
-    print("-" * 100)
-    print(f"{'TOTAL':<8} {'':<10} {'':<8} {total_trades:>8} {total_wins:>6} {total_losses:>8} {total_wins/total_trades*100 if total_trades > 0 else 0:>7.0f}% ${total_pnl:>11,.2f}")
+    print("-" * 120)
+    print(f"{'TOTAL':<8} {'':>8} {'':>7} {total_trades:>7} {total_wins:>5} {total_losses:>7} {total_wins/total_trades*100 if total_trades > 0 else 0:>7.0f}% ${total_pnl:>10,.0f}")
     
     # Portfolio summary
     total_capital = args.capital * len(args.tickers)
