@@ -537,11 +537,22 @@ def manage_positions(
             continue
         
         if not long_pos:
-            # Orphaned short leg - close it
+            # Orphaned short leg - close it individually
+            # This can happen if the long leg was closed but short wasn't
             if short_pos:
-                print(f"[positions] Orphaned short leg for {underlying}, closing")
+                short_symbol = short_pos.get("symbol", "")
+                print(f"[positions] Orphaned short leg detected for {underlying}")
+                print(f"[positions]   Short symbol: {short_symbol}")
+                print(f"[positions]   Qty: {short_pos.get('qty', 0)}")
                 if not dry_run:
-                    close_option_position(short_pos["symbol"])
+                    result = close_option_position(short_symbol)
+                    if result.get("error"):
+                        print(f"[positions] ERROR closing orphaned short: {result.get('message', 'Unknown')}")
+                        # Will retry next cycle
+                    else:
+                        print(f"[positions] Orphaned short leg closed successfully")
+                else:
+                    print(f"[positions] [DRY-RUN] Would close orphaned short leg")
             continue
         
         # Parse symbols

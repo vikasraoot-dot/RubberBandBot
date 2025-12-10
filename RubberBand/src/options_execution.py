@@ -209,6 +209,9 @@ def close_spread(
     """
     Close a bull call spread by closing both legs together as a multi-leg order.
     
+    IMPORTANT: This function will NEVER close legs individually to prevent orphaned legs.
+    If the mleg order fails, it returns an error for the caller to handle/retry.
+    
     For a bull call spread:
     - Sell to close the long leg (the one we bought)
     - Buy to close the short leg (the one we sold)
@@ -230,15 +233,14 @@ def close_spread(
     short_quote = get_option_quote(short_symbol)
     
     if not long_quote or not short_quote:
-        # Fallback to closing legs individually if quotes unavailable
-        print(f"[options] Cannot get quotes, closing legs individually")
-        result_long = close_option_position(long_symbol, qty)
-        result_short = close_option_position(short_symbol, qty)
+        # DO NOT fall back to individual closes - return error for retry
+        print(f"[options] Cannot get quotes for spread legs - will retry later")
+        print(f"[options]   Long quote: {long_quote}")
+        print(f"[options]   Short quote: {short_quote}")
         return {
-            "error": result_long.get("error", False) or result_short.get("error", False),
-            "long_result": result_long,
-            "short_result": result_short,
-            "message": "Closed individually",
+            "error": True, 
+            "message": "Cannot get quotes for spread legs",
+            "retry": True,  # Signal that this is retryable
         }
     
     # For closing: sell long at bid, buy short at ask
@@ -248,6 +250,12 @@ def close_spread(
     
     # Use absolute value as limit price (negative = credit to receive)
     limit_price = round(abs(net_credit), 2)
+    
+    # Log the spread close attempt with full details
+    print(f"[options] Attempting spread close:")
+    print(f"[options]   Long: {long_symbol} @ bid={long_bid}")
+    print(f"[options]   Short: {short_symbol} @ ask={short_ask}")
+    print(f"[options]   Net credit: ${net_credit:.2f}, limit_price: ${limit_price:.2f}")
     
     # Build multi-leg close order
     # Note: mleg orders do NOT use top-level "symbol" field
@@ -288,16 +296,14 @@ def close_spread(
         
         if resp.status_code >= 400:
             error_msg = result.get("message", str(result))
-            print(f"[options] Spread close error: {result}")
-            # Fallback to individual closes
-            print(f"[options] Falling back to individual leg closes")
-            result_long = close_option_position(long_symbol, qty)
-            result_short = close_option_position(short_symbol, qty)
+            print(f"[options] Spread close ERROR: {result}")
+            print(f"[options] NOT falling back to individual closes - will retry next cycle")
+            # DO NOT fall back to individual closes - return error for retry
             return {
                 "error": True,
-                "message": f"mleg failed: {error_msg}, closed individually",
-                "long_result": result_long,
-                "short_result": result_short,
+                "message": f"mleg close failed: {error_msg}",
+                "status_code": resp.status_code,
+                "retry": True,  # Signal that this is retryable
             }
         
         order_id = result.get("id", "")
@@ -313,14 +319,12 @@ def close_spread(
         }
     except Exception as e:
         print(f"[options] Spread close exception: {e}")
-        # Fallback to individual closes
-        result_long = close_option_position(long_symbol, qty)
-        result_short = close_option_position(short_symbol, qty)
+        print(f"[options] NOT falling back to individual closes - will retry next cycle")
+        # DO NOT fall back to individual closes - return error for retry
         return {
             "error": True,
             "message": str(e),
-            "long_result": result_long,
-            "short_result": result_short,
+            "retry": True,  # Signal that this is retryable
         }
 
 
