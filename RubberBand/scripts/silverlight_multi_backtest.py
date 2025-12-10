@@ -34,16 +34,15 @@ from RubberBand.src.silverlight_strategy import (
 
 # Pre-selected tickers for Silver Light
 # NOTE: SPY removed - it's used as regime filter, can't backtest SPY with SPY
+# NOTE: NVDA/AVGO removed - too volatile, gaps destroy trailing stops
 DEFAULT_TICKERS = [
     "QQQ",    # NASDAQ 100 ETF
-    "NVDA",   # GPU leader
     "AAPL",   # Apple
     "MSFT",   # Microsoft
     "AMZN",   # Amazon
     "META",   # Meta
     "GOOGL",  # Alphabet
     "AMD",    # Semiconductors
-    "AVGO",   # Broadcom
     "COST",   # Costco - stable mega cap
 ]
 
