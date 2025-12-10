@@ -260,8 +260,8 @@ def try_spread_entry(
     contracts = spread_cfg.get("contracts", 1)
     entry_reason = signal.get("entry_reason", "RubberBand_signal")
     
-    # Select spread contracts (may fallback to different DTE)
-    spread = select_spread_contracts(sym, dte=dte, spread_width_pct=spread_width_pct)
+    # Select spread contracts (may fallback to different DTE, respecting min_dte)
+    spread = select_spread_contracts(sym, dte=dte, spread_width_pct=spread_width_pct, min_dte=min_dte)
     if not spread:
         logger.spread_skip(underlying=sym, skip_reason="No_contracts_available")
         return False

@@ -331,14 +331,16 @@ def select_spread_contracts(
     underlying: str,
     dte: int = 3,
     spread_width_pct: float = 2.0,
+    min_dte: Optional[int] = None,
 ) -> Optional[Dict[str, Any]]:
     """
     Select contracts for a bull call spread.
     
     Args:
         underlying: Stock symbol
-        dte: Days to expiration (1-3 recommended)
+        dte: Target days to expiration (1-3 recommended)
         spread_width_pct: OTM strike = ATM * (1 + this/100)
+        min_dte: Minimum DTE required (skips expirations below this)
     
     Returns:
         Dict with 'long' (ATM) and 'short' (OTM) contracts, or None
@@ -349,9 +351,19 @@ def select_spread_contracts(
         print(f"[spreads] Cannot get price for {underlying}")
         return None
     
-    # Try DTE, then DTE-1, DTE-2, DTE+1, DTE+2 to find available expiration
-    dte_attempts = [dte, dte - 1, dte + 1, dte - 2, dte + 2]
+    # Try current week first (dte ± 2), then next week (dte + 7 ± 2) if no match
+    # This ensures we find a valid expiration even mid-week when DTE < min_dte
+    current_week = [dte, dte - 1, dte + 1, dte - 2, dte + 2]
+    next_week = [dte + 7, dte + 5, dte + 6, dte + 8, dte + 9]  # Next Friday
+    dte_attempts = current_week + next_week
     dte_attempts = [d for d in dte_attempts if d >= 0]  # No negative DTE
+    
+    # If min_dte specified, filter out attempts below threshold
+    if min_dte is not None:
+        dte_attempts = [d for d in dte_attempts if d >= min_dte]
+        if not dte_attempts:
+            print(f"[spreads] No valid DTE options for {underlying} with min_dte={min_dte}")
+            return None
     
     contracts = None
     used_expiration = None
