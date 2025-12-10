@@ -1,0 +1,555 @@
+﻿2025-12-08T14:13:56.6506695Z Current runner version: '2.329.0'
+2025-12-08T14:13:56.6522742Z Runner name: 'VHOMEPC'
+2025-12-08T14:13:56.6523375Z Runner group name: 'Default'
+2025-12-08T14:13:56.6524122Z Machine name: 'VHOMEPC'
+2025-12-08T14:13:56.6526782Z ##[group]GITHUB_TOKEN Permissions
+2025-12-08T14:13:56.6529338Z Contents: read
+2025-12-08T14:13:56.6529732Z Metadata: read
+2025-12-08T14:13:56.6530069Z Packages: read
+2025-12-08T14:13:56.6530436Z ##[endgroup]
+2025-12-08T14:13:56.6532719Z Secret source: Actions
+2025-12-08T14:13:56.6533236Z Prepare workflow directory
+2025-12-08T14:13:56.7785670Z Prepare all required actions
+2025-12-08T14:13:56.7831714Z Getting action download info
+2025-12-08T14:13:57.4993246Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-08T14:13:58.6649492Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-08T14:14:00.2346325Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-08T14:14:02.3298267Z Complete job name: trade
+2025-12-08T14:14:02.4878919Z ##[group]Run actions/checkout@v4
+2025-12-08T14:14:02.4880201Z with:
+2025-12-08T14:14:02.4880736Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-08T14:14:02.4882239Z   token: ***
+2025-12-08T14:14:02.4882750Z   ssh-strict: true
+2025-12-08T14:14:02.4883231Z   ssh-user: git
+2025-12-08T14:14:02.4883742Z   persist-credentials: true
+2025-12-08T14:14:02.4884303Z   clean: true
+2025-12-08T14:14:02.4884824Z   sparse-checkout-cone-mode: true
+2025-12-08T14:14:02.4885240Z   fetch-depth: 1
+2025-12-08T14:14:02.4885460Z   fetch-tags: false
+2025-12-08T14:14:02.4885682Z   show-progress: true
+2025-12-08T14:14:02.4886098Z   lfs: false
+2025-12-08T14:14:02.4886569Z   submodules: false
+2025-12-08T14:14:02.4886779Z   set-safe-directory: true
+2025-12-08T14:14:02.4887647Z ##[endgroup]
+2025-12-08T14:14:03.0985382Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-08T14:14:03.0988785Z ##[group]Getting Git version info
+2025-12-08T14:14:03.0990134Z Working directory is 'C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot'
+2025-12-08T14:14:03.1135668Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-08T14:14:03.1946207Z git version 2.52.0.windows.1
+2025-12-08T14:14:03.2042853Z ##[endgroup]
+2025-12-08T14:14:03.2081441Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\58fc128c-291f-4a6a-8129-0cfa31de9bd7' before making global git config changes
+2025-12-08T14:14:03.2083438Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-08T14:14:03.2092012Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-08T14:14:03.2911248Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-08T14:14:03.3468186Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-08T14:14:03.3558083Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-08T14:14:03.3563768Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-08T14:14:03.4084579Z refs/heads/main
+2025-12-08T14:14:03.4175493Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-08T14:14:03.5370585Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-08T14:14:03.5371966Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-08T14:14:03.5373247Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-08T14:14:03.5396069Z HEAD is now at d762bfe feat: Add stock bot registry integration + GitHub Actions artifact persistence
+2025-12-08T14:14:03.6783020Z ##[endgroup]
+2025-12-08T14:14:03.6792360Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-08T14:14:05.3358261Z ##[group]Cleaning the repository
+2025-12-08T14:14:05.3359066Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-08T14:14:05.3887142Z Removing .pytest_cache/
+2025-12-08T14:14:05.3892757Z Removing tests/__pycache__/
+2025-12-08T14:14:05.3969671Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-08T14:14:05.5300986Z HEAD is now at d762bfe feat: Add stock bot registry integration + GitHub Actions artifact persistence
+2025-12-08T14:14:05.5388046Z ##[endgroup]
+2025-12-08T14:14:05.5390827Z ##[group]Disabling automatic garbage collection
+2025-12-08T14:14:05.5396599Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-08T14:14:05.6099822Z ##[endgroup]
+2025-12-08T14:14:05.6100871Z ##[group]Setting up auth
+2025-12-08T14:14:05.6113631Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-08T14:14:05.6691454Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-08T14:14:06.7653468Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-08T14:14:06.8218757Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-08T14:14:07.8707728Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-08T14:14:07.9428309Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-08T14:14:09.0228236Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-08T14:14:09.0878885Z ##[endgroup]
+2025-12-08T14:14:09.0879527Z ##[group]Fetching the repository
+2025-12-08T14:14:09.0886751Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +947a0363e5620ff8dbe3056673526397c016bca1:refs/remotes/origin/main
+2025-12-08T14:14:10.2472198Z From https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-08T14:14:10.2473065Z  + d762bfe...947a036 947a0363e5620ff8dbe3056673526397c016bca1 -> origin/main  (forced update)
+2025-12-08T14:14:10.2904394Z ##[endgroup]
+2025-12-08T14:14:10.2905029Z ##[group]Determining the checkout info
+2025-12-08T14:14:10.2905755Z ##[endgroup]
+2025-12-08T14:14:10.2913303Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-08T14:14:10.3626118Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-08T14:14:10.4215782Z ##[group]Checking out the ref
+2025-12-08T14:14:10.4224703Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-08T14:14:10.5686990Z branch 'main' set up to track 'origin/main'.
+2025-12-08T14:14:10.5687805Z Your branch is up to date with 'origin/main'.
+2025-12-08T14:14:10.5704391Z Previous HEAD position was d762bfe feat: Add stock bot registry integration + GitHub Actions artifact persistence
+2025-12-08T14:14:10.5705378Z Switched to and reset branch 'main'
+2025-12-08T14:14:10.5793220Z ##[endgroup]
+2025-12-08T14:14:10.6590730Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-08T14:14:10.7066352Z 947a0363e5620ff8dbe3056673526397c016bca1
+2025-12-08T14:14:10.7649677Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-08T14:14:10.7650184Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-08T14:14:10.7650481Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-08T14:14:10.7677717Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-08T14:14:10.7678279Z ##[endgroup]
+2025-12-08T14:14:12.1268307Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-08T14:14:12.1270882Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-08T14:14:12.1271614Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-08T14:14:12.1316207Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-08T14:14:12.1317415Z env:
+2025-12-08T14:14:12.1317912Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-08T14:14:12.1318529Z ##[endgroup]
+2025-12-08T14:14:13.8582591Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-08T14:14:14.8135830Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-08T14:14:18.1959240Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-08T14:14:19.0283455Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-08T14:14:19.0294011Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-08T14:14:19.0313527Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-08T14:14:19.0322073Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-08T14:14:19.0330414Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-08T14:14:19.0430996Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-08T14:14:19.0446219Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-08T14:14:19.0741458Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-08T14:14:19.0757064Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-08T14:14:19.0770961Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-08T14:14:19.0782816Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-08T14:14:19.1019690Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-08T14:14:19.5932219Z ##[group]Run chcp 65001 > $null
+2025-12-08T14:14:19.5933096Z [36;1mchcp 65001 > $null[0m
+2025-12-08T14:14:19.5934031Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-08T14:14:19.5935010Z [36;1mfunction Get-Clock {[0m
+2025-12-08T14:14:19.5935850Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-08T14:14:19.5937307Z [36;1m}[0m
+2025-12-08T14:14:19.5937683Z [36;1m$maxWaitMin = 20[0m
+2025-12-08T14:14:19.5939404Z [36;1m$start = Get-Date[0m
+2025-12-08T14:14:19.5940114Z [36;1mwhile ($true) {[0m
+2025-12-08T14:14:19.5940596Z [36;1m  try {[0m
+2025-12-08T14:14:19.5941044Z [36;1m    $clk = Get-Clock[0m
+2025-12-08T14:14:19.5941776Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-08T14:14:19.5942594Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-08T14:14:19.5943463Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-08T14:14:19.5944192Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-08T14:14:19.5944911Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-08T14:14:19.5945828Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-08T14:14:19.5946640Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-08T14:14:19.5947196Z [36;1m    } else {[0m
+2025-12-08T14:14:19.5948260Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-08T14:14:19.5948950Z [36;1m      break[0m
+2025-12-08T14:14:19.5949380Z [36;1m    }[0m
+2025-12-08T14:14:19.5950000Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-08T14:14:19.5950914Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-08T14:14:19.5951614Z [36;1m      break[0m
+2025-12-08T14:14:19.5952039Z [36;1m    }[0m
+2025-12-08T14:14:19.5952474Z [36;1m  } catch {[0m
+2025-12-08T14:14:19.5953193Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-08T14:14:19.5954078Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-08T14:14:19.5954712Z [36;1m  }[0m
+2025-12-08T14:14:19.5955118Z [36;1m}[0m
+2025-12-08T14:14:19.6008523Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-08T14:14:19.6009445Z env:
+2025-12-08T14:14:19.6010209Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-08T14:14:19.6011057Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-08T14:14:19.6012015Z   APCA_API_KEY_ID: ***
+2025-12-08T14:14:19.6012701Z   APCA_API_SECRET_KEY: ***
+2025-12-08T14:14:19.6013157Z ##[endgroup]
+2025-12-08T14:14:20.8779395Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:14:50.9999736Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:15:21.1025194Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:15:51.1953888Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:16:21.2930704Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:16:51.4004066Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:17:21.5060089Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:17:51.6081518Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:18:21.7096567Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:18:51.8065164Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:19:21.9097514Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:19:52.0132999Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:20:22.1089649Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:20:52.2088011Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:21:22.3123107Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:21:52.4136237Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:22:22.5198008Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:22:52.6201264Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:23:22.7298368Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:23:52.8310180Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:24:22.9320527Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:24:53.0376496Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:25:23.1347165Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:25:53.2413605Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:26:23.3532924Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:26:53.4558246Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:27:23.5520008Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:27:53.6526281Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:28:23.7501800Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:28:53.8440856Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:29:23.9456232Z Waiting 30 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:29:54.0478611Z Waiting 6 s until next_open 2025-12-08T09:30:00-05:00...
+2025-12-08T14:30:00.1546151Z Past next_open window; continuing.
+2025-12-08T14:30:00.2795692Z ##[group]Run actions/download-artifact@v4
+2025-12-08T14:30:00.2796584Z with:
+2025-12-08T14:30:00.2797275Z   name: position-registry-15M_OPT
+2025-12-08T14:30:00.2797868Z   path: .position_registry/
+2025-12-08T14:30:00.2798375Z   merge-multiple: false
+2025-12-08T14:30:00.2798870Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-08T14:30:00.2799437Z   run-id: 20031083465
+2025-12-08T14:30:00.2799866Z env:
+2025-12-08T14:30:00.2800176Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-08T14:30:00.2800477Z ##[endgroup]
+2025-12-08T14:30:01.4303604Z Downloading single artifact
+2025-12-08T14:30:01.9299895Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-08T14:30:01.9751209Z ##[group]Run chcp 65001 > $null
+2025-12-08T14:30:01.9752303Z [36;1mchcp 65001 > $null[0m
+2025-12-08T14:30:01.9752882Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-08T14:30:01.9753488Z [36;1m[0m
+2025-12-08T14:30:01.9753885Z [36;1m# Get inputs with defaults[0m
+2025-12-08T14:30:01.9754445Z [36;1m$dryRun = if ("" -ne "") { "" } else { "0" }[0m
+2025-12-08T14:30:01.9755095Z [36;1m$dte = if ("" -ne "") { "" } else { "3" }[0m
+2025-12-08T14:30:01.9755626Z [36;1m[0m
+2025-12-08T14:30:01.9756290Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-08T14:30:01.9757104Z [36;1m[0m
+2025-12-08T14:30:01.9757480Z [36;1m# Run the spreads loop[0m
+2025-12-08T14:30:01.9758241Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-08T14:30:01.9758920Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-08T14:30:01.9759522Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-08T14:30:01.9760266Z [36;1m  --dry-run $dryRun `[0m
+2025-12-08T14:30:01.9760713Z [36;1m  --dte $dte `[0m
+2025-12-08T14:30:01.9760928Z [36;1m  --max-debit 3.00[0m
+2025-12-08T14:30:01.9785881Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-08T14:30:01.9786312Z env:
+2025-12-08T14:30:01.9786544Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-08T14:30:01.9786887Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-08T14:30:01.9787433Z   APCA_API_KEY_ID: ***
+2025-12-08T14:30:01.9787764Z   APCA_API_SECRET_KEY: ***
+2025-12-08T14:30:01.9788052Z   ALPACA_KEY: ***
+2025-12-08T14:30:01.9788337Z   ALPACA_SECRET: ***
+2025-12-08T14:30:01.9788537Z   PYTHONUNBUFFERED: 1
+2025-12-08T14:30:01.9788739Z ##[endgroup]
+2025-12-08T14:30:02.4599641Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-08T14:30:04.2565614Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-08T14:30:04Z","ts_et":"2025-12-08 09:30:04 ET"}
+2025-12-08T14:30:04.2732493Z {"event":"symbols_loaded","count":30,"sample":["NVDA","AMD","AAPL","MSFT","GOOGL"],"type":"HEARTBEAT","ts":"2025-12-08T14:30:04Z","ts_et":"2025-12-08 09:30:04 ET"}
+2025-12-08T14:30:04.6541132Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-08T14:30:04Z","ts_et":"2025-12-08 09:30:04 ET"}
+2025-12-08T14:30:05.0011181Z {"event":"scan_cycle_start","cycle":1,"time":"09:30","type":"HEARTBEAT","ts":"2025-12-08T14:30:05Z","ts_et":"2025-12-08 09:30:05 ET"}
+2025-12-08T14:30:05.0011751Z {"event":"outside_entry_window","current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-08T14:30:05Z","ts_et":"2025-12-08 09:30:05 ET"}
+2025-12-08T14:30:05.3617069Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T14:30:05Z","ts_et":"2025-12-08 09:30:05 ET"}
+2025-12-08T14:30:05.3619060Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-08T14:30:05Z","ts_et":"2025-12-08 09:30:05 ET"}
+2025-12-08T14:45:05.7618747Z {"event":"scan_cycle_start","cycle":2,"time":"09:45","type":"HEARTBEAT","ts":"2025-12-08T14:45:05Z","ts_et":"2025-12-08 09:45:05 ET"}
+2025-12-08T14:45:05.7624003Z {"event":"scan_start","current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-08T14:45:05Z","ts_et":"2025-12-08 09:45:05 ET"}
+2025-12-08T14:45:18.8214949Z {"type":"SPREAD_SIGNAL","underlying":"NFLX","signal_reason":"RSI_oversold(24.0)","entry_price":96.95,"rsi":23.96,"atr":0.8589,"ts":"2025-12-08T14:45:18Z","ts_et":"2025-12-08 09:45:18 ET"}
+2025-12-08T14:45:19.4428012Z {"event":"signals_found","count":1,"symbols":["NFLX"],"type":"HEARTBEAT","ts":"2025-12-08T14:45:19Z","ts_et":"2025-12-08 09:45:19 ET"}
+2025-12-08T14:45:20.5715664Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for NFLX
+2025-12-08T14:45:20.5716403Z [spreads] NFLX: Long 97.0 / Short 99.0 (width=$2.00, exp=2025-12-12)
+2025-12-08T14:45:21.6814243Z [options] Submitting spread: NFLX251212C00097000 (buy) / NFLX251212C00099000 (sell) @ $0.94 debit
+2025-12-08T14:45:21.9633473Z [options] Spread order submitted: c70f625a-c008-4335-9dc4-647101fc5509
+2025-12-08T14:45:21.9701695Z [registry] Recorded entry: NFLX251212C00097000 (order_id=15M_OPT_NFLX251212C00097000_17...)
+2025-12-08T14:45:21.9834826Z {"type":"SPREAD_ENTRY","underlying":"NFLX","long_symbol":"NFLX251212C00097000","short_symbol":"NFLX251212C00099000","atm_strike":97.0,"otm_strike":99.0,"spread_width":2.0,"net_debit":0.94,"total_cost":94.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(24.0)","signal_rsi":23.96,"signal_atr":0.8589,"entry_ts":"2025-12-08T14:45:21Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T14:45:21Z","ts_et":"2025-12-08 09:45:21 ET"}
+2025-12-08T14:45:21.9843914Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":1,"type":"HEARTBEAT","ts":"2025-12-08T14:45:21Z","ts_et":"2025-12-08 09:45:21 ET"}
+2025-12-08T14:45:21.9844807Z {"event":"scan_cycle_end","cycle":2,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T14:45:21Z","ts_et":"2025-12-08 09:45:21 ET"}
+2025-12-08T14:45:21.9846577Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-08T14:45:21Z","ts_et":"2025-12-08 09:45:21 ET"}
+2025-12-08T15:00:22.2779500Z {"event":"scan_cycle_start","cycle":3,"time":"10:00","type":"HEARTBEAT","ts":"2025-12-08T15:00:22Z","ts_et":"2025-12-08 10:00:22 ET"}
+2025-12-08T15:00:22.2780574Z {"event":"scan_start","current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-08T15:00:22Z","ts_et":"2025-12-08 10:00:22 ET"}
+2025-12-08T15:00:28.7913928Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(23.9)","entry_price":445.13,"rsi":23.9,"atr":2.1537,"ts":"2025-12-08T15:00:28Z","ts_et":"2025-12-08 10:00:28 ET"}
+2025-12-08T15:00:35.8026417Z {"event":"signals_found","count":1,"symbols":["TSLA"],"type":"HEARTBEAT","ts":"2025-12-08T15:00:35Z","ts_et":"2025-12-08 10:00:35 ET"}
+2025-12-08T15:00:37.0216409Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T15:00:37.0217937Z [spreads] TSLA: Long 445.0 / Short 455.0 (width=$10.00, exp=2025-12-12)
+2025-12-08T15:00:37.5847123Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.42>3.00)","ts":"2025-12-08T15:00:37Z","ts_et":"2025-12-08 10:00:37 ET"}
+2025-12-08T15:00:37.5875477Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":2,"type":"HEARTBEAT","ts":"2025-12-08T15:00:37Z","ts_et":"2025-12-08 10:00:37 ET"}
+2025-12-08T15:00:37.5880766Z {"event":"scan_cycle_end","cycle":3,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T15:00:37Z","ts_et":"2025-12-08 10:00:37 ET"}
+2025-12-08T15:00:37.5882703Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-08T15:00:37Z","ts_et":"2025-12-08 10:00:37 ET"}
+2025-12-08T15:15:37.8815533Z {"event":"scan_cycle_start","cycle":4,"time":"10:15","type":"HEARTBEAT","ts":"2025-12-08T15:15:37Z","ts_et":"2025-12-08 10:15:37 ET"}
+2025-12-08T15:15:37.8816721Z {"event":"scan_start","current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-08T15:15:37Z","ts_et":"2025-12-08 10:15:37 ET"}
+2025-12-08T15:15:44.1169831Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(22.7)","entry_price":444.32,"rsi":22.66,"atr":2.152,"ts":"2025-12-08T15:15:44Z","ts_et":"2025-12-08 10:15:44 ET"}
+2025-12-08T15:15:50.1981180Z {"type":"SPREAD_SIGNAL","underlying":"NFLX","signal_reason":"RSI_oversold(24.3)","entry_price":96.59,"rsi":24.25,"atr":0.8677,"ts":"2025-12-08T15:15:50Z","ts_et":"2025-12-08 10:15:50 ET"}
+2025-12-08T15:15:50.7761487Z {"event":"signals_found","count":2,"symbols":["TSLA","NFLX"],"type":"HEARTBEAT","ts":"2025-12-08T15:15:50Z","ts_et":"2025-12-08 10:15:50 ET"}
+2025-12-08T15:15:51.9520147Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T15:15:51.9526758Z [spreads] TSLA: Long 445.0 / Short 455.0 (width=$10.00, exp=2025-12-12)
+2025-12-08T15:15:52.5078733Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.18>3.00)","ts":"2025-12-08T15:15:52Z","ts_et":"2025-12-08 10:15:52 ET"}
+2025-12-08T15:15:52.5079497Z {"type":"SPREAD_SKIP","underlying":"NFLX","skip_reason":"Already_have_position","ts":"2025-12-08T15:15:52Z","ts_et":"2025-12-08 10:15:52 ET"}
+2025-12-08T15:15:52.5080241Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":2,"type":"HEARTBEAT","ts":"2025-12-08T15:15:52Z","ts_et":"2025-12-08 10:15:52 ET"}
+2025-12-08T15:15:52.5080926Z {"event":"scan_cycle_end","cycle":4,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T15:15:52Z","ts_et":"2025-12-08 10:15:52 ET"}
+2025-12-08T15:15:52.5081599Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-08T15:15:52Z","ts_et":"2025-12-08 10:15:52 ET"}
+2025-12-08T15:30:52.8541817Z {"event":"scan_cycle_start","cycle":5,"time":"10:30","type":"HEARTBEAT","ts":"2025-12-08T15:30:52Z","ts_et":"2025-12-08 10:30:52 ET"}
+2025-12-08T15:30:52.8543082Z {"event":"scan_start","current_time":"10:30","type":"HEARTBEAT","ts":"2025-12-08T15:30:52Z","ts_et":"2025-12-08 10:30:52 ET"}
+2025-12-08T15:31:00.8325425Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(21.5)","entry_price":443.54,"rsi":21.5,"atr":2.2312,"ts":"2025-12-08T15:31:00Z","ts_et":"2025-12-08 10:31:00 ET"}
+2025-12-08T15:31:06.5256334Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(23.5)","entry_price":149.025,"rsi":23.47,"atr":0.4747,"ts":"2025-12-08T15:31:06Z","ts_et":"2025-12-08 10:31:06 ET"}
+2025-12-08T15:31:06.8342537Z {"type":"SPREAD_SIGNAL","underlying":"NFLX","signal_reason":"RSI_oversold(21.8)","entry_price":95.83,"rsi":21.81,"atr":0.8764,"ts":"2025-12-08T15:31:06Z","ts_et":"2025-12-08 10:31:06 ET"}
+2025-12-08T15:31:07.4717408Z {"event":"signals_found","count":3,"symbols":["TSLA","CVX","NFLX"],"type":"HEARTBEAT","ts":"2025-12-08T15:31:07Z","ts_et":"2025-12-08 10:31:07 ET"}
+2025-12-08T15:31:08.6616600Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T15:31:08.6618022Z [spreads] TSLA: Long 442.5 / Short 452.5 (width=$10.00, exp=2025-12-12)
+2025-12-08T15:31:09.2285722Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.49>3.00)","ts":"2025-12-08T15:31:09Z","ts_et":"2025-12-08 10:31:09 ET"}
+2025-12-08T15:31:10.3665783Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for CVX
+2025-12-08T15:31:10.3667962Z [spreads] CVX: Long 145.0 / Short 148.0 (width=$3.00, exp=2025-12-12)
+2025-12-08T15:31:10.9252932Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Debit_too_high(3.15>3.00)","ts":"2025-12-08T15:31:10Z","ts_et":"2025-12-08 10:31:10 ET"}
+2025-12-08T15:31:10.9257646Z {"type":"SPREAD_SKIP","underlying":"NFLX","skip_reason":"Already_have_position","ts":"2025-12-08T15:31:10Z","ts_et":"2025-12-08 10:31:10 ET"}
+2025-12-08T15:31:10.9259275Z {"event":"scan_complete","signals":3,"new_entries":0,"total_positions":2,"type":"HEARTBEAT","ts":"2025-12-08T15:31:10Z","ts_et":"2025-12-08 10:31:10 ET"}
+2025-12-08T15:31:10.9261623Z {"event":"scan_cycle_end","cycle":5,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T15:31:10Z","ts_et":"2025-12-08 10:31:10 ET"}
+2025-12-08T15:31:10.9264350Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:31","type":"HEARTBEAT","ts":"2025-12-08T15:31:10Z","ts_et":"2025-12-08 10:31:10 ET"}
+2025-12-08T15:46:11.2275243Z {"event":"scan_cycle_start","cycle":6,"time":"10:46","type":"HEARTBEAT","ts":"2025-12-08T15:46:11Z","ts_et":"2025-12-08 10:46:11 ET"}
+2025-12-08T15:46:11.2277990Z {"event":"scan_start","current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-08T15:46:11Z","ts_et":"2025-12-08 10:46:11 ET"}
+2025-12-08T15:46:17.1326210Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(19.0)","entry_price":441.685,"rsi":19.01,"atr":2.24,"ts":"2025-12-08T15:46:17Z","ts_et":"2025-12-08 10:46:17 ET"}
+2025-12-08T15:46:22.8357775Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(24.5)","entry_price":149.07,"rsi":24.47,"atr":0.4576,"ts":"2025-12-08T15:46:22Z","ts_et":"2025-12-08 10:46:22 ET"}
+2025-12-08T15:46:23.1156194Z {"type":"SPREAD_SIGNAL","underlying":"NFLX","signal_reason":"RSI_oversold(20.7)","entry_price":95.46,"rsi":20.72,"atr":0.8602,"ts":"2025-12-08T15:46:23Z","ts_et":"2025-12-08 10:46:23 ET"}
+2025-12-08T15:46:23.7272899Z {"event":"signals_found","count":3,"symbols":["TSLA","CVX","NFLX"],"type":"HEARTBEAT","ts":"2025-12-08T15:46:23Z","ts_et":"2025-12-08 10:46:23 ET"}
+2025-12-08T15:46:24.9154071Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T15:46:24.9155822Z [spreads] TSLA: Long 442.5 / Short 450.0 (width=$7.50, exp=2025-12-12)
+2025-12-08T15:46:25.5074832Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(3.20>3.00)","ts":"2025-12-08T15:46:25Z","ts_et":"2025-12-08 10:46:25 ET"}
+2025-12-08T15:46:26.6550835Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for CVX
+2025-12-08T15:46:26.6551811Z [spreads] CVX: Long 150.0 / Short 152.5 (width=$2.50, exp=2025-12-12)
+2025-12-08T15:46:27.7823799Z [options] Submitting spread: CVX251212C00150000 (buy) / CVX251212C00152500 (sell) @ $0.72 debit
+2025-12-08T15:46:28.0857465Z [options] Spread order submitted: a131daaf-2da2-4f62-ba78-921b5a290803
+2025-12-08T15:46:28.0912966Z [registry] Recorded entry: CVX251212C00150000 (order_id=15M_OPT_CVX251212C00150000_176...)
+2025-12-08T15:46:28.0919199Z {"type":"SPREAD_ENTRY","underlying":"CVX","long_symbol":"CVX251212C00150000","short_symbol":"CVX251212C00152500","atm_strike":150.0,"otm_strike":152.5,"spread_width":2.5,"net_debit":0.72,"total_cost":72.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(24.5)","signal_rsi":24.47,"signal_atr":0.4576,"entry_ts":"2025-12-08T15:46:28Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T15:46:28Z","ts_et":"2025-12-08 10:46:28 ET"}
+2025-12-08T15:46:28.0925550Z {"type":"SPREAD_SKIP","underlying":"NFLX","skip_reason":"Already_have_position","ts":"2025-12-08T15:46:28Z","ts_et":"2025-12-08 10:46:28 ET"}
+2025-12-08T15:46:28.0927918Z {"event":"scan_complete","signals":3,"new_entries":1,"total_positions":3,"type":"HEARTBEAT","ts":"2025-12-08T15:46:28Z","ts_et":"2025-12-08 10:46:28 ET"}
+2025-12-08T15:46:28.0930025Z {"event":"scan_cycle_end","cycle":6,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T15:46:28Z","ts_et":"2025-12-08 10:46:28 ET"}
+2025-12-08T15:46:28.0932158Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-08T15:46:28Z","ts_et":"2025-12-08 10:46:28 ET"}
+2025-12-08T16:01:28.3818179Z {"event":"scan_cycle_start","cycle":7,"time":"11:01","type":"HEARTBEAT","ts":"2025-12-08T16:01:28Z","ts_et":"2025-12-08 11:01:28 ET"}
+2025-12-08T16:01:28.3828273Z {"event":"scan_start","current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-08T16:01:28Z","ts_et":"2025-12-08 11:01:28 ET"}
+2025-12-08T16:01:34.3200724Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(17.1)","entry_price":439.985,"rsi":17.06,"atr":2.2536,"ts":"2025-12-08T16:01:34Z","ts_et":"2025-12-08 11:01:34 ET"}
+2025-12-08T16:01:35.8277495Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(22.4)","entry_price":40.025,"rsi":22.43,"atr":0.351,"ts":"2025-12-08T16:01:35Z","ts_et":"2025-12-08 11:01:35 ET"}
+2025-12-08T16:01:39.9700382Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(22.4)","entry_price":148.77,"rsi":22.38,"atr":0.4563,"ts":"2025-12-08T16:01:39Z","ts_et":"2025-12-08 11:01:39 ET"}
+2025-12-08T16:01:40.8588354Z {"event":"signals_found","count":3,"symbols":["TSLA","INTC","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T16:01:40Z","ts_et":"2025-12-08 11:01:40 ET"}
+2025-12-08T16:01:41.9699064Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T16:01:41.9709662Z [spreads] TSLA: Long 440.0 / Short 447.5 (width=$7.50, exp=2025-12-12)
+2025-12-08T16:01:42.5118973Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(3.34>3.00)","ts":"2025-12-08T16:01:42Z","ts_et":"2025-12-08 11:01:42 ET"}
+2025-12-08T16:01:43.6355862Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for INTC
+2025-12-08T16:01:43.6356776Z [spreads] INTC: Long 40.0 / Short 40.5 (width=$0.50, exp=2025-12-12)
+2025-12-08T16:01:44.7298350Z [options] Submitting spread: INTC251212C00040000 (buy) / INTC251212C00040500 (sell) @ $0.22 debit
+2025-12-08T16:01:45.0303744Z [options] Spread order submitted: 97834193-2ac7-458e-b945-37dffdd37fc5
+2025-12-08T16:01:45.0331650Z [registry] Recorded entry: INTC251212C00040000 (order_id=15M_OPT_INTC251212C00040000_17...)
+2025-12-08T16:01:45.0335179Z {"type":"SPREAD_ENTRY","underlying":"INTC","long_symbol":"INTC251212C00040000","short_symbol":"INTC251212C00040500","atm_strike":40.0,"otm_strike":40.5,"spread_width":0.5,"net_debit":0.22,"total_cost":22.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(22.4)","signal_rsi":22.43,"signal_atr":0.351,"entry_ts":"2025-12-08T16:01:45Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T16:01:45Z","ts_et":"2025-12-08 11:01:45 ET"}
+2025-12-08T16:01:45.0338722Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T16:01:45Z","ts_et":"2025-12-08 11:01:45 ET"}
+2025-12-08T16:01:45.0341460Z {"event":"scan_complete","signals":3,"new_entries":1,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-08T16:01:45Z","ts_et":"2025-12-08 11:01:45 ET"}
+2025-12-08T16:01:45.0342234Z {"event":"scan_cycle_end","cycle":7,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T16:01:45Z","ts_et":"2025-12-08 11:01:45 ET"}
+2025-12-08T16:01:45.0342970Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-08T16:01:45Z","ts_et":"2025-12-08 11:01:45 ET"}
+2025-12-08T16:16:45.3455487Z {"event":"scan_cycle_start","cycle":8,"time":"11:16","type":"HEARTBEAT","ts":"2025-12-08T16:16:45Z","ts_et":"2025-12-08 11:16:45 ET"}
+2025-12-08T16:16:45.3495714Z {"event":"scan_start","current_time":"11:16","type":"HEARTBEAT","ts":"2025-12-08T16:16:45Z","ts_et":"2025-12-08 11:16:45 ET"}
+2025-12-08T16:16:51.1698404Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(15.8)","entry_price":438.745,"rsi":15.79,"atr":2.244,"ts":"2025-12-08T16:16:51Z","ts_et":"2025-12-08 11:16:51 ET"}
+2025-12-08T16:16:52.7041457Z {"type":"SPREAD_SIGNAL","underlying":"INTC","signal_reason":"RSI_oversold(20.4)","entry_price":39.775,"rsi":20.37,"atr":0.3466,"ts":"2025-12-08T16:16:52Z","ts_et":"2025-12-08 11:16:52 ET"}
+2025-12-08T16:16:57.8697894Z {"event":"signals_found","count":2,"symbols":["TSLA","INTC"],"type":"HEARTBEAT","ts":"2025-12-08T16:16:57Z","ts_et":"2025-12-08 11:16:57 ET"}
+2025-12-08T16:16:59.0417698Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T16:16:59.0419397Z [spreads] TSLA: Long 437.5 / Short 447.5 (width=$10.00, exp=2025-12-12)
+2025-12-08T16:16:59.6058810Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.50>3.00)","ts":"2025-12-08T16:16:59Z","ts_et":"2025-12-08 11:16:59 ET"}
+2025-12-08T16:16:59.6060360Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Already_have_position","ts":"2025-12-08T16:16:59Z","ts_et":"2025-12-08 11:16:59 ET"}
+2025-12-08T16:16:59.6061859Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T16:16:59Z","ts_et":"2025-12-08 11:16:59 ET"}
+2025-12-08T16:16:59.6074956Z {"event":"scan_cycle_end","cycle":8,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T16:16:59Z","ts_et":"2025-12-08 11:16:59 ET"}
+2025-12-08T16:16:59.6076807Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:16","type":"HEARTBEAT","ts":"2025-12-08T16:16:59Z","ts_et":"2025-12-08 11:16:59 ET"}
+2025-12-08T16:32:00.0029925Z {"event":"scan_cycle_start","cycle":9,"time":"11:31","type":"HEARTBEAT","ts":"2025-12-08T16:32:00Z","ts_et":"2025-12-08 11:32:00 ET"}
+2025-12-08T16:32:00.0051046Z {"event":"scan_start","current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-08T16:32:00Z","ts_et":"2025-12-08 11:32:00 ET"}
+2025-12-08T16:32:06.7504808Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(15.5)","entry_price":438.43,"rsi":15.48,"atr":2.2305,"ts":"2025-12-08T16:32:06Z","ts_et":"2025-12-08 11:32:06 ET"}
+2025-12-08T16:32:13.2768343Z {"event":"signals_found","count":1,"symbols":["TSLA"],"type":"HEARTBEAT","ts":"2025-12-08T16:32:13Z","ts_et":"2025-12-08 11:32:13 ET"}
+2025-12-08T16:32:14.4448502Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T16:32:14.4450669Z [spreads] TSLA: Long 437.5 / Short 447.5 (width=$10.00, exp=2025-12-12)
+2025-12-08T16:32:15.0083118Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.42>3.00)","ts":"2025-12-08T16:32:15Z","ts_et":"2025-12-08 11:32:15 ET"}
+2025-12-08T16:32:15.0093753Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T16:32:15Z","ts_et":"2025-12-08 11:32:15 ET"}
+2025-12-08T16:32:15.0096364Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T16:32:15Z","ts_et":"2025-12-08 11:32:15 ET"}
+2025-12-08T16:32:15.0097426Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-08T16:32:15Z","ts_et":"2025-12-08 11:32:15 ET"}
+2025-12-08T16:47:15.3094168Z {"event":"scan_cycle_start","cycle":10,"time":"11:47","type":"HEARTBEAT","ts":"2025-12-08T16:47:15Z","ts_et":"2025-12-08 11:47:15 ET"}
+2025-12-08T16:47:15.3096583Z {"event":"scan_start","current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-08T16:47:15Z","ts_et":"2025-12-08 11:47:15 ET"}
+2025-12-08T16:47:21.3114137Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(20.5)","entry_price":439.36,"rsi":20.52,"atr":2.1669,"ts":"2025-12-08T16:47:21Z","ts_et":"2025-12-08 11:47:21 ET"}
+2025-12-08T16:47:27.9851133Z {"event":"signals_found","count":1,"symbols":["TSLA"],"type":"HEARTBEAT","ts":"2025-12-08T16:47:27Z","ts_et":"2025-12-08 11:47:27 ET"}
+2025-12-08T16:47:29.1428771Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T16:47:29.1429918Z [spreads] TSLA: Long 440.0 / Short 447.5 (width=$7.50, exp=2025-12-12)
+2025-12-08T16:47:29.7201277Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(3.35>3.00)","ts":"2025-12-08T16:47:29Z","ts_et":"2025-12-08 11:47:29 ET"}
+2025-12-08T16:47:29.7203453Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T16:47:29Z","ts_et":"2025-12-08 11:47:29 ET"}
+2025-12-08T16:47:29.7205192Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T16:47:29Z","ts_et":"2025-12-08 11:47:29 ET"}
+2025-12-08T16:47:29.7206896Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-08T16:47:29Z","ts_et":"2025-12-08 11:47:29 ET"}
+2025-12-08T17:02:30.0442900Z {"event":"scan_cycle_start","cycle":11,"time":"12:02","type":"HEARTBEAT","ts":"2025-12-08T17:02:30Z","ts_et":"2025-12-08 12:02:30 ET"}
+2025-12-08T17:02:30.0444117Z {"event":"scan_start","current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-08T17:02:30Z","ts_et":"2025-12-08 12:02:30 ET"}
+2025-12-08T17:02:42.9265720Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T17:02:42Z","ts_et":"2025-12-08 12:02:42 ET"}
+2025-12-08T17:02:42.9268176Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T17:02:42Z","ts_et":"2025-12-08 12:02:42 ET"}
+2025-12-08T17:02:42.9270046Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T17:02:42Z","ts_et":"2025-12-08 12:02:42 ET"}
+2025-12-08T17:02:42.9271824Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-08T17:02:42Z","ts_et":"2025-12-08 12:02:42 ET"}
+2025-12-08T17:17:43.2613449Z {"event":"scan_cycle_start","cycle":12,"time":"12:17","type":"HEARTBEAT","ts":"2025-12-08T17:17:43Z","ts_et":"2025-12-08 12:17:43 ET"}
+2025-12-08T17:17:43.2616792Z {"event":"scan_start","current_time":"12:17","type":"HEARTBEAT","ts":"2025-12-08T17:17:43Z","ts_et":"2025-12-08 12:17:43 ET"}
+2025-12-08T17:17:56.0388295Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T17:17:56Z","ts_et":"2025-12-08 12:17:56 ET"}
+2025-12-08T17:17:56.0391278Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T17:17:56Z","ts_et":"2025-12-08 12:17:56 ET"}
+2025-12-08T17:17:56.0393849Z {"event":"scan_cycle_end","cycle":12,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T17:17:56Z","ts_et":"2025-12-08 12:17:56 ET"}
+2025-12-08T17:17:56.0396571Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:17","type":"HEARTBEAT","ts":"2025-12-08T17:17:56Z","ts_et":"2025-12-08 12:17:56 ET"}
+2025-12-08T17:32:56.3411162Z {"event":"scan_cycle_start","cycle":13,"time":"12:32","type":"HEARTBEAT","ts":"2025-12-08T17:32:56Z","ts_et":"2025-12-08 12:32:56 ET"}
+2025-12-08T17:32:56.3412716Z {"event":"scan_start","current_time":"12:32","type":"HEARTBEAT","ts":"2025-12-08T17:32:56Z","ts_et":"2025-12-08 12:32:56 ET"}
+2025-12-08T17:33:09.0988086Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T17:33:09Z","ts_et":"2025-12-08 12:33:09 ET"}
+2025-12-08T17:33:09.0989033Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T17:33:09Z","ts_et":"2025-12-08 12:33:09 ET"}
+2025-12-08T17:33:09.0989462Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T17:33:09Z","ts_et":"2025-12-08 12:33:09 ET"}
+2025-12-08T17:33:09.0989902Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:33","type":"HEARTBEAT","ts":"2025-12-08T17:33:09Z","ts_et":"2025-12-08 12:33:09 ET"}
+2025-12-08T17:48:09.4262679Z {"event":"scan_cycle_start","cycle":14,"time":"12:48","type":"HEARTBEAT","ts":"2025-12-08T17:48:09Z","ts_et":"2025-12-08 12:48:09 ET"}
+2025-12-08T17:48:09.4263582Z {"event":"scan_start","current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-08T17:48:09Z","ts_et":"2025-12-08 12:48:09 ET"}
+2025-12-08T17:48:22.2100638Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T17:48:22Z","ts_et":"2025-12-08 12:48:22 ET"}
+2025-12-08T17:48:22.2122226Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-08T17:48:22Z","ts_et":"2025-12-08 12:48:22 ET"}
+2025-12-08T17:48:22.2123976Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T17:48:22Z","ts_et":"2025-12-08 12:48:22 ET"}
+2025-12-08T17:48:22.2125673Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-08T17:48:22Z","ts_et":"2025-12-08 12:48:22 ET"}
+2025-12-08T18:03:22.5104112Z {"event":"scan_cycle_start","cycle":15,"time":"13:03","type":"HEARTBEAT","ts":"2025-12-08T18:03:22Z","ts_et":"2025-12-08 13:03:22 ET"}
+2025-12-08T18:03:22.5105766Z {"event":"scan_start","current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-08T18:03:22Z","ts_et":"2025-12-08 13:03:22 ET"}
+2025-12-08T18:03:29.1982885Z {"type":"SPREAD_SIGNAL","underlying":"GOOGL","signal_reason":"RSI_oversold(23.1)","entry_price":312.445,"rsi":23.11,"atr":1.1758,"ts":"2025-12-08T18:03:29Z","ts_et":"2025-12-08 13:03:29 ET"}
+2025-12-08T18:03:37.3359265Z {"event":"signals_found","count":1,"symbols":["GOOGL"],"type":"HEARTBEAT","ts":"2025-12-08T18:03:37Z","ts_et":"2025-12-08 13:03:37 ET"}
+2025-12-08T18:03:38.5309483Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for GOOGL
+2025-12-08T18:03:38.5310728Z [spreads] GOOGL: Long 312.5 / Short 317.5 (width=$5.00, exp=2025-12-12)
+2025-12-08T18:03:39.6874584Z [options] Submitting spread: GOOGL251212C00312500 (buy) / GOOGL251212C00317500 (sell) @ $2.29 debit
+2025-12-08T18:03:39.9783001Z [options] Spread order submitted: 21ed50c0-477b-434e-811c-4ce49be0ee36
+2025-12-08T18:03:39.9845013Z [registry] Recorded entry: GOOGL251212C00312500 (order_id=15M_OPT_GOOGL251212C00312500_1...)
+2025-12-08T18:03:39.9849791Z {"type":"SPREAD_ENTRY","underlying":"GOOGL","long_symbol":"GOOGL251212C00312500","short_symbol":"GOOGL251212C00317500","atm_strike":312.5,"otm_strike":317.5,"spread_width":5.0,"net_debit":2.3,"total_cost":230.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(23.1)","signal_rsi":23.11,"signal_atr":1.1758,"entry_ts":"2025-12-08T18:03:39Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T18:03:39Z","ts_et":"2025-12-08 13:03:39 ET"}
+2025-12-08T18:03:39.9867153Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-08T18:03:39Z","ts_et":"2025-12-08 13:03:39 ET"}
+2025-12-08T18:03:39.9867901Z {"event":"scan_cycle_end","cycle":15,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T18:03:39Z","ts_et":"2025-12-08 13:03:39 ET"}
+2025-12-08T18:03:39.9868631Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-08T18:03:39Z","ts_et":"2025-12-08 13:03:39 ET"}
+2025-12-08T18:18:40.2938849Z {"event":"scan_cycle_start","cycle":16,"time":"13:18","type":"HEARTBEAT","ts":"2025-12-08T18:18:40Z","ts_et":"2025-12-08 13:18:40 ET"}
+2025-12-08T18:18:40.2979508Z {"event":"scan_start","current_time":"13:18","type":"HEARTBEAT","ts":"2025-12-08T18:18:40Z","ts_et":"2025-12-08 13:18:40 ET"}
+2025-12-08T18:18:45.3865670Z {"type":"SPREAD_SIGNAL","underlying":"GOOGL","signal_reason":"RSI_oversold(20.5)","entry_price":311.45,"rsi":20.5,"atr":1.1775,"ts":"2025-12-08T18:18:45Z","ts_et":"2025-12-08 13:18:45 ET"}
+2025-12-08T18:18:51.6640430Z {"type":"SPREAD_SIGNAL","underlying":"XOM","signal_reason":"RSI_oversold(23.7)","entry_price":115.72,"rsi":23.67,"atr":0.2924,"ts":"2025-12-08T18:18:51Z","ts_et":"2025-12-08 13:18:51 ET"}
+2025-12-08T18:18:52.0057200Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(24.9)","entry_price":148.065,"rsi":24.88,"atr":0.3844,"ts":"2025-12-08T18:18:52Z","ts_et":"2025-12-08 13:18:52 ET"}
+2025-12-08T18:18:52.9320037Z {"event":"signals_found","count":3,"symbols":["GOOGL","XOM","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T18:18:52Z","ts_et":"2025-12-08 13:18:52 ET"}
+2025-12-08T18:18:52.9321816Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Already_have_position","ts":"2025-12-08T18:18:52Z","ts_et":"2025-12-08 13:18:52 ET"}
+2025-12-08T18:18:54.1511929Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for XOM
+2025-12-08T18:18:54.1512941Z [spreads] XOM: Long 116.0 / Short 118.0 (width=$2.00, exp=2025-12-12)
+2025-12-08T18:18:55.2913646Z [options] Submitting spread: XOM251212C00116000 (buy) / XOM251212C00118000 (sell) @ $0.71 debit
+2025-12-08T18:18:55.6265110Z [options] Spread order submitted: 18550b69-fdfd-44a1-be04-d5850fcdbc33
+2025-12-08T18:18:55.6276279Z [registry] Recorded entry: XOM251212C00116000 (order_id=15M_OPT_XOM251212C00116000_176...)
+2025-12-08T18:18:55.6279249Z {"type":"SPREAD_ENTRY","underlying":"XOM","long_symbol":"XOM251212C00116000","short_symbol":"XOM251212C00118000","atm_strike":116.0,"otm_strike":118.0,"spread_width":2.0,"net_debit":0.71,"total_cost":71.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(23.7)","signal_rsi":23.67,"signal_atr":0.2924,"entry_ts":"2025-12-08T18:18:55Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T18:18:55Z","ts_et":"2025-12-08 13:18:55 ET"}
+2025-12-08T18:18:55.6282374Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T18:18:55Z","ts_et":"2025-12-08 13:18:55 ET"}
+2025-12-08T18:18:55.6283898Z {"event":"scan_complete","signals":3,"new_entries":1,"total_positions":9,"type":"HEARTBEAT","ts":"2025-12-08T18:18:55Z","ts_et":"2025-12-08 13:18:55 ET"}
+2025-12-08T18:18:55.6285369Z {"event":"scan_cycle_end","cycle":16,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T18:18:55Z","ts_et":"2025-12-08 13:18:55 ET"}
+2025-12-08T18:18:55.6287430Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:18","type":"HEARTBEAT","ts":"2025-12-08T18:18:55Z","ts_et":"2025-12-08 13:18:55 ET"}
+2025-12-08T18:33:55.9489717Z {"event":"scan_cycle_start","cycle":17,"time":"13:33","type":"HEARTBEAT","ts":"2025-12-08T18:33:55Z","ts_et":"2025-12-08 13:33:55 ET"}
+2025-12-08T18:33:55.9500680Z {"event":"scan_start","current_time":"13:33","type":"HEARTBEAT","ts":"2025-12-08T18:33:55Z","ts_et":"2025-12-08 13:33:55 ET"}
+2025-12-08T18:34:02.3690756Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(24.1)","entry_price":437.25,"rsi":24.14,"atr":1.8225,"ts":"2025-12-08T18:34:02Z","ts_et":"2025-12-08 13:34:02 ET"}
+2025-12-08T18:34:07.9158614Z {"type":"SPREAD_SIGNAL","underlying":"XOM","signal_reason":"RSI_oversold(22.5)","entry_price":115.64,"rsi":22.5,"atr":0.2801,"ts":"2025-12-08T18:34:07Z","ts_et":"2025-12-08 13:34:07 ET"}
+2025-12-08T18:34:08.2394123Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(23.7)","entry_price":147.91,"rsi":23.65,"atr":0.3705,"ts":"2025-12-08T18:34:08Z","ts_et":"2025-12-08 13:34:08 ET"}
+2025-12-08T18:34:09.1367842Z {"event":"signals_found","count":3,"symbols":["TSLA","XOM","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T18:34:09Z","ts_et":"2025-12-08 13:34:09 ET"}
+2025-12-08T18:34:10.3156263Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T18:34:10.3157252Z [spreads] TSLA: Long 437.5 / Short 445.0 (width=$7.50, exp=2025-12-12)
+2025-12-08T18:34:10.8686529Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(3.17>3.00)","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:34:10.8687903Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Already_have_position","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:34:10.8689400Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:34:10.8691434Z {"event":"scan_complete","signals":3,"new_entries":0,"total_positions":10,"type":"HEARTBEAT","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:34:10.8692981Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:34:10.8694649Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:34","type":"HEARTBEAT","ts":"2025-12-08T18:34:10Z","ts_et":"2025-12-08 13:34:10 ET"}
+2025-12-08T18:49:11.1606744Z {"event":"scan_cycle_start","cycle":18,"time":"13:49","type":"HEARTBEAT","ts":"2025-12-08T18:49:11Z","ts_et":"2025-12-08 13:49:11 ET"}
+2025-12-08T18:49:11.1608520Z {"event":"scan_start","current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-08T18:49:11Z","ts_et":"2025-12-08 13:49:11 ET"}
+2025-12-08T18:49:17.3310262Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(22.9)","entry_price":436.56,"rsi":22.91,"atr":1.7895,"ts":"2025-12-08T18:49:17Z","ts_et":"2025-12-08 13:49:17 ET"}
+2025-12-08T18:49:22.5966630Z {"type":"SPREAD_SIGNAL","underlying":"XOM","signal_reason":"RSI_oversold(24.0)","entry_price":115.67,"rsi":24.01,"atr":0.2751,"ts":"2025-12-08T18:49:22Z","ts_et":"2025-12-08 13:49:22 ET"}
+2025-12-08T18:49:22.8869878Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(24.4)","entry_price":147.94,"rsi":24.43,"atr":0.3634,"ts":"2025-12-08T18:49:22Z","ts_et":"2025-12-08 13:49:22 ET"}
+2025-12-08T18:49:23.7742936Z {"event":"signals_found","count":3,"symbols":["TSLA","XOM","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T18:49:23Z","ts_et":"2025-12-08 13:49:23 ET"}
+2025-12-08T18:49:24.9249664Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T18:49:24.9250326Z [spreads] TSLA: Long 437.5 / Short 447.5 (width=$10.00, exp=2025-12-12)
+2025-12-08T18:49:25.5160428Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(3.98>3.00)","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T18:49:25.5164822Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Already_have_position","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T18:49:25.5166632Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T18:49:25.5168457Z {"event":"scan_complete","signals":3,"new_entries":0,"total_positions":10,"type":"HEARTBEAT","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T18:49:25.5170179Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T18:49:25.5171866Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-08T18:49:25Z","ts_et":"2025-12-08 13:49:25 ET"}
+2025-12-08T19:04:25.8257577Z {"event":"scan_cycle_start","cycle":19,"time":"14:04","type":"HEARTBEAT","ts":"2025-12-08T19:04:25Z","ts_et":"2025-12-08 14:04:25 ET"}
+2025-12-08T19:04:25.8259289Z {"event":"scan_start","current_time":"14:04","type":"HEARTBEAT","ts":"2025-12-08T19:04:25Z","ts_et":"2025-12-08 14:04:25 ET"}
+2025-12-08T19:04:32.2534695Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(21.9)","entry_price":435.96,"rsi":21.87,"atr":1.7567,"ts":"2025-12-08T19:04:32Z","ts_et":"2025-12-08 14:04:32 ET"}
+2025-12-08T19:04:34.6708069Z {"type":"SPREAD_SIGNAL","underlying":"SHOP","signal_reason":"RSI_oversold(24.6)","entry_price":156.44,"rsi":24.58,"atr":0.6589,"ts":"2025-12-08T19:04:34Z","ts_et":"2025-12-08 14:04:34 ET"}
+2025-12-08T19:04:37.8026879Z {"type":"SPREAD_SIGNAL","underlying":"XOM","signal_reason":"RSI_oversold(23.4)","entry_price":115.635,"rsi":23.44,"atr":0.2687,"ts":"2025-12-08T19:04:37Z","ts_et":"2025-12-08 14:04:37 ET"}
+2025-12-08T19:04:38.1009145Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(23.0)","entry_price":147.775,"rsi":23.04,"atr":0.3524,"ts":"2025-12-08T19:04:38Z","ts_et":"2025-12-08 14:04:38 ET"}
+2025-12-08T19:04:39.0222062Z {"event":"signals_found","count":4,"symbols":["TSLA","SHOP","XOM","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T19:04:39Z","ts_et":"2025-12-08 14:04:39 ET"}
+2025-12-08T19:04:40.1740225Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T19:04:40.1741102Z [spreads] TSLA: Long 435.0 / Short 445.0 (width=$10.00, exp=2025-12-12)
+2025-12-08T19:04:40.7403445Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.42>3.00)","ts":"2025-12-08T19:04:40Z","ts_et":"2025-12-08 14:04:40 ET"}
+2025-12-08T19:04:41.8842650Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for SHOP
+2025-12-08T19:04:41.8844336Z [spreads] SHOP: Long 157.5 / Short 160.0 (width=$2.50, exp=2025-12-12)
+2025-12-08T19:04:43.0271792Z [options] Submitting spread: SHOP251212C00157500 (buy) / SHOP251212C00160000 (sell) @ $1.36 debit
+2025-12-08T19:04:43.3285698Z [options] Spread order submitted: fd2f069f-2b01-409f-a382-cb70b22b1fb7
+2025-12-08T19:04:43.3310889Z [registry] Recorded entry: SHOP251212C00157500 (order_id=15M_OPT_SHOP251212C00157500_17...)
+2025-12-08T19:04:43.3312944Z {"type":"SPREAD_ENTRY","underlying":"SHOP","long_symbol":"SHOP251212C00157500","short_symbol":"SHOP251212C00160000","atm_strike":157.5,"otm_strike":160.0,"spread_width":2.5,"net_debit":1.36,"total_cost":136.0,"contracts":1,"expiration":"2025-12-12","entry_reason":"RSI_oversold(24.6)","signal_rsi":24.58,"signal_atr":0.6589,"entry_ts":"2025-12-08T19:04:43Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:04:43.3314813Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Already_have_position","ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:04:43.3315498Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:04:43.3316831Z {"event":"scan_complete","signals":4,"new_entries":1,"total_positions":11,"type":"HEARTBEAT","ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:04:43.3318560Z {"event":"scan_cycle_end","cycle":19,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:04:43.3320294Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:04","type":"HEARTBEAT","ts":"2025-12-08T19:04:43Z","ts_et":"2025-12-08 14:04:43 ET"}
+2025-12-08T19:19:43.6328533Z {"event":"scan_cycle_start","cycle":20,"time":"14:19","type":"HEARTBEAT","ts":"2025-12-08T19:19:43Z","ts_et":"2025-12-08 14:19:43 ET"}
+2025-12-08T19:19:43.6329795Z {"event":"scan_start","current_time":"14:19","type":"HEARTBEAT","ts":"2025-12-08T19:19:43Z","ts_et":"2025-12-08 14:19:43 ET"}
+2025-12-08T19:19:49.9378946Z {"type":"SPREAD_SIGNAL","underlying":"TSLA","signal_reason":"RSI_oversold(21.5)","entry_price":435.745,"rsi":21.5,"atr":1.7069,"ts":"2025-12-08T19:19:49Z","ts_et":"2025-12-08 14:19:49 ET"}
+2025-12-08T19:19:55.7350326Z {"type":"SPREAD_SIGNAL","underlying":"CVX","signal_reason":"RSI_oversold(23.0)","entry_price":147.77,"rsi":23.0,"atr":0.3458,"ts":"2025-12-08T19:19:55Z","ts_et":"2025-12-08 14:19:55 ET"}
+2025-12-08T19:19:56.6254461Z {"event":"signals_found","count":2,"symbols":["TSLA","CVX"],"type":"HEARTBEAT","ts":"2025-12-08T19:19:56Z","ts_et":"2025-12-08 14:19:56 ET"}
+2025-12-08T19:19:57.8282234Z [spreads] Using 4 DTE (2025-12-12) instead of 3 DTE for TSLA
+2025-12-08T19:19:57.8282676Z [spreads] TSLA: Long 435.0 / Short 445.0 (width=$10.00, exp=2025-12-12)
+2025-12-08T19:19:58.4324798Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Debit_too_high(4.30>3.00)","ts":"2025-12-08T19:19:58Z","ts_et":"2025-12-08 14:19:58 ET"}
+2025-12-08T19:19:58.4326704Z {"type":"SPREAD_SKIP","underlying":"CVX","skip_reason":"Already_have_position","ts":"2025-12-08T19:19:58Z","ts_et":"2025-12-08 14:19:58 ET"}
+2025-12-08T19:19:58.4329465Z {"event":"scan_complete","signals":2,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T19:19:58Z","ts_et":"2025-12-08 14:19:58 ET"}
+2025-12-08T19:19:58.4331284Z {"event":"scan_cycle_end","cycle":20,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T19:19:58Z","ts_et":"2025-12-08 14:19:58 ET"}
+2025-12-08T19:19:58.4333063Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:19","type":"HEARTBEAT","ts":"2025-12-08T19:19:58Z","ts_et":"2025-12-08 14:19:58 ET"}
+2025-12-08T19:34:58.7369139Z {"event":"scan_cycle_start","cycle":21,"time":"14:34","type":"HEARTBEAT","ts":"2025-12-08T19:34:58Z","ts_et":"2025-12-08 14:34:58 ET"}
+2025-12-08T19:34:58.7370752Z {"event":"scan_start","current_time":"14:34","type":"HEARTBEAT","ts":"2025-12-08T19:34:58Z","ts_et":"2025-12-08 14:34:58 ET"}
+2025-12-08T19:35:11.6671336Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T19:35:11Z","ts_et":"2025-12-08 14:35:11 ET"}
+2025-12-08T19:35:11.6672846Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T19:35:11Z","ts_et":"2025-12-08 14:35:11 ET"}
+2025-12-08T19:35:11.6674179Z {"event":"scan_cycle_end","cycle":21,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T19:35:11Z","ts_et":"2025-12-08 14:35:11 ET"}
+2025-12-08T19:35:11.6675468Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:35","type":"HEARTBEAT","ts":"2025-12-08T19:35:11Z","ts_et":"2025-12-08 14:35:11 ET"}
+2025-12-08T19:50:11.9823249Z {"event":"scan_cycle_start","cycle":22,"time":"14:50","type":"HEARTBEAT","ts":"2025-12-08T19:50:11Z","ts_et":"2025-12-08 14:50:11 ET"}
+2025-12-08T19:50:11.9824273Z {"event":"scan_start","current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-08T19:50:11Z","ts_et":"2025-12-08 14:50:11 ET"}
+2025-12-08T19:50:25.0761708Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T19:50:25Z","ts_et":"2025-12-08 14:50:25 ET"}
+2025-12-08T19:50:25.0767503Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T19:50:25Z","ts_et":"2025-12-08 14:50:25 ET"}
+2025-12-08T19:50:25.0769366Z {"event":"scan_cycle_end","cycle":22,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T19:50:25Z","ts_et":"2025-12-08 14:50:25 ET"}
+2025-12-08T19:50:25.0769790Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-08T19:50:25Z","ts_et":"2025-12-08 14:50:25 ET"}
+2025-12-08T20:05:25.4036273Z {"event":"scan_cycle_start","cycle":23,"time":"15:05","type":"HEARTBEAT","ts":"2025-12-08T20:05:25Z","ts_et":"2025-12-08 15:05:25 ET"}
+2025-12-08T20:05:25.4036935Z {"event":"scan_start","current_time":"15:05","type":"HEARTBEAT","ts":"2025-12-08T20:05:25Z","ts_et":"2025-12-08 15:05:25 ET"}
+2025-12-08T20:05:38.8418958Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T20:05:38Z","ts_et":"2025-12-08 15:05:38 ET"}
+2025-12-08T20:05:38.8420991Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T20:05:38Z","ts_et":"2025-12-08 15:05:38 ET"}
+2025-12-08T20:05:38.8422833Z {"event":"scan_cycle_end","cycle":23,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T20:05:38Z","ts_et":"2025-12-08 15:05:38 ET"}
+2025-12-08T20:05:38.8427132Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:05","type":"HEARTBEAT","ts":"2025-12-08T20:05:38Z","ts_et":"2025-12-08 15:05:38 ET"}
+2025-12-08T20:20:39.1578767Z {"event":"scan_cycle_start","cycle":24,"time":"15:20","type":"HEARTBEAT","ts":"2025-12-08T20:20:39Z","ts_et":"2025-12-08 15:20:39 ET"}
+2025-12-08T20:20:39.1580047Z {"event":"scan_start","current_time":"15:20","type":"HEARTBEAT","ts":"2025-12-08T20:20:39Z","ts_et":"2025-12-08 15:20:39 ET"}
+2025-12-08T20:20:52.2005195Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T20:20:52Z","ts_et":"2025-12-08 15:20:52 ET"}
+2025-12-08T20:20:52.2006695Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T20:20:52Z","ts_et":"2025-12-08 15:20:52 ET"}
+2025-12-08T20:20:52.2010017Z {"event":"scan_cycle_end","cycle":24,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T20:20:52Z","ts_et":"2025-12-08 15:20:52 ET"}
+2025-12-08T20:20:52.2011354Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:20","type":"HEARTBEAT","ts":"2025-12-08T20:20:52Z","ts_et":"2025-12-08 15:20:52 ET"}
+2025-12-08T20:35:52.5945674Z {"event":"scan_cycle_start","cycle":25,"time":"15:35","type":"HEARTBEAT","ts":"2025-12-08T20:35:52Z","ts_et":"2025-12-08 15:35:52 ET"}
+2025-12-08T20:35:52.5947240Z {"event":"scan_start","current_time":"15:35","type":"HEARTBEAT","ts":"2025-12-08T20:35:52Z","ts_et":"2025-12-08 15:35:52 ET"}
+2025-12-08T20:36:05.7630528Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-08T20:36:05Z","ts_et":"2025-12-08 15:36:05 ET"}
+2025-12-08T20:36:05.7631390Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":12,"type":"HEARTBEAT","ts":"2025-12-08T20:36:05Z","ts_et":"2025-12-08 15:36:05 ET"}
+2025-12-08T20:36:05.7632106Z {"event":"scan_cycle_end","cycle":25,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T20:36:05Z","ts_et":"2025-12-08 15:36:05 ET"}
+2025-12-08T20:36:05.7633005Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:36","type":"HEARTBEAT","ts":"2025-12-08T20:36:05Z","ts_et":"2025-12-08 15:36:05 ET"}
+2025-12-08T20:51:06.1027106Z {"event":"scan_cycle_start","cycle":26,"time":"15:51","type":"HEARTBEAT","ts":"2025-12-08T20:51:06Z","ts_et":"2025-12-08 15:51:06 ET"}
+2025-12-08T20:51:06.1028868Z {"event":"outside_entry_window","current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-08T20:51:06Z","ts_et":"2025-12-08 15:51:06 ET"}
+2025-12-08T20:51:06.3864603Z {"event":"scan_cycle_end","cycle":26,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-08T20:51:06Z","ts_et":"2025-12-08 15:51:06 ET"}
+2025-12-08T20:51:06.3869661Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-08T20:51:06Z","ts_et":"2025-12-08 15:51:06 ET"}
+2025-12-08T21:06:06.4112216Z {"event":"market_close_reached","time":"16:06","type":"HEARTBEAT","ts":"2025-12-08T21:06:06Z","ts_et":"2025-12-08 16:06:06 ET"}
+2025-12-08T21:06:06.4120084Z {"event":"eod_processing","scan_count":26,"type":"HEARTBEAT","ts":"2025-12-08T21:06:06Z","ts_et":"2025-12-08 16:06:06 ET"}
+2025-12-08T21:06:06.7926107Z {"type":"EOD_SUMMARY","date":"2025-12-08","total_trades":6,"closed_trades":0,"open_trades":6,"total_pnl":0,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"underlying":"NFLX","entry_reason":"RSI_oversold(24.0)","exit_reason":null,"net_debit":0.94,"pnl":null,"pnl_pct":null},{"underlying":"CVX","entry_reason":"RSI_oversold(24.5)","exit_reason":null,"net_debit":0.72,"pnl":null,"pnl_pct":null},{"underlying":"INTC","entry_reason":"RSI_oversold(22.4)","exit_reason":null,"net_debit":0.22,"pnl":null,"pnl_pct":null},{"underlying":"GOOGL","entry_reason":"RSI_oversold(23.1)","exit_reason":null,"net_debit":2.3,"pnl":null,"pnl_pct":null},{"underlying":"XOM","entry_reason":"RSI_oversold(23.7)","exit_reason":null,"net_debit":0.71,"pnl":null,"pnl_pct":null},{"underlying":"SHOP","entry_reason":"RSI_oversold(24.6)","exit_reason":null,"net_debit":1.36,"pnl":null,"pnl_pct":null}],"ts":"2025-12-08T21:06:06Z","ts_et":"2025-12-08 16:06:06 ET"}
+2025-12-08T21:06:06.7937432Z 
+2025-12-08T21:06:06.7937738Z ============================================================
+2025-12-08T21:06:06.7939041Z EOD SUMMARY: 6 trades, PnL: $0.00
+2025-12-08T21:06:06.7940699Z Win Rate: 0.0%
+2025-12-08T21:06:06.7941319Z ============================================================
+2025-12-08T21:06:06.7941859Z 
+2025-12-08T21:06:07.5422117Z ##[group]Run actions/upload-artifact@v4
+2025-12-08T21:06:07.5424168Z with:
+2025-12-08T21:06:07.5424759Z   name: position-registry-15M_OPT
+2025-12-08T21:06:07.5426143Z   path: .position_registry/15M_OPT_positions.json
+2025-12-08T21:06:07.5435479Z   if-no-files-found: warn
+2025-12-08T21:06:07.5437010Z   retention-days: 90
+2025-12-08T21:06:07.5437740Z   compression-level: 6
+2025-12-08T21:06:07.5439064Z   overwrite: false
+2025-12-08T21:06:07.5439643Z   include-hidden-files: false
+2025-12-08T21:06:07.5440959Z env:
+2025-12-08T21:06:07.5441968Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-08T21:06:07.5443203Z ##[endgroup]
+2025-12-08T21:06:09.0609770Z With the provided path, there will be 1 file uploaded
+2025-12-08T21:06:09.0621956Z Artifact name is valid!
+2025-12-08T21:06:09.0628696Z Root directory input is valid!
+2025-12-08T21:06:09.6406093Z Beginning upload of artifact content to blob storage
+2025-12-08T21:06:10.0933678Z Uploaded bytes 823
+2025-12-08T21:06:10.2079983Z Finished uploading artifact content to blob storage!
+2025-12-08T21:06:10.2093162Z SHA256 digest of uploaded artifact zip is a08465d5db4b719f5dc1fcadc76394c3914db4d80914b5df1bab8402d5fd7142
+2025-12-08T21:06:10.2097710Z Finalizing artifact upload
+2025-12-08T21:06:10.3952578Z Artifact position-registry-15M_OPT.zip successfully finalized. Artifact ID 4803006208
+2025-12-08T21:06:10.3955239Z Artifact position-registry-15M_OPT has been successfully uploaded! Final size is 823 bytes. Artifact ID is 4803006208
+2025-12-08T21:06:10.3964273Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20031083465/artifacts/4803006208
+2025-12-08T21:06:10.4518128Z Post job cleanup.
+2025-12-08T21:06:11.1285197Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-08T21:06:11.1970113Z git version 2.52.0.windows.1
+2025-12-08T21:06:11.2089013Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\c6f69345-8708-4da3-8460-52ca798829f5' before making global git config changes
+2025-12-08T21:06:11.2090847Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-08T21:06:11.2097409Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-08T21:06:11.2856060Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-08T21:06:11.3564349Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-08T21:06:12.5608234Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-08T21:06:12.6225478Z http.https://github.com/.extraheader
+2025-12-08T21:06:12.6322720Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-08T21:06:12.7017586Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-08T21:06:13.8270942Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-08T21:06:13.8962183Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-08T21:06:15.1322238Z Cleaning up orphan processes
