@@ -23,7 +23,8 @@ entry_filters:
   # Threshold of 25 is calibrated for VIXY's price range.
   vix_threshold: 25             # Don't enter if VIXY > $25
   adx_filter_enabled: true      # Enable ADX chop filter
-  adx_threshold: 20             # Don't enter if ADX < 20 (choppy market)
+  adx_threshold: 25             # Raised to 25 - require stronger trend (was 20)
+  confirm_days: 2               # Require 2 consecutive closes above SMA for entry
 
 # --- Risk Management ---
 risk:

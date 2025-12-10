@@ -181,6 +181,7 @@ def generate_signal(
     vix_threshold = float(entry_cfg.get("vix_threshold", 25))
     adx_filter_enabled = entry_cfg.get("adx_filter_enabled", True)
     adx_threshold = float(entry_cfg.get("adx_threshold", 20))
+    confirm_days = int(entry_cfg.get("confirm_days", 1))  # 2-day confirmation
     
     metadata = {
         "price": price,
@@ -211,13 +212,22 @@ def generate_signal(
     
     # 4. Check entry condition (Price > 50 SMA with epsilon tolerance)
     if price > sma_fast + PRICE_EPSILON:
+        # 4a. Check N-day confirmation (consecutive closes above SMA)
+        if confirm_days > 1 and len(asset_df) >= confirm_days:
+            recent_closes = asset_df["close"].iloc[-confirm_days:]
+            recent_sma = asset_df["sma_fast"].iloc[-confirm_days:]
+            all_above = all(c > s + PRICE_EPSILON for c, s in zip(recent_closes, recent_sma) if not pd.isna(s))
+            if not all_above:
+                metadata["reason"] = f"WAITING: Need {confirm_days} consecutive closes above SMA"
+                return Signal.CASH, metadata
+        
         # 5. Check momentum confirmation (ROC > 0)
         if require_positive_roc and roc <= PRICE_EPSILON:
             metadata["reason"] = f"WEAK MOMENTUM: ROC {roc*100:.1f}% <= 0. Waiting for acceleration."
             return Signal.CASH, metadata
         
         # All conditions met - GO LONG
-        metadata["reason"] = f"BULLISH: Price > 50 SMA, ROC={roc*100:.1f}%, ADX={adx:.0f}"
+        metadata["reason"] = f"BULLISH: Price > 50 SMA x{confirm_days}d, ROC={roc*100:.1f}%, ADX={adx:.0f}"
         return Signal.LONG, metadata
     else:
         # Price below 50 SMA - exit or stay out
