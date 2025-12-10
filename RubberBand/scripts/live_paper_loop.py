@@ -197,6 +197,22 @@ def main() -> int:
     if secret:
         os.environ["APCA_API_SECRET_KEY"] = secret
 
+    # Sync registry with Alpaca positions - remove any positions that were closed by stop-loss/take-profit
+    try:
+        alpaca_positions = get_positions(base_url, key, secret)
+        # Filter to only stock positions (not options)
+        stock_positions = [p for p in alpaca_positions if p.get("asset_class") == "us_equity"]
+        registry.sync_with_alpaca(stock_positions)
+        print(json.dumps({
+            "type": "REGISTRY_SYNC",
+            "registry_positions": len(registry.positions),
+            "alpaca_stock_positions": len(stock_positions),
+            "my_symbols": list(registry.get_my_symbols()),
+            "ts": now_iso,
+        }), flush=True)
+    except Exception as e:
+        print(json.dumps({"type": "REGISTRY_SYNC_ERROR", "error": str(e), "ts": now_iso}), flush=True)
+
     # Universe
     symbols = load_symbols_from_file(args.tickers)
     print(json.dumps({"type": "UNIVERSE", "loaded": len(symbols), "sample": symbols[:10], "when": now_iso}), flush=True)
