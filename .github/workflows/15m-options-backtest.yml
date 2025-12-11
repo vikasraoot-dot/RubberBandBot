@@ -18,10 +18,15 @@ on:
         required: false
         default: '1.5'
         type: string
+      sma_period:
+        description: 'SMA period for trend filter (20=short, 50=medium)'
+        required: false
+        default: '20'
+        type: string
       max_debit:
         description: 'Max debit per share ($)'
         required: false
-        default: '1.0'
+        default: '2.0'
         type: string
       tickers:
         description: 'Ticker file path'
@@ -60,7 +65,8 @@ jobs:
           echo "Period: ${{ github.event.inputs.days || '30' }} days"
           echo "DTE: ${{ github.event.inputs.dte || '2' }}"
           echo "Spread Width: ${{ github.event.inputs.spread_width || '1.5' }} ATR"
-          echo "Max Debit: ${{ github.event.inputs.max_debit || '1.0' }}"
+          echo "SMA Period: ${{ github.event.inputs.sma_period || '20' }}"
+          echo "Max Debit: ${{ github.event.inputs.max_debit || '2.0' }}"
           echo "Tickers: ${{ github.event.inputs.tickers || 'RubberBand/tickers_options.txt' }}"
           echo "=========================================="
           
@@ -70,7 +76,8 @@ jobs:
             --days "${{ github.event.inputs.days || '30' }}" \
             --dte "${{ github.event.inputs.dte || '2' }}" \
             --spread-width "${{ github.event.inputs.spread_width || '1.5' }}" \
-            --max-debit "${{ github.event.inputs.max_debit || '1.0' }}"
+            --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
+            --max-debit "${{ github.event.inputs.max_debit || '2.0' }}"
 
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4
@@ -81,3 +88,4 @@ jobs:
             results/spread_backtest_summary.json
           if-no-files-found: warn
           retention-days: 30
+

@@ -40,7 +40,7 @@ DEFAULT_OPTS = {
     "max_debit": 1.00,          # Max $ per share for the spread
     "contracts": 1,             # Contracts per trade
     "bars_per_day": 26,         # 15m bars per trading day (6.5 hours)
-    "sma_period": 120,          # Daily SMA period for trend filter
+    "sma_period": 20,           # Daily SMA period for trend filter (20 = ~1 month)
     "trend_filter": True,       # Enable/disable SMA trend filter
 }
 
@@ -274,7 +274,7 @@ def main():
     ap.add_argument("--dte", type=int, default=2, help="Days to expiration (1-3)")
     ap.add_argument("--spread-width", type=float, default=1.5, help="Spread width in ATR")
     ap.add_argument("--max-debit", type=float, default=1.0, help="Max debit per share")
-    ap.add_argument("--sma-period", type=int, default=120, help="Daily SMA period for trend filter")
+    ap.add_argument("--sma-period", type=int, default=20, help="Daily SMA period for trend filter")
     ap.add_argument("--no-trend-filter", action="store_true", help="Disable SMA trend filter")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
