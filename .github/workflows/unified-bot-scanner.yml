@@ -7,41 +7,41 @@ on:
         description: 'Bot type to scan for'
         type: choice
         options:
+          - ALL
           - 15M_STK
           - 15M_OPT
           - WK_STK
           - WK_OPT
-          - ALL
         default: 'ALL'
       price_min:
-        description: 'Minimum price ($)'
+        description: 'Minimum price ($) - Default: $20'
         required: false
-        default: ''
+        default: '20'
         type: string
       price_max:
-        description: 'Maximum price ($)'
+        description: 'Maximum price ($) - Default: $1000'
         required: false
-        default: ''
+        default: '1000'
         type: string
       atr_min:
-        description: 'Minimum ATR%'
+        description: 'Minimum ATR% - Default: 2.0'
         required: false
-        default: ''
+        default: '2.0'
         type: string
       atr_max:
-        description: 'Maximum ATR%'
+        description: 'Maximum ATR% - Default: 6.0'
         required: false
-        default: ''
+        default: '6.0'
         type: string
       volume_min:
-        description: 'Minimum daily dollar volume ($M)'
+        description: 'Minimum daily dollar volume ($M) - Default: $20M'
         required: false
-        default: ''
+        default: '20'
         type: string
       sma_period:
-        description: 'SMA period for trend filter'
+        description: 'SMA period (20 for 15M, 120 for Weekly/ALL)'
         required: false
-        default: ''
+        default: '120'
         type: string
       skip_options_check:
         description: 'Skip options availability check (faster)'
