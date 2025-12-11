@@ -40,6 +40,8 @@ DEFAULT_OPTS = {
     "max_debit": 1.00,          # Max $ per share for the spread
     "contracts": 1,             # Contracts per trade
     "bars_per_day": 26,         # 15m bars per trading day (6.5 hours)
+    "sma_period": 120,          # Daily SMA period for trend filter
+    "trend_filter": True,       # Enable/disable SMA trend filter
 }
 
 
@@ -205,9 +207,13 @@ def simulate_spreads_for_symbol(
     cfg: dict,
     sym: str,
     opts: dict,
+    daily_sma: Optional[float] = None,
 ) -> list:
     """
     Run spread simulation for a symbol.
+    
+    Args:
+        daily_sma: If provided, skip signals when close < daily_sma (trend filter)
     """
     if df is None or df.empty or len(df) < 50:
         return []
@@ -234,6 +240,12 @@ def simulate_spreads_for_symbol(
         
         if atr <= 0 or entry_price <= 0:
             continue
+        
+        # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
+        if daily_sma is not None and opts.get("trend_filter", True):
+            close_price = float(prev["close"])
+            if close_price < daily_sma:
+                continue  # Skip - in bear trend
         
         # Simulate the spread trade
         result = simulate_spread_trade(df, i, entry_price, atr, opts)
@@ -262,6 +274,8 @@ def main():
     ap.add_argument("--dte", type=int, default=2, help="Days to expiration (1-3)")
     ap.add_argument("--spread-width", type=float, default=1.5, help="Spread width in ATR")
     ap.add_argument("--max-debit", type=float, default=1.0, help="Max debit per share")
+    ap.add_argument("--sma-period", type=int, default=120, help="Daily SMA period for trend filter")
+    ap.add_argument("--no-trend-filter", action="store_true", help="Disable SMA trend filter")
     ap.add_argument("--quiet", action="store_true")
     args = ap.parse_args()
     
@@ -278,14 +292,17 @@ def main():
         "max_debit": args.max_debit,
         "contracts": 1,
         "bars_per_day": 26,
+        "sma_period": args.sma_period,
+        "trend_filter": not args.no_trend_filter,
     }
     
-    # Fetch data
+    # Fetch 15-minute data
     timeframe = "15Min"
     feed = cfg.get("feed", "iex")
     fetch_days = int(args.days * 1.6)
     
     print(f"Fetching {len(symbols)} symbols for {args.days} days...", flush=True)
+    print(f"SMA Trend Filter: {'ENABLED' if opts['trend_filter'] else 'DISABLED'} (SMA-{args.sma_period})")
     
     bars_map, _ = fetch_latest_bars(
         symbols=symbols,
@@ -294,6 +311,25 @@ def main():
         feed=feed,
         verbose=not args.quiet,
     )
+    
+    # Fetch daily data for SMA trend filter
+    daily_sma_map = {}
+    if opts["trend_filter"]:
+        print(f"Fetching daily bars for SMA-{args.sma_period} trend filter...")
+        daily_bars_map, _ = fetch_latest_bars(
+            symbols=symbols,
+            timeframe="1Day",
+            history_days=int(args.sma_period * 1.5),
+            feed=feed,
+            verbose=False,
+        )
+        for sym in symbols:
+            df_daily = daily_bars_map.get(sym)
+            if df_daily is not None and len(df_daily) >= args.sma_period:
+                sma_val = df_daily["close"].rolling(window=args.sma_period).mean().iloc[-1]
+                if not pd.isna(sma_val):
+                    daily_sma_map[sym] = float(sma_val)
+        print(f"  Calculated SMA for {len(daily_sma_map)} symbols")
     
     # Run simulation
     all_trades = []
@@ -304,7 +340,10 @@ def main():
         if df.empty:
             continue
         
-        trades = simulate_spreads_for_symbol(df, cfg, sym, opts)
+        # Get daily SMA for this symbol (None if not available)
+        daily_sma = daily_sma_map.get(sym)
+        
+        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma)
         all_trades.extend(trades)
         
         for t in trades:
