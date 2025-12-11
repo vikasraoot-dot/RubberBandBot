@@ -65,7 +65,8 @@ def alpaca_market_open(base_url: Optional[str] = None, key: Optional[str] = None
         r.raise_for_status()
         j = r.json() or {}
         return bool(j.get("is_open"))
-    except Exception:
+    except Exception as e:
+        print(f"[warn] alpaca_market_open error: {type(e).__name__}: {e}")
         return False
 
 # Risk ops
@@ -104,7 +105,8 @@ def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, sec
         arr = r.json() or []
         # Ensure list-of-dicts
         return arr if isinstance(arr, list) else []
-    except Exception:
+    except Exception as e:
+        print(f"[warn] get_positions error: {type(e).__name__}: {e}")
         return []
 
 def get_daily_fills(
