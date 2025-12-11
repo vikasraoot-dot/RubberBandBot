@@ -50,7 +50,7 @@ resilience:
   
 trend_filter:
   enabled: true
-  sma_period: 200  # Daily SMA period for trend detection
+  sma_period: 20   # Changed from 200 to 20 for 15M options (better trade opportunity)
 
 # POSITION / SIZING
 allow_shorts: false
