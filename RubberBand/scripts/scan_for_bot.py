@@ -18,8 +18,6 @@ import os
 import sys
 import argparse
 import pandas as pd
-import numpy as np
-from datetime import datetime
 from typing import Dict, List, Any, Optional
 import requests
 
@@ -177,8 +175,10 @@ def check_options_available(symbol: str) -> bool:
         else:
             # API error, assume available
             return True
-    except Exception:
-        return True  # Fail open - assume available
+    except Exception as e:
+        # Fail open - assume available if API error
+        print(f"  [OPTIONS CHECK] Error checking {symbol}: {e}")
+        return True
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -288,6 +288,7 @@ def scan_for_bot(
                 })
                 
             except Exception as e:
+                print(f"    Warning: Error processing {sym}: {e}")
                 continue
     
     if verbose:
