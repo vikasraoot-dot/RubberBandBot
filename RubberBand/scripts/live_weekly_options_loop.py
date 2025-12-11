@@ -38,6 +38,7 @@ from RubberBand.src.data import (
     get_daily_fills,
     check_kill_switch,
     KillSwitchTriggered,
+    order_exists_today,
 )
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.options_data import (
@@ -305,6 +306,11 @@ def try_weekly_option_entry(
         # Generate client_order_id for position attribution
         client_order_id = registry.generate_order_id(option_symbol)
         
+        # Idempotency check - prevent duplicate orders on restart
+        if order_exists_today(client_order_id=client_order_id):
+            _log(f"[skip] Order already exists: {client_order_id}")
+            return False
+        
         result = submit_option_order(
             option_symbol=option_symbol,
             qty=max_contracts,
@@ -312,38 +318,46 @@ def try_weekly_option_entry(
             order_type="limit",
             limit_price=ask_price,
             client_order_id=client_order_id,
+            verify_fill=True,
+            verify_timeout=5,
         )
         if result.get("error"):
             _log(f"Order failed for {option_symbol}", {"result": result})
             return False
         
-        _log(f"Order submitted for {option_symbol}", {
-            "order_id": result.get("id"),
-            "client_order_id": client_order_id,
-            "qty": max_contracts,
-            "limit_price": ask_price,
-        })
-        
-        # Record in registry for position attribution
-        registry.record_entry(
-            symbol=option_symbol,
-            client_order_id=client_order_id,
-            qty=max_contracts,
-            entry_price=ask_price,
-            underlying=sym,
-            order_id=result.get("id", ""),
-        )
-        # NOTE: Order may not fill immediately. Check positions on next run.
-    
-    # Track
-    tracker.record_entry(
-        underlying=sym,
-        option_symbol=option_symbol,
-        qty=max_contracts,
-        premium=ask_price,
-        strike=strike,
-        expiration=expiration,
-    )
+        # Only record if filled or pending (not rejected)
+        order_status = result.get("status", "unknown")
+        if order_status in ("filled", "new", "pending", "accepted", "pending_new"):
+            _log(f"Order submitted for {option_symbol}", {
+                "order_id": result.get("id"),
+                "client_order_id": client_order_id,
+                "qty": max_contracts,
+                "limit_price": ask_price,
+                "status": order_status,
+            })
+            
+            # Record in registry for position attribution
+            registry.record_entry(
+                symbol=option_symbol,
+                client_order_id=client_order_id,
+                qty=max_contracts,
+                entry_price=ask_price,
+                underlying=sym,
+                order_id=result.get("id", ""),
+            )
+            
+            # Track successful entry
+            tracker.record_entry(
+                underlying=sym,
+                option_symbol=option_symbol,
+                qty=max_contracts,
+                premium=ask_price,
+                strike=strike,
+                expiration=expiration,
+            )
+        else:
+            _log(f"Order not recorded, status: {order_status}", {"result": result})
+            return False  # Don't track failed orders
     
     return True
 

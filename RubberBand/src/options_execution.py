@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import os
 import json
+import time
 import requests
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
@@ -34,6 +35,19 @@ def _headers(key: str, secret: str) -> Dict[str, str]:
 # ──────────────────────────────────────────────────────────────────────────────
 # Order Submission
 # ──────────────────────────────────────────────────────────────────────────────
+def _get_order_by_id(base: str, key: str, secret: str, order_id: str) -> Dict[str, Any]:
+    """Get order details by Alpaca order ID."""
+    try:
+        r = requests.get(f"{base}/v2/orders/{order_id}", headers=_headers(key, secret), timeout=10)
+        if r.status_code == 404:
+            return {"error": "not_found"}
+        r.raise_for_status()
+        return r.json() or {}
+    except Exception as e:
+        print(f"[options] Failed to get order {order_id}: {e}")
+        return {"error": str(e)}
+
+
 def submit_option_order(
     option_symbol: str,
     qty: int = 1,
@@ -41,6 +55,8 @@ def submit_option_order(
     order_type: str = "limit",
     limit_price: Optional[float] = None,
     client_order_id: Optional[str] = None,
+    verify_fill: bool = False,
+    verify_timeout: int = 5,
 ) -> Dict[str, Any]:
     """
     Submit an option order.
@@ -52,6 +68,8 @@ def submit_option_order(
         order_type: "market" or "limit"
         limit_price: Required if order_type is "limit"
         client_order_id: Optional unique ID for order attribution (e.g., "WK_OPT_NVDA...")
+        verify_fill: If True, wait and verify order fills before returning
+        verify_timeout: Seconds to wait for fill verification
     
     Returns:
         Order response dict
@@ -85,7 +103,30 @@ def submit_option_order(
             return {"error": True, "message": result.get("message", str(result))}
         
         print(f"[options] Order submitted: {option_symbol} {side} {qty} @ {limit_price}")
+        
+        # Verify fill if requested
+        if verify_fill and result.get("id"):
+            order_id = result["id"]
+            for i in range(verify_timeout):
+                time.sleep(1)
+                order = _get_order_by_id(base, key, secret, order_id)
+                status = order.get("status")
+                
+                if status == "filled":
+                    print(f"[options] Fill verified: {option_symbol} (took {i+1}s)")
+                    return order
+                elif status in ("canceled", "expired", "rejected"):
+                    print(f"[options] Order {status}: {option_symbol}")
+                    return order
+            
+            # Still not filled
+            print(f"[options] Order pending after {verify_timeout}s: {option_symbol}")
+            return {"id": order_id, "status": "pending", "needs_monitoring": True, **result}
+        
         return result
+    except requests.Timeout:
+        print(f"[options] Order timeout: {option_symbol}")
+        return {"error": True, "message": "timeout", "needs_verification": True}
     except Exception as e:
         print(f"[options] Order exception: {e}")
         return {"error": True, "message": str(e)}

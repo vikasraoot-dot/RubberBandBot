@@ -37,6 +37,7 @@ from RubberBand.src.data import (
     alpaca_market_open,
     check_kill_switch,
     KillSwitchTriggered,
+    order_exists_today,
 )
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.options_data import (
@@ -341,6 +342,11 @@ def try_spread_entry(
     else:
         # Generate client_order_id for position attribution
         client_order_id = registry.generate_order_id(long_symbol)
+        
+        # Idempotency check - prevent duplicate orders on restart
+        if order_exists_today(client_order_id=client_order_id):
+            logger.spread_skip(underlying=sym, skip_reason="Order_already_exists")
+            return False
         
         result = submit_spread_order(
             long_symbol=long_symbol,
