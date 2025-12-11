@@ -83,6 +83,16 @@ def close_all_positions(base_url: Optional[str], key: Optional[str], secret: Opt
         r.raise_for_status()
     return {"ok": True}
 
+def close_position(base_url: Optional[str], key: Optional[str], secret: Optional[str], symbol: str) -> Dict[str, Any]:
+    """Close a single position by symbol."""
+    base = _base_url_from_env(base_url)
+    r = requests.delete(f"{base}/v2/positions/{symbol}", headers=_alpaca_headers(key, secret), timeout=15)
+    if r.status_code == 404:
+        return {"ok": True, "message": "Position not found"}  # Already closed
+    if r.status_code not in (200, 204):
+        r.raise_for_status()
+    return {"ok": True}
+
 # Positions (return a LIST to match live loop usage)
 def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
     base = _base_url_from_env(base_url)
@@ -152,6 +162,217 @@ def get_daily_fills(
     except Exception as e:
         print(f"[warn] Failed to fetch daily fills: {e}")
         return []
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Kill Switch & Safety Functions
+# ──────────────────────────────────────────────────────────────────────────────
+class KillSwitchTriggered(Exception):
+    """Raised when daily loss exceeds threshold."""
+    pass
+
+def get_order_by_id(
+    base_url: Optional[str] = None, 
+    key: Optional[str] = None, 
+    secret: Optional[str] = None,
+    order_id: str = ""
+) -> Dict[str, Any]:
+    """Get order details by Alpaca order ID."""
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.get(f"{base}/v2/orders/{order_id}", headers=_alpaca_headers(key, secret), timeout=10)
+        if r.status_code == 404:
+            return {"error": "not_found"}
+        r.raise_for_status()
+        return r.json() or {}
+    except Exception as e:
+        print(f"[warn] Failed to get order {order_id}: {e}")
+        return {"error": str(e)}
+
+def cancel_order_by_id(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    order_id: str = ""
+) -> Dict[str, Any]:
+    """Cancel an order by ID."""
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.delete(f"{base}/v2/orders/{order_id}", headers=_alpaca_headers(key, secret), timeout=10)
+        if r.status_code == 404:
+            return {"ok": True, "message": "already_canceled"}
+        if r.status_code in (200, 204):
+            return {"ok": True}
+        r.raise_for_status()
+        return {"ok": True}
+    except Exception as e:
+        print(f"[warn] Failed to cancel order {order_id}: {e}")
+        return {"error": str(e)}
+
+def get_latest_quote(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    symbol: str = ""
+) -> Dict[str, Any]:
+    """Get latest bid/ask quote for a symbol."""
+    base = _base_url_from_env(base_url)
+    # Use data API for quotes
+    data_url = base.replace("api.alpaca.markets", "data.alpaca.markets")
+    if "paper-api" in base:
+        data_url = "https://data.alpaca.markets"
+    
+    try:
+        r = requests.get(
+            f"{data_url}/v2/stocks/{symbol}/quotes/latest",
+            headers=_alpaca_headers(key, secret),
+            timeout=10
+        )
+        r.raise_for_status()
+        quote = r.json().get("quote", {})
+        return {
+            "bid": float(quote.get("bp", 0)),
+            "ask": float(quote.get("ap", 0)),
+            "bid_size": int(quote.get("bs", 0)),
+            "ask_size": int(quote.get("as", 0)),
+        }
+    except Exception as e:
+        print(f"[warn] Failed to get quote for {symbol}: {e}")
+        return {"bid": 0, "ask": 0, "error": str(e)}
+
+def order_exists_today(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    client_order_id: str = ""
+) -> bool:
+    """Check if an order with this client_order_id already exists today."""
+    base = _base_url_from_env(base_url)
+    today = _now_utc().strftime("%Y-%m-%d")
+    params = {
+        "status": "all",
+        "limit": 500,
+        "after": f"{today}T00:00:00Z"
+    }
+    try:
+        r = requests.get(f"{base}/v2/orders", headers=_alpaca_headers(key, secret), params=params, timeout=15)
+        r.raise_for_status()
+        orders = r.json() or []
+        return any(o.get("client_order_id") == client_order_id for o in orders)
+    except Exception as e:
+        print(f"[warn] Failed to check order existence: {e}")
+        return False  # Assume doesn't exist on error
+
+def calculate_realized_pnl(fills: List[Dict[str, Any]]) -> float:
+    """Calculate realized P&L from a list of fills."""
+    pnl = 0.0
+    # Group by symbol
+    symbol_fills: Dict[str, List[Dict[str, Any]]] = {}
+    for f in fills:
+        sym = f.get("symbol", "")
+        if sym:
+            symbol_fills.setdefault(sym, []).append(f)
+    
+    for sym, sym_fills in symbol_fills.items():
+        buys = [f for f in sym_fills if f.get("side") == "buy"]
+        sells = [f for f in sym_fills if f.get("side") == "sell"]
+        
+        total_buy_cost = sum(
+            float(f.get("filled_avg_price", 0)) * int(f.get("filled_qty", 0))
+            for f in buys
+        )
+        total_sell_proceeds = sum(
+            float(f.get("filled_avg_price", 0)) * int(f.get("filled_qty", 0))
+            for f in sells
+        )
+        
+        pnl += total_sell_proceeds - total_buy_cost
+    
+    return pnl
+
+def get_daily_invested_capital(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    bot_tag: Optional[str] = None
+) -> float:
+    """Get total capital invested today by this bot (sum of buy orders)."""
+    fills = get_daily_fills(base_url, key, secret, bot_tag)
+    buys = [f for f in fills if f.get("side") == "buy"]
+    return sum(
+        float(f.get("filled_avg_price", 0)) * int(f.get("filled_qty", 0))
+        for f in buys
+    )
+
+def check_kill_switch(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    bot_tag: str = "",
+    max_loss_pct: float = 25.0
+) -> bool:
+    """
+    Check if daily loss exceeds threshold.
+    
+    Args:
+        bot_tag: Bot identifier for filtering fills
+        max_loss_pct: Maximum allowed loss as % of invested capital (default 25%)
+    
+    Returns:
+        True if kill switch should trigger, False otherwise
+    """
+    invested = get_daily_invested_capital(base_url, key, secret, bot_tag)
+    if invested <= 0:
+        return False  # No investment = no loss possible
+    
+    fills = get_daily_fills(base_url, key, secret, bot_tag)
+    realized_pnl = calculate_realized_pnl(fills)
+    loss_pct = (realized_pnl / invested) * 100 if invested > 0 else 0
+    
+    if loss_pct < -max_loss_pct:
+        print(f"[KILL SWITCH] {bot_tag} exceeded {max_loss_pct}% loss: {loss_pct:.1f}% (P&L: ${realized_pnl:.2f}, Invested: ${invested:.2f})")
+        return True
+    
+    return False
+
+def api_call_with_retry(
+    func,
+    *args,
+    max_retries: int = 3,
+    base_wait: float = 2.0,
+    **kwargs
+):
+    """
+    Wrapper with exponential backoff for API calls.
+    Handles HTTP 429 (rate limit) and transient errors.
+    """
+    last_exception = None
+    for attempt in range(max_retries):
+        try:
+            return func(*args, **kwargs)
+        except requests.HTTPError as e:
+            if hasattr(e, 'response') and e.response is not None:
+                if e.response.status_code == 429:
+                    wait = base_wait * (2 ** attempt)
+                    print(f"[API] Rate limited (429), waiting {wait:.1f}s (attempt {attempt+1}/{max_retries})")
+                    time.sleep(wait)
+                    last_exception = e
+                    continue
+            raise
+        except requests.Timeout as e:
+            wait = base_wait * (2 ** attempt)
+            print(f"[API] Timeout, waiting {wait:.1f}s (attempt {attempt+1}/{max_retries})")
+            time.sleep(wait)
+            last_exception = e
+            continue
+        except Exception as e:
+            # Log other exceptions but don't retry
+            print(f"[API] Error: {type(e).__name__}: {e}")
+            raise
+    
+    # Max retries exceeded
+    if last_exception:
+        raise last_exception
+    raise Exception(f"Max retries ({max_retries}) exceeded")
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Multi-symbol bars (robust shape + pagination)
@@ -420,46 +641,79 @@ def fetch_latest_bars(
     }
 
 def _round_to_tick(px: float, tick: float = 0.01) -> float:
-    if px <= 0: return 0.0
-    steps = math.floor(px / tick + 1e-9)
-    return round(steps * tick, 2)
+    """Round price to tick size using Decimal for precision."""
+    from decimal import Decimal, ROUND_DOWN
+    if px <= 0:
+        return 0.0
+    d_px = Decimal(str(px))
+    d_tick = Decimal(str(tick))
+    return float((d_px / d_tick).quantize(Decimal('1'), rounding=ROUND_DOWN) * d_tick)
 
 def submit_bracket_order(
     base_url: Optional[str], key: Optional[str], secret: Optional[str],
     symbol: str, qty: int, side: str = "buy",
-    limit_price: Optional[float] = None,   # None => market entry
+    limit_price: Optional[float] = None,
     take_profit_price: float = 0.0,
     stop_loss_price: float = 0.0,
     tif: str = "day",
     client_order_id: Optional[str] = None,
+    limit_buffer_pct: float = 1.0,  # Buffer for limit orders when no price specified
+    verify_fill: bool = False,      # Whether to verify fill status
+    verify_timeout: int = 5,        # Seconds to wait for fill verification
 ) -> Dict[str, Any]:
     """
-    Places a "market/limit + OCO" style bracket.
-    Enforces min-tick on TP vs base: TP >= base + 1 * tick (0.01 default for stocks).
+    Places a limit + OCO style bracket order.
+    
+    SAFETY: Always uses limit orders to prevent slippage.
+    If no limit_price specified, uses current quote + buffer.
+    
+    Args:
+        limit_buffer_pct: Buffer above ask (buy) or below bid (sell) for limit price
+        verify_fill: If True, wait and verify order filled before returning
+        verify_timeout: Seconds to wait for fill verification
     """
     base = _base_url_from_env(base_url)
     H = _alpaca_headers(key, secret)
 
     side = (side or "buy").lower()
+    tick = 0.01
+    
+    # SAFETY: Always use limit orders, never market orders
+    if limit_price is None:
+        # Get current quote and apply buffer
+        quote = get_latest_quote(base_url, key, secret, symbol)
+        if quote.get("error") or (quote.get("ask", 0) == 0 and quote.get("bid", 0) == 0):
+            # Fallback: Use TP/SL as reference if no quote available
+            print(f"[order] {symbol}: No quote available, using TP/SL reference")
+            if side == "buy":
+                limit_price = take_profit_price * 0.98 if take_profit_price > 0 else stop_loss_price * 1.05
+            else:
+                limit_price = stop_loss_price * 0.95 if stop_loss_price > 0 else take_profit_price * 1.02
+        else:
+            if side == "buy":
+                # Buy: limit slightly above ask to ensure fill
+                limit_price = quote["ask"] * (1 + limit_buffer_pct / 100)
+            else:
+                # Sell: limit slightly below bid to ensure fill
+                limit_price = quote["bid"] * (1 - limit_buffer_pct / 100)
+        
+        limit_price = _round_to_tick(limit_price, tick)
+        print(f"[order] {symbol}: Using limit price ${limit_price:.2f} ({side}, buffer={limit_buffer_pct}%)")
+    
     payload: Dict[str, Any] = {
         "symbol": symbol.upper(),
         "qty": int(qty),
         "side": side,
         "time_in_force": tif,
+        "type": "limit",
+        "limit_price": float(limit_price),
     }
     
     if client_order_id:
         payload["client_order_id"] = client_order_id
 
-    if limit_price is None:
-        payload["type"] = "market"
-    else:
-        payload["type"] = "limit"
-        payload["limit_price"] = float(limit_price)
-
     # Attach take-profit / stop-loss
-    tick = 0.01
-    base_hint = float(limit_price) if limit_price else float(take_profit_price) - 10 * tick  # harmless bias
+    base_hint = float(limit_price)
     tp = _round_to_tick(float(take_profit_price), tick)
     sl = _round_to_tick(float(stop_loss_price), tick)
 
@@ -469,12 +723,44 @@ def submit_bracket_order(
 
     payload["order_class"] = "bracket"
     payload["take_profit"] = {"limit_price": tp}
-    payload["stop_loss"]  = {"stop_price": sl}
+    payload["stop_loss"] = {"stop_price": sl}
 
-    r = requests.post(f"{base}/v2/orders", headers=H, json=payload, timeout=20)
-    # Return JSON body even on 4xx to let caller log error details
     try:
-        return r.json()
-    except Exception:
-        r.raise_for_status()
-        return {}
+        r = requests.post(f"{base}/v2/orders", headers=H, json=payload, timeout=20)
+        result = r.json() if r.content else {}
+    except requests.Timeout:
+        # Timeout - order may have been received
+        print(f"[order] {symbol}: Timeout submitting order - checking status...")
+        if client_order_id:
+            # Try to find order by client_order_id
+            if order_exists_today(base_url, key, secret, client_order_id):
+                return {"id": None, "status": "timeout_but_may_exist", "client_order_id": client_order_id}
+        return {"error": "timeout", "needs_verification": True}
+    except Exception as e:
+        print(f"[order] {symbol}: Error submitting order: {e}")
+        return {"error": str(e)}
+    
+    # Check for API error
+    if r.status_code >= 400 or result.get("code"):
+        return result  # Return error response for caller to handle
+    
+    # Verify fill if requested
+    if verify_fill and result.get("id"):
+        order_id = result["id"]
+        for i in range(verify_timeout):
+            time.sleep(1)
+            order = get_order_by_id(base_url, key, secret, order_id)
+            status = order.get("status")
+            
+            if status == "filled":
+                print(f"[order] {symbol}: Fill verified (took {i+1}s)")
+                return order
+            elif status in ("canceled", "expired", "rejected"):
+                print(f"[order] {symbol}: Order {status}")
+                return order
+        
+        # Still not filled - return with pending status
+        print(f"[order] {symbol}: Order still pending after {verify_timeout}s")
+        return {"id": order_id, "status": "pending", "needs_monitoring": True, **result}
+    
+    return result

@@ -17,6 +17,9 @@ from RubberBand.src.data import (
     submit_bracket_order,
     get_positions,
     get_daily_fills,
+    check_kill_switch,
+    order_exists_today,
+    KillSwitchTriggered,
 )
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
@@ -75,6 +78,11 @@ def run_weekly_cycle():
     
     # Sync registry with actual Alpaca positions (removes closed/orphaned)
     registry.sync_with_alpaca(all_positions)
+    
+    # Kill Switch Check - halt if daily loss exceeds 25%
+    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+        logging.critical(f"[KILL SWITCH] {BOT_TAG} exceeded 25% daily loss - HALTING")
+        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
     
     # Filter to only OUR positions (based on registry)
     positions = registry.filter_positions(all_positions)

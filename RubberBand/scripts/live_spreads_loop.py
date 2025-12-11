@@ -31,7 +31,13 @@ if _REPO_ROOT not in sys.path:
 
 from zoneinfo import ZoneInfo
 
-from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open
+from RubberBand.src.data import (
+    load_symbols_from_file,
+    fetch_latest_bars,
+    alpaca_market_open,
+    check_kill_switch,
+    KillSwitchTriggered,
+)
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.options_data import (
     select_spread_contracts,
@@ -782,6 +788,12 @@ def main() -> int:
         bot_tag=BOT_TAG,
         my_positions=len(registry.positions),
     )
+    
+    # Kill Switch Check - halt if daily loss exceeds 25%
+    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+        logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
+        logger.close()
+        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
     
     # ──────────────────────────────────────────────────────────────────────────
     # Main Loop: Run until market close (4:00 PM ET)

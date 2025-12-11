@@ -25,6 +25,9 @@ from RubberBand.src.data import (
     submit_bracket_order,
     get_positions,
     get_daily_fills,
+    check_kill_switch,
+    order_exists_today,
+    KillSwitchTriggered,
 )
 from RubberBand.strategy import attach_verifiers
 from RubberBand.src.trade_logger import TradeLogger
@@ -212,6 +215,16 @@ def main() -> int:
         }), flush=True)
     except Exception as e:
         print(json.dumps({"type": "REGISTRY_SYNC_ERROR", "error": str(e), "ts": now_iso}), flush=True)
+
+    # Kill Switch Check - halt if daily loss exceeds 25%
+    if check_kill_switch(base_url, key, secret, bot_tag=BOT_TAG, max_loss_pct=25.0):
+        print(json.dumps({
+            "type": "KILL_SWITCH_TRIGGERED",
+            "bot_tag": BOT_TAG,
+            "reason": "Daily loss exceeded 25% of invested capital",
+            "ts": now_iso,
+        }), flush=True)
+        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
 
     # Universe
     symbols = load_symbols_from_file(args.tickers)
@@ -563,6 +576,11 @@ def main() -> int:
                 # Generate client_order_id for position attribution
                 coid = registry.generate_order_id(sym)
                 
+                # Idempotency check - prevent duplicate orders
+                if order_exists_today(base_url, key, secret, coid):
+                    print(f"[order] SKIP {sym}: Order {coid} already exists today", flush=True)
+                    continue
+                
                 resp = submit_bracket_order(
                     base_url,
                     key,
@@ -570,13 +588,32 @@ def main() -> int:
                     symbol=sym,
                     qty=qty,
                     side=side,
-                    limit_price=None,  # market entry
+                    limit_price=None,  # Uses limit with 1% buffer now
                     take_profit_price=take_profit,
                     stop_loss_price=stop_price,
                     tif="day",
                     client_order_id=coid,
+                    verify_fill=True,  # Wait and verify fill
+                    verify_timeout=5,  # 5 second timeout
                 )
+                
+                # Check for order issues
+                if resp.get("error"):
+                    print(f"[order] ERROR {sym}: {resp.get('error')}", flush=True)
+                    continue
+                
                 print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
+                
+                # Record in registry on successful fill
+                if resp.get("status") == "filled":
+                    registry.record_entry(
+                        symbol=sym,
+                        client_order_id=coid,
+                        qty=qty,
+                        entry_price=float(resp.get("filled_avg_price", entry)),
+                        order_id=resp.get("id", ""),
+                    )
+                
                 try:
                     oid = (resp.get("id") if isinstance(resp, dict) else None)
                     log.entry_ack(

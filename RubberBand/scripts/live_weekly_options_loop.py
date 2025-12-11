@@ -19,7 +19,7 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 
 # Ensure repo root is on path
 _THIS = os.path.abspath(os.path.dirname(__file__))
@@ -31,7 +31,14 @@ from zoneinfo import ZoneInfo
 import pandas as pd
 import yaml
 
-from RubberBand.src.data import load_symbols_from_file, fetch_latest_bars, alpaca_market_open, get_daily_fills
+from RubberBand.src.data import (
+    load_symbols_from_file,
+    fetch_latest_bars,
+    alpaca_market_open,
+    get_daily_fills,
+    check_kill_switch,
+    KillSwitchTriggered,
+)
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.options_data import (
     select_itm_contract,
@@ -348,12 +355,19 @@ def manage_weekly_positions(
     opts_cfg: dict,
     tracker: OptionsTradeTracker,
     dry_run: bool = True,
+    registry: Optional["PositionRegistry"] = None,
 ):
     """Check open positions and exit if TP/SL conditions met.
     
     Note: Time-based exits are tracked separately since the tracker is
     instantiated fresh each run. For 45-DTE options, expiration date
     serves as the natural time limit.
+    
+    Args:
+        opts_cfg: Options configuration
+        tracker: Trade tracker
+        dry_run: If True, don't actually close
+        registry: Position registry to update on successful close
     """
     positions = get_option_positions()
     tp_pct = opts_cfg.get("tp_pct", 100.0)
@@ -386,11 +400,34 @@ def manage_weekly_positions(
                     "pnl_pct": pnl_pct,
                     "current_price": current_price,
                 })
+                tracker.record_exit(symbol, current_price, f"[DRY-RUN] {reason}")
             else:
                 result = close_option_position(symbol)
+                
+                # Check if close was successful before recording exit
+                if result.get("error"):
+                    _log(f"ERROR closing {symbol}", {
+                        "reason": reason,
+                        "error": result.get("message", "Unknown"),
+                    })
+                    # Don't record exit - will retry next cycle
+                    continue
+                
                 _log(f"Closed {symbol}", {"reason": reason, "result": result})
-            
-            tracker.record_exit(symbol, current_price, reason)
+                
+                # Only record exit on successful close
+                tracker.record_exit(symbol, current_price, reason)
+                
+                # Update registry to remove closed position
+                if registry and symbol in registry.positions:
+                    pnl = float(pos.get("unrealized_pl", 0))
+                    registry.record_exit(
+                        symbol=symbol,
+                        exit_price=current_price,
+                        exit_reason=reason,
+                        pnl=pnl,
+                    )
+                    _log(f"Registry updated: removed {symbol}")
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -447,6 +484,12 @@ def main() -> int:
     # Initialize position registry for this bot
     registry = PositionRegistry(bot_tag=BOT_TAG)
     
+    # Kill Switch Check - halt if daily loss exceeds 25%
+    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+        logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
+        logger.close()
+        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+    
     _log("Starting weekly options scan", {
         "dry_run": dry_run,
         "monitor_only": args.monitor_only,
@@ -457,7 +500,7 @@ def main() -> int:
     })
     
     # 1. Check existing positions for exits (always do this)
-    manage_weekly_positions(opts_cfg, tracker, dry_run)
+    manage_weekly_positions(opts_cfg, tracker, dry_run, registry=registry)
     
     # 2. Get ALL option positions, then filter to only THIS BOT'S positions
     all_option_positions = get_option_positions()
