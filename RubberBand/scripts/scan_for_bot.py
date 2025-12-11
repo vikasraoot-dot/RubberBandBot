@@ -447,14 +447,15 @@ Examples:
     
     print(f"\nSaved to {output_path}")
     
-    # Also save per-bot ticker files for convenience
+    # Also save per-bot ticker files in same directory as output CSV
+    output_dir = os.path.dirname(output_path) or "."
     for bt in df["bot_type"].unique():
         bot_df = df[df["bot_type"] == bt]
-        bot_file = os.path.join(_REPO_ROOT, f"RubberBand/tickers_{bt.lower()}_scan.txt")
+        bot_file = os.path.join(output_dir, f"tickers_{bt.lower()}_scan.txt")
         with open(bot_file, "w") as f:
             for sym in bot_df["symbol"]:
                 f.write(f"{sym}\n")
-        print(f"  → {bt}: {len(bot_df)} tickers saved to tickers_{bt.lower()}_scan.txt")
+        print(f"  → {bt}: {len(bot_df)} tickers saved to {bot_file}")
     
     return 0
 
