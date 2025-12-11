@@ -313,25 +313,63 @@ def check_kill_switch(
     max_loss_pct: float = 25.0
 ) -> bool:
     """
-    Check if daily loss exceeds threshold.
+    Check if day's TOTAL P&L (Realized + Unrealized) exceeds max loss %.
     
-    Args:
-        bot_tag: Bot identifier for filtering fills
-        max_loss_pct: Maximum allowed loss as % of invested capital (default 25%)
-    
-    Returns:
-        True if kill switch should trigger, False otherwise
+    CRITICAL FIX: 
+    1. Includes Unrealized P&L (so new positions aren't seen as 100% loss).
+    2. Handles missing API data gracefully (skips check if price unavailable).
     """
     invested = get_daily_invested_capital(base_url, key, secret, bot_tag)
     if invested <= 0:
-        return False  # No investment = no loss possible
+        return False  # No capital at risk
     
+    # 1. Realized P&L from closed trades today
     fills = get_daily_fills(base_url, key, secret, bot_tag)
     realized_pnl = calculate_realized_pnl(fills)
-    loss_pct = (realized_pnl / invested) * 100 if invested > 0 else 0
+    
+    # 2. Unrealized P&L from open positions opened TODAY
+    # We need to find positions that were opened today (matches buys in fills)
+    unrealized_pnl = 0.0
+    
+    # Get all positions
+    try:
+        positions = get_positions(base_url, key, secret)
+    except Exception as e:
+        print(f"[KILL SWITCH] Error fetching positions: {e}")
+        return False  # Fail safe: don't trigger if API down
+        
+    # Filter for this bot
+    # We don't have registry access here easily, so we rely on:
+    # A) Client Order ID if available (ideal)
+    # B) Or matching symbol from today's fills
+    
+    today_symbols = {f.get("symbol") for f in fills if f.get("side") == "buy"}
+    
+    for p in positions:
+        sym = p.get("symbol")
+        if sym not in today_symbols:
+            continue
+            
+        qty = float(p.get("qty", 0))
+        entry = float(p.get("avg_entry_price", 0))
+        current = float(p.get("current_price", 0))
+        
+        # SAFETY CHECK: If current price is 0 or None (API error), SKIP this position
+        if current <= 0:
+            print(f"[KILL SWITCH] ⚠️ Missing price for {sym}, skipping PnL check to avoid false trigger.")
+            continue
+            
+        # Only count PnL for the portion bought today
+        # (This is an approximation, assuming if we bought today, the whole pos is relevant for daily risk)
+        unrealized_pnl += (current - entry) * qty
+
+    total_pnl = realized_pnl + unrealized_pnl
+    
+    # PnL Check
+    loss_pct = (total_pnl / invested) * 100
     
     if loss_pct < -max_loss_pct:
-        print(f"[KILL SWITCH] {bot_tag} exceeded {max_loss_pct}% loss: {loss_pct:.1f}% (P&L: ${realized_pnl:.2f}, Invested: ${invested:.2f})")
+        print(f"[KILL SWITCH] {bot_tag} exceeded {max_loss_pct}% loss: {loss_pct:.1f}% (P&L: ${total_pnl:.2f}, Invested: ${invested:.2f})")
         return True
     
     return False
