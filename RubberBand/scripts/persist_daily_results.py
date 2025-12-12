@@ -81,6 +81,10 @@ def calculate_bot_pnl(
     """
     Calculate PnL for a specific bot on a specific date.
     
+    IMPORTANT: For bracket orders, the stop-loss/take-profit child orders
+    don't have the bot tag in client_order_id. We match untagged sells
+    to tagged buys for the same symbol on the same day.
+    
     Args:
         orders: List of filled orders
         positions: Current open positions
@@ -100,20 +104,43 @@ def calculate_bot_pnl(
         "open_positions": [],
     }
     
-    # Filter orders for this bot and date
+    # Step 1: Find all BUY orders that belong to this bot on target date
+    bot_buy_symbols = set()
     bot_orders = []
+    
     for order in orders:
-        order_bot = extract_bot_tag_from_order(order)
-        if order_bot != bot_tag:
-            continue
-        
         filled_at = order.get("filled_at", "")
         if not filled_at.startswith(target_date):
             continue
         
-        bot_orders.append(order)
+        order_bot = extract_bot_tag_from_order(order)
+        side = order.get("side", "")
+        sym = order.get("symbol", "")
+        
+        if order_bot == bot_tag:
+            bot_orders.append(order)
+            if side == "buy":
+                bot_buy_symbols.add(sym)
     
-    # Group by symbol to calculate realized P&L
+    # Step 2: Find SELL orders that match our buy symbols (even if untagged)
+    # This catches stop-loss/take-profit orders from bracket orders
+    for order in orders:
+        filled_at = order.get("filled_at", "")
+        if not filled_at.startswith(target_date):
+            continue
+        
+        order_bot = extract_bot_tag_from_order(order)
+        side = order.get("side", "")
+        sym = order.get("symbol", "")
+        
+        # Include untagged sells for symbols we bought today
+        if side == "sell" and order_bot is None and sym in bot_buy_symbols:
+            # Check if we already have this order
+            order_id = order.get("id")
+            if not any(o.get("id") == order_id for o in bot_orders):
+                bot_orders.append(order)
+    
+    # Step 3: Group by symbol to calculate realized P&L
     symbol_trades: Dict[str, Dict[str, Any]] = {}
     for order in bot_orders:
         sym = order.get("symbol", "")
