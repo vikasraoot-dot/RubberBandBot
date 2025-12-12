@@ -286,6 +286,14 @@ def main():
     else:
         symbols = read_tickers(args.tickers)
     
+    # Debug: Print loaded tickers
+    print(f"\n{'='*60}")
+    print(f"LOADED TICKERS FROM: {args.tickers}")
+    print(f"{'='*60}")
+    print(f"Total: {len(symbols)} symbols")
+    print(f"Tickers: {symbols}")
+    print(f"{'='*60}\n")
+    
     opts = {
         "dte": args.dte,
         "spread_width_atr": args.spread_width,
