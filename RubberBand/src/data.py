@@ -642,7 +642,9 @@ def fetch_latest_bars(
                 syms_empty.append(s)
                 continue
 
-            if rth_only:
+            # Skip RTH filter for daily/weekly timeframes (they don't have intraday timestamps)
+            is_daily_or_longer = timeframe.lower() in ("1day", "1d", "day", "1week", "1w", "week")
+            if rth_only and not is_daily_or_longer:
                 df = filter_rth(df, tz_name=tz_name, start_hm=rth_start, end_hm=rth_end)
             df = drop_unclosed_last_bar(df, timeframe)
 
