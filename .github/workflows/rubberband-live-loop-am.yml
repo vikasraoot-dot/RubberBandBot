@@ -36,7 +36,7 @@ jobs:
         continue-on-error: true
         with:
           name: position-registry-15M_STK
-          path: RubberBand/.position_registry
+          path: .position_registry/
 
       # Wait guard so the loop begins right at the bell, even if cron is early/late
       - name: Wait until market open (guard)
@@ -98,6 +98,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: position-registry-15M_STK
-          path: RubberBand/.position_registry
+          path: .position_registry/
           retention-days: 90
           overwrite: true
