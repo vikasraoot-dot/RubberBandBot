@@ -68,7 +68,7 @@ DEFAULT_SPREAD_CONFIG = {
     "dte": 3,                      # Days to expiration (3 = 90% WR in backtest)
     "min_dte": 3,                   # Minimum DTE allowed (skip if DTE fallback goes below)
     "spread_width_pct": 2.0,       # OTM strike = ATM * (1 + this%)
-    "max_debit": 1.00,             # Max $ per share for the spread debit ($100/contract)
+    "max_debit": 3.00,             # Max $ per share for the spread debit ($300/contract)
     "contracts": 1,                # Contracts per signal
     "tp_max_profit_pct": 80.0,     # Take profit at 80% of max profit
     "sl_pct": -50.0,               # Stop loss at -50% of debit lost
@@ -88,7 +88,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--tickers", required=True, help="Path to tickers file")
     p.add_argument("--dry-run", type=int, default=1, help="1=dry run, 0=live")
     p.add_argument("--dte", type=int, default=3, help="Days to expiration (1-3)")
-    p.add_argument("--max-debit", type=float, default=1.00, help="Max debit per share")
+    p.add_argument("--max-debit", type=float, default=3.00, help="Max debit per share")
     p.add_argument("--contracts", type=int, default=1, help="Contracts per trade")
     return p.parse_args()
 
@@ -175,7 +175,7 @@ def get_long_signals(
     # Get trend filter settings
     trend_cfg = cfg.get("trend_filter", {})
     trend_enabled = trend_cfg.get("enabled", True)  # Default enabled for options
-    sma_period = int(trend_cfg.get("sma_period", 120))  # Use 120 for faster calculation
+    sma_period = int(trend_cfg.get("sma_period", 20))  # Default 20-day SMA (matches config)
     
     try:
         bars_map, _ = fetch_latest_bars(
