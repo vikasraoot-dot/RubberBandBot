@@ -23,11 +23,22 @@ def _minutes(td: dt.timedelta) -> int:
     return int(td.total_seconds() // 60)
 
 def load_symbols_from_file(path: str) -> List[str]:
-    """Load symbols from a text file (one per line)."""
+    """Load symbols from a text file (one per line), filtering comments and deduping."""
     if not os.path.exists(path):
         return []
+    seen = set()
+    tickers = []
     with open(path, "r", encoding="utf-8") as f:
-        return [line.strip().upper() for line in f if line.strip() and not line.startswith("#")]
+        for ln in f:
+            ticker = ln.strip().upper()
+            # Skip empty lines, comments, and triple-quote markers
+            if not ticker or ticker.startswith("#") or ticker.startswith("'''") or ticker.startswith('"""'):
+                continue
+            # Dedupe while preserving order
+            if ticker not in seen:
+                seen.add(ticker)
+                tickers.append(ticker)
+    return tickers
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Creds / Alpaca helpers

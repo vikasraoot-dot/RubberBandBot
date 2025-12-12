@@ -20,6 +20,7 @@ import json
 import pandas as pd
 from collections import defaultdict
 from datetime import datetime
+from typing import Optional
 
 # Ensure repo root is on path
 _THIS = os.path.abspath(os.path.dirname(__file__))

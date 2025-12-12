@@ -123,7 +123,7 @@ def _in_entry_window(now_et: datetime, windows: list) -> bool:
 # ──────────────────────────────────────────────────────────────────────────────
 # Signal Detection
 # ──────────────────────────────────────────────────────────────────────────────
-def get_daily_sma(symbol: str, period: int = 120, feed: str = "iex") -> Optional[float]:
+def get_daily_sma(symbol: str, period: int = 20, feed: str = "iex") -> Optional[float]:
     """Fetch daily data and calculate SMA for trend filter."""
     try:
         daily_map, _ = fetch_latest_bars(
@@ -576,12 +576,14 @@ def manage_positions(
         if active_spreads and underlying in active_spreads:
             entry_debit = active_spreads[underlying].get("net_debit", 1.0)
         else:
-            # Estimate from cost basis
-            long_cost = float(long_pos.get("cost_basis", 0)) / 100
-            short_cost = abs(float(short_pos.get("cost_basis", 0))) / 100 if short_pos else 0
-            entry_debit = long_cost - short_cost
+            # Estimate from cost basis (Alpaca returns cost_basis in dollars)
+            long_cost = float(long_pos.get("cost_basis", 0))
+            short_cost = abs(float(short_pos.get("cost_basis", 0))) if short_pos else 0
+            # For options, cost_basis is total cost. Debit per share = cost_basis / (qty * 100)
+            long_qty = abs(int(long_pos.get("qty", 1)))
+            entry_debit = long_cost / (long_qty * 100) if long_qty > 0 else long_cost / 100
             if entry_debit <= 0:
-                entry_debit = long_cost  # Fallback to just long cost
+                entry_debit = 1.0  # Fallback to default
         
         # Calculate spread P&L
         pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)
