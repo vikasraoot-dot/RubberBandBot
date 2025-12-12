@@ -323,21 +323,31 @@ def main():
     # Fetch daily data for SMA trend filter
     daily_sma_map = {}
     if opts["trend_filter"]:
-        print(f"Fetching daily bars for SMA-{args.sma_period} trend filter...")
+        sma_history_days = max(args.sma_period * 2, 60)  # At least 60 days for reliable SMA
+        print(f"Fetching daily bars for SMA-{args.sma_period} trend filter (history={sma_history_days} days)...")
         daily_bars_map, _ = fetch_latest_bars(
             symbols=symbols,
             timeframe="1Day",
-            history_days=int(args.sma_period * 1.5),
+            history_days=sma_history_days,
             feed=feed,
             verbose=False,
         )
+        skipped_no_data = 0
+        skipped_short = 0
         for sym in symbols:
             df_daily = daily_bars_map.get(sym)
-            if df_daily is not None and len(df_daily) >= args.sma_period:
-                sma_val = df_daily["close"].rolling(window=args.sma_period).mean().iloc[-1]
-                if not pd.isna(sma_val):
-                    daily_sma_map[sym] = float(sma_val)
+            if df_daily is None or df_daily.empty:
+                skipped_no_data += 1
+                continue
+            if len(df_daily) < args.sma_period:
+                skipped_short += 1
+                continue
+            sma_val = df_daily["close"].rolling(window=args.sma_period).mean().iloc[-1]
+            if not pd.isna(sma_val):
+                daily_sma_map[sym] = float(sma_val)
         print(f"  Calculated SMA for {len(daily_sma_map)} symbols")
+        if skipped_no_data > 0 or skipped_short > 0:
+            print(f"  Skipped: {skipped_no_data} no data, {skipped_short} insufficient history")
     
     # Run simulation
     all_trades = []
