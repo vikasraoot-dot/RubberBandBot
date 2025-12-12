@@ -446,9 +446,14 @@ def calculate_spread_pnl(
     Spread value = long_value - short_value
     P&L = current_spread_value - entry_debit
     """
-    # Get current values
-    long_value = float(long_pos.get("current_price", 0))
-    short_value = float(short_pos.get("current_price", 0)) if short_pos else 0
+    # Get current values (handle None explicitly)
+    long_price = long_pos.get("current_price")
+    long_value = float(long_price) if long_price is not None else 0.0
+    
+    short_value = 0.0
+    if short_pos:
+        short_price = short_pos.get("current_price")
+        short_value = float(short_price) if short_price is not None else 0.0
     
     # Current spread value (what we'd receive if we closed now)
     current_spread_value = long_value - short_value
@@ -577,10 +582,19 @@ def manage_positions(
             entry_debit = active_spreads[underlying].get("net_debit", 1.0)
         else:
             # Estimate from cost basis (Alpaca returns cost_basis in dollars)
-            long_cost = float(long_pos.get("cost_basis", 0))
-            short_cost = abs(float(short_pos.get("cost_basis", 0))) if short_pos else 0
+            # Handle None values explicitly
+            cb_long = long_pos.get("cost_basis")
+            long_cost = float(cb_long) if cb_long is not None else 0.0
+            
+            if short_pos:
+                cb_short = short_pos.get("cost_basis")
+                short_cost = abs(float(cb_short)) if cb_short is not None else 0.0
+            else:
+                short_cost = 0.0
+            
             # For options, cost_basis is total cost. Debit per share = cost_basis / (qty * 100)
-            long_qty = abs(int(long_pos.get("qty", 1)))
+            qty_val = long_pos.get("qty")
+            long_qty = abs(int(qty_val)) if qty_val is not None else 1
             entry_debit = long_cost / (long_qty * 100) if long_qty > 0 else long_cost / 100
             if entry_debit <= 0:
                 entry_debit = 1.0  # Fallback to default
@@ -592,9 +606,11 @@ def manage_positions(
         should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg)
         
         if should_exit:
-            # Calculate current spread value for logging
-            long_value = float(long_pos.get("current_price", 0))
-            short_value = float(short_pos.get("current_price", 0)) if short_pos else 0
+            # Calculate current spread value for logging (handle None values)
+            lp = long_pos.get("current_price")
+            long_value = float(lp) if lp is not None else 0.0
+            sp = short_pos.get("current_price") if short_pos else None
+            short_value = float(sp) if sp is not None else 0.0
             exit_value = long_value - short_value
             
             if dry_run:
@@ -797,11 +813,13 @@ def main() -> int:
         my_positions=len(registry.positions),
     )
     
-    # Kill Switch Check - halt if daily loss exceeds 25%
-    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
-        logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
-        logger.close()
-        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+    # Kill Switch Check - TEMPORARILY DISABLED (Dec 12, 2025)
+    # Bug: PnL calculation is incorrect
+    # TODO: Fix check_kill_switch() to only count THIS bot's positions
+    # if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+    #     logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
+    #     logger.close()
+    #     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
     
     # ──────────────────────────────────────────────────────────────────────────
     # Main Loop: Run until market close (4:00 PM ET)

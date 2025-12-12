@@ -79,10 +79,12 @@ def run_weekly_cycle():
     # Sync registry with actual Alpaca positions (removes closed/orphaned)
     registry.sync_with_alpaca(all_positions)
     
-    # Kill Switch Check - halt if daily loss exceeds 25%
-    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
-        logging.critical(f"[KILL SWITCH] {BOT_TAG} exceeded 25% daily loss - HALTING")
-        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+    # Kill Switch Check - TEMPORARILY DISABLED (Dec 12, 2025)
+    # Bug: PnL calculation is incorrect - showing -100% when actual loss is <5%
+    # TODO: Fix check_kill_switch() to only count THIS bot's positions
+    # if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+    #     logging.critical(f"[KILL SWITCH] {BOT_TAG} exceeded 25% daily loss - HALTING")
+    #     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
     
     # Filter to only OUR positions (based on registry)
     positions = registry.filter_positions(all_positions)

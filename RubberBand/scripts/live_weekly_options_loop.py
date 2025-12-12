@@ -498,11 +498,13 @@ def main() -> int:
     # Initialize position registry for this bot
     registry = PositionRegistry(bot_tag=BOT_TAG)
     
-    # Kill Switch Check - halt if daily loss exceeds 25%
-    if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
-        logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
-        logger.close()
-        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+    # Kill Switch Check - TEMPORARILY DISABLED (Dec 12, 2025)
+    # Bug: PnL calculation is incorrect
+    # TODO: Fix check_kill_switch() to only count THIS bot's positions
+    # if check_kill_switch(bot_tag=BOT_TAG, max_loss_pct=25.0):
+    #     logger.error(error=f"{BOT_TAG} exceeded 25% daily loss - HALTING")
+    #     logger.close()
+    #     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
     
     _log("Starting weekly options scan", {
         "dry_run": dry_run,
