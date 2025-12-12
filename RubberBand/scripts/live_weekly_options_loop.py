@@ -391,7 +391,9 @@ def manage_weekly_positions(
     
     for pos in positions:
         symbol = pos.get("symbol", "")
-        pnl_pct = float(pos.get("unrealized_plpc", 0)) * 100  # Convert to %
+        # Handle None values explicitly (Alpaca may return None for empty fields)
+        plpc_val = pos.get("unrealized_plpc")
+        pnl_pct = float(plpc_val) * 100 if plpc_val is not None else 0.0
         
         # Check exit conditions (TP and SL only for now)
         # Time stop would require persistent tracking across runs
@@ -406,7 +408,8 @@ def manage_weekly_positions(
             reason = "StopLoss"
         
         if should_exit:
-            current_price = float(pos.get("current_price", 0))
+            cp_val = pos.get("current_price")
+            current_price = float(cp_val) if cp_val is not None else 0.0
             
             if dry_run:
                 _log(f"[DRY-RUN] Would exit {symbol}", {
