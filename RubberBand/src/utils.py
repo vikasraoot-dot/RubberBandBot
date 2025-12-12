@@ -7,8 +7,20 @@ def load_config(path: str) -> dict:
         return yaml.safe_load(f)
 
 def read_tickers(path: str) -> list[str]:
+    """Read tickers from file, filtering comments and deduping."""
+    seen = set()
+    tickers = []
     with open(path, "r", encoding="utf-8") as f:
-        return [ln.strip() for ln in f if ln.strip() and not ln.startswith("#")]
+        for ln in f:
+            ticker = ln.strip().upper()
+            # Skip empty lines, comments, and triple-quote markers
+            if not ticker or ticker.startswith("#") or ticker.startswith("'''") or ticker.startswith('"""'):
+                continue
+            # Dedupe while preserving order
+            if ticker not in seen:
+                seen.add(ticker)
+                tickers.append(ticker)
+    return tickers
 
 def new_york_now() -> dt.datetime:
     return dt.datetime.now(tz=pytz.timezone("US/Eastern"))
