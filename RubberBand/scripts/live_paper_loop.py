@@ -216,17 +216,16 @@ def main() -> int:
     except Exception as e:
         print(json.dumps({"type": "REGISTRY_SYNC_ERROR", "error": str(e), "ts": now_iso}), flush=True)
 
-    # Kill Switch Check - TEMPORARILY DISABLED (Dec 12, 2025)
-    # Bug: PnL calculation is incorrect - showing -50% when actual loss is <1%
-    # TODO: Fix check_kill_switch() to only count THIS bot's positions
-    # if check_kill_switch(base_url, key, secret, bot_tag=BOT_TAG, max_loss_pct=25.0):
-    #     print(json.dumps({
-    #         "type": "KILL_SWITCH_TRIGGERED",
-    #         "bot_tag": BOT_TAG,
-    #         "reason": "Daily loss exceeded 25% of invested capital",
-    #         "ts": now_iso,
-    #     }), flush=True)
-    #     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+    # Kill Switch Check - RE-ENABLED Dec 13, 2025
+    # Halts trading if daily loss exceeds 25% of invested capital
+    if check_kill_switch(base_url, key, secret, bot_tag=BOT_TAG, max_loss_pct=25.0):
+        print(json.dumps({
+            "type": "KILL_SWITCH_TRIGGERED",
+            "bot_tag": BOT_TAG,
+            "reason": "Daily loss exceeded 25% of invested capital",
+            "ts": now_iso,
+        }), flush=True)
+        raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
 
     # Universe
     symbols = load_symbols_from_file(args.tickers)
