@@ -3,7 +3,7 @@ import json
 import shutil
 from RubberBand.src.ticker_health import TickerHealthManager
 
-def test_resilience():
+def test_guardrails_resilience():
     # Setup
     test_file = "test_health.json"
     if os.path.exists(test_file):
@@ -63,4 +63,4 @@ def test_resilience():
     print("\n🎉 All resilience tests passed!")
 
 if __name__ == "__main__":
-    test_resilience()
+    test_guardrails_resilience()
