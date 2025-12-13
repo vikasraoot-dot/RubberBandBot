@@ -502,7 +502,9 @@ def main() -> int:
             pass
 
         # ATR Calculation (Use pre-calculated from attach_verifiers)
-        atr_val = float(last.get("atr", 0.0))
+        # Safely handle None values (get returns None if key exists but value is None)
+        atr_raw = last.get("atr")
+        atr_val = float(atr_raw) if atr_raw is not None else 0.0
         
         if side == "buy":
             stop_price = round(entry - sl_mult * atr_val, 2)

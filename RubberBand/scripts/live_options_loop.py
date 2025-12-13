@@ -123,11 +123,14 @@ def get_long_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
             last = df.iloc[-1]
             
             if bool(last.get("long_signal", False)):
+                # Safely handle None values (get returns None if key exists but value is None)
+                rsi_val = last.get("rsi")
+                atr_val = last.get("atr")
                 signals.append({
                     "symbol": sym,
                     "entry_price": float(last["close"]),
-                    "rsi": float(last.get("rsi", 0)),
-                    "atr": float(last.get("atr", 0)),
+                    "rsi": float(rsi_val) if rsi_val is not None else 0.0,
+                    "atr": float(atr_val) if atr_val is not None else 0.0,
                 })
         except Exception as e:
             _log(f"Error processing {sym}", {"error": str(e)})

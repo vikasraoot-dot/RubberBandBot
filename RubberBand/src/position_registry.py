@@ -244,6 +244,30 @@ class PositionRegistry:
         """Check if a symbol is owned by this bot."""
         return symbol in self.positions
     
+    def find_by_symbol(self, symbol: str) -> Optional[str]:
+        """
+        Find a position by either long symbol (primary key) or short_symbol.
+        
+        Issue #5 fix: For spreads, we need to find entries by either leg.
+        
+        Args:
+            symbol: Either the long symbol (primary key) or short_symbol
+            
+        Returns:
+            The primary key (long symbol) if found, or None
+        """
+        # Check if it's a primary key (long symbol)
+        if symbol in self.positions:
+            return symbol
+        
+        # Search through positions for matching short_symbol
+        for long_symbol, pos in self.positions.items():
+            short_sym = pos.get("short_symbol", "")
+            if short_sym == symbol:
+                return long_symbol
+        
+        return None
+    
     def filter_positions(self, alpaca_positions: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
         """
         Filter Alpaca positions to only those owned by this bot.

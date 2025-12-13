@@ -67,7 +67,7 @@ BOT_TAG = "15M_OPT"
 DEFAULT_SPREAD_CONFIG = {
     "dte": 3,                      # Days to expiration (3 = 90% WR in backtest)
     "min_dte": 3,                   # Minimum DTE allowed (skip if DTE fallback goes below)
-    "spread_width_pct": 2.0,       # OTM strike = ATM * (1 + this%)
+    "spread_width_atr": 1.5,       # OTM strike = ATM + this * ATR (matches backtest)
     "max_debit": 3.00,             # Max $ per share for the spread debit ($300/contract)
     "contracts": 1,                # Contracts per signal
     "tp_max_profit_pct": 80.0,     # Take profit at 80% of max profit
@@ -114,7 +114,7 @@ def _in_entry_window(now_et: datetime, windows: list) -> bool:
         start_time = dt_time(int(start_parts[0]), int(start_parts[1]))
         end_time = dt_time(int(end_parts[0]), int(end_parts[1]))
         
-        if start_time <= current_time <= end_time:
+        if start_time <= current_time < end_time:
             return True
     
     return False
@@ -211,8 +211,11 @@ def get_long_signals(
                     continue
             
             if bool(last.get("long_signal", False)):
-                rsi = float(last.get("rsi", 0))
-                atr = float(last.get("atr", 0))
+                # Safely handle None values (get returns None if key exists but value is None)
+                rsi_val = last.get("rsi")
+                atr_val = last.get("atr")
+                rsi = float(rsi_val) if rsi_val is not None else 0.0
+                atr = float(atr_val) if atr_val is not None else 0.0
                 entry_price = close
                 
                 # Build entry reason from signal components
@@ -262,13 +265,22 @@ def try_spread_entry(
     sym = signal["symbol"]
     dte = spread_cfg.get("dte", 3)
     min_dte = spread_cfg.get("min_dte", 2)  # Minimum DTE allowed
-    spread_width_pct = spread_cfg.get("spread_width_pct", 2.0)
+    spread_width_atr = spread_cfg.get("spread_width_atr", 1.5)  # ATR-based spread width
     max_debit = spread_cfg.get("max_debit", 1.00)
     contracts = spread_cfg.get("contracts", 1)
     entry_reason = signal.get("entry_reason", "RubberBand_signal")
     
+    # Get ATR from signal for volatility-adaptive spread width
+    signal_atr = signal.get("atr", 0)
+    
     # Select spread contracts (may fallback to different DTE, respecting min_dte)
-    spread = select_spread_contracts(sym, dte=dte, spread_width_pct=spread_width_pct, min_dte=min_dte)
+    spread = select_spread_contracts(
+        sym, 
+        dte=dte, 
+        spread_width_atr=spread_width_atr, 
+        atr=signal_atr,
+        min_dte=min_dte
+    )
     if not spread:
         logger.spread_skip(underlying=sym, skip_reason="No_contracts_available")
         return False
@@ -561,13 +573,36 @@ def manage_positions(
                 print(f"[positions] Orphaned short leg detected for {underlying}")
                 print(f"[positions]   Short symbol: {short_symbol}")
                 print(f"[positions]   Qty: {short_pos.get('qty', 0)}")
+                
+                # Track retry count in registry (max 3 attempts)
+                orphan_key = f"_orphan_retry_{short_symbol}"
+                retry_count = 0
+                if registry:
+                    retry_count = registry.positions.get(orphan_key, {}).get("retry_count", 0)
+                
+                if retry_count >= 3:
+                    # Already tried 3 times, log error and skip
+                    print(f"[positions] ERROR: Orphan close failed 3 times for {underlying}/{short_symbol} - GIVING UP")
+                    logger.error(
+                        error=f"Orphan close failed after 3 retries",
+                        context=f"orphan_{underlying}",
+                    )
+                    continue
+                
                 if not dry_run:
                     result = close_option_position(short_symbol)
                     if result.get("error"):
-                        print(f"[positions] ERROR closing orphaned short: {result.get('message', 'Unknown')}")
-                        # Will retry next cycle
+                        retry_count += 1
+                        print(f"[positions] ERROR closing orphaned short (attempt {retry_count}/3): {result.get('message', 'Unknown')}")
+                        # Track retry count in registry
+                        if registry:
+                            registry.positions[orphan_key] = {"retry_count": retry_count, "symbol": short_symbol}
+                        # Will retry next cycle (up to 3 times)
                     else:
                         print(f"[positions] Orphaned short leg closed successfully")
+                        # Clear retry counter on success
+                        if registry and orphan_key in registry.positions:
+                            del registry.positions[orphan_key]
                 else:
                     print(f"[positions] [DRY-RUN] Would close orphaned short leg")
             continue
@@ -654,14 +689,16 @@ def manage_positions(
                 )
                 
                 # Update registry to remove closed position
-                if registry and long_symbol in registry.positions:
+                # Use find_by_symbol to support lookup by either long or short symbol
+                registry_key = registry.find_by_symbol(long_symbol) if registry else None
+                if registry and registry_key:
                     registry.record_exit(
-                        symbol=long_symbol,
+                        symbol=registry_key,
                         exit_price=exit_value,
                         exit_reason=exit_reason,
                         pnl=pnl,
                     )
-                    print(f"[positions] Registry updated: removed {long_symbol}")
+                    print(f"[positions] Registry updated: removed {registry_key}")
                 
                 already_closed.add(underlying)
 

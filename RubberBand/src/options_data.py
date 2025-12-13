@@ -330,7 +330,8 @@ def format_option_symbol(
 def select_spread_contracts(
     underlying: str,
     dte: int = 3,
-    spread_width_pct: float = 2.0,
+    spread_width_atr: float = 1.5,
+    atr: float = None,
     min_dte: Optional[int] = None,
 ) -> Optional[Dict[str, Any]]:
     """
@@ -339,7 +340,8 @@ def select_spread_contracts(
     Args:
         underlying: Stock symbol
         dte: Target days to expiration (1-3 recommended)
-        spread_width_pct: OTM strike = ATM * (1 + this/100)
+        spread_width_atr: OTM strike = ATM + this * ATR (default 1.5)
+        atr: Average True Range for volatility-based spread width
         min_dte: Minimum DTE required (skips expirations below this)
     
     Returns:
@@ -405,7 +407,14 @@ def select_spread_contracts(
     atm_strike = float(atm_contract.get("strike_price", 0))
     
     # Find OTM (short leg) - strike above ATM by spread width
-    target_otm = price * (1 + spread_width_pct / 100)
+    # ATR-based: target = atm_strike + (atr * spread_width_atr)
+    # Fallback to 2% of price if ATR not provided
+    if atr is not None and atr > 0:
+        target_otm = atm_strike + (atr * spread_width_atr)
+    else:
+        # Fallback: use 2% of price if no ATR provided
+        target_otm = atm_strike + (price * 0.02)
+        print(f"[spreads] WARNING: No ATR for {underlying}, using 2% fallback")
     otm_contract = None
     otm_diff = float("inf")
     
