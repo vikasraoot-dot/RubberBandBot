@@ -19,6 +19,7 @@ from RubberBand.src.data import (
     get_daily_fills,
     check_kill_switch,
     order_exists_today,
+    close_position,
     KillSwitchTriggered,
 )
 from RubberBand.src.trade_logger import TradeLogger
@@ -27,6 +28,9 @@ from RubberBand.src.position_registry import PositionRegistry
 
 # Bot tag for position attribution
 BOT_TAG = "WK_STK"
+
+# Time stop: Close positions held longer than this (matches backtest behavior)
+TIME_STOP_WEEKS = 20  # 20 weeks = ~5 months max hold
 
 # Setup Logging
 logging.basicConfig(
@@ -122,6 +126,47 @@ def run_weekly_cycle():
             
             logging.info(f"{sym:<8} {int(qty):<6} {entry:<10.2f} {current:<10.2f} {pnl:<10.2f} {pnl_pct:<8.2f}%")
         logging.info("-" * len(header))
+    
+    # --- Time Stop Check ---
+    # Close positions held longer than TIME_STOP_WEEKS
+    from datetime import timedelta
+    from dateutil import parser as dateparser
+    
+    time_stop_days = TIME_STOP_WEEKS * 7
+    now = datetime.now()
+    
+    for p in positions:
+        sym = p.get("symbol", "")
+        reg_entry = registry.positions.get(sym, {})
+        entry_date_str = reg_entry.get("entry_date", "")
+        
+        if not entry_date_str:
+            continue
+        
+        try:
+            entry_date = dateparser.parse(entry_date_str)
+            if entry_date.tzinfo:
+                entry_date = entry_date.replace(tzinfo=None)
+            
+            days_held = (now - entry_date).days
+            
+            if days_held >= time_stop_days:
+                logging.warning(
+                    f"⏰ TIME STOP: {sym} held {days_held} days (>{time_stop_days}). Closing position."
+                )
+                result = close_position(
+                    base_url=None,  # Uses APCA_API_BASE_URL env
+                    key=None,       # Uses APCA_API_KEY_ID env
+                    secret=None,    # Uses APCA_API_SECRET_KEY env
+                    symbol=sym
+                )
+                if result.get("ok"):
+                    logging.info(f"✅ Time stop exit: {sym} closed after {days_held} days")
+                    registry.record_exit(sym, exit_reason="TIME_STOP", pnl=p.get("unrealized_pl", 0))
+                else:
+                    logging.error(f"❌ Failed to close {sym}: {result}")
+        except Exception as e:
+            logging.error(f"Error checking time stop for {sym}: {e}")
 
     max_capital_per_trade = float(cfg.get("max_notional_per_trade", 2000.0))
     limit_pos = int(cfg.get("max_concurrent_positions", 5))

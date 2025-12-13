@@ -123,8 +123,9 @@ def attach_indicators(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     # Mean deviation = how far below the 20-week SMA (percentage)
     df["mean_deviation_pct"] = (df["close"] - sma_20w) / sma_20w * 100
     
-    # Signal: Price is 10%+ below the 20-week SMA (stretched rubber band)
-    mean_dev_threshold = float(filter_cfg.get("mean_deviation_threshold", -10))
+    # Signal: Price is 5%+ below the 20-week SMA (stretched rubber band)
+    # Note: Default -5 matches config_weekly.yaml and live_weekly_loop.py
+    mean_dev_threshold = float(filter_cfg.get("mean_deviation_threshold", -5))
     df["mean_dev_signal"] = df["mean_deviation_pct"] < mean_dev_threshold
     
     # Factor 3: Trend Filter - only buy dips in uptrends
