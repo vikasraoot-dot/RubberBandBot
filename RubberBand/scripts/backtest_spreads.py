@@ -271,7 +271,7 @@ def simulate_spread_trade(
         "pnl_pct": round(pnl_pct, 1),
         "reason": exit_reason,
         "bars_held": actual_exit_idx - entry_idx,
-        "dte": dte,
+        "dte": actual_dte,
     }
 
 
