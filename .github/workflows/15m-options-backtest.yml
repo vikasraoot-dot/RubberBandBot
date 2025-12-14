@@ -47,6 +47,12 @@ on:
         description: 'Time stop: exit after N bars (0=disabled, default=10)'
         required: false
         default: '10'
+
+        type: string
+      slope_threshold:
+        description: 'Slope Threshold (e.g. -0.20, leave empty to disable)'
+        required: false
+        default: ''
         type: string
 
 jobs:
@@ -82,9 +88,16 @@ jobs:
           echo "Spread Width: ${{ github.event.inputs.spread_width || '1.5' }} ATR"
           echo "SMA Period: ${{ github.event.inputs.sma_period || '20' }}"
           echo "Max Debit: ${{ github.event.inputs.max_debit || '2.0' }}"
+          echo "Slope Threshold: ${{ github.event.inputs.slope_threshold || 'DISABLED' }}"
           echo "Tickers: ${{ github.event.inputs.tickers || 'RubberBand/tickers_options.txt' }}"
           echo "=========================================="
           
+          # Construct slope arg only if input is present
+          SLOPE_ARG=""
+          if [ -n "${{ github.event.inputs.slope_threshold }}" ]; then
+            SLOPE_ARG="--slope-threshold ${{ github.event.inputs.slope_threshold }}"
+          fi
+
           python RubberBand/scripts/backtest_spreads.py \
             --config RubberBand/config.yaml \
             --tickers "${{ github.event.inputs.tickers || 'RubberBand/tickers_options.txt' }}" \
@@ -94,6 +107,7 @@ jobs:
             --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
             --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \
             --bars-stop "${{ github.event.inputs.bars_stop || '10' }}" \
+            $SLOPE_ARG \
             ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
             ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}
 

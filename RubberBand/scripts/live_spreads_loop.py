@@ -90,6 +90,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--dte", type=int, default=3, help="Days to expiration (1-3)")
     p.add_argument("--max-debit", type=float, default=3.00, help="Max debit per share")
     p.add_argument("--contracts", type=int, default=1, help="Contracts per trade")
+    p.add_argument("--slope-threshold", type=float, default=None, help="Keltner mean slope threshold (e.g. -0.20)")
     return p.parse_args()
 
 
@@ -209,6 +210,21 @@ def get_long_signals(
                         skip_reason=f"Bear_trend(close={close:.2f}<SMA{sma_period}={daily_sma:.2f})"
                     )
                     continue
+            
+            # Check Slope Threshold (Anti-Falling Knife)
+            slope_threshold = cfg.get("slope_threshold")
+            if slope_threshold is not None:
+                # Calculate slope (diff(3)/3)
+                # Ensure we have enough data
+                if "kc_middle" in df.columns and len(df) >= 4:
+                    # Calculate slope for the last bar
+                    current_slope = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
+                    if current_slope < slope_threshold:
+                         logger.spread_skip(
+                            underlying=sym,
+                            skip_reason=f"Slope_too_steep({current_slope:.4f}<{slope_threshold})"
+                         )
+                         continue
             
             if bool(last.get("long_signal", False)):
                 # Safely handle None values (get returns None if key exists but value is None)
@@ -828,6 +844,11 @@ def main() -> int:
     
     args = _parse_args()
     cfg = _load_config(args.config)
+    
+    # Inject command line overrides into config
+    if args.slope_threshold is not None:
+        cfg["slope_threshold"] = args.slope_threshold
+        print(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
     
     # Spread config
     spread_cfg = {**DEFAULT_SPREAD_CONFIG}

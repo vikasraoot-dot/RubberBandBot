@@ -320,6 +320,18 @@ def simulate_spreads_for_symbol(
         
         if atr <= 0 or entry_price <= 0:
             continue
+            
+        # Slope Filter (Anti-Falling Knife) matches live bot logic
+        slope_threshold = opts.get("slope_threshold")
+        if slope_threshold is not None:
+             if "kc_middle" in df.columns and i >= 4:
+                  # Calculate slope for entry bar (prev)
+                  # In live bot we use diff(3)/3. Matched indices: prev is entry signal bar.
+                  # We use i-1, i-4
+                  # If i=1, prev is idx 0. Need i>=4 (indices 4,3,2,1).
+                  current_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+                  if current_slope < slope_threshold:
+                      continue
         
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
         if daily_sma is not None and opts.get("trend_filter", True):
@@ -396,6 +408,7 @@ def main():
     ap.add_argument("--flatten-eod", action="store_true", help="Exit all positions at end of entry day (no overnight holds)")
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 25-30)")
     ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Backtest with slope threshold (e.g. -0.20)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
@@ -426,7 +439,9 @@ def main():
         "trend_filter": not args.no_trend_filter,
         "flatten_eod": args.flatten_eod,
         "adx_max": args.adx_max,
+        "adx_max": args.adx_max,
         "bars_stop": args.bars_stop,
+        "slope_threshold": args.slope_threshold,
     }
     
     # Fetch 15-minute data
