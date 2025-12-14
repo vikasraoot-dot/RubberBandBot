@@ -32,8 +32,11 @@ run:
 keltner_length: 20
 keltner_mult: 2.0
 atr_length: 14
+atr_length: 14
 rsi_length: 14
 
+# Slope Filter (Anti-Falling Knife)
+slope_threshold: -0.20
 # ──────────────────────────────────────────────────────────────────────────────
 # RISK CONTROLS
 # ──────────────────────────────────────────────────────────────────────────────
