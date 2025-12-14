@@ -38,6 +38,11 @@ on:
         required: false
         default: false
         type: boolean
+      flatten_eod:
+        description: 'Flatten at end of day (no overnight holds)'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   backtest:
@@ -83,7 +88,8 @@ jobs:
             --spread-width "${{ github.event.inputs.spread_width || '1.5' }}" \
             --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
             --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \
-            ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }}
+            ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
+            ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}
 
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4

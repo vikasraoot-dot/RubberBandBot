@@ -135,9 +135,27 @@ def simulate_spread_trade(
     exit_value = 0
     actual_exit_idx = exit_idx
     
+    # Get entry day for EOD detection
+    entry_bar = df.iloc[entry_idx]
+    entry_day = entry_bar.name.date() if hasattr(entry_bar.name, 'date') else None
+    flatten_eod = opts.get("flatten_eod", False)
+    
     for i in range(entry_idx + 1, exit_idx + 1):
         bar = df.iloc[i]
         bars_remaining = exit_idx - i
+        
+        # EOD Flatten Check: Exit at end of entry day if enabled
+        if flatten_eod and entry_day is not None:
+            bar_day = bar.name.date() if hasattr(bar.name, 'date') else None
+            if bar_day is not None and bar_day != entry_day:
+                # New day started - exit at close of previous bar (last bar of entry day)
+                prev_bar = df.iloc[i - 1]
+                _, _, exit_value = estimate_spread_value(
+                    float(prev_bar["close"]), atm_strike, otm_strike, bars_remaining + 1, total_bars
+                )
+                exit_reason = "EOD_FLAT"
+                actual_exit_idx = i - 1
+                break
         
         # Check at high and low
         for check_price in [bar["high"], bar["low"], bar["close"]]:
@@ -303,6 +321,7 @@ def main():
     ap.add_argument("--max-debit", type=float, default=1.0, help="Max debit per share")
     ap.add_argument("--sma-period", type=int, default=20, help="Daily SMA period for trend filter")
     ap.add_argument("--no-trend-filter", action="store_true", help="Disable SMA trend filter")
+    ap.add_argument("--flatten-eod", action="store_true", help="Exit all positions at end of entry day (no overnight holds)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
@@ -330,6 +349,7 @@ def main():
         "bars_per_day": 26,
         "sma_period": args.sma_period,
         "trend_filter": not args.no_trend_filter,
+        "flatten_eod": args.flatten_eod,
     }
     
     # Fetch 15-minute data
