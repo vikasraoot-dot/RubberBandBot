@@ -335,6 +335,23 @@ def try_spread_entry(
     
     spread_width = spread["spread_width"]
     
+    # Calculate time value for analysis (Premium - Intrinsic)
+    stock_price = signal.get("price", 0) or spread.get("underlying_price", 0)
+    long_strike = spread.get("atm_strike", 0)
+    short_strike = spread.get("otm_strike", 0)
+    
+    # Intrinsic values (for calls: max(0, stock - strike))
+    long_intrinsic = max(0, stock_price - long_strike) if stock_price > 0 else 0
+    short_intrinsic = max(0, stock_price - short_strike) if stock_price > 0 else 0
+    
+    # Time value = premium - intrinsic
+    long_time_value = long_ask - long_intrinsic
+    short_time_value = short_bid - short_intrinsic
+    
+    # Time value as percentage of premium
+    long_tv_pct = (long_time_value / long_ask * 100) if long_ask > 0 else 0
+    short_tv_pct = (short_time_value / short_bid * 100) if short_bid > 0 else 0
+    
     if dry_run:
         # Log entry even in dry-run mode
         logger.spread_entry(
@@ -350,6 +367,10 @@ def try_spread_entry(
             entry_reason=f"[DRY-RUN] {entry_reason}",
             signal_rsi=signal.get("rsi", 0),
             signal_atr=signal.get("atr", 0),
+            long_time_value=round(long_time_value, 2),
+            short_time_value=round(short_time_value, 2),
+            long_tv_pct=round(long_tv_pct, 1),
+            short_tv_pct=round(short_tv_pct, 1),
         )
     else:
         # Generate client_order_id for position attribution
@@ -398,6 +419,10 @@ def try_spread_entry(
             entry_reason=entry_reason,
             signal_rsi=signal.get("rsi", 0),
             signal_atr=signal.get("atr", 0),
+            long_time_value=round(long_time_value, 2),
+            short_time_value=round(short_time_value, 2),
+            long_tv_pct=round(long_tv_pct, 1),
+            short_tv_pct=round(short_tv_pct, 1),
         )
     
     return True
