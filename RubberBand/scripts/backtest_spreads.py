@@ -72,7 +72,7 @@ def estimate_spread_value(
     short_intrinsic = max(0, underlying_price - otm_strike)
     
     # Time value (rough estimate, decays with sqrt of time for options)
-    time_value_factor = (time_factor ** 0.5) * 0.3  # 30% of spread at entry
+    time_value_factor = (time_factor ** 0.5) * 0.65  # 65% of spread at entry (realistic)
     
     # Long call value
     long_time_value = spread_width * time_value_factor
