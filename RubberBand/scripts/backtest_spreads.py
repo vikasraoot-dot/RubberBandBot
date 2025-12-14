@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Options Spread Backtest: Simulate bull call spreads using 1-3 DTE options.
+Options Spread Backtest: Simulate bull call spreads with variable DTE (matches live bot behavior).
 
 Bull Call Spread:
 - Buy ATM call
 - Sell OTM call (e.g., strike + 1 ATR)
 - Max profit = spread width - net debit
 - Max loss = net debit (defined risk)
+
+Variable DTE: Thu/Fri entries roll to next week's Friday (8-10 DTE).
 
 Usage:
     python RubberBand/scripts/backtest_spreads.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --days 30
@@ -36,9 +38,9 @@ from RubberBand.strategy import attach_verifiers
 # Spread Simulation Parameters
 # ──────────────────────────────────────────────────────────────────────────────
 DEFAULT_OPTS = {
-    "dte": 2,                   # Days to expiration (1-3)
+    "dte": 3,                   # Days to expiration (matches live bot default)
     "spread_width_atr": 1.5,    # OTM strike = ATM + this * ATR
-    "max_debit": 1.00,          # Max $ per share for the spread
+    "max_debit": 2.00,          # Max $ per share for the spread (matches production)
     "contracts": 1,             # Contracts per trade
     "bars_per_day": 26,         # 15m bars per trading day (6.5 hours)
     "sma_period": 20,           # Daily SMA period for trend filter (20 = ~1 month)
@@ -64,6 +66,10 @@ def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) ->
     Returns:
         Actual DTE to use for this trade
     """
+    # Type guard: if entry_date doesn't have weekday(), return target_dte
+    if not hasattr(entry_date, 'weekday'):
+        return target_dte
+    
     # Monday=0, Tuesday=1, Wednesday=2, Thursday=3, Friday=4
     day_of_week = entry_date.weekday()
     

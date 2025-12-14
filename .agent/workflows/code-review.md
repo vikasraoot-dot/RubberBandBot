@@ -149,6 +149,8 @@ Use this checklist to identify **patterns of issues**, not just specific bugs. E
 | **Data Availability Assumptions** | Weekly bot couldn't fetch 1Week bars | Ask: "Does this API call work on the actual data plan?" |
 | **Workflow State Persistence** | Registry lost between runs | Check every upload-artifact has overwrite: true |
 | **Cross-Version Compatibility** | dt.UTC broke on Python 3.10 | Search for any Python 3.11+ only features |
+| **Variable Rename Orphan** | `dte` renamed to `target_dte` but return dict still used `dte` | Search for ALL uses of old name when renaming |
+| **Default Value Drift** | DEFAULT_OPTS had `dte:2` but CLI had `default=3` | Compare all code defaults vs config/CLI defaults |
 
 ---
 
@@ -162,5 +164,46 @@ Use this checklist to identify **patterns of issues**, not just specific bugs. E
 
 ---
 
-*Last Updated: 2024-12-08*
-*Derived from: Issues found in sessions a535f5b4, d02a1ffc, and live trading observations*
+## 🟢 LOW PATTERNS (Continued)
+
+### Pattern 12: Variable Rename Orphans (NEW)
+**Root Cause:** Renaming a variable but missing some references.
+**Example:** Changed `dte` to `target_dte` but left `"dte": dte` in return dict.
+
+**Checklist:**
+- [ ] Any variable renames - search for ALL uses of the old name
+- [ ] Any function renames - update all callers
+- [ ] Any dict key renames - check all places that read the key
+- [ ] Any parameter renames - update all keyword arguments
+
+---
+
+### Pattern 13: Default Value Drift
+**Root Cause:** Multiple places define defaults for the same parameter, values diverge over time.
+**Example:** `DEFAULT_OPTS["dte"]=2` but `argparse default=3`.
+
+**Checklist:**
+- [ ] Any hardcoded defaults in code - do they match config defaults?
+- [ ] Any CLI arg defaults - do they match code defaults?
+- [ ] Any workflow input defaults - do they match CLI defaults?
+- [ ] When changing a default - search for and update ALL locations
+
+---
+
+## 📅 Issues Found by Date
+
+### December 14, 2025
+| Issue | Pattern | File | Fix |
+|:---|:---|:---|:---|
+| Negative time value not logged | Pattern 6 | live_spreads_loop.py | Added logging |
+| DEFAULT_OPTS dte=2 vs CLI dte=3 | Pattern 13 | backtest_spreads.py | Unified to 3 |
+| calculate_actual_dte no type guard | Pattern 5 | backtest_spreads.py | Added hasattr check |
+| stock_price=0 not warned | Pattern 5 | live_spreads_loop.py | Added warning log |
+| max_debit default 1.00 vs 2.00 | Pattern 13 | backtest_spreads.py | Changed to 2.00 |
+| Docstring said "1-3 DTE" | Docs | backtest_spreads.py | Updated for variable DTE |
+| dte renamed but missed in return | Pattern 12 | backtest_spreads.py | Fixed in a734fe1 |
+
+---
+
+*Last Updated: 2024-12-14*
+*Derived from: Issues found in sessions a535f5b4, d02a1ffc, 82d17c66, and live trading observations*

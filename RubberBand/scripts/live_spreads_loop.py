@@ -340,13 +340,21 @@ def try_spread_entry(
     long_strike = spread.get("atm_strike", 0)
     short_strike = spread.get("otm_strike", 0)
     
+    # Warn if stock price is missing (time value will be inaccurate)
+    if stock_price <= 0:
+        print(f"[WARN] No stock price for {sym}, time value calculation may be inaccurate")
+    
     # Intrinsic values (for calls: max(0, stock - strike))
     long_intrinsic = max(0, stock_price - long_strike) if stock_price > 0 else 0
     short_intrinsic = max(0, stock_price - short_strike) if stock_price > 0 else 0
     
-    # Time value = premium - intrinsic
+    # Time value = premium - intrinsic (may be negative for deep ITM due to bid-ask spread)
     long_time_value = long_ask - long_intrinsic
     short_time_value = short_bid - short_intrinsic
+    
+    # Log if negative time value detected (deep ITM edge case)
+    if long_time_value < 0 or short_time_value < 0:
+        print(f"[INFO] {sym}: Negative time value detected (deep ITM) - long_tv={long_time_value:.2f}, short_tv={short_time_value:.2f}")
     
     # Time value as percentage of premium
     long_tv_pct = (long_time_value / long_ask * 100) if long_ask > 0 else 0
