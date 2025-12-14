@@ -46,6 +46,40 @@ DEFAULT_OPTS = {
 }
 
 
+def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) -> int:
+    """
+    Calculate actual DTE based on entry day of week, matching live bot behavior.
+    
+    Live bot logic (from options_data.py select_spread_contracts):
+    - Tries target DTE first, then ±1, ±2, then rolls to next week (+7, +5, +6, etc.)
+    - Filters out any DTE < min_dte
+    
+    This simulates: On Thu/Fri when target DTE < min_dte, roll to next Friday.
+    
+    Args:
+        entry_date: The datetime of entry
+        target_dte: Target DTE from config (e.g., 3)
+        min_dte: Minimum DTE allowed (e.g., 3)
+    
+    Returns:
+        Actual DTE to use for this trade
+    """
+    # Monday=0, Tuesday=1, Wednesday=2, Thursday=3, Friday=4
+    day_of_week = entry_date.weekday()
+    
+    # Days until this Friday (Friday = 4)
+    days_to_friday = (4 - day_of_week) if day_of_week <= 4 else (11 - day_of_week)
+    
+    # If this Friday is >= min_dte away, use it (capped at target_dte if closer)
+    if days_to_friday >= min_dte:
+        return max(min_dte, min(target_dte, days_to_friday))
+    
+    # Otherwise, roll to NEXT Friday (add 7 days)
+    days_to_next_friday = days_to_friday + 7
+    return days_to_next_friday
+
+
+
 def estimate_spread_value(
     underlying_price: float,
     atm_strike: float,
@@ -93,25 +127,34 @@ def simulate_spread_trade(
     entry_price: float,
     atr: float,
     opts: dict,
+    entry_time: datetime = None,
 ) -> dict:
     """
     Simulate a bull call spread trade.
     
     Hold for DTE bars or until max profit/loss.
+    Uses variable DTE based on entry day of week (matching live bot behavior).
     """
-    dte = opts.get("dte", 2)
+    target_dte = opts.get("dte", 2)
+    min_dte = opts.get("min_dte", target_dte)  # Default to target_dte if not specified
     spread_width_atr = opts.get("spread_width_atr", 1.5)
     max_debit = opts.get("max_debit", 1.00)
     contracts = opts.get("contracts", 1)
     bars_per_day = opts.get("bars_per_day", 26)
+    
+    # Calculate actual DTE based on entry day of week (Thu/Fri roll to next week)
+    if entry_time is not None:
+        actual_dte = calculate_actual_dte(entry_time, target_dte, min_dte)
+    else:
+        actual_dte = target_dte
     
     # Calculate strikes
     atm_strike = entry_price
     spread_width = atr * spread_width_atr
     otm_strike = atm_strike + spread_width
     
-    # Total bars to hold (DTE * bars per day)
-    total_bars = dte * bars_per_day
+    # Total bars to hold (actual DTE * bars per day)
+    total_bars = actual_dte * bars_per_day
     exit_idx = min(entry_idx + total_bars, len(df) - 1)
     
     # Initial spread value (entry debit)
@@ -291,8 +334,11 @@ def simulate_spreads_for_symbol(
         kc_lower = float(prev.get("kc_lower", 0))
         entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
         
-        # Simulate the spread trade
-        result = simulate_spread_trade(df, i, entry_price, atr, opts)
+        # Get entry time for variable DTE calculation
+        entry_time = cur.name if hasattr(cur.name, 'weekday') else None
+        
+        # Simulate the spread trade (pass entry_time for variable DTE)
+        result = simulate_spread_trade(df, i, entry_price, atr, opts, entry_time=entry_time)
         
         if result:
             result["symbol"] = sym
@@ -335,7 +381,8 @@ def main():
     ap.add_argument("--tickers", default="RubberBand/tickers.txt")
     ap.add_argument("--symbols", default="")
     ap.add_argument("--days", type=int, default=30)
-    ap.add_argument("--dte", type=int, default=2, help="Days to expiration (1-3)")
+    ap.add_argument("--dte", type=int, default=3, help="Target days to expiration")
+    ap.add_argument("--min-dte", type=int, default=3, help="Minimum DTE (Thu/Fri roll to next week if < min_dte)")
     ap.add_argument("--spread-width", type=float, default=1.5, help="Spread width in ATR")
     ap.add_argument("--max-debit", type=float, default=1.0, help="Max debit per share")
     ap.add_argument("--sma-period", type=int, default=20, help="Daily SMA period for trend filter")
@@ -364,6 +411,7 @@ def main():
     
     opts = {
         "dte": args.dte,
+        "min_dte": args.min_dte,
         "spread_width_atr": args.spread_width,
         "max_debit": args.max_debit,
         "contracts": 1,
