@@ -209,6 +209,7 @@ def simulate_spreads_for_symbol(
     sym: str,
     opts: dict,
     daily_sma: Optional[float] = None,
+    verbose: bool = False,
 ) -> list:
     """
     Run spread simulation for a symbol.
@@ -248,6 +249,11 @@ def simulate_spreads_for_symbol(
             if close_price < daily_sma:
                 continue  # Skip - in bear trend
         
+        # Capture entry signal details
+        entry_rsi = float(prev.get("rsi", 0))
+        entry_close = float(prev.get("close", 0))
+        kc_lower = float(prev.get("kc_lower", 0))
+        
         # Simulate the spread trade
         result = simulate_spread_trade(df, i, entry_price, atr, opts)
         
@@ -255,6 +261,26 @@ def simulate_spreads_for_symbol(
             result["symbol"] = sym
             result["entry_time"] = str(cur.name)
             result["atr"] = round(atr, 2)
+            
+            # Add entry signal details
+            result["entry_rsi"] = round(entry_rsi, 1)
+            result["entry_close"] = round(entry_close, 2)
+            result["kc_lower"] = round(kc_lower, 2)
+            result["entry_reason"] = f"RSI={entry_rsi:.1f}, Close=${entry_close:.2f} < KC_Lower=${kc_lower:.2f}"
+            
+            # Calculate exit time
+            exit_bar_idx = i + result["bars_held"]
+            if exit_bar_idx < len(df):
+                result["exit_time"] = str(df.iloc[exit_bar_idx].name)
+            else:
+                result["exit_time"] = "END_OF_DATA"
+            
+            # Verbose logging
+            if verbose:
+                pnl_sign = "+" if result["pnl"] >= 0 else ""
+                print(f"  [{sym}] ENTRY: {result['entry_time'][:16]} | RSI={entry_rsi:.1f} | Price=${entry_price:.2f}")
+                print(f"         EXIT:  {result['exit_time'][:16]} | Reason={result['reason']} | P&L={pnl_sign}${result['pnl']:.2f} ({pnl_sign}{result['pnl_pct']:.1f}%)")
+            
             trades.append(result)
             
             # Block overlapping trades
@@ -278,6 +304,7 @@ def main():
     ap.add_argument("--sma-period", type=int, default=20, help="Daily SMA period for trend filter")
     ap.add_argument("--no-trend-filter", action="store_true", help="Disable SMA trend filter")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
     
     cfg = load_config(args.config)
@@ -362,7 +389,7 @@ def main():
         # Get daily SMA for this symbol (None if not available)
         daily_sma = daily_sma_map.get(sym)
         
-        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma)
+        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma, verbose=args.verbose)
         all_trades.extend(trades)
         
         for t in trades:

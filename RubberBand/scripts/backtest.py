@@ -128,11 +128,14 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
 # ------------------------------------------------------------------
 # Backtest simulator
 # ------------------------------------------------------------------
-def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealthManager, sym: str, start_cash=10_000.0, risk_pct: float = 0.01):
+def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealthManager, sym: str, start_cash=10_000.0, risk_pct: float = 0.01, verbose: bool = False):
     """
     Mean Reversion Backtest:
     - Entry: Price < Lower Keltner & RSI < 30 (long_signal)
     - Exit: Price > Middle Keltner (Mean) OR Bracket SL/TP
+    
+    Args:
+        verbose: If True, print each trade's entry/exit details
     """
     if df is None or df.empty or len(df) < 30:
         return dict(trades=0, gross=0.0, net=0.0, win_rate=0.0, ret_pct=0.0, equity=start_cash, detailed_trades=[])
@@ -380,6 +383,14 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                     "tp_px": entry_state.get("tp_px", 0)
                 })
                 
+                # Verbose logging
+                if verbose:
+                    pnl_sign = "+" if pnl >= 0 else ""
+                    entry_ts_str = str(entry_ts)[:16] if entry_ts else "N/A"
+                    exit_ts_str = str(cur.name)[:16]
+                    print(f"  [{sym}] {side} ENTRY: {entry_ts_str} | RSI={entry_state.get('rsi', 0):.1f} | Price=${entry_px:.2f}")
+                    print(f"         EXIT:  {exit_ts_str} | Reason={reason} | P&L={pnl_sign}${pnl:.2f}")
+                
                 in_pos = False
                 qty = 0
                 
@@ -420,6 +431,7 @@ def main():
     ap.add_argument("--no-flatten-eod", dest="flatten_eod", action="store_false")
     ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
+    ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
@@ -495,7 +507,7 @@ def main():
             # Inject symbol for logging
             cfg["_symbol"] = sym
             cfg["verbose"] = not args.quiet # Pass quiet state to simulator
-            res = simulate_mean_reversion(df_run, cfg, health_mgr, sym, start_cash=args.cash, risk_pct=args.risk)
+            res = simulate_mean_reversion(df_run, cfg, health_mgr, sym, start_cash=args.cash, risk_pct=args.risk, verbose=args.verbose)
             rows.append({"symbol": sym, "days": d, **res})
 
     if not rows:
