@@ -33,6 +33,11 @@ on:
         required: false
         default: 'RubberBand/tickers_options.txt'
         type: string
+      verbose:
+        description: 'Enable detailed trade logging'
+        required: false
+        default: false
+        type: boolean
 
 jobs:
   backtest:
@@ -77,7 +82,8 @@ jobs:
             --dte "${{ github.event.inputs.dte || '2' }}" \
             --spread-width "${{ github.event.inputs.spread_width || '1.5' }}" \
             --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
-            --max-debit "${{ github.event.inputs.max_debit || '2.0' }}"
+            --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \
+            ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }}
 
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4
