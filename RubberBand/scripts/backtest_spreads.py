@@ -157,6 +157,17 @@ def simulate_spread_trade(
                 actual_exit_idx = i - 1
                 break
         
+        # Bars Stop: Exit after N bars if no TP/SL (limit slow losers)
+        bars_stop = opts.get("bars_stop", 0)
+        bars_held = i - entry_idx
+        if bars_stop > 0 and bars_held >= bars_stop:
+            _, _, exit_value = estimate_spread_value(
+                float(bar["close"]), atm_strike, otm_strike, bars_remaining, total_bars
+            )
+            exit_reason = "BARS_STOP"
+            actual_exit_idx = i
+            break
+        
         # Check at high and low
         for check_price in [bar["high"], bar["low"], bar["close"]]:
             _, _, current_value = estimate_spread_value(
@@ -267,10 +278,18 @@ def simulate_spreads_for_symbol(
             if close_price < daily_sma:
                 continue  # Skip - in bear trend
         
+        # ADX Filter: Skip if ADX > threshold (strong trend = mean reversion fails)
+        adx_max = opts.get("adx_max", 0)
+        if adx_max > 0:
+            entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
+            if entry_adx > adx_max:
+                continue  # Skip - trend too strong for mean reversion
+        
         # Capture entry signal details
         entry_rsi = float(prev.get("rsi", 0))
         entry_close = float(prev.get("close", 0))
         kc_lower = float(prev.get("kc_lower", 0))
+        entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
         
         # Simulate the spread trade
         result = simulate_spread_trade(df, i, entry_price, atr, opts)
@@ -322,6 +341,8 @@ def main():
     ap.add_argument("--sma-period", type=int, default=20, help="Daily SMA period for trend filter")
     ap.add_argument("--no-trend-filter", action="store_true", help="Disable SMA trend filter")
     ap.add_argument("--flatten-eod", action="store_true", help="Exit all positions at end of entry day (no overnight holds)")
+    ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 25-30)")
+    ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
@@ -350,6 +371,8 @@ def main():
         "sma_period": args.sma_period,
         "trend_filter": not args.no_trend_filter,
         "flatten_eod": args.flatten_eod,
+        "adx_max": args.adx_max,
+        "bars_stop": args.bars_stop,
     }
     
     # Fetch 15-minute data

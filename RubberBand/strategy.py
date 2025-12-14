@@ -8,6 +8,7 @@ from RubberBand.src.indicators import (
     ta_add_vol_dollar,
     ta_add_atr,
     ta_add_sma,
+    ta_add_adx_di,
 )
 
 def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
@@ -28,6 +29,7 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     df = ta_add_keltner(df, length=keltner_len, mult=keltner_mult, atr_length=atr_len)
     df = ta_add_rsi(df, length=rsi_len)
     df = ta_add_vol_dollar(df, window=vol_win)
+    df = ta_add_adx_di(df, period=14)  # Add ADX for trend strength filtering
     
     # Logic: Price below Lower Keltner Channel
     # We use 'close' < 'kc_lower'
