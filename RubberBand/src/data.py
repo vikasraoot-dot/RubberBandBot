@@ -276,7 +276,12 @@ def order_exists_today(
         return False  # Assume doesn't exist on error
 
 def calculate_realized_pnl(fills: List[Dict[str, Any]]) -> float:
-    """Calculate realized P&L from a list of fills."""
+    """
+    Calculate realized P&L from a list of fills.
+    
+    CRITICAL: Only counts P&L for MATCHED buy/sell pairs (closed positions).
+    Unmatched buys (open positions) are NOT counted as losses.
+    """
     pnl = 0.0
     # Group by symbol
     symbol_fills: Dict[str, List[Dict[str, Any]]] = {}
@@ -289,6 +294,19 @@ def calculate_realized_pnl(fills: List[Dict[str, Any]]) -> float:
         buys = [f for f in sym_fills if f.get("side") == "buy"]
         sells = [f for f in sym_fills if f.get("side") == "sell"]
         
+        # Calculate total quantities
+        total_buy_qty = sum(int(f.get("filled_qty", 0)) for f in buys)
+        total_sell_qty = sum(int(f.get("filled_qty", 0)) for f in sells)
+        
+        # Only calculate P&L for MATCHED portion (closed positions)
+        # If we bought 100 shares and sold 0, realized P&L is $0 (not a loss!)
+        matched_qty = min(total_buy_qty, total_sell_qty)
+        
+        if matched_qty <= 0:
+            # No matched trades = no realized P&L for this symbol
+            continue
+        
+        # Calculate weighted average prices
         total_buy_cost = sum(
             float(f.get("filled_avg_price", 0)) * int(f.get("filled_qty", 0))
             for f in buys
@@ -298,7 +316,12 @@ def calculate_realized_pnl(fills: List[Dict[str, Any]]) -> float:
             for f in sells
         )
         
-        pnl += total_sell_proceeds - total_buy_cost
+        avg_buy_price = total_buy_cost / total_buy_qty if total_buy_qty > 0 else 0
+        avg_sell_price = total_sell_proceeds / total_sell_qty if total_sell_qty > 0 else 0
+        
+        # Realized P&L = (sell_price - buy_price) * matched_qty
+        symbol_pnl = (avg_sell_price - avg_buy_price) * matched_qty
+        pnl += symbol_pnl
     
     return pnl
 

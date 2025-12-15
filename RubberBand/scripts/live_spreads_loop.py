@@ -14,12 +14,21 @@ Key Features:
 """
 from __future__ import annotations
 
+# === EARLY STARTUP LOGGING ===
+# Print immediately so GitHub Actions can show progress
+import sys
+print("=" * 60, flush=True)
+print("[STARTUP] 15M Options Spreads Loop - Initializing...", flush=True)
+print(f"[STARTUP] Python: {sys.version}", flush=True)
+print("=" * 60, flush=True)
+
 import argparse
 import json
 import os
-import sys
 from datetime import datetime, time as dt_time
 from typing import List, Dict, Any, Optional, Tuple
+
+print("[STARTUP] Core imports complete", flush=True)
 
 import pandas as pd
 
@@ -29,8 +38,11 @@ _REPO_ROOT = os.path.abspath(os.path.join(_THIS, "..", ".."))
 if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
+print(f"[STARTUP] Repo root: {_REPO_ROOT}", flush=True)
+
 from zoneinfo import ZoneInfo
 
+print("[STARTUP] Loading RubberBand.src.data...", flush=True)
 from RubberBand.src.data import (
     load_symbols_from_file,
     fetch_latest_bars,
@@ -39,12 +51,18 @@ from RubberBand.src.data import (
     KillSwitchTriggered,
     order_exists_today,
 )
+
+print("[STARTUP] Loading RubberBand.strategy...", flush=True)
 from RubberBand.strategy import attach_verifiers
+
+print("[STARTUP] Loading RubberBand.src.options_data...", flush=True)
 from RubberBand.src.options_data import (
     select_spread_contracts,
     get_option_quote,
     is_options_trading_allowed,
 )
+
+print("[STARTUP] Loading RubberBand.src.options_execution...", flush=True)
 from RubberBand.src.options_execution import (
     submit_spread_order,
     close_spread,
@@ -53,8 +71,12 @@ from RubberBand.src.options_execution import (
     flatten_all_option_positions,
     get_position_pnl,
 )
+
+print("[STARTUP] Loading loggers and registry...", flush=True)
 from RubberBand.src.options_trade_logger import OptionsTradeLogger
 from RubberBand.src.position_registry import PositionRegistry
+
+print("[STARTUP] All imports complete!", flush=True)
 
 ET = ZoneInfo("US/Eastern")
 
