@@ -1,6 +1,15 @@
 name: RubberBand Backtest
 on:
   workflow_dispatch:
+    inputs:
+      days:
+        description: 'Backtest Days (e.g. 30, 60, 120)'
+        required: true
+        default: '30'
+      slope_threshold:
+        description: 'Slope Threshold (e.g. -0.20). Leave empty to disable.'
+        required: false
+        default: '-0.20'
   push:
     branches: [ "main" ]
     paths:
@@ -33,4 +42,13 @@ jobs:
         run: |
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
-          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py
+          
+          # Construct args
+          $args = @("--days", "${{ inputs.days }}")
+          
+          if ("${{ inputs.slope_threshold }}" -ne "") {
+            $args += "--slope-threshold"
+            $args += "${{ inputs.slope_threshold }}"
+          }
+          
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args
