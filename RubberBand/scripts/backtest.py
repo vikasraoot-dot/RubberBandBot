@@ -177,6 +177,19 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             if is_paused:
                 continue
 
+            # Slope Filter (Panic Buyer Logic)
+            # Use same logic as backtest_spreads: (KC[i-1] - KC[i-4]) / 3
+            # We want to buy ONLY if slope is steep enough (Panic).
+            # We skip if slope is too flat (Drift).
+            # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
+            slope_threshold = cfg.get("slope_threshold")
+            if slope_threshold is not None:
+                 # Check sufficient history (need i >= 4)
+                 if i >= 4 and "kc_middle" in df.columns:
+                      current_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+                      if current_slope > float(slope_threshold):
+                           continue
+
             # Trend Filter Check
             trend_sma = prev.get("trend_sma", float('nan'))
             trend_sma_2 = prev.get("trend_sma_2", float('nan'))
@@ -432,6 +445,7 @@ def main():
     ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
@@ -439,6 +453,8 @@ def main():
     # Override config with CLI args if needed
     cfg["_flatten_eod"] = args.flatten_eod
     cfg["_max_hold_days"] = args.max_hold_days
+    if args.slope_threshold is not None:
+        cfg["slope_threshold"] = args.slope_threshold
 
     if args.symbols.strip():
         symbols = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
