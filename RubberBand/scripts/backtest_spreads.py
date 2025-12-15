@@ -330,7 +330,12 @@ def simulate_spreads_for_symbol(
                   # We use i-1, i-4
                   # If i=1, prev is idx 0. Need i>=4 (indices 4,3,2,1).
                   current_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-                  if current_slope < slope_threshold:
+                  # Inverted Logic (Panic Buyer):
+                  # We want to buy ONLY if slope is steep enough (Panic).
+                  # We skip if slope is too flat (Drift).
+                  # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
+                  # Slope -0.54 is < -0.20 -> KEEP.
+                  if current_slope > slope_threshold:
                       continue
         
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
@@ -408,7 +413,7 @@ def main():
     ap.add_argument("--flatten-eod", action="store_true", help="Exit all positions at end of entry day (no overnight holds)")
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 25-30)")
     ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
-    ap.add_argument("--slope-threshold", type=float, default=None, help="Backtest with slope threshold (e.g. -0.20)")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
