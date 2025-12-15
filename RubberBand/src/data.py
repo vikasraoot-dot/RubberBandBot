@@ -399,6 +399,9 @@ def check_kill_switch(
 
     total_pnl = realized_pnl + unrealized_pnl
     
+    # Debug logging for troubleshooting
+    print(f"[KILL SWITCH DEBUG] {bot_tag}: realized_pnl=${realized_pnl:.2f}, unrealized_pnl=${unrealized_pnl:.2f}, total=${total_pnl:.2f}, invested=${invested:.2f}")
+    
     # PnL Check
     loss_pct = (total_pnl / invested) * 100
     
