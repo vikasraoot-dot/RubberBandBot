@@ -18,7 +18,7 @@ on:
       slope_threshold:
         description: 'Slope Threshold (e.g. -0.20, leave empty to disable)'
         required: false
-        default: '-0.20'
+        default: '-0.15'
 
 concurrency:
   group: rubberband-options-spreads-loop-am

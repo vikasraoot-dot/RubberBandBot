@@ -10,7 +10,7 @@ on:
       slope_threshold:
         description: 'Slope Threshold (e.g. -0.20, leave empty to use config.yaml)'
         required: false
-        default: '-0.20'
+        default: '-0.15'
 
 concurrency:
   group: rubberband-live-paper-loop-am
