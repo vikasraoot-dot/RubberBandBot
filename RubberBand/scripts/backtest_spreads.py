@@ -357,6 +357,11 @@ def simulate_spreads_for_symbol(
         kc_lower = float(prev.get("kc_lower", 0))
         entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
         
+        # Calculate slope for logging (always, even if not filtering)
+        entry_slope = 0.0
+        if "kc_middle" in df.columns and i >= 4:
+            entry_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+        
         # Get entry time for variable DTE calculation
         entry_time = cur.name if hasattr(cur.name, 'weekday') else None
         
@@ -372,6 +377,8 @@ def simulate_spreads_for_symbol(
             result["entry_rsi"] = round(entry_rsi, 1)
             result["entry_close"] = round(entry_close, 2)
             result["kc_lower"] = round(kc_lower, 2)
+            result["entry_slope"] = round(entry_slope, 4)  # NEW: For slope analysis
+            result["entry_adx"] = round(entry_adx, 1)     # NEW: For ADX analysis
             result["entry_reason"] = f"RSI={entry_rsi:.1f}, Close=${entry_close:.2f} < KC_Lower=${kc_lower:.2f}"
             
             # Calculate exit time
