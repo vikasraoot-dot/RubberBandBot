@@ -171,3 +171,51 @@ class TradeLogger:
             self._fp.close()
         except Exception:
             pass
+    
+    def export_trades_csv(self, path: str):
+        """
+        Export all trades to CSV format for post-analysis.
+        
+        Called at EOD for analysis similar to backtest output.
+        """
+        import csv
+        
+        if not self._trades:
+            print(f"[logger] No trades to export")
+            return
+        
+        os.makedirs(os.path.dirname(path) if os.path.dirname(path) else ".", exist_ok=True)
+        
+        # Define columns for stock trades
+        columns = [
+            "symbol", "side", "entry_time", "exit_time",
+            "entry_price", "exit_price", "qty",
+            "stop_loss", "take_profit",
+            "entry_reason", "exit_reason", "pnl",
+        ]
+        
+        try:
+            with open(path, "w", newline="", encoding="utf-8") as f:
+                writer = csv.writer(f)
+                writer.writerow(columns)
+                
+                for t in self._trades:
+                    row = [
+                        t.get("symbol", ""),
+                        t.get("side", ""),
+                        t.get("entry_ts", ""),
+                        t.get("exit_ts", ""),
+                        t.get("entry_price", 0),
+                        t.get("exit_price", 0),
+                        t.get("qty", 0),
+                        t.get("stop_loss", 0),
+                        t.get("take_profit", 0),
+                        t.get("entry_reason", ""),
+                        t.get("exit_reason", ""),
+                        t.get("pnl", 0),
+                    ]
+                    writer.writerow(row)
+            
+            print(f"[logger] Exported {len(self._trades)} trades to {path}")
+        except Exception as e:
+            print(f"[logger] Error exporting CSV: {e}")

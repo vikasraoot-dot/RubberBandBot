@@ -757,6 +757,10 @@ def main() -> int:
             # Emit structured EOD_SUMMARY to JSONL
             try:
                 log.eod_summary(total_pnl=total_pnl, total_vol=total_vol)
+                # Export trades to CSV for analysis (matching backtest format)
+                csv_date = datetime.now(ET).strftime("%Y%m%d")
+                csv_path = f"results/{BOT_TAG}_trades_{csv_date}.csv"
+                log.export_trades_csv(csv_path)
             except Exception:
                 pass
 

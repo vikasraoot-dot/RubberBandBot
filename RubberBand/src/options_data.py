@@ -288,6 +288,49 @@ def get_option_quote(option_symbol: str) -> Optional[Dict[str, float]]:
         return None
 
 
+def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
+    """
+    Get snapshot (quote + greeks) for an option contract from Alpaca.
+    
+    Returns:
+        Dict with bid, ask, mid, iv, delta, theta, gamma, vega or None
+    """
+    base, key, secret = _resolve_creds()
+    
+    # Use options snapshots endpoint for greeks
+    data_url = f"https://data.alpaca.markets/v1beta1/options/snapshots/{option_symbol}"
+    
+    try:
+        resp = requests.get(data_url, headers=_headers(key, secret), timeout=10)
+        if resp.status_code == 404:
+            print(f"[options] No snapshot for {option_symbol}")
+            return None
+        resp.raise_for_status()
+        data = resp.json()
+        
+        # Extract quote
+        quote = data.get("latestQuote", {})
+        bid = float(quote.get("bp", 0))
+        ask = float(quote.get("ap", 0))
+        
+        # Extract greeks
+        greeks = data.get("greeks", {})
+        
+        return {
+            "bid": bid,
+            "ask": ask,
+            "mid": (bid + ask) / 2 if bid > 0 and ask > 0 else 0,
+            "iv": float(greeks.get("implied_volatility", 0)),
+            "delta": float(greeks.get("delta", 0)),
+            "theta": float(greeks.get("theta", 0)),
+            "gamma": float(greeks.get("gamma", 0)),
+            "vega": float(greeks.get("vega", 0)),
+        }
+    except Exception as e:
+        print(f"[options] Error fetching snapshot for {option_symbol}: {e}")
+        return None
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Utility
 # ──────────────────────────────────────────────────────────────────────────────

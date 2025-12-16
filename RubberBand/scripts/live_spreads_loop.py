@@ -59,6 +59,7 @@ print("[STARTUP] Loading RubberBand.src.options_data...", flush=True)
 from RubberBand.src.options_data import (
     select_spread_contracts,
     get_option_quote,
+    get_option_snapshot,  # For fetching IV/theta/delta greeks
     is_options_trading_allowed,
 )
 
@@ -384,8 +385,33 @@ def try_spread_entry(
     
     spread_width = spread["spread_width"]
     
+    # Calculate DTE from expiration
+    actual_expiration = spread.get("expiration", "")
+    dte_at_entry = 0
+    if actual_expiration:
+        try:
+            from datetime import datetime as dt_parse
+            exp_date = dt_parse.strptime(actual_expiration, "%Y-%m-%d").date()
+            today = _now_et().date()
+            dte_at_entry = (exp_date - today).days
+        except ValueError:
+            pass
+    
+    # Fetch greeks for enhanced logging (optional, fallback to 0 if unavailable)
+    long_snapshot = get_option_snapshot(long_symbol)
+    short_snapshot = get_option_snapshot(short_symbol)
+    
+    long_iv = long_snapshot.get("iv", 0) if long_snapshot else 0
+    long_theta = long_snapshot.get("theta", 0) if long_snapshot else 0
+    long_delta = long_snapshot.get("delta", 0) if long_snapshot else 0
+    short_iv = short_snapshot.get("iv", 0) if short_snapshot else 0
+    short_theta = short_snapshot.get("theta", 0) if short_snapshot else 0
+    short_delta = short_snapshot.get("delta", 0) if short_snapshot else 0
+    
     # Calculate time value for analysis (Premium - Intrinsic)
     stock_price = signal.get("price", 0) or spread.get("underlying_price", 0)
+    entry_close = stock_price  # Store for logging
+    kc_lower = signal.get("kc_lower", 0)  # Keltner Channel lower band
     long_strike = spread.get("atm_strike", 0)
     short_strike = spread.get("otm_strike", 0)
     
@@ -424,6 +450,19 @@ def try_spread_entry(
             entry_reason=f"[DRY-RUN] {entry_reason}",
             signal_rsi=signal.get("rsi", 0),
             signal_atr=signal.get("atr", 0),
+            # NEW: Enhanced fields for analysis
+            entry_close=entry_close,
+            kc_lower=kc_lower,
+            dte=dte_at_entry,
+            long_premium=long_ask,
+            short_premium=short_bid,
+            long_iv=long_iv,
+            short_iv=short_iv,
+            long_theta=long_theta,
+            short_theta=short_theta,
+            long_delta=long_delta,
+            short_delta=short_delta,
+            # Kept: time value fields
             long_time_value=round(long_time_value, 2),
             short_time_value=round(short_time_value, 2),
             long_tv_pct=round(long_tv_pct, 1),
@@ -476,6 +515,19 @@ def try_spread_entry(
             entry_reason=entry_reason,
             signal_rsi=signal.get("rsi", 0),
             signal_atr=signal.get("atr", 0),
+            # NEW: Enhanced fields for analysis
+            entry_close=entry_close,
+            kc_lower=kc_lower,
+            dte=dte_at_entry,
+            long_premium=long_ask,
+            short_premium=short_bid,
+            long_iv=long_iv,
+            short_iv=short_iv,
+            long_theta=long_theta,
+            short_theta=short_theta,
+            long_delta=long_delta,
+            short_delta=short_delta,
+            # Kept: time value fields
             long_time_value=round(long_time_value, 2),
             short_time_value=round(short_time_value, 2),
             long_tv_pct=round(long_tv_pct, 1),
@@ -1002,6 +1054,12 @@ def main() -> int:
     
     # EOD Summary
     summary = logger.eod_summary()
+    
+    # Export trades to CSV for analysis (matching backtest format)
+    csv_date = _now_et().strftime("%Y%m%d")
+    csv_path = f"results/{BOT_TAG}_trades_{csv_date}.csv"
+    logger.export_trades_csv(csv_path)
+    
     logger.close()
     
     print(f"\n{'='*60}", flush=True)
