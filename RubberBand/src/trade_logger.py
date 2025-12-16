@@ -22,6 +22,16 @@ def _ts_et() -> str:
     return dt.datetime.now(ET).strftime("%Y-%m-%d %H:%M:%S ET")
 
 
+def _date_et() -> str:
+    """Return current date in YYYY-MM-DD format (Eastern time)."""
+    return dt.datetime.now(ET).strftime("%Y-%m-%d")
+
+
+def _time_et() -> str:
+    """Return current time in HH:MM:SS format (Eastern time)."""
+    return dt.datetime.now(ET).strftime("%H:%M:%S")
+
+
 class TradeLogger:
     """
     Line-buffered JSONL logger with a compact, auditable schema.
@@ -74,7 +84,11 @@ class TradeLogger:
             "take_profit": kw.get("take_profit_price"),
             "entry_reason": kw.get("entry_reason", "RubberBand_signal"),
             "entry_ts": _ts(),
+            "entry_date": _date_et(),        # YYYY-MM-DD for filtering
+            "entry_time_et": _time_et(),     # HH:MM:SS Eastern
             "exit_ts": None,
+            "exit_date": None,
+            "exit_time_et": None,
             "exit_reason": None,
             "exit_price": None,
             "pnl": None,
@@ -100,6 +114,8 @@ class TradeLogger:
         for trade in self._trades:
             if trade.get("symbol") == symbol and trade.get("exit_ts") is None:
                 trade["exit_ts"] = _ts()
+                trade["exit_date"] = _date_et()
+                trade["exit_time_et"] = _time_et()
                 trade["exit_reason"] = exit_reason
                 trade["exit_price"] = exit_price
                 trade["pnl"] = pnl

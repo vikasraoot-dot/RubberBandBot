@@ -22,6 +22,16 @@ def _ts_et() -> str:
     return dt.datetime.now(ET).strftime("%Y-%m-%d %H:%M:%S ET")
 
 
+def _date_et() -> str:
+    """Return current date in YYYY-MM-DD format (Eastern time)."""
+    return dt.datetime.now(ET).strftime("%Y-%m-%d")
+
+
+def _time_et() -> str:
+    """Return current time in HH:MM:SS format (Eastern time)."""
+    return dt.datetime.now(ET).strftime("%H:%M:%S")
+
+
 class OptionsTradeLogger:
     """
     Line-buffered JSONL logger for options spread trades.
@@ -158,7 +168,11 @@ class OptionsTradeLogger:
             "long_delta": round(long_delta, 4),
             "short_delta": round(short_delta, 4),
             "entry_ts": _ts(),
+            "entry_date": _date_et(),        # YYYY-MM-DD for easy filtering
+            "entry_time_et": _time_et(),     # HH:MM:SS Eastern for analysis
             "exit_ts": None,
+            "exit_date": None,
+            "exit_time_et": None,
             "exit_reason": None,
             "exit_value": None,
             "pnl": None,
@@ -184,6 +198,8 @@ class OptionsTradeLogger:
     ):
         """Log a spread exit with duration tracking."""
         exit_ts = _ts()
+        exit_date = _date_et()
+        exit_time = _time_et()
         
         # Update the corresponding trade in our list
         for trade in self._trades:
@@ -191,6 +207,8 @@ class OptionsTradeLogger:
                 trade.get("long_symbol") == long_symbol and
                 trade.get("exit_ts") is None):
                 trade["exit_ts"] = exit_ts
+                trade["exit_date"] = exit_date
+                trade["exit_time_et"] = exit_time
                 trade["exit_reason"] = exit_reason
                 trade["exit_value"] = round(exit_value, 2)
                 trade["pnl"] = round(pnl, 2)
