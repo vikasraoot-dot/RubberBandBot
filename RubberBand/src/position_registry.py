@@ -318,5 +318,61 @@ class PositionRegistry:
             "symbols": list(self.positions.keys()),
         }
     
+    def was_traded_today(self, underlying: str) -> bool:
+        """
+        Check if an underlying symbol was traded today (open or closed).
+        
+        Used for daily cooldown: prevents re-trading the same underlying
+        on the same day after a loss.
+        
+        Args:
+            underlying: The underlying stock symbol (not the option symbol)
+            
+        Returns:
+            True if this underlying was traded today, False otherwise
+        """
+        today_str = datetime.now(ET).strftime("%Y-%m-%d")
+        
+        # Check open positions for this underlying
+        for symbol, pos in self.positions.items():
+            pos_underlying = pos.get("underlying", symbol)
+            if pos_underlying == underlying:
+                entry_date = pos.get("entry_date", "")
+                if entry_date.startswith(today_str):
+                    return True
+        
+        # Check closed positions for this underlying
+        for pos in self.closed_positions:
+            pos_underlying = pos.get("underlying", pos.get("symbol", ""))
+            if pos_underlying == underlying:
+                entry_date = pos.get("entry_date", "")
+                if entry_date.startswith(today_str):
+                    return True
+        
+        return False
+    
+    def get_tickers_traded_today(self) -> Set[str]:
+        """
+        Get all underlying symbols that were traded today.
+        
+        Returns:
+            Set of underlying symbols traded today
+        """
+        today_str = datetime.now(ET).strftime("%Y-%m-%d")
+        traded = set()
+        
+        # Open positions from today
+        for symbol, pos in self.positions.items():
+            entry_date = pos.get("entry_date", "")
+            if entry_date.startswith(today_str):
+                traded.add(pos.get("underlying", symbol))
+        
+        # Closed positions from today
+        for pos in self.closed_positions:
+            entry_date = pos.get("entry_date", "")
+            if entry_date.startswith(today_str):
+                traded.add(pos.get("underlying", pos.get("symbol", "")))
+        
+        return traded
 
 

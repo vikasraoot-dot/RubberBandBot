@@ -362,16 +362,21 @@ def run_weekly_cycle():
     logging.info("=== End Summary ===")
 
 if __name__ == "__main__":
+    # Load registry once at startup for persistence across cycles
+    registry = PositionRegistry(bot_tag=BOT_TAG)
+    
     while True:
         # Simple loop: Run once every hour around market times or just sleep
-        # For now, simplistic loop
         now = datetime.now()
         
-        # Only run during market hours (or extended) to fetch quotes
-        # Or just run once and let the user cron it. 
-        # User requested "Loop", so:
         try:
-             # Run logic
+            # Check if market is still open before running cycle
+            if not alpaca_market_open():
+                logging.info("Market is closed. Saving registry and exiting.")
+                registry.save()
+                break
+            
+            # Run logic
             run_weekly_cycle()
             
             # Sleep 1 hour
@@ -379,7 +384,14 @@ if __name__ == "__main__":
             time.sleep(3600)
             
         except KeyboardInterrupt:
+            logging.info("Keyboard interrupt. Saving registry and exiting.")
+            registry.save()
+            break
+        except KillSwitchTriggered as e:
+            logging.critical(f"Kill switch triggered: {e}. Saving registry and exiting.")
+            registry.save()
             break
         except Exception as e:
             logging.error(f"Main loop error: {e}")
             time.sleep(60)
+

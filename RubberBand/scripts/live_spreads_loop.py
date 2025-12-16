@@ -302,6 +302,16 @@ def try_spread_entry(
 ) -> bool:
     """Attempt to enter a bull call spread based on a stock signal."""
     sym = signal["symbol"]
+    
+    # DAILY COOLDOWN: Skip if this underlying was already traded today
+    # Prevents repeated entries on the same ticker after a loss (Dec 15, 2025 fix)
+    if registry.was_traded_today(sym):
+        logger.spread_skip(
+            underlying=sym,
+            skip_reason=f"Daily_cooldown({sym}_already_traded_today)"
+        )
+        return False
+    
     dte = spread_cfg.get("dte", 3)
     min_dte = spread_cfg.get("min_dte", 2)  # Minimum DTE allowed
     spread_width_atr = spread_cfg.get("spread_width_atr", 1.5)  # ATR-based spread width
