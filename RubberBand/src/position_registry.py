@@ -318,14 +318,5 @@ class PositionRegistry:
             "symbols": list(self.positions.keys()),
         }
     
-    def get_my_symbols(self) -> Set[str]:
-        """Get set of symbols tracked by this bot."""
-        return set(self.positions.keys())
-    
-    def get_my_underlyings(self) -> Set[str]:
-        """Get set of underlying symbols for this bot's option positions."""
-        return {
-            pos.get("underlying", pos.get("symbol", ""))
-            for pos in self.positions.values()
-        }
+
 
