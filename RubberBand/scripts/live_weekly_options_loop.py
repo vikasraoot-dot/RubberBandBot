@@ -597,6 +597,12 @@ def main() -> int:
     tracker.to_json(log_path.replace(".jsonl", "_tracker.json"))
     
     registry.save()
+    
+    # EOD: Export trades to CSV
+    logger.eod_summary()
+    csv_date = datetime.now(ET).strftime("%Y%m%d")
+    logger.export_trades_csv(f"results/{BOT_TAG}_trades_{csv_date}.csv")
+    
     logger.close()
     
     # --- Session Summary ---

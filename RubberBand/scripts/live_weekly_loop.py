@@ -42,6 +42,11 @@ logging.basicConfig(
     ]
 )
 
+# Trade logger for structured JSONL logging and CSV export
+from zoneinfo import ZoneInfo
+ET = ZoneInfo("US/Eastern")
+logger = TradeLogger(f"logs/{BOT_TAG}/trade_{datetime.now(ET).strftime('%Y%m%d')}.jsonl")
+
 def load_config():
     with open("RubberBand/config_weekly.yaml", "r") as f:
         return yaml.safe_load(f)
@@ -372,7 +377,15 @@ if __name__ == "__main__":
         try:
             # Check if market is still open before running cycle
             if not alpaca_market_open():
-                logging.info("Market is closed. Saving registry and exiting.")
+                logging.info("Market is closed. Saving registry and exporting logs.")
+                # EOD: Export trades to CSV and summary
+                try:
+                    logger.eod_summary()
+                    csv_date = datetime.now(ET).strftime("%Y%m%d")
+                    logger.export_trades_csv(f"results/{BOT_TAG}_trades_{csv_date}.csv")
+                    logger.close()
+                except Exception as e:
+                    logging.error(f"Error exporting trade logs: {e}")
                 registry.save()
                 break
             
