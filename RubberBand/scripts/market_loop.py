@@ -56,6 +56,7 @@ def run_once():
     symbols = os.environ.get("SYMBOLS", "").strip()
     dry = os.environ.get("DRY_RUN", "1")
     force = os.environ.get("FORCE_RUN", "0")
+    slope_threshold = os.environ.get("SLOPE_THRESHOLD", "").strip()
 
     args = [py, "-X", "utf8", "-u", "RubberBand/scripts/live_paper_loop.py", "--config", cfg]
     if symbols:
@@ -63,6 +64,10 @@ def run_once():
     else:
         args += ["--tickers", tickers]
     args += ["--dry-run", dry, "--force-run", force]
+    
+    # Pass slope threshold if provided
+    if slope_threshold:
+        args += ["--slope-threshold", slope_threshold]
 
     print(f"[loop] invoking: {py} {' '.join(args[1:])}", flush=True)
     rc = subprocess.run(args, check=False).returncode

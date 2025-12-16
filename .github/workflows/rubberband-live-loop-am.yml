@@ -6,6 +6,11 @@ on:
     # The wait guard will hold until market actually opens
     - cron: "0 14 * * 1-5"
   workflow_dispatch:
+    inputs:
+      slope_threshold:
+        description: 'Slope Threshold (e.g. -0.20, leave empty to use config.yaml)'
+        required: false
+        default: '-0.20'
 
 concurrency:
   group: rubberband-live-paper-loop-am
@@ -87,6 +92,7 @@ jobs:
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
           DRY_RUN: "0"
           FORCE_RUN: "0"
+          SLOPE_THRESHOLD: ${{ github.event.inputs.slope_threshold }}
           PYTHONUNBUFFERED: "1"
         run: |
           chcp 65001 > $null

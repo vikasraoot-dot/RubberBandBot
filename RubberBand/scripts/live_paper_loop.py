@@ -54,6 +54,8 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--tickers", required=True)
     p.add_argument("--dry-run", type=int, default=0)
     p.add_argument("--force-run", type=int, default=0)
+    p.add_argument("--slope-threshold", type=float, default=None,
+                   help="Require slope to be steeper than this (e.g. -0.20) to enter")
     return p.parse_args()
 
 
@@ -152,6 +154,11 @@ def _get_positions_compat(base_url: str, key: str, secret: str):
 def main() -> int:
     args = _parse_args()
     cfg = _load_config(args.config)
+
+    # CLI override for slope_threshold
+    if args.slope_threshold is not None:
+        cfg["slope_threshold"] = args.slope_threshold
+        print(f"[config] Slope Threshold overridden to: {args.slope_threshold}", flush=True)
 
     # Reference timeframe
     intervals = cfg.get("intervals") or ["15m"]
@@ -410,6 +417,24 @@ def main() -> int:
         else:
             # Filter disabled -> assume Bull (allow Longs)
             is_bull_trend = True
+
+        # Slope Filter (Panic Buyer Logic)
+        # We want to buy ONLY if slope is steep enough (Panic).
+        # We skip if slope is too flat (Drift).
+        # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP (gentle drift).
+        slope_threshold = cfg.get("slope_threshold")
+        if slope_threshold is not None:
+            if "kc_middle" in df.columns and len(df) >= 4:
+                current_slope = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
+                if current_slope > float(slope_threshold):
+                    print(json.dumps({
+                        "type": "SKIP_SLOPE",
+                        "symbol": sym,
+                        "slope": round(current_slope, 4),
+                        "threshold": slope_threshold,
+                        "ts": now_iso,
+                    }), flush=True)
+                    continue
 
         # Extract Signal
         long_signal = bool(last["long_signal"])

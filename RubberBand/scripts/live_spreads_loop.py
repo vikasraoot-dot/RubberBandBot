@@ -233,18 +233,19 @@ def get_long_signals(
                     )
                     continue
             
-            # Check Slope Threshold (Anti-Falling Knife)
+            # Check Slope Threshold (Panic Buyer Logic)
+            # We want to buy ONLY if slope is steep enough (Panic).
+            # We skip if slope is too flat (Drift).
+            # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP (gentle drift).
             slope_threshold = cfg.get("slope_threshold")
             if slope_threshold is not None:
                 # Calculate slope (diff(3)/3)
-                # Ensure we have enough data
                 if "kc_middle" in df.columns and len(df) >= 4:
-                    # Calculate slope for the last bar
                     current_slope = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
-                    if current_slope < slope_threshold:
+                    if current_slope > float(slope_threshold):
                          logger.spread_skip(
                             underlying=sym,
-                            skip_reason=f"Slope_too_steep({current_slope:.4f}<{slope_threshold})"
+                            skip_reason=f"Slope_too_flat({current_slope:.4f}>{slope_threshold})"
                          )
                          continue
             
