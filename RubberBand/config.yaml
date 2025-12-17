@@ -90,8 +90,8 @@ filters:
   # Filter overrides to allow mean reversion (RSI < 25)
   rsi_min: 15
   rsi_max: 100
-  adx_threshold: 0           # Disable ADX requirement for now
-  slope_threshold_pct: -0.001 # Allow slight pullback slope
+  adx_threshold: 80          # Optimized safety cutoff (was 0)
+  slope_threshold_pct: -0.12 # Optimized High Volume Entry (was -0.001)
   require_fast_above_slow: false # Allow deep dips where fast EMA crosses slow
 
 # ──────────────────────────────────────────────────────────────────────────────

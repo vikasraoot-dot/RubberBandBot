@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Baseline_NoADX_30d_DTE6",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "0",
+            "slope_threshold": "-0.20",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "sma_period": "20",
+            "spread_width": "1.5",
+            "verbose": "true"
+        }
+    },
+    {
+        "name": "Baseline_NoADX_120d_DTE6",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "120",
+            "dte": "6",
+            "adx_max": "0",
+            "slope_threshold": "-0.20",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "sma_period": "20",
+            "spread_width": "1.5",
+            "verbose": "true"
+        }
+    }
+]

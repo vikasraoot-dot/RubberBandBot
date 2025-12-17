@@ -88,14 +88,15 @@ BOT_TAG = "15M_OPT"
 # Config
 # ──────────────────────────────────────────────────────────────────────────────
 DEFAULT_SPREAD_CONFIG = {
-    "dte": 3,                      # Days to expiration (3 = 90% WR in backtest)
-    "min_dte": 3,                   # Minimum DTE allowed (skip if DTE fallback goes below)
-    "spread_width_atr": 1.5,       # OTM strike = ATM + this * ATR (matches backtest)
-    "max_debit": 3.00,             # Max $ per share for the spread debit ($300/contract)
-    "contracts": 1,                # Contracts per signal
-    "tp_max_profit_pct": 80.0,     # Take profit at 80% of max profit
-    "sl_pct": -50.0,               # Stop loss at -50% of debit lost
-    "hold_overnight": True,        # Hold positions overnight for multi-day DTE
+    "dte": 6,                      # Optimized for robust mean reversion (was 3)
+    "min_dte": 3,
+    "spread_width_atr": 1.5,
+    "max_debit": 3.00,
+    "contracts": 1,
+    "tp_max_profit_pct": 80.0,
+    "sl_pct": -80.0,               # Optimized Stop Loss (was -50%)
+    "bars_stop": 14,               # Time Stop: 14 bars (~3.5 hours)
+    "hold_overnight": True,
 }
 
 
@@ -110,6 +111,9 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--config", required=True, help="Path to config.yaml")
     p.add_argument("--tickers", required=True, help="Path to tickers file")
     p.add_argument("--dry-run", type=int, default=1, help="1=dry run, 0=live")
+    p.add_argument("--dte", type=int, default=6) # Optimized Default
+    p.add_argument("--max-debit", type=float, default=3.00)
+    p.add_argument("--slope-threshold", type=float, default=-0.12) # Optimized Default
     p.add_argument("--dte", type=int, default=3, help="Days to expiration (1-3)")
     p.add_argument("--max-debit", type=float, default=3.00, help="Max debit per share")
     p.add_argument("--contracts", type=int, default=1, help="Contracts per trade")

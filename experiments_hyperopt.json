@@ -1,0 +1,156 @@
+[
+    {
+        "name": "Slope_-0.12",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.12",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.15",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.15",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.18",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.18",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.20",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.20",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.25",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.25",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.30",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.30",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.40",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.40",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "Slope_-0.45",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.45",
+            "bars_stop": "10",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "TimeStop_6",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.20",
+            "bars_stop": "6",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "TimeStop_14",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.20",
+            "bars_stop": "14",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    },
+    {
+        "name": "TimeStop_20",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.20",
+            "bars_stop": "20",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5"
+        }
+    }
+]

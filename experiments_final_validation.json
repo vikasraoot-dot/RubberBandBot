@@ -1,0 +1,18 @@
+[
+    {
+        "name": "Final_Validation_5d_Opt",
+        "workflow": "15m-options-backtest.yml",
+        "inputs": {
+            "days": "5",
+            "dte": "6",
+            "adx_max": "80",
+            "slope_threshold": "-0.12",
+            "bars_stop": "14",
+            "sl_pct": "0.80",
+            "max_debit": "2.0",
+            "spread_width": "1.5",
+            "sma_period": "20",
+            "verbose": "true"
+        }
+    }
+]
