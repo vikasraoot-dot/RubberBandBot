@@ -14,6 +14,11 @@ on:
         required: false
         default: 'RubberBand/tickers_weekly.txt'
         type: string
+      adx_max:
+        description: 'Max ADX to allow entry (0=disabled, try 50-60)'
+        required: false
+        default: '0'
+        type: string
 
 jobs:
   backtest:
@@ -55,7 +60,8 @@ jobs:
           python RubberBand/scripts/backtest_weekly.py \
             --days $DAYS \
             --tickers ${{ github.event.inputs.tickers || 'RubberBand/tickers_weekly.txt' }} \
-            --config RubberBand/config_weekly.yaml
+            --config RubberBand/config_weekly.yaml \
+            --adx-max "${{ github.event.inputs.adx_max || '0' }}"
       
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4

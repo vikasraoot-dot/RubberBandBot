@@ -371,6 +371,7 @@ def main():
     ap.add_argument("--days", default="365", help="Comma-separated days to backtest (e.g., 90,180,365)")
     ap.add_argument("--cash", type=float, default=10_000, help="Starting cash")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
+    ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 50-60)")
     args = ap.parse_args()
     
     # Load config

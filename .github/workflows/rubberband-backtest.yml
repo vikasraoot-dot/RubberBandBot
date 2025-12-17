@@ -10,6 +10,10 @@ on:
         description: 'Slope Threshold (e.g. -0.20). Leave empty to disable.'
         required: false
         default: '-0.20'
+      adx_max:
+        description: 'Max ADX to allow entry (0=disabled, try 50-60)'
+        required: false
+        default: '0'
   push:
     branches: [ "main" ]
     paths:
@@ -49,6 +53,11 @@ jobs:
           if ("${{ inputs.slope_threshold }}" -ne "") {
             $args += "--slope-threshold"
             $args += "${{ inputs.slope_threshold }}"
+          }
+          
+          if ("${{ inputs.adx_max }}" -ne "0" -and "${{ inputs.adx_max }}" -ne "") {
+            $args += "--adx-max"
+            $args += "${{ inputs.adx_max }}"
           }
           
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args

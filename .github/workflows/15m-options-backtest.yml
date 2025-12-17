@@ -54,6 +54,11 @@ on:
         required: false
         default: ''
         type: string
+      adx_max:
+        description: 'Max ADX to allow entry (0=disabled, try 50-60)'
+        required: false
+        default: '0'
+        type: string
 
 jobs:
   backtest:
@@ -107,6 +112,7 @@ jobs:
             --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
             --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \
             --bars-stop "${{ github.event.inputs.bars_stop || '10' }}" \
+            --adx-max "${{ github.event.inputs.adx_max || '0' }}" \
             $SLOPE_ARG \
             ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
             ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}

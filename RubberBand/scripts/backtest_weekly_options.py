@@ -167,6 +167,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--days", type=int, default=1095)
     parser.add_argument("--tickers", default="RubberBand/tickers_weekly.txt")
+    parser.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 50-60)")
     args = parser.parse_args()
     
     cfg = load_config("RubberBand/config_weekly.yaml")

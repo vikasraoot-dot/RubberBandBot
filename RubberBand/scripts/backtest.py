@@ -446,6 +446,7 @@ def main():
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
+    ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 50-60)")
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
