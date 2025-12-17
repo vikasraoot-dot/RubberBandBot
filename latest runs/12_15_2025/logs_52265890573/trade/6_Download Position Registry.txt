@@ -1,0 +1,14 @@
+﻿2025-12-15T14:40:36.5783847Z ##[group]Run actions/download-artifact@v4
+2025-12-15T14:40:36.5784139Z with:
+2025-12-15T14:40:36.5784315Z   name: position-registry-15M_OPT
+2025-12-15T14:40:36.5784492Z   path: .position_registry/
+2025-12-15T14:40:36.5784688Z   merge-multiple: false
+2025-12-15T14:40:36.5784871Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-15T14:40:36.5785041Z   run-id: 20236152089
+2025-12-15T14:40:36.5785147Z env:
+2025-12-15T14:40:36.5785260Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-15T14:40:36.5785406Z ##[endgroup]
+2025-12-15T14:40:38.0171463Z Downloading single artifact
+2025-12-15T14:40:38.5255425Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md

@@ -1,0 +1,217 @@
+{
+  "date": "2025-12-11",
+  "generated_at": "2025-12-11T23:12:33.862871-05:00",
+  "account": {
+    "equity": 99082.92,
+    "cash": 88778.64,
+    "buying_power": 376111.15
+  },
+  "summary": {
+    "total_realized_pnl": 74.63999999999999,
+    "total_unrealized_pnl": 126.43000100000042,
+    "total_pnl": 201.0700010000004,
+    "bots_active": [
+      "15M_STK",
+      "15M_OPT",
+      "WK_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2025-12-11",
+      "realized_pnl": 74.63999999999999,
+      "unrealized_pnl": 0.0,
+      "total_pnl": 74.63999999999999,
+      "trades": [
+        {
+          "symbol": "CRWV",
+          "side": "buy",
+          "qty": 24.0,
+          "price": 81.74,
+          "filled_at": "2025-12-11T15:00:22.315925Z"
+        },
+        {
+          "symbol": "CRWV",
+          "side": "sell",
+          "qty": 24.0,
+          "price": 84.85,
+          "filled_at": "2025-12-11T16:45:04.805176Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2025-12-11",
+      "realized_pnl": 0.0,
+      "unrealized_pnl": 0.0,
+      "total_pnl": 0.0,
+      "trades": [
+        {
+          "symbol": "",
+          "side": "",
+          "qty": 1.0,
+          "price": 1.6,
+          "filled_at": "2025-12-11T16:18:15.402068Z"
+        },
+        {
+          "symbol": "",
+          "side": "",
+          "qty": 1.0,
+          "price": 2.45,
+          "filled_at": "2025-12-11T15:00:49.321923Z"
+        },
+        {
+          "symbol": "",
+          "side": "",
+          "qty": 1.0,
+          "price": 2.45,
+          "filled_at": "2025-12-11T14:45:27.932914Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2025-12-11",
+      "realized_pnl": 0.0,
+      "unrealized_pnl": 126.43000100000042,
+      "total_pnl": 126.43000100000042,
+      "trades": [
+        {
+          "symbol": "META",
+          "side": "buy",
+          "qty": 3.0,
+          "price": 648.063333,
+          "filled_at": "2025-12-11T14:49:57.261081Z"
+        },
+        {
+          "symbol": "ORCL",
+          "side": "buy",
+          "qty": 10.0,
+          "price": 191.35,
+          "filled_at": "2025-12-11T14:49:56.096388Z"
+        },
+        {
+          "symbol": "BA",
+          "side": "buy",
+          "qty": 9.0,
+          "price": 200.02,
+          "filled_at": "2025-12-11T14:49:54.242484Z"
+        },
+        {
+          "symbol": "RBLX",
+          "side": "buy",
+          "qty": 21.0,
+          "price": 94.8,
+          "filled_at": "2025-12-11T14:49:51.211149Z"
+        },
+        {
+          "symbol": "UBER",
+          "side": "buy",
+          "qty": 23.0,
+          "price": 83.66,
+          "filled_at": "2025-12-11T14:49:48.518278Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "BA",
+          "qty": 9.0,
+          "entry_price": 200.02,
+          "current_price": 200.71,
+          "unrealized_pnl": 6.2099999999999795
+        },
+        {
+          "symbol": "META",
+          "qty": 3.0,
+          "entry_price": 648.063333,
+          "current_price": 652.71,
+          "unrealized_pnl": 13.94000100000028
+        },
+        {
+          "symbol": "ORCL",
+          "qty": 10.0,
+          "entry_price": 191.35,
+          "current_price": 198.85,
+          "unrealized_pnl": 75.0
+        },
+        {
+          "symbol": "RBLX",
+          "qty": 21.0,
+          "entry_price": 94.8,
+          "current_price": 94.34,
+          "unrealized_pnl": -9.659999999999869
+        },
+        {
+          "symbol": "UBER",
+          "qty": 23.0,
+          "entry_price": 83.66,
+          "current_price": 85.44,
+          "unrealized_pnl": 40.940000000000026
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 4,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "AMD251226C00210000",
+      "qty": "1",
+      "market_value": "1525",
+      "unrealized_pl": "640"
+    },
+    {
+      "symbol": "AMD251226C00215000",
+      "qty": "-1",
+      "market_value": "-1200",
+      "unrealized_pl": "-560"
+    },
+    {
+      "symbol": "BA",
+      "qty": "9",
+      "market_value": "1806.39",
+      "unrealized_pl": "6.21"
+    },
+    {
+      "symbol": "META",
+      "qty": "3",
+      "market_value": "1958.13",
+      "unrealized_pl": "13.94"
+    },
+    {
+      "symbol": "NVDA251226C00177500",
+      "qty": "1",
+      "market_value": "725",
+      "unrealized_pl": "120"
+    },
+    {
+      "symbol": "NVDA251226C00182500",
+      "qty": "-1",
+      "market_value": "-445",
+      "unrealized_pl": "-85"
+    },
+    {
+      "symbol": "ORCL",
+      "qty": "10",
+      "market_value": "1988.5",
+      "unrealized_pl": "75"
+    },
+    {
+      "symbol": "RBLX",
+      "qty": "21",
+      "market_value": "1981.14",
+      "unrealized_pl": "-9.66"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "23",
+      "market_value": "1965.12",
+      "unrealized_pl": "40.94"
+    }
+  ]
+}

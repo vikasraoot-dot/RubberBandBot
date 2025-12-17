@@ -1,1028 +1,172 @@
-Skip to content
-Navigation Menu
-vikasraoot-dot
-RubberBandBot
+RUN 1:
 
-Type / to search
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-RubberBand Live Paper (loop AM)
-RubberBand Live Paper (loop AM) #27
-Jobs
-Run details
-trade
-Started 5h 58m 24s ago
-Search logs
-2s
-12s
-1s
-5s
-12m 13s
-5h 45m 48s
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:00:37Z","ts_et":"2025-12-05 12:00:37 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 261s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:05:01.400955+00:00"}
-{"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-05T17:05:01.400955+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:05:01.400955+00:00", "end": "2025-12-05T17:05:01.400955+00:00", "when": "2025-12-05T17:05:01.400955+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:05:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:05:01Z","end":"2025-12-05T17:05:01Z","when":"2025-12-05T17:05:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:05:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:05:01.400955+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:05:17Z","ts_et":"2025-12-05 12:05:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-{"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-05T17:20:02.332993+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:20:02.332993+00:00", "end": "2025-12-05T17:20:02.332993+00:00", "when": "2025-12-05T17:20:02.332993+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:20:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:20:02Z","end":"2025-12-05T17:20:02Z","when":"2025-12-05T17:20:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:20:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:20:02.332993+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:20:17Z","ts_et":"2025-12-05 12:20:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:25:01.674594+00:00"}
-{"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-05T17:25:01.674594+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:25:01.674594+00:00", "end": "2025-12-05T17:25:01.674594+00:00", "when": "2025-12-05T17:25:01.674594+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:25:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:25:02Z","end":"2025-12-05T17:25:02Z","when":"2025-12-05T17:25:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:25:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:25:01.674594+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:25:15Z","ts_et":"2025-12-05 12:25:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:30:02.111544+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:30:02.111544+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:30:02.111544+00:00", "end": "2025-12-05T17:30:02.111544+00:00", "when": "2025-12-05T17:30:02.111544+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:30:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:30:02Z","end":"2025-12-05T17:30:02Z","when":"2025-12-05T17:30:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:30:12Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:30:02.111544+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:30:19Z","ts_et":"2025-12-05 12:30:19 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 280s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:35:02.287044+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:35:02.287044+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:35:02.287044+00:00", "end": "2025-12-05T17:35:02.287044+00:00", "when": "2025-12-05T17:35:02.287044+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:35:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:35:02Z","end":"2025-12-05T17:35:02Z","when":"2025-12-05T17:35:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:35:12Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:35:02.287044+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:35:17Z","ts_et":"2025-12-05 12:35:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:40:02.183305+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:40:02.183305+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:40:02.183305+00:00", "end": "2025-12-05T17:40:02.183305+00:00", "when": "2025-12-05T17:40:02.183305+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:40:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:40:02Z","end":"2025-12-05T17:40:02Z","when":"2025-12-05T17:40:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:40:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:40:02.183305+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:40:17Z","ts_et":"2025-12-05 12:40:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:45:01.690254+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:45:01.690254+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:45:01.690254+00:00", "end": "2025-12-05T17:45:01.690254+00:00", "when": "2025-12-05T17:45:01.690254+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:45:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:45:02Z","end":"2025-12-05T17:45:02Z","when":"2025-12-05T17:45:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:45:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:45:01.690254+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:45:16Z","ts_et":"2025-12-05 12:45:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:50:01.329540+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:50:01.329540+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:50:01.329540+00:00", "end": "2025-12-05T17:50:01.329540+00:00", "when": "2025-12-05T17:50:01.329540+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:50:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:50:01Z","end":"2025-12-05T17:50:01Z","when":"2025-12-05T17:50:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:50:09Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:50:01.329540+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:50:15Z","ts_et":"2025-12-05 12:50:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T17:55:01.942346+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T17:55:01.942346+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T17:55:01.942346+00:00", "end": "2025-12-05T17:55:01.942346+00:00", "when": "2025-12-05T17:55:01.942346+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T17:55:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T17:55:02Z","end":"2025-12-05T17:55:02Z","when":"2025-12-05T17:55:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T17:55:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T17:55:01.942346+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T17:55:15Z","ts_et":"2025-12-05 12:55:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:00:02.190235+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:00:02.190235+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:00:02.190235+00:00", "end": "2025-12-05T18:00:02.190235+00:00", "when": "2025-12-05T18:00:02.190235+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:00:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:00:02Z","end":"2025-12-05T18:00:02Z","when":"2025-12-05T18:00:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:00:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:00:02.190235+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:00:18Z","ts_et":"2025-12-05 13:00:18 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 281s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:05:01.899307+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:05:01.899307+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:05:01.899307+00:00", "end": "2025-12-05T18:05:01.899307+00:00", "when": "2025-12-05T18:05:01.899307+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:05:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:05:02Z","end":"2025-12-05T18:05:02Z","when":"2025-12-05T18:05:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:05:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:05:01.899307+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:05:16Z","ts_et":"2025-12-05 13:05:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:10:02.016669+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:10:02.016669+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:10:02.016669+00:00", "end": "2025-12-05T18:10:02.016669+00:00", "when": "2025-12-05T18:10:02.016669+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:10:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:10:02Z","end":"2025-12-05T18:10:02Z","when":"2025-12-05T18:10:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:10:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:10:02.016669+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:10:16Z","ts_et":"2025-12-05 13:10:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:15:01.801059+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:15:01.801059+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:15:01.801059+00:00", "end": "2025-12-05T18:15:01.801059+00:00", "when": "2025-12-05T18:15:01.801059+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:15:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:15:02Z","end":"2025-12-05T18:15:02Z","when":"2025-12-05T18:15:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:15:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:15:01.801059+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:15:17Z","ts_et":"2025-12-05 13:15:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:20:01.666375+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:20:01.666375+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:20:01.666375+00:00", "end": "2025-12-05T18:20:01.666375+00:00", "when": "2025-12-05T18:20:01.666375+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:20:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:20:01Z","end":"2025-12-05T18:20:01Z","when":"2025-12-05T18:20:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:20:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:20:01.666375+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:20:15Z","ts_et":"2025-12-05 13:20:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:25:02.126062+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:25:02.126062+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:25:02.126062+00:00", "end": "2025-12-05T18:25:02.126062+00:00", "when": "2025-12-05T18:25:02.126062+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:25:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:25:02Z","end":"2025-12-05T18:25:02Z","when":"2025-12-05T18:25:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:25:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:25:02.126062+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:25:16Z","ts_et":"2025-12-05 13:25:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:30:01.430382+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:30:01.430382+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:30:01.430382+00:00", "end": "2025-12-05T18:30:01.430382+00:00", "when": "2025-12-05T18:30:01.430382+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:30:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:30:01Z","end":"2025-12-05T18:30:01Z","when":"2025-12-05T18:30:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:30:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:30:01.430382+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:30:17Z","ts_et":"2025-12-05 13:30:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:35:01.741383+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:35:01.741383+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:35:01.741383+00:00", "end": "2025-12-05T18:35:01.741383+00:00", "when": "2025-12-05T18:35:01.741383+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:35:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:35:02Z","end":"2025-12-05T18:35:02Z","when":"2025-12-05T18:35:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:35:09Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:35:01.741383+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:35:15Z","ts_et":"2025-12-05 13:35:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:40:01.920671+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:40:01.920671+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:40:01.920671+00:00", "end": "2025-12-05T18:40:01.920671+00:00", "when": "2025-12-05T18:40:01.920671+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:40:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:40:02Z","end":"2025-12-05T18:40:02Z","when":"2025-12-05T18:40:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:40:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:40:01.920671+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:40:16Z","ts_et":"2025-12-05 13:40:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:45:01.338152+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:45:01.338152+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:45:01.338152+00:00", "end": "2025-12-05T18:45:01.338152+00:00", "when": "2025-12-05T18:45:01.338152+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:45:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:45:01Z","end":"2025-12-05T18:45:01Z","when":"2025-12-05T18:45:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:45:12Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:45:01.338152+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:45:19Z","ts_et":"2025-12-05 13:45:19 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 280s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:50:01.970078+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:50:01.970078+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:50:01.970078+00:00", "end": "2025-12-05T18:50:01.970078+00:00", "when": "2025-12-05T18:50:01.970078+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:50:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:50:02Z","end":"2025-12-05T18:50:02Z","when":"2025-12-05T18:50:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:50:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:50:01.970078+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:50:16Z","ts_et":"2025-12-05 13:50:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T18:55:01.578263+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T18:55:01.578263+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T18:55:01.578263+00:00", "end": "2025-12-05T18:55:01.578263+00:00", "when": "2025-12-05T18:55:01.578263+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T18:55:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T18:55:01Z","end":"2025-12-05T18:55:01Z","when":"2025-12-05T18:55:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T18:55:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T18:55:01.578263+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T18:55:16Z","ts_et":"2025-12-05 13:55:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:00:02.090493+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:00:02.090493+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:00:02.090493+00:00", "end": "2025-12-05T19:00:02.090493+00:00", "when": "2025-12-05T19:00:02.090493+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:00:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:00:02Z","end":"2025-12-05T19:00:02Z","when":"2025-12-05T19:00:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:00:14Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:00:02.090493+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:00:22Z","ts_et":"2025-12-05 14:00:22 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 277s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:05:02.005460+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:05:02.005460+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:05:02.005460+00:00", "end": "2025-12-05T19:05:02.005460+00:00", "when": "2025-12-05T19:05:02.005460+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:05:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:05:02Z","end":"2025-12-05T19:05:02Z","when":"2025-12-05T19:05:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:05:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:05:02.005460+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:05:16Z","ts_et":"2025-12-05 14:05:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:10:01.526976+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:10:01.526976+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:10:01.526976+00:00", "end": "2025-12-05T19:10:01.526976+00:00", "when": "2025-12-05T19:10:01.526976+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:10:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:10:01Z","end":"2025-12-05T19:10:01Z","when":"2025-12-05T19:10:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:10:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:10:01.526976+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:10:15Z","ts_et":"2025-12-05 14:10:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:15:02.048410+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:15:02.048410+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:15:02.048410+00:00", "end": "2025-12-05T19:15:02.048410+00:00", "when": "2025-12-05T19:15:02.048410+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:15:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:15:02Z","end":"2025-12-05T19:15:02Z","when":"2025-12-05T19:15:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:15:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:15:02.048410+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:15:17Z","ts_et":"2025-12-05 14:15:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:20:02.018593+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:20:02.018593+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:20:02.018593+00:00", "end": "2025-12-05T19:20:02.018593+00:00", "when": "2025-12-05T19:20:02.018593+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:20:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:20:02Z","end":"2025-12-05T19:20:02Z","when":"2025-12-05T19:20:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:20:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:20:02.018593+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:20:16Z","ts_et":"2025-12-05 14:20:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:25:01.424763+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:25:01.424763+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:25:01.424763+00:00", "end": "2025-12-05T19:25:01.424763+00:00", "when": "2025-12-05T19:25:01.424763+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:25:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:25:01Z","end":"2025-12-05T19:25:01Z","when":"2025-12-05T19:25:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:25:09Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:25:01.424763+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:25:15Z","ts_et":"2025-12-05 14:25:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:30:01.950732+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:30:01.950732+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:30:01.950732+00:00", "end": "2025-12-05T19:30:01.950732+00:00", "when": "2025-12-05T19:30:01.950732+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:30:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:30:02Z","end":"2025-12-05T19:30:02Z","when":"2025-12-05T19:30:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:30:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:30:01.950732+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:30:17Z","ts_et":"2025-12-05 14:30:17 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:35:02.338817+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:35:02.338817+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:35:02.338817+00:00", "end": "2025-12-05T19:35:02.338817+00:00", "when": "2025-12-05T19:35:02.338817+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:35:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:35:02Z","end":"2025-12-05T19:35:02Z","when":"2025-12-05T19:35:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:35:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:35:02.338817+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:35:16Z","ts_et":"2025-12-05 14:35:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:40:01.965528+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:40:01.965528+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:40:01.965528+00:00", "end": "2025-12-05T19:40:01.965528+00:00", "when": "2025-12-05T19:40:01.965528+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:40:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:40:02Z","end":"2025-12-05T19:40:02Z","when":"2025-12-05T19:40:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:40:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:40:01.965528+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:40:15Z","ts_et":"2025-12-05 14:40:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:45:01.360862+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:45:01.360862+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:45:01.360862+00:00", "end": "2025-12-05T19:45:01.360862+00:00", "when": "2025-12-05T19:45:01.360862+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:45:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:45:01Z","end":"2025-12-05T19:45:01Z","when":"2025-12-05T19:45:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:45:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:45:01.360862+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:45:16Z","ts_et":"2025-12-05 14:45:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 282s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:50:01.284955+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:50:01.284955+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:50:01.284955+00:00", "end": "2025-12-05T19:50:01.284955+00:00", "when": "2025-12-05T19:50:01.284955+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:50:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:50:01Z","end":"2025-12-05T19:50:01Z","when":"2025-12-05T19:50:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:50:09Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:50:01.284955+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:50:15Z","ts_et":"2025-12-05 14:50:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T19:55:01.926380+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T19:55:01.926380+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T19:55:01.926380+00:00", "end": "2025-12-05T19:55:01.926380+00:00", "when": "2025-12-05T19:55:01.926380+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T19:55:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T19:55:02Z","end":"2025-12-05T19:55:02Z","when":"2025-12-05T19:55:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T19:55:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T19:55:01.926380+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T19:55:16Z","ts_et":"2025-12-05 14:55:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T20:00:01.437409+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T20:00:01.437409+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T20:00:01.437409+00:00", "end": "2025-12-05T20:00:01.437409+00:00", "when": "2025-12-05T20:00:01.437409+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T20:00:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T20:00:01Z","end":"2025-12-05T20:00:01Z","when":"2025-12-05T20:00:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T20:00:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T20:00:01.437409+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T20:00:19Z","ts_et":"2025-12-05 15:00:19 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 280s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T20:05:01.606462+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T20:05:01.606462+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T20:05:01.606462+00:00", "end": "2025-12-05T20:05:01.606462+00:00", "when": "2025-12-05T20:05:01.606462+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T20:05:01Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T20:05:01Z","end":"2025-12-05T20:05:01Z","when":"2025-12-05T20:05:01Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T20:05:10Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T20:05:01.606462+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T20:05:15Z","ts_et":"2025-12-05 15:05:15 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 284s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T20:10:02.157727+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T20:10:02.157727+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T20:10:02.157727+00:00", "end": "2025-12-05T20:10:02.157727+00:00", "when": "2025-12-05T20:10:02.157727+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T20:10:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T20:10:02Z","end":"2025-12-05T20:10:02Z","when":"2025-12-05T20:10:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T20:10:11Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T20:10:02.157727+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T20:10:16Z","ts_et":"2025-12-05 15:10:16 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 283s → next 5m boundary
-[loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
-{"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-05T20:15:01.939001+00:00"}
-{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2025-12-05T20:15:01.939001+00:00"}
-{"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-11-25T20:15:01.939001+00:00", "end": "2025-12-05T20:15:01.939001+00:00", "when": "2025-12-05T20:15:01.939001+00:00"}
-{"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-05T20:15:02Z"}
-{"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-11-25T20:15:02Z","end":"2025-12-05T20:15:02Z","when":"2025-12-05T20:15:02Z"}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":25}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":5,"source_shape":"dict","collected_symbols":24}
-{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
-{"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-05T20:15:23Z"}
-{"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-05T20:15:01.939001+00:00"}
-[warn] Could not fetch daily fills for cooldown: cannot access local variable 'get_daily_fills' where it is not associated with a value
-=== Session Summary ===
-------------------------------------------------------------------------
-Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
-------------------------------------------------------------------------
-AAPL251205C00282500 0        0.00       0.00         1        0.26       -         
-AMZN251205C00227500 0        0.00       0.00         1        3.10       -         
-INTC251205C00041000 0        0.00       0.00         1        0.84       -         
-------------------------------------------------------------------------
-TOTAL Day PnL: $0.00 | TOTAL VOL: $4.20
-(Note: Day PnL calculated on matched intraday buy/sell quantity)
-=== End Summary ===
-{"type":"EOD_SUMMARY","date":"2025-12-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"total_volume":4.2,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2025-12-05T20:15:32Z","ts_et":"2025-12-05 15:15:32 ET"}
-[loop] live_paper_loop exit code=0
-[loop] sleep 267s → next 5m boundary
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 30 days
+DTE: 3
+Spread Width: 1.5 ATR
+SMA Period: 20
+Max Debit: 2.0
+Slope Threshold: -0.20
+Tickers: RubberBand/tickers_options.txt
+==========================================
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+Tickers: ['RKLB', 'HOOD', 'INTC', 'WDC', 'VRT', 'COIN', 'MU', 'CIEN', 'STX', 'APP', 'BURL', 'ORCL', 'CVNA', 'MDB', 'SMCI', 'DKNG', 'ON', 'AVGO', 'DASH', 'SHOP', 'PLTR', 'LRCX', 'B', 'TER', 'DELL', 'CEG', 'FSLR', 'DG', 'CRWD', 'RCL', 'HPE', 'NVDA', 'MCHP', 'ANET', 'TSLA', 'BABA', 'NET', 'ULTA', 'CCL', 'NVO', 'UAL', 'AMAT', 'NEM', 'WBD', 'DHI', 'GLW', 'HUM', 'SPOT', 'WDAY', 'NXPI', 'BA', 'DAL', 'GOOGL', 'FCX', 'SNPS', 'GOOG', 'ETN', 'ADI', 'CMG', 'TSM', 'TGT', 'PINS', 'TXN', 'HAL', 'INTU', 'SLB', 'KKR', 'BMY', 'ACN', 'NKE', 'ADBE', 'ADSK', 'CRM', 'CRH', 'TEVA', 'EXPE', 'ABNB', 'UNH', 'CVS', 'VRTX', 'APO', 'URI', 'CAT', 'META', 'WMT', 'JPM', 'CMCSA', 'QCOM', 'C', 'BX', 'COF', 'GS', 'IBM', 'CDNS', 'AMZN', 'COP', 'WFC', 'NOW', 'PFE', 'MS', 'GM', 'LOW', 'RTX', 'AXP', 'LMT', 'CSCO', 'SCHW', 'DIS', 'USB', 'BAC', 'AAPL', 'DHR', 'XOM', 'CSX', 'PEP', 'MCD', 'TJX', 'UNP', 'JNJ', 'MO']
+============================================================
+Fetching 120 symbols for 30 days...
+SMA Trend Filter: ENABLED (SMA-20)
+{"type":"UNIVERSE","loaded":120,"sample":["RKLB","HOOD","INTC","WDC","VRT","COIN","MU","CIEN","STX","APP"],"when":"2025-12-15T22:53:57Z"}
+{"type":"BARS_FETCH_START","requested":120,"chunks":5,"timeframe":"15Min","feed":"iex","start":"2025-10-28T22:53:57Z","end":"2025-12-15T22:53:57Z","when":"2025-12-15T22:53:57Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":18}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":21}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":19}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":20}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":5,"symbols_in_chunk":20,"pages":20,"source_shape":"dict","collected_symbols":20}
+{"type":"BARS_FETCH_SUMMARY","requested":120,"with_data":98,"empty":22,"stale":5,"sample_with_data":["HOOD","INTC","COIN","MU"],"sample_empty":["RKLB","WDC","VRT","STX","SMCI","SHOP","TER","ULTA","UAL","WBD"],"when":"2025-12-15T22:54:27Z"}
+Fetching daily bars for SMA-20 trend filter (history=60 days)...
+  Calculated SMA for 120 symbols
+  [HOOD] ENTRY: 2025-11-04 20:00 | RSI=24.2 | Price=$138.09
+         EXIT:  2025-11-05 14:30 | Reason=MAX_PROFIT | P&L=+$110.90 (+207.7%)
+  [HOOD] ENTRY: 2025-11-05 14:45 | RSI=20.6 | Price=$135.64
+         EXIT:  2025-11-05 15:00 | Reason=MAX_PROFIT | P&L=+$132.44 (+207.7%)
+  [HOOD] ENTRY: 2025-11-06 15:00 | RSI=23.0 | Price=$131.49
+         EXIT:  2025-11-06 17:30 | Reason=BARS_STOP | P&L=$-2.20 (-2.4%)
+  [HOOD] ENTRY: 2025-12-11 15:00 | RSI=19.1 | Price=$125.77
+         EXIT:  2025-12-11 15:15 | Reason=MAX_PROFIT | P&L=+$179.89 (+207.7%)
+  [HOOD] ENTRY: 2025-12-11 15:45 | RSI=23.6 | Price=$125.70
+         EXIT:  2025-12-11 18:15 | Reason=BARS_STOP | P&L=$-39.94 (-45.4%)
+  [COIN] ENTRY: 2025-11-06 16:45 | RSI=24.9 | Price=$297.19
+         EXIT:  2025-11-06 17:45 | Reason=MAX_PROFIT | P&L=+$321.70 (+207.7%)
+  [COIN] ENTRY: 2025-11-13 18:30 | RSI=24.3 | Price=$284.66
+         EXIT:  2025-11-14 14:30 | Reason=BARS_STOP | P&L=$-3.10 (-2.4%)
+  [COIN] ENTRY: 2025-11-14 14:45 | RSI=24.5 | Price=$275.97
+         EXIT:  2025-11-14 15:00 | Reason=MAX_PROFIT | P&L=+$363.04 (+207.7%)
+  [COIN] ENTRY: 2025-11-17 15:45 | RSI=24.6 | Price=$268.38
+         EXIT:  2025-11-17 18:15 | Reason=BARS_STOP | P&L=$-12.04 (-6.6%)
+  [MU] ENTRY: 2025-12-12 15:15 | RSI=24.2 | Price=$246.50
+         EXIT:  2025-12-12 17:45 | Reason=BARS_STOP | P&L=$-60.83 (-54.3%)
+  [BURL] ENTRY: 2025-10-31 13:30 | RSI=24.5 | Price=$271.81
+         EXIT:  2025-10-31 13:45 | Reason=MAX_PROFIT | P&L=+$126.58 (+207.7%)
+  [BURL] ENTRY: 2025-11-17 19:30 | RSI=24.7 | Price=$274.61
+         EXIT:  2025-11-17 20:45 | Reason=MAX_PROFIT | P&L=+$101.57 (+207.7%)
+  [ORCL] ENTRY: 2025-10-30 13:45 | RSI=21.3 | Price=$266.11
+         EXIT:  2025-10-30 14:00 | Reason=MAX_PROFIT | P&L=+$292.15 (+200.6%)
+  [ORCL] ENTRY: 2025-10-30 14:30 | RSI=24.7 | Price=$264.53
+         EXIT:  2025-10-30 17:00 | Reason=BARS_STOP | P&L=$-3.53 (-2.4%)
+  [DIS] ENTRY: 2025-11-13 15:30 | RSI=17.6 | Price=$107.49
+         EXIT:  2025-11-13 18:00 | Reason=BARS_STOP | P&L=$-1.19 (-2.4%)
+  [AAPL] ENTRY: 2025-12-04 15:00 | RSI=19.7 | Price=$281.31
+         EXIT:  2025-12-04 17:30 | Reason=BARS_STOP | P&L=$-1.30 (-3.2%)
+============================================================
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 30 days
+Symbols: 120
+Spread Config: DTE=3, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 116
+Total Cost: $9,008.83
+Total P&L: $11,798.28
+ROI: 131.0%
+Win Rate: 58.6% (68W / 48L)
+Avg Win: $179.91
+Avg Loss: $-9.08
+Avg Bars Held: 5.9
+------------------------------------------------------------
+Exit @ Max Profit: 63 (54.3%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+Top 10 Symbols by P&L:
+  META: $1,779.00 (4 trades, 75% WR)
+  SPOT: $1,453.20 (4 trades, 75% WR)
+  ORCL: $924.32 (8 trades, 62% WR)
+  NET: $907.59 (9 trades, 67% WR)
+  AMZN: $735.16 (9 trades, 78% WR)
+  COIN: $669.60 (4 trades, 50% WR)
+  CAT: $539.40 (2 trades, 100% WR)
+  DELL: $513.05 (7 trades, 86% WR)
+  HUM: $395.88 (3 trades, 100% WR)
+  HOOD: $381.09 (5 trades, 60% WR)
+Bottom 5 Symbols:
+  GLW: $-20.43 (3 trades, 0% WR)
+  CRM: $-31.51 (2 trades, 0% WR)
+  KKR: $-47.79 (2 trades, 0% WR)
+  MU: $-60.83 (1 trades, 0% WR)
+  INTU: $-94.93 (1 trades, 0% WR)
+
+
+
+
+
+RUN 2:
+
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 30 days
+DTE: 3
+Spread Width: 1.5 ATR
+SMA Period: 20
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 30 days
+Symbols: 120
+Spread Config: DTE=3, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 62
+Total Cost: $1,446.05
+Total P&L: $1,890.63
+ROI: 130.7%
+Win Rate: 69.4% (43W / 19L)
+Avg Win: $44.43
+Avg Loss: $-1.05
+Avg Bars Held: 4.8
+------------------------------------------------------------
+Exit @ Max Profit: 40 (64.5%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+
+Top 10 Symbols by P&L:
+  BX: $176.64 (3 trades, 100% WR)
+  BABA: $153.68 (2 trades, 100% WR)
+  ADBE: $115.02 (1 trades, 100% WR)
+  DASH: $110.56 (1 trades, 100% WR)
+  ABNB: $106.16 (3 trades, 67% WR)
+  ANET: $102.25 (1 trades, 100% WR)
+  CRH: $98.31 (2 trades, 100% WR)
+  NET: $79.32 (1 trades, 100% WR)
+  BA: $78.20 (1 trades, 100% WR)
+  QCOM: $76.62 (1 trades, 100% WR)
+
+Bottom 5 Symbols:
+  ADSK: $-0.86 (1 trades, 0% WR)
+  IBM: $-0.93 (2 trades, 50% WR)
+  GLW: $-1.50 (1 trades, 0% WR)
+  CRM: $-3.01 (1 trades, 0% WR)
+  AMZN: $-4.01 (1 trades, 0% WR)
+
+
+
+
+
+TOTAL trades=28 net=235.12 win_rate=67.9%
+=== Daily Win/Loss Stats (Last 10 Days) ===
+            wins  losses    net_pnl  trades  max_capital
+date                                                    
+2025-11-26     1       0  18.104985       1     1904.840
+2025-12-02     0       2 -25.323707       2     3896.830
+2025-12-03     1       0  17.804202       1     1854.400
+2025-12-04     1       1  -7.349325       2     1924.650
+2025-12-08     4       1  36.996170       5     5628.920
+2025-12-09     2       1  31.687349       3     3913.645
+2025-12-10     1       0   9.729176       1     1949.490
+2025-12-11     1       0  55.054174       1     1967.520
+2025-12-12     6       3  81.656902       9    15233.305

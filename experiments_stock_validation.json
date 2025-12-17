@@ -1,0 +1,24 @@
+[
+    {
+        "name": "Stock_RSI30_TP1.5_90d",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "90",
+            "rsi_entry": "30",
+            "tp_r": "1.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "Stock_RSI30_TP1.5_120d",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "120",
+            "rsi_entry": "30",
+            "tp_r": "1.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    }
+]

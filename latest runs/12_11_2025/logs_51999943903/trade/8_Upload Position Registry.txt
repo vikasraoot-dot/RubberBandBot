@@ -1,0 +1,13 @@
+﻿2025-12-11T21:04:59.8302115Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T21:04:59.8302880Z with:
+2025-12-11T21:04:59.8303309Z   name: position-registry-15M_STK
+2025-12-11T21:04:59.8303891Z   path: RubberBand/.position_registry
+2025-12-11T21:04:59.8305665Z   retention-days: 90
+2025-12-11T21:04:59.8306139Z   overwrite: true
+2025-12-11T21:04:59.8306625Z   if-no-files-found: warn
+2025-12-11T21:04:59.8307091Z   compression-level: 6
+2025-12-11T21:04:59.8307560Z   include-hidden-files: false
+2025-12-11T21:04:59.8308038Z env:
+2025-12-11T21:04:59.8308505Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T21:04:59.8309145Z ##[endgroup]
+2025-12-11T21:05:01.7372132Z ##[warning]No files were found with the provided path: RubberBand/.position_registry. No artifacts will be uploaded.

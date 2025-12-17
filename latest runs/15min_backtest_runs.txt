@@ -1,0 +1,432 @@
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 120 days
+DTE: 2
+Spread Width: 1.5 ATR
+SMA Period: 20
+Max Debit: 2.0
+Tickers: RubberBand/tickers_options.txt
+==========================================
+
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+         EXIT:  2025-12-08 19:15 | Reason=BARS_STOP | P&L=+$86.53 (+295.1%)
+  [BAC] ENTRY: 2025-12-09 18:45 | RSI=23.1 | Price=$53.27
+         EXIT:  2025-12-09 19:45 | Reason=MAX_PROFIT | P&L=+$24.34 (+566.7%)
+  [AAPL] ENTRY: 2025-12-04 15:00 | RSI=19.7 | Price=$281.31
+         EXIT:  2025-12-04 17:30 | Reason=BARS_STOP | P&L=$-1.92 (-10.1%)
+  [AAPL] ENTRY: 2025-12-04 18:15 | RSI=23.4 | Price=$279.94
+         EXIT:  2025-12-04 20:45 | Reason=BARS_STOP | P&L=+$72.80 (+433.5%)
+  [CSX] ENTRY: 2025-08-18 14:30 | RSI=22.6 | Price=$35.72
+         EXIT:  2025-08-18 14:45 | Reason=MAX_PROFIT | P&L=+$14.34 (+566.7%)
+  [CSX] ENTRY: 2025-08-21 13:45 | RSI=20.7 | Price=$35.74
+         EXIT:  2025-08-21 14:00 | Reason=MAX_PROFIT | P&L=+$13.17 (+566.7%)
+
+============================================================
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 120 days
+Symbols: 120
+Spread Config: DTE=2, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 223
+Total Cost: $5,538.60
+Total P&L: $18,154.28
+ROI: 327.8%
+Win Rate: 62.8% (140W / 83L)
+Avg Win: $131.13
+Avg Loss: $-2.46
+Avg Bars Held: 6.0
+------------------------------------------------------------
+Exit @ Max Profit: 122 (54.7%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+
+Top 10 Symbols by P&L:
+  COIN: $2,584.58 (10 trades, 80% WR)
+  ADBE: $2,387.24 (23 trades, 61% WR)
+  CDNS: $2,191.00 (14 trades, 71% WR)
+  BA: $1,655.90 (20 trades, 70% WR)
+  APP: $1,238.58 (2 trades, 100% WR)
+  AMZN: $1,165.04 (14 trades, 79% WR)
+  ACN: $1,150.18 (18 trades, 61% WR)
+  BX: $1,040.22 (17 trades, 65% WR)
+  ANET: $914.14 (10 trades, 60% WR)
+  BABA: $812.53 (12 trades, 67% WR)
+
+Bottom 5 Symbols:
+  AAPL: $70.88 (2 trades, 50% WR)
+  B: $55.45 (2 trades, 100% WR)
+  CSX: $27.51 (2 trades, 100% WR)
+  BAC: $24.34 (1 trades, 100% WR)
+  CEG: $-18.06 (4 trades, 0% WR)
+
+
+
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 120 days
+DTE: 3
+Spread Width: 1.5 ATR
+SMA Period: 20
+Max Debit: 2.0
+Tickers: RubberBand/tickers_options.txt
+==========================================
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+Tickers: ['RKLB', 'HOOD', 'INTC', 'WDC', 'VRT', 'COIN', 'MU', 'CIEN', 'STX', 'APP', 'BURL', 'ORCL', 'CVNA', 'MDB', 'SMCI', 'DKNG', 'ON', 'AVGO', 'DASH', 'SHOP', 'PLTR', 'LRCX', 'B', 'TER', 'DELL', 'CEG', 'FSLR', 'DG', 'CRWD', 'RCL', 'HPE', 'NVDA', 'MCHP', 'ANET', 'TSLA', 'BABA', 'NET', 'ULTA', 'CCL', 'NVO', 'UAL', 'AMAT', 'NEM', 'WBD', 'DHI', 'GLW', 'HUM', 'SPOT', 'WDAY', 'NXPI', 'BA', 'DAL', 'GOOGL', 'FCX', 'SNPS', 'GOOG', 'ETN', 'ADI', 'CMG', 'TSM', 'TGT', 'PINS', 'TXN', 'HAL', 'INTU', 'SLB', 'KKR', 'BMY', 'ACN', 'NKE', 'ADBE', 'ADSK', 'CRM', 'CRH', 'TEVA', 'EXPE', 'ABNB', 'UNH', 'CVS', 'VRTX', 'APO', 'URI', 'CAT', 'META', 'WMT', 'JPM', 'CMCSA', 'QCOM', 'C', 'BX', 'COF', 'GS', 'IBM', 'CDNS', 'AMZN', 'COP', 'WFC', 'NOW', 'PFE', 'MS', 'GM', 'LOW', 'RTX', 'AXP', 'LMT', 'CSCO', 'SCHW', 'DIS', 'USB', 'BAC', 'AAPL', 'DHR', 'XOM', 'CSX', 'PEP', 'MCD', 'TJX', 'UNP', 'JNJ', 'MO']
+============================================================
+Fetching 120 symbols for 120 days...
+SMA Trend Filter: ENABLED (SMA-20)
+{"type":"UNIVERSE","loaded":120,"sample":["RKLB","HOOD","INTC","WDC","VRT","COIN","MU","CIEN","STX","APP"],"when":"2025-12-14T18:40:46Z"}
+{"type":"BARS_FETCH_START","requested":120,"chunks":5,"timeframe":"15Min","feed":"iex","start":"2025-06-05T18:40:46Z","end":"2025-12-14T18:40:46Z","when":"2025-12-14T18:40:46Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":5,"symbols_in_chunk":20,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_SUMMARY","requested":120,"with_data":28,"empty":92,"stale":5,"sample_with_data":["COIN","CIEN","APP","BURL"],"sample_empty":["RKLB","HOOD","INTC","WDC","VRT","MU","STX","ORCL","CVNA","MDB"],"when":"2025-12-14T18:41:17Z"}
+Fetching daily bars for SMA-20 trend filter (history=60 days)...
+  Calculated SMA for 120 symbols
+  [COIN] ENTRY: 2025-07-22 14:00 | RSI=19.2 | Price=$397.04
+         EXIT:  2025-07-22 14:15 | Reason=MAX_PROFIT | P&L=+$617.39 (+566.7%)
+  [COIN] ENTRY: 2025-07-28 14:00 | RSI=24.7 | Price=$385.05
+         EXIT:  2025-07-28 16:30 | Reason=BARS_STOP | P&L=$-3.19 (-6.6%)
+  [COIN] ENTRY: 2025-07-29 15:30 | RSI=22.2 | Price=$368.15
+         EXIT:  2025-07-29 17:30 | Reason=MAX_PROFIT | P&L=+$317.79 (+521.7%)
+  [COIN] ENTRY: 2025-08-01 15:00 | RSI=16.2 | Price=$321.15
+         EXIT:  2025-08-01 17:30 | Reason=BARS_STOP | P&L=$-9.09 (-6.6%)
+  [COIN] ENTRY: 2025-08-01 18:00 | RSI=23.1 | Price=$316.00
+         EXIT:  2025-08-04 14:00 | Reason=BARS_STOP | P&L=+$408.78 (+435.7%)
+  [COIN] ENTRY: 2025-08-05 14:45 | RSI=23.8 | Price=$301.73
+         EXIT:  2025-08-05 17:15 | Reason=BARS_STOP | P&L=+$187.77 (+263.3%)
+  [COIN] ENTRY: 2025-08-06 14:30 | RSI=24.9 | Price=$294.22
+         EXIT:  2025-08-06 16:00 | Reason=MAX_PROFIT | P&L=+$291.97 (+566.7%)
+  [COIN] ENTRY: 2025-08-18 14:00 | RSI=23.5 | Price=$308.61
+         EXIT:  2025-08-18 14:15 | Reason=MAX_PROFIT | P&L=+$259.58 (+566.7%)
+  [COIN] ENTRY: 2025-08-20 14:00 | RSI=18.5 | Price=$294.13
+         EXIT:  2025-08-20 14:30 | Reason=MAX_PROFIT | P&L=+$301.26 (+523.2%)
+  [COIN] ENTRY: 2025-08-26 14:15 | RSI=24.9 | Price=$301.92
+         EXIT:  2025-08-26 15:15 | Reason=MAX_PROFIT | P&L=+$226.63 (+566.7%)
+  [APP] ENTRY: 2025-09-25 13:45 | RSI=23.8 | Price=$621.94
+         EXIT:  2025-09-25 14:00 | Reason=MAX_PROFIT | P&L=+$626.41 (+566.7%)
+  [APP] ENTRY: 2025-10-06 14:15 | RSI=22.3 | Price=$658.37
+         EXIT:  2025-10-06 16:15 | Reason=MAX_PROFIT | P&L=+$615.20 (+558.3%)
+  [BURL] ENTRY: 2025-08-01 13:45 | RSI=16.9 | Price=$266.90
+         EXIT:  2025-08-01 14:45 | Reason=MAX_PROFIT | P&L=+$182.53 (+566.7%)
+  [BURL] ENTRY: 2025-08-29 15:00 | RSI=24.5 | Price=$283.43
+         EXIT:  2025-08-29 16:15 | Reason=MAX_PROFIT | P&L=+$256.06 (+566.7%)
+  [BURL] ENTRY: 2025-09-05 18:00 | RSI=24.6 | Price=$291.05
+         EXIT:  2025-09-05 18:30 | Reason=MAX_PROFIT | P&L=+$118.03 (+566.7%)
+  [BURL] ENTRY: 2025-09-09 14:00 | RSI=22.6 | Price=$284.51
+         EXIT:  2025-09-09 16:30 | Reason=BARS_STOP | P&L=$-1.39 (-6.6%)
+  [BURL] ENTRY: 2025-09-09 19:00 | RSI=24.9 | Price=$281.45
+         EXIT:  2025-09-10 13:30 | Reason=MAX_PROFIT | P&L=+$83.61 (+566.7%)
+  [BURL] ENTRY: 2025-09-12 14:00 | RSI=21.8 | Price=$273.66
+         EXIT:  2025-09-12 16:30 | Reason=BARS_STOP | P&L=$-1.30 (-6.6%)
+  [BURL] ENTRY: 2025-09-12 16:45 | RSI=18.7 | Price=$267.43
+         EXIT:  2025-09-12 19:15 | Reason=BARS_STOP | P&L=$-1.45 (-6.6%)
+  [AAPL] ENTRY: 2025-12-04 15:00 | RSI=19.7 | Price=$281.31
+         EXIT:  2025-12-04 17:30 | Reason=BARS_STOP | P&L=$-1.25 (-6.6%)
+  [AAPL] ENTRY: 2025-12-04 18:15 | RSI=23.4 | Price=$279.94
+         EXIT:  2025-12-04 20:45 | Reason=BARS_STOP | P&L=+$73.39 (+436.9%)
+  [CSX] ENTRY: 2025-08-18 14:30 | RSI=22.6 | Price=$35.72
+         EXIT:  2025-08-18 14:45 | Reason=MAX_PROFIT | P&L=+$14.34 (+566.7%)
+  [CSX] ENTRY: 2025-08-21 13:45 | RSI=20.7 | Price=$35.74
+         EXIT:  2025-08-21 14:00 | Reason=MAX_PROFIT | P&L=+$13.17 (+566.7%)
+============================================================
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 120 days
+Symbols: 120
+Spread Config: DTE=3, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 223
+Total Cost: $5,538.60
+Total P&L: $18,252.31
+ROI: 329.5%
+Win Rate: 62.8% (140W / 83L)
+Avg Win: $131.33
+Avg Loss: $-1.61
+Avg Bars Held: 6.0
+------------------------------------------------------------
+Exit @ Max Profit: 122 (54.7%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+Top 10 Symbols by P&L:
+  COIN: $2,598.89 (10 trades, 80% WR)
+  ADBE: $2,399.09 (23 trades, 61% WR)
+  CDNS: $2,198.44 (14 trades, 71% WR)
+  BA: $1,663.22 (20 trades, 70% WR)
+  APP: $1,241.61 (2 trades, 100% WR)
+  AMZN: $1,169.32 (14 trades, 79% WR)
+  ACN: $1,159.66 (18 trades, 61% WR)
+  BX: $1,043.22 (17 trades, 65% WR)
+  ANET: $919.52 (10 trades, 60% WR)
+  BABA: $816.83 (12 trades, 67% WR)
+Bottom 5 Symbols:
+  AAPL: $72.14 (2 trades, 50% WR)
+  B: $55.45 (2 trades, 100% WR)
+  CSX: $27.51 (2 trades, 100% WR)
+  BAC: $24.34 (1 trades, 100% WR)
+  CEG: $-11.82 (4 trades, 0% WR)
+Saved results to results/spread_backtest_*.csv/json
+
+
+
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 120 days
+DTE: 3
+Spread Width: 1.5 ATR
+SMA Period: 20
+Max Debit: 2.0
+Tickers: RubberBand/tickers_options.txt
+==========================================
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+Tickers: ['RKLB', 'HOOD', 'INTC', 'WDC', 'VRT', 'COIN', 'MU', 'CIEN', 'STX', 'APP', 'BURL', 'ORCL', 'CVNA', 'MDB', 'SMCI', 'DKNG', 'ON', 'AVGO', 'DASH', 'SHOP', 'PLTR', 'LRCX', 'B', 'TER', 'DELL', 'CEG', 'FSLR', 'DG', 'CRWD', 'RCL', 'HPE', 'NVDA', 'MCHP', 'ANET', 'TSLA', 'BABA', 'NET', 'ULTA', 'CCL', 'NVO', 'UAL', 'AMAT', 'NEM', 'WBD', 'DHI', 'GLW', 'HUM', 'SPOT', 'WDAY', 'NXPI', 'BA', 'DAL', 'GOOGL', 'FCX', 'SNPS', 'GOOG', 'ETN', 'ADI', 'CMG', 'TSM', 'TGT', 'PINS', 'TXN', 'HAL', 'INTU', 'SLB', 'KKR', 'BMY', 'ACN', 'NKE', 'ADBE', 'ADSK', 'CRM', 'CRH', 'TEVA', 'EXPE', 'ABNB', 'UNH', 'CVS', 'VRTX', 'APO', 'URI', 'CAT', 'META', 'WMT', 'JPM', 'CMCSA', 'QCOM', 'C', 'BX', 'COF', 'GS', 'IBM', 'CDNS', 'AMZN', 'COP', 'WFC', 'NOW', 'PFE', 'MS', 'GM', 'LOW', 'RTX', 'AXP', 'LMT', 'CSCO', 'SCHW', 'DIS', 'USB', 'BAC', 'AAPL', 'DHR', 'XOM', 'CSX', 'PEP', 'MCD', 'TJX', 'UNP', 'JNJ', 'MO']
+============================================================
+Fetching 120 symbols for 120 days...
+SMA Trend Filter: ENABLED (SMA-20)
+{"type":"UNIVERSE","loaded":120,"sample":["RKLB","HOOD","INTC","WDC","VRT","COIN","MU","CIEN","STX","APP"],"when":"2025-12-14T18:42:42Z"}
+{"type":"BARS_FETCH_START","requested":120,"chunks":5,"timeframe":"15Min","feed":"iex","start":"2025-06-05T18:42:42Z","end":"2025-12-14T18:42:42Z","when":"2025-12-14T18:42:42Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":5,"symbols_in_chunk":20,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_SUMMARY","requested":120,"with_data":28,"empty":92,"stale":5,"sample_with_data":["COIN","CIEN","APP","BURL"],"sample_empty":["RKLB","HOOD","INTC","WDC","VRT","MU","STX","ORCL","CVNA","MDB"],"when":"2025-12-14T18:43:23Z"}
+Fetching daily bars for SMA-20 trend filter (history=60 days)...
+  Calculated SMA for 120 symbols
+  [COIN] ENTRY: 2025-07-22 14:00 | RSI=19.2 | Price=$397.04
+         EXIT:  2025-07-22 14:15 | Reason=MAX_PROFIT | P&L=+$617.39 (+566.7%)
+  [COIN] ENTRY: 2025-07-28 14:00 | RSI=24.7 | Price=$385.05
+         EXIT:  2025-07-28 17:00 | Reason=BARS_STOP | P&L=$-3.86 (-8.0%)
+  [COIN] ENTRY: 2025-07-29 15:30 | RSI=22.2 | Price=$368.15
+         EXIT:  2025-07-29 17:30 | Reason=MAX_PROFIT | P&L=+$317.79 (+521.7%)
+  [COIN] ENTRY: 2025-08-01 15:00 | RSI=16.2 | Price=$321.15
+         EXIT:  2025-08-01 18:00 | Reason=BARS_STOP | P&L=$-10.99 (-8.0%)
+  [COIN] ENTRY: 2025-08-01 18:15 | RSI=20.7 | Price=$311.70
+         EXIT:  2025-08-01 18:30 | Reason=MAX_PROFIT | P&L=+$545.43 (+566.7%)
+  [COIN] ENTRY: 2025-08-05 14:45 | RSI=23.8 | Price=$301.73
+         EXIT:  2025-08-05 17:45 | Reason=BARS_STOP | P&L=+$231.29 (+324.4%)
+  [COIN] ENTRY: 2025-08-06 14:30 | RSI=24.9 | Price=$294.22
+         EXIT:  2025-08-06 16:00 | Reason=MAX_PROFIT | P&L=+$291.97 (+566.7%)
+  [COIN] ENTRY: 2025-08-18 14:00 | RSI=23.5 | Price=$308.61
+         EXIT:  2025-08-18 14:15 | Reason=MAX_PROFIT | P&L=+$259.58 (+566.7%)
+  [COIN] ENTRY: 2025-08-20 14:00 | RSI=18.5 | Price=$294.13
+         EXIT:  2025-08-20 14:30 | Reason=MAX_PROFIT | P&L=+$301.26 (+523.2%)
+  [COIN] ENTRY: 2025-08-26 14:15 | RSI=24.9 | Price=$301.92
+         EXIT:  2025-08-26 15:15 | Reason=MAX_PROFIT | P&L=+$226.63 (+566.7%)
+  [APP] ENTRY: 2025-09-25 13:45 | RSI=23.8 | Price=$621.94
+         EXIT:  2025-09-25 14:00 | Reason=MAX_PROFIT | P&L=+$626.41 (+566.7%)
+  [APP] ENTRY: 2025-10-06 14:15 | RSI=22.3 | Price=$658.37
+         EXIT:  2025-10-06 16:15 | Reason=MAX_PROFIT | P&L=+$615.20 (+558.3%)
+  [BURL] ENTRY: 2025-08-01 13:45 | RSI=16.9 | Price=$266.90
+         EXIT:  2025-08-01 14:45 | Reason=MAX_PROFIT | P&L=+$182.53 (+566.7%)
+  [BURL] ENTRY: 2025-08-29 15:00 | RSI=24.5 | Price=$283.43
+         EXIT:  2025-08-29 16:15 | Reason=MAX_PROFIT | P&L=+$256.06 (+566.7%)
+  [BURL] ENTRY: 2025-09-05 18:00 | RSI=24.6 | Price=$291.05
+         EXIT:  2025-09-05 18:30 | Reason=MAX_PROFIT | P&L=+$118.03 (+566.7%)
+  [BURL] ENTRY: 2025-09-09 14:00 | RSI=22.6 | Price=$284.51
+         EXIT:  2025-09-09 17:00 | Reason=BARS_STOP | P&L=$-1.68 (-8.0%)
+  [BURL] ENTRY: 2025-09-09 19:00 | RSI=24.9 | Price=$281.45
+         EXIT:  2025-09-10 13:30 | Reason=MAX_PROFIT | P&L=+$83.61 (+566.7%)
+  [BURL] ENTRY: 2025-09-12 14:00 | RSI=21.8 | Price=$273.66
+         EXIT:  2025-09-12 17:00 | Reason=BARS_STOP | P&L=$-1.58 (-8.0%)
+  [BURL] ENTRY: 2025-11-17 19:30 | RSI=24.7 | Price=$274.61
+Spread Config: DTE=3, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 216
+Total Cost: $5,359.34
+Total P&L: $18,517.67
+ROI: 345.5%
+Win Rate: 64.8% (140W / 76L)
+Avg Win: $133.32
+Avg Loss: $-1.94
+Avg Bars Held: 6.7
+------------------------------------------------------------
+Exit @ Max Profit: 127 (58.8%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+Top 10 Symbols by P&L:
+  COIN: $2,776.49 (10 trades, 80% WR)
+  CDNS: $2,168.27 (14 trades, 71% WR)
+  ADBE: $1,879.06 (20 trades, 60% WR)
+  BA: $1,722.41 (19 trades, 74% WR)
+  APP: $1,241.61 (2 trades, 100% WR)
+  AMZN: $1,238.06 (14 trades, 79% WR)
+  ACN: $1,219.18 (17 trades, 65% WR)
+  BX: $1,042.08 (17 trades, 65% WR)
+  BABA: $914.86 (12 trades, 75% WR)
+  ANET: $823.55 (10 trades, 50% WR)
+Bottom 5 Symbols:
+  AXP: $170.22 (3 trades, 67% WR)
+  AAPL: $93.65 (2 trades, 50% WR)
+  B: $55.45 (2 trades, 100% WR)
+  CSX: $27.51 (2 trades, 100% WR)
+  BAC: $24.34 (1 trades, 100% WR)
+Saved results to results/spread_backtest_*.csv/json
+
+
+
+Run echo "=========================================="
+==========================================
+15-Minute Options Spread Backtest
+==========================================
+Period: 120 days
+DTE: 3
+Spread Width: 1.5 ATR
+SMA Period: 20
+Max Debit: 2.0
+Tickers: RubberBand/tickers_options.txt
+==========================================
+
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+Tickers: ['RKLB', 'HOOD', 'INTC', 'WDC', 'VRT', 'COIN', 'MU', 'CIEN', 'STX', 'APP', 'BURL', 'ORCL', 'CVNA', 'MDB', 'SMCI', 'DKNG', 'ON', 'AVGO', 'DASH', 'SHOP', 'PLTR', 'LRCX', 'B', 'TER', 'DELL', 'CEG', 'FSLR', 'DG', 'CRWD', 'RCL', 'HPE', 'NVDA', 'MCHP', 'ANET', 'TSLA', 'BABA', 'NET', 'ULTA', 'CCL', 'NVO', 'UAL', 'AMAT', 'NEM', 'WBD', 'DHI', 'GLW', 'HUM', 'SPOT', 'WDAY', 'NXPI', 'BA', 'DAL', 'GOOGL', 'FCX', 'SNPS', 'GOOG', 'ETN', 'ADI', 'CMG', 'TSM', 'TGT', 'PINS', 'TXN', 'HAL', 'INTU', 'SLB', 'KKR', 'BMY', 'ACN', 'NKE', 'ADBE', 'ADSK', 'CRM', 'CRH', 'TEVA', 'EXPE', 'ABNB', 'UNH', 'CVS', 'VRTX', 'APO', 'URI', 'CAT', 'META', 'WMT', 'JPM', 'CMCSA', 'QCOM', 'C', 'BX', 'COF', 'GS', 'IBM', 'CDNS', 'AMZN', 'COP', 'WFC', 'NOW', 'PFE', 'MS', 'GM', 'LOW', 'RTX', 'AXP', 'LMT', 'CSCO', 'SCHW', 'DIS', 'USB', 'BAC', 'AAPL', 'DHR', 'XOM', 'CSX', 'PEP', 'MCD', 'TJX', 'UNP', 'JNJ', 'MO']
+============================================================
+
+Fetching 120 symbols for 120 days...
+SMA Trend Filter: ENABLED (SMA-20)
+{"type":"UNIVERSE","loaded":120,"sample":["RKLB","HOOD","INTC","WDC","VRT","COIN","MU","CIEN","STX","APP"],"when":"2025-12-14T18:44:36Z"}
+{"type":"BARS_FETCH_START","requested":120,"chunks":5,"timeframe":"15Min","feed":"iex","start":"2025-06-05T18:44:36Z","end":"2025-12-14T18:44:36Z","when":"2025-12-14T18:44:36Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":6}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":5,"symbols_in_chunk":20,"pages":20,"source_shape":"dict","collected_symbols":5}
+{"type":"BARS_FETCH_SUMMARY","requested":120,"with_data":28,"empty":92,"stale":5,"sample_with_data":["COIN","CIEN","APP","BURL"],"sample_empty":["RKLB","HOOD","INTC","WDC","VRT","MU","STX","ORCL","CVNA","MDB"],"when":"2025-12-14T18:44:55Z"}
+Fetching daily bars for SMA-20 trend filter (history=60 days)...
+  Calculated SMA for 120 symbols
+  [COIN] ENTRY: 2025-07-22 14:00 | RSI=19.2 | Price=$397.04
+         EXIT:  2025-07-22 14:15 | Reason=MAX_PROFIT | P&L=+$617.39 (+566.7%)
+  [COIN] ENTRY: 2025-07-28 14:00 | RSI=24.7 | Price=$385.05
+         EXIT:  2025-07-28 17:45 | Reason=BARS_STOP | P&L=$-4.88 (-10.1%)
+  [COIN] ENTRY: 2025-07-29 15:30 | RSI=22.2 | Price=$368.15
+         EXIT:  2025-07-29 17:30 | Reason=MAX_PROFIT | P&L=+$317.79 (+521.7%)
+  [COIN] ENTRY: 2025-08-01 15:00 | RSI=16.2 | Price=$321.15
+         EXIT:  2025-08-01 18:45 | Reason=BARS_STOP | P&L=$-13.89 (-10.1%)
+  [COIN] ENTRY: 2025-08-05 14:45 | RSI=23.8 | Price=$301.73
+         EXIT:  2025-08-05 18:30 | Reason=BARS_STOP | P&L=$-7.22 (-10.1%)
+  [COIN] ENTRY: 2025-08-06 14:30 | RSI=24.9 | Price=$294.22
+         EXIT:  2025-08-06 16:00 | Reason=MAX_PROFIT | P&L=+$291.97 (+566.7%)
+  [COIN] ENTRY: 2025-08-18 14:00 | RSI=23.5 | Price=$308.61
+         EXIT:  2025-08-18 14:15 | Reason=MAX_PROFIT | P&L=+$259.58 (+566.7%)
+  [COIN] ENTRY: 2025-08-20 14:00 | RSI=18.5 | Price=$294.13
+         EXIT:  2025-08-20 14:30 | Reason=MAX_PROFIT | P&L=+$301.26 (+523.2%)
+  [COIN] ENTRY: 2025-08-26 14:15 | RSI=24.9 | Price=$301.92
+         EXIT:  2025-08-26 15:15 | Reason=MAX_PROFIT | P&L=+$226.63 (+566.7%)
+  [APP] ENTRY: 2025-09-25 13:45 | RSI=23.8 | Price=$621.94
+         EXIT:  2025-09-25 14:00 | Reason=MAX_PROFIT | P&L=+$626.41 (+566.7%)
+  [APP] ENTRY: 2025-10-06 14:15 | RSI=22.3 | Price=$658.37
+         EXIT:  2025-10-06 16:15 | Reason=MAX_PROFIT | P&L=+$615.20 (+558.3%)
+  [BURL] ENTRY: 2025-08-01 13:45 | RSI=16.9 | Price=$266.90
+         EXIT:  2025-08-01 14:45 | Reason=MAX_PROFIT | P&L=+$182.53 (+566.7%)
+  [BURL] ENTRY: 2025-08-29 15:00 | RSI=24.5 | Price=$283.43
+         EXIT:  2025-08-29 16:15 | Reason=MAX_PROFIT | P&L=+$256.06 (+566.7%)
+  [BURL] ENTRY: 2025-09-05 18:00 | RSI=24.6 | Price=$291.05
+         EXIT:  2025-09-05 18:30 | Reason=MAX_PROFIT | P&L=+$118.03 (+566.7%)
+  [BURL] ENTRY: 2025-09-09 14:00 | RSI=22.6 | Price=$284.51
+         EXIT:  2025-09-09 17:45 | Reason=BARS_STOP | P&L=$-2.13 (-10.1%)
+  [BURL] ENTRY: 2025-09-09 19:00 | RSI=24.9 | Price=$281.45
+         EXIT:  2025-09-10 13:30 | Reason=MAX_PROFIT | P&L=+$83.61 (+566.7%)
+  [BURL] ENTRY: 2025-09-12 14:00 | RSI=21.8 | Price=$273.66
+         EXIT:  2025-09-12 17:45 | Reason=BARS_STOP | P&L=$-1.99 (-10.1%)
+  [BURL] ENTRY: 2025-11-17 19:30 | RSI=24.7 | Price=$274.61
+         EXIT:  2025-09-11 13:30 | Reason=MAX_PROFIT | P&L=+$99.96 (+566.7%)
+  [AMZN] ENTRY: 2025-09-17 14:30 | RSI=22.8 | Price=$230.41
+         EXIT:  2025-09-17 17:30 | Reason=MAX_PROFIT | P&L=+$93.02 (+566.7%)
+  [AMZN] ENTRY: 2025-09-22 13:45 | RSI=22.2 | Price=$229.11
+         EXIT:  2025-09-22 14:15 | Reason=MAX_PROFIT | P&L=+$106.82 (+566.7%)
+  [AMZN] ENTRY: 2025-11-06 16:30 | RSI=24.3 | Price=$243.65
+         EXIT:  2025-11-06 19:15 | Reason=MAX_PROFIT | P&L=+$149.32 (+566.7%)
+  [AMZN] ENTRY: 2025-11-07 14:45 | RSI=23.7 | Price=$240.20
+         EXIT:  2025-11-07 18:30 | Reason=BARS_STOP | P&L=+$64.41 (+251.8%)
+  [AMZN] ENTRY: 2025-11-12 16:00 | RSI=23.1 | Price=$244.67
+         EXIT:  2025-11-12 17:30 | Reason=MAX_PROFIT | P&L=+$109.23 (+558.2%)
+  [AMZN] ENTRY: 2025-11-13 14:45 | RSI=19.4 | Price=$241.02
+         EXIT:  2025-11-13 15:00 | Reason=MAX_PROFIT | P&L=+$118.92 (+566.7%)
+  [AMZN] ENTRY: 2025-11-13 16:45 | RSI=23.8 | Price=$239.29
+         EXIT:  2025-11-13 20:30 | Reason=BARS_STOP | P&L=$-2.47 (-10.1%)
+  [AMZN] ENTRY: 2025-11-14 14:45 | RSI=24.1 | Price=$234.39
+         EXIT:  2025-11-14 15:00 | Reason=MAX_PROFIT | P&L=+$157.32 (+566.7%)
+  [AMZN] ENTRY: 2025-11-17 14:45 | RSI=23.0 | Price=$231.88
+         EXIT:  2025-11-17 16:30 | Reason=MAX_PROFIT | P&L=+$130.67 (+566.7%)
+  [AMZN] ENTRY: 2025-12-04 15:00 | RSI=24.3 | Price=$228.94
+         EXIT:  2025-12-04 18:45 | Reason=BARS_STOP | P&L=$-1.90 (-10.1%)
+  [AXP] ENTRY: 2025-11-13 20:15 | RSI=23.7 | Price=$365.30
+         EXIT:  2025-11-14 17:30 | Reason=BARS_STOP | P&L=$-2.13 (-10.1%)
+  [AXP] ENTRY: 2025-12-08 14:45 | RSI=22.8 | Price=$366.08
+         EXIT:  2025-12-08 15:00 | Reason=MAX_PROFIT | P&L=+$130.25 (+566.7%)
+  [AXP] ENTRY: 2025-12-08 16:45 | RSI=23.9 | Price=$361.90
+         EXIT:  2025-12-08 20:15 | Reason=MAX_PROFIT | P&L=+$166.15 (+566.7%)
+  [BAC] ENTRY: 2025-12-09 18:45 | RSI=23.1 | Price=$53.27
+         EXIT:  2025-12-09 19:45 | Reason=MAX_PROFIT | P&L=+$24.34 (+566.7%)
+  [AAPL] ENTRY: 2025-12-04 15:00 | RSI=19.7 | Price=$281.31
+         EXIT:  2025-12-04 18:45 | Reason=BARS_STOP | P&L=$-1.92 (-10.1%)
+  [AAPL] ENTRY: 2025-12-04 19:00 | RSI=21.9 | Price=$279.38
+         EXIT:  2025-12-04 19:45 | Reason=MAX_PROFIT | P&L=+$87.91 (+566.7%)
+  [CSX] ENTRY: 2025-08-18 14:30 | RSI=22.6 | Price=$35.72
+         EXIT:  2025-08-18 14:45 | Reason=MAX_PROFIT | P&L=+$14.34 (+566.7%)
+  [CSX] ENTRY: 2025-08-21 13:45 | RSI=20.7 | Price=$35.74
+         EXIT:  2025-08-21 14:00 | Reason=MAX_PROFIT | P&L=+$13.17 (+566.7%)
+
+============================================================
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 120 days
+Symbols: 120
+Spread Config: DTE=3, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 211
+Total Cost: $5,101.63
+Total P&L: $17,924.08
+ROI: 351.3%
+Win Rate: 64.9% (137W / 74L)
+Avg Win: $132.18
+Avg Loss: $-2.49
+Avg Bars Held: 7.9
+------------------------------------------------------------
+Exit @ Max Profit: 132 (62.6%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+
+Top 10 Symbols by P&L:
+  CDNS: $2,537.11 (14 trades, 79% WR)
+  ADBE: $2,041.89 (20 trades, 60% WR)
+  COIN: $1,988.63 (9 trades, 67% WR)
+  BA: $1,620.99 (18 trades, 72% WR)
+  AMZN: $1,303.60 (14 trades, 86% WR)
+  APP: $1,241.61 (2 trades, 100% WR)
+  ACN: $1,089.45 (16 trades, 62% WR)
+  BX: $1,031.60 (17 trades, 65% WR)
+  BABA: $908.02 (12 trades, 67% WR)
+  ANET: $820.52 (10 trades, 50% WR)
+
+Bottom 5 Symbols:
+  AAPL: $85.99 (2 trades, 50% WR)
+  B: $55.45 (2 trades, 100% WR)
+  CSX: $27.51 (2 trades, 100% WR)
+  BAC: $24.34 (1 trades, 100% WR)
+  CEG: $-8.32 (2 trades, 0% WR)
+
+Saved results to results/spread_backtest_*.csv/json

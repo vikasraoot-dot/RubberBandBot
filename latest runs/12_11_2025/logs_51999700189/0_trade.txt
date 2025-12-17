@@ -1,0 +1,456 @@
+﻿2025-12-11T14:16:56.2291891Z Current runner version: '2.329.0'
+2025-12-11T14:16:56.2310399Z Runner name: 'OptionsRunner'
+2025-12-11T14:16:56.2311814Z Runner group name: 'Default'
+2025-12-11T14:16:56.2313322Z Machine name: 'VHOMEPC'
+2025-12-11T14:16:56.2320946Z ##[group]GITHUB_TOKEN Permissions
+2025-12-11T14:16:56.2326210Z Contents: read
+2025-12-11T14:16:56.2327124Z Metadata: read
+2025-12-11T14:16:56.2327960Z Packages: read
+2025-12-11T14:16:56.2328866Z ##[endgroup]
+2025-12-11T14:16:56.2333524Z Secret source: Actions
+2025-12-11T14:16:56.2334743Z Prepare workflow directory
+2025-12-11T14:16:56.3541661Z Prepare all required actions
+2025-12-11T14:16:56.3632227Z Getting action download info
+2025-12-11T14:16:57.0029438Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-11T14:16:58.2929808Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-11T14:16:59.8927469Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-11T14:17:02.3704370Z Complete job name: trade
+2025-12-11T14:17:02.5700643Z ##[group]Run actions/checkout@v4
+2025-12-11T14:17:02.5702344Z with:
+2025-12-11T14:17:02.5702908Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:17:02.5704055Z   token: ***
+2025-12-11T14:17:02.5704593Z   ssh-strict: true
+2025-12-11T14:17:02.5705141Z   ssh-user: git
+2025-12-11T14:17:02.5705704Z   persist-credentials: true
+2025-12-11T14:17:02.5706311Z   clean: true
+2025-12-11T14:17:02.5706875Z   sparse-checkout-cone-mode: true
+2025-12-11T14:17:02.5707683Z   fetch-depth: 1
+2025-12-11T14:17:02.5708141Z   fetch-tags: false
+2025-12-11T14:17:02.5708669Z   show-progress: true
+2025-12-11T14:17:02.5709263Z   lfs: false
+2025-12-11T14:17:02.5709645Z   submodules: false
+2025-12-11T14:17:02.5710255Z   set-safe-directory: true
+2025-12-11T14:17:02.5711945Z ##[endgroup]
+2025-12-11T14:17:03.3298028Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:17:03.3302147Z ##[group]Getting Git version info
+2025-12-11T14:17:03.3303655Z Working directory is 'C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot'
+2025-12-11T14:17:03.3387075Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-11T14:17:03.4175488Z git version 2.52.0.windows.1
+2025-12-11T14:17:03.4262474Z ##[endgroup]
+2025-12-11T14:17:03.4288852Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\a4e676da-eb0e-4f1c-a2d6-aace4976d460' before making global git config changes
+2025-12-11T14:17:03.4290987Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-11T14:17:03.4296128Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-11T14:17:03.5072250Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-11T14:17:03.5693407Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-11T14:17:03.5784939Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-11T14:17:03.5795447Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-11T14:17:03.6449143Z refs/heads/main
+2025-12-11T14:17:03.6544146Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-11T14:17:03.7880464Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-11T14:17:03.7881418Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-11T14:17:03.7882251Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-11T14:17:03.7904807Z HEAD is now at fbacfd2 fix: Save per-bot ticker files to same directory as output CSV
+2025-12-11T14:17:03.9485864Z ##[endgroup]
+2025-12-11T14:17:03.9498351Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-11T14:17:05.6862701Z ##[group]Cleaning the repository
+2025-12-11T14:17:05.6876413Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-11T14:17:05.7588330Z Removing .pytest_cache/
+2025-12-11T14:17:05.7589018Z Removing tests/__pycache__/
+2025-12-11T14:17:05.7686612Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-11T14:17:05.8963289Z HEAD is now at fbacfd2 fix: Save per-bot ticker files to same directory as output CSV
+2025-12-11T14:17:05.9054885Z ##[endgroup]
+2025-12-11T14:17:05.9062428Z ##[group]Disabling automatic garbage collection
+2025-12-11T14:17:05.9072592Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-11T14:17:05.9783040Z ##[endgroup]
+2025-12-11T14:17:05.9784198Z ##[group]Setting up auth
+2025-12-11T14:17:05.9804272Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-11T14:17:06.0552404Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-11T14:17:07.2313493Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-11T14:17:07.3044800Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-11T14:17:08.4655104Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-11T14:17:08.5414264Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-11T14:17:09.7395224Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-11T14:17:09.8394987Z ##[endgroup]
+2025-12-11T14:17:09.8396955Z ##[group]Fetching the repository
+2025-12-11T14:17:09.8428788Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +fbacfd27d2fbd77d9b37bd4d48237c0e3d21271b:refs/remotes/origin/main
+2025-12-11T14:17:11.0161272Z ##[endgroup]
+2025-12-11T14:17:11.0162401Z ##[group]Determining the checkout info
+2025-12-11T14:17:11.0163448Z ##[endgroup]
+2025-12-11T14:17:11.0171907Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-11T14:17:11.1091817Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-11T14:17:11.1834236Z ##[group]Checking out the ref
+2025-12-11T14:17:11.1842485Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-11T14:17:11.3014750Z branch 'main' set up to track 'origin/main'.
+2025-12-11T14:17:11.3015667Z Your branch is up to date with 'origin/main'.
+2025-12-11T14:17:11.3027575Z Switched to and reset branch 'main'
+2025-12-11T14:17:11.3105922Z ##[endgroup]
+2025-12-11T14:17:11.3837558Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-11T14:17:11.4469980Z fbacfd27d2fbd77d9b37bd4d48237c0e3d21271b
+2025-12-11T14:17:11.5003301Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-11T14:17:11.5004317Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-11T14:17:11.5004981Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-11T14:17:11.5051280Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-11T14:17:11.5052202Z ##[endgroup]
+2025-12-11T14:17:13.0610074Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-11T14:17:13.0610384Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-11T14:17:13.0610597Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-11T14:17:13.0623766Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-11T14:17:13.0623980Z env:
+2025-12-11T14:17:13.0624697Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T14:17:13.0624847Z ##[endgroup]
+2025-12-11T14:17:14.7580311Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-11T14:17:15.6494006Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-11T14:17:18.9957876Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-11T14:17:19.8114143Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-11T14:17:19.8135967Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-11T14:17:19.8149875Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-11T14:17:19.8154943Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-11T14:17:19.8162715Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-11T14:17:19.8250500Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-11T14:17:19.8268634Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-11T14:17:19.8585596Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-11T14:17:19.8599117Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-11T14:17:19.8611486Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-11T14:17:19.8621616Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-11T14:17:19.8832047Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-11T14:17:20.2873526Z ##[group]Run chcp 65001 > $null
+2025-12-11T14:17:20.2873737Z [36;1mchcp 65001 > $null[0m
+2025-12-11T14:17:20.2873976Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-11T14:17:20.2874215Z [36;1mfunction Get-Clock {[0m
+2025-12-11T14:17:20.2874424Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-11T14:17:20.2874622Z [36;1m}[0m
+2025-12-11T14:17:20.2874723Z [36;1m$maxWaitMin = 20[0m
+2025-12-11T14:17:20.2874843Z [36;1m$start = Get-Date[0m
+2025-12-11T14:17:20.2874956Z [36;1mwhile ($true) {[0m
+2025-12-11T14:17:20.2875064Z [36;1m  try {[0m
+2025-12-11T14:17:20.2875167Z [36;1m    $clk = Get-Clock[0m
+2025-12-11T14:17:20.2875545Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-11T14:17:20.2875747Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-11T14:17:20.2875973Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-11T14:17:20.2876146Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-11T14:17:20.2876323Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-11T14:17:20.2876546Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-11T14:17:20.2876735Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-11T14:17:20.2876871Z [36;1m    } else {[0m
+2025-12-11T14:17:20.2877016Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-11T14:17:20.2877167Z [36;1m      break[0m
+2025-12-11T14:17:20.2877267Z [36;1m    }[0m
+2025-12-11T14:17:20.2877419Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-11T14:17:20.2877634Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-11T14:17:20.2877798Z [36;1m      break[0m
+2025-12-11T14:17:20.2877892Z [36;1m    }[0m
+2025-12-11T14:17:20.2877987Z [36;1m  } catch {[0m
+2025-12-11T14:17:20.2878200Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-11T14:17:20.2878441Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-11T14:17:20.2878578Z [36;1m  }[0m
+2025-12-11T14:17:20.2878663Z [36;1m}[0m
+2025-12-11T14:17:20.2905550Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-11T14:17:20.2906246Z env:
+2025-12-11T14:17:20.2906815Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T14:17:20.2907705Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-11T14:17:20.2908544Z   APCA_API_KEY_ID: ***
+2025-12-11T14:17:20.2909052Z   APCA_API_SECRET_KEY: ***
+2025-12-11T14:17:20.2909411Z ##[endgroup]
+2025-12-11T14:17:21.5281411Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:17:51.6495677Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:18:21.7595722Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:18:51.8700363Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:19:21.9744694Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:19:52.0732406Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:20:22.1826587Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:20:52.2856358Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:21:22.4630530Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:21:52.5648634Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:22:22.6649710Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:22:52.7655823Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:23:22.8792796Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:23:52.9795512Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:24:23.0821333Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:24:53.1839752Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:25:23.3043679Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:25:53.4079903Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:26:23.5236295Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:26:53.6318910Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:27:23.7466444Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:27:53.8501304Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:28:23.9580351Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:28:54.0651748Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:29:24.1682601Z Waiting 30 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:29:54.2726893Z Waiting 6 s until next_open 2025-12-11T09:30:00-05:00...
+2025-12-11T14:30:00.5603588Z Market is open â†’ proceed.
+2025-12-11T14:30:00.6754995Z ##[group]Run actions/download-artifact@v4
+2025-12-11T14:30:00.6755271Z with:
+2025-12-11T14:30:00.6755433Z   name: position-registry-15M_OPT
+2025-12-11T14:30:00.6755588Z   path: .position_registry/
+2025-12-11T14:30:00.6755751Z   merge-multiple: false
+2025-12-11T14:30:00.6755899Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:30:00.6756053Z   run-id: 20136128256
+2025-12-11T14:30:00.6756169Z env:
+2025-12-11T14:30:00.6756305Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T14:30:00.6756465Z ##[endgroup]
+2025-12-11T14:30:01.8108107Z Downloading single artifact
+2025-12-11T14:30:02.3471074Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-11T14:30:02.3777660Z ##[group]Run chcp 65001 > $null
+2025-12-11T14:30:02.3778435Z [36;1mchcp 65001 > $null[0m
+2025-12-11T14:30:02.3778709Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-11T14:30:02.3778998Z [36;1m[0m
+2025-12-11T14:30:02.3779178Z [36;1m# Get inputs with defaults[0m
+2025-12-11T14:30:02.3779475Z [36;1m$dryRun = if ("" -ne "") { "" } else { "0" }[0m
+2025-12-11T14:30:02.3779787Z [36;1m$dte = if ("" -ne "") { "" } else { "3" }[0m
+2025-12-11T14:30:02.3780059Z [36;1m[0m
+2025-12-11T14:30:02.3780369Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-11T14:30:02.3780753Z [36;1m[0m
+2025-12-11T14:30:02.3780931Z [36;1m# Run the spreads loop[0m
+2025-12-11T14:30:02.3781325Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-11T14:30:02.3781725Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-11T14:30:02.3782043Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-11T14:30:02.3782417Z [36;1m  --dry-run $dryRun `[0m
+2025-12-11T14:30:02.3782649Z [36;1m  --dte $dte `[0m
+2025-12-11T14:30:02.3782886Z [36;1m  --max-debit 3.00[0m
+2025-12-11T14:30:02.3809164Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-11T14:30:02.3809592Z env:
+2025-12-11T14:30:02.3809832Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T14:30:02.3810202Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-11T14:30:02.3810811Z   APCA_API_KEY_ID: ***
+2025-12-11T14:30:02.3811146Z   APCA_API_SECRET_KEY: ***
+2025-12-11T14:30:02.3811407Z   ALPACA_KEY: ***
+2025-12-11T14:30:02.3811697Z   ALPACA_SECRET: ***
+2025-12-11T14:30:02.3811907Z   PYTHONUNBUFFERED: 1
+2025-12-11T14:30:02.3812145Z ##[endgroup]
+2025-12-11T14:30:02.8753445Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-11T14:30:05.3811101Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:05.3992783Z {"event":"symbols_loaded","count":30,"sample":["NVDA","AMD","AAPL","MSFT","GOOGL"],"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:05.9371137Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:06.5593848Z {"event":"scan_cycle_start","cycle":1,"time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.5595677Z {"event":"outside_entry_window","current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.8859909Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.8860683Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:45:07.1941575Z {"event":"scan_cycle_start","cycle":2,"time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:07Z","ts_et":"2025-12-11 09:45:07 ET"}
+2025-12-11T14:45:07.1942748Z {"event":"scan_start","current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:07Z","ts_et":"2025-12-11 09:45:07 ET"}
+2025-12-11T14:45:14.2527383Z {"type":"SPREAD_SIGNAL","underlying":"NVDA","signal_reason":"RSI_oversold(23.2)","entry_price":178.385,"rsi":23.22,"atr":1.0783,"ts":"2025-12-11T14:45:14Z","ts_et":"2025-12-11 09:45:14 ET"}
+2025-12-11T14:45:23.8113862Z {"event":"signals_found","count":1,"symbols":["NVDA"],"type":"HEARTBEAT","ts":"2025-12-11T14:45:23Z","ts_et":"2025-12-11 09:45:23 ET"}
+2025-12-11T14:45:26.1621587Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for NVDA
+2025-12-11T14:45:26.1622504Z [spreads] NVDA: Long 177.5 / Short 182.5 (width=$5.00, exp=2025-12-26)
+2025-12-11T14:45:27.5895990Z [options] Submitting spread: NVDA251226C00177500 (buy) / NVDA251226C00182500 (sell) @ $2.54 debit
+2025-12-11T14:45:27.9099087Z [options] Spread order submitted: 64caaeec-9c68-40b4-9ad4-5de670141b5e
+2025-12-11T14:45:27.9127472Z [registry] Recorded entry: NVDA251226C00177500 (order_id=15M_OPT_NVDA251226C00177500_17...)
+2025-12-11T14:45:27.9130778Z {"type":"SPREAD_ENTRY","underlying":"NVDA","long_symbol":"NVDA251226C00177500","short_symbol":"NVDA251226C00182500","atm_strike":177.5,"otm_strike":182.5,"spread_width":5.0,"net_debit":2.59,"total_cost":259.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(23.2)","signal_rsi":23.22,"signal_atr":1.0783,"entry_ts":"2025-12-11T14:45:27Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9134239Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":1,"type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9135791Z {"event":"scan_cycle_end","cycle":2,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9137208Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T15:00:28.2545155Z {"event":"scan_cycle_start","cycle":3,"time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:28Z","ts_et":"2025-12-11 10:00:28 ET"}
+2025-12-11T15:00:28.2547066Z {"event":"scan_start","current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:28Z","ts_et":"2025-12-11 10:00:28 ET"}
+2025-12-11T15:00:35.3054457Z {"type":"SPREAD_SIGNAL","underlying":"NVDA","signal_reason":"RSI_oversold(19.8)","entry_price":176.835,"rsi":19.77,"atr":1.1323,"ts":"2025-12-11T15:00:35Z","ts_et":"2025-12-11 10:00:35 ET"}
+2025-12-11T15:00:35.6384947Z {"type":"SPREAD_SIGNAL","underlying":"AMD","signal_reason":"RSI_oversold(20.3)","entry_price":210.94,"rsi":20.32,"atr":1.7328,"ts":"2025-12-11T15:00:35Z","ts_et":"2025-12-11 10:00:35 ET"}
+2025-12-11T15:00:45.0449368Z {"event":"signals_found","count":2,"symbols":["NVDA","AMD"],"type":"HEARTBEAT","ts":"2025-12-11T15:00:45Z","ts_et":"2025-12-11 10:00:45 ET"}
+2025-12-11T15:00:45.0451435Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Already_have_position","ts":"2025-12-11T15:00:45Z","ts_et":"2025-12-11 10:00:45 ET"}
+2025-12-11T15:00:47.4899691Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for AMD
+2025-12-11T15:00:47.4900170Z [spreads] AMD: Long 210.0 / Short 215.0 (width=$5.00, exp=2025-12-26)
+2025-12-11T15:00:49.0242428Z [options] Submitting spread: AMD251226C00210000 (buy) / AMD251226C00215000 (sell) @ $2.6 debit
+2025-12-11T15:00:49.3966215Z [options] Spread order submitted: 0d6589ad-5959-49e2-b474-d9675e8f5838
+2025-12-11T15:00:49.3967343Z [registry] Recorded entry: AMD251226C00210000 (order_id=15M_OPT_AMD251226C00210000_176...)
+2025-12-11T15:00:49.3969057Z {"type":"SPREAD_ENTRY","underlying":"AMD","long_symbol":"AMD251226C00210000","short_symbol":"AMD251226C00215000","atm_strike":210.0,"otm_strike":215.0,"spread_width":5.0,"net_debit":2.33,"total_cost":233.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(20.3)","signal_rsi":20.32,"signal_atr":1.7328,"entry_ts":"2025-12-11T15:00:49Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3970015Z {"event":"scan_complete","signals":2,"new_entries":1,"total_positions":3,"type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3970755Z {"event":"scan_cycle_end","cycle":3,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3971329Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:15:49.7279070Z {"event":"scan_cycle_start","cycle":4,"time":"10:15","type":"HEARTBEAT","ts":"2025-12-11T15:15:49Z","ts_et":"2025-12-11 10:15:49 ET"}
+2025-12-11T15:15:49.7288255Z {"event":"scan_start","current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-11T15:15:49Z","ts_et":"2025-12-11 10:15:49 ET"}
+2025-12-11T15:16:05.2402834Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2404913Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2405621Z {"event":"scan_cycle_end","cycle":4,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2406195Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:16","type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:31:05.5279032Z {"event":"scan_cycle_start","cycle":5,"time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:05Z","ts_et":"2025-12-11 10:31:05 ET"}
+2025-12-11T15:31:05.5280578Z {"event":"scan_start","current_time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:05Z","ts_et":"2025-12-11 10:31:05 ET"}
+2025-12-11T15:31:19.8899230Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8900198Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8903663Z {"event":"scan_cycle_end","cycle":5,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8905945Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:46:27.2599298Z {"event":"scan_cycle_start","cycle":6,"time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:27Z","ts_et":"2025-12-11 10:46:27 ET"}
+2025-12-11T15:46:27.2600881Z {"event":"scan_start","current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:27Z","ts_et":"2025-12-11 10:46:27 ET"}
+2025-12-11T15:46:41.8941080Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8943034Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8944735Z {"event":"scan_cycle_end","cycle":6,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8958620Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T16:01:42.2110353Z {"event":"scan_cycle_start","cycle":7,"time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:42Z","ts_et":"2025-12-11 11:01:42 ET"}
+2025-12-11T16:01:42.2111981Z {"event":"scan_start","current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:42Z","ts_et":"2025-12-11 11:01:42 ET"}
+2025-12-11T16:01:56.4636871Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4639020Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4641000Z {"event":"scan_cycle_end","cycle":7,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4643083Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:16:56.7681316Z {"event":"scan_cycle_start","cycle":8,"time":"11:16","type":"HEARTBEAT","ts":"2025-12-11T16:16:56Z","ts_et":"2025-12-11 11:16:56 ET"}
+2025-12-11T16:16:56.7683260Z {"event":"scan_start","current_time":"11:16","type":"HEARTBEAT","ts":"2025-12-11T16:16:56Z","ts_et":"2025-12-11 11:16:56 ET"}
+2025-12-11T16:17:06.2178340Z {"type":"SPREAD_SIGNAL","underlying":"MSTR","signal_reason":"RSI_oversold(24.7)","entry_price":171.95,"rsi":24.7,"atr":2.909,"ts":"2025-12-11T16:17:06Z","ts_et":"2025-12-11 11:17:06 ET"}
+2025-12-11T16:17:11.0701565Z {"event":"signals_found","count":1,"symbols":["MSTR"],"type":"HEARTBEAT","ts":"2025-12-11T16:17:11Z","ts_et":"2025-12-11 11:17:11 ET"}
+2025-12-11T16:17:13.4592937Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for MSTR
+2025-12-11T16:17:13.4594506Z [spreads] MSTR: Long 175.0 / Short 177.5 (width=$2.50, exp=2025-12-26)
+2025-12-11T16:17:14.8655424Z [options] Submitting spread: MSTR251226C00175000 (buy) / MSTR251226C00177500 (sell) @ $1.63 debit
+2025-12-11T16:17:15.1789375Z [options] Spread order submitted: 55aadc0a-1a7d-4013-84a7-bd4311ba1c00
+2025-12-11T16:17:15.1806570Z [registry] Recorded entry: MSTR251226C00175000 (order_id=15M_OPT_MSTR251226C00175000_17...)
+2025-12-11T16:17:15.1810885Z {"type":"SPREAD_ENTRY","underlying":"MSTR","long_symbol":"MSTR251226C00175000","short_symbol":"MSTR251226C00177500","atm_strike":175.0,"otm_strike":177.5,"spread_width":2.5,"net_debit":1.79,"total_cost":179.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(24.7)","signal_rsi":24.7,"signal_atr":2.909,"entry_ts":"2025-12-11T16:17:15Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1814817Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1816828Z {"event":"scan_cycle_end","cycle":8,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1818491Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:17","type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:32:15.5045905Z {"event":"scan_cycle_start","cycle":9,"time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:15Z","ts_et":"2025-12-11 11:32:15 ET"}
+2025-12-11T16:32:15.5047464Z {"event":"scan_start","current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:15Z","ts_et":"2025-12-11 11:32:15 ET"}
+2025-12-11T16:32:16.3363521Z [options] Attempting spread close:
+2025-12-11T16:32:16.3366494Z [options]   Long: MSTR251226C00175000 @ bid=8.77
+2025-12-11T16:32:16.3367217Z [options]   Short: MSTR251226C00177500 @ ask=8.35
+2025-12-11T16:32:16.3371644Z [options]   Net credit: $0.42, limit_price: $0.42
+2025-12-11T16:32:16.3372691Z [options] Closing spread: MSTR251226C00175000 (sell) / MSTR251226C00177500 (buy) @ $0.42 credit
+2025-12-11T16:32:16.6427521Z [options] Spread close order submitted: 4b1cd2fa-c85f-4b7a-b693-d4c0094f0a68
+2025-12-11T16:32:16.6431657Z {"type":"SPREAD_EXIT","underlying":"MSTR","long_symbol":"MSTR251226C00175000","short_symbol":"MSTR251226C00177500","exit_value":0.25,"exit_reason":"SL_hit(-84.4%<=-50.0%)","pnl":-135.0,"pnl_pct":-84.4,"ts":"2025-12-11T16:32:16Z","ts_et":"2025-12-11 11:32:16 ET"}
+2025-12-11T16:32:16.6442485Z [registry] Recorded exit: MSTR251226C00175000 (SL_hit(-84.4%<=-50.0%))
+2025-12-11T16:32:16.6443657Z [positions] Registry updated: removed MSTR251226C00175000
+2025-12-11T16:32:30.3500034Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3501894Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3503732Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3507002Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:47:30.6557230Z {"event":"scan_cycle_start","cycle":10,"time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:30Z","ts_et":"2025-12-11 11:47:30 ET"}
+2025-12-11T16:47:30.6558770Z {"event":"scan_start","current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:30Z","ts_et":"2025-12-11 11:47:30 ET"}
+2025-12-11T16:47:44.5317067Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5317974Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5318755Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5319288Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T17:02:44.8473440Z {"event":"scan_cycle_start","cycle":11,"time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:44Z","ts_et":"2025-12-11 12:02:44 ET"}
+2025-12-11T17:02:44.8475060Z {"event":"scan_start","current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:44Z","ts_et":"2025-12-11 12:02:44 ET"}
+2025-12-11T17:02:58.9207072Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9207931Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9208715Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9209250Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:17:59.2332980Z {"event":"scan_cycle_start","cycle":12,"time":"12:17","type":"HEARTBEAT","ts":"2025-12-11T17:17:59Z","ts_et":"2025-12-11 12:17:59 ET"}
+2025-12-11T17:17:59.2334516Z {"event":"scan_start","current_time":"12:17","type":"HEARTBEAT","ts":"2025-12-11T17:17:59Z","ts_et":"2025-12-11 12:17:59 ET"}
+2025-12-11T17:18:13.5557192Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5558920Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5565151Z {"event":"scan_cycle_end","cycle":12,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5566893Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:18","type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:33:13.8604823Z {"event":"scan_cycle_start","cycle":13,"time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:13Z","ts_et":"2025-12-11 12:33:13 ET"}
+2025-12-11T17:33:13.8606536Z {"event":"scan_start","current_time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:13Z","ts_et":"2025-12-11 12:33:13 ET"}
+2025-12-11T17:33:27.8263431Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8265314Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8266862Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8268949Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:48:28.1454197Z {"event":"scan_cycle_start","cycle":14,"time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:28Z","ts_et":"2025-12-11 12:48:28 ET"}
+2025-12-11T17:48:28.1457674Z {"event":"scan_start","current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:28Z","ts_et":"2025-12-11 12:48:28 ET"}
+2025-12-11T17:48:41.9505413Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9506960Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9508478Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9510343Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T18:03:42.2428054Z {"event":"scan_cycle_start","cycle":15,"time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:42Z","ts_et":"2025-12-11 13:03:42 ET"}
+2025-12-11T18:03:42.2428676Z {"event":"scan_start","current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:42Z","ts_et":"2025-12-11 13:03:42 ET"}
+2025-12-11T18:03:56.3277883Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3279290Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3280760Z {"event":"scan_cycle_end","cycle":15,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3281278Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:18:56.6400148Z {"event":"scan_cycle_start","cycle":16,"time":"13:18","type":"HEARTBEAT","ts":"2025-12-11T18:18:56Z","ts_et":"2025-12-11 13:18:56 ET"}
+2025-12-11T18:18:56.6401717Z {"event":"scan_start","current_time":"13:18","type":"HEARTBEAT","ts":"2025-12-11T18:18:56Z","ts_et":"2025-12-11 13:18:56 ET"}
+2025-12-11T18:19:11.0227668Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0229061Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0232051Z {"event":"scan_cycle_end","cycle":16,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0232612Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:19","type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:34:11.3377974Z {"event":"scan_cycle_start","cycle":17,"time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:11Z","ts_et":"2025-12-11 13:34:11 ET"}
+2025-12-11T18:34:11.3379002Z {"event":"scan_start","current_time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:11Z","ts_et":"2025-12-11 13:34:11 ET"}
+2025-12-11T18:34:25.6740499Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6742699Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6744145Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6747782Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:49:25.9960286Z {"event":"scan_cycle_start","cycle":18,"time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:25Z","ts_et":"2025-12-11 13:49:25 ET"}
+2025-12-11T18:49:25.9961125Z {"event":"scan_start","current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:25Z","ts_et":"2025-12-11 13:49:25 ET"}
+2025-12-11T18:49:39.8688528Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8746776Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8928671Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8983414Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T19:04:40.1967818Z {"event":"scan_cycle_start","cycle":19,"time":"14:04","type":"HEARTBEAT","ts":"2025-12-11T19:04:40Z","ts_et":"2025-12-11 14:04:40 ET"}
+2025-12-11T19:04:40.1969476Z {"event":"scan_start","current_time":"14:04","type":"HEARTBEAT","ts":"2025-12-11T19:04:40Z","ts_et":"2025-12-11 14:04:40 ET"}
+2025-12-11T19:05:06.9038669Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9039501Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9040227Z {"event":"scan_cycle_end","cycle":19,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9040904Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:05","type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:20:07.2181786Z {"event":"scan_cycle_start","cycle":20,"time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:07Z","ts_et":"2025-12-11 14:20:07 ET"}
+2025-12-11T19:20:07.2182527Z {"event":"scan_start","current_time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:07Z","ts_et":"2025-12-11 14:20:07 ET"}
+2025-12-11T19:20:21.4056798Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4058379Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4073912Z {"event":"scan_cycle_end","cycle":20,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4075521Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:35:21.7550313Z {"event":"scan_cycle_start","cycle":21,"time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:21Z","ts_et":"2025-12-11 14:35:21 ET"}
+2025-12-11T19:35:21.7551115Z {"event":"scan_start","current_time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:21Z","ts_et":"2025-12-11 14:35:21 ET"}
+2025-12-11T19:35:35.8031036Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8032966Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8034707Z {"event":"scan_cycle_end","cycle":21,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8040388Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:50:36.1031218Z {"event":"scan_cycle_start","cycle":22,"time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:36Z","ts_et":"2025-12-11 14:50:36 ET"}
+2025-12-11T19:50:36.1033112Z {"event":"scan_start","current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:36Z","ts_et":"2025-12-11 14:50:36 ET"}
+2025-12-11T19:50:50.6300941Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6305156Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6311940Z {"event":"scan_cycle_end","cycle":22,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6313409Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T20:05:50.9285240Z {"event":"scan_cycle_start","cycle":23,"time":"15:05","type":"HEARTBEAT","ts":"2025-12-11T20:05:50Z","ts_et":"2025-12-11 15:05:50 ET"}
+2025-12-11T20:05:50.9285829Z {"event":"scan_start","current_time":"15:05","type":"HEARTBEAT","ts":"2025-12-11T20:05:50Z","ts_et":"2025-12-11 15:05:50 ET"}
+2025-12-11T20:06:05.9575868Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9580437Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9585552Z {"event":"scan_cycle_end","cycle":23,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9587709Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:06","type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:21:06.2888055Z {"event":"scan_cycle_start","cycle":24,"time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:06Z","ts_et":"2025-12-11 15:21:06 ET"}
+2025-12-11T20:21:06.2889769Z {"event":"scan_start","current_time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:06Z","ts_et":"2025-12-11 15:21:06 ET"}
+2025-12-11T20:21:20.8716203Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8718570Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8723974Z {"event":"scan_cycle_end","cycle":24,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8726169Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:36:21.1751888Z {"event":"scan_cycle_start","cycle":25,"time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:21Z","ts_et":"2025-12-11 15:36:21 ET"}
+2025-12-11T20:36:21.1753177Z {"event":"scan_start","current_time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:21Z","ts_et":"2025-12-11 15:36:21 ET"}
+2025-12-11T20:36:35.1681330Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2145484Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2292359Z {"event":"scan_cycle_end","cycle":25,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2355799Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:51:35.5529953Z {"event":"scan_cycle_start","cycle":26,"time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.5534410Z {"event":"outside_entry_window","current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.8817490Z {"event":"scan_cycle_end","cycle":26,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.8819233Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T21:06:35.8814123Z {"event":"market_close_reached","time":"16:06","type":"HEARTBEAT","ts":"2025-12-11T21:06:35Z","ts_et":"2025-12-11 16:06:35 ET"}
+2025-12-11T21:06:35.8814994Z {"event":"eod_processing","scan_count":26,"type":"HEARTBEAT","ts":"2025-12-11T21:06:35Z","ts_et":"2025-12-11 16:06:35 ET"}
+2025-12-11T21:06:36.1943064Z {"type":"EOD_SUMMARY","date":"2025-12-11","total_trades":3,"closed_trades":1,"open_trades":2,"total_pnl":-135.0,"win_count":0,"loss_count":1,"win_rate_pct":0.0,"avg_win":0,"avg_loss":-135.0,"exit_reasons":{"SL_hit(-84.4%<=-50.0%)":{"count":1,"pnl":-135.0}},"trades":[{"underlying":"NVDA","entry_reason":"RSI_oversold(23.2)","exit_reason":null,"net_debit":2.59,"pnl":null,"pnl_pct":null},{"underlying":"AMD","entry_reason":"RSI_oversold(20.3)","exit_reason":null,"net_debit":2.33,"pnl":null,"pnl_pct":null},{"underlying":"MSTR","entry_reason":"RSI_oversold(24.7)","exit_reason":"SL_hit(-84.4%<=-50.0%)","net_debit":1.79,"pnl":-135.0,"pnl_pct":-84.4}],"ts":"2025-12-11T21:06:36Z","ts_et":"2025-12-11 16:06:36 ET"}
+2025-12-11T21:06:36.1958127Z 
+2025-12-11T21:06:36.1966697Z ============================================================
+2025-12-11T21:06:36.1975118Z EOD SUMMARY: 3 trades, PnL: $-135.00
+2025-12-11T21:06:36.1986413Z Win Rate: 0.0%
+2025-12-11T21:06:36.2084122Z ============================================================
+2025-12-11T21:06:36.2085102Z 
+2025-12-11T21:06:36.7075445Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T21:06:36.7076291Z with:
+2025-12-11T21:06:36.7076745Z   name: position-registry-15M_OPT
+2025-12-11T21:06:36.7077973Z   path: .position_registry/15M_OPT_positions.json
+2025-12-11T21:06:36.7078676Z   if-no-files-found: warn
+2025-12-11T21:06:36.7079167Z   retention-days: 90
+2025-12-11T21:06:36.7079601Z   overwrite: true
+2025-12-11T21:06:36.7080024Z   compression-level: 6
+2025-12-11T21:06:36.7080502Z   include-hidden-files: false
+2025-12-11T21:06:36.7081233Z env:
+2025-12-11T21:06:36.7081692Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T21:06:36.7084037Z ##[endgroup]
+2025-12-11T21:06:38.9009562Z With the provided path, there will be 1 file uploaded
+2025-12-11T21:06:39.4405100Z Artifact name is valid!
+2025-12-11T21:06:39.4417833Z Root directory input is valid!
+2025-12-11T21:06:39.6810088Z Beginning upload of artifact content to blob storage
+2025-12-11T21:06:40.2151064Z Uploaded bytes 670
+2025-12-11T21:06:40.3577807Z Finished uploading artifact content to blob storage!
+2025-12-11T21:06:40.3592679Z SHA256 digest of uploaded artifact zip is 7bdbd4ee5b25cdb63bd7a4e437aa2a4a9ba32e923fb06ff328a3ad1318813443
+2025-12-11T21:06:40.3594002Z Finalizing artifact upload
+2025-12-11T21:06:40.5429840Z Artifact position-registry-15M_OPT.zip successfully finalized. Artifact ID 4843201304
+2025-12-11T21:06:40.5430357Z Artifact position-registry-15M_OPT has been successfully uploaded! Final size is 670 bytes. Artifact ID is 4843201304
+2025-12-11T21:06:40.5431742Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20136128256/artifacts/4843201304
+2025-12-11T21:06:40.6051680Z Post job cleanup.
+2025-12-11T21:06:40.9185270Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-11T21:06:40.9768438Z git version 2.52.0.windows.1
+2025-12-11T21:06:40.9871314Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\3635b281-e626-4a82-97bb-418aa76af48c' before making global git config changes
+2025-12-11T21:06:40.9873207Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-11T21:06:40.9893902Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-11T21:06:41.0512197Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-11T21:06:41.1155556Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-11T21:06:42.2331737Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-11T21:06:42.2908773Z http.https://github.com/.extraheader
+2025-12-11T21:06:42.2971405Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-11T21:06:42.4000037Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-11T21:06:44.7258670Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-11T21:06:44.8105340Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-11T21:06:45.9366105Z Cleaning up orphan processes

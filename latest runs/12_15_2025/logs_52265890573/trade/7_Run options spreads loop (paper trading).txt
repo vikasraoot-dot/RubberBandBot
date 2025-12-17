@@ -1,0 +1,1050 @@
+﻿2025-12-15T14:40:38.5665343Z ##[group]Run chcp 65001 > $null
+2025-12-15T14:40:38.5665758Z [36;1mchcp 65001 > $null[0m
+2025-12-15T14:40:38.5665908Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-15T14:40:38.5666057Z [36;1m[0m
+2025-12-15T14:40:38.5666162Z [36;1m# Get inputs with defaults[0m
+2025-12-15T14:40:38.5666322Z [36;1m$dryRun = if ("0" -ne "") { "0" } else { "0" }[0m
+2025-12-15T14:40:38.5666480Z [36;1m$dte = if ("3" -ne "") { "3" } else { "3" }[0m
+2025-12-15T14:40:38.5666622Z [36;1m$slopeInput = "-0.20"[0m
+2025-12-15T14:40:38.5667087Z [36;1m$slopeArg = if ($slopeInput -ne "") { "--slope-threshold $slopeInput" } else { "" }[0m
+2025-12-15T14:40:38.5667280Z [36;1m[0m
+2025-12-15T14:40:38.5667475Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte, slope=$slopeInput)"[0m
+2025-12-15T14:40:38.5667699Z [36;1m[0m
+2025-12-15T14:40:38.5667787Z [36;1m# Run the spreads loop[0m
+2025-12-15T14:40:38.5668006Z [36;1m# We use Invoke-Expression or just simplistic string splicing if simple enough.[0m
+2025-12-15T14:40:38.5668244Z [36;1m# Ideally just pass args.[0m
+2025-12-15T14:40:38.5668367Z [36;1m[0m
+2025-12-15T14:40:38.5668755Z [36;1m$cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg"[0m
+2025-12-15T14:40:38.5669168Z [36;1mInvoke-Expression $cmd[0m
+2025-12-15T14:40:38.5686041Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-15T14:40:38.5686295Z env:
+2025-12-15T14:40:38.5686433Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-15T14:40:38.5686626Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-15T14:40:38.5686927Z   APCA_API_KEY_ID: ***
+2025-12-15T14:40:38.5687097Z   APCA_API_SECRET_KEY: ***
+2025-12-15T14:40:38.5687227Z   ALPACA_KEY: ***
+2025-12-15T14:40:38.5687377Z   ALPACA_SECRET: ***
+2025-12-15T14:40:38.5687484Z   PYTHONUNBUFFERED: 1
+2025-12-15T14:40:38.5687595Z ##[endgroup]
+2025-12-15T14:40:39.1695813Z Starting Options Spreads Loop (dry_run=0, dte=3, slope=-0.20)
+2025-12-15T14:40:41.4100875Z [config] Slope Threshold overridden to: -0.2
+2025-12-15T14:40:41.4119909Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-15T14:40:41Z","ts_et":"2025-12-15 09:40:41 ET"}
+2025-12-15T14:40:41.4134173Z {"event":"symbols_loaded","count":120,"sample":["RKLB","HOOD","INTC","WDC","VRT"],"type":"HEARTBEAT","ts":"2025-12-15T14:40:41Z","ts_et":"2025-12-15 09:40:41 ET"}
+2025-12-15T14:40:41.7665145Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-15T14:40:41Z","ts_et":"2025-12-15 09:40:41 ET"}
+2025-12-15T14:40:42.3673980Z {"event":"scan_cycle_start","cycle":1,"time":"09:40","type":"HEARTBEAT","ts":"2025-12-15T14:40:42Z","ts_et":"2025-12-15 09:40:42 ET"}
+2025-12-15T14:40:42.3675214Z {"event":"outside_entry_window","current_time":"09:40","type":"HEARTBEAT","ts":"2025-12-15T14:40:42Z","ts_et":"2025-12-15 09:40:42 ET"}
+2025-12-15T14:40:42.6638529Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T14:40:42Z","ts_et":"2025-12-15 09:40:42 ET"}
+2025-12-15T14:40:42.6640681Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:40","type":"HEARTBEAT","ts":"2025-12-15T14:40:42Z","ts_et":"2025-12-15 09:40:42 ET"}
+2025-12-15T14:55:42.9735703Z {"event":"scan_cycle_start","cycle":2,"time":"09:55","type":"HEARTBEAT","ts":"2025-12-15T14:55:42Z","ts_et":"2025-12-15 09:55:42 ET"}
+2025-12-15T14:55:42.9736635Z {"event":"scan_start","current_time":"09:55","type":"HEARTBEAT","ts":"2025-12-15T14:55:42Z","ts_et":"2025-12-15 09:55:42 ET"}
+2025-12-15T14:55:56.3150264Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=118.13<SMA20=123.42)","ts":"2025-12-15T14:55:56Z","ts_et":"2025-12-15 09:55:56 ET"}
+2025-12-15T14:55:56.6085139Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=38.06<SMA20=38.36)","ts":"2025-12-15T14:55:56Z","ts_et":"2025-12-15 09:55:56 ET"}
+2025-12-15T14:55:57.2333018Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.51<SMA20=173.45)","ts":"2025-12-15T14:55:57Z","ts_et":"2025-12-15 09:55:57 ET"}
+2025-12-15T14:55:57.5458773Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=260.50<SMA20=263.63)","ts":"2025-12-15T14:55:57Z","ts_et":"2025-12-15 09:55:57 ET"}
+2025-12-15T14:55:58.1522309Z {"type":"SPREAD_SKIP","underlying":"CIEN","skip_reason":"Slope_too_steep(-0.2059<-0.2)","ts":"2025-12-15T14:55:58Z","ts_et":"2025-12-15 09:55:58 ET"}
+2025-12-15T14:55:58.4657066Z {"type":"SPREAD_SKIP","underlying":"STX","skip_reason":"Slope_too_steep(-0.2190<-0.2)","ts":"2025-12-15T14:55:58Z","ts_et":"2025-12-15 09:55:58 ET"}
+2025-12-15T14:55:58.7919700Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_steep(-0.8108<-0.2)","ts":"2025-12-15T14:55:58Z","ts_et":"2025-12-15 09:55:58 ET"}
+2025-12-15T14:55:59.4431161Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=183.47<SMA20=207.92)","ts":"2025-12-15T14:55:59Z","ts_et":"2025-12-15 09:55:59 ET"}
+2025-12-15T14:55:59.7782332Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.8269<-0.2)","ts":"2025-12-15T14:55:59Z","ts_et":"2025-12-15 09:55:59 ET"}
+2025-12-15T14:56:00.4007535Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.26<SMA20=33.58)","ts":"2025-12-15T14:56:00Z","ts_et":"2025-12-15 09:56:00 ET"}
+2025-12-15T14:56:01.3577661Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=351.90<SMA20=377.24)","ts":"2025-12-15T14:56:01Z","ts_et":"2025-12-15 09:56:01 ET"}
+2025-12-15T14:56:03.9458595Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=355.77<SMA20=356.44)","ts":"2025-12-15T14:56:03Z","ts_et":"2025-12-15 09:56:03 ET"}
+2025-12-15T14:56:04.2700309Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.12<SMA20=258.30)","ts":"2025-12-15T14:56:04Z","ts_et":"2025-12-15 09:56:04 ET"}
+2025-12-15T14:56:04.8903182Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=502.13<SMA20=511.51)","ts":"2025-12-15T14:56:04Z","ts_et":"2025-12-15 09:56:04 ET"}
+2025-12-15T14:56:05.8701474Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.98<SMA20=181.34)","ts":"2025-12-15T14:56:05Z","ts_et":"2025-12-15 09:56:05 ET"}
+2025-12-15T14:56:06.5431453Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.27<SMA20=126.64)","ts":"2025-12-15T14:56:06Z","ts_et":"2025-12-15 09:56:06 ET"}
+2025-12-15T14:56:07.1494503Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.89<SMA20=157.58)","ts":"2025-12-15T14:56:07Z","ts_et":"2025-12-15 09:56:07 ET"}
+2025-12-15T14:56:11.0516338Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=587.51<SMA20=591.04)","ts":"2025-12-15T14:56:11Z","ts_et":"2025-12-15 09:56:11 ET"}
+2025-12-15T14:56:12.6410317Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.84<SMA20=310.18)","ts":"2025-12-15T14:56:12Z","ts_et":"2025-12-15 09:56:12 ET"}
+2025-12-15T14:56:13.5203342Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=309.90<SMA20=310.74)","ts":"2025-12-15T14:56:13Z","ts_et":"2025-12-15 09:56:13 ET"}
+2025-12-15T14:56:13.8260721Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.43<SMA20=339.00)","ts":"2025-12-15T14:56:13Z","ts_et":"2025-12-15 09:56:13 ET"}
+2025-12-15T14:56:14.7428877Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Slope_too_steep(-0.2504<-0.2)","ts":"2025-12-15T14:56:14Z","ts_et":"2025-12-15 09:56:14 ET"}
+2025-12-15T14:56:15.3598963Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.75<SMA20=26.22)","ts":"2025-12-15T14:56:15Z","ts_et":"2025-12-15 09:56:15 ET"}
+2025-12-15T14:56:15.6432340Z {"type":"SPREAD_SIGNAL","underlying":"TXN","signal_reason":"RSI_oversold(24.0)","entry_price":177.41,"rsi":23.95,"atr":0.8439,"ts":"2025-12-15T14:56:15Z","ts_et":"2025-12-15 09:56:15 ET"}
+2025-12-15T14:56:18.4522254Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.54<SMA20=298.79)","ts":"2025-12-15T14:56:18Z","ts_et":"2025-12-15 09:56:18 ET"}
+2025-12-15T14:56:18.7482683Z {"type":"SPREAD_SIGNAL","underlying":"CRM","signal_reason":"RSI_oversold(24.9)","entry_price":257.35,"rsi":24.94,"atr":1.0004,"ts":"2025-12-15T14:56:18Z","ts_et":"2025-12-15 09:56:18 ET"}
+2025-12-15T14:56:21.5095626Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.5207<-0.2)","ts":"2025-12-15T14:56:21Z","ts_et":"2025-12-15 09:56:21 ET"}
+2025-12-15T14:56:21.8171447Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-1.1214<-0.2)","ts":"2025-12-15T14:56:21Z","ts_et":"2025-12-15 09:56:21 ET"}
+2025-12-15T14:56:25.5716647Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=224.91<SMA20=228.08)","ts":"2025-12-15T14:56:25Z","ts_et":"2025-12-15 09:56:25 ET"}
+2025-12-15T14:56:25.8820609Z {"type":"SPREAD_SIGNAL","underlying":"COP","signal_reason":"RSI_oversold(24.2)","entry_price":94.33,"rsi":24.17,"atr":0.3622,"ts":"2025-12-15T14:56:25Z","ts_et":"2025-12-15 09:56:25 ET"}
+2025-12-15T14:56:26.5157955Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=787.00<SMA20=829.47)","ts":"2025-12-15T14:56:26Z","ts_et":"2025-12-15 09:56:26 ET"}
+2025-12-15T14:56:30.6070807Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.97<SMA20=276.44)","ts":"2025-12-15T14:56:30Z","ts_et":"2025-12-15 09:56:30 ET"}
+2025-12-15T14:56:33.3785413Z {"event":"signals_found","count":3,"symbols":["TXN","CRM","COP"],"type":"HEARTBEAT","ts":"2025-12-15T14:56:33Z","ts_et":"2025-12-15 09:56:33 ET"}
+2025-12-15T14:56:34.3089436Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for TXN
+2025-12-15T14:56:34.3090289Z [spreads] TXN: Long 172.5 / Short 175.0 (width=$2.50, exp=2025-12-19)
+2025-12-15T14:56:34.8897079Z {"type":"SPREAD_SKIP","underlying":"TXN","skip_reason":"Debit_too_high(3.24>3.00)","ts":"2025-12-15T14:56:34Z","ts_et":"2025-12-15 09:56:34 ET"}
+2025-12-15T14:56:35.7903366Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for CRM
+2025-12-15T14:56:35.7904125Z [spreads] CRM: Long 260.0 / Short 262.5 (width=$2.50, exp=2025-12-19)
+2025-12-15T14:56:37.2569354Z [options] Submitting spread: CRM251219C00260000 (buy) / CRM251219C00262500 (sell) @ $1.29 debit
+2025-12-15T14:56:37.5597709Z [options] Spread order submitted: ce52a799-7252-4617-a0fc-c382df682090
+2025-12-15T14:56:37.5611905Z [registry] Recorded entry: CRM251219C00260000 (order_id=15M_OPT_CRM251219C00260000_176...)
+2025-12-15T14:56:37.5615809Z {"type":"SPREAD_ENTRY","underlying":"CRM","long_symbol":"CRM251219C00260000","short_symbol":"CRM251219C00262500","atm_strike":260.0,"otm_strike":262.5,"spread_width":2.5,"net_debit":1.29,"total_cost":129.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(24.9)","signal_rsi":24.94,"signal_atr":1.0004,"entry_ts":"2025-12-15T14:56:37Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":2.39,"short_time_value":1.1,"long_tv_pct":100.0,"short_tv_pct":100.0,"ts":"2025-12-15T14:56:37Z","ts_et":"2025-12-15 09:56:37 ET"}
+2025-12-15T14:56:38.4737078Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for COP
+2025-12-15T14:56:38.4738043Z [spreads] COP: Long 94.0 / Short 95.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T14:56:40.0079927Z [options] Submitting spread: COP251219C00094000 (buy) / COP251219C00095000 (sell) @ $0.85 debit
+2025-12-15T14:56:40.3383530Z [options] Spread order submitted: b64a1b35-6def-458e-a29d-49de7ed6c5a8
+2025-12-15T14:56:40.3400217Z [registry] Recorded entry: COP251219C00094000 (order_id=15M_OPT_COP251219C00094000_176...)
+2025-12-15T14:56:40.3402092Z {"type":"SPREAD_ENTRY","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","atm_strike":94.0,"otm_strike":95.0,"spread_width":1.0,"net_debit":0.85,"total_cost":85.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(24.2)","signal_rsi":24.17,"signal_atr":0.3622,"entry_ts":"2025-12-15T14:56:40Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":1.38,"short_time_value":0.72,"long_tv_pct":87.6,"short_tv_pct":100.0,"ts":"2025-12-15T14:56:40Z","ts_et":"2025-12-15 09:56:40 ET"}
+2025-12-15T14:56:40.3404481Z {"event":"scan_complete","signals":3,"new_entries":2,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T14:56:40Z","ts_et":"2025-12-15 09:56:40 ET"}
+2025-12-15T14:56:40.3405423Z {"event":"scan_cycle_end","cycle":2,"new_entries":2,"type":"HEARTBEAT","ts":"2025-12-15T14:56:40Z","ts_et":"2025-12-15 09:56:40 ET"}
+2025-12-15T14:56:40.3406099Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:56","type":"HEARTBEAT","ts":"2025-12-15T14:56:40Z","ts_et":"2025-12-15 09:56:40 ET"}
+2025-12-15T15:11:40.7080492Z {"event":"scan_cycle_start","cycle":3,"time":"10:11","type":"HEARTBEAT","ts":"2025-12-15T15:11:40Z","ts_et":"2025-12-15 10:11:40 ET"}
+2025-12-15T15:11:40.7083417Z {"event":"scan_start","current_time":"10:11","type":"HEARTBEAT","ts":"2025-12-15T15:11:40Z","ts_et":"2025-12-15 10:11:40 ET"}
+2025-12-15T15:11:41.5941848Z [options] Attempting spread close:
+2025-12-15T15:11:41.5942308Z [options]   Long: COP251219C00094000 @ bid=1.2
+2025-12-15T15:11:41.5942714Z [options]   Short: COP251219C00095000 @ ask=0.88
+2025-12-15T15:11:41.5943123Z [options]   Net credit: $0.32, limit_price: $0.32
+2025-12-15T15:11:41.5943587Z [options] Closing spread: COP251219C00094000 (sell) / COP251219C00095000 (buy) @ $0.32 credit
+2025-12-15T15:11:41.9026356Z [options] Spread close order submitted: 3a4b5dde-1e91-4bc7-ab2a-4272bef28884
+2025-12-15T15:11:41.9031829Z {"type":"SPREAD_EXIT","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","exit_value":0.28,"exit_reason":"SL_hit(-82.4%<=-50.0%)","pnl":-131.0,"pnl_pct":-82.4,"ts":"2025-12-15T15:11:41Z","ts_et":"2025-12-15 10:11:41 ET"}
+2025-12-15T15:11:41.9046762Z [registry] Recorded exit: COP251219C00094000 (SL_hit(-82.4%<=-50.0%))
+2025-12-15T15:11:41.9047859Z [positions] Registry updated: removed COP251219C00094000
+2025-12-15T15:11:42.4926315Z [options] Attempting spread close:
+2025-12-15T15:11:42.4927104Z [options]   Long: CRM251219C00260000 @ bid=1.57
+2025-12-15T15:11:42.4927774Z [options]   Short: CRM251219C00262500 @ ask=1.13
+2025-12-15T15:11:42.4928425Z [options]   Net credit: $0.44, limit_price: $0.44
+2025-12-15T15:11:42.4929437Z [options] Closing spread: CRM251219C00260000 (sell) / CRM251219C00262500 (buy) @ $0.44 credit
+2025-12-15T15:11:42.7949772Z [options] Spread close order submitted: 764658bd-e3b9-42da-aac2-7a3a4025f02e
+2025-12-15T15:11:42.7955503Z {"type":"SPREAD_EXIT","underlying":"CRM","long_symbol":"CRM251219C00260000","short_symbol":"CRM251219C00262500","exit_value":0.4,"exit_reason":"SL_hit(-83.1%<=-50.0%)","pnl":-196.0,"pnl_pct":-83.1,"ts":"2025-12-15T15:11:42Z","ts_et":"2025-12-15 10:11:42 ET"}
+2025-12-15T15:11:42.7966583Z [registry] Recorded exit: CRM251219C00260000 (SL_hit(-83.1%<=-50.0%))
+2025-12-15T15:11:42.7967042Z [positions] Registry updated: removed CRM251219C00260000
+2025-12-15T15:11:43.1035148Z [options] Position closed: SMCI260130C00031000
+2025-12-15T15:11:43.1038531Z {"type":"SPREAD_EXIT","underlying":"SMCI","long_symbol":"SMCI260130C00031000","short_symbol":"","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-460.0,"pnl_pct":-100.0,"ts":"2025-12-15T15:11:43Z","ts_et":"2025-12-15 10:11:43 ET"}
+2025-12-15T15:11:55.0647607Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2811<-0.2)","ts":"2025-12-15T15:11:55Z","ts_et":"2025-12-15 10:11:55 ET"}
+2025-12-15T15:11:55.4017862Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.17<SMA20=123.39)","ts":"2025-12-15T15:11:55Z","ts_et":"2025-12-15 10:11:55 ET"}
+2025-12-15T15:11:55.7124431Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.70<SMA20=38.35)","ts":"2025-12-15T15:11:55Z","ts_et":"2025-12-15 10:11:55 ET"}
+2025-12-15T15:11:56.3410750Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.94<SMA20=173.55)","ts":"2025-12-15T15:11:56Z","ts_et":"2025-12-15 10:11:56 ET"}
+2025-12-15T15:11:56.6626990Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.77<SMA20=263.51)","ts":"2025-12-15T15:11:56Z","ts_et":"2025-12-15 10:11:56 ET"}
+2025-12-15T15:11:58.1070832Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_steep(-1.0741<-0.2)","ts":"2025-12-15T15:11:58Z","ts_et":"2025-12-15 10:11:58 ET"}
+2025-12-15T15:11:59.0322454Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=181.96<SMA20=207.93)","ts":"2025-12-15T15:11:59Z","ts_et":"2025-12-15 10:11:59 ET"}
+2025-12-15T15:11:59.3633739Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.7304<-0.2)","ts":"2025-12-15T15:11:59Z","ts_et":"2025-12-15 10:11:59 ET"}
+2025-12-15T15:12:00.0870322Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.81<SMA20=33.57)","ts":"2025-12-15T15:12:00Z","ts_et":"2025-12-15 10:12:00 ET"}
+2025-12-15T15:12:01.0058841Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=350.66<SMA20=377.14)","ts":"2025-12-15T15:12:01Z","ts_et":"2025-12-15 10:12:01 ET"}
+2025-12-15T15:12:01.3592116Z {"type":"SPREAD_SKIP","underlying":"DASH","skip_reason":"Slope_too_steep(-0.2624<-0.2)","ts":"2025-12-15T15:12:01Z","ts_et":"2025-12-15 10:12:01 ET"}
+2025-12-15T15:12:04.0035430Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.00<SMA20=258.23)","ts":"2025-12-15T15:12:04Z","ts_et":"2025-12-15 10:12:04 ET"}
+2025-12-15T15:12:04.6743854Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=499.15<SMA20=511.47)","ts":"2025-12-15T15:12:04Z","ts_et":"2025-12-15 10:12:04 ET"}
+2025-12-15T15:12:05.5866259Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.25<SMA20=181.34)","ts":"2025-12-15T15:12:05Z","ts_et":"2025-12-15 10:12:05 ET"}
+2025-12-15T15:12:06.2124498Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.18<SMA20=126.69)","ts":"2025-12-15T15:12:06Z","ts_et":"2025-12-15 10:12:06 ET"}
+2025-12-15T15:12:06.8253286Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.17<SMA20=157.57)","ts":"2025-12-15T15:12:06Z","ts_et":"2025-12-15 10:12:06 ET"}
+2025-12-15T15:12:07.1351641Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=198.45<SMA20=200.32)","ts":"2025-12-15T15:12:07Z","ts_et":"2025-12-15 10:12:07 ET"}
+2025-12-15T15:12:10.4921964Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=581.64<SMA20=590.78)","ts":"2025-12-15T15:12:10Z","ts_et":"2025-12-15 10:12:10 ET"}
+2025-12-15T15:12:10.8266517Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=220.29<SMA20=220.96)","ts":"2025-12-15T15:12:10Z","ts_et":"2025-12-15 10:12:10 ET"}
+2025-12-15T15:12:12.1173380Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.66<SMA20=310.18)","ts":"2025-12-15T15:12:12Z","ts_et":"2025-12-15 10:12:12 ET"}
+2025-12-15T15:12:13.0290449Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.61<SMA20=310.73)","ts":"2025-12-15T15:12:13Z","ts_et":"2025-12-15 10:12:13 ET"}
+2025-12-15T15:12:13.3469586Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.09<SMA20=339.01)","ts":"2025-12-15T15:12:13Z","ts_et":"2025-12-15 10:12:13 ET"}
+2025-12-15T15:12:14.2833706Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Slope_too_steep(-0.2115<-0.2)","ts":"2025-12-15T15:12:14Z","ts_et":"2025-12-15 10:12:14 ET"}
+2025-12-15T15:12:14.9603187Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.77<SMA20=26.22)","ts":"2025-12-15T15:12:14Z","ts_et":"2025-12-15 10:12:14 ET"}
+2025-12-15T15:12:16.5063415Z {"type":"SPREAD_SIGNAL","underlying":"KKR","signal_reason":"RSI_oversold(23.9)","entry_price":135.07,"rsi":23.88,"atr":0.7714,"ts":"2025-12-15T15:12:16Z","ts_et":"2025-12-15 10:12:16 ET"}
+2025-12-15T15:12:17.7713762Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.3407<-0.2)","ts":"2025-12-15T15:12:17Z","ts_et":"2025-12-15 10:12:17 ET"}
+2025-12-15T15:12:18.0806396Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.24<SMA20=298.76)","ts":"2025-12-15T15:12:18Z","ts_et":"2025-12-15 10:12:18 ET"}
+2025-12-15T15:12:18.3975787Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.3514<-0.2)","ts":"2025-12-15T15:12:18Z","ts_et":"2025-12-15 10:12:18 ET"}
+2025-12-15T15:12:21.2185782Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.7455<-0.2)","ts":"2025-12-15T15:12:21Z","ts_et":"2025-12-15 10:12:21 ET"}
+2025-12-15T15:12:21.5498336Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-1.3027<-0.2)","ts":"2025-12-15T15:12:21Z","ts_et":"2025-12-15 10:12:21 ET"}
+2025-12-15T15:12:24.9297708Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2428<-0.2)","ts":"2025-12-15T15:12:24Z","ts_et":"2025-12-15 10:12:24 ET"}
+2025-12-15T15:12:25.2421995Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=224.34<SMA20=228.04)","ts":"2025-12-15T15:12:25Z","ts_et":"2025-12-15 10:12:25 ET"}
+2025-12-15T15:12:25.5482011Z {"type":"SPREAD_SIGNAL","underlying":"COP","signal_reason":"RSI_oversold(22.7)","entry_price":94.14,"rsi":22.65,"atr":0.3727,"ts":"2025-12-15T15:12:25Z","ts_et":"2025-12-15 10:12:25 ET"}
+2025-12-15T15:12:26.1395016Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=782.06<SMA20=829.33)","ts":"2025-12-15T15:12:26Z","ts_et":"2025-12-15 10:12:26 ET"}
+2025-12-15T15:12:30.0639990Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.83<SMA20=276.39)","ts":"2025-12-15T15:12:30Z","ts_et":"2025-12-15 10:12:30 ET"}
+2025-12-15T15:12:32.7530732Z {"event":"signals_found","count":2,"symbols":["KKR","COP"],"type":"HEARTBEAT","ts":"2025-12-15T15:12:32Z","ts_et":"2025-12-15 10:12:32 ET"}
+2025-12-15T15:12:33.6671300Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for KKR
+2025-12-15T15:12:33.6672287Z [spreads] KKR: Long 135.0 / Short 136.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T15:12:35.1734285Z [options] Submitting spread: KKR251219C00135000 (buy) / KKR251219C00136000 (sell) @ $1.0 debit
+2025-12-15T15:12:35.4821928Z [options] Spread order submitted: ac0300ad-06fd-4bb2-851f-d224acce0361
+2025-12-15T15:12:35.4835527Z [registry] Recorded entry: KKR251219C00135000 (order_id=15M_OPT_KKR251219C00135000_176...)
+2025-12-15T15:12:35.4839518Z {"type":"SPREAD_ENTRY","underlying":"KKR","long_symbol":"KKR251219C00135000","short_symbol":"KKR251219C00136000","atm_strike":135.0,"otm_strike":136.0,"spread_width":1.0,"net_debit":1.01,"total_cost":101.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(23.9)","signal_rsi":23.88,"signal_atr":0.7714,"entry_ts":"2025-12-15T15:12:35Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":2.65,"short_time_value":1.67,"long_tv_pct":98.7,"short_tv_pct":100.0,"ts":"2025-12-15T15:12:35Z","ts_et":"2025-12-15 10:12:35 ET"}
+2025-12-15T15:12:36.3359616Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for COP
+2025-12-15T15:12:36.3360680Z [spreads] COP: Long 97.0 / Short 97.5 (width=$0.50, exp=2025-12-19)
+2025-12-15T15:12:37.7782083Z [options] Submitting spread: COP251219C00097000 (buy) / COP251219C00097500 (sell) @ $0.19 debit
+2025-12-15T15:12:38.0976963Z [options] Spread order submitted: 305e9a99-d7a3-42e2-83c3-071407d6114b
+2025-12-15T15:12:38.0995742Z [registry] Recorded entry: COP251219C00097000 (order_id=15M_OPT_COP251219C00097000_176...)
+2025-12-15T15:12:38.1001367Z {"type":"SPREAD_ENTRY","underlying":"COP","long_symbol":"COP251219C00097000","short_symbol":"COP251219C00097500","atm_strike":97.0,"otm_strike":97.5,"spread_width":0.5,"net_debit":0.15,"total_cost":15.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(22.7)","signal_rsi":22.65,"signal_atr":0.3727,"entry_ts":"2025-12-15T15:12:38Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":0.31,"short_time_value":0.16,"long_tv_pct":100.0,"short_tv_pct":100.0,"ts":"2025-12-15T15:12:38Z","ts_et":"2025-12-15 10:12:38 ET"}
+2025-12-15T15:12:38.1008077Z {"event":"scan_complete","signals":2,"new_entries":2,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T15:12:38Z","ts_et":"2025-12-15 10:12:38 ET"}
+2025-12-15T15:12:38.1011058Z {"event":"scan_cycle_end","cycle":3,"new_entries":2,"type":"HEARTBEAT","ts":"2025-12-15T15:12:38Z","ts_et":"2025-12-15 10:12:38 ET"}
+2025-12-15T15:12:38.1013304Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:12","type":"HEARTBEAT","ts":"2025-12-15T15:12:38Z","ts_et":"2025-12-15 10:12:38 ET"}
+2025-12-15T15:27:38.4574158Z {"event":"scan_cycle_start","cycle":4,"time":"10:27","type":"HEARTBEAT","ts":"2025-12-15T15:27:38Z","ts_et":"2025-12-15 10:27:38 ET"}
+2025-12-15T15:27:38.4582315Z {"event":"scan_start","current_time":"10:27","type":"HEARTBEAT","ts":"2025-12-15T15:27:38Z","ts_et":"2025-12-15 10:27:38 ET"}
+2025-12-15T15:27:39.3202099Z [options] Attempting spread close:
+2025-12-15T15:27:39.3204144Z [options]   Long: COP251219C00097000 @ bid=0.23
+2025-12-15T15:27:39.3205659Z [options]   Short: COP251219C00097500 @ ask=0.19
+2025-12-15T15:27:39.3206980Z [options]   Net credit: $0.04, limit_price: $0.04
+2025-12-15T15:27:39.3208531Z [options] Closing spread: COP251219C00097000 (sell) / COP251219C00097500 (buy) @ $0.04 credit
+2025-12-15T15:27:39.6187388Z [options] Spread close order submitted: 125432fb-6991-4a2a-83d2-91d56e8fbfda
+2025-12-15T15:27:39.6197210Z {"type":"SPREAD_EXIT","underlying":"COP","long_symbol":"COP251219C00097000","short_symbol":"COP251219C00097500","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-33.0,"pnl_pct":-100.0,"ts":"2025-12-15T15:27:39Z","ts_et":"2025-12-15 10:27:39 ET"}
+2025-12-15T15:27:39.6213084Z [registry] Recorded exit: COP251219C00097000 (SL_hit(-100.0%<=-50.0%))
+2025-12-15T15:27:39.6213844Z [positions] Registry updated: removed COP251219C00097000
+2025-12-15T15:27:40.2113682Z [options] Attempting spread close:
+2025-12-15T15:27:40.2115245Z [options]   Long: KKR251219C00135000 @ bid=2.08
+2025-12-15T15:27:40.2116457Z [options]   Short: KKR251219C00136000 @ ask=2.09
+2025-12-15T15:27:40.2119785Z [options]   Net credit: $-0.01, limit_price: $0.01
+2025-12-15T15:27:40.2121796Z [options] Closing spread: KKR251219C00135000 (sell) / KKR251219C00136000 (buy) @ $0.01 credit
+2025-12-15T15:27:40.4964824Z [options] Spread close order submitted: 229ad8c7-4abd-447a-a257-e46b325ffb40
+2025-12-15T15:27:40.4971960Z {"type":"SPREAD_EXIT","underlying":"KKR","long_symbol":"KKR251219C00135000","short_symbol":"KKR251219C00136000","exit_value":0.05,"exit_reason":"SL_hit(-98.1%<=-50.0%)","pnl":-265.0,"pnl_pct":-98.1,"ts":"2025-12-15T15:27:40Z","ts_et":"2025-12-15 10:27:40 ET"}
+2025-12-15T15:27:40.4984854Z [registry] Recorded exit: KKR251219C00135000 (SL_hit(-98.1%<=-50.0%))
+2025-12-15T15:27:40.4986546Z [positions] Registry updated: removed KKR251219C00135000
+2025-12-15T15:27:53.0184843Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.3693<-0.2)","ts":"2025-12-15T15:27:53Z","ts_et":"2025-12-15 10:27:53 ET"}
+2025-12-15T15:27:53.3564287Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.87<SMA20=123.42)","ts":"2025-12-15T15:27:53Z","ts_et":"2025-12-15 10:27:53 ET"}
+2025-12-15T15:27:53.7240109Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.70<SMA20=38.34)","ts":"2025-12-15T15:27:53Z","ts_et":"2025-12-15 10:27:53 ET"}
+2025-12-15T15:27:54.3437698Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.79<SMA20=173.48)","ts":"2025-12-15T15:27:54Z","ts_et":"2025-12-15 10:27:54 ET"}
+2025-12-15T15:27:54.6239483Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=254.03<SMA20=263.48)","ts":"2025-12-15T15:27:54Z","ts_et":"2025-12-15 10:27:54 ET"}
+2025-12-15T15:27:55.9427701Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_steep(-0.9548<-0.2)","ts":"2025-12-15T15:27:55Z","ts_et":"2025-12-15 10:27:55 ET"}
+2025-12-15T15:27:56.7907101Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=183.76<SMA20=207.86)","ts":"2025-12-15T15:27:56Z","ts_et":"2025-12-15 10:27:56 ET"}
+2025-12-15T15:27:57.2579612Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.4697<-0.2)","ts":"2025-12-15T15:27:57Z","ts_et":"2025-12-15 10:27:57 ET"}
+2025-12-15T15:27:57.6421570Z {"type":"SPREAD_SKIP","underlying":"MDB","skip_reason":"Slope_too_steep(-0.2613<-0.2)","ts":"2025-12-15T15:27:57Z","ts_et":"2025-12-15 10:27:57 ET"}
+2025-12-15T15:27:57.9586064Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.88<SMA20=33.56)","ts":"2025-12-15T15:27:57Z","ts_et":"2025-12-15 10:27:57 ET"}
+2025-12-15T15:27:58.9429791Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=347.97<SMA20=376.97)","ts":"2025-12-15T15:27:58Z","ts_et":"2025-12-15 10:27:58 ET"}
+2025-12-15T15:27:59.2378791Z {"type":"SPREAD_SKIP","underlying":"DASH","skip_reason":"Slope_too_steep(-0.3966<-0.2)","ts":"2025-12-15T15:27:59Z","ts_et":"2025-12-15 10:27:59 ET"}
+2025-12-15T15:28:01.0564440Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.71<SMA20=131.06)","ts":"2025-12-15T15:28:01Z","ts_et":"2025-12-15 10:28:01 ET"}
+2025-12-15T15:28:01.6709424Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.23<SMA20=258.29)","ts":"2025-12-15T15:28:01Z","ts_et":"2025-12-15 10:28:01 ET"}
+2025-12-15T15:28:02.2639722Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=499.58<SMA20=511.29)","ts":"2025-12-15T15:28:02Z","ts_et":"2025-12-15 10:28:02 ET"}
+2025-12-15T15:28:03.2114360Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.34<SMA20=181.24)","ts":"2025-12-15T15:28:03Z","ts_et":"2025-12-15 10:28:03 ET"}
+2025-12-15T15:28:03.8067942Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.38<SMA20=126.68)","ts":"2025-12-15T15:28:03Z","ts_et":"2025-12-15 10:28:03 ET"}
+2025-12-15T15:28:04.4268591Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.17<SMA20=157.53)","ts":"2025-12-15T15:28:04Z","ts_et":"2025-12-15 10:28:04 ET"}
+2025-12-15T15:28:04.7276474Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=199.90<SMA20=200.31)","ts":"2025-12-15T15:28:04Z","ts_et":"2025-12-15 10:28:04 ET"}
+2025-12-15T15:28:08.1677517Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=579.69<SMA20=590.65)","ts":"2025-12-15T15:28:08Z","ts_et":"2025-12-15 10:28:08 ET"}
+2025-12-15T15:28:08.4753236Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=218.07<SMA20=220.95)","ts":"2025-12-15T15:28:08Z","ts_et":"2025-12-15 10:28:08 ET"}
+2025-12-15T15:28:09.6887625Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.22<SMA20=310.12)","ts":"2025-12-15T15:28:09Z","ts_et":"2025-12-15 10:28:09 ET"}
+2025-12-15T15:28:10.6209525Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=309.20<SMA20=310.67)","ts":"2025-12-15T15:28:10Z","ts_et":"2025-12-15 10:28:10 ET"}
+2025-12-15T15:28:10.9221668Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.92<SMA20=339.07)","ts":"2025-12-15T15:28:10Z","ts_et":"2025-12-15 10:28:10 ET"}
+2025-12-15T15:28:12.4772346Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.66<SMA20=26.21)","ts":"2025-12-15T15:28:12Z","ts_et":"2025-12-15 10:28:12 ET"}
+2025-12-15T15:28:12.7826999Z {"type":"SPREAD_SKIP","underlying":"TXN","skip_reason":"Slope_too_steep(-0.2138<-0.2)","ts":"2025-12-15T15:28:12Z","ts_et":"2025-12-15 10:28:12 ET"}
+2025-12-15T15:28:13.3975684Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.3613<-0.2)","ts":"2025-12-15T15:28:13Z","ts_et":"2025-12-15 10:28:13 ET"}
+2025-12-15T15:28:15.2880033Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.6606<-0.2)","ts":"2025-12-15T15:28:15Z","ts_et":"2025-12-15 10:28:15 ET"}
+2025-12-15T15:28:15.5885306Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.52<SMA20=298.69)","ts":"2025-12-15T15:28:15Z","ts_et":"2025-12-15 10:28:15 ET"}
+2025-12-15T15:28:15.8976734Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.5550<-0.2)","ts":"2025-12-15T15:28:15Z","ts_et":"2025-12-15 10:28:15 ET"}
+2025-12-15T15:28:18.6893710Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.9713<-0.2)","ts":"2025-12-15T15:28:18Z","ts_et":"2025-12-15 10:28:18 ET"}
+2025-12-15T15:28:19.0033929Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-1.3194<-0.2)","ts":"2025-12-15T15:28:19Z","ts_et":"2025-12-15 10:28:19 ET"}
+2025-12-15T15:28:22.2773079Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2585<-0.2)","ts":"2025-12-15T15:28:22Z","ts_et":"2025-12-15 10:28:22 ET"}
+2025-12-15T15:28:22.5735084Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.98<SMA20=228.00)","ts":"2025-12-15T15:28:22Z","ts_et":"2025-12-15 10:28:22 ET"}
+2025-12-15T15:28:22.9409392Z {"type":"SPREAD_SIGNAL","underlying":"COP","signal_reason":"RSI_oversold(21.5)","entry_price":93.985,"rsi":21.46,"atr":0.3725,"ts":"2025-12-15T15:28:22Z","ts_et":"2025-12-15 10:28:22 ET"}
+2025-12-15T15:28:23.5710902Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=778.00<SMA20=829.16)","ts":"2025-12-15T15:28:23Z","ts_et":"2025-12-15 10:28:23 ET"}
+2025-12-15T15:28:27.6310983Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.26<SMA20=276.40)","ts":"2025-12-15T15:28:27Z","ts_et":"2025-12-15 10:28:27 ET"}
+2025-12-15T15:28:27.9300595Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=225.92<SMA20=226.29)","ts":"2025-12-15T15:28:27Z","ts_et":"2025-12-15 10:28:27 ET"}
+2025-12-15T15:28:30.4316161Z {"event":"signals_found","count":1,"symbols":["COP"],"type":"HEARTBEAT","ts":"2025-12-15T15:28:30Z","ts_et":"2025-12-15 10:28:30 ET"}
+2025-12-15T15:28:31.3606212Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for COP
+2025-12-15T15:28:31.3607630Z [spreads] COP: Long 94.0 / Short 95.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T15:28:32.9359054Z [options] Submitting spread: COP251219C00094000 (buy) / COP251219C00095000 (sell) @ $0.65 debit
+2025-12-15T15:28:33.2573564Z [options] Spread order submitted: e4bc06ba-e0ac-494a-929a-039f848eabe8
+2025-12-15T15:28:33.2584353Z [registry] Recorded entry: COP251219C00094000 (order_id=15M_OPT_COP251219C00094000_176...)
+2025-12-15T15:28:33.2587255Z {"type":"SPREAD_ENTRY","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","atm_strike":94.0,"otm_strike":95.0,"spread_width":1.0,"net_debit":0.65,"total_cost":65.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(21.5)","signal_rsi":21.46,"signal_atr":0.3725,"entry_ts":"2025-12-15T15:28:33Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":1.36,"short_time_value":0.8,"long_tv_pct":93.8,"short_tv_pct":100.0,"ts":"2025-12-15T15:28:33Z","ts_et":"2025-12-15 10:28:33 ET"}
+2025-12-15T15:28:33.2591444Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T15:28:33Z","ts_et":"2025-12-15 10:28:33 ET"}
+2025-12-15T15:28:33.2592944Z {"event":"scan_cycle_end","cycle":4,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-15T15:28:33Z","ts_et":"2025-12-15 10:28:33 ET"}
+2025-12-15T15:28:33.2594418Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:28","type":"HEARTBEAT","ts":"2025-12-15T15:28:33Z","ts_et":"2025-12-15 10:28:33 ET"}
+2025-12-15T15:43:33.5953328Z {"event":"scan_cycle_start","cycle":5,"time":"10:43","type":"HEARTBEAT","ts":"2025-12-15T15:43:33Z","ts_et":"2025-12-15 10:43:33 ET"}
+2025-12-15T15:43:33.5958871Z {"event":"scan_start","current_time":"10:43","type":"HEARTBEAT","ts":"2025-12-15T15:43:33Z","ts_et":"2025-12-15 10:43:33 ET"}
+2025-12-15T15:43:34.6004298Z [options] Attempting spread close:
+2025-12-15T15:43:34.6004971Z [options]   Long: COP251219C00094000 @ bid=1.26
+2025-12-15T15:43:34.6005695Z [options]   Short: COP251219C00095000 @ ask=0.91
+2025-12-15T15:43:34.6006446Z [options]   Net credit: $0.35, limit_price: $0.35
+2025-12-15T15:43:34.6007497Z [options] Closing spread: COP251219C00094000 (sell) / COP251219C00095000 (buy) @ $0.35 credit
+2025-12-15T15:43:34.8992783Z [options] Spread close order submitted: 546b558f-e548-452e-aea2-9ddbf064c5b2
+2025-12-15T15:43:34.8999190Z {"type":"SPREAD_EXIT","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","exit_value":0.35,"exit_reason":"SL_hit(-75.4%<=-50.0%)","pnl":-107.0,"pnl_pct":-75.4,"ts":"2025-12-15T15:43:34Z","ts_et":"2025-12-15 10:43:34 ET"}
+2025-12-15T15:43:34.9013569Z [registry] Recorded exit: COP251219C00094000 (SL_hit(-75.4%<=-50.0%))
+2025-12-15T15:43:34.9014557Z [positions] Registry updated: removed COP251219C00094000
+2025-12-15T15:43:48.2113307Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.4402<-0.2)","ts":"2025-12-15T15:43:48Z","ts_et":"2025-12-15 10:43:48 ET"}
+2025-12-15T15:43:48.5419732Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.06<SMA20=123.48)","ts":"2025-12-15T15:43:48Z","ts_et":"2025-12-15 10:43:48 ET"}
+2025-12-15T15:43:48.8809683Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.39<SMA20=38.34)","ts":"2025-12-15T15:43:48Z","ts_et":"2025-12-15 10:43:48 ET"}
+2025-12-15T15:43:49.4992522Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.20<SMA20=173.54)","ts":"2025-12-15T15:43:49Z","ts_et":"2025-12-15 10:43:49 ET"}
+2025-12-15T15:43:49.7914672Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.90<SMA20=263.57)","ts":"2025-12-15T15:43:49Z","ts_et":"2025-12-15 10:43:49 ET"}
+2025-12-15T15:43:51.0189045Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_steep(-0.9947<-0.2)","ts":"2025-12-15T15:43:51Z","ts_et":"2025-12-15 10:43:51 ET"}
+2025-12-15T15:43:51.6304983Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=182.06<SMA20=207.91)","ts":"2025-12-15T15:43:51Z","ts_et":"2025-12-15 10:43:51 ET"}
+2025-12-15T15:43:51.9198156Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.4564<-0.2)","ts":"2025-12-15T15:43:51Z","ts_et":"2025-12-15 10:43:51 ET"}
+2025-12-15T15:43:52.2337096Z {"type":"SPREAD_SKIP","underlying":"MDB","skip_reason":"Slope_too_steep(-0.3075<-0.2)","ts":"2025-12-15T15:43:52Z","ts_et":"2025-12-15 10:43:52 ET"}
+2025-12-15T15:43:52.5466692Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.59<SMA20=33.56)","ts":"2025-12-15T15:43:52Z","ts_et":"2025-12-15 10:43:52 ET"}
+2025-12-15T15:43:53.4464130Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=344.65<SMA20=376.94)","ts":"2025-12-15T15:43:53Z","ts_et":"2025-12-15 10:43:53 ET"}
+2025-12-15T15:43:53.7372313Z {"type":"SPREAD_SKIP","underlying":"DASH","skip_reason":"Slope_too_steep(-0.3791<-0.2)","ts":"2025-12-15T15:43:53Z","ts_et":"2025-12-15 10:43:53 ET"}
+2025-12-15T15:43:55.6098750Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=129.86<SMA20=131.10)","ts":"2025-12-15T15:43:55Z","ts_et":"2025-12-15 10:43:55 ET"}
+2025-12-15T15:43:56.2111452Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=251.62<SMA20=258.31)","ts":"2025-12-15T15:43:56Z","ts_et":"2025-12-15 10:43:56 ET"}
+2025-12-15T15:43:56.8526094Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=495.68<SMA20=511.35)","ts":"2025-12-15T15:43:56Z","ts_et":"2025-12-15 10:43:56 ET"}
+2025-12-15T15:43:57.7831870Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=175.47<SMA20=181.28)","ts":"2025-12-15T15:43:57Z","ts_et":"2025-12-15 10:43:57 ET"}
+2025-12-15T15:43:58.4046667Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.58<SMA20=126.68)","ts":"2025-12-15T15:43:58Z","ts_et":"2025-12-15 10:43:58 ET"}
+2025-12-15T15:43:59.0063040Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.30<SMA20=157.55)","ts":"2025-12-15T15:43:59Z","ts_et":"2025-12-15 10:43:59 ET"}
+2025-12-15T15:43:59.3162429Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=199.31<SMA20=200.29)","ts":"2025-12-15T15:43:59Z","ts_et":"2025-12-15 10:43:59 ET"}
+2025-12-15T15:44:02.7970922Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=576.57<SMA20=590.78)","ts":"2025-12-15T15:44:02Z","ts_et":"2025-12-15 10:44:02 ET"}
+2025-12-15T15:44:03.1105863Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=218.32<SMA20=220.96)","ts":"2025-12-15T15:44:03Z","ts_et":"2025-12-15 10:44:03 ET"}
+2025-12-15T15:44:04.3461209Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.79<SMA20=310.18)","ts":"2025-12-15T15:44:04Z","ts_et":"2025-12-15 10:44:04 ET"}
+2025-12-15T15:44:05.3877043Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.51<SMA20=310.72)","ts":"2025-12-15T15:44:05Z","ts_et":"2025-12-15 10:44:05 ET"}
+2025-12-15T15:44:05.7092441Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.84<SMA20=339.03)","ts":"2025-12-15T15:44:05Z","ts_et":"2025-12-15 10:44:05 ET"}
+2025-12-15T15:44:06.6922846Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=289.77<SMA20=290.63)","ts":"2025-12-15T15:44:06Z","ts_et":"2025-12-15 10:44:06 ET"}
+2025-12-15T15:44:07.3442592Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.55<SMA20=26.22)","ts":"2025-12-15T15:44:07Z","ts_et":"2025-12-15 10:44:07 ET"}
+2025-12-15T15:44:07.6360785Z {"type":"SPREAD_SKIP","underlying":"TXN","skip_reason":"Slope_too_steep(-0.2009<-0.2)","ts":"2025-12-15T15:44:07Z","ts_et":"2025-12-15 10:44:07 ET"}
+2025-12-15T15:44:08.2483277Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5815<-0.2)","ts":"2025-12-15T15:44:08Z","ts_et":"2025-12-15 10:44:08 ET"}
+2025-12-15T15:44:08.8561270Z {"type":"SPREAD_SKIP","underlying":"KKR","skip_reason":"Slope_too_steep(-0.2079<-0.2)","ts":"2025-12-15T15:44:08Z","ts_et":"2025-12-15 10:44:08 ET"}
+2025-12-15T15:44:10.1886271Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.7903<-0.2)","ts":"2025-12-15T15:44:10Z","ts_et":"2025-12-15 10:44:10 ET"}
+2025-12-15T15:44:10.5106121Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.52<SMA20=298.75)","ts":"2025-12-15T15:44:10Z","ts_et":"2025-12-15 10:44:10 ET"}
+2025-12-15T15:44:10.8407862Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.6311<-0.2)","ts":"2025-12-15T15:44:10Z","ts_et":"2025-12-15 10:44:10 ET"}
+2025-12-15T15:44:13.7891235Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-1.1545<-0.2)","ts":"2025-12-15T15:44:13Z","ts_et":"2025-12-15 10:44:13 ET"}
+2025-12-15T15:44:14.1346278Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-1.2934<-0.2)","ts":"2025-12-15T15:44:14Z","ts_et":"2025-12-15 10:44:14 ET"}
+2025-12-15T15:44:14.5623868Z {"type":"SPREAD_SKIP","underlying":"META","skip_reason":"Slope_too_steep(-0.3530<-0.2)","ts":"2025-12-15T15:44:14Z","ts_et":"2025-12-15 10:44:14 ET"}
+2025-12-15T15:44:17.6628836Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.3761<-0.2)","ts":"2025-12-15T15:44:17Z","ts_et":"2025-12-15 10:44:17 ET"}
+2025-12-15T15:44:17.9666898Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.05<SMA20=228.02)","ts":"2025-12-15T15:44:17Z","ts_et":"2025-12-15 10:44:17 ET"}
+2025-12-15T15:44:18.2869560Z {"type":"SPREAD_SIGNAL","underlying":"COP","signal_reason":"RSI_oversold(23.1)","entry_price":94.045,"rsi":23.14,"atr":0.3656,"ts":"2025-12-15T15:44:18Z","ts_et":"2025-12-15 10:44:18 ET"}
+2025-12-15T15:44:18.9259971Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=776.15<SMA20=829.08)","ts":"2025-12-15T15:44:18Z","ts_et":"2025-12-15 10:44:18 ET"}
+2025-12-15T15:44:23.1628899Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.13<SMA20=276.40)","ts":"2025-12-15T15:44:23Z","ts_et":"2025-12-15 10:44:23 ET"}
+2025-12-15T15:44:23.4960034Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=224.93<SMA20=226.32)","ts":"2025-12-15T15:44:23Z","ts_et":"2025-12-15 10:44:23 ET"}
+2025-12-15T15:44:25.9565574Z {"event":"signals_found","count":1,"symbols":["COP"],"type":"HEARTBEAT","ts":"2025-12-15T15:44:25Z","ts_et":"2025-12-15 10:44:25 ET"}
+2025-12-15T15:44:26.8735220Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for COP
+2025-12-15T15:44:26.8736314Z [spreads] COP: Long 94.0 / Short 95.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T15:44:28.4013908Z [options] Submitting spread: COP251219C00094000 (buy) / COP251219C00095000 (sell) @ $0.61 debit
+2025-12-15T15:44:29.0244730Z [options] Spread order submitted: 11bc176d-ac06-4873-a76a-288704874ee1
+2025-12-15T15:44:29.0260315Z [registry] Recorded entry: COP251219C00094000 (order_id=15M_OPT_COP251219C00094000_176...)
+2025-12-15T15:44:29.0264378Z {"type":"SPREAD_ENTRY","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","atm_strike":94.0,"otm_strike":95.0,"spread_width":1.0,"net_debit":0.57,"total_cost":57.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(23.1)","signal_rsi":23.14,"signal_atr":0.3656,"entry_ts":"2025-12-15T15:44:29Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":1.16,"short_time_value":0.82,"long_tv_pct":83.5,"short_tv_pct":100.0,"ts":"2025-12-15T15:44:29Z","ts_et":"2025-12-15 10:44:29 ET"}
+2025-12-15T15:44:29.0268644Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T15:44:29Z","ts_et":"2025-12-15 10:44:29 ET"}
+2025-12-15T15:44:29.0270347Z {"event":"scan_cycle_end","cycle":5,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-15T15:44:29Z","ts_et":"2025-12-15 10:44:29 ET"}
+2025-12-15T15:44:29.0272143Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:44","type":"HEARTBEAT","ts":"2025-12-15T15:44:29Z","ts_et":"2025-12-15 10:44:29 ET"}
+2025-12-15T15:59:29.3515533Z {"event":"scan_cycle_start","cycle":6,"time":"10:59","type":"HEARTBEAT","ts":"2025-12-15T15:59:29Z","ts_et":"2025-12-15 10:59:29 ET"}
+2025-12-15T15:59:29.3517061Z {"event":"scan_start","current_time":"10:59","type":"HEARTBEAT","ts":"2025-12-15T15:59:29Z","ts_et":"2025-12-15 10:59:29 ET"}
+2025-12-15T15:59:30.2185978Z [options] Attempting spread close:
+2025-12-15T15:59:30.2186732Z [options]   Long: COP251219C00094000 @ bid=1.12
+2025-12-15T15:59:30.2187323Z [options]   Short: COP251219C00095000 @ ask=0.79
+2025-12-15T15:59:30.2187939Z [options]   Net credit: $0.33, limit_price: $0.33
+2025-12-15T15:59:30.2188816Z [options] Closing spread: COP251219C00094000 (sell) / COP251219C00095000 (buy) @ $0.33 credit
+2025-12-15T15:59:30.5675491Z [options] Spread close order submitted: 78c5449b-ddf4-49ea-98a9-b6b8c513aa21
+2025-12-15T15:59:30.5680002Z {"type":"SPREAD_EXIT","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","exit_value":0.33,"exit_reason":"SL_hit(-76.6%<=-50.0%)","pnl":-108.0,"pnl_pct":-76.6,"ts":"2025-12-15T15:59:30Z","ts_et":"2025-12-15 10:59:30 ET"}
+2025-12-15T15:59:30.5690291Z [registry] Recorded exit: COP251219C00094000 (SL_hit(-76.6%<=-50.0%))
+2025-12-15T15:59:30.5691154Z [positions] Registry updated: removed COP251219C00094000
+2025-12-15T15:59:42.8631903Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.3776<-0.2)","ts":"2025-12-15T15:59:42Z","ts_et":"2025-12-15 10:59:42 ET"}
+2025-12-15T15:59:43.2408746Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=118.58<SMA20=123.46)","ts":"2025-12-15T15:59:43Z","ts_et":"2025-12-15 10:59:43 ET"}
+2025-12-15T15:59:43.5972813Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.65<SMA20=38.35)","ts":"2025-12-15T15:59:43Z","ts_et":"2025-12-15 10:59:43 ET"}
+2025-12-15T15:59:44.2154404Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.13<SMA20=173.50)","ts":"2025-12-15T15:59:44Z","ts_et":"2025-12-15 10:59:44 ET"}
+2025-12-15T15:59:44.5263282Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=255.88<SMA20=263.59)","ts":"2025-12-15T15:59:44Z","ts_et":"2025-12-15 10:59:44 ET"}
+2025-12-15T15:59:45.7110668Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_steep(-0.2150<-0.2)","ts":"2025-12-15T15:59:45Z","ts_et":"2025-12-15 10:59:45 ET"}
+2025-12-15T15:59:46.3294398Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=183.74<SMA20=207.90)","ts":"2025-12-15T15:59:46Z","ts_et":"2025-12-15 10:59:46 ET"}
+2025-12-15T15:59:46.6232430Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.2618<-0.2)","ts":"2025-12-15T15:59:46Z","ts_et":"2025-12-15 10:59:46 ET"}
+2025-12-15T15:59:46.9423931Z {"type":"SPREAD_SKIP","underlying":"MDB","skip_reason":"Slope_too_steep(-0.2179<-0.2)","ts":"2025-12-15T15:59:46Z","ts_et":"2025-12-15 10:59:46 ET"}
+2025-12-15T15:59:47.2421861Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.72<SMA20=33.56)","ts":"2025-12-15T15:59:47Z","ts_et":"2025-12-15 10:59:47 ET"}
+2025-12-15T15:59:48.1582943Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=345.57<SMA20=376.92)","ts":"2025-12-15T15:59:48Z","ts_et":"2025-12-15 10:59:48 ET"}
+2025-12-15T15:59:48.4595283Z {"type":"SPREAD_SKIP","underlying":"DASH","skip_reason":"Slope_too_steep(-0.2840<-0.2)","ts":"2025-12-15T15:59:48Z","ts_et":"2025-12-15 10:59:48 ET"}
+2025-12-15T15:59:50.2515521Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.72<SMA20=131.10)","ts":"2025-12-15T15:59:50Z","ts_et":"2025-12-15 10:59:50 ET"}
+2025-12-15T15:59:50.8334871Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.64<SMA20=258.34)","ts":"2025-12-15T15:59:50Z","ts_et":"2025-12-15 10:59:50 ET"}
+2025-12-15T15:59:51.4449715Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=497.51<SMA20=511.37)","ts":"2025-12-15T15:59:51Z","ts_et":"2025-12-15 10:59:51 ET"}
+2025-12-15T15:59:52.3205187Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.24<SMA20=181.30)","ts":"2025-12-15T15:59:52Z","ts_et":"2025-12-15 10:59:52 ET"}
+2025-12-15T15:59:52.9305044Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.33<SMA20=126.70)","ts":"2025-12-15T15:59:52Z","ts_et":"2025-12-15 10:59:52 ET"}
+2025-12-15T15:59:53.5472176Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.11<SMA20=157.56)","ts":"2025-12-15T15:59:53Z","ts_et":"2025-12-15 10:59:53 ET"}
+2025-12-15T15:59:53.8371342Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=198.98<SMA20=200.30)","ts":"2025-12-15T15:59:53Z","ts_et":"2025-12-15 10:59:53 ET"}
+2025-12-15T15:59:57.1432038Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=580.10<SMA20=590.74)","ts":"2025-12-15T15:59:57Z","ts_et":"2025-12-15 10:59:57 ET"}
+2025-12-15T15:59:57.4406528Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=218.18<SMA20=220.94)","ts":"2025-12-15T15:59:57Z","ts_et":"2025-12-15 10:59:57 ET"}
+2025-12-15T15:59:58.6242420Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.33<SMA20=310.17)","ts":"2025-12-15T15:59:58Z","ts_et":"2025-12-15 10:59:58 ET"}
+2025-12-15T15:59:59.5129229Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=309.24<SMA20=310.72)","ts":"2025-12-15T15:59:59Z","ts_et":"2025-12-15 10:59:59 ET"}
+2025-12-15T15:59:59.8082020Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.06<SMA20=339.06)","ts":"2025-12-15T15:59:59Z","ts_et":"2025-12-15 10:59:59 ET"}
+2025-12-15T16:00:00.7006396Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Slope_too_steep(-0.2339<-0.2)","ts":"2025-12-15T16:00:00Z","ts_et":"2025-12-15 11:00:00 ET"}
+2025-12-15T16:00:01.3236610Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.73<SMA20=26.22)","ts":"2025-12-15T16:00:01Z","ts_et":"2025-12-15 11:00:01 ET"}
+2025-12-15T16:00:02.3668067Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.7751<-0.2)","ts":"2025-12-15T16:00:02Z","ts_et":"2025-12-15 11:00:02 ET"}
+2025-12-15T16:00:04.3102347Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.8071<-0.2)","ts":"2025-12-15T16:00:04Z","ts_et":"2025-12-15 11:00:04 ET"}
+2025-12-15T16:00:04.6165301Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.62<SMA20=298.77)","ts":"2025-12-15T16:00:04Z","ts_et":"2025-12-15 11:00:04 ET"}
+2025-12-15T16:00:04.9511273Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.6338<-0.2)","ts":"2025-12-15T16:00:04Z","ts_et":"2025-12-15 11:00:04 ET"}
+2025-12-15T16:00:06.6693871Z {"type":"SPREAD_SKIP","underlying":"UNH","skip_reason":"Slope_too_steep(-0.2273<-0.2)","ts":"2025-12-15T16:00:06Z","ts_et":"2025-12-15 11:00:06 ET"}
+2025-12-15T16:00:08.0422472Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-1.1784<-0.2)","ts":"2025-12-15T16:00:08Z","ts_et":"2025-12-15 11:00:08 ET"}
+2025-12-15T16:00:08.4098404Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-1.0993<-0.2)","ts":"2025-12-15T16:00:08Z","ts_et":"2025-12-15 11:00:08 ET"}
+2025-12-15T16:00:08.7335626Z {"type":"SPREAD_SKIP","underlying":"META","skip_reason":"Slope_too_steep(-0.3221<-0.2)","ts":"2025-12-15T16:00:08Z","ts_et":"2025-12-15 11:00:08 ET"}
+2025-12-15T16:00:11.9683534Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.3408<-0.2)","ts":"2025-12-15T16:00:11Z","ts_et":"2025-12-15 11:00:11 ET"}
+2025-12-15T16:00:12.3084722Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=224.10<SMA20=228.01)","ts":"2025-12-15T16:00:12Z","ts_et":"2025-12-15 11:00:12 ET"}
+2025-12-15T16:00:13.3876513Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=773.90<SMA20=829.14)","ts":"2025-12-15T16:00:13Z","ts_et":"2025-12-15 11:00:13 ET"}
+2025-12-15T16:00:17.7006401Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.56<SMA20=276.40)","ts":"2025-12-15T16:00:17Z","ts_et":"2025-12-15 11:00:17 ET"}
+2025-12-15T16:00:18.0332696Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=225.85<SMA20=226.30)","ts":"2025-12-15T16:00:18Z","ts_et":"2025-12-15 11:00:18 ET"}
+2025-12-15T16:00:20.5886161Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T16:00:20Z","ts_et":"2025-12-15 11:00:20 ET"}
+2025-12-15T16:00:20.5888418Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T16:00:20Z","ts_et":"2025-12-15 11:00:20 ET"}
+2025-12-15T16:00:20.5890619Z {"event":"scan_cycle_end","cycle":6,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T16:00:20Z","ts_et":"2025-12-15 11:00:20 ET"}
+2025-12-15T16:00:20.5892597Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:00","type":"HEARTBEAT","ts":"2025-12-15T16:00:20Z","ts_et":"2025-12-15 11:00:20 ET"}
+2025-12-15T16:15:20.9071721Z {"event":"scan_cycle_start","cycle":7,"time":"11:15","type":"HEARTBEAT","ts":"2025-12-15T16:15:20Z","ts_et":"2025-12-15 11:15:20 ET"}
+2025-12-15T16:15:20.9072437Z {"event":"scan_start","current_time":"11:15","type":"HEARTBEAT","ts":"2025-12-15T16:15:20Z","ts_et":"2025-12-15 11:15:20 ET"}
+2025-12-15T16:15:37.0577052Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.3016<-0.2)","ts":"2025-12-15T16:15:37Z","ts_et":"2025-12-15 11:15:37 ET"}
+2025-12-15T16:15:37.3754758Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=118.20<SMA20=123.49)","ts":"2025-12-15T16:15:37Z","ts_et":"2025-12-15 11:15:37 ET"}
+2025-12-15T16:15:37.6754582Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.68<SMA20=38.35)","ts":"2025-12-15T16:15:37Z","ts_et":"2025-12-15 11:15:37 ET"}
+2025-12-15T16:15:38.5594991Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.43<SMA20=173.53)","ts":"2025-12-15T16:15:38Z","ts_et":"2025-12-15 11:15:38 ET"}
+2025-12-15T16:15:38.8497490Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=256.36<SMA20=263.65)","ts":"2025-12-15T16:15:38Z","ts_et":"2025-12-15 11:15:38 ET"}
+2025-12-15T16:15:40.7797041Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.09<SMA20=207.98)","ts":"2025-12-15T16:15:40Z","ts_et":"2025-12-15 11:15:40 ET"}
+2025-12-15T16:15:41.6836208Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.72<SMA20=33.57)","ts":"2025-12-15T16:15:41Z","ts_et":"2025-12-15 11:15:41 ET"}
+2025-12-15T16:15:42.6261467Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=345.42<SMA20=377.01)","ts":"2025-12-15T16:15:42Z","ts_et":"2025-12-15 11:15:42 ET"}
+2025-12-15T16:15:44.8931496Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=131.00<SMA20=131.12)","ts":"2025-12-15T16:15:44Z","ts_et":"2025-12-15 11:15:44 ET"}
+2025-12-15T16:15:45.4910367Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.21<SMA20=258.37)","ts":"2025-12-15T16:15:45Z","ts_et":"2025-12-15 11:15:45 ET"}
+2025-12-15T16:15:46.0618744Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=495.71<SMA20=511.30)","ts":"2025-12-15T16:15:46Z","ts_et":"2025-12-15 11:15:46 ET"}
+2025-12-15T16:15:47.0099919Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.19<SMA20=181.32)","ts":"2025-12-15T16:15:47Z","ts_et":"2025-12-15 11:15:47 ET"}
+2025-12-15T16:15:47.6603455Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.77<SMA20=126.73)","ts":"2025-12-15T16:15:47Z","ts_et":"2025-12-15 11:15:47 ET"}
+2025-12-15T16:15:48.3002876Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.80<SMA20=157.55)","ts":"2025-12-15T16:15:48Z","ts_et":"2025-12-15 11:15:48 ET"}
+2025-12-15T16:15:48.6130721Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Slope_too_steep(-0.2016<-0.2)","ts":"2025-12-15T16:15:48Z","ts_et":"2025-12-15 11:15:48 ET"}
+2025-12-15T16:15:48.9087361Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.2603<-0.2)","ts":"2025-12-15T16:15:48Z","ts_et":"2025-12-15 11:15:48 ET"}
+2025-12-15T16:15:51.9313084Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=579.66<SMA20=590.76)","ts":"2025-12-15T16:15:51Z","ts_et":"2025-12-15 11:15:51 ET"}
+2025-12-15T16:15:52.2387940Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.72<SMA20=220.92)","ts":"2025-12-15T16:15:52Z","ts_et":"2025-12-15 11:15:52 ET"}
+2025-12-15T16:15:53.4587551Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.46<SMA20=310.16)","ts":"2025-12-15T16:15:53Z","ts_et":"2025-12-15 11:15:53 ET"}
+2025-12-15T16:15:54.3310320Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.34<SMA20=310.70)","ts":"2025-12-15T16:15:54Z","ts_et":"2025-12-15 11:15:54 ET"}
+2025-12-15T16:15:54.6122443Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=335.08<SMA20=339.11)","ts":"2025-12-15T16:15:54Z","ts_et":"2025-12-15 11:15:54 ET"}
+2025-12-15T16:15:56.1628307Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.78<SMA20=26.22)","ts":"2025-12-15T16:15:56Z","ts_et":"2025-12-15 11:15:56 ET"}
+2025-12-15T16:15:57.0299883Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.8783<-0.2)","ts":"2025-12-15T16:15:57Z","ts_et":"2025-12-15 11:15:57 ET"}
+2025-12-15T16:15:58.8256612Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.5047<-0.2)","ts":"2025-12-15T16:15:58Z","ts_et":"2025-12-15 11:15:58 ET"}
+2025-12-15T16:15:59.1305927Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.10<SMA20=298.72)","ts":"2025-12-15T16:15:59Z","ts_et":"2025-12-15 11:15:59 ET"}
+2025-12-15T16:15:59.4246313Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.5409<-0.2)","ts":"2025-12-15T16:15:59Z","ts_et":"2025-12-15 11:15:59 ET"}
+2025-12-15T16:16:02.0924335Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Bear_trend(close=801.71<SMA20=804.30)","ts":"2025-12-15T16:16:02Z","ts_et":"2025-12-15 11:16:02 ET"}
+2025-12-15T16:16:02.4050588Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.7915<-0.2)","ts":"2025-12-15T16:16:02Z","ts_et":"2025-12-15 11:16:02 ET"}
+2025-12-15T16:16:05.7253809Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.3269<-0.2)","ts":"2025-12-15T16:16:05Z","ts_et":"2025-12-15 11:16:05 ET"}
+2025-12-15T16:16:06.0233199Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.44<SMA20=228.01)","ts":"2025-12-15T16:16:06Z","ts_et":"2025-12-15 11:16:06 ET"}
+2025-12-15T16:16:06.3296303Z {"type":"SPREAD_SIGNAL","underlying":"COP","signal_reason":"RSI_oversold(23.2)","entry_price":93.67,"rsi":23.21,"atr":0.3622,"ts":"2025-12-15T16:16:06Z","ts_et":"2025-12-15 11:16:06 ET"}
+2025-12-15T16:16:06.9199698Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=769.67<SMA20=828.94)","ts":"2025-12-15T16:16:06Z","ts_et":"2025-12-15 11:16:06 ET"}
+2025-12-15T16:16:10.9056361Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.19<SMA20=276.41)","ts":"2025-12-15T16:16:10Z","ts_et":"2025-12-15 11:16:10 ET"}
+2025-12-15T16:16:13.6171972Z {"event":"signals_found","count":1,"symbols":["COP"],"type":"HEARTBEAT","ts":"2025-12-15T16:16:13Z","ts_et":"2025-12-15 11:16:13 ET"}
+2025-12-15T16:16:14.5073046Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for COP
+2025-12-15T16:16:14.5074187Z [spreads] COP: Long 94.0 / Short 95.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T16:16:15.9145327Z [options] Submitting spread: COP251219C00094000 (buy) / COP251219C00095000 (sell) @ $0.56 debit
+2025-12-15T16:16:16.2154632Z [options] Spread order submitted: 21dd9c31-ca18-46dc-93fe-55d35b89a0db
+2025-12-15T16:16:16.2163575Z [registry] Recorded entry: COP251219C00094000 (order_id=15M_OPT_COP251219C00094000_176...)
+2025-12-15T16:16:16.2166659Z {"type":"SPREAD_ENTRY","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","atm_strike":94.0,"otm_strike":95.0,"spread_width":1.0,"net_debit":0.6,"total_cost":60.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(23.2)","signal_rsi":23.21,"signal_atr":0.3622,"entry_ts":"2025-12-15T16:16:16Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":1.22,"short_time_value":0.62,"long_tv_pct":100.0,"short_tv_pct":100.0,"ts":"2025-12-15T16:16:16Z","ts_et":"2025-12-15 11:16:16 ET"}
+2025-12-15T16:16:16.2171046Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T16:16:16Z","ts_et":"2025-12-15 11:16:16 ET"}
+2025-12-15T16:16:16.2176004Z {"event":"scan_cycle_end","cycle":7,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-15T16:16:16Z","ts_et":"2025-12-15 11:16:16 ET"}
+2025-12-15T16:16:16.2176885Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:16","type":"HEARTBEAT","ts":"2025-12-15T16:16:16Z","ts_et":"2025-12-15 11:16:16 ET"}
+2025-12-15T16:31:16.5457729Z {"event":"scan_cycle_start","cycle":8,"time":"11:31","type":"HEARTBEAT","ts":"2025-12-15T16:31:16Z","ts_et":"2025-12-15 11:31:16 ET"}
+2025-12-15T16:31:16.5458702Z {"event":"scan_start","current_time":"11:31","type":"HEARTBEAT","ts":"2025-12-15T16:31:16Z","ts_et":"2025-12-15 11:31:16 ET"}
+2025-12-15T16:31:17.4040027Z [options] Attempting spread close:
+2025-12-15T16:31:17.4041208Z [options]   Long: COP251219C00094000 @ bid=1.2
+2025-12-15T16:31:17.4047486Z [options]   Short: COP251219C00095000 @ ask=0.86
+2025-12-15T16:31:17.4049626Z [options]   Net credit: $0.34, limit_price: $0.34
+2025-12-15T16:31:17.4051245Z [options] Closing spread: COP251219C00094000 (sell) / COP251219C00095000 (buy) @ $0.34 credit
+2025-12-15T16:31:17.6909880Z [options] Spread close order submitted: 99f48f8f-e90f-4b1d-a070-e4a6d2e8d8ab
+2025-12-15T16:31:17.6913430Z {"type":"SPREAD_EXIT","underlying":"COP","long_symbol":"COP251219C00094000","short_symbol":"COP251219C00095000","exit_value":0.34,"exit_reason":"SL_hit(-71.7%<=-50.0%)","pnl":-86.0,"pnl_pct":-71.7,"ts":"2025-12-15T16:31:17Z","ts_et":"2025-12-15 11:31:17 ET"}
+2025-12-15T16:31:17.6923167Z [registry] Recorded exit: COP251219C00094000 (SL_hit(-71.7%<=-50.0%))
+2025-12-15T16:31:17.6995164Z [positions] Registry updated: removed COP251219C00094000
+2025-12-15T16:31:29.2012265Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2854<-0.2)","ts":"2025-12-15T16:31:29Z","ts_et":"2025-12-15 11:31:29 ET"}
+2025-12-15T16:31:29.4881924Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.06<SMA20=123.51)","ts":"2025-12-15T16:31:29Z","ts_et":"2025-12-15 11:31:29 ET"}
+2025-12-15T16:31:29.7821842Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.94<SMA20=38.36)","ts":"2025-12-15T16:31:29Z","ts_et":"2025-12-15 11:31:29 ET"}
+2025-12-15T16:31:30.4649488Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=166.18<SMA20=173.70)","ts":"2025-12-15T16:31:30Z","ts_et":"2025-12-15 11:31:30 ET"}
+2025-12-15T16:31:30.7690818Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=257.62<SMA20=263.69)","ts":"2025-12-15T16:31:30Z","ts_et":"2025-12-15 11:31:30 ET"}
+2025-12-15T16:31:32.5752542Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.66<SMA20=208.01)","ts":"2025-12-15T16:31:32Z","ts_et":"2025-12-15 11:31:32 ET"}
+2025-12-15T16:31:33.4598878Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.97<SMA20=33.58)","ts":"2025-12-15T16:31:33Z","ts_et":"2025-12-15 11:31:33 ET"}
+2025-12-15T16:31:34.3979312Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=345.83<SMA20=377.01)","ts":"2025-12-15T16:31:34Z","ts_et":"2025-12-15 11:31:34 ET"}
+2025-12-15T16:31:37.1906795Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.20<SMA20=258.37)","ts":"2025-12-15T16:31:37Z","ts_et":"2025-12-15 11:31:37 ET"}
+2025-12-15T16:31:37.7916799Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=498.79<SMA20=511.45)","ts":"2025-12-15T16:31:37Z","ts_et":"2025-12-15 11:31:37 ET"}
+2025-12-15T16:31:38.7532828Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=178.26<SMA20=181.37)","ts":"2025-12-15T16:31:38Z","ts_et":"2025-12-15 11:31:38 ET"}
+2025-12-15T16:31:39.3666895Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.31<SMA20=126.76)","ts":"2025-12-15T16:31:39Z","ts_et":"2025-12-15 11:31:39 ET"}
+2025-12-15T16:31:39.9297024Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.31<SMA20=157.57)","ts":"2025-12-15T16:31:39Z","ts_et":"2025-12-15 11:31:39 ET"}
+2025-12-15T16:31:40.4995874Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.4030<-0.2)","ts":"2025-12-15T16:31:40Z","ts_et":"2025-12-15 11:31:40 ET"}
+2025-12-15T16:31:43.4508296Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=581.71<SMA20=590.76)","ts":"2025-12-15T16:31:43Z","ts_et":"2025-12-15 11:31:43 ET"}
+2025-12-15T16:31:43.7444729Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=218.50<SMA20=220.96)","ts":"2025-12-15T16:31:43Z","ts_et":"2025-12-15 11:31:43 ET"}
+2025-12-15T16:31:44.8753371Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.88<SMA20=310.16)","ts":"2025-12-15T16:31:44Z","ts_et":"2025-12-15 11:31:44 ET"}
+2025-12-15T16:31:45.7313592Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.88<SMA20=310.72)","ts":"2025-12-15T16:31:45Z","ts_et":"2025-12-15 11:31:45 ET"}
+2025-12-15T16:31:46.0140613Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=335.51<SMA20=339.14)","ts":"2025-12-15T16:31:46Z","ts_et":"2025-12-15 11:31:46 ET"}
+2025-12-15T16:31:47.4704484Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.98<SMA20=26.23)","ts":"2025-12-15T16:31:47Z","ts_et":"2025-12-15 11:31:47 ET"}
+2025-12-15T16:31:48.3968770Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.7133<-0.2)","ts":"2025-12-15T16:31:48Z","ts_et":"2025-12-15 11:31:48 ET"}
+2025-12-15T16:31:50.1663007Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.3060<-0.2)","ts":"2025-12-15T16:31:50Z","ts_et":"2025-12-15 11:31:50 ET"}
+2025-12-15T16:31:50.4625344Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.11<SMA20=298.76)","ts":"2025-12-15T16:31:50Z","ts_et":"2025-12-15 11:31:50 ET"}
+2025-12-15T16:31:50.7527950Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.4646<-0.2)","ts":"2025-12-15T16:31:50Z","ts_et":"2025-12-15 11:31:50 ET"}
+2025-12-15T16:31:53.4435402Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-1.0407<-0.2)","ts":"2025-12-15T16:31:53Z","ts_et":"2025-12-15 11:31:53 ET"}
+2025-12-15T16:31:53.7316755Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.5406<-0.2)","ts":"2025-12-15T16:31:53Z","ts_et":"2025-12-15 11:31:53 ET"}
+2025-12-15T16:31:57.1295726Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2897<-0.2)","ts":"2025-12-15T16:31:57Z","ts_et":"2025-12-15 11:31:57 ET"}
+2025-12-15T16:31:57.4591701Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=224.31<SMA20=228.04)","ts":"2025-12-15T16:31:57Z","ts_et":"2025-12-15 11:31:57 ET"}
+2025-12-15T16:31:58.3502093Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=776.02<SMA20=829.14)","ts":"2025-12-15T16:31:58Z","ts_et":"2025-12-15 11:31:58 ET"}
+2025-12-15T16:32:02.6579062Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=275.45<SMA20=276.46)","ts":"2025-12-15T16:32:02Z","ts_et":"2025-12-15 11:32:02 ET"}
+2025-12-15T16:32:03.2931039Z {"type":"SPREAD_SIGNAL","underlying":"XOM","signal_reason":"RSI_oversold(24.3)","entry_price":117.125,"rsi":24.29,"atr":0.3152,"ts":"2025-12-15T16:32:03Z","ts_et":"2025-12-15 11:32:03 ET"}
+2025-12-15T16:32:05.4250788Z {"event":"signals_found","count":1,"symbols":["XOM"],"type":"HEARTBEAT","ts":"2025-12-15T16:32:05Z","ts_et":"2025-12-15 11:32:05 ET"}
+2025-12-15T16:32:06.3317829Z [spreads] Using 4 DTE (2025-12-19) instead of 3 DTE for XOM
+2025-12-15T16:32:06.3318810Z [spreads] XOM: Long 117.0 / Short 118.0 (width=$1.00, exp=2025-12-19)
+2025-12-15T16:32:07.7961357Z [options] Submitting spread: XOM251219C00117000 (buy) / XOM251219C00118000 (sell) @ $0.56 debit
+2025-12-15T16:32:08.0772235Z [options] Spread order submitted: 3c55d2d0-5088-4d21-b542-8b42b334d8bb
+2025-12-15T16:32:08.0787641Z [registry] Recorded entry: XOM251219C00117000 (order_id=15M_OPT_XOM251219C00117000_176...)
+2025-12-15T16:32:08.0790373Z {"type":"SPREAD_ENTRY","underlying":"XOM","long_symbol":"XOM251219C00117000","short_symbol":"XOM251219C00118000","atm_strike":117.0,"otm_strike":118.0,"spread_width":1.0,"net_debit":0.56,"total_cost":56.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(24.3)","signal_rsi":24.29,"signal_atr":0.3152,"entry_ts":"2025-12-15T16:32:08Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"long_time_value":1.21,"short_time_value":0.65,"long_tv_pct":100.0,"short_tv_pct":100.0,"ts":"2025-12-15T16:32:08Z","ts_et":"2025-12-15 11:32:08 ET"}
+2025-12-15T16:32:08.0792367Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-15T16:32:08Z","ts_et":"2025-12-15 11:32:08 ET"}
+2025-12-15T16:32:08.0794228Z {"event":"scan_cycle_end","cycle":8,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-15T16:32:08Z","ts_et":"2025-12-15 11:32:08 ET"}
+2025-12-15T16:32:08.0796812Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-15T16:32:08Z","ts_et":"2025-12-15 11:32:08 ET"}
+2025-12-15T16:47:08.3948746Z {"event":"scan_cycle_start","cycle":9,"time":"11:47","type":"HEARTBEAT","ts":"2025-12-15T16:47:08Z","ts_et":"2025-12-15 11:47:08 ET"}
+2025-12-15T16:47:08.3950394Z {"event":"scan_start","current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-15T16:47:08Z","ts_et":"2025-12-15 11:47:08 ET"}
+2025-12-15T16:47:09.2701779Z [options] Attempting spread close:
+2025-12-15T16:47:09.2702133Z [options]   Long: XOM251219C00117000 @ bid=1.04
+2025-12-15T16:47:09.2702393Z [options]   Short: XOM251219C00118000 @ ask=0.67
+2025-12-15T16:47:09.2702621Z [options]   Net credit: $0.37, limit_price: $0.37
+2025-12-15T16:47:09.2702854Z [options] Closing spread: XOM251219C00117000 (sell) / XOM251219C00118000 (buy) @ $0.37 credit
+2025-12-15T16:47:09.5629584Z [options] Spread close order submitted: 0c94ebba-5be5-4b0e-a524-9d6e69609022
+2025-12-15T16:47:09.5636659Z {"type":"SPREAD_EXIT","underlying":"XOM","long_symbol":"XOM251219C00117000","short_symbol":"XOM251219C00118000","exit_value":0.37,"exit_reason":"SL_hit(-69.9%<=-50.0%)","pnl":-86.0,"pnl_pct":-69.9,"ts":"2025-12-15T16:47:09Z","ts_et":"2025-12-15 11:47:09 ET"}
+2025-12-15T16:47:09.5651909Z [registry] Recorded exit: XOM251219C00117000 (SL_hit(-69.9%<=-50.0%))
+2025-12-15T16:47:09.5652916Z [positions] Registry updated: removed XOM251219C00117000
+2025-12-15T16:47:21.3416086Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2693<-0.2)","ts":"2025-12-15T16:47:21Z","ts_et":"2025-12-15 11:47:21 ET"}
+2025-12-15T16:47:21.6255789Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.49<SMA20=123.43)","ts":"2025-12-15T16:47:21Z","ts_et":"2025-12-15 11:47:21 ET"}
+2025-12-15T16:47:21.9409737Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.51<SMA20=38.34)","ts":"2025-12-15T16:47:21Z","ts_et":"2025-12-15 11:47:21 ET"}
+2025-12-15T16:47:22.5185399Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.30<SMA20=173.64)","ts":"2025-12-15T16:47:22Z","ts_et":"2025-12-15 11:47:22 ET"}
+2025-12-15T16:47:22.8112492Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=254.69<SMA20=263.55)","ts":"2025-12-15T16:47:22Z","ts_et":"2025-12-15 11:47:22 ET"}
+2025-12-15T16:47:24.6082056Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.55<SMA20=208.00)","ts":"2025-12-15T16:47:24Z","ts_et":"2025-12-15 11:47:24 ET"}
+2025-12-15T16:47:25.4784150Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.64<SMA20=33.56)","ts":"2025-12-15T16:47:25Z","ts_et":"2025-12-15 11:47:25 ET"}
+2025-12-15T16:47:26.3781776Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=343.69<SMA20=376.90)","ts":"2025-12-15T16:47:26Z","ts_et":"2025-12-15 11:47:26 ET"}
+2025-12-15T16:47:28.4607877Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.45<SMA20=131.10)","ts":"2025-12-15T16:47:28Z","ts_et":"2025-12-15 11:47:28 ET"}
+2025-12-15T16:47:29.0529782Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.12<SMA20=258.30)","ts":"2025-12-15T16:47:29Z","ts_et":"2025-12-15 11:47:29 ET"}
+2025-12-15T16:47:29.6286305Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=495.28<SMA20=511.23)","ts":"2025-12-15T16:47:29Z","ts_et":"2025-12-15 11:47:29 ET"}
+2025-12-15T16:47:30.5472326Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.44<SMA20=181.32)","ts":"2025-12-15T16:47:30Z","ts_et":"2025-12-15 11:47:30 ET"}
+2025-12-15T16:47:31.1369879Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.17<SMA20=126.75)","ts":"2025-12-15T16:47:31Z","ts_et":"2025-12-15 11:47:31 ET"}
+2025-12-15T16:47:31.7385829Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.84<SMA20=157.55)","ts":"2025-12-15T16:47:31Z","ts_et":"2025-12-15 11:47:31 ET"}
+2025-12-15T16:47:32.3546967Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.4506<-0.2)","ts":"2025-12-15T16:47:32Z","ts_et":"2025-12-15 11:47:32 ET"}
+2025-12-15T16:47:35.3624868Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=579.44<SMA20=590.75)","ts":"2025-12-15T16:47:35Z","ts_et":"2025-12-15 11:47:35 ET"}
+2025-12-15T16:47:35.7595156Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.20<SMA20=220.91)","ts":"2025-12-15T16:47:35Z","ts_et":"2025-12-15 11:47:35 ET"}
+2025-12-15T16:47:36.9344147Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.56<SMA20=310.10)","ts":"2025-12-15T16:47:36Z","ts_et":"2025-12-15 11:47:36 ET"}
+2025-12-15T16:47:37.8162439Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.66<SMA20=310.66)","ts":"2025-12-15T16:47:37Z","ts_et":"2025-12-15 11:47:37 ET"}
+2025-12-15T16:47:38.1142944Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.95<SMA20=339.03)","ts":"2025-12-15T16:47:38Z","ts_et":"2025-12-15 11:47:38 ET"}
+2025-12-15T16:47:39.6562170Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.93<SMA20=26.23)","ts":"2025-12-15T16:47:39Z","ts_et":"2025-12-15 11:47:39 ET"}
+2025-12-15T16:47:40.5790508Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5869<-0.2)","ts":"2025-12-15T16:47:40Z","ts_et":"2025-12-15 11:47:40 ET"}
+2025-12-15T16:47:42.3970440Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_steep(-0.2043<-0.2)","ts":"2025-12-15T16:47:42Z","ts_et":"2025-12-15 11:47:42 ET"}
+2025-12-15T16:47:42.6974284Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.73<SMA20=298.70)","ts":"2025-12-15T16:47:42Z","ts_et":"2025-12-15 11:47:42 ET"}
+2025-12-15T16:47:43.0280675Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.4121<-0.2)","ts":"2025-12-15T16:47:43Z","ts_et":"2025-12-15 11:47:43 ET"}
+2025-12-15T16:47:45.7493901Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Bear_trend(close=803.21<SMA20=804.37)","ts":"2025-12-15T16:47:45Z","ts_et":"2025-12-15 11:47:45 ET"}
+2025-12-15T16:47:46.0442721Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.5078<-0.2)","ts":"2025-12-15T16:47:46Z","ts_et":"2025-12-15 11:47:46 ET"}
+2025-12-15T16:47:49.3289570Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2793<-0.2)","ts":"2025-12-15T16:47:49Z","ts_et":"2025-12-15 11:47:49 ET"}
+2025-12-15T16:47:49.6298480Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.92<SMA20=227.98)","ts":"2025-12-15T16:47:49Z","ts_et":"2025-12-15 11:47:49 ET"}
+2025-12-15T16:47:50.5780359Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=769.41<SMA20=828.88)","ts":"2025-12-15T16:47:50Z","ts_et":"2025-12-15 11:47:50 ET"}
+2025-12-15T16:47:54.5254040Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.30<SMA20=276.39)","ts":"2025-12-15T16:47:54Z","ts_et":"2025-12-15 11:47:54 ET"}
+2025-12-15T16:47:55.1326795Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.00<SMA20=117.10)","ts":"2025-12-15T16:47:55Z","ts_et":"2025-12-15 11:47:55 ET"}
+2025-12-15T16:47:57.1952614Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T16:47:57Z","ts_et":"2025-12-15 11:47:57 ET"}
+2025-12-15T16:47:57.1954574Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T16:47:57Z","ts_et":"2025-12-15 11:47:57 ET"}
+2025-12-15T16:47:57.1958596Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T16:47:57Z","ts_et":"2025-12-15 11:47:57 ET"}
+2025-12-15T16:47:57.1959162Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-15T16:47:57Z","ts_et":"2025-12-15 11:47:57 ET"}
+2025-12-15T17:02:57.4934961Z {"event":"scan_cycle_start","cycle":10,"time":"12:02","type":"HEARTBEAT","ts":"2025-12-15T17:02:57Z","ts_et":"2025-12-15 12:02:57 ET"}
+2025-12-15T17:02:57.4935754Z {"event":"scan_start","current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-15T17:02:57Z","ts_et":"2025-12-15 12:02:57 ET"}
+2025-12-15T17:03:09.9125392Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2729<-0.2)","ts":"2025-12-15T17:03:09Z","ts_et":"2025-12-15 12:03:09 ET"}
+2025-12-15T17:03:10.2170413Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.94<SMA20=123.47)","ts":"2025-12-15T17:03:10Z","ts_et":"2025-12-15 12:03:10 ET"}
+2025-12-15T17:03:10.5391122Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.67<SMA20=38.35)","ts":"2025-12-15T17:03:10Z","ts_et":"2025-12-15 12:03:10 ET"}
+2025-12-15T17:03:11.1385789Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.98<SMA20=173.66)","ts":"2025-12-15T17:03:11Z","ts_et":"2025-12-15 12:03:11 ET"}
+2025-12-15T17:03:11.4545084Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=254.18<SMA20=263.53)","ts":"2025-12-15T17:03:11Z","ts_et":"2025-12-15 12:03:11 ET"}
+2025-12-15T17:03:13.2973950Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.54<SMA20=208.00)","ts":"2025-12-15T17:03:13Z","ts_et":"2025-12-15 12:03:13 ET"}
+2025-12-15T17:03:14.1624057Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.70<SMA20=33.57)","ts":"2025-12-15T17:03:14Z","ts_et":"2025-12-15 12:03:14 ET"}
+2025-12-15T17:03:15.0692207Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=343.71<SMA20=376.92)","ts":"2025-12-15T17:03:15Z","ts_et":"2025-12-15 12:03:15 ET"}
+2025-12-15T17:03:17.2184590Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.72<SMA20=131.10)","ts":"2025-12-15T17:03:17Z","ts_et":"2025-12-15 12:03:17 ET"}
+2025-12-15T17:03:17.8314050Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.49<SMA20=258.33)","ts":"2025-12-15T17:03:17Z","ts_et":"2025-12-15 12:03:17 ET"}
+2025-12-15T17:03:18.4297641Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=496.47<SMA20=511.32)","ts":"2025-12-15T17:03:18Z","ts_et":"2025-12-15 12:03:18 ET"}
+2025-12-15T17:03:19.3193456Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.82<SMA20=181.35)","ts":"2025-12-15T17:03:19Z","ts_et":"2025-12-15 12:03:19 ET"}
+2025-12-15T17:03:20.5739720Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.88<SMA20=157.56)","ts":"2025-12-15T17:03:20Z","ts_et":"2025-12-15 12:03:20 ET"}
+2025-12-15T17:03:21.1634191Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.3312<-0.2)","ts":"2025-12-15T17:03:21Z","ts_et":"2025-12-15 12:03:21 ET"}
+2025-12-15T17:03:24.1575078Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=579.89<SMA20=590.76)","ts":"2025-12-15T17:03:24Z","ts_et":"2025-12-15 12:03:24 ET"}
+2025-12-15T17:03:24.4432517Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.53<SMA20=220.92)","ts":"2025-12-15T17:03:24Z","ts_et":"2025-12-15 12:03:24 ET"}
+2025-12-15T17:03:25.8534668Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.67<SMA20=310.11)","ts":"2025-12-15T17:03:25Z","ts_et":"2025-12-15 12:03:25 ET"}
+2025-12-15T17:03:26.8332694Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.64<SMA20=310.66)","ts":"2025-12-15T17:03:26Z","ts_et":"2025-12-15 12:03:26 ET"}
+2025-12-15T17:03:27.1173508Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.64<SMA20=339.04)","ts":"2025-12-15T17:03:27Z","ts_et":"2025-12-15 12:03:27 ET"}
+2025-12-15T17:03:28.9141977Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.00<SMA20=26.24)","ts":"2025-12-15T17:03:28Z","ts_et":"2025-12-15 12:03:28 ET"}
+2025-12-15T17:03:30.2621775Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.4866<-0.2)","ts":"2025-12-15T17:03:30Z","ts_et":"2025-12-15 12:03:30 ET"}
+2025-12-15T17:03:32.8577534Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.97<SMA20=298.72)","ts":"2025-12-15T17:03:32Z","ts_et":"2025-12-15 12:03:32 ET"}
+2025-12-15T17:03:33.2446587Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.3294<-0.2)","ts":"2025-12-15T17:03:33Z","ts_et":"2025-12-15 12:03:33 ET"}
+2025-12-15T17:03:35.9115898Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.7239<-0.2)","ts":"2025-12-15T17:03:35Z","ts_et":"2025-12-15 12:03:35 ET"}
+2025-12-15T17:03:36.2141274Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.4314<-0.2)","ts":"2025-12-15T17:03:36Z","ts_et":"2025-12-15 12:03:36 ET"}
+2025-12-15T17:03:39.5225231Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2549<-0.2)","ts":"2025-12-15T17:03:39Z","ts_et":"2025-12-15 12:03:39 ET"}
+2025-12-15T17:03:39.8213506Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.91<SMA20=227.99)","ts":"2025-12-15T17:03:39Z","ts_et":"2025-12-15 12:03:39 ET"}
+2025-12-15T17:03:40.7474720Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=771.54<SMA20=828.89)","ts":"2025-12-15T17:03:40Z","ts_et":"2025-12-15 12:03:40 ET"}
+2025-12-15T17:03:44.7424765Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.95<SMA20=276.42)","ts":"2025-12-15T17:03:44Z","ts_et":"2025-12-15 12:03:44 ET"}
+2025-12-15T17:03:45.0332244Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.35<SMA20=226.36)","ts":"2025-12-15T17:03:45Z","ts_et":"2025-12-15 12:03:45 ET"}
+2025-12-15T17:03:45.3592956Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.02<SMA20=117.11)","ts":"2025-12-15T17:03:45Z","ts_et":"2025-12-15 12:03:45 ET"}
+2025-12-15T17:03:47.5526300Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T17:03:47Z","ts_et":"2025-12-15 12:03:47 ET"}
+2025-12-15T17:03:47.5528182Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T17:03:47Z","ts_et":"2025-12-15 12:03:47 ET"}
+2025-12-15T17:03:47.5533548Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T17:03:47Z","ts_et":"2025-12-15 12:03:47 ET"}
+2025-12-15T17:03:47.5534212Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:03","type":"HEARTBEAT","ts":"2025-12-15T17:03:47Z","ts_et":"2025-12-15 12:03:47 ET"}
+2025-12-15T17:18:47.8878922Z {"event":"scan_cycle_start","cycle":11,"time":"12:18","type":"HEARTBEAT","ts":"2025-12-15T17:18:47Z","ts_et":"2025-12-15 12:18:47 ET"}
+2025-12-15T17:18:47.8880566Z {"event":"scan_start","current_time":"12:18","type":"HEARTBEAT","ts":"2025-12-15T17:18:47Z","ts_et":"2025-12-15 12:18:47 ET"}
+2025-12-15T17:19:00.1220126Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2734<-0.2)","ts":"2025-12-15T17:19:00Z","ts_et":"2025-12-15 12:19:00 ET"}
+2025-12-15T17:19:00.4420559Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.58<SMA20=123.46)","ts":"2025-12-15T17:19:00Z","ts_et":"2025-12-15 12:19:00 ET"}
+2025-12-15T17:19:00.7443991Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.56<SMA20=38.34)","ts":"2025-12-15T17:19:00Z","ts_et":"2025-12-15 12:19:00 ET"}
+2025-12-15T17:19:01.3275845Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.12<SMA20=173.65)","ts":"2025-12-15T17:19:01Z","ts_et":"2025-12-15 12:19:01 ET"}
+2025-12-15T17:19:01.6203851Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.86<SMA20=263.51)","ts":"2025-12-15T17:19:01Z","ts_et":"2025-12-15 12:19:01 ET"}
+2025-12-15T17:19:03.4766101Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.35<SMA20=208.03)","ts":"2025-12-15T17:19:03Z","ts_et":"2025-12-15 12:19:03 ET"}
+2025-12-15T17:19:04.3570746Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.68<SMA20=33.56)","ts":"2025-12-15T17:19:04Z","ts_et":"2025-12-15 12:19:04 ET"}
+2025-12-15T17:19:05.2563572Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=343.14<SMA20=376.87)","ts":"2025-12-15T17:19:05Z","ts_et":"2025-12-15 12:19:05 ET"}
+2025-12-15T17:19:07.3769204Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.63<SMA20=131.09)","ts":"2025-12-15T17:19:07Z","ts_et":"2025-12-15 12:19:07 ET"}
+2025-12-15T17:19:08.0142238Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.08<SMA20=258.37)","ts":"2025-12-15T17:19:08Z","ts_et":"2025-12-15 12:19:08 ET"}
+2025-12-15T17:19:08.6184602Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=496.89<SMA20=511.31)","ts":"2025-12-15T17:19:08Z","ts_et":"2025-12-15 12:19:08 ET"}
+2025-12-15T17:19:09.5444770Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.84<SMA20=181.34)","ts":"2025-12-15T17:19:09Z","ts_et":"2025-12-15 12:19:09 ET"}
+2025-12-15T17:19:10.1500403Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.69<SMA20=126.77)","ts":"2025-12-15T17:19:10Z","ts_et":"2025-12-15 12:19:10 ET"}
+2025-12-15T17:19:10.7615779Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.00<SMA20=157.56)","ts":"2025-12-15T17:19:10Z","ts_et":"2025-12-15 12:19:10 ET"}
+2025-12-15T17:19:11.3523624Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.2752<-0.2)","ts":"2025-12-15T17:19:11Z","ts_et":"2025-12-15 12:19:11 ET"}
+2025-12-15T17:19:14.3923966Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=578.73<SMA20=590.69)","ts":"2025-12-15T17:19:14Z","ts_et":"2025-12-15 12:19:14 ET"}
+2025-12-15T17:19:14.6781282Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.59<SMA20=220.89)","ts":"2025-12-15T17:19:14Z","ts_et":"2025-12-15 12:19:14 ET"}
+2025-12-15T17:19:15.8739261Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.26<SMA20=310.08)","ts":"2025-12-15T17:19:15Z","ts_et":"2025-12-15 12:19:15 ET"}
+2025-12-15T17:19:16.7650931Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.16<SMA20=310.62)","ts":"2025-12-15T17:19:16Z","ts_et":"2025-12-15 12:19:16 ET"}
+2025-12-15T17:19:17.0494781Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.76<SMA20=339.03)","ts":"2025-12-15T17:19:17Z","ts_et":"2025-12-15 12:19:17 ET"}
+2025-12-15T17:19:18.5717257Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.07<SMA20=26.24)","ts":"2025-12-15T17:19:18Z","ts_et":"2025-12-15 12:19:18 ET"}
+2025-12-15T17:19:19.5055572Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5655<-0.2)","ts":"2025-12-15T17:19:19Z","ts_et":"2025-12-15 12:19:19 ET"}
+2025-12-15T17:19:21.6388102Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.94<SMA20=298.70)","ts":"2025-12-15T17:19:21Z","ts_et":"2025-12-15 12:19:21 ET"}
+2025-12-15T17:19:21.9421641Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.3123<-0.2)","ts":"2025-12-15T17:19:21Z","ts_et":"2025-12-15 12:19:21 ET"}
+2025-12-15T17:19:24.6846675Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.7215<-0.2)","ts":"2025-12-15T17:19:24Z","ts_et":"2025-12-15 12:19:24 ET"}
+2025-12-15T17:19:24.9840507Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.4655<-0.2)","ts":"2025-12-15T17:19:24Z","ts_et":"2025-12-15 12:19:24 ET"}
+2025-12-15T17:19:28.3230665Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2865<-0.2)","ts":"2025-12-15T17:19:28Z","ts_et":"2025-12-15 12:19:28 ET"}
+2025-12-15T17:19:28.6193276Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.87<SMA20=227.97)","ts":"2025-12-15T17:19:28Z","ts_et":"2025-12-15 12:19:28 ET"}
+2025-12-15T17:19:29.5801915Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=771.05<SMA20=828.81)","ts":"2025-12-15T17:19:29Z","ts_et":"2025-12-15 12:19:29 ET"}
+2025-12-15T17:19:33.5872089Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.73<SMA20=276.42)","ts":"2025-12-15T17:19:33Z","ts_et":"2025-12-15 12:19:33 ET"}
+2025-12-15T17:19:33.8994756Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.26<SMA20=226.36)","ts":"2025-12-15T17:19:33Z","ts_et":"2025-12-15 12:19:33 ET"}
+2025-12-15T17:19:34.1862757Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=116.96<SMA20=117.10)","ts":"2025-12-15T17:19:34Z","ts_et":"2025-12-15 12:19:34 ET"}
+2025-12-15T17:19:36.2686982Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T17:19:36Z","ts_et":"2025-12-15 12:19:36 ET"}
+2025-12-15T17:19:36.2688789Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T17:19:36Z","ts_et":"2025-12-15 12:19:36 ET"}
+2025-12-15T17:19:36.2690538Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T17:19:36Z","ts_et":"2025-12-15 12:19:36 ET"}
+2025-12-15T17:19:36.2692201Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:19","type":"HEARTBEAT","ts":"2025-12-15T17:19:36Z","ts_et":"2025-12-15 12:19:36 ET"}
+2025-12-15T17:34:36.5747139Z {"event":"scan_cycle_start","cycle":12,"time":"12:34","type":"HEARTBEAT","ts":"2025-12-15T17:34:36Z","ts_et":"2025-12-15 12:34:36 ET"}
+2025-12-15T17:34:36.5748917Z {"event":"scan_start","current_time":"12:34","type":"HEARTBEAT","ts":"2025-12-15T17:34:36Z","ts_et":"2025-12-15 12:34:36 ET"}
+2025-12-15T17:34:48.8354873Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2380<-0.2)","ts":"2025-12-15T17:34:48Z","ts_et":"2025-12-15 12:34:48 ET"}
+2025-12-15T17:34:49.1313631Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.63<SMA20=123.44)","ts":"2025-12-15T17:34:49Z","ts_et":"2025-12-15 12:34:49 ET"}
+2025-12-15T17:34:49.4431723Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.58<SMA20=38.34)","ts":"2025-12-15T17:34:49Z","ts_et":"2025-12-15 12:34:49 ET"}
+2025-12-15T17:34:50.0631076Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.93<SMA20=173.71)","ts":"2025-12-15T17:34:50Z","ts_et":"2025-12-15 12:34:50 ET"}
+2025-12-15T17:34:50.3656004Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.63<SMA20=263.47)","ts":"2025-12-15T17:34:50Z","ts_et":"2025-12-15 12:34:50 ET"}
+2025-12-15T17:34:52.1942337Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.98<SMA20=208.06)","ts":"2025-12-15T17:34:52Z","ts_et":"2025-12-15 12:34:52 ET"}
+2025-12-15T17:34:53.0799132Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.70<SMA20=33.56)","ts":"2025-12-15T17:34:53Z","ts_et":"2025-12-15 12:34:53 ET"}
+2025-12-15T17:34:54.0092255Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=342.62<SMA20=376.84)","ts":"2025-12-15T17:34:54Z","ts_et":"2025-12-15 12:34:54 ET"}
+2025-12-15T17:34:56.2834964Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.60<SMA20=131.09)","ts":"2025-12-15T17:34:56Z","ts_et":"2025-12-15 12:34:56 ET"}
+2025-12-15T17:34:56.8847709Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.26<SMA20=258.33)","ts":"2025-12-15T17:34:56Z","ts_et":"2025-12-15 12:34:56 ET"}
+2025-12-15T17:34:57.4979084Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=496.90<SMA20=511.35)","ts":"2025-12-15T17:34:57Z","ts_et":"2025-12-15 12:34:57 ET"}
+2025-12-15T17:34:58.3976754Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.59<SMA20=181.33)","ts":"2025-12-15T17:34:58Z","ts_et":"2025-12-15 12:34:58 ET"}
+2025-12-15T17:34:59.0343030Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.58<SMA20=126.77)","ts":"2025-12-15T17:34:59Z","ts_et":"2025-12-15 12:34:59 ET"}
+2025-12-15T17:34:59.6919057Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.84<SMA20=157.55)","ts":"2025-12-15T17:34:59Z","ts_et":"2025-12-15 12:34:59 ET"}
+2025-12-15T17:35:00.3231964Z {"type":"SPREAD_SKIP","underlying":"ULTA","skip_reason":"Slope_too_steep(-0.2455<-0.2)","ts":"2025-12-15T17:35:00Z","ts_et":"2025-12-15 12:35:00 ET"}
+2025-12-15T17:35:03.3464341Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=577.73<SMA20=590.68)","ts":"2025-12-15T17:35:03Z","ts_et":"2025-12-15 12:35:03 ET"}
+2025-12-15T17:35:03.6485530Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.35<SMA20=220.93)","ts":"2025-12-15T17:35:03Z","ts_et":"2025-12-15 12:35:03 ET"}
+2025-12-15T17:35:04.8710041Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=305.32<SMA20=310.08)","ts":"2025-12-15T17:35:04Z","ts_et":"2025-12-15 12:35:04 ET"}
+2025-12-15T17:35:05.7565910Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=306.19<SMA20=310.63)","ts":"2025-12-15T17:35:05Z","ts_et":"2025-12-15 12:35:05 ET"}
+2025-12-15T17:35:06.0419666Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.59<SMA20=339.04)","ts":"2025-12-15T17:35:06Z","ts_et":"2025-12-15 12:35:06 ET"}
+2025-12-15T17:35:07.6608840Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.98<SMA20=26.23)","ts":"2025-12-15T17:35:07Z","ts_et":"2025-12-15 12:35:07 ET"}
+2025-12-15T17:35:08.5854267Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5862<-0.2)","ts":"2025-12-15T17:35:08Z","ts_et":"2025-12-15 12:35:08 ET"}
+2025-12-15T17:35:10.7233070Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.41<SMA20=298.69)","ts":"2025-12-15T17:35:10Z","ts_et":"2025-12-15 12:35:10 ET"}
+2025-12-15T17:35:11.0767347Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.2829<-0.2)","ts":"2025-12-15T17:35:11Z","ts_et":"2025-12-15 12:35:11 ET"}
+2025-12-15T17:35:13.7947817Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.5427<-0.2)","ts":"2025-12-15T17:35:13Z","ts_et":"2025-12-15 12:35:13 ET"}
+2025-12-15T17:35:14.1223776Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.3229<-0.2)","ts":"2025-12-15T17:35:14Z","ts_et":"2025-12-15 12:35:14 ET"}
+2025-12-15T17:35:17.4868701Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Slope_too_steep(-0.2522<-0.2)","ts":"2025-12-15T17:35:17Z","ts_et":"2025-12-15 12:35:17 ET"}
+2025-12-15T17:35:17.7985365Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.52<SMA20=227.96)","ts":"2025-12-15T17:35:17Z","ts_et":"2025-12-15 12:35:17 ET"}
+2025-12-15T17:35:18.6971323Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=773.63<SMA20=828.96)","ts":"2025-12-15T17:35:18Z","ts_et":"2025-12-15 12:35:18 ET"}
+2025-12-15T17:35:22.6143901Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.98<SMA20=276.42)","ts":"2025-12-15T17:35:22Z","ts_et":"2025-12-15 12:35:22 ET"}
+2025-12-15T17:35:22.9165424Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.21<SMA20=226.36)","ts":"2025-12-15T17:35:22Z","ts_et":"2025-12-15 12:35:22 ET"}
+2025-12-15T17:35:23.2243918Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=116.94<SMA20=117.10)","ts":"2025-12-15T17:35:23Z","ts_et":"2025-12-15 12:35:23 ET"}
+2025-12-15T17:35:25.2971156Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T17:35:25Z","ts_et":"2025-12-15 12:35:25 ET"}
+2025-12-15T17:35:25.2972973Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T17:35:25Z","ts_et":"2025-12-15 12:35:25 ET"}
+2025-12-15T17:35:25.2974681Z {"event":"scan_cycle_end","cycle":12,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T17:35:25Z","ts_et":"2025-12-15 12:35:25 ET"}
+2025-12-15T17:35:25.2977309Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:35","type":"HEARTBEAT","ts":"2025-12-15T17:35:25Z","ts_et":"2025-12-15 12:35:25 ET"}
+2025-12-15T17:50:25.6178516Z {"event":"scan_cycle_start","cycle":13,"time":"12:50","type":"HEARTBEAT","ts":"2025-12-15T17:50:25Z","ts_et":"2025-12-15 12:50:25 ET"}
+2025-12-15T17:50:25.6179967Z {"event":"scan_start","current_time":"12:50","type":"HEARTBEAT","ts":"2025-12-15T17:50:25Z","ts_et":"2025-12-15 12:50:25 ET"}
+2025-12-15T17:50:37.9499407Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2158<-0.2)","ts":"2025-12-15T17:50:37Z","ts_et":"2025-12-15 12:50:37 ET"}
+2025-12-15T17:50:38.2476065Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.69<SMA20=123.46)","ts":"2025-12-15T17:50:38Z","ts_et":"2025-12-15 12:50:38 ET"}
+2025-12-15T17:50:38.5874846Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.65<SMA20=38.34)","ts":"2025-12-15T17:50:38Z","ts_et":"2025-12-15 12:50:38 ET"}
+2025-12-15T17:50:39.1983527Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.29<SMA20=173.70)","ts":"2025-12-15T17:50:39Z","ts_et":"2025-12-15 12:50:39 ET"}
+2025-12-15T17:50:39.5004326Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=254.27<SMA20=263.50)","ts":"2025-12-15T17:50:39Z","ts_et":"2025-12-15 12:50:39 ET"}
+2025-12-15T17:50:41.4192962Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=186.00<SMA20=208.04)","ts":"2025-12-15T17:50:41Z","ts_et":"2025-12-15 12:50:41 ET"}
+2025-12-15T17:50:42.3198097Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.77<SMA20=33.57)","ts":"2025-12-15T17:50:42Z","ts_et":"2025-12-15 12:50:42 ET"}
+2025-12-15T17:50:43.2733340Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=342.39<SMA20=376.83)","ts":"2025-12-15T17:50:43Z","ts_et":"2025-12-15 12:50:43 ET"}
+2025-12-15T17:50:45.4724444Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.95<SMA20=131.12)","ts":"2025-12-15T17:50:45Z","ts_et":"2025-12-15 12:50:45 ET"}
+2025-12-15T17:50:46.0898296Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=252.44<SMA20=258.31)","ts":"2025-12-15T17:50:46Z","ts_et":"2025-12-15 12:50:46 ET"}
+2025-12-15T17:50:46.6968535Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=497.48<SMA20=511.35)","ts":"2025-12-15T17:50:46Z","ts_et":"2025-12-15 12:50:46 ET"}
+2025-12-15T17:50:47.5965973Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.83<SMA20=181.34)","ts":"2025-12-15T17:50:47Z","ts_et":"2025-12-15 12:50:47 ET"}
+2025-12-15T17:50:48.2288710Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.66<SMA20=126.77)","ts":"2025-12-15T17:50:48Z","ts_et":"2025-12-15 12:50:48 ET"}
+2025-12-15T17:50:48.9004266Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.19<SMA20=157.52)","ts":"2025-12-15T17:50:48Z","ts_et":"2025-12-15 12:50:48 ET"}
+2025-12-15T17:50:52.6488866Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=577.82<SMA20=590.65)","ts":"2025-12-15T17:50:52Z","ts_et":"2025-12-15 12:50:52 ET"}
+2025-12-15T17:50:52.9462169Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.50<SMA20=220.89)","ts":"2025-12-15T17:50:52Z","ts_et":"2025-12-15 12:50:52 ET"}
+2025-12-15T17:50:54.1733484Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.10<SMA20=310.07)","ts":"2025-12-15T17:50:54Z","ts_et":"2025-12-15 12:50:54 ET"}
+2025-12-15T17:50:55.0744084Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=306.92<SMA20=310.62)","ts":"2025-12-15T17:50:55Z","ts_et":"2025-12-15 12:50:55 ET"}
+2025-12-15T17:50:55.3819953Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.21<SMA20=339.05)","ts":"2025-12-15T17:50:55Z","ts_et":"2025-12-15 12:50:55 ET"}
+2025-12-15T17:50:56.9275392Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.14<SMA20=26.24)","ts":"2025-12-15T17:50:56Z","ts_et":"2025-12-15 12:50:56 ET"}
+2025-12-15T17:50:57.8350551Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5256<-0.2)","ts":"2025-12-15T17:50:57Z","ts_et":"2025-12-15 12:50:57 ET"}
+2025-12-15T17:51:00.0215624Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.44<SMA20=298.67)","ts":"2025-12-15T17:51:00Z","ts_et":"2025-12-15 12:51:00 ET"}
+2025-12-15T17:51:00.3271277Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.2077<-0.2)","ts":"2025-12-15T17:51:00Z","ts_et":"2025-12-15 12:51:00 ET"}
+2025-12-15T17:51:03.0851796Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.4822<-0.2)","ts":"2025-12-15T17:51:03Z","ts_et":"2025-12-15 12:51:03 ET"}
+2025-12-15T17:51:03.4015817Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.2414<-0.2)","ts":"2025-12-15T17:51:03Z","ts_et":"2025-12-15 12:51:03 ET"}
+2025-12-15T17:51:06.1338384Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.2028<-0.2)","ts":"2025-12-15T17:51:06Z","ts_et":"2025-12-15 12:51:06 ET"}
+2025-12-15T17:51:07.1289366Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.87<SMA20=227.95)","ts":"2025-12-15T17:51:07Z","ts_et":"2025-12-15 12:51:07 ET"}
+2025-12-15T17:51:08.0294847Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=770.74<SMA20=828.74)","ts":"2025-12-15T17:51:08Z","ts_et":"2025-12-15 12:51:08 ET"}
+2025-12-15T17:51:12.0156967Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.97<SMA20=276.42)","ts":"2025-12-15T17:51:12Z","ts_et":"2025-12-15 12:51:12 ET"}
+2025-12-15T17:51:12.3358942Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.01<SMA20=226.32)","ts":"2025-12-15T17:51:12Z","ts_et":"2025-12-15 12:51:12 ET"}
+2025-12-15T17:51:12.6272555Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.08<SMA20=117.10)","ts":"2025-12-15T17:51:12Z","ts_et":"2025-12-15 12:51:12 ET"}
+2025-12-15T17:51:14.7687639Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T17:51:14Z","ts_et":"2025-12-15 12:51:14 ET"}
+2025-12-15T17:51:14.7689529Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T17:51:14Z","ts_et":"2025-12-15 12:51:14 ET"}
+2025-12-15T17:51:14.7691369Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T17:51:14Z","ts_et":"2025-12-15 12:51:14 ET"}
+2025-12-15T17:51:14.7692762Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:51","type":"HEARTBEAT","ts":"2025-12-15T17:51:14Z","ts_et":"2025-12-15 12:51:14 ET"}
+2025-12-15T18:06:15.0916454Z {"event":"scan_cycle_start","cycle":14,"time":"13:06","type":"HEARTBEAT","ts":"2025-12-15T18:06:15Z","ts_et":"2025-12-15 13:06:15 ET"}
+2025-12-15T18:06:15.0918402Z {"event":"scan_start","current_time":"13:06","type":"HEARTBEAT","ts":"2025-12-15T18:06:15Z","ts_et":"2025-12-15 13:06:15 ET"}
+2025-12-15T18:06:29.0144027Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.51<SMA20=123.45)","ts":"2025-12-15T18:06:29Z","ts_et":"2025-12-15 13:06:29 ET"}
+2025-12-15T18:06:29.3292279Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.41<SMA20=38.34)","ts":"2025-12-15T18:06:29Z","ts_et":"2025-12-15 13:06:29 ET"}
+2025-12-15T18:06:29.9291747Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.09<SMA20=173.62)","ts":"2025-12-15T18:06:29Z","ts_et":"2025-12-15 13:06:29 ET"}
+2025-12-15T18:06:30.2619709Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=252.97<SMA20=263.49)","ts":"2025-12-15T18:06:30Z","ts_et":"2025-12-15 13:06:30 ET"}
+2025-12-15T18:06:32.1121352Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=186.29<SMA20=208.09)","ts":"2025-12-15T18:06:32Z","ts_et":"2025-12-15 13:06:32 ET"}
+2025-12-15T18:06:33.0501568Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.73<SMA20=33.56)","ts":"2025-12-15T18:06:33Z","ts_et":"2025-12-15 13:06:33 ET"}
+2025-12-15T18:06:33.9939269Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=341.29<SMA20=376.78)","ts":"2025-12-15T18:06:33Z","ts_et":"2025-12-15 13:06:33 ET"}
+2025-12-15T18:06:36.0689908Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.66<SMA20=131.09)","ts":"2025-12-15T18:06:36Z","ts_et":"2025-12-15 13:06:36 ET"}
+2025-12-15T18:06:36.6730736Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.56<SMA20=258.39)","ts":"2025-12-15T18:06:36Z","ts_et":"2025-12-15 13:06:36 ET"}
+2025-12-15T18:06:37.3356666Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=495.38<SMA20=511.26)","ts":"2025-12-15T18:06:37Z","ts_et":"2025-12-15 13:06:37 ET"}
+2025-12-15T18:06:38.2266816Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.35<SMA20=181.32)","ts":"2025-12-15T18:06:38Z","ts_et":"2025-12-15 13:06:38 ET"}
+2025-12-15T18:06:38.8275227Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.65<SMA20=126.79)","ts":"2025-12-15T18:06:38Z","ts_et":"2025-12-15 13:06:38 ET"}
+2025-12-15T18:06:44.4309725Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.13<SMA20=157.51)","ts":"2025-12-15T18:06:44Z","ts_et":"2025-12-15 13:06:44 ET"}
+2025-12-15T18:06:48.1447816Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=574.82<SMA20=590.56)","ts":"2025-12-15T18:06:48Z","ts_et":"2025-12-15 13:06:48 ET"}
+2025-12-15T18:06:48.4375346Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=216.75<SMA20=220.87)","ts":"2025-12-15T18:06:48Z","ts_et":"2025-12-15 13:06:48 ET"}
+2025-12-15T18:06:49.6118189Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=305.99<SMA20=310.10)","ts":"2025-12-15T18:06:49Z","ts_et":"2025-12-15 13:06:49 ET"}
+2025-12-15T18:06:50.5242265Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=306.94<SMA20=310.64)","ts":"2025-12-15T18:06:50Z","ts_et":"2025-12-15 13:06:50 ET"}
+2025-12-15T18:06:50.8090650Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.05<SMA20=339.05)","ts":"2025-12-15T18:06:50Z","ts_et":"2025-12-15 13:06:50 ET"}
+2025-12-15T18:06:52.3955640Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.05<SMA20=26.24)","ts":"2025-12-15T18:06:52Z","ts_et":"2025-12-15 13:06:52 ET"}
+2025-12-15T18:06:53.3366291Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5105<-0.2)","ts":"2025-12-15T18:06:53Z","ts_et":"2025-12-15 13:06:53 ET"}
+2025-12-15T18:06:55.4423792Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.11<SMA20=298.68)","ts":"2025-12-15T18:06:55Z","ts_et":"2025-12-15 13:06:55 ET"}
+2025-12-15T18:06:58.5394557Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.4454<-0.2)","ts":"2025-12-15T18:06:58Z","ts_et":"2025-12-15 13:06:58 ET"}
+2025-12-15T18:06:58.8297679Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.2149<-0.2)","ts":"2025-12-15T18:06:58Z","ts_et":"2025-12-15 13:06:58 ET"}
+2025-12-15T18:07:01.5998709Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.2592<-0.2)","ts":"2025-12-15T18:07:01Z","ts_et":"2025-12-15 13:07:01 ET"}
+2025-12-15T18:07:02.5404791Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.62<SMA20=227.96)","ts":"2025-12-15T18:07:02Z","ts_et":"2025-12-15 13:07:02 ET"}
+2025-12-15T18:07:03.4114848Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=768.22<SMA20=828.66)","ts":"2025-12-15T18:07:03Z","ts_et":"2025-12-15 13:07:03 ET"}
+2025-12-15T18:07:07.5277558Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.74<SMA20=276.42)","ts":"2025-12-15T18:07:07Z","ts_et":"2025-12-15 13:07:07 ET"}
+2025-12-15T18:07:07.8470950Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=225.68<SMA20=226.33)","ts":"2025-12-15T18:07:07Z","ts_et":"2025-12-15 13:07:07 ET"}
+2025-12-15T18:07:08.1724303Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.03<SMA20=117.11)","ts":"2025-12-15T18:07:08Z","ts_et":"2025-12-15 13:07:08 ET"}
+2025-12-15T18:07:10.4022705Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T18:07:10Z","ts_et":"2025-12-15 13:07:10 ET"}
+2025-12-15T18:07:10.4025417Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T18:07:10Z","ts_et":"2025-12-15 13:07:10 ET"}
+2025-12-15T18:07:10.4027123Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T18:07:10Z","ts_et":"2025-12-15 13:07:10 ET"}
+2025-12-15T18:07:10.4028775Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:07","type":"HEARTBEAT","ts":"2025-12-15T18:07:10Z","ts_et":"2025-12-15 13:07:10 ET"}
+2025-12-15T18:22:10.7349250Z {"event":"scan_cycle_start","cycle":15,"time":"13:22","type":"HEARTBEAT","ts":"2025-12-15T18:22:10Z","ts_et":"2025-12-15 13:22:10 ET"}
+2025-12-15T18:22:10.7350635Z {"event":"scan_start","current_time":"13:22","type":"HEARTBEAT","ts":"2025-12-15T18:22:10Z","ts_et":"2025-12-15 13:22:10 ET"}
+2025-12-15T18:22:23.9627769Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.32<SMA20=123.43)","ts":"2025-12-15T18:22:23Z","ts_et":"2025-12-15 13:22:23 ET"}
+2025-12-15T18:22:24.2806632Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.48<SMA20=38.34)","ts":"2025-12-15T18:22:24Z","ts_et":"2025-12-15 13:22:24 ET"}
+2025-12-15T18:22:24.8796414Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.47<SMA20=173.59)","ts":"2025-12-15T18:22:24Z","ts_et":"2025-12-15 13:22:24 ET"}
+2025-12-15T18:22:25.1878674Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.62<SMA20=263.50)","ts":"2025-12-15T18:22:25Z","ts_et":"2025-12-15 13:22:25 ET"}
+2025-12-15T18:22:27.0732674Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=186.15<SMA20=208.04)","ts":"2025-12-15T18:22:27Z","ts_et":"2025-12-15 13:22:27 ET"}
+2025-12-15T18:22:27.3831169Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.2928<-0.2)","ts":"2025-12-15T18:22:27Z","ts_et":"2025-12-15 13:22:27 ET"}
+2025-12-15T18:22:27.9629759Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.70<SMA20=33.56)","ts":"2025-12-15T18:22:27Z","ts_et":"2025-12-15 13:22:27 ET"}
+2025-12-15T18:22:28.8765682Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=341.16<SMA20=376.75)","ts":"2025-12-15T18:22:28Z","ts_et":"2025-12-15 13:22:28 ET"}
+2025-12-15T18:22:30.9950762Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.41<SMA20=131.09)","ts":"2025-12-15T18:22:30Z","ts_et":"2025-12-15 13:22:30 ET"}
+2025-12-15T18:22:31.6131343Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.56<SMA20=258.42)","ts":"2025-12-15T18:22:31Z","ts_et":"2025-12-15 13:22:31 ET"}
+2025-12-15T18:22:32.2111488Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=494.99<SMA20=511.27)","ts":"2025-12-15T18:22:32Z","ts_et":"2025-12-15 13:22:32 ET"}
+2025-12-15T18:22:33.1029366Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.42<SMA20=181.32)","ts":"2025-12-15T18:22:33Z","ts_et":"2025-12-15 13:22:33 ET"}
+2025-12-15T18:22:33.7715288Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.53<SMA20=126.78)","ts":"2025-12-15T18:22:33Z","ts_et":"2025-12-15 13:22:33 ET"}
+2025-12-15T18:22:34.3862466Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=149.97<SMA20=157.50)","ts":"2025-12-15T18:22:34Z","ts_et":"2025-12-15 13:22:34 ET"}
+2025-12-15T18:22:38.0220135Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=576.64<SMA20=590.57)","ts":"2025-12-15T18:22:38Z","ts_et":"2025-12-15 13:22:38 ET"}
+2025-12-15T18:22:38.3250546Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=216.07<SMA20=220.83)","ts":"2025-12-15T18:22:38Z","ts_et":"2025-12-15 13:22:38 ET"}
+2025-12-15T18:22:39.5222724Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.86<SMA20=310.11)","ts":"2025-12-15T18:22:39Z","ts_et":"2025-12-15 13:22:39 ET"}
+2025-12-15T18:22:40.4396687Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.80<SMA20=310.66)","ts":"2025-12-15T18:22:40Z","ts_et":"2025-12-15 13:22:40 ET"}
+2025-12-15T18:22:40.7340289Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.96<SMA20=339.04)","ts":"2025-12-15T18:22:40Z","ts_et":"2025-12-15 13:22:40 ET"}
+2025-12-15T18:22:42.2480194Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.12<SMA20=26.24)","ts":"2025-12-15T18:22:42Z","ts_et":"2025-12-15 13:22:42 ET"}
+2025-12-15T18:22:43.1979639Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5009<-0.2)","ts":"2025-12-15T18:22:43Z","ts_et":"2025-12-15 13:22:43 ET"}
+2025-12-15T18:22:45.2590733Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=295.52<SMA20=298.67)","ts":"2025-12-15T18:22:45Z","ts_et":"2025-12-15 13:22:45 ET"}
+2025-12-15T18:22:48.2824761Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.4029<-0.2)","ts":"2025-12-15T18:22:48Z","ts_et":"2025-12-15 13:22:48 ET"}
+2025-12-15T18:22:51.2490257Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.2986<-0.2)","ts":"2025-12-15T18:22:51Z","ts_et":"2025-12-15 13:22:51 ET"}
+2025-12-15T18:22:52.1314024Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.83<SMA20=227.95)","ts":"2025-12-15T18:22:52Z","ts_et":"2025-12-15 13:22:52 ET"}
+2025-12-15T18:22:53.0952389Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=764.54<SMA20=828.49)","ts":"2025-12-15T18:22:53Z","ts_et":"2025-12-15 13:22:53 ET"}
+2025-12-15T18:22:57.0149271Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.47<SMA20=276.39)","ts":"2025-12-15T18:22:57Z","ts_et":"2025-12-15 13:22:57 ET"}
+2025-12-15T18:22:57.3120449Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=225.79<SMA20=226.33)","ts":"2025-12-15T18:22:57Z","ts_et":"2025-12-15 13:22:57 ET"}
+2025-12-15T18:22:59.6997346Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T18:22:59Z","ts_et":"2025-12-15 13:22:59 ET"}
+2025-12-15T18:22:59.6999196Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T18:22:59Z","ts_et":"2025-12-15 13:22:59 ET"}
+2025-12-15T18:22:59.7000925Z {"event":"scan_cycle_end","cycle":15,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T18:22:59Z","ts_et":"2025-12-15 13:22:59 ET"}
+2025-12-15T18:22:59.7003007Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:22","type":"HEARTBEAT","ts":"2025-12-15T18:22:59Z","ts_et":"2025-12-15 13:22:59 ET"}
+2025-12-15T18:38:00.0211241Z {"event":"scan_cycle_start","cycle":16,"time":"13:37","type":"HEARTBEAT","ts":"2025-12-15T18:38:00Z","ts_et":"2025-12-15 13:38:00 ET"}
+2025-12-15T18:38:00.0212208Z {"event":"scan_start","current_time":"13:38","type":"HEARTBEAT","ts":"2025-12-15T18:38:00Z","ts_et":"2025-12-15 13:38:00 ET"}
+2025-12-15T18:38:12.6829527Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2097<-0.2)","ts":"2025-12-15T18:38:12Z","ts_et":"2025-12-15 13:38:12 ET"}
+2025-12-15T18:38:12.9824344Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.63<SMA20=123.40)","ts":"2025-12-15T18:38:12Z","ts_et":"2025-12-15 13:38:12 ET"}
+2025-12-15T18:38:13.2903707Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.42<SMA20=38.34)","ts":"2025-12-15T18:38:13Z","ts_et":"2025-12-15 13:38:13 ET"}
+2025-12-15T18:38:13.8806864Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.56<SMA20=173.59)","ts":"2025-12-15T18:38:13Z","ts_et":"2025-12-15 13:38:13 ET"}
+2025-12-15T18:38:14.1739669Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=252.59<SMA20=263.46)","ts":"2025-12-15T18:38:14Z","ts_et":"2025-12-15 13:38:14 ET"}
+2025-12-15T18:38:15.9845104Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.62<SMA20=208.06)","ts":"2025-12-15T18:38:15Z","ts_et":"2025-12-15 13:38:15 ET"}
+2025-12-15T18:38:16.2858643Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.4883<-0.2)","ts":"2025-12-15T18:38:16Z","ts_et":"2025-12-15 13:38:16 ET"}
+2025-12-15T18:38:16.9201575Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.52<SMA20=33.56)","ts":"2025-12-15T18:38:16Z","ts_et":"2025-12-15 13:38:16 ET"}
+2025-12-15T18:38:18.1498483Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=339.40<SMA20=376.72)","ts":"2025-12-15T18:38:18Z","ts_et":"2025-12-15 13:38:18 ET"}
+2025-12-15T18:38:20.6333624Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.27<SMA20=131.07)","ts":"2025-12-15T18:38:20Z","ts_et":"2025-12-15 13:38:20 ET"}
+2025-12-15T18:38:21.2171537Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=254.20<SMA20=258.42)","ts":"2025-12-15T18:38:21Z","ts_et":"2025-12-15 13:38:21 ET"}
+2025-12-15T18:38:21.8418899Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=493.73<SMA20=511.17)","ts":"2025-12-15T18:38:21Z","ts_et":"2025-12-15 13:38:21 ET"}
+2025-12-15T18:38:22.7576740Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.12<SMA20=181.31)","ts":"2025-12-15T18:38:22Z","ts_et":"2025-12-15 13:38:22 ET"}
+2025-12-15T18:38:23.3682046Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.97<SMA20=126.77)","ts":"2025-12-15T18:38:23Z","ts_et":"2025-12-15 13:38:23 ET"}
+2025-12-15T18:38:23.9611802Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=149.81<SMA20=157.50)","ts":"2025-12-15T18:38:23Z","ts_et":"2025-12-15 13:38:23 ET"}
+2025-12-15T18:38:24.2581807Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=200.05<SMA20=200.35)","ts":"2025-12-15T18:38:24Z","ts_et":"2025-12-15 13:38:24 ET"}
+2025-12-15T18:38:27.6574540Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=575.70<SMA20=590.64)","ts":"2025-12-15T18:38:27Z","ts_et":"2025-12-15 13:38:27 ET"}
+2025-12-15T18:38:27.9526873Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.99<SMA20=220.84)","ts":"2025-12-15T18:38:27Z","ts_et":"2025-12-15 13:38:27 ET"}
+2025-12-15T18:38:29.1390166Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.50<SMA20=310.12)","ts":"2025-12-15T18:38:29Z","ts_et":"2025-12-15 13:38:29 ET"}
+2025-12-15T18:38:30.0388941Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.43<SMA20=310.67)","ts":"2025-12-15T18:38:30Z","ts_et":"2025-12-15 13:38:30 ET"}
+2025-12-15T18:38:30.3462139Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.30<SMA20=339.01)","ts":"2025-12-15T18:38:30Z","ts_et":"2025-12-15 13:38:30 ET"}
+2025-12-15T18:38:31.2427588Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=289.68<SMA20=290.58)","ts":"2025-12-15T18:38:31Z","ts_et":"2025-12-15 13:38:31 ET"}
+2025-12-15T18:38:31.8324461Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.09<SMA20=26.24)","ts":"2025-12-15T18:38:31Z","ts_et":"2025-12-15 13:38:31 ET"}
+2025-12-15T18:38:32.7257552Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5834<-0.2)","ts":"2025-12-15T18:38:32Z","ts_et":"2025-12-15 13:38:32 ET"}
+2025-12-15T18:38:34.8146177Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.82<SMA20=298.68)","ts":"2025-12-15T18:38:34Z","ts_et":"2025-12-15 13:38:34 ET"}
+2025-12-15T18:38:37.8728307Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.3912<-0.2)","ts":"2025-12-15T18:38:37Z","ts_et":"2025-12-15 13:38:37 ET"}
+2025-12-15T18:38:38.1790350Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.2448<-0.2)","ts":"2025-12-15T18:38:38Z","ts_et":"2025-12-15 13:38:38 ET"}
+2025-12-15T18:38:40.8360815Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.3654<-0.2)","ts":"2025-12-15T18:38:40Z","ts_et":"2025-12-15 13:38:40 ET"}
+2025-12-15T18:38:41.8179989Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.37<SMA20=227.95)","ts":"2025-12-15T18:38:41Z","ts_et":"2025-12-15 13:38:41 ET"}
+2025-12-15T18:38:42.8370133Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=760.78<SMA20=828.65)","ts":"2025-12-15T18:38:42Z","ts_et":"2025-12-15 13:38:42 ET"}
+2025-12-15T18:38:46.7298885Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=274.01<SMA20=276.39)","ts":"2025-12-15T18:38:46Z","ts_et":"2025-12-15 13:38:46 ET"}
+2025-12-15T18:38:47.0255716Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.22<SMA20=226.36)","ts":"2025-12-15T18:38:47Z","ts_et":"2025-12-15 13:38:47 ET"}
+2025-12-15T18:38:47.3160744Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=116.97<SMA20=117.10)","ts":"2025-12-15T18:38:47Z","ts_et":"2025-12-15 13:38:47 ET"}
+2025-12-15T18:38:49.4986819Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T18:38:49Z","ts_et":"2025-12-15 13:38:49 ET"}
+2025-12-15T18:38:49.4988063Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T18:38:49Z","ts_et":"2025-12-15 13:38:49 ET"}
+2025-12-15T18:38:49.4989162Z {"event":"scan_cycle_end","cycle":16,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T18:38:49Z","ts_et":"2025-12-15 13:38:49 ET"}
+2025-12-15T18:38:49.4990980Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:38","type":"HEARTBEAT","ts":"2025-12-15T18:38:49Z","ts_et":"2025-12-15 13:38:49 ET"}
+2025-12-15T18:53:49.8224644Z {"event":"scan_cycle_start","cycle":17,"time":"13:53","type":"HEARTBEAT","ts":"2025-12-15T18:53:49Z","ts_et":"2025-12-15 13:53:49 ET"}
+2025-12-15T18:53:49.8226012Z {"event":"scan_start","current_time":"13:53","type":"HEARTBEAT","ts":"2025-12-15T18:53:49Z","ts_et":"2025-12-15 13:53:49 ET"}
+2025-12-15T18:54:01.9622302Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2200<-0.2)","ts":"2025-12-15T18:54:01Z","ts_et":"2025-12-15 13:54:01 ET"}
+2025-12-15T18:54:02.2611887Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.84<SMA20=123.42)","ts":"2025-12-15T18:54:02Z","ts_et":"2025-12-15 13:54:02 ET"}
+2025-12-15T18:54:02.5646130Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.45<SMA20=38.34)","ts":"2025-12-15T18:54:02Z","ts_et":"2025-12-15 13:54:02 ET"}
+2025-12-15T18:54:03.1596179Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.69<SMA20=173.61)","ts":"2025-12-15T18:54:03Z","ts_et":"2025-12-15 13:54:03 ET"}
+2025-12-15T18:54:03.4590559Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=252.49<SMA20=263.48)","ts":"2025-12-15T18:54:03Z","ts_et":"2025-12-15 13:54:03 ET"}
+2025-12-15T18:54:05.3168493Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=186.27<SMA20=208.11)","ts":"2025-12-15T18:54:05Z","ts_et":"2025-12-15 13:54:05 ET"}
+2025-12-15T18:54:05.6069825Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.6672<-0.2)","ts":"2025-12-15T18:54:05Z","ts_et":"2025-12-15 13:54:05 ET"}
+2025-12-15T18:54:06.2077700Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.59<SMA20=33.56)","ts":"2025-12-15T18:54:06Z","ts_et":"2025-12-15 13:54:06 ET"}
+2025-12-15T18:54:07.0928507Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=340.05<SMA20=376.86)","ts":"2025-12-15T18:54:07Z","ts_et":"2025-12-15 13:54:07 ET"}
+2025-12-15T18:54:09.1880153Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.56<SMA20=131.11)","ts":"2025-12-15T18:54:09Z","ts_et":"2025-12-15 13:54:09 ET"}
+2025-12-15T18:54:09.7884976Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.79<SMA20=258.39)","ts":"2025-12-15T18:54:09Z","ts_et":"2025-12-15 13:54:09 ET"}
+2025-12-15T18:54:10.3982605Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=492.50<SMA20=511.13)","ts":"2025-12-15T18:54:10Z","ts_et":"2025-12-15 13:54:10 ET"}
+2025-12-15T18:54:11.2920499Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.00<SMA20=181.32)","ts":"2025-12-15T18:54:11Z","ts_et":"2025-12-15 13:54:11 ET"}
+2025-12-15T18:54:11.8834926Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.76<SMA20=126.80)","ts":"2025-12-15T18:54:11Z","ts_et":"2025-12-15 13:54:11 ET"}
+2025-12-15T18:54:12.4733044Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=149.85<SMA20=157.53)","ts":"2025-12-15T18:54:12Z","ts_et":"2025-12-15 13:54:12 ET"}
+2025-12-15T18:54:12.7625127Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=200.25<SMA20=200.38)","ts":"2025-12-15T18:54:12Z","ts_et":"2025-12-15 13:54:12 ET"}
+2025-12-15T18:54:16.0621389Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=576.87<SMA20=590.63)","ts":"2025-12-15T18:54:16Z","ts_et":"2025-12-15 13:54:16 ET"}
+2025-12-15T18:54:16.3495137Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.73<SMA20=220.83)","ts":"2025-12-15T18:54:16Z","ts_et":"2025-12-15 13:54:16 ET"}
+2025-12-15T18:54:17.5138612Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.39<SMA20=310.17)","ts":"2025-12-15T18:54:17Z","ts_et":"2025-12-15 13:54:17 ET"}
+2025-12-15T18:54:18.4136688Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.12<SMA20=310.71)","ts":"2025-12-15T18:54:18Z","ts_et":"2025-12-15 13:54:18 ET"}
+2025-12-15T18:54:18.7039341Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.82<SMA20=339.07)","ts":"2025-12-15T18:54:18Z","ts_et":"2025-12-15 13:54:18 ET"}
+2025-12-15T18:54:19.6121693Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=290.37<SMA20=290.61)","ts":"2025-12-15T18:54:19Z","ts_et":"2025-12-15 13:54:19 ET"}
+2025-12-15T18:54:20.2176337Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.16<SMA20=26.24)","ts":"2025-12-15T18:54:20Z","ts_et":"2025-12-15 13:54:20 ET"}
+2025-12-15T18:54:21.1083181Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5929<-0.2)","ts":"2025-12-15T18:54:21Z","ts_et":"2025-12-15 13:54:21 ET"}
+2025-12-15T18:54:23.1990817Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.85<SMA20=298.64)","ts":"2025-12-15T18:54:23Z","ts_et":"2025-12-15 13:54:23 ET"}
+2025-12-15T18:54:26.1959124Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.3303<-0.2)","ts":"2025-12-15T18:54:26Z","ts_et":"2025-12-15 13:54:26 ET"}
+2025-12-15T18:54:26.5028635Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.2668<-0.2)","ts":"2025-12-15T18:54:26Z","ts_et":"2025-12-15 13:54:26 ET"}
+2025-12-15T18:54:29.1141614Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.3808<-0.2)","ts":"2025-12-15T18:54:29Z","ts_et":"2025-12-15 13:54:29 ET"}
+2025-12-15T18:54:30.0291966Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.51<SMA20=227.97)","ts":"2025-12-15T18:54:30Z","ts_et":"2025-12-15 13:54:30 ET"}
+2025-12-15T18:54:30.9389711Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=765.00<SMA20=828.40)","ts":"2025-12-15T18:54:30Z","ts_et":"2025-12-15 13:54:30 ET"}
+2025-12-15T18:54:34.8442753Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.69<SMA20=276.38)","ts":"2025-12-15T18:54:34Z","ts_et":"2025-12-15 13:54:34 ET"}
+2025-12-15T18:54:35.1458250Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.15<SMA20=226.36)","ts":"2025-12-15T18:54:35Z","ts_et":"2025-12-15 13:54:35 ET"}
+2025-12-15T18:54:35.4472899Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.02<SMA20=117.11)","ts":"2025-12-15T18:54:35Z","ts_et":"2025-12-15 13:54:35 ET"}
+2025-12-15T18:54:37.5753601Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T18:54:37Z","ts_et":"2025-12-15 13:54:37 ET"}
+2025-12-15T18:54:37.5756908Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T18:54:37Z","ts_et":"2025-12-15 13:54:37 ET"}
+2025-12-15T18:54:37.5758222Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T18:54:37Z","ts_et":"2025-12-15 13:54:37 ET"}
+2025-12-15T18:54:37.5759548Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:54","type":"HEARTBEAT","ts":"2025-12-15T18:54:37Z","ts_et":"2025-12-15 13:54:37 ET"}
+2025-12-15T19:09:37.9126201Z {"event":"scan_cycle_start","cycle":18,"time":"14:09","type":"HEARTBEAT","ts":"2025-12-15T19:09:37Z","ts_et":"2025-12-15 14:09:37 ET"}
+2025-12-15T19:09:37.9128563Z {"event":"scan_start","current_time":"14:09","type":"HEARTBEAT","ts":"2025-12-15T19:09:37Z","ts_et":"2025-12-15 14:09:37 ET"}
+2025-12-15T19:09:49.8800560Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_steep(-0.2069<-0.2)","ts":"2025-12-15T19:09:49Z","ts_et":"2025-12-15 14:09:49 ET"}
+2025-12-15T19:09:50.1718787Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=117.26<SMA20=123.43)","ts":"2025-12-15T19:09:50Z","ts_et":"2025-12-15 14:09:50 ET"}
+2025-12-15T19:09:50.4822918Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.59<SMA20=38.35)","ts":"2025-12-15T19:09:50Z","ts_et":"2025-12-15 14:09:50 ET"}
+2025-12-15T19:09:51.0637678Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.02<SMA20=173.62)","ts":"2025-12-15T19:09:51Z","ts_et":"2025-12-15 14:09:51 ET"}
+2025-12-15T19:09:51.3984166Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.79<SMA20=263.52)","ts":"2025-12-15T19:09:51Z","ts_et":"2025-12-15 14:09:51 ET"}
+2025-12-15T19:09:53.1552303Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=187.27<SMA20=208.10)","ts":"2025-12-15T19:09:53Z","ts_et":"2025-12-15 14:09:53 ET"}
+2025-12-15T19:09:53.4637956Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.6827<-0.2)","ts":"2025-12-15T19:09:53Z","ts_et":"2025-12-15 14:09:53 ET"}
+2025-12-15T19:09:54.0304565Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.71<SMA20=33.56)","ts":"2025-12-15T19:09:54Z","ts_et":"2025-12-15 14:09:54 ET"}
+2025-12-15T19:09:54.9491478Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=342.38<SMA20=376.79)","ts":"2025-12-15T19:09:54Z","ts_et":"2025-12-15 14:09:54 ET"}
+2025-12-15T19:09:57.1828900Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.88<SMA20=131.12)","ts":"2025-12-15T19:09:57Z","ts_et":"2025-12-15 14:09:57 ET"}
+2025-12-15T19:09:57.7753119Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=254.68<SMA20=258.44)","ts":"2025-12-15T19:09:57Z","ts_et":"2025-12-15 14:09:57 ET"}
+2025-12-15T19:09:58.3796989Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=493.75<SMA20=511.14)","ts":"2025-12-15T19:09:58Z","ts_et":"2025-12-15 14:09:58 ET"}
+2025-12-15T19:09:59.3010975Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.47<SMA20=181.33)","ts":"2025-12-15T19:09:59Z","ts_et":"2025-12-15 14:09:59 ET"}
+2025-12-15T19:10:00.4910623Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.45<SMA20=157.54)","ts":"2025-12-15T19:10:00Z","ts_et":"2025-12-15 14:10:00 ET"}
+2025-12-15T19:10:04.1337999Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=578.11<SMA20=590.62)","ts":"2025-12-15T19:10:04Z","ts_et":"2025-12-15 14:10:04 ET"}
+2025-12-15T19:10:04.4483519Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.95<SMA20=220.83)","ts":"2025-12-15T19:10:04Z","ts_et":"2025-12-15 14:10:04 ET"}
+2025-12-15T19:10:05.6773226Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.98<SMA20=310.19)","ts":"2025-12-15T19:10:05Z","ts_et":"2025-12-15 14:10:05 ET"}
+2025-12-15T19:10:06.5730281Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.91<SMA20=310.74)","ts":"2025-12-15T19:10:06Z","ts_et":"2025-12-15 14:10:06 ET"}
+2025-12-15T19:10:06.8733742Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.17<SMA20=339.06)","ts":"2025-12-15T19:10:06Z","ts_et":"2025-12-15 14:10:06 ET"}
+2025-12-15T19:10:08.4468668Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.13<SMA20=26.24)","ts":"2025-12-15T19:10:08Z","ts_et":"2025-12-15 14:10:08 ET"}
+2025-12-15T19:10:09.3272197Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.6018<-0.2)","ts":"2025-12-15T19:10:09Z","ts_et":"2025-12-15 14:10:09 ET"}
+2025-12-15T19:10:11.4386155Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.63<SMA20=298.63)","ts":"2025-12-15T19:10:11Z","ts_et":"2025-12-15 14:10:11 ET"}
+2025-12-15T19:10:11.7364119Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_steep(-0.2044<-0.2)","ts":"2025-12-15T19:10:11Z","ts_et":"2025-12-15 14:10:11 ET"}
+2025-12-15T19:10:14.4802909Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.2798<-0.2)","ts":"2025-12-15T19:10:14Z","ts_et":"2025-12-15 14:10:14 ET"}
+2025-12-15T19:10:14.8342289Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.3382<-0.2)","ts":"2025-12-15T19:10:14Z","ts_et":"2025-12-15 14:10:14 ET"}
+2025-12-15T19:10:17.5467532Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.2993<-0.2)","ts":"2025-12-15T19:10:17Z","ts_et":"2025-12-15 14:10:17 ET"}
+2025-12-15T19:10:18.5484689Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.81<SMA20=227.99)","ts":"2025-12-15T19:10:18Z","ts_et":"2025-12-15 14:10:18 ET"}
+2025-12-15T19:10:19.4647932Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=762.04<SMA20=828.61)","ts":"2025-12-15T19:10:19Z","ts_et":"2025-12-15 14:10:19 ET"}
+2025-12-15T19:10:23.3736314Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.94<SMA20=276.37)","ts":"2025-12-15T19:10:23Z","ts_et":"2025-12-15 14:10:23 ET"}
+2025-12-15T19:10:23.6678043Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.34<SMA20=226.38)","ts":"2025-12-15T19:10:23Z","ts_et":"2025-12-15 14:10:23 ET"}
+2025-12-15T19:10:26.0965800Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T19:10:26Z","ts_et":"2025-12-15 14:10:26 ET"}
+2025-12-15T19:10:26.0967335Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T19:10:26Z","ts_et":"2025-12-15 14:10:26 ET"}
+2025-12-15T19:10:26.0968654Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T19:10:26Z","ts_et":"2025-12-15 14:10:26 ET"}
+2025-12-15T19:10:26.0969940Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:10","type":"HEARTBEAT","ts":"2025-12-15T19:10:26Z","ts_et":"2025-12-15 14:10:26 ET"}
+2025-12-15T19:25:26.4055252Z {"event":"scan_cycle_start","cycle":19,"time":"14:25","type":"HEARTBEAT","ts":"2025-12-15T19:25:26Z","ts_et":"2025-12-15 14:25:26 ET"}
+2025-12-15T19:25:26.4056878Z {"event":"scan_start","current_time":"14:25","type":"HEARTBEAT","ts":"2025-12-15T19:25:26Z","ts_et":"2025-12-15 14:25:26 ET"}
+2025-12-15T19:25:39.4142779Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.90<SMA20=123.42)","ts":"2025-12-15T19:25:39Z","ts_et":"2025-12-15 14:25:39 ET"}
+2025-12-15T19:25:39.7467433Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.63<SMA20=38.35)","ts":"2025-12-15T19:25:39Z","ts_et":"2025-12-15 14:25:39 ET"}
+2025-12-15T19:25:40.3375986Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.10<SMA20=173.62)","ts":"2025-12-15T19:25:40Z","ts_et":"2025-12-15 14:25:40 ET"}
+2025-12-15T19:25:40.6210543Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=253.08<SMA20=263.51)","ts":"2025-12-15T19:25:40Z","ts_et":"2025-12-15 14:25:40 ET"}
+2025-12-15T19:25:42.4510488Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.98<SMA20=208.06)","ts":"2025-12-15T19:25:42Z","ts_et":"2025-12-15 14:25:42 ET"}
+2025-12-15T19:25:42.7648322Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.7353<-0.2)","ts":"2025-12-15T19:25:42Z","ts_et":"2025-12-15 14:25:42 ET"}
+2025-12-15T19:25:43.3631828Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.64<SMA20=33.56)","ts":"2025-12-15T19:25:43Z","ts_et":"2025-12-15 14:25:43 ET"}
+2025-12-15T19:25:44.3133894Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=340.44<SMA20=376.77)","ts":"2025-12-15T19:25:44Z","ts_et":"2025-12-15 14:25:44 ET"}
+2025-12-15T19:25:46.4715999Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.77<SMA20=131.10)","ts":"2025-12-15T19:25:46Z","ts_et":"2025-12-15 14:25:46 ET"}
+2025-12-15T19:25:47.0540952Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=255.05<SMA20=258.46)","ts":"2025-12-15T19:25:47Z","ts_et":"2025-12-15 14:25:47 ET"}
+2025-12-15T19:25:47.6416203Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=491.69<SMA20=511.10)","ts":"2025-12-15T19:25:47Z","ts_et":"2025-12-15 14:25:47 ET"}
+2025-12-15T19:25:48.5212352Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.17<SMA20=181.32)","ts":"2025-12-15T19:25:48Z","ts_et":"2025-12-15 14:25:48 ET"}
+2025-12-15T19:25:49.7227709Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.51<SMA20=157.57)","ts":"2025-12-15T19:25:49Z","ts_et":"2025-12-15 14:25:49 ET"}
+2025-12-15T19:25:50.0225704Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=200.32<SMA20=200.35)","ts":"2025-12-15T19:25:50Z","ts_et":"2025-12-15 14:25:50 ET"}
+2025-12-15T19:25:53.3888162Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=577.82<SMA20=590.60)","ts":"2025-12-15T19:25:53Z","ts_et":"2025-12-15 14:25:53 ET"}
+2025-12-15T19:25:53.6830169Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.50<SMA20=220.82)","ts":"2025-12-15T19:25:53Z","ts_et":"2025-12-15 14:25:53 ET"}
+2025-12-15T19:25:54.8886535Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.07<SMA20=310.16)","ts":"2025-12-15T19:25:54Z","ts_et":"2025-12-15 14:25:54 ET"}
+2025-12-15T19:25:55.7993056Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.99<SMA20=310.71)","ts":"2025-12-15T19:25:55Z","ts_et":"2025-12-15 14:25:55 ET"}
+2025-12-15T19:25:56.0818247Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.40<SMA20=339.04)","ts":"2025-12-15T19:25:56Z","ts_et":"2025-12-15 14:25:56 ET"}
+2025-12-15T19:25:57.0205360Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=290.38<SMA20=290.60)","ts":"2025-12-15T19:25:57Z","ts_et":"2025-12-15 14:25:57 ET"}
+2025-12-15T19:25:57.6136570Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.09<SMA20=26.24)","ts":"2025-12-15T19:25:57Z","ts_et":"2025-12-15 14:25:57 ET"}
+2025-12-15T19:25:58.5061983Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5807<-0.2)","ts":"2025-12-15T19:25:58Z","ts_et":"2025-12-15 14:25:58 ET"}
+2025-12-15T19:26:00.5725688Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=293.91<SMA20=298.61)","ts":"2025-12-15T19:26:00Z","ts_et":"2025-12-15 14:26:00 ET"}
+2025-12-15T19:26:03.6228829Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_steep(-0.2233<-0.2)","ts":"2025-12-15T19:26:03Z","ts_et":"2025-12-15 14:26:03 ET"}
+2025-12-15T19:26:03.9329268Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.4040<-0.2)","ts":"2025-12-15T19:26:03Z","ts_et":"2025-12-15 14:26:03 ET"}
+2025-12-15T19:26:06.7012188Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_steep(-0.2205<-0.2)","ts":"2025-12-15T19:26:06Z","ts_et":"2025-12-15 14:26:06 ET"}
+2025-12-15T19:26:07.6125504Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.01<SMA20=227.99)","ts":"2025-12-15T19:26:07Z","ts_et":"2025-12-15 14:26:07 ET"}
+2025-12-15T19:26:08.5051469Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=764.74<SMA20=828.65)","ts":"2025-12-15T19:26:08Z","ts_et":"2025-12-15 14:26:08 ET"}
+2025-12-15T19:26:12.4919746Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.53<SMA20=276.35)","ts":"2025-12-15T19:26:12Z","ts_et":"2025-12-15 14:26:12 ET"}
+2025-12-15T19:26:15.2387771Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T19:26:15Z","ts_et":"2025-12-15 14:26:15 ET"}
+2025-12-15T19:26:15.2389640Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T19:26:15Z","ts_et":"2025-12-15 14:26:15 ET"}
+2025-12-15T19:26:15.2391405Z {"event":"scan_cycle_end","cycle":19,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T19:26:15Z","ts_et":"2025-12-15 14:26:15 ET"}
+2025-12-15T19:26:15.2393381Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:26","type":"HEARTBEAT","ts":"2025-12-15T19:26:15Z","ts_et":"2025-12-15 14:26:15 ET"}
+2025-12-15T19:41:15.5213824Z {"event":"scan_cycle_start","cycle":20,"time":"14:41","type":"HEARTBEAT","ts":"2025-12-15T19:41:15Z","ts_et":"2025-12-15 14:41:15 ET"}
+2025-12-15T19:41:15.5215576Z {"event":"scan_start","current_time":"14:41","type":"HEARTBEAT","ts":"2025-12-15T19:41:15Z","ts_et":"2025-12-15 14:41:15 ET"}
+2025-12-15T19:41:27.9783314Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.61<SMA20=123.40)","ts":"2025-12-15T19:41:27Z","ts_et":"2025-12-15 14:41:27 ET"}
+2025-12-15T19:41:28.2853361Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.67<SMA20=38.35)","ts":"2025-12-15T19:41:28Z","ts_et":"2025-12-15 14:41:28 ET"}
+2025-12-15T19:41:28.9871722Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.21<SMA20=173.60)","ts":"2025-12-15T19:41:28Z","ts_et":"2025-12-15 14:41:28 ET"}
+2025-12-15T19:41:29.3134127Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=252.63<SMA20=263.44)","ts":"2025-12-15T19:41:29Z","ts_et":"2025-12-15 14:41:29 ET"}
+2025-12-15T19:41:31.1199645Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.38<SMA20=208.03)","ts":"2025-12-15T19:41:31Z","ts_et":"2025-12-15 14:41:31 ET"}
+2025-12-15T19:41:31.4261622Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.6857<-0.2)","ts":"2025-12-15T19:41:31Z","ts_et":"2025-12-15 14:41:31 ET"}
+2025-12-15T19:41:32.0054609Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.56<SMA20=33.55)","ts":"2025-12-15T19:41:32Z","ts_et":"2025-12-15 14:41:32 ET"}
+2025-12-15T19:41:32.9300664Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=340.89<SMA20=376.74)","ts":"2025-12-15T19:41:32Z","ts_et":"2025-12-15 14:41:32 ET"}
+2025-12-15T19:41:35.1348399Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.68<SMA20=131.10)","ts":"2025-12-15T19:41:35Z","ts_et":"2025-12-15 14:41:35 ET"}
+2025-12-15T19:41:35.7610283Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=255.01<SMA20=258.51)","ts":"2025-12-15T19:41:35Z","ts_et":"2025-12-15 14:41:35 ET"}
+2025-12-15T19:41:36.4040936Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=491.74<SMA20=511.05)","ts":"2025-12-15T19:41:36Z","ts_et":"2025-12-15 14:41:36 ET"}
+2025-12-15T19:41:37.3092158Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.13<SMA20=181.29)","ts":"2025-12-15T19:41:37Z","ts_et":"2025-12-15 14:41:37 ET"}
+2025-12-15T19:41:38.4883379Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=151.05<SMA20=157.55)","ts":"2025-12-15T19:41:38Z","ts_et":"2025-12-15 14:41:38 ET"}
+2025-12-15T19:41:38.7944141Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=199.06<SMA20=200.29)","ts":"2025-12-15T19:41:38Z","ts_et":"2025-12-15 14:41:38 ET"}
+2025-12-15T19:41:42.1317038Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=577.45<SMA20=590.60)","ts":"2025-12-15T19:41:42Z","ts_et":"2025-12-15 14:41:42 ET"}
+2025-12-15T19:41:42.4359314Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.64<SMA20=220.79)","ts":"2025-12-15T19:41:42Z","ts_et":"2025-12-15 14:41:42 ET"}
+2025-12-15T19:41:43.6274515Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.62<SMA20=310.15)","ts":"2025-12-15T19:41:43Z","ts_et":"2025-12-15 14:41:43 ET"}
+2025-12-15T19:41:44.5310964Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.63<SMA20=310.71)","ts":"2025-12-15T19:41:44Z","ts_et":"2025-12-15 14:41:44 ET"}
+2025-12-15T19:41:44.8299992Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.72<SMA20=339.04)","ts":"2025-12-15T19:41:44Z","ts_et":"2025-12-15 14:41:44 ET"}
+2025-12-15T19:41:46.3527959Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.98<SMA20=26.23)","ts":"2025-12-15T19:41:46Z","ts_et":"2025-12-15 14:41:46 ET"}
+2025-12-15T19:41:47.2602100Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5765<-0.2)","ts":"2025-12-15T19:41:47Z","ts_et":"2025-12-15 14:41:47 ET"}
+2025-12-15T19:41:49.4585245Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=293.69<SMA20=298.61)","ts":"2025-12-15T19:41:49Z","ts_et":"2025-12-15 14:41:49 ET"}
+2025-12-15T19:41:52.7549885Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.4055<-0.2)","ts":"2025-12-15T19:41:52Z","ts_et":"2025-12-15 14:41:52 ET"}
+2025-12-15T19:41:56.3688964Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.22<SMA20=227.99)","ts":"2025-12-15T19:41:56Z","ts_et":"2025-12-15 14:41:56 ET"}
+2025-12-15T19:41:57.3128614Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=763.78<SMA20=828.58)","ts":"2025-12-15T19:41:57Z","ts_et":"2025-12-15 14:41:57 ET"}
+2025-12-15T19:42:01.2570843Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.37<SMA20=276.35)","ts":"2025-12-15T19:42:01Z","ts_et":"2025-12-15 14:42:01 ET"}
+2025-12-15T19:42:01.9095772Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.08<SMA20=117.11)","ts":"2025-12-15T19:42:01Z","ts_et":"2025-12-15 14:42:01 ET"}
+2025-12-15T19:42:04.0668991Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T19:42:04Z","ts_et":"2025-12-15 14:42:04 ET"}
+2025-12-15T19:42:04.0670822Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T19:42:04Z","ts_et":"2025-12-15 14:42:04 ET"}
+2025-12-15T19:42:04.0672520Z {"event":"scan_cycle_end","cycle":20,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T19:42:04Z","ts_et":"2025-12-15 14:42:04 ET"}
+2025-12-15T19:42:04.0674671Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:42","type":"HEARTBEAT","ts":"2025-12-15T19:42:04Z","ts_et":"2025-12-15 14:42:04 ET"}
+2025-12-15T19:57:04.3640962Z {"event":"scan_cycle_start","cycle":21,"time":"14:57","type":"HEARTBEAT","ts":"2025-12-15T19:57:04Z","ts_et":"2025-12-15 14:57:04 ET"}
+2025-12-15T19:57:04.3644000Z {"event":"scan_start","current_time":"14:57","type":"HEARTBEAT","ts":"2025-12-15T19:57:04Z","ts_et":"2025-12-15 14:57:04 ET"}
+2025-12-15T19:57:17.6704916Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.42<SMA20=123.40)","ts":"2025-12-15T19:57:17Z","ts_et":"2025-12-15 14:57:17 ET"}
+2025-12-15T19:57:17.9764181Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.66<SMA20=38.35)","ts":"2025-12-15T19:57:17Z","ts_et":"2025-12-15 14:57:17 ET"}
+2025-12-15T19:57:18.5468579Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.56<SMA20=173.58)","ts":"2025-12-15T19:57:18Z","ts_et":"2025-12-15 14:57:18 ET"}
+2025-12-15T19:57:18.8519162Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=252.35<SMA20=263.38)","ts":"2025-12-15T19:57:18Z","ts_et":"2025-12-15 14:57:18 ET"}
+2025-12-15T19:57:19.1919953Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Slope_too_steep(-0.2059<-0.2)","ts":"2025-12-15T19:57:19Z","ts_et":"2025-12-15 14:57:19 ET"}
+2025-12-15T19:57:20.6907323Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.58<SMA20=208.03)","ts":"2025-12-15T19:57:20Z","ts_et":"2025-12-15 14:57:20 ET"}
+2025-12-15T19:57:20.9869223Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.7233<-0.2)","ts":"2025-12-15T19:57:20Z","ts_et":"2025-12-15 14:57:20 ET"}
+2025-12-15T19:57:21.5695244Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.46<SMA20=33.56)","ts":"2025-12-15T19:57:21Z","ts_et":"2025-12-15 14:57:21 ET"}
+2025-12-15T19:57:22.4744556Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=340.13<SMA20=376.75)","ts":"2025-12-15T19:57:22Z","ts_et":"2025-12-15 14:57:22 ET"}
+2025-12-15T19:57:24.5914659Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.70<SMA20=131.11)","ts":"2025-12-15T19:57:24Z","ts_et":"2025-12-15 14:57:24 ET"}
+2025-12-15T19:57:25.1937044Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=255.88<SMA20=258.54)","ts":"2025-12-15T19:57:25Z","ts_et":"2025-12-15 14:57:25 ET"}
+2025-12-15T19:57:25.8101107Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=490.19<SMA20=510.99)","ts":"2025-12-15T19:57:25Z","ts_et":"2025-12-15 14:57:25 ET"}
+2025-12-15T19:57:26.7003143Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.47<SMA20=181.31)","ts":"2025-12-15T19:57:26Z","ts_et":"2025-12-15 14:57:26 ET"}
+2025-12-15T19:57:27.9181606Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.69<SMA20=157.57)","ts":"2025-12-15T19:57:27Z","ts_et":"2025-12-15 14:57:27 ET"}
+2025-12-15T19:57:28.2094245Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=198.97<SMA20=200.28)","ts":"2025-12-15T19:57:28Z","ts_et":"2025-12-15 14:57:28 ET"}
+2025-12-15T19:57:31.5670717Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=576.55<SMA20=590.56)","ts":"2025-12-15T19:57:31Z","ts_et":"2025-12-15 14:57:31 ET"}
+2025-12-15T19:57:31.8595560Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.46<SMA20=220.82)","ts":"2025-12-15T19:57:31Z","ts_et":"2025-12-15 14:57:31 ET"}
+2025-12-15T19:57:33.0545040Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.34<SMA20=310.18)","ts":"2025-12-15T19:57:33Z","ts_et":"2025-12-15 14:57:33 ET"}
+2025-12-15T19:57:33.6842413Z {"type":"SPREAD_SKIP","underlying":"SNPS","skip_reason":"Slope_too_steep(-0.2467<-0.2)","ts":"2025-12-15T19:57:33Z","ts_et":"2025-12-15 14:57:33 ET"}
+2025-12-15T19:57:33.9849033Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.24<SMA20=310.73)","ts":"2025-12-15T19:57:33Z","ts_et":"2025-12-15 14:57:33 ET"}
+2025-12-15T19:57:37.7987406Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.34<SMA20=339.01)","ts":"2025-12-15T19:57:37Z","ts_et":"2025-12-15 14:57:37 ET"}
+2025-12-15T19:57:38.7208199Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=289.65<SMA20=290.53)","ts":"2025-12-15T19:57:38Z","ts_et":"2025-12-15 14:57:38 ET"}
+2025-12-15T19:57:39.3184408Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.00<SMA20=26.23)","ts":"2025-12-15T19:57:39Z","ts_et":"2025-12-15 14:57:39 ET"}
+2025-12-15T19:57:40.1923698Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.5524<-0.2)","ts":"2025-12-15T19:57:40Z","ts_et":"2025-12-15 14:57:40 ET"}
+2025-12-15T19:57:42.2998350Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.02<SMA20=298.62)","ts":"2025-12-15T19:57:42Z","ts_et":"2025-12-15 14:57:42 ET"}
+2025-12-15T19:57:45.6220318Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.3724<-0.2)","ts":"2025-12-15T19:57:45Z","ts_et":"2025-12-15 14:57:45 ET"}
+2025-12-15T19:57:49.3189697Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.17<SMA20=227.99)","ts":"2025-12-15T19:57:49Z","ts_et":"2025-12-15 14:57:49 ET"}
+2025-12-15T19:57:50.1907889Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=764.81<SMA20=828.68)","ts":"2025-12-15T19:57:50Z","ts_et":"2025-12-15 14:57:50 ET"}
+2025-12-15T19:57:54.0726296Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.18<SMA20=276.35)","ts":"2025-12-15T19:57:54Z","ts_et":"2025-12-15 14:57:54 ET"}
+2025-12-15T19:57:54.6706403Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=117.08<SMA20=117.12)","ts":"2025-12-15T19:57:54Z","ts_et":"2025-12-15 14:57:54 ET"}
+2025-12-15T19:57:56.7193218Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T19:57:56Z","ts_et":"2025-12-15 14:57:56 ET"}
+2025-12-15T19:57:56.7194926Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T19:57:56Z","ts_et":"2025-12-15 14:57:56 ET"}
+2025-12-15T19:57:56.7196629Z {"event":"scan_cycle_end","cycle":21,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T19:57:56Z","ts_et":"2025-12-15 14:57:56 ET"}
+2025-12-15T19:57:56.7198310Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:57","type":"HEARTBEAT","ts":"2025-12-15T19:57:56Z","ts_et":"2025-12-15 14:57:56 ET"}
+2025-12-15T20:12:57.0250529Z {"event":"scan_cycle_start","cycle":22,"time":"15:12","type":"HEARTBEAT","ts":"2025-12-15T20:12:57Z","ts_et":"2025-12-15 15:12:57 ET"}
+2025-12-15T20:12:57.0252843Z {"event":"scan_start","current_time":"15:12","type":"HEARTBEAT","ts":"2025-12-15T20:12:57Z","ts_et":"2025-12-15 15:12:57 ET"}
+2025-12-15T20:13:09.4997875Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=116.44<SMA20=123.36)","ts":"2025-12-15T20:13:09Z","ts_et":"2025-12-15 15:13:09 ET"}
+2025-12-15T20:13:09.8143311Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.85<SMA20=38.36)","ts":"2025-12-15T20:13:09Z","ts_et":"2025-12-15 15:13:09 ET"}
+2025-12-15T20:13:10.4116672Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.28<SMA20=173.58)","ts":"2025-12-15T20:13:10Z","ts_et":"2025-12-15 15:13:10 ET"}
+2025-12-15T20:13:10.7013732Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=250.95<SMA20=263.32)","ts":"2025-12-15T20:13:10Z","ts_et":"2025-12-15 15:13:10 ET"}
+2025-12-15T20:13:11.0237871Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Slope_too_steep(-0.2562<-0.2)","ts":"2025-12-15T20:13:11Z","ts_et":"2025-12-15 15:13:11 ET"}
+2025-12-15T20:13:11.3337175Z {"type":"SPREAD_SKIP","underlying":"CIEN","skip_reason":"Slope_too_steep(-0.2425<-0.2)","ts":"2025-12-15T20:13:11Z","ts_et":"2025-12-15 15:13:11 ET"}
+2025-12-15T20:13:12.5607120Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=185.43<SMA20=208.01)","ts":"2025-12-15T20:13:12Z","ts_et":"2025-12-15 15:13:12 ET"}
+2025-12-15T20:13:12.8540359Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.6427<-0.2)","ts":"2025-12-15T20:13:12Z","ts_et":"2025-12-15 15:13:12 ET"}
+2025-12-15T20:13:13.4719028Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.51<SMA20=33.55)","ts":"2025-12-15T20:13:13Z","ts_et":"2025-12-15 15:13:13 ET"}
+2025-12-15T20:13:14.3630720Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=339.93<SMA20=376.78)","ts":"2025-12-15T20:13:14Z","ts_et":"2025-12-15 15:13:14 ET"}
+2025-12-15T20:13:16.4934415Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.76<SMA20=131.11)","ts":"2025-12-15T20:13:16Z","ts_et":"2025-12-15 15:13:16 ET"}
+2025-12-15T20:13:17.0702721Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=256.62<SMA20=258.56)","ts":"2025-12-15T20:13:17Z","ts_et":"2025-12-15 15:13:17 ET"}
+2025-12-15T20:13:17.7068064Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=489.50<SMA20=511.04)","ts":"2025-12-15T20:13:17Z","ts_et":"2025-12-15 15:13:17 ET"}
+2025-12-15T20:13:18.6329729Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.93<SMA20=181.30)","ts":"2025-12-15T20:13:18Z","ts_et":"2025-12-15 15:13:18 ET"}
+2025-12-15T20:13:19.2450617Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.50<SMA20=126.77)","ts":"2025-12-15T20:13:19Z","ts_et":"2025-12-15 15:13:19 ET"}
+2025-12-15T20:13:19.8478962Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.58<SMA20=157.53)","ts":"2025-12-15T20:13:19Z","ts_et":"2025-12-15 15:13:19 ET"}
+2025-12-15T20:13:20.1373518Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=198.90<SMA20=200.26)","ts":"2025-12-15T20:13:20Z","ts_et":"2025-12-15 15:13:20 ET"}
+2025-12-15T20:13:23.4763345Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=575.46<SMA20=590.50)","ts":"2025-12-15T20:13:23Z","ts_et":"2025-12-15 15:13:23 ET"}
+2025-12-15T20:13:23.7660927Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.90<SMA20=220.80)","ts":"2025-12-15T20:13:23Z","ts_et":"2025-12-15 15:13:23 ET"}
+2025-12-15T20:13:24.9980334Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.00<SMA20=310.19)","ts":"2025-12-15T20:13:24Z","ts_et":"2025-12-15 15:13:24 ET"}
+2025-12-15T20:13:25.6260225Z {"type":"SPREAD_SKIP","underlying":"SNPS","skip_reason":"Slope_too_steep(-0.2859<-0.2)","ts":"2025-12-15T20:13:25Z","ts_et":"2025-12-15 15:13:25 ET"}
+2025-12-15T20:13:25.9052349Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.82<SMA20=310.74)","ts":"2025-12-15T20:13:25Z","ts_et":"2025-12-15 15:13:25 ET"}
+2025-12-15T20:13:26.1972498Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.08<SMA20=339.01)","ts":"2025-12-15T20:13:26Z","ts_et":"2025-12-15 15:13:26 ET"}
+2025-12-15T20:13:27.1338005Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=289.37<SMA20=290.57)","ts":"2025-12-15T20:13:27Z","ts_et":"2025-12-15 15:13:27 ET"}
+2025-12-15T20:13:27.7300281Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.00<SMA20=26.23)","ts":"2025-12-15T20:13:27Z","ts_et":"2025-12-15 15:13:27 ET"}
+2025-12-15T20:13:28.6895155Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.4623<-0.2)","ts":"2025-12-15T20:13:28Z","ts_et":"2025-12-15 15:13:28 ET"}
+2025-12-15T20:13:30.9399170Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.17<SMA20=298.62)","ts":"2025-12-15T20:13:30Z","ts_et":"2025-12-15 15:13:30 ET"}
+2025-12-15T20:13:34.2839575Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.3214<-0.2)","ts":"2025-12-15T20:13:34Z","ts_et":"2025-12-15 15:13:34 ET"}
+2025-12-15T20:13:38.0403057Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=223.23<SMA20=227.98)","ts":"2025-12-15T20:13:38Z","ts_et":"2025-12-15 15:13:38 ET"}
+2025-12-15T20:13:38.9155339Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=769.21<SMA20=829.17)","ts":"2025-12-15T20:13:38Z","ts_et":"2025-12-15 15:13:38 ET"}
+2025-12-15T20:13:42.7774942Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.58<SMA20=276.36)","ts":"2025-12-15T20:13:42Z","ts_et":"2025-12-15 15:13:42 ET"}
+2025-12-15T20:13:45.4899793Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T20:13:45Z","ts_et":"2025-12-15 15:13:45 ET"}
+2025-12-15T20:13:45.4900511Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T20:13:45Z","ts_et":"2025-12-15 15:13:45 ET"}
+2025-12-15T20:13:45.4901545Z {"event":"scan_cycle_end","cycle":22,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T20:13:45Z","ts_et":"2025-12-15 15:13:45 ET"}
+2025-12-15T20:13:45.4902177Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:13","type":"HEARTBEAT","ts":"2025-12-15T20:13:45Z","ts_et":"2025-12-15 15:13:45 ET"}
+2025-12-15T20:28:45.8153330Z {"event":"scan_cycle_start","cycle":23,"time":"15:28","type":"HEARTBEAT","ts":"2025-12-15T20:28:45Z","ts_et":"2025-12-15 15:28:45 ET"}
+2025-12-15T20:28:45.8155356Z {"event":"scan_start","current_time":"15:28","type":"HEARTBEAT","ts":"2025-12-15T20:28:45Z","ts_et":"2025-12-15 15:28:45 ET"}
+2025-12-15T20:28:58.3129768Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=115.36<SMA20=123.31)","ts":"2025-12-15T20:28:58Z","ts_et":"2025-12-15 15:28:58 ET"}
+2025-12-15T20:28:58.5993884Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.78<SMA20=38.35)","ts":"2025-12-15T20:28:58Z","ts_et":"2025-12-15 15:28:58 ET"}
+2025-12-15T20:28:59.1752138Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=163.32<SMA20=173.52)","ts":"2025-12-15T20:28:59Z","ts_et":"2025-12-15 15:28:59 ET"}
+2025-12-15T20:28:59.5144222Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=249.10<SMA20=263.23)","ts":"2025-12-15T20:28:59Z","ts_et":"2025-12-15 15:28:59 ET"}
+2025-12-15T20:28:59.8027645Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Slope_too_steep(-0.2775<-0.2)","ts":"2025-12-15T20:28:59Z","ts_et":"2025-12-15 15:28:59 ET"}
+2025-12-15T20:29:00.0944177Z {"type":"SPREAD_SKIP","underlying":"CIEN","skip_reason":"Slope_too_steep(-0.2742<-0.2)","ts":"2025-12-15T20:29:00Z","ts_et":"2025-12-15 15:29:00 ET"}
+2025-12-15T20:29:00.4061684Z {"type":"SPREAD_SKIP","underlying":"STX","skip_reason":"Slope_too_steep(-0.2401<-0.2)","ts":"2025-12-15T20:29:00Z","ts_et":"2025-12-15 15:29:00 ET"}
+2025-12-15T20:29:01.3520818Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.56<SMA20=208.00)","ts":"2025-12-15T20:29:01Z","ts_et":"2025-12-15 15:29:01 ET"}
+2025-12-15T20:29:01.6575752Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.6276<-0.2)","ts":"2025-12-15T20:29:01Z","ts_et":"2025-12-15 15:29:01 ET"}
+2025-12-15T20:29:02.2655413Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.39<SMA20=33.54)","ts":"2025-12-15T20:29:02Z","ts_et":"2025-12-15 15:29:02 ET"}
+2025-12-15T20:29:03.1705043Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=340.54<SMA20=376.73)","ts":"2025-12-15T20:29:03Z","ts_et":"2025-12-15 15:29:03 ET"}
+2025-12-15T20:29:05.3489917Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.76<SMA20=131.09)","ts":"2025-12-15T20:29:05Z","ts_et":"2025-12-15 15:29:05 ET"}
+2025-12-15T20:29:05.9524794Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=256.97<SMA20=258.51)","ts":"2025-12-15T20:29:05Z","ts_et":"2025-12-15 15:29:05 ET"}
+2025-12-15T20:29:06.5910511Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=490.30<SMA20=510.99)","ts":"2025-12-15T20:29:06Z","ts_et":"2025-12-15 15:29:06 ET"}
+2025-12-15T20:29:07.5185689Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.57<SMA20=181.28)","ts":"2025-12-15T20:29:07Z","ts_et":"2025-12-15 15:29:07 ET"}
+2025-12-15T20:29:08.1232408Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.54<SMA20=126.76)","ts":"2025-12-15T20:29:08Z","ts_et":"2025-12-15 15:29:08 ET"}
+2025-12-15T20:29:08.7279480Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.28<SMA20=157.52)","ts":"2025-12-15T20:29:08Z","ts_et":"2025-12-15 15:29:08 ET"}
+2025-12-15T20:29:09.0324051Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=198.36<SMA20=200.19)","ts":"2025-12-15T20:29:09Z","ts_et":"2025-12-15 15:29:09 ET"}
+2025-12-15T20:29:12.3541672Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=574.24<SMA20=590.53)","ts":"2025-12-15T20:29:12Z","ts_et":"2025-12-15 15:29:12 ET"}
+2025-12-15T20:29:12.6449454Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.49<SMA20=220.82)","ts":"2025-12-15T20:29:12Z","ts_et":"2025-12-15 15:29:12 ET"}
+2025-12-15T20:29:13.8126862Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.31<SMA20=310.19)","ts":"2025-12-15T20:29:13Z","ts_et":"2025-12-15 15:29:13 ET"}
+2025-12-15T20:29:14.4229572Z {"type":"SPREAD_SKIP","underlying":"SNPS","skip_reason":"Slope_too_steep(-0.3009<-0.2)","ts":"2025-12-15T20:29:14Z","ts_et":"2025-12-15 15:29:14 ET"}
+2025-12-15T20:29:14.7153406Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=309.24<SMA20=310.75)","ts":"2025-12-15T20:29:14Z","ts_et":"2025-12-15 15:29:14 ET"}
+2025-12-15T20:29:14.9994636Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.63<SMA20=338.98)","ts":"2025-12-15T20:29:14Z","ts_et":"2025-12-15 15:29:14 ET"}
+2025-12-15T20:29:15.9212185Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=289.81<SMA20=290.52)","ts":"2025-12-15T20:29:15Z","ts_et":"2025-12-15 15:29:15 ET"}
+2025-12-15T20:29:16.5349691Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.96<SMA20=26.23)","ts":"2025-12-15T20:29:16Z","ts_et":"2025-12-15 15:29:16 ET"}
+2025-12-15T20:29:17.4327716Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.3462<-0.2)","ts":"2025-12-15T20:29:17Z","ts_et":"2025-12-15 15:29:17 ET"}
+2025-12-15T20:29:19.5024514Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=294.19<SMA20=298.61)","ts":"2025-12-15T20:29:19Z","ts_et":"2025-12-15 15:29:19 ET"}
+2025-12-15T20:29:22.7778132Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.3076<-0.2)","ts":"2025-12-15T20:29:22Z","ts_et":"2025-12-15 15:29:22 ET"}
+2025-12-15T20:29:26.3663956Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.87<SMA20=227.96)","ts":"2025-12-15T20:29:26Z","ts_et":"2025-12-15 15:29:26 ET"}
+2025-12-15T20:29:27.3022606Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=776.30<SMA20=829.04)","ts":"2025-12-15T20:29:27Z","ts_et":"2025-12-15 15:29:27 ET"}
+2025-12-15T20:29:31.2401240Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.49<SMA20=276.38)","ts":"2025-12-15T20:29:31Z","ts_et":"2025-12-15 15:29:31 ET"}
+2025-12-15T20:29:33.9661082Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T20:29:33Z","ts_et":"2025-12-15 15:29:33 ET"}
+2025-12-15T20:29:33.9662613Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T20:29:33Z","ts_et":"2025-12-15 15:29:33 ET"}
+2025-12-15T20:29:33.9663977Z {"event":"scan_cycle_end","cycle":23,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T20:29:33Z","ts_et":"2025-12-15 15:29:33 ET"}
+2025-12-15T20:29:33.9665271Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:29","type":"HEARTBEAT","ts":"2025-12-15T20:29:33Z","ts_et":"2025-12-15 15:29:33 ET"}
+2025-12-15T20:44:34.2726321Z {"event":"scan_cycle_start","cycle":24,"time":"15:44","type":"HEARTBEAT","ts":"2025-12-15T20:44:34Z","ts_et":"2025-12-15 15:44:34 ET"}
+2025-12-15T20:44:34.2728026Z {"event":"scan_start","current_time":"15:44","type":"HEARTBEAT","ts":"2025-12-15T20:44:34Z","ts_et":"2025-12-15 15:44:34 ET"}
+2025-12-15T20:44:47.0216694Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=114.56<SMA20=123.30)","ts":"2025-12-15T20:44:47Z","ts_et":"2025-12-15 15:44:47 ET"}
+2025-12-15T20:44:47.3224312Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.66<SMA20=38.34)","ts":"2025-12-15T20:44:47Z","ts_et":"2025-12-15 15:44:47 ET"}
+2025-12-15T20:44:47.8924888Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.34<SMA20=173.48)","ts":"2025-12-15T20:44:47Z","ts_et":"2025-12-15 15:44:47 ET"}
+2025-12-15T20:44:48.1864564Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=247.60<SMA20=263.29)","ts":"2025-12-15T20:44:48Z","ts_et":"2025-12-15 15:44:48 ET"}
+2025-12-15T20:44:48.4951487Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Slope_too_steep(-0.3177<-0.2)","ts":"2025-12-15T20:44:48Z","ts_et":"2025-12-15 15:44:48 ET"}
+2025-12-15T20:44:48.7969656Z {"type":"SPREAD_SKIP","underlying":"CIEN","skip_reason":"Slope_too_steep(-0.2822<-0.2)","ts":"2025-12-15T20:44:48Z","ts_et":"2025-12-15 15:44:48 ET"}
+2025-12-15T20:44:49.1255599Z {"type":"SPREAD_SKIP","underlying":"STX","skip_reason":"Slope_too_steep(-0.2817<-0.2)","ts":"2025-12-15T20:44:49Z","ts_et":"2025-12-15 15:44:49 ET"}
+2025-12-15T20:44:50.0859041Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=184.68<SMA20=207.97)","ts":"2025-12-15T20:44:50Z","ts_et":"2025-12-15 15:44:50 ET"}
+2025-12-15T20:44:50.3941860Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_steep(-0.5229<-0.2)","ts":"2025-12-15T20:44:50Z","ts_et":"2025-12-15 15:44:50 ET"}
+2025-12-15T20:44:50.9854532Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.28<SMA20=33.55)","ts":"2025-12-15T20:44:50Z","ts_et":"2025-12-15 15:44:50 ET"}
+2025-12-15T20:44:51.9033903Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=339.57<SMA20=376.72)","ts":"2025-12-15T20:44:51Z","ts_et":"2025-12-15 15:44:51 ET"}
+2025-12-15T20:44:54.2539581Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.54<SMA20=131.08)","ts":"2025-12-15T20:44:54Z","ts_et":"2025-12-15 15:44:54 ET"}
+2025-12-15T20:44:54.8435910Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=256.05<SMA20=258.52)","ts":"2025-12-15T20:44:54Z","ts_et":"2025-12-15 15:44:54 ET"}
+2025-12-15T20:44:55.4899044Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=489.49<SMA20=510.96)","ts":"2025-12-15T20:44:55Z","ts_et":"2025-12-15 15:44:55 ET"}
+2025-12-15T20:44:56.4527922Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.32<SMA20=181.28)","ts":"2025-12-15T20:44:56Z","ts_et":"2025-12-15 15:44:56 ET"}
+2025-12-15T20:44:57.0998261Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.36<SMA20=126.75)","ts":"2025-12-15T20:44:57Z","ts_et":"2025-12-15 15:44:57 ET"}
+2025-12-15T20:44:57.7370707Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.17<SMA20=157.53)","ts":"2025-12-15T20:44:57Z","ts_et":"2025-12-15 15:44:57 ET"}
+2025-12-15T20:44:58.0476188Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=197.24<SMA20=200.18)","ts":"2025-12-15T20:44:58Z","ts_et":"2025-12-15 15:44:58 ET"}
+2025-12-15T20:45:01.5206500Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=574.90<SMA20=590.65)","ts":"2025-12-15T20:45:01Z","ts_et":"2025-12-15 15:45:01 ET"}
+2025-12-15T20:45:01.8254210Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=215.71<SMA20=220.81)","ts":"2025-12-15T20:45:01Z","ts_et":"2025-12-15 15:45:01 ET"}
+2025-12-15T20:45:03.1881771Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.37<SMA20=310.16)","ts":"2025-12-15T20:45:03Z","ts_et":"2025-12-15 15:45:03 ET"}
+2025-12-15T20:45:03.8213371Z {"type":"SPREAD_SKIP","underlying":"SNPS","skip_reason":"Slope_too_steep(-0.2379<-0.2)","ts":"2025-12-15T20:45:03Z","ts_et":"2025-12-15 15:45:03 ET"}
+2025-12-15T20:45:04.1645110Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=309.36<SMA20=310.71)","ts":"2025-12-15T20:45:04Z","ts_et":"2025-12-15 15:45:04 ET"}
+2025-12-15T20:45:04.4784783Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.55<SMA20=338.96)","ts":"2025-12-15T20:45:04Z","ts_et":"2025-12-15 15:45:04 ET"}
+2025-12-15T20:45:05.4201648Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=288.83<SMA20=290.48)","ts":"2025-12-15T20:45:05Z","ts_et":"2025-12-15 15:45:05 ET"}
+2025-12-15T20:45:06.0456564Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=25.84<SMA20=26.23)","ts":"2025-12-15T20:45:06Z","ts_et":"2025-12-15 15:45:06 ET"}
+2025-12-15T20:45:06.9553592Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_steep(-0.2507<-0.2)","ts":"2025-12-15T20:45:06Z","ts_et":"2025-12-15 15:45:06 ET"}
+2025-12-15T20:45:09.1706046Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=293.77<SMA20=298.58)","ts":"2025-12-15T20:45:09Z","ts_et":"2025-12-15 15:45:09 ET"}
+2025-12-15T20:45:12.8325317Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_steep(-0.2947<-0.2)","ts":"2025-12-15T20:45:12Z","ts_et":"2025-12-15 15:45:12 ET"}
+2025-12-15T20:45:16.8824800Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=222.71<SMA20=227.95)","ts":"2025-12-15T20:45:16Z","ts_et":"2025-12-15 15:45:16 ET"}
+2025-12-15T20:45:17.8974411Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=774.43<SMA20=828.92)","ts":"2025-12-15T20:45:17Z","ts_et":"2025-12-15 15:45:17 ET"}
+2025-12-15T20:45:22.2778263Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=273.79<SMA20=276.37)","ts":"2025-12-15T20:45:22Z","ts_et":"2025-12-15 15:45:22 ET"}
+2025-12-15T20:45:25.3972006Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-15T20:45:25Z","ts_et":"2025-12-15 15:45:25 ET"}
+2025-12-15T20:45:25.4002470Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-15T20:45:25Z","ts_et":"2025-12-15 15:45:25 ET"}
+2025-12-15T20:45:25.4003694Z {"event":"scan_cycle_end","cycle":24,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-15T20:45:25Z","ts_et":"2025-12-15 15:45:25 ET"}
+2025-12-15T20:45:25.4005086Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:45","type":"HEARTBEAT","ts":"2025-12-15T20:45:25Z","ts_et":"2025-12-15 15:45:25 ET"}
+2025-12-15T21:00:25.4169711Z {"event":"market_close_reached","time":"16:00","type":"HEARTBEAT","ts":"2025-12-15T21:00:25Z","ts_et":"2025-12-15 16:00:25 ET"}
+2025-12-15T21:00:25.4177865Z {"event":"eod_processing","scan_count":24,"type":"HEARTBEAT","ts":"2025-12-15T21:00:25Z","ts_et":"2025-12-15 16:00:25 ET"}
+2025-12-15T21:00:25.8078144Z {"type":"EOD_SUMMARY","date":"2025-12-15","total_trades":8,"closed_trades":8,"open_trades":0,"total_pnl":-1012.0,"win_count":0,"loss_count":8,"win_rate_pct":0.0,"avg_win":0,"avg_loss":-126.5,"exit_reasons":{"SL_hit(-83.1%<=-50.0%)":{"count":1,"pnl":-196.0},"SL_hit(-82.4%<=-50.0%)":{"count":1,"pnl":-131.0},"SL_hit(-98.1%<=-50.0%)":{"count":1,"pnl":-265.0},"SL_hit(-100.0%<=-50.0%)":{"count":1,"pnl":-33.0},"SL_hit(-75.4%<=-50.0%)":{"count":1,"pnl":-107.0},"SL_hit(-76.6%<=-50.0%)":{"count":1,"pnl":-108.0},"SL_hit(-71.7%<=-50.0%)":{"count":1,"pnl":-86.0},"SL_hit(-69.9%<=-50.0%)":{"count":1,"pnl":-86.0}},"trades":[{"underlying":"CRM","entry_reason":"RSI_oversold(24.9)","exit_reason":"SL_hit(-83.1%<=-50.0%)","net_debit":1.29,"pnl":-196.0,"pnl_pct":-83.1},{"underlying":"COP","entry_reason":"RSI_oversold(24.2)","exit_reason":"SL_hit(-82.4%<=-50.0%)","net_debit":0.85,"pnl":-131.0,"pnl_pct":-82.4},{"underlying":"KKR","entry_reason":"RSI_oversold(23.9)","exit_reason":"SL_hit(-98.1%<=-50.0%)","net_debit":1.01,"pnl":-265.0,"pnl_pct":-98.1},{"underlying":"COP","entry_reason":"RSI_oversold(22.7)","exit_reason":"SL_hit(-100.0%<=-50.0%)","net_debit":0.15,"pnl":-33.0,"pnl_pct":-100.0},{"underlying":"COP","entry_reason":"RSI_oversold(21.5)","exit_reason":"SL_hit(-75.4%<=-50.0%)","net_debit":0.65,"pnl":-107.0,"pnl_pct":-75.4},{"underlying":"COP","entry_reason":"RSI_oversold(23.1)","exit_reason":"SL_hit(-76.6%<=-50.0%)","net_debit":0.57,"pnl":-108.0,"pnl_pct":-76.6},{"underlying":"COP","entry_reason":"RSI_oversold(23.2)","exit_reason":"SL_hit(-71.7%<=-50.0%)","net_debit":0.6,"pnl":-86.0,"pnl_pct":-71.7},{"underlying":"XOM","entry_reason":"RSI_oversold(24.3)","exit_reason":"SL_hit(-69.9%<=-50.0%)","net_debit":0.56,"pnl":-86.0,"pnl_pct":-69.9}],"ts":"2025-12-15T21:00:25Z","ts_et":"2025-12-15 16:00:25 ET"}
+2025-12-15T21:00:25.8101086Z 
+2025-12-15T21:00:25.8101657Z ============================================================
+2025-12-15T21:00:25.8103088Z EOD SUMMARY: 8 trades, PnL: $-1012.00
+2025-12-15T21:00:25.8103415Z Win Rate: 0.0%
+2025-12-15T21:00:25.8103622Z ============================================================
+2025-12-15T21:00:25.8103810Z 

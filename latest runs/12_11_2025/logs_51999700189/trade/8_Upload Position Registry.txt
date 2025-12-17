@@ -1,0 +1,23 @@
+﻿2025-12-11T21:06:36.7075390Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T21:06:36.7076281Z with:
+2025-12-11T21:06:36.7076737Z   name: position-registry-15M_OPT
+2025-12-11T21:06:36.7077945Z   path: .position_registry/15M_OPT_positions.json
+2025-12-11T21:06:36.7078668Z   if-no-files-found: warn
+2025-12-11T21:06:36.7079161Z   retention-days: 90
+2025-12-11T21:06:36.7079595Z   overwrite: true
+2025-12-11T21:06:36.7080019Z   compression-level: 6
+2025-12-11T21:06:36.7080497Z   include-hidden-files: false
+2025-12-11T21:06:36.7081226Z env:
+2025-12-11T21:06:36.7081687Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T21:06:36.7084029Z ##[endgroup]
+2025-12-11T21:06:38.9009513Z With the provided path, there will be 1 file uploaded
+2025-12-11T21:06:39.4405054Z Artifact name is valid!
+2025-12-11T21:06:39.4417784Z Root directory input is valid!
+2025-12-11T21:06:39.6810055Z Beginning upload of artifact content to blob storage
+2025-12-11T21:06:40.2150999Z Uploaded bytes 670
+2025-12-11T21:06:40.3577637Z Finished uploading artifact content to blob storage!
+2025-12-11T21:06:40.3592639Z SHA256 digest of uploaded artifact zip is 7bdbd4ee5b25cdb63bd7a4e437aa2a4a9ba32e923fb06ff328a3ad1318813443
+2025-12-11T21:06:40.3593995Z Finalizing artifact upload
+2025-12-11T21:06:40.5429800Z Artifact position-registry-15M_OPT.zip successfully finalized. Artifact ID 4843201304
+2025-12-11T21:06:40.5430355Z Artifact position-registry-15M_OPT has been successfully uploaded! Final size is 670 bytes. Artifact ID is 4843201304
+2025-12-11T21:06:40.5431737Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20136128256/artifacts/4843201304

@@ -1,0 +1,135 @@
+﻿2025-12-15T14:56:05.4253107Z ##[group]Run python -m pip install --upgrade pip
+2025-12-15T14:56:05.4253874Z [36;1mpython -m pip install --upgrade pip[0m
+2025-12-15T14:56:05.4254738Z [36;1mif [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi[0m
+2025-12-15T14:56:05.4255712Z [36;1mpip install pandas requests pyyaml numpy alpaca-trade-api[0m
+2025-12-15T14:56:05.4303793Z shell: /usr/bin/bash -e {0}
+2025-12-15T14:56:05.4304334Z env:
+2025-12-15T14:56:05.4305024Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T14:56:05.4305838Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-15T14:56:05.4306608Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T14:56:05.4307578Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T14:56:05.4308288Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T14:56:05.4309164Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-15T14:56:05.4309766Z ##[endgroup]
+2025-12-15T14:56:07.4313234Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (25.3)
+2025-12-15T14:56:08.2810035Z Collecting pandas>=2.2 (from -r RubberBand/requirements.txt (line 1))
+2025-12-15T14:56:08.3356271Z   Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+2025-12-15T14:56:08.6280397Z Collecting numpy>=1.26 (from -r RubberBand/requirements.txt (line 2))
+2025-12-15T14:56:08.6315511Z   Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+2025-12-15T14:56:08.6705775Z Collecting requests>=2.31 (from -r RubberBand/requirements.txt (line 3))
+2025-12-15T14:56:08.6738575Z   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+2025-12-15T14:56:08.7194275Z Collecting pyyaml>=6.0 (from -r RubberBand/requirements.txt (line 4))
+2025-12-15T14:56:08.7227496Z   Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2025-12-15T14:56:08.7655690Z Collecting pytz>=2024.1 (from -r RubberBand/requirements.txt (line 5))
+2025-12-15T14:56:08.7687569Z   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+2025-12-15T14:56:08.7927759Z Collecting python-dateutil>=2.8.2 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-15T14:56:08.7957443Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2025-12-15T14:56:08.8160493Z Collecting tzdata>=2022.7 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-15T14:56:08.8194265Z   Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+2025-12-15T14:56:08.9442857Z Collecting charset_normalizer<4,>=2 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-15T14:56:08.9490672Z   Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+2025-12-15T14:56:08.9713216Z Collecting idna<4,>=2.5 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-15T14:56:08.9747233Z   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+2025-12-15T14:56:09.0092207Z Collecting urllib3<3,>=1.21.1 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-15T14:56:09.0123311Z   Downloading urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+2025-12-15T14:56:09.0364091Z Collecting certifi>=2017.4.17 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-15T14:56:09.0395096Z   Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+2025-12-15T14:56:09.0575598Z Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-15T14:56:09.0604460Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2025-12-15T14:56:09.0747160Z Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+2025-12-15T14:56:09.1456131Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 192.5 MB/s  0:00:00
+2025-12-15T14:56:09.1489891Z Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+2025-12-15T14:56:09.2375121Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 192.5 MB/s  0:00:00
+2025-12-15T14:56:09.2407187Z Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+2025-12-15T14:56:09.2464968Z Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+2025-12-15T14:56:09.2525995Z Downloading idna-3.11-py3-none-any.whl (71 kB)
+2025-12-15T14:56:09.2613131Z Downloading urllib3-2.6.2-py3-none-any.whl (131 kB)
+2025-12-15T14:56:09.2672603Z Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+2025-12-15T14:56:09.2748820Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 770.3/770.3 kB 101.9 MB/s  0:00:00
+2025-12-15T14:56:09.2779630Z Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+2025-12-15T14:56:09.2917670Z Downloading certifi-2025.11.12-py3-none-any.whl (159 kB)
+2025-12-15T14:56:09.2977490Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2025-12-15T14:56:09.3083698Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2025-12-15T14:56:09.3135656Z Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+2025-12-15T14:56:09.4587077Z Installing collected packages: pytz, urllib3, tzdata, six, pyyaml, numpy, idna, charset_normalizer, certifi, requests, python-dateutil, pandas
+2025-12-15T14:56:15.9100408Z 
+2025-12-15T14:56:15.9129894Z Successfully installed certifi-2025.11.12 charset_normalizer-3.4.4 idna-3.11 numpy-2.2.6 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2025.2 pyyaml-6.0.3 requests-2.32.5 six-1.17.0 tzdata-2025.3 urllib3-2.6.2
+2025-12-15T14:56:16.3517752Z Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.3.3)
+2025-12-15T14:56:16.3521229Z Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.32.5)
+2025-12-15T14:56:16.3525516Z Requirement already satisfied: pyyaml in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (6.0.3)
+2025-12-15T14:56:16.3530924Z Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.2.6)
+2025-12-15T14:56:16.4334894Z Collecting alpaca-trade-api
+2025-12-15T14:56:16.4871440Z   Downloading alpaca_trade_api-3.2.0-py3-none-any.whl.metadata (29 kB)
+2025-12-15T14:56:16.5349573Z Requirement already satisfied: python-dateutil>=2.8.2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+2025-12-15T14:56:16.5354375Z Requirement already satisfied: pytz>=2020.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+2025-12-15T14:56:16.5359603Z Requirement already satisfied: tzdata>=2022.7 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.3)
+2025-12-15T14:56:16.5381198Z Requirement already satisfied: charset_normalizer<4,>=2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.4.4)
+2025-12-15T14:56:16.5386973Z Requirement already satisfied: idna<4,>=2.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.11)
+2025-12-15T14:56:16.5392945Z Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2.6.2)
+2025-12-15T14:56:16.5398259Z Requirement already satisfied: certifi>=2017.4.17 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2025.11.12)
+2025-12-15T14:56:16.5889818Z Collecting urllib3<3,>=1.21.1 (from requests)
+2025-12-15T14:56:16.5917343Z   Downloading urllib3-1.26.20-py2.py3-none-any.whl.metadata (50 kB)
+2025-12-15T14:56:16.6303937Z Collecting websocket-client<2,>=0.56.0 (from alpaca-trade-api)
+2025-12-15T14:56:16.6332429Z   Downloading websocket_client-1.9.0-py3-none-any.whl.metadata (8.3 kB)
+2025-12-15T14:56:16.7622258Z Collecting websockets<11,>=9.0 (from alpaca-trade-api)
+2025-12-15T14:56:16.7684738Z   Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.4 kB)
+2025-12-15T14:56:16.8513186Z Collecting msgpack==1.0.3 (from alpaca-trade-api)
+2025-12-15T14:56:16.8551413Z   Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.7 kB)
+2025-12-15T14:56:17.4983067Z Collecting aiohttp<4,>=3.8.3 (from alpaca-trade-api)
+2025-12-15T14:56:17.5014706Z   Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+2025-12-15T14:56:17.5496828Z Collecting pyyaml
+2025-12-15T14:56:17.5535281Z   Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+2025-12-15T14:56:17.5749221Z Collecting deprecation==2.1.0 (from alpaca-trade-api)
+2025-12-15T14:56:17.5775021Z   Downloading deprecation-2.1.0-py2.py3-none-any.whl.metadata (4.6 kB)
+2025-12-15T14:56:17.5985240Z Collecting packaging (from deprecation==2.1.0->alpaca-trade-api)
+2025-12-15T14:56:17.6011888Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-12-15T14:56:17.6198346Z Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:17.6225548Z   Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+2025-12-15T14:56:17.6335938Z Collecting aiosignal>=1.4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:17.6364722Z   Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+2025-12-15T14:56:17.6518952Z Collecting async-timeout<6.0,>=4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:17.6544007Z   Downloading async_timeout-5.0.1-py3-none-any.whl.metadata (5.1 kB)
+2025-12-15T14:56:17.6828967Z Collecting attrs>=17.3.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:17.6858255Z   Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+2025-12-15T14:56:17.7747078Z Collecting frozenlist>=1.1.1 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:17.7779862Z   Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+2025-12-15T14:56:18.0967336Z Collecting multidict<7.0,>=4.5 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:18.1001383Z   Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+2025-12-15T14:56:18.1694814Z Collecting propcache>=0.2.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:18.1805519Z   Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+2025-12-15T14:56:18.5426154Z Collecting yarl<2.0,>=1.17.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:18.5460045Z   Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (75 kB)
+2025-12-15T14:56:18.5717483Z Collecting typing-extensions>=4.1.0 (from multidict<7.0,>=4.5->aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-15T14:56:18.5748828Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2025-12-15T14:56:18.6123150Z Requirement already satisfied: six>=1.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+2025-12-15T14:56:18.6207459Z Downloading alpaca_trade_api-3.2.0-py3-none-any.whl (34 kB)
+2025-12-15T14:56:18.6282334Z Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (705 kB)
+2025-12-15T14:56:18.6376488Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 705.5/705.5 kB 92.8 MB/s  0:00:00
+2025-12-15T14:56:18.6404336Z Downloading deprecation-2.1.0-py2.py3-none-any.whl (11 kB)
+2025-12-15T14:56:18.6463850Z Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (323 kB)
+2025-12-15T14:56:18.6530598Z Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+2025-12-15T14:56:18.6694264Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 130.6 MB/s  0:00:00
+2025-12-15T14:56:18.6724781Z Downloading async_timeout-5.0.1-py3-none-any.whl (6.2 kB)
+2025-12-15T14:56:18.6789470Z Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (241 kB)
+2025-12-15T14:56:18.6879357Z Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+2025-12-15T14:56:18.6964141Z Downloading websocket_client-1.9.0-py3-none-any.whl (82 kB)
+2025-12-15T14:56:18.7046885Z Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (106 kB)
+2025-12-15T14:56:18.7131917Z Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (346 kB)
+2025-12-15T14:56:18.7209463Z Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+2025-12-15T14:56:18.7269922Z Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+2025-12-15T14:56:18.7425000Z Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+2025-12-15T14:56:18.7500254Z Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (219 kB)
+2025-12-15T14:56:18.7579244Z Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (196 kB)
+2025-12-15T14:56:18.7654948Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2025-12-15T14:56:18.7726482Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
+2025-12-15T14:56:18.8363791Z Installing collected packages: msgpack, websockets, websocket-client, urllib3, typing-extensions, pyyaml, propcache, packaging, frozenlist, attrs, async-timeout, aiohappyeyeballs, multidict, deprecation, aiosignal, yarl, aiohttp, alpaca-trade-api
+2025-12-15T14:56:18.9597793Z   Attempting uninstall: urllib3
+2025-12-15T14:56:18.9605816Z     Found existing installation: urllib3 2.6.2
+2025-12-15T14:56:18.9655779Z     Uninstalling urllib3-2.6.2:
+2025-12-15T14:56:18.9669465Z       Successfully uninstalled urllib3-2.6.2
+2025-12-15T14:56:19.0588543Z   Attempting uninstall: pyyaml
+2025-12-15T14:56:19.0595372Z     Found existing installation: PyYAML 6.0.3
+2025-12-15T14:56:19.0627429Z     Uninstalling PyYAML-6.0.3:
+2025-12-15T14:56:19.0639213Z       Successfully uninstalled PyYAML-6.0.3
+2025-12-15T14:56:19.4575309Z 
+2025-12-15T14:56:19.4625397Z Successfully installed aiohappyeyeballs-2.6.1 aiohttp-3.13.2 aiosignal-1.4.0 alpaca-trade-api-3.2.0 async-timeout-5.0.1 attrs-25.4.0 deprecation-2.1.0 frozenlist-1.8.0 msgpack-1.0.3 multidict-6.7.0 packaging-25.0 propcache-0.4.1 pyyaml-6.0.1 typing-extensions-4.15.0 urllib3-1.26.20 websocket-client-1.9.0 websockets-10.4 yarl-1.22.0

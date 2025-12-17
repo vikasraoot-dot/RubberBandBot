@@ -1,0 +1,224 @@
+﻿2025-12-11T14:30:02.3777614Z ##[group]Run chcp 65001 > $null
+2025-12-11T14:30:02.3778429Z [36;1mchcp 65001 > $null[0m
+2025-12-11T14:30:02.3778705Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-11T14:30:02.3778994Z [36;1m[0m
+2025-12-11T14:30:02.3779175Z [36;1m# Get inputs with defaults[0m
+2025-12-11T14:30:02.3779472Z [36;1m$dryRun = if ("" -ne "") { "" } else { "0" }[0m
+2025-12-11T14:30:02.3779784Z [36;1m$dte = if ("" -ne "") { "" } else { "3" }[0m
+2025-12-11T14:30:02.3780056Z [36;1m[0m
+2025-12-11T14:30:02.3780366Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-11T14:30:02.3780750Z [36;1m[0m
+2025-12-11T14:30:02.3780929Z [36;1m# Run the spreads loop[0m
+2025-12-11T14:30:02.3781321Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-11T14:30:02.3781722Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-11T14:30:02.3782039Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-11T14:30:02.3782331Z [36;1m  --dry-run $dryRun `[0m
+2025-12-11T14:30:02.3782646Z [36;1m  --dte $dte `[0m
+2025-12-11T14:30:02.3782883Z [36;1m  --max-debit 3.00[0m
+2025-12-11T14:30:02.3809142Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-11T14:30:02.3809589Z env:
+2025-12-11T14:30:02.3809829Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-11T14:30:02.3810200Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-11T14:30:02.3810806Z   APCA_API_KEY_ID: ***
+2025-12-11T14:30:02.3811143Z   APCA_API_SECRET_KEY: ***
+2025-12-11T14:30:02.3811404Z   ALPACA_KEY: ***
+2025-12-11T14:30:02.3811694Z   ALPACA_SECRET: ***
+2025-12-11T14:30:02.3811905Z   PYTHONUNBUFFERED: 1
+2025-12-11T14:30:02.3812143Z ##[endgroup]
+2025-12-11T14:30:02.8753350Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-11T14:30:05.3810986Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:05.3992719Z {"event":"symbols_loaded","count":30,"sample":["NVDA","AMD","AAPL","MSFT","GOOGL"],"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:05.9371014Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-11T14:30:05Z","ts_et":"2025-12-11 09:30:05 ET"}
+2025-12-11T14:30:06.5593779Z {"event":"scan_cycle_start","cycle":1,"time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.5595671Z {"event":"outside_entry_window","current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.8859865Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:30:06.8860632Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-11T14:30:06Z","ts_et":"2025-12-11 09:30:06 ET"}
+2025-12-11T14:45:07.1941525Z {"event":"scan_cycle_start","cycle":2,"time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:07Z","ts_et":"2025-12-11 09:45:07 ET"}
+2025-12-11T14:45:07.1942716Z {"event":"scan_start","current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:07Z","ts_et":"2025-12-11 09:45:07 ET"}
+2025-12-11T14:45:14.2527329Z {"type":"SPREAD_SIGNAL","underlying":"NVDA","signal_reason":"RSI_oversold(23.2)","entry_price":178.385,"rsi":23.22,"atr":1.0783,"ts":"2025-12-11T14:45:14Z","ts_et":"2025-12-11 09:45:14 ET"}
+2025-12-11T14:45:23.8113771Z {"event":"signals_found","count":1,"symbols":["NVDA"],"type":"HEARTBEAT","ts":"2025-12-11T14:45:23Z","ts_et":"2025-12-11 09:45:23 ET"}
+2025-12-11T14:45:26.1621519Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for NVDA
+2025-12-11T14:45:26.1622496Z [spreads] NVDA: Long 177.5 / Short 182.5 (width=$5.00, exp=2025-12-26)
+2025-12-11T14:45:27.5891999Z [options] Submitting spread: NVDA251226C00177500 (buy) / NVDA251226C00182500 (sell) @ $2.54 debit
+2025-12-11T14:45:27.9099017Z [options] Spread order submitted: 64caaeec-9c68-40b4-9ad4-5de670141b5e
+2025-12-11T14:45:27.9127408Z [registry] Recorded entry: NVDA251226C00177500 (order_id=15M_OPT_NVDA251226C00177500_17...)
+2025-12-11T14:45:27.9130761Z {"type":"SPREAD_ENTRY","underlying":"NVDA","long_symbol":"NVDA251226C00177500","short_symbol":"NVDA251226C00182500","atm_strike":177.5,"otm_strike":182.5,"spread_width":5.0,"net_debit":2.59,"total_cost":259.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(23.2)","signal_rsi":23.22,"signal_atr":1.0783,"entry_ts":"2025-12-11T14:45:27Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9134208Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":1,"type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9135777Z {"event":"scan_cycle_end","cycle":2,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T14:45:27.9137191Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-11T14:45:27Z","ts_et":"2025-12-11 09:45:27 ET"}
+2025-12-11T15:00:28.2545066Z {"event":"scan_cycle_start","cycle":3,"time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:28Z","ts_et":"2025-12-11 10:00:28 ET"}
+2025-12-11T15:00:28.2547054Z {"event":"scan_start","current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:28Z","ts_et":"2025-12-11 10:00:28 ET"}
+2025-12-11T15:00:35.3054396Z {"type":"SPREAD_SIGNAL","underlying":"NVDA","signal_reason":"RSI_oversold(19.8)","entry_price":176.835,"rsi":19.77,"atr":1.1323,"ts":"2025-12-11T15:00:35Z","ts_et":"2025-12-11 10:00:35 ET"}
+2025-12-11T15:00:35.6384826Z {"type":"SPREAD_SIGNAL","underlying":"AMD","signal_reason":"RSI_oversold(20.3)","entry_price":210.94,"rsi":20.32,"atr":1.7328,"ts":"2025-12-11T15:00:35Z","ts_et":"2025-12-11 10:00:35 ET"}
+2025-12-11T15:00:45.0449311Z {"event":"signals_found","count":2,"symbols":["NVDA","AMD"],"type":"HEARTBEAT","ts":"2025-12-11T15:00:45Z","ts_et":"2025-12-11 10:00:45 ET"}
+2025-12-11T15:00:45.0451423Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Already_have_position","ts":"2025-12-11T15:00:45Z","ts_et":"2025-12-11 10:00:45 ET"}
+2025-12-11T15:00:47.4899636Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for AMD
+2025-12-11T15:00:47.4900165Z [spreads] AMD: Long 210.0 / Short 215.0 (width=$5.00, exp=2025-12-26)
+2025-12-11T15:00:49.0242381Z [options] Submitting spread: AMD251226C00210000 (buy) / AMD251226C00215000 (sell) @ $2.6 debit
+2025-12-11T15:00:49.3966150Z [options] Spread order submitted: 0d6589ad-5959-49e2-b474-d9675e8f5838
+2025-12-11T15:00:49.3967336Z [registry] Recorded entry: AMD251226C00210000 (order_id=15M_OPT_AMD251226C00210000_176...)
+2025-12-11T15:00:49.3969018Z {"type":"SPREAD_ENTRY","underlying":"AMD","long_symbol":"AMD251226C00210000","short_symbol":"AMD251226C00215000","atm_strike":210.0,"otm_strike":215.0,"spread_width":5.0,"net_debit":2.33,"total_cost":233.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(20.3)","signal_rsi":20.32,"signal_atr":1.7328,"entry_ts":"2025-12-11T15:00:49Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3970013Z {"event":"scan_complete","signals":2,"new_entries":1,"total_positions":3,"type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3970748Z {"event":"scan_cycle_end","cycle":3,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:00:49.3971327Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-11T15:00:49Z","ts_et":"2025-12-11 10:00:49 ET"}
+2025-12-11T15:15:49.7277796Z {"event":"scan_cycle_start","cycle":4,"time":"10:15","type":"HEARTBEAT","ts":"2025-12-11T15:15:49Z","ts_et":"2025-12-11 10:15:49 ET"}
+2025-12-11T15:15:49.7288241Z {"event":"scan_start","current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-11T15:15:49Z","ts_et":"2025-12-11 10:15:49 ET"}
+2025-12-11T15:16:05.2402761Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2404906Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2405615Z {"event":"scan_cycle_end","cycle":4,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:16:05.2406193Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:16","type":"HEARTBEAT","ts":"2025-12-11T15:16:05Z","ts_et":"2025-12-11 10:16:05 ET"}
+2025-12-11T15:31:05.5278921Z {"event":"scan_cycle_start","cycle":5,"time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:05Z","ts_et":"2025-12-11 10:31:05 ET"}
+2025-12-11T15:31:05.5280569Z {"event":"scan_start","current_time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:05Z","ts_et":"2025-12-11 10:31:05 ET"}
+2025-12-11T15:31:19.8899185Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8900189Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8903639Z {"event":"scan_cycle_end","cycle":5,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:31:19.8905932Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:31","type":"HEARTBEAT","ts":"2025-12-11T15:31:19Z","ts_et":"2025-12-11 10:31:19 ET"}
+2025-12-11T15:46:27.2599192Z {"event":"scan_cycle_start","cycle":6,"time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:27Z","ts_et":"2025-12-11 10:46:27 ET"}
+2025-12-11T15:46:27.2600875Z {"event":"scan_start","current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:27Z","ts_et":"2025-12-11 10:46:27 ET"}
+2025-12-11T15:46:41.8941016Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8943020Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8944727Z {"event":"scan_cycle_end","cycle":6,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T15:46:41.8958593Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:46","type":"HEARTBEAT","ts":"2025-12-11T15:46:41Z","ts_et":"2025-12-11 10:46:41 ET"}
+2025-12-11T16:01:42.2110245Z {"event":"scan_cycle_start","cycle":7,"time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:42Z","ts_et":"2025-12-11 11:01:42 ET"}
+2025-12-11T16:01:42.2111971Z {"event":"scan_start","current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:42Z","ts_et":"2025-12-11 11:01:42 ET"}
+2025-12-11T16:01:56.4636818Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4639008Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4640992Z {"event":"scan_cycle_end","cycle":7,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:01:56.4643058Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:01","type":"HEARTBEAT","ts":"2025-12-11T16:01:56Z","ts_et":"2025-12-11 11:01:56 ET"}
+2025-12-11T16:16:56.7679736Z {"event":"scan_cycle_start","cycle":8,"time":"11:16","type":"HEARTBEAT","ts":"2025-12-11T16:16:56Z","ts_et":"2025-12-11 11:16:56 ET"}
+2025-12-11T16:16:56.7683254Z {"event":"scan_start","current_time":"11:16","type":"HEARTBEAT","ts":"2025-12-11T16:16:56Z","ts_et":"2025-12-11 11:16:56 ET"}
+2025-12-11T16:17:06.2178287Z {"type":"SPREAD_SIGNAL","underlying":"MSTR","signal_reason":"RSI_oversold(24.7)","entry_price":171.95,"rsi":24.7,"atr":2.909,"ts":"2025-12-11T16:17:06Z","ts_et":"2025-12-11 11:17:06 ET"}
+2025-12-11T16:17:11.0701502Z {"event":"signals_found","count":1,"symbols":["MSTR"],"type":"HEARTBEAT","ts":"2025-12-11T16:17:11Z","ts_et":"2025-12-11 11:17:11 ET"}
+2025-12-11T16:17:13.4592890Z [spreads] Using 11 DTE (2025-12-26) instead of 3 DTE for MSTR
+2025-12-11T16:17:13.4594501Z [spreads] MSTR: Long 175.0 / Short 177.5 (width=$2.50, exp=2025-12-26)
+2025-12-11T16:17:14.8655348Z [options] Submitting spread: MSTR251226C00175000 (buy) / MSTR251226C00177500 (sell) @ $1.63 debit
+2025-12-11T16:17:15.1789275Z [options] Spread order submitted: 55aadc0a-1a7d-4013-84a7-bd4311ba1c00
+2025-12-11T16:17:15.1806530Z [registry] Recorded entry: MSTR251226C00175000 (order_id=15M_OPT_MSTR251226C00175000_17...)
+2025-12-11T16:17:15.1810859Z {"type":"SPREAD_ENTRY","underlying":"MSTR","long_symbol":"MSTR251226C00175000","short_symbol":"MSTR251226C00177500","atm_strike":175.0,"otm_strike":177.5,"spread_width":2.5,"net_debit":1.79,"total_cost":179.0,"contracts":1,"expiration":"2025-12-26","entry_reason":"RSI_oversold(24.7)","signal_rsi":24.7,"signal_atr":2.909,"entry_ts":"2025-12-11T16:17:15Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1814803Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1816817Z {"event":"scan_cycle_end","cycle":8,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:17:15.1818466Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:17","type":"HEARTBEAT","ts":"2025-12-11T16:17:15Z","ts_et":"2025-12-11 11:17:15 ET"}
+2025-12-11T16:32:15.5045848Z {"event":"scan_cycle_start","cycle":9,"time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:15Z","ts_et":"2025-12-11 11:32:15 ET"}
+2025-12-11T16:32:15.5047456Z {"event":"scan_start","current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:15Z","ts_et":"2025-12-11 11:32:15 ET"}
+2025-12-11T16:32:16.3363449Z [options] Attempting spread close:
+2025-12-11T16:32:16.3366440Z [options]   Long: MSTR251226C00175000 @ bid=8.77
+2025-12-11T16:32:16.3367207Z [options]   Short: MSTR251226C00177500 @ ask=8.35
+2025-12-11T16:32:16.3371625Z [options]   Net credit: $0.42, limit_price: $0.42
+2025-12-11T16:32:16.3372681Z [options] Closing spread: MSTR251226C00175000 (sell) / MSTR251226C00177500 (buy) @ $0.42 credit
+2025-12-11T16:32:16.6427433Z [options] Spread close order submitted: 4b1cd2fa-c85f-4b7a-b693-d4c0094f0a68
+2025-12-11T16:32:16.6431622Z {"type":"SPREAD_EXIT","underlying":"MSTR","long_symbol":"MSTR251226C00175000","short_symbol":"MSTR251226C00177500","exit_value":0.25,"exit_reason":"SL_hit(-84.4%<=-50.0%)","pnl":-135.0,"pnl_pct":-84.4,"ts":"2025-12-11T16:32:16Z","ts_et":"2025-12-11 11:32:16 ET"}
+2025-12-11T16:32:16.6442420Z [registry] Recorded exit: MSTR251226C00175000 (SL_hit(-84.4%<=-50.0%))
+2025-12-11T16:32:16.6443646Z [positions] Registry updated: removed MSTR251226C00175000
+2025-12-11T16:32:30.3499979Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3501883Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3503724Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:32:30.3505483Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:32","type":"HEARTBEAT","ts":"2025-12-11T16:32:30Z","ts_et":"2025-12-11 11:32:30 ET"}
+2025-12-11T16:47:30.6557173Z {"event":"scan_cycle_start","cycle":10,"time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:30Z","ts_et":"2025-12-11 11:47:30 ET"}
+2025-12-11T16:47:30.6558763Z {"event":"scan_start","current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:30Z","ts_et":"2025-12-11 11:47:30 ET"}
+2025-12-11T16:47:44.5317018Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5317967Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5318743Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T16:47:44.5319276Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:47","type":"HEARTBEAT","ts":"2025-12-11T16:47:44Z","ts_et":"2025-12-11 11:47:44 ET"}
+2025-12-11T17:02:44.8473378Z {"event":"scan_cycle_start","cycle":11,"time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:44Z","ts_et":"2025-12-11 12:02:44 ET"}
+2025-12-11T17:02:44.8475054Z {"event":"scan_start","current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:44Z","ts_et":"2025-12-11 12:02:44 ET"}
+2025-12-11T17:02:58.9207023Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9207924Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9208708Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:02:58.9209238Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:02","type":"HEARTBEAT","ts":"2025-12-11T17:02:58Z","ts_et":"2025-12-11 12:02:58 ET"}
+2025-12-11T17:17:59.2332924Z {"event":"scan_cycle_start","cycle":12,"time":"12:17","type":"HEARTBEAT","ts":"2025-12-11T17:17:59Z","ts_et":"2025-12-11 12:17:59 ET"}
+2025-12-11T17:17:59.2334507Z {"event":"scan_start","current_time":"12:17","type":"HEARTBEAT","ts":"2025-12-11T17:17:59Z","ts_et":"2025-12-11 12:17:59 ET"}
+2025-12-11T17:18:13.5557135Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5558898Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5565126Z {"event":"scan_cycle_end","cycle":12,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:18:13.5566856Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:18","type":"HEARTBEAT","ts":"2025-12-11T17:18:13Z","ts_et":"2025-12-11 12:18:13 ET"}
+2025-12-11T17:33:13.8604755Z {"event":"scan_cycle_start","cycle":13,"time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:13Z","ts_et":"2025-12-11 12:33:13 ET"}
+2025-12-11T17:33:13.8606527Z {"event":"scan_start","current_time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:13Z","ts_et":"2025-12-11 12:33:13 ET"}
+2025-12-11T17:33:27.8263375Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8265297Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8266836Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:33:27.8267335Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:33","type":"HEARTBEAT","ts":"2025-12-11T17:33:27Z","ts_et":"2025-12-11 12:33:27 ET"}
+2025-12-11T17:48:28.1454145Z {"event":"scan_cycle_start","cycle":14,"time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:28Z","ts_et":"2025-12-11 12:48:28 ET"}
+2025-12-11T17:48:28.1457641Z {"event":"scan_start","current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:28Z","ts_et":"2025-12-11 12:48:28 ET"}
+2025-12-11T17:48:41.9505349Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9506954Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9508472Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T17:48:41.9510250Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:48","type":"HEARTBEAT","ts":"2025-12-11T17:48:41Z","ts_et":"2025-12-11 12:48:41 ET"}
+2025-12-11T18:03:42.2428004Z {"event":"scan_cycle_start","cycle":15,"time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:42Z","ts_et":"2025-12-11 13:03:42 ET"}
+2025-12-11T18:03:42.2428674Z {"event":"scan_start","current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:42Z","ts_et":"2025-12-11 13:03:42 ET"}
+2025-12-11T18:03:56.3277822Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3279283Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3280729Z {"event":"scan_cycle_end","cycle":15,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:03:56.3281257Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:03","type":"HEARTBEAT","ts":"2025-12-11T18:03:56Z","ts_et":"2025-12-11 13:03:56 ET"}
+2025-12-11T18:18:56.6400086Z {"event":"scan_cycle_start","cycle":16,"time":"13:18","type":"HEARTBEAT","ts":"2025-12-11T18:18:56Z","ts_et":"2025-12-11 13:18:56 ET"}
+2025-12-11T18:18:56.6401711Z {"event":"scan_start","current_time":"13:18","type":"HEARTBEAT","ts":"2025-12-11T18:18:56Z","ts_et":"2025-12-11 13:18:56 ET"}
+2025-12-11T18:19:11.0227603Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0229054Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0232039Z {"event":"scan_cycle_end","cycle":16,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:19:11.0232598Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:19","type":"HEARTBEAT","ts":"2025-12-11T18:19:11Z","ts_et":"2025-12-11 13:19:11 ET"}
+2025-12-11T18:34:11.3377900Z {"event":"scan_cycle_start","cycle":17,"time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:11Z","ts_et":"2025-12-11 13:34:11 ET"}
+2025-12-11T18:34:11.3378993Z {"event":"scan_start","current_time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:11Z","ts_et":"2025-12-11 13:34:11 ET"}
+2025-12-11T18:34:25.6740453Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6742664Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6744138Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:34:25.6745430Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:34","type":"HEARTBEAT","ts":"2025-12-11T18:34:25Z","ts_et":"2025-12-11 13:34:25 ET"}
+2025-12-11T18:49:25.9960239Z {"event":"scan_cycle_start","cycle":18,"time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:25Z","ts_et":"2025-12-11 13:49:25 ET"}
+2025-12-11T18:49:25.9961118Z {"event":"scan_start","current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:25Z","ts_et":"2025-12-11 13:49:25 ET"}
+2025-12-11T18:49:39.8688419Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8746700Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8928596Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T18:49:39.8983302Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:49","type":"HEARTBEAT","ts":"2025-12-11T18:49:39Z","ts_et":"2025-12-11 13:49:39 ET"}
+2025-12-11T19:04:40.1967735Z {"event":"scan_cycle_start","cycle":19,"time":"14:04","type":"HEARTBEAT","ts":"2025-12-11T19:04:40Z","ts_et":"2025-12-11 14:04:40 ET"}
+2025-12-11T19:04:40.1969468Z {"event":"scan_start","current_time":"14:04","type":"HEARTBEAT","ts":"2025-12-11T19:04:40Z","ts_et":"2025-12-11 14:04:40 ET"}
+2025-12-11T19:05:06.9038619Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9039496Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9040224Z {"event":"scan_cycle_end","cycle":19,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:05:06.9040891Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:05","type":"HEARTBEAT","ts":"2025-12-11T19:05:06Z","ts_et":"2025-12-11 14:05:06 ET"}
+2025-12-11T19:20:07.2181732Z {"event":"scan_cycle_start","cycle":20,"time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:07Z","ts_et":"2025-12-11 14:20:07 ET"}
+2025-12-11T19:20:07.2182524Z {"event":"scan_start","current_time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:07Z","ts_et":"2025-12-11 14:20:07 ET"}
+2025-12-11T19:20:21.4056713Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4058371Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4073888Z {"event":"scan_cycle_end","cycle":20,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:20:21.4075479Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:20","type":"HEARTBEAT","ts":"2025-12-11T19:20:21Z","ts_et":"2025-12-11 14:20:21 ET"}
+2025-12-11T19:35:21.7550263Z {"event":"scan_cycle_start","cycle":21,"time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:21Z","ts_et":"2025-12-11 14:35:21 ET"}
+2025-12-11T19:35:21.7551110Z {"event":"scan_start","current_time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:21Z","ts_et":"2025-12-11 14:35:21 ET"}
+2025-12-11T19:35:35.8030977Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8032953Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8034699Z {"event":"scan_cycle_end","cycle":21,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:35:35.8036345Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:35","type":"HEARTBEAT","ts":"2025-12-11T19:35:35Z","ts_et":"2025-12-11 14:35:35 ET"}
+2025-12-11T19:50:36.1031158Z {"event":"scan_cycle_start","cycle":22,"time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:36Z","ts_et":"2025-12-11 14:50:36 ET"}
+2025-12-11T19:50:36.1033102Z {"event":"scan_start","current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:36Z","ts_et":"2025-12-11 14:50:36 ET"}
+2025-12-11T19:50:50.6300873Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6305123Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6311921Z {"event":"scan_cycle_end","cycle":22,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T19:50:50.6313355Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:50","type":"HEARTBEAT","ts":"2025-12-11T19:50:50Z","ts_et":"2025-12-11 14:50:50 ET"}
+2025-12-11T20:05:50.9285198Z {"event":"scan_cycle_start","cycle":23,"time":"15:05","type":"HEARTBEAT","ts":"2025-12-11T20:05:50Z","ts_et":"2025-12-11 15:05:50 ET"}
+2025-12-11T20:05:50.9285827Z {"event":"scan_start","current_time":"15:05","type":"HEARTBEAT","ts":"2025-12-11T20:05:50Z","ts_et":"2025-12-11 15:05:50 ET"}
+2025-12-11T20:06:05.9575822Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9580384Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9585515Z {"event":"scan_cycle_end","cycle":23,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:06:05.9587668Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:06","type":"HEARTBEAT","ts":"2025-12-11T20:06:05Z","ts_et":"2025-12-11 15:06:05 ET"}
+2025-12-11T20:21:06.2887996Z {"event":"scan_cycle_start","cycle":24,"time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:06Z","ts_et":"2025-12-11 15:21:06 ET"}
+2025-12-11T20:21:06.2889753Z {"event":"scan_start","current_time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:06Z","ts_et":"2025-12-11 15:21:06 ET"}
+2025-12-11T20:21:20.8716140Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8718557Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8723951Z {"event":"scan_cycle_end","cycle":24,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:21:20.8726127Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:21","type":"HEARTBEAT","ts":"2025-12-11T20:21:20Z","ts_et":"2025-12-11 15:21:20 ET"}
+2025-12-11T20:36:21.1751837Z {"event":"scan_cycle_start","cycle":25,"time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:21Z","ts_et":"2025-12-11 15:36:21 ET"}
+2025-12-11T20:36:21.1753166Z {"event":"scan_start","current_time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:21Z","ts_et":"2025-12-11 15:36:21 ET"}
+2025-12-11T20:36:35.1681240Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2145390Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2292279Z {"event":"scan_cycle_end","cycle":25,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:36:35.2353539Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:36","type":"HEARTBEAT","ts":"2025-12-11T20:36:35Z","ts_et":"2025-12-11 15:36:35 ET"}
+2025-12-11T20:51:35.5529883Z {"event":"scan_cycle_start","cycle":26,"time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.5534404Z {"event":"outside_entry_window","current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.8817423Z {"event":"scan_cycle_end","cycle":26,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T20:51:35.8819225Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:51","type":"HEARTBEAT","ts":"2025-12-11T20:51:35Z","ts_et":"2025-12-11 15:51:35 ET"}
+2025-12-11T21:06:35.8814081Z {"event":"market_close_reached","time":"16:06","type":"HEARTBEAT","ts":"2025-12-11T21:06:35Z","ts_et":"2025-12-11 16:06:35 ET"}
+2025-12-11T21:06:35.8814962Z {"event":"eod_processing","scan_count":26,"type":"HEARTBEAT","ts":"2025-12-11T21:06:35Z","ts_et":"2025-12-11 16:06:35 ET"}
+2025-12-11T21:06:36.1943009Z {"type":"EOD_SUMMARY","date":"2025-12-11","total_trades":3,"closed_trades":1,"open_trades":2,"total_pnl":-135.0,"win_count":0,"loss_count":1,"win_rate_pct":0.0,"avg_win":0,"avg_loss":-135.0,"exit_reasons":{"SL_hit(-84.4%<=-50.0%)":{"count":1,"pnl":-135.0}},"trades":[{"underlying":"NVDA","entry_reason":"RSI_oversold(23.2)","exit_reason":null,"net_debit":2.59,"pnl":null,"pnl_pct":null},{"underlying":"AMD","entry_reason":"RSI_oversold(20.3)","exit_reason":null,"net_debit":2.33,"pnl":null,"pnl_pct":null},{"underlying":"MSTR","entry_reason":"RSI_oversold(24.7)","exit_reason":"SL_hit(-84.4%<=-50.0%)","net_debit":1.79,"pnl":-135.0,"pnl_pct":-84.4}],"ts":"2025-12-11T21:06:36Z","ts_et":"2025-12-11 16:06:36 ET"}
+2025-12-11T21:06:36.1958108Z 
+2025-12-11T21:06:36.1966674Z ============================================================
+2025-12-11T21:06:36.1975106Z EOD SUMMARY: 3 trades, PnL: $-135.00
+2025-12-11T21:06:36.1986404Z Win Rate: 0.0%
+2025-12-11T21:06:36.2084020Z ============================================================
+2025-12-11T21:06:36.2085089Z 

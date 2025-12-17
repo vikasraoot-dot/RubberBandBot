@@ -1,0 +1,318 @@
+﻿2025-12-12T14:13:56.0285086Z Current runner version: '2.329.0'
+2025-12-12T14:13:56.0301658Z Runner name: 'OptionsRunner'
+2025-12-12T14:13:56.0303103Z Runner group name: 'Default'
+2025-12-12T14:13:56.0304619Z Machine name: 'VHOMEPC'
+2025-12-12T14:13:56.0311674Z ##[group]GITHUB_TOKEN Permissions
+2025-12-12T14:13:56.0317203Z Contents: read
+2025-12-12T14:13:56.0318147Z Metadata: read
+2025-12-12T14:13:56.0319041Z Packages: read
+2025-12-12T14:13:56.0319982Z ##[endgroup]
+2025-12-12T14:13:56.0324772Z Secret source: Actions
+2025-12-12T14:13:56.0326053Z Prepare workflow directory
+2025-12-12T14:13:56.1571081Z Prepare all required actions
+2025-12-12T14:13:56.1662296Z Getting action download info
+2025-12-12T14:13:56.7615106Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-12T14:13:58.0946571Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-12T14:13:59.5758722Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-12T14:14:01.8040629Z Complete job name: trade
+2025-12-12T14:14:01.9512920Z ##[group]Run actions/checkout@v4
+2025-12-12T14:14:01.9514855Z with:
+2025-12-12T14:14:01.9515465Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:14:01.9516767Z   token: ***
+2025-12-12T14:14:01.9517262Z   ssh-strict: true
+2025-12-12T14:14:01.9517764Z   ssh-user: git
+2025-12-12T14:14:01.9518287Z   persist-credentials: true
+2025-12-12T14:14:01.9519152Z   clean: true
+2025-12-12T14:14:01.9519722Z   sparse-checkout-cone-mode: true
+2025-12-12T14:14:01.9520345Z   fetch-depth: 1
+2025-12-12T14:14:01.9520844Z   fetch-tags: false
+2025-12-12T14:14:01.9521404Z   show-progress: true
+2025-12-12T14:14:01.9521924Z   lfs: false
+2025-12-12T14:14:01.9522384Z   submodules: false
+2025-12-12T14:14:01.9522894Z   set-safe-directory: true
+2025-12-12T14:14:01.9524053Z ##[endgroup]
+2025-12-12T14:14:02.6853355Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:14:02.6856690Z ##[group]Getting Git version info
+2025-12-12T14:14:02.6858083Z Working directory is 'C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot'
+2025-12-12T14:14:02.6918290Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T14:14:02.7676084Z git version 2.52.0.windows.1
+2025-12-12T14:14:02.7738728Z ##[endgroup]
+2025-12-12T14:14:02.7763142Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\fbfb884f-96ac-4529-998d-521bc6afb8ac' before making global git config changes
+2025-12-12T14:14:02.7765241Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T14:14:02.7769930Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-12T14:14:02.8502088Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-12T14:14:02.9099533Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-12T14:14:02.9194739Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-12T14:14:02.9201590Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-12T14:14:02.9865624Z refs/heads/main
+2025-12-12T14:14:02.9965091Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-12T14:14:03.1636456Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-12T14:14:03.1637185Z M	RubberBand/__pycache__/strategy.cpython-313.pyc
+2025-12-12T14:14:03.1637638Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-12T14:14:03.1638064Z M	RubberBand/src/__pycache__/data.cpython-313.pyc
+2025-12-12T14:14:03.1638494Z M	RubberBand/src/__pycache__/indicators.cpython-313.pyc
+2025-12-12T14:14:03.1639703Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-12T14:14:03.1640786Z M	RubberBand/src/__pycache__/utils.cpython-313.pyc
+2025-12-12T14:14:03.1641438Z M	backtest_health.json
+2025-12-12T14:14:03.1648962Z M	backtest_summary.json
+2025-12-12T14:14:03.1649662Z M	daily_stats.csv
+2025-12-12T14:14:03.1650266Z M	detailed_trades.csv
+2025-12-12T14:14:03.1650853Z M	loss_analysis.csv
+2025-12-12T14:14:03.1674160Z HEAD is now at 1d7addd Update tickers_options.txt
+2025-12-12T14:14:03.3098009Z ##[endgroup]
+2025-12-12T14:14:03.3131524Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-12T14:14:05.0374868Z ##[group]Cleaning the repository
+2025-12-12T14:14:05.0390571Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-12T14:14:05.1185153Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-12T14:14:05.2917906Z HEAD is now at 1d7addd Update tickers_options.txt
+2025-12-12T14:14:05.3015950Z ##[endgroup]
+2025-12-12T14:14:05.3020862Z ##[group]Disabling automatic garbage collection
+2025-12-12T14:14:05.3031618Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-12T14:14:05.3735912Z ##[endgroup]
+2025-12-12T14:14:05.3736296Z ##[group]Setting up auth
+2025-12-12T14:14:05.3762469Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T14:14:05.4430198Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T14:14:06.5600970Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T14:14:06.6317881Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T14:14:07.7378325Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T14:14:07.8034393Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T14:14:08.9112107Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-12T14:14:09.0068554Z ##[endgroup]
+2025-12-12T14:14:09.0069678Z ##[group]Fetching the repository
+2025-12-12T14:14:09.0078979Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1d7addddf855c59289371c25f93a3e83c955db55:refs/remotes/origin/main
+2025-12-12T14:14:10.1494076Z ##[endgroup]
+2025-12-12T14:14:10.1494923Z ##[group]Determining the checkout info
+2025-12-12T14:14:10.1495797Z ##[endgroup]
+2025-12-12T14:14:10.1506717Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-12T14:14:10.2527733Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-12T14:14:10.3217168Z ##[group]Checking out the ref
+2025-12-12T14:14:10.3228148Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-12T14:14:10.4399394Z branch 'main' set up to track 'origin/main'.
+2025-12-12T14:14:10.4400208Z Your branch is up to date with 'origin/main'.
+2025-12-12T14:14:10.4412290Z Switched to and reset branch 'main'
+2025-12-12T14:14:10.4505670Z ##[endgroup]
+2025-12-12T14:14:10.5268114Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-12T14:14:10.5819367Z 1d7addddf855c59289371c25f93a3e83c955db55
+2025-12-12T14:14:10.6637092Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-12T14:14:10.6638339Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-12T14:14:10.6639073Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-12T14:14:10.6702565Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:14:10.6703507Z ##[endgroup]
+2025-12-12T14:14:11.9658803Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-12T14:14:11.9659747Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-12T14:14:11.9659967Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-12T14:14:11.9674075Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:14:11.9674300Z env:
+2025-12-12T14:14:11.9674426Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:14:11.9674582Z ##[endgroup]
+2025-12-12T14:14:13.7101070Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T14:14:14.5992404Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-12T14:14:17.7556313Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T14:14:18.6209712Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-12T14:14:18.6221059Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-12T14:14:18.6233220Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-12T14:14:18.6243521Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-12T14:14:18.6252145Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-12T14:14:18.6359433Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-12T14:14:18.6376046Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-12T14:14:18.6622385Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-12T14:14:18.6628749Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-12T14:14:18.6640507Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-12T14:14:18.6654123Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-12T14:14:18.6887756Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-12T14:14:19.1372169Z ##[group]Run chcp 65001 > $null
+2025-12-12T14:14:19.1372452Z [36;1mchcp 65001 > $null[0m
+2025-12-12T14:14:19.1372702Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-12T14:14:19.1372938Z [36;1mfunction Get-Clock {[0m
+2025-12-12T14:14:19.1373150Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-12T14:14:19.1373598Z [36;1m}[0m
+2025-12-12T14:14:19.1373700Z [36;1m$maxWaitMin = 20[0m
+2025-12-12T14:14:19.1373820Z [36;1m$start = Get-Date[0m
+2025-12-12T14:14:19.1373931Z [36;1mwhile ($true) {[0m
+2025-12-12T14:14:19.1374037Z [36;1m  try {[0m
+2025-12-12T14:14:19.1374135Z [36;1m    $clk = Get-Clock[0m
+2025-12-12T14:14:19.1374308Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-12T14:14:19.1374501Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-12T14:14:19.1374719Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-12T14:14:19.1374885Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-12T14:14:19.1375055Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-12T14:14:19.1375273Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-12T14:14:19.1375459Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-12T14:14:19.1375594Z [36;1m    } else {[0m
+2025-12-12T14:14:19.1375733Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-12T14:14:19.1375880Z [36;1m      break[0m
+2025-12-12T14:14:19.1375979Z [36;1m    }[0m
+2025-12-12T14:14:19.1376132Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-12T14:14:19.1376347Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-12T14:14:19.1376502Z [36;1m      break[0m
+2025-12-12T14:14:19.1376599Z [36;1m    }[0m
+2025-12-12T14:14:19.1376696Z [36;1m  } catch {[0m
+2025-12-12T14:14:19.1376870Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-12T14:14:19.1377080Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-12T14:14:19.1377222Z [36;1m  }[0m
+2025-12-12T14:14:19.1377305Z [36;1m}[0m
+2025-12-12T14:14:19.1390509Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:14:19.1390745Z env:
+2025-12-12T14:14:19.1390983Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:14:19.1391238Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T14:14:19.1391535Z   APCA_API_KEY_ID: ***
+2025-12-12T14:14:19.1391704Z   APCA_API_SECRET_KEY: ***
+2025-12-12T14:14:19.1391823Z ##[endgroup]
+2025-12-12T14:14:20.4186678Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:14:50.5325604Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:15:20.6395860Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:15:50.7450429Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:16:20.8690124Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:16:50.9774963Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:17:21.1058433Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:17:51.2325025Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:18:21.3396738Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:18:51.4544136Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:19:21.5701636Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:19:51.6801221Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:20:21.8041684Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:20:51.9165137Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:21:22.0260254Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:21:52.1433487Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:22:22.2507147Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:22:52.3508863Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:23:22.4697512Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:23:52.5828341Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:24:22.6754455Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:24:52.7844299Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:25:22.8983302Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:25:53.0161088Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:26:23.1256692Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:26:53.2470109Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:27:23.3626252Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:27:53.4709814Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:28:23.5658424Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:28:53.6719646Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:23.7824277Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:53.8878489Z Waiting 6 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:59.9956966Z Waiting 0 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:30:00.0863380Z Past next_open window; continuing.
+2025-12-12T14:30:00.1962522Z ##[group]Run actions/download-artifact@v4
+2025-12-12T14:30:00.1963108Z with:
+2025-12-12T14:30:00.1963520Z   name: position-registry-15M_OPT
+2025-12-12T14:30:00.1963805Z   path: .position_registry/
+2025-12-12T14:30:00.1964037Z   merge-multiple: false
+2025-12-12T14:30:00.1964282Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:30:00.1964552Z   run-id: 20169451511
+2025-12-12T14:30:00.1964735Z env:
+2025-12-12T14:30:00.1964975Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:30:00.1965262Z ##[endgroup]
+2025-12-12T14:30:01.5487325Z Downloading single artifact
+2025-12-12T14:30:02.1019762Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-12T14:30:02.1488846Z ##[group]Run chcp 65001 > $null
+2025-12-12T14:30:02.1489067Z [36;1mchcp 65001 > $null[0m
+2025-12-12T14:30:02.1489213Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-12T14:30:02.1489481Z [36;1m[0m
+2025-12-12T14:30:02.1489597Z [36;1m# Get inputs with defaults[0m
+2025-12-12T14:30:02.1489748Z [36;1m$dryRun = if ("" -ne "") { "" } else { "0" }[0m
+2025-12-12T14:30:02.1489907Z [36;1m$dte = if ("" -ne "") { "" } else { "3" }[0m
+2025-12-12T14:30:02.1490038Z [36;1m[0m
+2025-12-12T14:30:02.1490201Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-12T14:30:02.1490388Z [36;1m[0m
+2025-12-12T14:30:02.1490482Z [36;1m# Run the spreads loop[0m
+2025-12-12T14:30:02.1490693Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-12T14:30:02.1490897Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-12T14:30:02.1491077Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-12T14:30:02.1491261Z [36;1m  --dry-run $dryRun `[0m
+2025-12-12T14:30:02.1491383Z [36;1m  --dte $dte `[0m
+2025-12-12T14:30:02.1491498Z [36;1m  --max-debit 3.00[0m
+2025-12-12T14:30:02.1510600Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:30:02.1511025Z env:
+2025-12-12T14:30:02.1511252Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:30:02.1511596Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T14:30:02.1512138Z   APCA_API_KEY_ID: ***
+2025-12-12T14:30:02.1512464Z   APCA_API_SECRET_KEY: ***
+2025-12-12T14:30:02.1512702Z   ALPACA_KEY: ***
+2025-12-12T14:30:02.1512963Z   ALPACA_SECRET: ***
+2025-12-12T14:30:02.1513160Z   PYTHONUNBUFFERED: 1
+2025-12-12T14:30:02.1515296Z ##[endgroup]
+2025-12-12T14:30:02.6577241Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-12T14:30:04.6587947Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-12T14:30:04Z","ts_et":"2025-12-12 09:30:04 ET"}
+2025-12-12T14:30:04.6749360Z {"event":"symbols_loaded","count":120,"sample":["RKLB","HOOD","INTC","WDC","VRT"],"type":"HEARTBEAT","ts":"2025-12-12T14:30:04Z","ts_et":"2025-12-12 09:30:04 ET"}
+2025-12-12T14:30:05.0347214Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-12T14:30:05Z","ts_et":"2025-12-12 09:30:05 ET"}
+2025-12-12T14:30:05.6512177Z {"event":"scan_cycle_start","cycle":1,"time":"09:30","type":"HEARTBEAT","ts":"2025-12-12T14:30:05Z","ts_et":"2025-12-12 09:30:05 ET"}
+2025-12-12T14:30:05.6520172Z {"event":"outside_entry_window","current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-12T14:30:05Z","ts_et":"2025-12-12 09:30:05 ET"}
+2025-12-12T14:30:06.6316570Z [options] Attempting spread close:
+2025-12-12T14:30:06.6317674Z [options]   Long: AMD251226C00210000 @ bid=13.36
+2025-12-12T14:30:06.6318639Z [options]   Short: AMD251226C00215000 @ ask=10.36
+2025-12-12T14:30:06.6336827Z [options]   Net credit: $3.00, limit_price: $3.00
+2025-12-12T14:30:06.6337916Z [options] Closing spread: AMD251226C00210000 (sell) / AMD251226C00215000 (buy) @ $3.0 credit
+2025-12-12T14:30:06.9475315Z [options] Spread close order submitted: 03f47767-4449-45dd-a1f4-ca21c37f9451
+2025-12-12T14:30:06.9484917Z {"type":"SPREAD_EXIT","underlying":"AMD","long_symbol":"AMD251226C00210000","short_symbol":"AMD251226C00215000","exit_value":2.8,"exit_reason":"SL_hit(-68.4%<=-50.0%)","pnl":-605.0,"pnl_pct":-68.4,"ts":"2025-12-12T14:30:06Z","ts_et":"2025-12-12 09:30:06 ET"}
+2025-12-12T14:30:07.6243893Z [options] Attempting spread close:
+2025-12-12T14:30:07.6244401Z [options]   Long: NVDA251226C00177500 @ bid=7.22
+2025-12-12T14:30:07.6244713Z [options]   Short: NVDA251226C00182500 @ ask=4.38
+2025-12-12T14:30:07.6287538Z [options]   Net credit: $2.84, limit_price: $2.84
+2025-12-12T14:30:07.6289366Z [options] Closing spread: NVDA251226C00177500 (sell) / NVDA251226C00182500 (buy) @ $2.84 credit
+2025-12-12T14:30:07.9330062Z [options] Spread close order submitted: ee999d08-c9ea-43ed-b3b3-e7b0854c94a0
+2025-12-12T14:30:07.9338329Z {"type":"SPREAD_EXIT","underlying":"NVDA","long_symbol":"NVDA251226C00177500","short_symbol":"NVDA251226C00182500","exit_value":2.75,"exit_reason":"SL_hit(-54.5%<=-50.0%)","pnl":-330.0,"pnl_pct":-54.5,"ts":"2025-12-12T14:30:07Z","ts_et":"2025-12-12 09:30:07 ET"}
+2025-12-12T14:30:07.9340506Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T14:30:07Z","ts_et":"2025-12-12 09:30:07 ET"}
+2025-12-12T14:30:07.9342145Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:30","type":"HEARTBEAT","ts":"2025-12-12T14:30:07Z","ts_et":"2025-12-12 09:30:07 ET"}
+2025-12-12T14:45:08.2126211Z {"event":"scan_cycle_start","cycle":2,"time":"09:45","type":"HEARTBEAT","ts":"2025-12-12T14:45:08Z","ts_et":"2025-12-12 09:45:08 ET"}
+2025-12-12T14:45:08.2127833Z {"event":"scan_start","current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-12T14:45:08Z","ts_et":"2025-12-12 09:45:08 ET"}
+2025-12-12T14:45:08.5120920Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T14:45:08Z","ts_et":"2025-12-12 09:45:08 ET"}
+2025-12-12T14:45:08.5122600Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:45","type":"HEARTBEAT","ts":"2025-12-12T14:45:08Z","ts_et":"2025-12-12 09:45:08 ET"}
+2025-12-12T15:00:08.8273072Z {"event":"scan_cycle_start","cycle":3,"time":"10:00","type":"HEARTBEAT","ts":"2025-12-12T15:00:08Z","ts_et":"2025-12-12 10:00:08 ET"}
+2025-12-12T15:00:08.8274626Z {"event":"scan_start","current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-12T15:00:08Z","ts_et":"2025-12-12 10:00:08 ET"}
+2025-12-12T15:00:09.1374552Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T15:00:09Z","ts_et":"2025-12-12 10:00:09 ET"}
+2025-12-12T15:00:09.1377107Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:00","type":"HEARTBEAT","ts":"2025-12-12T15:00:09Z","ts_et":"2025-12-12 10:00:09 ET"}
+2025-12-12T15:15:09.4474401Z {"event":"scan_cycle_start","cycle":4,"time":"10:15","type":"HEARTBEAT","ts":"2025-12-12T15:15:09Z","ts_et":"2025-12-12 10:15:09 ET"}
+2025-12-12T15:15:09.4475733Z {"event":"scan_start","current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-12T15:15:09Z","ts_et":"2025-12-12 10:15:09 ET"}
+2025-12-12T15:15:09.7675268Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T15:15:09Z","ts_et":"2025-12-12 10:15:09 ET"}
+2025-12-12T15:15:09.7677534Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:15","type":"HEARTBEAT","ts":"2025-12-12T15:15:09Z","ts_et":"2025-12-12 10:15:09 ET"}
+2025-12-12T15:30:10.0960351Z {"event":"scan_cycle_start","cycle":5,"time":"10:30","type":"HEARTBEAT","ts":"2025-12-12T15:30:10Z","ts_et":"2025-12-12 10:30:10 ET"}
+2025-12-12T15:30:10.0960916Z {"event":"scan_start","current_time":"10:30","type":"HEARTBEAT","ts":"2025-12-12T15:30:10Z","ts_et":"2025-12-12 10:30:10 ET"}
+2025-12-12T15:30:10.3963176Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T15:30:10Z","ts_et":"2025-12-12 10:30:10 ET"}
+2025-12-12T15:30:10.4062294Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:30","type":"HEARTBEAT","ts":"2025-12-12T15:30:10Z","ts_et":"2025-12-12 10:30:10 ET"}
+2025-12-12T15:45:10.6965228Z {"event":"scan_cycle_start","cycle":6,"time":"10:45","type":"HEARTBEAT","ts":"2025-12-12T15:45:10Z","ts_et":"2025-12-12 10:45:10 ET"}
+2025-12-12T15:45:10.6965611Z {"event":"scan_start","current_time":"10:45","type":"HEARTBEAT","ts":"2025-12-12T15:45:10Z","ts_et":"2025-12-12 10:45:10 ET"}
+2025-12-12T15:45:10.9769933Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T15:45:10Z","ts_et":"2025-12-12 10:45:10 ET"}
+2025-12-12T15:45:10.9772402Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"10:45","type":"HEARTBEAT","ts":"2025-12-12T15:45:10Z","ts_et":"2025-12-12 10:45:10 ET"}
+2025-12-12T16:00:11.2914765Z {"event":"scan_cycle_start","cycle":7,"time":"11:00","type":"HEARTBEAT","ts":"2025-12-12T16:00:11Z","ts_et":"2025-12-12 11:00:11 ET"}
+2025-12-12T16:00:11.2915592Z {"event":"scan_start","current_time":"11:00","type":"HEARTBEAT","ts":"2025-12-12T16:00:11Z","ts_et":"2025-12-12 11:00:11 ET"}
+2025-12-12T16:00:11.6171980Z {"error":"float() argument must be a string or a real number, not 'NoneType'","context":"scan_cycle","type":"ERROR","ts":"2025-12-12T16:00:11Z","ts_et":"2025-12-12 11:00:11 ET"}
+2025-12-12T16:00:11.6173909Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:00","type":"HEARTBEAT","ts":"2025-12-12T16:00:11Z","ts_et":"2025-12-12 11:00:11 ET"}
+2025-12-12T16:14:26.8416389Z Traceback (most recent call last):
+2025-12-12T16:14:26.8594249Z   File "C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_spreads_loop.py", line 875, in <module>
+2025-12-12T16:14:26.8597340Z     raise SystemExit(main())
+2025-12-12T16:14:26.8599255Z                      ~~~~^^
+2025-12-12T16:14:26.8600424Z   File "C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_spreads_loop.py", line 849, in main
+2025-12-12T16:14:26.8602982Z     time.sleep(SCAN_INTERVAL_SECONDS)
+2025-12-12T16:14:26.8604636Z     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-12T16:14:26.8608145Z KeyboardInterrupt
+2025-12-12T16:14:27.4816812Z ##[error]The operation was canceled.
+2025-12-12T16:14:27.5942419Z ##[group]Run actions/upload-artifact@v4
+2025-12-12T16:14:27.5948594Z with:
+2025-12-12T16:14:27.5949098Z   name: position-registry-15M_OPT
+2025-12-12T16:14:27.5949774Z   path: .position_registry/15M_OPT_positions.json
+2025-12-12T16:14:27.5950473Z   if-no-files-found: warn
+2025-12-12T16:14:27.5950975Z   retention-days: 90
+2025-12-12T16:14:27.5951437Z   overwrite: true
+2025-12-12T16:14:27.5951871Z   compression-level: 6
+2025-12-12T16:14:27.5952380Z   include-hidden-files: false
+2025-12-12T16:14:27.5952897Z env:
+2025-12-12T16:14:27.5953366Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:14:27.5954016Z ##[endgroup]
+2025-12-12T16:14:28.6920408Z ##[warning]No files were found with the provided path: .position_registry/15M_OPT_positions.json. No artifacts will be uploaded.
+2025-12-12T16:14:28.7897663Z Post job cleanup.
+2025-12-12T16:14:29.0082487Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T16:14:29.0524413Z git version 2.52.0.windows.1
+2025-12-12T16:14:29.0618165Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\1f81c91b-1a08-4dc6-b7c7-b7037a6413ea' before making global git config changes
+2025-12-12T16:14:29.0619139Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T16:14:29.0631934Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-12T16:14:29.1039308Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T16:14:29.1473515Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T16:14:29.9687202Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T16:14:30.0117376Z http.https://github.com/.extraheader
+2025-12-12T16:14:30.0192249Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-12T16:14:30.0639859Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T16:14:30.8479985Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T16:14:30.8983241Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T16:14:31.6825703Z Cleaning up orphan processes

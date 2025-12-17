@@ -1,0 +1,641 @@
+﻿2025-12-12T14:16:39.8544619Z Current runner version: '2.329.0'
+2025-12-12T14:16:39.8558621Z Runner name: 'VHOMEPC'
+2025-12-12T14:16:39.8560068Z Runner group name: 'Default'
+2025-12-12T14:16:39.8561427Z Machine name: 'VHOMEPC'
+2025-12-12T14:16:39.8566789Z ##[group]GITHUB_TOKEN Permissions
+2025-12-12T14:16:39.8571180Z Contents: read
+2025-12-12T14:16:39.8571969Z Metadata: read
+2025-12-12T14:16:39.8572679Z Packages: read
+2025-12-12T14:16:39.8573430Z ##[endgroup]
+2025-12-12T14:16:39.8577582Z Secret source: Actions
+2025-12-12T14:16:39.8578594Z Prepare workflow directory
+2025-12-12T14:16:39.9729933Z Prepare all required actions
+2025-12-12T14:16:39.9780370Z Getting action download info
+2025-12-12T14:16:40.5929764Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-12T14:16:41.8215495Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-12T14:16:43.2090276Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-12T14:16:45.1676655Z Complete job name: trade
+2025-12-12T14:16:45.3613228Z ##[group]Run actions/checkout@v4
+2025-12-12T14:16:45.3615301Z with:
+2025-12-12T14:16:45.3615926Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:16:45.3617489Z   token: ***
+2025-12-12T14:16:45.3618028Z   ssh-strict: true
+2025-12-12T14:16:45.3618524Z   ssh-user: git
+2025-12-12T14:16:45.3619055Z   persist-credentials: true
+2025-12-12T14:16:45.3619631Z   clean: true
+2025-12-12T14:16:45.3620170Z   sparse-checkout-cone-mode: true
+2025-12-12T14:16:45.3620794Z   fetch-depth: 1
+2025-12-12T14:16:45.3621299Z   fetch-tags: false
+2025-12-12T14:16:45.3621828Z   show-progress: true
+2025-12-12T14:16:45.3622360Z   lfs: false
+2025-12-12T14:16:45.3622838Z   submodules: false
+2025-12-12T14:16:45.3623345Z   set-safe-directory: true
+2025-12-12T14:16:45.3624523Z ##[endgroup]
+2025-12-12T14:16:46.0401901Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:16:46.0405894Z ##[group]Getting Git version info
+2025-12-12T14:16:46.0407555Z Working directory is 'C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot'
+2025-12-12T14:16:46.0637776Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T14:16:46.1281304Z git version 2.52.0.windows.1
+2025-12-12T14:16:46.1379260Z ##[endgroup]
+2025-12-12T14:16:46.1398114Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\473e63ca-bc6e-4ef7-92be-6771735580ba' before making global git config changes
+2025-12-12T14:16:46.1399019Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T14:16:46.1406071Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-12T14:16:46.2153350Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-12T14:16:46.2778335Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-12T14:16:46.2880163Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-12T14:16:46.2883169Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-12T14:16:46.3491127Z refs/heads/main
+2025-12-12T14:16:46.3578121Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-12T14:16:46.4785808Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-12T14:16:46.4788782Z M	RubberBand/__pycache__/strategy.cpython-313.pyc
+2025-12-12T14:16:46.4789928Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-12T14:16:46.4790789Z M	RubberBand/src/__pycache__/data.cpython-313.pyc
+2025-12-12T14:16:46.4791660Z M	RubberBand/src/__pycache__/indicators.cpython-313.pyc
+2025-12-12T14:16:46.4792582Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-12T14:16:46.4793470Z M	RubberBand/src/__pycache__/utils.cpython-313.pyc
+2025-12-12T14:16:46.4794197Z M	backtest_health.json
+2025-12-12T14:16:46.4794742Z M	backtest_summary.json
+2025-12-12T14:16:46.4795324Z M	daily_stats.csv
+2025-12-12T14:16:46.4799900Z M	detailed_trades.csv
+2025-12-12T14:16:46.4800506Z M	loss_analysis.csv
+2025-12-12T14:16:46.4804347Z HEAD is now at f7d8d34 Update tickers_weekly.txt
+2025-12-12T14:16:46.6303255Z ##[endgroup]
+2025-12-12T14:16:46.6308425Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-12T14:16:47.8732816Z ##[group]Cleaning the repository
+2025-12-12T14:16:47.8738819Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-12T14:16:47.9459904Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-12T14:16:48.1311675Z HEAD is now at f7d8d34 Update tickers_weekly.txt
+2025-12-12T14:16:48.1398032Z ##[endgroup]
+2025-12-12T14:16:48.1401350Z ##[group]Disabling automatic garbage collection
+2025-12-12T14:16:48.1408217Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-12T14:16:48.2098815Z ##[endgroup]
+2025-12-12T14:16:48.2099556Z ##[group]Setting up auth
+2025-12-12T14:16:48.2121340Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T14:16:48.2790662Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T14:16:49.3501940Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T14:16:49.4207786Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T14:16:50.6615992Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T14:16:50.7264014Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T14:16:51.8531064Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-12T14:16:51.9211332Z ##[endgroup]
+2025-12-12T14:16:51.9211855Z ##[group]Fetching the repository
+2025-12-12T14:16:51.9223439Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +1d7addddf855c59289371c25f93a3e83c955db55:refs/remotes/origin/main
+2025-12-12T14:16:52.8160043Z From https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-12T14:16:52.8162271Z  + f7d8d34...1d7addd 1d7addddf855c59289371c25f93a3e83c955db55 -> origin/main  (forced update)
+2025-12-12T14:16:52.8626455Z ##[endgroup]
+2025-12-12T14:16:52.8627216Z ##[group]Determining the checkout info
+2025-12-12T14:16:52.8627635Z ##[endgroup]
+2025-12-12T14:16:52.8641928Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-12T14:16:52.9693641Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-12T14:16:53.0375396Z ##[group]Checking out the ref
+2025-12-12T14:16:53.0393400Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-12T14:16:53.1738600Z branch 'main' set up to track 'origin/main'.
+2025-12-12T14:16:53.1739599Z Your branch is up to date with 'origin/main'.
+2025-12-12T14:16:53.1753202Z Previous HEAD position was f7d8d34 Update tickers_weekly.txt
+2025-12-12T14:16:53.1755111Z Switched to and reset branch 'main'
+2025-12-12T14:16:53.1840900Z ##[endgroup]
+2025-12-12T14:16:53.2589510Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-12T14:16:53.3162296Z 1d7addddf855c59289371c25f93a3e83c955db55
+2025-12-12T14:16:53.3722160Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-12T14:16:53.3722509Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-12T14:16:53.3722688Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-12T14:16:53.3742370Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:16:53.3742609Z ##[endgroup]
+2025-12-12T14:16:54.0162783Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-12T14:16:54.0163993Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-12T14:16:54.0164918Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-12T14:16:54.0212159Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:16:54.0212675Z env:
+2025-12-12T14:16:54.0213180Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:16:54.0213810Z ##[endgroup]
+2025-12-12T14:16:55.4400441Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T14:16:56.1989016Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-12T14:16:58.4209022Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T14:16:59.2985622Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-12T14:16:59.2997925Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-12T14:16:59.3014730Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-12T14:16:59.3024721Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-12T14:16:59.3040379Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-12T14:16:59.3133426Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-12T14:16:59.3150257Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-12T14:16:59.3433355Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-12T14:16:59.3446401Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-12T14:16:59.3460275Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-12T14:16:59.3471493Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-12T14:16:59.3700134Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-12T14:16:59.8325406Z ##[group]Run actions/download-artifact@v4
+2025-12-12T14:16:59.8325590Z with:
+2025-12-12T14:16:59.8326105Z   name: position-registry-15M_STK
+2025-12-12T14:16:59.8326233Z   path: .position_registry/
+2025-12-12T14:16:59.8326353Z   merge-multiple: false
+2025-12-12T14:16:59.8326475Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T14:16:59.8326604Z   run-id: 20169530117
+2025-12-12T14:16:59.8326697Z env:
+2025-12-12T14:16:59.8326805Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:16:59.8326945Z ##[endgroup]
+2025-12-12T14:17:01.4510950Z Downloading single artifact
+2025-12-12T14:17:02.0186281Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_STK
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-12T14:17:02.0641477Z ##[group]Run chcp 65001 > $null
+2025-12-12T14:17:02.0642357Z [36;1mchcp 65001 > $null[0m
+2025-12-12T14:17:02.0643340Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-12T14:17:02.0644333Z [36;1mfunction Get-Clock {[0m
+2025-12-12T14:17:02.0645177Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-12T14:17:02.0646034Z [36;1m}[0m
+2025-12-12T14:17:02.0646431Z [36;1m$maxWaitMin = 20[0m
+2025-12-12T14:17:02.0646923Z [36;1m$start = Get-Date[0m
+2025-12-12T14:17:02.0647421Z [36;1mwhile ($true) {[0m
+2025-12-12T14:17:02.0647871Z [36;1m  try {[0m
+2025-12-12T14:17:02.0708755Z [36;1m    $clk = Get-Clock[0m
+2025-12-12T14:17:02.0709646Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-12T14:17:02.0710327Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-12T14:17:02.0711059Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-12T14:17:02.0711657Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-12T14:17:02.0712295Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-12T14:17:02.0713061Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-12T14:17:02.0713724Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-12T14:17:02.0714164Z [36;1m    } else {[0m
+2025-12-12T14:17:02.0714413Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-12T14:17:02.0714671Z [36;1m      break[0m
+2025-12-12T14:17:02.0714827Z [36;1m    }[0m
+2025-12-12T14:17:02.0715072Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-12T14:17:02.0715443Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-12T14:17:02.0715718Z [36;1m      break[0m
+2025-12-12T14:17:02.0715989Z [36;1m    }[0m
+2025-12-12T14:17:02.0716316Z [36;1m  } catch {[0m
+2025-12-12T14:17:02.0716905Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-12T14:17:02.0717647Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-12T14:17:02.0718071Z [36;1m  }[0m
+2025-12-12T14:17:02.0718360Z [36;1m}[0m
+2025-12-12T14:17:02.0761418Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:17:02.0762124Z env:
+2025-12-12T14:17:02.0762834Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:17:02.0763598Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T14:17:02.0764392Z   APCA_API_KEY_ID: ***
+2025-12-12T14:17:02.0765080Z   APCA_API_SECRET_KEY: ***
+2025-12-12T14:17:02.0765542Z ##[endgroup]
+2025-12-12T14:17:03.1959048Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:17:33.3147683Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:18:03.4089294Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:18:33.5065169Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:19:03.6111540Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:19:33.7133857Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:20:03.8270498Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:20:33.9458578Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:21:04.0617803Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:21:34.1586158Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:22:04.2659575Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:22:34.3727497Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:23:04.4655019Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:23:34.5629285Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:24:04.6759402Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:24:34.7900896Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:25:04.8956586Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:25:34.9989179Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:26:05.1061710Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:26:35.2134100Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:27:05.3219092Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:27:35.4215449Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:28:05.5234276Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:28:35.6359233Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:05.7522182Z Waiting 30 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:35.8701544Z Waiting 24 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:29:59.9871339Z Waiting 0 s until next_open 2025-12-12T09:30:00-05:00...
+2025-12-12T14:30:00.0883117Z Past next_open window; continuing.
+2025-12-12T14:30:00.1933990Z ##[group]Run chcp 65001 > $null
+2025-12-12T14:30:00.1934708Z [36;1mchcp 65001 > $null[0m
+2025-12-12T14:30:00.1935001Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-12T14:30:00.1935452Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py[0m
+2025-12-12T14:30:00.1964365Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T14:30:00.1964826Z env:
+2025-12-12T14:30:00.1965078Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T14:30:00.1965661Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T14:30:00.1966601Z   APCA_API_KEY_ID: ***
+2025-12-12T14:30:00.1966985Z   APCA_API_SECRET_KEY: ***
+2025-12-12T14:30:00.1967254Z   ALPACA_KEY: ***
+2025-12-12T14:30:00.1967545Z   ALPACA_SECRET: ***
+2025-12-12T14:30:00.1967734Z   DRY_RUN: 0
+2025-12-12T14:30:00.1967909Z   FORCE_RUN: 0
+2025-12-12T14:30:00.1968097Z   PYTHONUNBUFFERED: 1
+2025-12-12T14:30:00.1968300Z ##[endgroup]
+2025-12-12T14:30:01.0375895Z [loop] starting RubberBand AM loop (15m strategy; check every 5m)
+2025-12-12T14:30:01.0376966Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:30:09.0208844Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 5, "my_symbols": [], "ts": "2025-12-12T14:30:08.721706+00:00"}
+2025-12-12T14:30:09.3174684Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:30:08.721706+00:00"}
+2025-12-12T14:30:09.3177364Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:30:08.721706+00:00"}
+2025-12-12T14:30:09.4513126Z [loop] live_paper_loop exit code=0
+2025-12-12T14:30:09.4513753Z [loop] sleep 290s → next 5m boundary
+2025-12-12T14:34:59.4523314Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:35:01.8561109Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 5, "my_symbols": [], "ts": "2025-12-12T14:35:01.512145+00:00"}
+2025-12-12T14:35:02.1501894Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:35:01.512145+00:00"}
+2025-12-12T14:35:02.1503525Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:35:01.512145+00:00"}
+2025-12-12T14:35:02.2708646Z [loop] live_paper_loop exit code=0
+2025-12-12T14:35:02.2709736Z [loop] sleep 297s → next 5m boundary
+2025-12-12T14:39:59.2719259Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:40:01.7945938Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 5, "my_symbols": [], "ts": "2025-12-12T14:40:01.440181+00:00"}
+2025-12-12T14:40:02.0819274Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:40:01.440181+00:00"}
+2025-12-12T14:40:02.0821259Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:40:01.440181+00:00"}
+2025-12-12T14:40:02.2103500Z [loop] live_paper_loop exit code=0
+2025-12-12T14:40:02.2104753Z [loop] sleep 297s → next 5m boundary
+2025-12-12T14:44:59.2110427Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:45:01.7396010Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 5, "my_symbols": [], "ts": "2025-12-12T14:45:01.356373+00:00"}
+2025-12-12T14:45:02.0350274Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:45:01.356373+00:00"}
+2025-12-12T14:45:02.3300860Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:45:01.356373+00:00"}
+2025-12-12T14:45:02.3301868Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T14:45:01.356373+00:00", "end": "2025-12-12T14:45:01.356373+00:00", "when": "2025-12-12T14:45:01.356373+00:00"}
+2025-12-12T14:45:02.3302965Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T14:45:02Z"}
+2025-12-12T14:45:02.3303833Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T14:45:02Z","end":"2025-12-12T14:45:02Z","when":"2025-12-12T14:45:02Z"}
+2025-12-12T14:45:06.1965635Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:45:09.4329281Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:45:13.9380891Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T14:45:14.5956038Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T14:45:14.6038542Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T14:45:14Z"}
+2025-12-12T14:45:17.9482752Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T14:45:01.356373+00:00"}
+2025-12-12T14:45:18.6236674Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_144501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:45:18Z","ts_et":"2025-12-12 09:45:18 ET"}
+2025-12-12T14:45:19.2330426Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_144501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:45:19Z","ts_et":"2025-12-12 09:45:19 ET"}
+2025-12-12T14:45:19.4291708Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_144501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:45:19Z","ts_et":"2025-12-12 09:45:19 ET"}
+2025-12-12T14:45:19.5824074Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_144501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:45:19Z","ts_et":"2025-12-12 09:45:19 ET"}
+2025-12-12T14:45:19.6593639Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_144501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:45:19Z","ts_et":"2025-12-12 09:45:19 ET"}
+2025-12-12T14:45:19.6594270Z 
+2025-12-12T14:45:19.6594359Z === Session Summary ===
+2025-12-12T14:45:19.9783813Z No trades filled today.
+2025-12-12T14:45:20.1128303Z [loop] live_paper_loop exit code=0
+2025-12-12T14:45:20.1129925Z [loop] sleep 279s → next 5m boundary
+2025-12-12T14:49:59.1152003Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:50:02.0491815Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 9, "my_symbols": [], "ts": "2025-12-12T14:50:01.638838+00:00"}
+2025-12-12T14:50:02.3340191Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:50:01.638838+00:00"}
+2025-12-12T14:50:02.6547910Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:50:01.638838+00:00"}
+2025-12-12T14:50:02.6550432Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T14:50:01.638838+00:00", "end": "2025-12-12T14:50:01.638838+00:00", "when": "2025-12-12T14:50:01.638838+00:00"}
+2025-12-12T14:50:02.6552898Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T14:50:02Z"}
+2025-12-12T14:50:02.6554374Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T14:50:02Z","end":"2025-12-12T14:50:02Z","when":"2025-12-12T14:50:02Z"}
+2025-12-12T14:50:06.2319914Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:50:09.0342222Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:50:12.2476763Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T14:50:12.8871874Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T14:50:12.8975969Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T14:50:12Z"}
+2025-12-12T14:50:14.7335760Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T14:50:01.638838+00:00"}
+2025-12-12T14:50:15.3420357Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_145001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:50:15Z","ts_et":"2025-12-12 09:50:15 ET"}
+2025-12-12T14:50:15.9697802Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_145001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:50:15Z","ts_et":"2025-12-12 09:50:15 ET"}
+2025-12-12T14:50:16.2475960Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_145001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:50:16Z","ts_et":"2025-12-12 09:50:16 ET"}
+2025-12-12T14:50:16.5991385Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_145001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:50:16Z","ts_et":"2025-12-12 09:50:16 ET"}
+2025-12-12T14:50:16.7320081Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_145001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:50:16Z","ts_et":"2025-12-12 09:50:16 ET"}
+2025-12-12T14:50:16.7334785Z 
+2025-12-12T14:50:16.7335366Z === Session Summary ===
+2025-12-12T14:50:17.0850791Z No trades filled today.
+2025-12-12T14:50:17.2230531Z [loop] live_paper_loop exit code=0
+2025-12-12T14:50:17.2232050Z [loop] sleep 282s → next 5m boundary
+2025-12-12T14:54:59.2253602Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T14:55:01.9599922Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 9, "my_symbols": [], "ts": "2025-12-12T14:55:01.613459+00:00"}
+2025-12-12T14:55:02.2669518Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T14:55:01.613459+00:00"}
+2025-12-12T14:55:02.6148092Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T14:55:01.613459+00:00"}
+2025-12-12T14:55:02.6151768Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T14:55:01.613459+00:00", "end": "2025-12-12T14:55:01.613459+00:00", "when": "2025-12-12T14:55:01.613459+00:00"}
+2025-12-12T14:55:02.6169695Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T14:55:02Z"}
+2025-12-12T14:55:02.6171718Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T14:55:02Z","end":"2025-12-12T14:55:02Z","when":"2025-12-12T14:55:02Z"}
+2025-12-12T14:55:06.1775535Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:55:09.2543724Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T14:55:12.5339800Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T14:55:13.1133723Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T14:55:13.1259295Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T14:55:13Z"}
+2025-12-12T14:55:14.9565753Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T14:55:01.613459+00:00"}
+2025-12-12T14:55:15.6104911Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:55:15Z","ts_et":"2025-12-12 09:55:15 ET"}
+2025-12-12T14:55:16.3360651Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:55:16Z","ts_et":"2025-12-12 09:55:16 ET"}
+2025-12-12T14:55:16.7096672Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:55:16Z","ts_et":"2025-12-12 09:55:16 ET"}
+2025-12-12T14:55:17.1535239Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:55:17Z","ts_et":"2025-12-12 09:55:17 ET"}
+2025-12-12T14:55:17.3134143Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_145501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T14:55:17Z","ts_et":"2025-12-12 09:55:17 ET"}
+2025-12-12T14:55:17.3135637Z 
+2025-12-12T14:55:17.3162593Z === Session Summary ===
+2025-12-12T14:55:17.6186773Z No trades filled today.
+2025-12-12T14:55:17.7767168Z [loop] live_paper_loop exit code=0
+2025-12-12T14:55:17.7768044Z [loop] sleep 282s → next 5m boundary
+2025-12-12T14:59:59.7773899Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:00:02.1526265Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 9, "my_symbols": [], "ts": "2025-12-12T15:00:01.791944+00:00"}
+2025-12-12T15:00:02.4544407Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T15:00:01.791944+00:00"}
+2025-12-12T15:00:02.7490334Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T15:00:01.791944+00:00"}
+2025-12-12T15:00:02.7492383Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T15:00:01.791944+00:00", "end": "2025-12-12T15:00:01.791944+00:00", "when": "2025-12-12T15:00:01.791944+00:00"}
+2025-12-12T15:00:02.7494566Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T15:00:02Z"}
+2025-12-12T15:00:02.7498299Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T15:00:02Z","end":"2025-12-12T15:00:02Z","when":"2025-12-12T15:00:02Z"}
+2025-12-12T15:00:06.8880150Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T15:00:10.7387957Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T15:00:14.6667904Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T15:00:15.4520348Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T15:00:15.4605488Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T15:00:15Z"}
+2025-12-12T15:00:18.9633829Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T15:00:01.791944+00:00"}
+2025-12-12T15:00:19.5973395Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:00:19Z","ts_et":"2025-12-12 10:00:19 ET"}
+2025-12-12T15:00:20.1921343Z {"symbol":"PINS","session":"AM","cid":"RB_PINS_20251212_150001","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-12 14:45:00+00:00","last_close":26.64,"trend":"BULL","entry_reason":"RSI_oversold(23.3) + Lower_KC_touch + Strong_bull_trend","type":"SIGNAL","ts":"2025-12-12T15:00:20Z","ts_et":"2025-12-12 10:00:20 ET"}
+2025-12-12T15:00:20.1925683Z {"symbol":"PINS","session":"AM","cid":"RB_PINS_20251212_150001","qty":75,"side":"buy","entry_price":26.64,"stop_loss_price":26.31,"take_profit_price":26.84,"atr":0.1313,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(23.3) + Lower_KC_touch + Strong_bull_trend","rsi":23.326322024163275,"type":"ENTRY_SUBMIT","ts":"2025-12-12T15:00:20Z","ts_et":"2025-12-12 10:00:20 ET"}
+2025-12-12T15:00:20.8047905Z [order] PINS: Using limit price $26.88 (buy, buffer=1.0%)
+2025-12-12T15:00:22.4167471Z [order] PINS: Fill verified (took 1s)
+2025-12-12T15:00:22.4170201Z [order] BRACKET submitted for PINS: {"id": "2f57455b-0f2f-465a-a4a9-ffd1f3028c70", "client_order_id": "15M_STK_PINS_1765551620", "created_at": "2025-12-12T15:00:20.73800409Z", "updated_at": "2025-12-12T15:00:21.815885846Z", "submitted_at": "2025-12-12T15:00:20.7455006Z", "filled_at": "2025-12-12T15:00:21.814032702Z", "expired_at": nul
+2025-12-12T15:00:22.4180183Z [registry] Recorded entry: PINS (order_id=15M_STK_PINS_1765551620...)
+2025-12-12T15:00:22.4192624Z {"symbol":"PINS","session":"AM","cid":"RB_PINS_20251212_150001","order_id":"2f57455b-0f2f-465a-a4a9-ffd1f3028c70","client_order_id":"15M_STK_PINS_1765551620","broker_resp":{"id":"2f57455b-0f2f-465a-a4a9-ffd1f3028c70","client_order_id":"15M_STK_PINS_1765551620","created_at":"2025-12-12T15:00:20.73800409Z","updated_at":"2025-12-12T15:00:21.815885846Z","submitted_at":"2025-12-12T15:00:20.7455006Z","filled_at":"2025-12-12T15:00:21.814032702Z","expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"e034f73f-5a8c-40af-8ed4-d4aed89f3740","symbol":"PINS","asset_class":"us_equity","notional":null,"qty":"75","filled_qty":"75","filled_avg_price":"26.6024","order_class":"bracket","order_type":"limit","type":"limit","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":"26.88","stop_price":null,"status":"filled","extended_hours":false,"legs":[{"id":"9b0a492f-8588-42d8-8791-1b4be4185520","client_order_id":"e60fc700-ac9a-4f6c-814e-5ba6fd58facb","created_at":"2025-12-12T15:00:20.73800409Z","updated_at":"2025-12-12T15:00:21.823005466Z","submitted_at":"2025-12-12T15:00:21.822028382Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"e034f73f-5a8c-40af-8ed4-d4aed89f3740","symbol":"PINS","asset_class":"us_equity","notional":null,"qty":"75","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"26.89","stop_price":null,"status":"new","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},{"id":"dab30fc9-8e6b-4544-b728-8a8280ddb97e","client_order_id":"7f154d93-609a-4bb2-814d-6ae48c906e5e","created_at":"2025-12-12T15:00:20.73800409Z","updated_at":"2025-12-12T15:00:20.74002287Z","submitted_at":"2025-12-12T15:00:20.73800409Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"e034f73f-5a8c-40af-8ed4-d4aed89f3740","symbol":"PINS","asset_class":"us_equity","notional":null,"qty":"75","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"26.31","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-12T15:00:22Z","ts_et":"2025-12-12 10:00:22 ET"}
+2025-12-12T15:00:22.4200688Z [registry] Recorded entry: PINS (order_id=15M_STK_PINS_1765551620...)
+2025-12-12T15:00:22.4243498Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:00:22Z","ts_et":"2025-12-12 10:00:22 ET"}
+2025-12-12T15:00:22.5366416Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:00:22Z","ts_et":"2025-12-12 10:00:22 ET"}
+2025-12-12T15:00:22.8497600Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:00:22Z","ts_et":"2025-12-12 10:00:22 ET"}
+2025-12-12T15:00:22.9551885Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_150001","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:00:22Z","ts_et":"2025-12-12 10:00:22 ET"}
+2025-12-12T15:00:22.9553142Z 
+2025-12-12T15:00:22.9553334Z === Session Summary ===
+2025-12-12T15:00:23.2373480Z ------------------------------------------------------------------------
+2025-12-12T15:00:23.2374619Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-12T15:00:23.2375696Z ------------------------------------------------------------------------
+2025-12-12T15:00:23.2376550Z PINS     75       26.60      1995.18      0        0.00       -         
+2025-12-12T15:00:23.2378099Z ------------------------------------------------------------------------
+2025-12-12T15:00:23.2378803Z TOTAL Day PnL: $0.00 | TOTAL VOL: $1,995.18
+2025-12-12T15:00:23.2379549Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-12T15:00:23.2380259Z === End Summary ===
+2025-12-12T15:00:23.2384868Z {"type":"EOD_SUMMARY","date":"2025-12-12","total_trades":1,"closed_trades":0,"open_trades":1,"total_pnl":0,"total_volume":1995.18,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"symbol":"PINS","side":"buy","qty":75,"entry_price":26.64,"exit_price":null,"entry_reason":"RSI_oversold(23.3) + Lower_KC_touch + Strong_bull_trend","exit_reason":null,"pnl":null}],"ts":"2025-12-12T15:00:23Z","ts_et":"2025-12-12 10:00:23 ET"}
+2025-12-12T15:00:23.3742397Z [loop] live_paper_loop exit code=0
+2025-12-12T15:00:23.3745141Z [loop] sleep 276s → next 5m boundary
+2025-12-12T15:04:59.3759950Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:05:01.8159250Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:05:02.1586642Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["PINS"], "ts": "2025-12-12T15:05:01.794644+00:00"}
+2025-12-12T15:05:03.1523352Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -100.0% (P&L: $-1994.61, Invested: $1995.18)
+2025-12-12T15:05:03.1525038Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:05:01.794644+00:00"}
+2025-12-12T15:05:03.1528237Z Traceback (most recent call last):
+2025-12-12T15:05:03.1529842Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:05:03.1530493Z     raise SystemExit(main())
+2025-12-12T15:05:03.1530854Z                      ~~~~^^
+2025-12-12T15:05:03.1531497Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:05:03.1532703Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:05:03.1533809Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:05:03.2861400Z [loop] live_paper_loop exit code=1
+2025-12-12T15:05:03.2862768Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:09:59.2880804Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:10:01.2640789Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:10:01.6701003Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["PINS"], "ts": "2025-12-12T15:10:01.262580+00:00"}
+2025-12-12T15:10:02.5757750Z Traceback (most recent call last):
+2025-12-12T15:10:02.5758059Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -100.6% (P&L: $-2006.24, Invested: $1995.18)
+2025-12-12T15:10:02.5761848Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:10:01.262580+00:00"}
+2025-12-12T15:10:02.5765044Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:10:02.5766006Z     raise SystemExit(main())
+2025-12-12T15:10:02.5855422Z                      ~~~~^^
+2025-12-12T15:10:02.5865973Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:10:02.5873618Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:10:02.5874736Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:10:02.6980640Z [loop] live_paper_loop exit code=1
+2025-12-12T15:10:02.6981981Z [loop] sleep 297s → next 5m boundary
+2025-12-12T15:14:59.7002501Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:15:02.1456185Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:15:02.4684407Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["PINS"], "ts": "2025-12-12T15:15:02.142467+00:00"}
+2025-12-12T15:15:03.3928989Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -100.8% (P&L: $-2011.48, Invested: $1995.18)
+2025-12-12T15:15:03.3930494Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:15:02.142467+00:00"}
+2025-12-12T15:15:03.3932875Z Traceback (most recent call last):
+2025-12-12T15:15:03.3940719Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:15:03.3941680Z     raise SystemExit(main())
+2025-12-12T15:15:03.3942737Z                      ~~~~^^
+2025-12-12T15:15:03.3944807Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:15:03.3945453Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:15:03.3948284Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:15:03.5149814Z [loop] live_paper_loop exit code=1
+2025-12-12T15:15:03.5150971Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:19:59.5172202Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:20:02.0619502Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:20:02.3888778Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["PINS"], "ts": "2025-12-12T15:20:02.059000+00:00"}
+2025-12-12T15:20:03.3671458Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -100.9% (P&L: $-2013.77, Invested: $1995.18)
+2025-12-12T15:20:03.3673053Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:20:02.059000+00:00"}
+2025-12-12T15:20:03.3679806Z Traceback (most recent call last):
+2025-12-12T15:20:03.3680389Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:20:03.3681052Z     raise SystemExit(main())
+2025-12-12T15:20:03.3684840Z                      ~~~~^^
+2025-12-12T15:20:03.3686046Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:20:03.3690105Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:20:03.3691205Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:20:03.5122965Z [loop] live_paper_loop exit code=1
+2025-12-12T15:20:03.5124076Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:24:59.5130914Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:25:01.9631856Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:25:02.3693174Z [registry] Removing orphaned position: PINS
+2025-12-12T15:25:02.3698637Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 9, "my_symbols": [], "ts": "2025-12-12T15:25:01.960936+00:00"}
+2025-12-12T15:25:03.2990591Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T15:25:01.960936+00:00"}
+2025-12-12T15:25:03.6141768Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T15:25:01.960936+00:00"}
+2025-12-12T15:25:03.6145578Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T15:25:01.960936+00:00", "end": "2025-12-12T15:25:01.960936+00:00", "when": "2025-12-12T15:25:01.960936+00:00"}
+2025-12-12T15:25:03.6149063Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T15:25:03Z"}
+2025-12-12T15:25:03.6151353Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T15:25:03Z","end":"2025-12-12T15:25:03Z","when":"2025-12-12T15:25:03Z"}
+2025-12-12T15:25:07.0489549Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T15:25:10.0199005Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T15:25:13.3014501Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T15:25:13.9462726Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T15:25:13.9464452Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T15:25:13Z"}
+2025-12-12T15:25:15.7176349Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T15:25:01.960936+00:00"}
+2025-12-12T15:25:16.3676994Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:25:16Z","ts_et":"2025-12-12 10:25:16 ET"}
+2025-12-12T15:25:16.8334483Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251212_152501","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-12 15:00:00+00:00","last_close":246.95,"trend":"BULL","entry_reason":"RSI_oversold(24.2) + Lower_KC_touch + Strong_bull_trend","type":"SIGNAL","ts":"2025-12-12T15:25:16Z","ts_et":"2025-12-12 10:25:16 ET"}
+2025-12-12T15:25:16.8338619Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251212_152501","qty":8,"side":"buy","entry_price":246.95,"stop_loss_price":241.21,"take_profit_price":250.4,"atr":2.2977,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(24.2) + Lower_KC_touch + Strong_bull_trend","rsi":24.168500190091777,"type":"ENTRY_SUBMIT","ts":"2025-12-12T15:25:16Z","ts_et":"2025-12-12 10:25:16 ET"}
+2025-12-12T15:25:17.4527185Z [order] MU: Using limit price $261.41 (buy, buffer=1.0%)
+2025-12-12T15:25:19.0819017Z [order] MU: Fill verified (took 1s)
+2025-12-12T15:25:19.0829580Z [order] BRACKET submitted for MU: {"id": "4fa49f53-ecd6-4e50-8c24-fbd484a47f01", "client_order_id": "15M_STK_MU_1765553116", "created_at": "2025-12-12T15:25:17.396103396Z", "updated_at": "2025-12-12T15:25:18.140740081Z", "submitted_at": "2025-12-12T15:25:17.404240921Z", "filled_at": "2025-12-12T15:25:18.138987309Z", "expired_at": nu
+2025-12-12T15:25:19.0855776Z [registry] Recorded entry: MU (order_id=15M_STK_MU_1765553116...)
+2025-12-12T15:25:19.0867155Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251212_152501","order_id":"4fa49f53-ecd6-4e50-8c24-fbd484a47f01","client_order_id":"15M_STK_MU_1765553116","broker_resp":{"id":"4fa49f53-ecd6-4e50-8c24-fbd484a47f01","client_order_id":"15M_STK_MU_1765553116","created_at":"2025-12-12T15:25:17.396103396Z","updated_at":"2025-12-12T15:25:18.140740081Z","submitted_at":"2025-12-12T15:25:17.404240921Z","filled_at":"2025-12-12T15:25:18.138987309Z","expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"8","filled_qty":"8","filled_avg_price":"245.7","order_class":"bracket","order_type":"limit","type":"limit","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":"261.41","stop_price":null,"status":"filled","extended_hours":false,"legs":[{"id":"744f40f7-ef16-41ac-a923-4ae3589c88be","client_order_id":"6ba44103-012b-4d93-a24d-4286642c5e97","created_at":"2025-12-12T15:25:17.396103396Z","updated_at":"2025-12-12T15:25:18.14911696Z","submitted_at":"2025-12-12T15:25:18.148194619Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"8","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"261.42","stop_price":null,"status":"new","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},{"id":"8a90233f-3baa-4fb7-beb4-931170cac5bb","client_order_id":"7ce7efd6-7bf6-46a7-a6b6-d59923b6f431","created_at":"2025-12-12T15:25:17.396103396Z","updated_at":"2025-12-12T15:25:17.399059076Z","submitted_at":"2025-12-12T15:25:17.396103396Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"1ef18995-5094-4f62-a5c5-e00168611152","symbol":"MU","asset_class":"us_equity","notional":null,"qty":"8","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"241.21","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-12T15:25:19Z","ts_et":"2025-12-12 10:25:19 ET"}
+2025-12-12T15:25:19.0888701Z [registry] Recorded entry: MU (order_id=15M_STK_MU_1765553116...)
+2025-12-12T15:25:19.2846638Z {"symbol":"PINS","session":"AM","cid":"RB_PINS_20251212_152501","decision":"BLOCK","reasons":["traded_today"],"type":"GATE","ts":"2025-12-12T15:25:19Z","ts_et":"2025-12-12 10:25:19 ET"}
+2025-12-12T15:25:19.3071258Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:25:19Z","ts_et":"2025-12-12 10:25:19 ET"}
+2025-12-12T15:25:19.6695871Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:25:19Z","ts_et":"2025-12-12 10:25:19 ET"}
+2025-12-12T15:25:20.1290641Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:25:20Z","ts_et":"2025-12-12 10:25:20 ET"}
+2025-12-12T15:25:20.2677421Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_152501","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T15:25:20Z","ts_et":"2025-12-12 10:25:20 ET"}
+2025-12-12T15:25:20.2678156Z 
+2025-12-12T15:25:20.2678356Z === Session Summary ===
+2025-12-12T15:25:20.6192080Z ------------------------------------------------------------------------
+2025-12-12T15:25:20.6196224Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-12T15:25:20.6197666Z ------------------------------------------------------------------------
+2025-12-12T15:25:20.6198097Z MU       8        245.70     1965.60      0        0.00       -         
+2025-12-12T15:25:20.6198579Z PINS     75       26.60      1995.18      75       26.30      -22.68    
+2025-12-12T15:25:20.6223977Z ------------------------------------------------------------------------
+2025-12-12T15:25:20.6234179Z TOTAL Day PnL: $-22.68 | TOTAL VOL: $5,933.28
+2025-12-12T15:25:20.6237224Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-12T15:25:20.6239116Z === End Summary ===
+2025-12-12T15:25:20.6244746Z {"type":"EOD_SUMMARY","date":"2025-12-12","total_trades":1,"closed_trades":0,"open_trades":1,"total_pnl":-22.68,"total_volume":5933.28,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"symbol":"MU","side":"buy","qty":8,"entry_price":246.95,"exit_price":null,"entry_reason":"RSI_oversold(24.2) + Lower_KC_touch + Strong_bull_trend","exit_reason":null,"pnl":null}],"ts":"2025-12-12T15:25:20Z","ts_et":"2025-12-12 10:25:20 ET"}
+2025-12-12T15:25:20.7940095Z [loop] live_paper_loop exit code=0
+2025-12-12T15:25:20.7941081Z [loop] sleep 279s → next 5m boundary
+2025-12-12T15:29:59.7964556Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:30:02.3969638Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:30:02.7465220Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:30:02.364657+00:00"}
+2025-12-12T15:30:03.6700779Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.6% (P&L: $-2002.66, Invested: $3960.78)
+2025-12-12T15:30:03.6705842Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:30:02.364657+00:00"}
+2025-12-12T15:30:03.6706490Z Traceback (most recent call last):
+2025-12-12T15:30:03.6710878Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:30:03.6711235Z     raise SystemExit(main())
+2025-12-12T15:30:03.6711419Z                      ~~~~^^
+2025-12-12T15:30:03.6712201Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:30:03.6712634Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:30:03.6712948Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:30:03.7895656Z [loop] live_paper_loop exit code=1
+2025-12-12T15:30:03.7897018Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:34:59.7904636Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:35:02.1510495Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:35:02.4951824Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:35:02.148734+00:00"}
+2025-12-12T15:35:03.4181028Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.5% (P&L: $-1999.48, Invested: $3960.78)
+2025-12-12T15:35:03.4182709Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:35:02.148734+00:00"}
+2025-12-12T15:35:03.4188251Z Traceback (most recent call last):
+2025-12-12T15:35:03.4189676Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:35:03.4190962Z     raise SystemExit(main())
+2025-12-12T15:35:03.4191464Z                      ~~~~^^
+2025-12-12T15:35:03.4192581Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:35:03.4194009Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:35:03.4195074Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:35:03.5792172Z [loop] live_paper_loop exit code=1
+2025-12-12T15:35:03.5793612Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:39:59.5802115Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:40:01.7674931Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:40:02.1621797Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:40:01.765116+00:00"}
+2025-12-12T15:40:03.0894962Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.6% (P&L: $-2003.40, Invested: $3960.78)
+2025-12-12T15:40:03.0895645Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:40:01.765116+00:00"}
+2025-12-12T15:40:03.0904102Z Traceback (most recent call last):
+2025-12-12T15:40:03.0908286Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:40:03.0909680Z     raise SystemExit(main())
+2025-12-12T15:40:03.0910163Z                      ~~~~^^
+2025-12-12T15:40:03.0926720Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:40:03.0929894Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:40:03.0932484Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:40:03.2121455Z [loop] live_paper_loop exit code=1
+2025-12-12T15:40:03.2122592Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:44:59.2177345Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:45:01.6502204Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:45:02.0658663Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:45:01.648003+00:00"}
+2025-12-12T15:45:02.9806590Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.2% (P&L: $-1990.12, Invested: $3960.78)
+2025-12-12T15:45:02.9813427Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:45:01.648003+00:00"}
+2025-12-12T15:45:02.9898044Z Traceback (most recent call last):
+2025-12-12T15:45:03.0024425Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:45:03.0024816Z     raise SystemExit(main())
+2025-12-12T15:45:03.0025108Z                      ~~~~^^
+2025-12-12T15:45:03.0048197Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:45:03.0048940Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:45:03.0050280Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:45:03.1307810Z [loop] live_paper_loop exit code=1
+2025-12-12T15:45:03.1310449Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:49:59.1330996Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:50:01.4300413Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:50:01.7770553Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:50:01.427871+00:00"}
+2025-12-12T15:50:02.7183840Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.3% (P&L: $-1991.56, Invested: $3960.78)
+2025-12-12T15:50:02.7185821Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:50:01.427871+00:00"}
+2025-12-12T15:50:02.7188942Z Traceback (most recent call last):
+2025-12-12T15:50:02.7195449Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:50:02.7229599Z     raise SystemExit(main())
+2025-12-12T15:50:02.7230850Z                      ~~~~^^
+2025-12-12T15:50:02.7294134Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:50:02.7333808Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:50:02.7394998Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:50:02.8916512Z [loop] live_paper_loop exit code=1
+2025-12-12T15:50:02.8918191Z [loop] sleep 297s → next 5m boundary
+2025-12-12T15:54:59.8935255Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T15:55:02.2228870Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T15:55:02.5687559Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T15:55:02.220647+00:00"}
+2025-12-12T15:55:03.4227512Z Traceback (most recent call last):
+2025-12-12T15:55:03.4227944Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.5% (P&L: $-2001.88, Invested: $3960.78)
+2025-12-12T15:55:03.4228546Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T15:55:02.220647+00:00"}
+2025-12-12T15:55:03.4229391Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T15:55:03.4229958Z     raise SystemExit(main())
+2025-12-12T15:55:03.4230208Z                      ~~~~^^
+2025-12-12T15:55:03.4230687Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T15:55:03.4231268Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T15:55:03.4231687Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T15:55:03.5528532Z [loop] live_paper_loop exit code=1
+2025-12-12T15:55:03.5529021Z [loop] sleep 296s → next 5m boundary
+2025-12-12T15:59:59.5535481Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T16:00:02.3836077Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T16:00:02.7331004Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["MU"], "ts": "2025-12-12T16:00:02.380982+00:00"}
+2025-12-12T16:00:03.6524612Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -50.8% (P&L: $-2013.64, Invested: $3960.78)
+2025-12-12T16:00:03.6525510Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T16:00:02.380982+00:00"}
+2025-12-12T16:00:03.6572803Z Traceback (most recent call last):
+2025-12-12T16:00:03.6579678Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T16:00:03.6581303Z     raise SystemExit(main())
+2025-12-12T16:00:03.6582082Z                      ~~~~^^
+2025-12-12T16:00:03.6583503Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T16:00:03.6585227Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T16:00:03.6586569Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T16:00:03.7931039Z [loop] live_paper_loop exit code=1
+2025-12-12T16:00:03.7932356Z [loop] sleep 296s → next 5m boundary
+2025-12-12T16:04:59.8042064Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T16:05:02.9584865Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T16:05:03.3172265Z [registry] Removing orphaned position: MU
+2025-12-12T16:05:03.3183724Z {"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 9, "my_symbols": [], "ts": "2025-12-12T16:05:02.952003+00:00"}
+2025-12-12T16:05:04.2059744Z {"type": "UNIVERSE", "loaded": 78, "sample": ["NVDA", "MARA", "AMD", "SOXL", "MSTR", "META", "AMZN", "DELL", "VRT", "SMH"], "when": "2025-12-12T16:05:02.952003+00:00"}
+2025-12-12T16:05:04.4869275Z {"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2025-12-12T16:05:02.952003+00:00"}
+2025-12-12T16:05:04.4876661Z {"type": "BARS_FETCH_START", "requested": 78, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2025-12-02T16:05:02.952003+00:00", "end": "2025-12-12T16:05:02.952003+00:00", "when": "2025-12-12T16:05:02.952003+00:00"}
+2025-12-12T16:05:04.4892467Z {"type":"UNIVERSE","loaded":78,"sample":["NVDA","MARA","AMD","SOXL","MSTR","META","AMZN","DELL","VRT","SMH"],"when":"2025-12-12T16:05:04Z"}
+2025-12-12T16:05:04.4893561Z {"type":"BARS_FETCH_START","requested":78,"chunks":4,"timeframe":"15Min","feed":"iex","start":"2025-12-02T16:05:04Z","end":"2025-12-12T16:05:04Z","when":"2025-12-12T16:05:04Z"}
+2025-12-12T16:05:07.8170798Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":8,"source_shape":"dict","collected_symbols":25}
+2025-12-12T16:05:10.6655437Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":6,"source_shape":"dict","collected_symbols":25}
+2025-12-12T16:05:13.8079400Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":7,"source_shape":"dict","collected_symbols":24}
+2025-12-12T16:05:14.4049629Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":3,"pages":1,"source_shape":"dict","collected_symbols":3}
+2025-12-12T16:05:14.4141636Z {"type":"BARS_FETCH_SUMMARY","requested":78,"with_data":77,"empty":1,"stale":0,"sample_with_data":["NVDA","MARA","AMD","SOXL"],"sample_empty":["SQ"],"when":"2025-12-12T16:05:14Z"}
+2025-12-12T16:05:16.2284063Z {"type": "BARS_FETCH_SUMMARY", "requested": 78, "with_data": 77, "empty": 1, "stale": 0, "sample_with_data": ["AAL", "ADBE", "ADI", "AMAT"], "sample_empty": ["SQ"], "when": "2025-12-12T16:05:02.952003+00:00"}
+2025-12-12T16:05:16.9597314Z {"symbol":"META","session":"AM","cid":"RB_META_20251212_160502","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T16:05:16Z","ts_et":"2025-12-12 11:05:16 ET"}
+2025-12-12T16:05:17.3841978Z {"symbol":"MU","session":"AM","cid":"RB_MU_20251212_160502","decision":"BLOCK","reasons":["traded_today"],"type":"GATE","ts":"2025-12-12T16:05:17Z","ts_et":"2025-12-12 11:05:17 ET"}
+2025-12-12T16:05:17.4009069Z {"symbol":"TSM","session":"AM","cid":"RB_TSM_20251212_160502","tf":"15Min","long_signal":1,"short_signal":0,"ref_bar_ts":"2025-12-12 15:45:00+00:00","last_close":293.8,"trend":"BULL","entry_reason":"RSI_oversold(24.7) + Lower_KC_touch + Strong_bull_trend","type":"SIGNAL","ts":"2025-12-12T16:05:17Z","ts_et":"2025-12-12 11:05:17 ET"}
+2025-12-12T16:05:17.4015533Z {"symbol":"TSM","session":"AM","cid":"RB_TSM_20251212_160502","qty":6,"side":"buy","entry_price":293.8,"stop_loss_price":289.33,"take_profit_price":296.48,"atr":1.7882,"method":"bracket","tif":"day","dry_run":false,"entry_reason":"RSI_oversold(24.7) + Lower_KC_touch + Strong_bull_trend","rsi":24.689252026385375,"type":"ENTRY_SUBMIT","ts":"2025-12-12T16:05:17Z","ts_et":"2025-12-12 11:05:17 ET"}
+2025-12-12T16:05:18.0513847Z [order] TSM: Using limit price $303.10 (buy, buffer=1.0%)
+2025-12-12T16:05:19.6634115Z [order] TSM: Fill verified (took 1s)
+2025-12-12T16:05:19.6636112Z [order] BRACKET submitted for TSM: {"id": "92b91f82-b266-483d-8c36-73dc96b6f504", "client_order_id": "15M_STK_TSM_1765555517", "created_at": "2025-12-12T16:05:17.961185962Z", "updated_at": "2025-12-12T16:05:18.522209771Z", "submitted_at": "2025-12-12T16:05:17.967652096Z", "filled_at": "2025-12-12T16:05:18.520130977Z", "expired_at": n
+2025-12-12T16:05:19.6646028Z [registry] Recorded entry: TSM (order_id=15M_STK_TSM_1765555517...)
+2025-12-12T16:05:19.6671412Z {"symbol":"TSM","session":"AM","cid":"RB_TSM_20251212_160502","order_id":"92b91f82-b266-483d-8c36-73dc96b6f504","client_order_id":"15M_STK_TSM_1765555517","broker_resp":{"id":"92b91f82-b266-483d-8c36-73dc96b6f504","client_order_id":"15M_STK_TSM_1765555517","created_at":"2025-12-12T16:05:17.961185962Z","updated_at":"2025-12-12T16:05:18.522209771Z","submitted_at":"2025-12-12T16:05:17.967652096Z","filled_at":"2025-12-12T16:05:18.520130977Z","expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"626ce11f-1e10-488b-8d75-a3eff18d6d0f","symbol":"TSM","asset_class":"us_equity","notional":null,"qty":"6","filled_qty":"6","filled_avg_price":"293.286667","order_class":"bracket","order_type":"limit","type":"limit","side":"buy","position_intent":"buy_to_open","time_in_force":"day","limit_price":"303.1","stop_price":null,"status":"filled","extended_hours":false,"legs":[{"id":"b0be5e04-f31d-4aa6-b16b-4ed1b4b65bb0","client_order_id":"14bf0e14-ccc9-48d2-bbd2-8db3647e59a2","created_at":"2025-12-12T16:05:17.961185962Z","updated_at":"2025-12-12T16:05:18.529968761Z","submitted_at":"2025-12-12T16:05:18.529116147Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"626ce11f-1e10-488b-8d75-a3eff18d6d0f","symbol":"TSM","asset_class":"us_equity","notional":null,"qty":"6","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"limit","type":"limit","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":"303.11","stop_price":null,"status":"new","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},{"id":"f0c5e956-29f5-45c7-bfdf-40f01bfd9003","client_order_id":"f72cb2af-6987-4396-9afc-620561fc0ead","created_at":"2025-12-12T16:05:17.961185962Z","updated_at":"2025-12-12T16:05:17.963367032Z","submitted_at":"2025-12-12T16:05:17.961185962Z","filled_at":null,"expired_at":null,"canceled_at":null,"failed_at":null,"replaced_at":null,"replaced_by":null,"replaces":null,"asset_id":"626ce11f-1e10-488b-8d75-a3eff18d6d0f","symbol":"TSM","asset_class":"us_equity","notional":null,"qty":"6","filled_qty":"0","filled_avg_price":null,"order_class":"bracket","order_type":"stop","type":"stop","side":"sell","position_intent":"sell_to_close","time_in_force":"day","limit_price":null,"stop_price":"289.33","status":"held","extended_hours":false,"legs":null,"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"}],"trail_percent":null,"trail_price":null,"hwm":null,"subtag":null,"source":null,"expires_at":"2025-12-12T21:00:00Z"},"dry_run":false,"type":"ENTRY_ACK","ts":"2025-12-12T16:05:19Z","ts_et":"2025-12-12 11:05:19 ET"}
+2025-12-12T16:05:19.6682018Z [registry] Recorded entry: TSM (order_id=15M_STK_TSM_1765555517...)
+2025-12-12T16:05:19.7970106Z {"symbol":"PINS","session":"AM","cid":"RB_PINS_20251212_160502","decision":"BLOCK","reasons":["traded_today"],"type":"GATE","ts":"2025-12-12T16:05:19Z","ts_et":"2025-12-12 11:05:19 ET"}
+2025-12-12T16:05:19.8150069Z {"symbol":"UBER","session":"AM","cid":"RB_UBER_20251212_160502","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T16:05:19Z","ts_et":"2025-12-12 11:05:19 ET"}
+2025-12-12T16:05:20.0716983Z {"symbol":"RBLX","session":"AM","cid":"RB_RBLX_20251212_160502","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T16:05:20Z","ts_et":"2025-12-12 11:05:20 ET"}
+2025-12-12T16:05:20.4219270Z {"symbol":"ORCL","session":"AM","cid":"RB_ORCL_20251212_160502","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T16:05:20Z","ts_et":"2025-12-12 11:05:20 ET"}
+2025-12-12T16:05:20.5315514Z {"symbol":"BA","session":"AM","cid":"RB_BA_20251212_160502","decision":"BLOCK","reasons":["already in position"],"type":"GATE","ts":"2025-12-12T16:05:20Z","ts_et":"2025-12-12 11:05:20 ET"}
+2025-12-12T16:05:20.5316585Z 
+2025-12-12T16:05:20.5317117Z === Session Summary ===
+2025-12-12T16:05:20.8627893Z ------------------------------------------------------------------------
+2025-12-12T16:05:20.8629741Z Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-12T16:05:20.8630533Z ------------------------------------------------------------------------
+2025-12-12T16:05:20.8681022Z MU       8        245.70     1965.60      8        241.20     -36.00    
+2025-12-12T16:05:20.8681502Z PINS     75       26.60      1995.18      75       26.30      -22.68    
+2025-12-12T16:05:20.8682068Z TSM      6        293.29     1759.72      0        0.00       -         
+2025-12-12T16:05:20.8683252Z ------------------------------------------------------------------------
+2025-12-12T16:05:20.8683814Z TOTAL Day PnL: $-58.68 | TOTAL VOL: $9,622.60
+2025-12-12T16:05:20.8687745Z (Note: Day PnL calculated on matched intraday buy/sell quantity)
+2025-12-12T16:05:20.8688682Z === End Summary ===
+2025-12-12T16:05:20.8690088Z {"type":"EOD_SUMMARY","date":"2025-12-12","total_trades":1,"closed_trades":0,"open_trades":1,"total_pnl":-58.68,"total_volume":9622.6,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[{"symbol":"TSM","side":"buy","qty":6,"entry_price":293.8,"exit_price":null,"entry_reason":"RSI_oversold(24.7) + Lower_KC_touch + Strong_bull_trend","exit_reason":null,"pnl":null}],"ts":"2025-12-12T16:05:20Z","ts_et":"2025-12-12 11:05:20 ET"}
+2025-12-12T16:05:21.2150134Z [loop] live_paper_loop exit code=0
+2025-12-12T16:05:21.2231571Z [loop] sleep 278s → next 5m boundary
+2025-12-12T16:09:59.2171475Z [loop] invoking: C:\Program Files\Python313\python.exe -X utf8 -u RubberBand/scripts/live_paper_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers.txt --dry-run 0 --force-run 0
+2025-12-12T16:10:01.5982080Z [registry] Loaded 1 open positions for 15M_STK
+2025-12-12T16:10:01.9712606Z {"type": "REGISTRY_SYNC", "registry_positions": 1, "alpaca_stock_positions": 10, "my_symbols": ["TSM"], "ts": "2025-12-12T16:10:01.551675+00:00"}
+2025-12-12T16:10:02.9639332Z Traceback (most recent call last):
+2025-12-12T16:10:02.9641170Z [KILL SWITCH] 15M_STK exceeded 25.0% loss: -31.8% (P&L: $-1818.08, Invested: $5720.50)
+2025-12-12T16:10:02.9642912Z {"type": "KILL_SWITCH_TRIGGERED", "bot_tag": "15M_STK", "reason": "Daily loss exceeded 25% of invested capital", "ts": "2025-12-12T16:10:01.551675+00:00"}
+2025-12-12T16:10:02.9663188Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 746, in <module>
+2025-12-12T16:10:02.9664952Z     raise SystemExit(main())
+2025-12-12T16:10:02.9666749Z                      ~~~~^^
+2025-12-12T16:10:02.9670073Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_paper_loop.py", line 227, in main
+2025-12-12T16:10:02.9672593Z     raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+2025-12-12T16:10:02.9675297Z RubberBand.src.data.KillSwitchTriggered: 15M_STK exceeded 25% daily loss
+2025-12-12T16:10:03.0895423Z [loop] live_paper_loop exit code=1
+2025-12-12T16:10:03.0922026Z [loop] sleep 296s → next 5m boundary
+2025-12-12T16:14:07.8779812Z Traceback (most recent call last):
+2025-12-12T16:14:07.8799301Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\market_loop.py", line 136, in <module>
+2025-12-12T16:14:07.8799848Z     main()
+2025-12-12T16:14:07.8800003Z     ~~~~^^
+2025-12-12T16:14:07.8800713Z   File "C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\market_loop.py", line 128, in main
+2025-12-12T16:14:07.8801897Z     time.sleep(secs)
+2025-12-12T16:14:07.8802403Z     ~~~~~~~~~~^^^^^^
+2025-12-12T16:14:07.8803220Z KeyboardInterrupt
+2025-12-12T16:14:08.0511778Z ##[error]The operation was canceled.
+2025-12-12T16:14:08.1677850Z ##[group]Run actions/upload-artifact@v4
+2025-12-12T16:14:08.1678433Z with:
+2025-12-12T16:14:08.1678651Z   name: position-registry-15M_STK
+2025-12-12T16:14:08.1678884Z   path: .position_registry/
+2025-12-12T16:14:08.1679085Z   retention-days: 90
+2025-12-12T16:14:08.1679261Z   overwrite: true
+2025-12-12T16:14:08.1679430Z   if-no-files-found: warn
+2025-12-12T16:14:08.1679628Z   compression-level: 6
+2025-12-12T16:14:08.1679821Z   include-hidden-files: false
+2025-12-12T16:14:08.1680007Z env:
+2025-12-12T16:14:08.1680201Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:14:08.1680452Z ##[endgroup]
+2025-12-12T16:14:09.2458556Z ##[warning]No files were found with the provided path: .position_registry/. No artifacts will be uploaded.
+2025-12-12T16:14:09.3925968Z Post job cleanup.
+2025-12-12T16:14:09.6167581Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T16:14:09.6672525Z git version 2.52.0.windows.1
+2025-12-12T16:14:09.6782492Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\13e69ff9-cfb7-46c9-8232-f48318ed1f74' before making global git config changes
+2025-12-12T16:14:09.6783655Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T16:14:09.6802515Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-12T16:14:09.7325651Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T16:14:09.7789902Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T16:14:10.6142691Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T16:14:10.6515097Z http.https://github.com/.extraheader
+2025-12-12T16:14:10.6573273Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-12T16:14:10.6968337Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T16:14:11.4446575Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T16:14:11.4934855Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T16:14:12.2188953Z Cleaning up orphan processes

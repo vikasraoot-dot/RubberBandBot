@@ -1,0 +1,32 @@
+﻿2025-12-11T14:49:25.2858137Z Current runner version: '2.329.0'
+2025-12-11T14:49:25.2882123Z ##[group]Runner Image Provisioner
+2025-12-11T14:49:25.2882956Z Hosted Compute Agent
+2025-12-11T14:49:25.2883440Z Version: 20251124.448
+2025-12-11T14:49:25.2884066Z Commit: fda5086b43ec66ade217e5fcd18146c879571177
+2025-12-11T14:49:25.2884711Z Build Date: 2025-11-24T21:16:26Z
+2025-12-11T14:49:25.2885238Z ##[endgroup]
+2025-12-11T14:49:25.2885879Z ##[group]Operating System
+2025-12-11T14:49:25.2886375Z Ubuntu
+2025-12-11T14:49:25.2886789Z 24.04.3
+2025-12-11T14:49:25.2887231Z LTS
+2025-12-11T14:49:25.2887661Z ##[endgroup]
+2025-12-11T14:49:25.2888125Z ##[group]Runner Image
+2025-12-11T14:49:25.2888632Z Image: ubuntu-24.04
+2025-12-11T14:49:25.2889091Z Version: 20251126.144.1
+2025-12-11T14:49:25.2889997Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251126.144/images/ubuntu/Ubuntu2404-Readme.md
+2025-12-11T14:49:25.2891211Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251126.144
+2025-12-11T14:49:25.2892310Z ##[endgroup]
+2025-12-11T14:49:25.2893311Z ##[group]GITHUB_TOKEN Permissions
+2025-12-11T14:49:25.2895146Z Contents: read
+2025-12-11T14:49:25.2895933Z Metadata: read
+2025-12-11T14:49:25.2896435Z Packages: read
+2025-12-11T14:49:25.2896919Z ##[endgroup]
+2025-12-11T14:49:25.2899054Z Secret source: Actions
+2025-12-11T14:49:25.2899746Z Prepare workflow directory
+2025-12-11T14:49:25.3216008Z Prepare all required actions
+2025-12-11T14:49:25.3256223Z Getting action download info
+2025-12-11T14:49:25.7373029Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2025-12-11T14:49:25.8100266Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+2025-12-11T14:49:25.8808340Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-11T14:49:26.5753823Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-11T14:49:26.7652130Z Complete job name: trade

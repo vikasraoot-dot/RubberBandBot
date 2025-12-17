@@ -111,13 +111,10 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--config", required=True, help="Path to config.yaml")
     p.add_argument("--tickers", required=True, help="Path to tickers file")
     p.add_argument("--dry-run", type=int, default=1, help="1=dry run, 0=live")
-    p.add_argument("--dte", type=int, default=6) # Optimized Default
-    p.add_argument("--max-debit", type=float, default=3.00)
-    p.add_argument("--slope-threshold", type=float, default=-0.12) # Optimized Default
-    p.add_argument("--dte", type=int, default=3, help="Days to expiration (1-3)")
+    p.add_argument("--dte", type=int, default=6, help="Days to expiration (default: 6)") # Optimized Default
     p.add_argument("--max-debit", type=float, default=3.00, help="Max debit per share")
+    p.add_argument("--slope-threshold", type=float, default=-0.12, help="Keltner mean slope threshold (default: -0.12)") # Optimized Default
     p.add_argument("--contracts", type=int, default=1, help="Contracts per trade")
-    p.add_argument("--slope-threshold", type=float, default=None, help="Keltner mean slope threshold (e.g. -0.20)")
     return p.parse_args()
 
 

@@ -1,0 +1,76 @@
+﻿2025-12-15T14:40:20.6252060Z ##[group]Run actions/checkout@v4
+2025-12-15T14:40:20.6255258Z with:
+2025-12-15T14:40:20.6256248Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-15T14:40:20.6258113Z   token: ***
+2025-12-15T14:40:20.6258915Z   ssh-strict: true
+2025-12-15T14:40:20.6259608Z   ssh-user: git
+2025-12-15T14:40:20.6260806Z   persist-credentials: true
+2025-12-15T14:40:20.6261765Z   clean: true
+2025-12-15T14:40:20.6262547Z   sparse-checkout-cone-mode: true
+2025-12-15T14:40:20.6263608Z   fetch-depth: 1
+2025-12-15T14:40:20.6264369Z   fetch-tags: false
+2025-12-15T14:40:20.6316746Z   show-progress: true
+2025-12-15T14:40:20.6317267Z   lfs: false
+2025-12-15T14:40:20.6317503Z   submodules: false
+2025-12-15T14:40:20.6317750Z   set-safe-directory: true
+2025-12-15T14:40:20.6319419Z ##[endgroup]
+2025-12-15T14:40:21.1965715Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-15T14:40:21.1987651Z ##[group]Getting Git version info
+2025-12-15T14:40:21.1991167Z Working directory is 'C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot'
+2025-12-15T14:40:21.2572439Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-15T14:40:21.3661370Z git version 2.52.0.windows.1
+2025-12-15T14:40:21.3838885Z ##[endgroup]
+2025-12-15T14:40:21.3857161Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\6ee02512-fc59-4360-b641-fa16c414543b' before making global git config changes
+2025-12-15T14:40:21.3858063Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-15T14:40:21.3867863Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-15T14:40:21.4722392Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-15T14:40:21.5298606Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-15T14:40:21.5376746Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-15T14:40:21.5387887Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-15T14:40:21.6004282Z refs/heads/main
+2025-12-15T14:40:21.6102307Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-15T14:40:21.7512470Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-15T14:40:21.7513642Z M	RubberBand/__pycache__/strategy.cpython-313.pyc
+2025-12-15T14:40:21.7514588Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-15T14:40:21.7515426Z M	RubberBand/src/__pycache__/data.cpython-313.pyc
+2025-12-15T14:40:21.7516270Z M	RubberBand/src/__pycache__/indicators.cpython-313.pyc
+2025-12-15T14:40:21.7517193Z M	RubberBand/src/__pycache__/options_data.cpython-313.pyc
+2025-12-15T14:40:21.7518160Z M	RubberBand/src/__pycache__/options_execution.cpython-313.pyc
+2025-12-15T14:40:21.7519202Z M	RubberBand/src/__pycache__/options_trade_logger.cpython-313.pyc
+2025-12-15T14:40:21.7519737Z M	RubberBand/src/__pycache__/position_registry.cpython-313.pyc
+2025-12-15T14:40:21.7530565Z HEAD is now at f29884b chore: enable slope threshold -0.20 by default in config
+2025-12-15T14:40:21.9388840Z ##[endgroup]
+2025-12-15T14:40:21.9389628Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-15T14:40:23.1226459Z ##[group]Cleaning the repository
+2025-12-15T14:40:23.1250466Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-15T14:40:23.1832806Z Removing results/options_trades_20251215.jsonl
+2025-12-15T14:40:23.1927285Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-15T14:40:23.3111830Z HEAD is now at f29884b chore: enable slope threshold -0.20 by default in config
+2025-12-15T14:40:23.3182037Z ##[endgroup]
+2025-12-15T14:40:23.3189462Z ##[group]Disabling automatic garbage collection
+2025-12-15T14:40:23.3198469Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-15T14:40:23.3854079Z ##[endgroup]
+2025-12-15T14:40:23.3855100Z ##[group]Setting up auth
+2025-12-15T14:40:23.3864307Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-15T14:40:23.4535195Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-15T14:40:24.6002164Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-15T14:40:24.6699686Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-15T14:40:25.8445366Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-15T14:40:25.9159757Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-15T14:40:27.0486860Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-15T14:40:27.1334991Z ##[endgroup]
+2025-12-15T14:40:27.1336052Z ##[group]Fetching the repository
+2025-12-15T14:40:27.1345568Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +f29884b3f0b1f576d947b5f5daef417128c06125:refs/remotes/origin/main
+2025-12-15T14:40:27.8946691Z ##[endgroup]
+2025-12-15T14:40:27.8946985Z ##[group]Determining the checkout info
+2025-12-15T14:40:27.8947361Z ##[endgroup]
+2025-12-15T14:40:27.8955654Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-15T14:40:27.9851468Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-15T14:40:28.0511722Z ##[group]Checking out the ref
+2025-12-15T14:40:28.0520868Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-15T14:40:28.1719853Z branch 'main' set up to track 'origin/main'.
+2025-12-15T14:40:28.1720702Z Your branch is up to date with 'origin/main'.
+2025-12-15T14:40:28.1733637Z Switched to and reset branch 'main'
+2025-12-15T14:40:28.1830873Z ##[endgroup]
+2025-12-15T14:40:28.2558934Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-15T14:40:28.3178214Z f29884b3f0b1f576d947b5f5daef417128c06125

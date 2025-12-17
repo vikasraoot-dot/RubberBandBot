@@ -1,0 +1,28 @@
+﻿2025-12-11T20:49:37.1670798Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T20:49:37.1671078Z with:
+2025-12-11T20:49:37.1671282Z   name: position-registry-WK_STK
+2025-12-11T20:49:37.1671548Z   path: .position_registry/WK_STK_positions.json
+2025-12-11T20:49:37.1671833Z   if-no-files-found: warn
+2025-12-11T20:49:37.1672061Z   retention-days: 90
+2025-12-11T20:49:37.1672249Z   overwrite: true
+2025-12-11T20:49:37.1672441Z   compression-level: 6
+2025-12-11T20:49:37.1672654Z   include-hidden-files: false
+2025-12-11T20:49:37.1672862Z env:
+2025-12-11T20:49:37.1673093Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T20:49:37.1673472Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T20:49:37.1673837Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T20:49:37.1674173Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T20:49:37.1674505Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T20:49:37.1674839Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T20:49:37.1675263Z ##[endgroup]
+2025-12-11T20:49:37.4476094Z With the provided path, there will be 1 file uploaded
+2025-12-11T20:49:37.6073610Z Artifact name is valid!
+2025-12-11T20:49:37.6075752Z Root directory input is valid!
+2025-12-11T20:49:37.7145130Z Beginning upload of artifact content to blob storage
+2025-12-11T20:49:38.0071334Z Uploaded bytes 662
+2025-12-11T20:49:38.0856404Z Finished uploading artifact content to blob storage!
+2025-12-11T20:49:38.0859472Z SHA256 digest of uploaded artifact zip is 2892365e16d30d388dac35128719d73bdf6b94b287569b6ca25b043d88c47fff
+2025-12-11T20:49:38.0860307Z Finalizing artifact upload
+2025-12-11T20:49:38.2386019Z Artifact position-registry-WK_STK.zip successfully finalized. Artifact ID 4843017313
+2025-12-11T20:49:38.2386889Z Artifact position-registry-WK_STK has been successfully uploaded! Final size is 662 bytes. Artifact ID is 4843017313
+2025-12-11T20:49:38.2392724Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20137130941/artifacts/4843017313

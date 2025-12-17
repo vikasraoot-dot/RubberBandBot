@@ -93,6 +93,9 @@ jobs:
           DRY_RUN: "0"
           FORCE_RUN: "0"
           SLOPE_THRESHOLD: ${{ github.event.inputs.slope_threshold }}
+          RSI_ENTRY: "30"
+          TP_R: "1.5"
+          SL_ATR: "1.5"
           PYTHONUNBUFFERED: "1"
         run: |
           chcp 65001 > $null

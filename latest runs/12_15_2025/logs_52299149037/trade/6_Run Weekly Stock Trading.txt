@@ -1,0 +1,184 @@
+﻿2025-12-15T20:50:08.1538069Z ##[group]Run DRY_RUN=0
+2025-12-15T20:50:08.1538352Z [36;1mDRY_RUN=0[0m
+2025-12-15T20:50:08.1538546Z [36;1m[0m
+2025-12-15T20:50:08.1538745Z [36;1m# Determine day of week (Monday = 1)[0m
+2025-12-15T20:50:08.1539049Z [36;1mDAY_OF_WEEK=$(TZ=America/New_York date +%u)[0m
+2025-12-15T20:50:08.1539513Z [36;1m[0m
+2025-12-15T20:50:08.1539712Z [36;1mecho "========================================"[0m
+2025-12-15T20:50:08.1539992Z [36;1mecho "Weekly Stock Trading V1"[0m
+2025-12-15T20:50:08.1540255Z [36;1mecho "========================================"[0m
+2025-12-15T20:50:08.1540544Z [36;1mecho "Day of Week: $DAY_OF_WEEK (1=Monday)"[0m
+2025-12-15T20:50:08.1540812Z [36;1mecho "Dry Run: $DRY_RUN"[0m
+2025-12-15T20:50:08.1541281Z [36;1mecho "========================================"[0m
+2025-12-15T20:50:08.1541538Z [36;1m[0m
+2025-12-15T20:50:08.1541714Z [36;1m# Create logs directory[0m
+2025-12-15T20:50:08.1541953Z [36;1mmkdir -p logs[0m
+2025-12-15T20:50:08.1542149Z [36;1m[0m
+2025-12-15T20:50:08.1542361Z [36;1m# Run the weekly stock cycle[0m
+2025-12-15T20:50:08.1542645Z [36;1mpython RubberBand/scripts/live_weekly_loop.py[0m
+2025-12-15T20:50:08.1577899Z shell: /usr/bin/bash -e {0}
+2025-12-15T20:50:08.1578139Z env:
+2025-12-15T20:50:08.1578395Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T20:50:08.1578833Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-15T20:50:08.1579234Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T20:50:08.1579587Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T20:50:08.1579933Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-15T20:50:08.1580278Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-15T20:50:08.1580839Z   APCA_API_KEY_ID: ***
+2025-12-15T20:50:08.1581332Z   APCA_API_SECRET_KEY: ***
+2025-12-15T20:50:08.1581639Z   APCA_API_BASE_URL: https://paper-api.alpaca.markets
+2025-12-15T20:50:08.1582006Z   PYTHONPATH: /home/runner/work/RubberBandBot/RubberBandBot
+2025-12-15T20:50:08.1582314Z ##[endgroup]
+2025-12-15T20:50:08.1684320Z ========================================
+2025-12-15T20:50:08.1684795Z Weekly Stock Trading V1
+2025-12-15T20:50:08.1685084Z ========================================
+2025-12-15T20:50:08.1685345Z Day of Week: 1 (1=Monday)
+2025-12-15T20:50:08.1685569Z Dry Run: 0
+2025-12-15T20:50:08.1685746Z ========================================
+2025-12-15T20:50:08.5739580Z 2025-12-15 20:50:08,573 [INFO] WEEKLY: ============================================================
+2025-12-15T20:50:08.5740225Z 2025-12-15 20:50:08,573 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-15T20:50:08.5740750Z 2025-12-15 20:50:08,573 [INFO] WEEKLY: ============================================================
+2025-12-15T20:50:08.8274995Z 2025-12-15 20:50:08,827 [INFO] WEEKLY: Registry loaded: 0 positions in WK_STK registry
+2025-12-15T20:50:09.7824048Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-577.04, total=$-577.04, invested=$9352.68
+2025-12-15T20:50:09.7825039Z 2025-12-15 20:50:09,782 [INFO] WEEKLY: Open Positions (WK_STK): 0
+2025-12-15T20:50:09.7825656Z 2025-12-15 20:50:09,782 [INFO] WEEKLY: Analyzing RKLB...
+2025-12-15T20:50:09.7826327Z {"type":"UNIVERSE","loaded":1,"sample":["RKLB"],"when":"2025-12-15T20:50:09Z"}
+2025-12-15T20:50:09.7827541Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:09Z","end":"2025-12-15T20:50:09Z","when":"2025-12-15T20:50:09Z"}
+2025-12-15T20:50:10.0856028Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:10.0904797Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["RKLB"],"sample_empty":[],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.1028125Z 2025-12-15 20:50:10,102 [INFO] WEEKLY: Analyzing HOOD...
+2025-12-15T20:50:10.1028970Z {"type":"UNIVERSE","loaded":1,"sample":["HOOD"],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.1030573Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:10Z","end":"2025-12-15T20:50:10Z","when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.4040675Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:10.4079325Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["HOOD"],"sample_empty":[],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.4194375Z 2025-12-15 20:50:10,419 [INFO] WEEKLY: Analyzing INTC...
+2025-12-15T20:50:10.4195215Z {"type":"UNIVERSE","loaded":1,"sample":["INTC"],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.4196321Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:10Z","end":"2025-12-15T20:50:10Z","when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.7169672Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:10.7210166Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["INTC"],"sample_empty":[],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.7329271Z 2025-12-15 20:50:10,732 [INFO] WEEKLY: Analyzing WDC...
+2025-12-15T20:50:10.7329973Z {"type":"UNIVERSE","loaded":1,"sample":["WDC"],"when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:10.7331084Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:10Z","end":"2025-12-15T20:50:10Z","when":"2025-12-15T20:50:10Z"}
+2025-12-15T20:50:11.0349675Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:11.0391593Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["WDC"],"sample_empty":[],"when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.0509331Z 2025-12-15 20:50:11,050 [INFO] WEEKLY: Analyzing VRT...
+2025-12-15T20:50:11.0510060Z {"type":"UNIVERSE","loaded":1,"sample":["VRT"],"when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.0511426Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:11Z","end":"2025-12-15T20:50:11Z","when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.3510267Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:11.3556402Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VRT"],"sample_empty":[],"when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.3677527Z 2025-12-15 20:50:11,367 [INFO] WEEKLY: Analyzing COIN...
+2025-12-15T20:50:11.3678212Z {"type":"UNIVERSE","loaded":1,"sample":["COIN"],"when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.3679347Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:11Z","end":"2025-12-15T20:50:11Z","when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.6674366Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:11.6714606Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["COIN"],"sample_empty":[],"when":"2025-12-15T20:50:11Z"}
+2025-12-15T20:50:11.6836403Z 2025-12-15 20:50:11,683 [INFO] WEEKLY: 🔥 SIGNAL FOUND for COIN: RSI=39.5, Dev=-19.5%
+2025-12-15T20:50:11.6837169Z 2025-12-15 20:50:11,683 [INFO] WEEKLY: Submitting Bracket Order: COIN x 8 @ Market, SL=166.00, TP=457.76
+2025-12-15T20:50:12.1714509Z [order] COIN: Using limit price $263.48 (buy, buffer=1.0%)
+2025-12-15T20:50:12.1715505Z 2025-12-15 20:50:12,170 [INFO] WEEKLY: ✅ Order placed: 12d97cd2-8440-4035-bcf5-4740efd7b7b8
+2025-12-15T20:50:12.1716716Z {"symbol":"COIN","side":"buy","qty":8,"entry_price":249.36,"stop_loss_price":166.00100000000003,"take_profit_price":457.75749999999994,"entry_reason":"Weekly RB: RSI=39.5, Dev=-19.5%","type":"ENTRY_SUBMIT","ts":"2025-12-15T20:50:12Z","ts_et":"2025-12-15 15:50:12 ET"}
+2025-12-15T20:50:12.1718368Z [registry] Recorded entry: COIN (order_id=WK_STK_COIN_1765831811...)
+2025-12-15T20:50:12.1718983Z 2025-12-15 20:50:12,171 [INFO] WEEKLY: Analyzing MU...
+2025-12-15T20:50:12.1721856Z {"type":"UNIVERSE","loaded":1,"sample":["MU"],"when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.1722922Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:12Z","end":"2025-12-15T20:50:12Z","when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.4552823Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:12.4593166Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["MU"],"sample_empty":[],"when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.4719071Z 2025-12-15 20:50:12,471 [INFO] WEEKLY: Analyzing CIEN...
+2025-12-15T20:50:12.4719915Z {"type":"UNIVERSE","loaded":1,"sample":["CIEN"],"when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.4721510Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:12Z","end":"2025-12-15T20:50:12Z","when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.7745336Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:12.7786211Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["CIEN"],"sample_empty":[],"when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.7905685Z 2025-12-15 20:50:12,790 [INFO] WEEKLY: Analyzing STX...
+2025-12-15T20:50:12.7906528Z {"type":"UNIVERSE","loaded":1,"sample":["STX"],"when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:12.7907893Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:12Z","end":"2025-12-15T20:50:12Z","when":"2025-12-15T20:50:12Z"}
+2025-12-15T20:50:13.0999401Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:13.1040815Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["STX"],"sample_empty":[],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.1158279Z 2025-12-15 20:50:13,115 [INFO] WEEKLY: Analyzing APP...
+2025-12-15T20:50:13.1159264Z {"type":"UNIVERSE","loaded":1,"sample":["APP"],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.1161181Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:13Z","end":"2025-12-15T20:50:13Z","when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.4182629Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:13.4218325Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["APP"],"sample_empty":[],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.4331722Z 2025-12-15 20:50:13,432 [INFO] WEEKLY: Analyzing BURL...
+2025-12-15T20:50:13.4332621Z {"type":"UNIVERSE","loaded":1,"sample":["BURL"],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.4334132Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:13Z","end":"2025-12-15T20:50:13Z","when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.7345416Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:13.7384978Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["BURL"],"sample_empty":[],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.7503124Z 2025-12-15 20:50:13,750 [INFO] WEEKLY: Analyzing ORCL...
+2025-12-15T20:50:13.7504018Z {"type":"UNIVERSE","loaded":1,"sample":["ORCL"],"when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:13.7505470Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:13Z","end":"2025-12-15T20:50:13Z","when":"2025-12-15T20:50:13Z"}
+2025-12-15T20:50:14.0528322Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:14.0569618Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["ORCL"],"sample_empty":[],"when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:14.0690250Z 2025-12-15 20:50:14,068 [INFO] WEEKLY: 🔥 SIGNAL FOUND for ORCL: RSI=22.8, Dev=-25.6%
+2025-12-15T20:50:14.0691356Z 2025-12-15 20:50:14,068 [INFO] WEEKLY: Submitting Bracket Order: ORCL x 10 @ Market, SL=125.98, TP=329.75
+2025-12-15T20:50:14.5341826Z [order] ORCL: Using limit price $186.32 (buy, buffer=1.0%)
+2025-12-15T20:50:14.5342742Z 2025-12-15 20:50:14,533 [INFO] WEEKLY: ✅ Order placed: 79542c24-8fa5-48cb-b95d-fae0ea90f184
+2025-12-15T20:50:14.5343861Z {"symbol":"ORCL","side":"buy","qty":10,"entry_price":184.2,"stop_loss_price":125.97899999999998,"take_profit_price":329.7525,"entry_reason":"Weekly RB: RSI=22.8, Dev=-25.6%","type":"ENTRY_SUBMIT","ts":"2025-12-15T20:50:14Z","ts_et":"2025-12-15 15:50:14 ET"}
+2025-12-15T20:50:14.5345042Z [registry] Recorded entry: ORCL (order_id=WK_STK_ORCL_1765831814...)
+2025-12-15T20:50:14.5345724Z 2025-12-15 20:50:14,534 [INFO] WEEKLY: Analyzing CVNA...
+2025-12-15T20:50:14.5346388Z {"type":"UNIVERSE","loaded":1,"sample":["CVNA"],"when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:14.5347392Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:14Z","end":"2025-12-15T20:50:14Z","when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:14.8201584Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:14.8242049Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["CVNA"],"sample_empty":[],"when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:14.8360622Z 2025-12-15 20:50:14,835 [INFO] WEEKLY: Analyzing MDB...
+2025-12-15T20:50:14.8361524Z {"type":"UNIVERSE","loaded":1,"sample":["MDB"],"when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:14.8362366Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:14Z","end":"2025-12-15T20:50:14Z","when":"2025-12-15T20:50:14Z"}
+2025-12-15T20:50:15.1100552Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:15.1142944Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["MDB"],"sample_empty":[],"when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:15.1262565Z 2025-12-15 20:50:15,126 [INFO] WEEKLY: Analyzing SMCI...
+2025-12-15T20:50:15.1263159Z {"type":"UNIVERSE","loaded":1,"sample":["SMCI"],"when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:15.1264004Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:15Z","end":"2025-12-15T20:50:15Z","when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:15.4287679Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:15.4328745Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["SMCI"],"sample_empty":[],"when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:15.4448320Z 2025-12-15 20:50:15,444 [INFO] WEEKLY: 🔥 SIGNAL FOUND for SMCI: RSI=33.7, Dev=-26.1%
+2025-12-15T20:50:15.4449053Z 2025-12-15 20:50:15,444 [INFO] WEEKLY: Submitting Bracket Order: SMCI x 63 @ Market, SL=19.83, TP=60.34
+2025-12-15T20:50:15.9186930Z [order] SMCI: Using limit price $31.70 (buy, buffer=1.0%)
+2025-12-15T20:50:15.9187826Z 2025-12-15 20:50:15,918 [INFO] WEEKLY: ✅ Order placed: 841d1caf-fc60-4ce3-a32b-c888ac8eccf2
+2025-12-15T20:50:15.9189198Z {"symbol":"SMCI","side":"buy","qty":63,"entry_price":31.405,"stop_loss_price":19.83,"take_profit_price":60.34250000000001,"entry_reason":"Weekly RB: RSI=33.7, Dev=-26.1%","type":"ENTRY_SUBMIT","ts":"2025-12-15T20:50:15Z","ts_et":"2025-12-15 15:50:15 ET"}
+2025-12-15T20:50:15.9190679Z [registry] Recorded entry: SMCI (order_id=WK_STK_SMCI_1765831815...)
+2025-12-15T20:50:15.9191467Z 2025-12-15 20:50:15,918 [INFO] WEEKLY: Analyzing DKNG...
+2025-12-15T20:50:15.9191915Z {"type":"UNIVERSE","loaded":1,"sample":["DKNG"],"when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:15.9193082Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:15Z","end":"2025-12-15T20:50:15Z","when":"2025-12-15T20:50:15Z"}
+2025-12-15T20:50:16.2189884Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:16.2231669Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["DKNG"],"sample_empty":[],"when":"2025-12-15T20:50:16Z"}
+2025-12-15T20:50:16.2352751Z 2025-12-15 20:50:16,235 [INFO] WEEKLY: 🔥 SIGNAL FOUND for DKNG: RSI=31.9, Dev=-5.6%
+2025-12-15T20:50:16.2353458Z 2025-12-15 20:50:16,235 [INFO] WEEKLY: Submitting Bracket Order: DKNG x 56 @ Market, SL=29.35, TP=51.09
+2025-12-15T20:50:16.7128269Z [order] DKNG: Using limit price $35.96 (buy, buffer=1.0%)
+2025-12-15T20:50:16.7129565Z 2025-12-15 20:50:16,712 [INFO] WEEKLY: ✅ Order placed: aece1054-6676-4419-b2e8-ebd7adf55a44
+2025-12-15T20:50:16.7131554Z {"symbol":"DKNG","side":"buy","qty":56,"entry_price":35.565,"stop_loss_price":29.354999999999997,"take_profit_price":51.09,"entry_reason":"Weekly RB: RSI=31.9, Dev=-5.6%","type":"ENTRY_SUBMIT","ts":"2025-12-15T20:50:16Z","ts_et":"2025-12-15 15:50:16 ET"}
+2025-12-15T20:50:16.7133169Z [registry] Recorded entry: DKNG (order_id=WK_STK_DKNG_1765831816...)
+2025-12-15T20:50:16.7134048Z 2025-12-15 20:50:16,713 [INFO] WEEKLY: Analyzing ON...
+2025-12-15T20:50:16.7134747Z {"type":"UNIVERSE","loaded":1,"sample":["ON"],"when":"2025-12-15T20:50:16Z"}
+2025-12-15T20:50:16.7135883Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:16Z","end":"2025-12-15T20:50:16Z","when":"2025-12-15T20:50:16Z"}
+2025-12-15T20:50:17.0119915Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:17.0162323Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["ON"],"sample_empty":[],"when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.0283331Z 2025-12-15 20:50:17,028 [INFO] WEEKLY: Analyzing AVGO...
+2025-12-15T20:50:17.0284013Z {"type":"UNIVERSE","loaded":1,"sample":["AVGO"],"when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.0285213Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:17Z","end":"2025-12-15T20:50:17Z","when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.3283975Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:17.3325659Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["AVGO"],"sample_empty":[],"when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.3444619Z 2025-12-15 20:50:17,344 [INFO] WEEKLY: Analyzing DASH...
+2025-12-15T20:50:17.3445315Z {"type":"UNIVERSE","loaded":1,"sample":["DASH"],"when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.3446451Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-10T20:50:17Z","end":"2025-12-15T20:50:17Z","when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.6510412Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+2025-12-15T20:50:17.6552017Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["DASH"],"sample_empty":[],"when":"2025-12-15T20:50:17Z"}
+2025-12-15T20:50:17.6672635Z 2025-12-15 20:50:17,667 [INFO] WEEKLY: 🔥 SIGNAL FOUND for DASH: RSI=39.3, Dev=-5.9%
+2025-12-15T20:50:17.6673623Z 2025-12-15 20:50:17,667 [INFO] WEEKLY: Submitting Bracket Order: DASH x 8 @ Market, SL=178.47, TP=348.02
+2025-12-15T20:50:18.1387749Z [order] DASH: Using limit price $242.74 (buy, buffer=1.0%)
+2025-12-15T20:50:18.1388970Z 2025-12-15 20:50:18,138 [INFO] WEEKLY: ✅ Order placed: a2536f53-da69-4232-a8dc-9beda62259e2
+2025-12-15T20:50:18.1390459Z {"symbol":"DASH","side":"buy","qty":8,"entry_price":226.91,"stop_loss_price":178.466,"take_profit_price":348.02,"entry_reason":"Weekly RB: RSI=39.3, Dev=-5.9%","type":"ENTRY_SUBMIT","ts":"2025-12-15T20:50:18Z","ts_et":"2025-12-15 15:50:18 ET"}
+2025-12-15T20:50:18.1392452Z [registry] Recorded entry: DASH (order_id=WK_STK_DASH_1765831817...)
+2025-12-15T20:50:18.1393228Z 2025-12-15 20:50:18,139 [INFO] WEEKLY: Max positions limit reached. Stopping.
+2025-12-15T20:50:18.1393889Z 2025-12-15 20:50:18,139 [INFO] WEEKLY: 
+2025-12-15T20:50:18.1394403Z === Weekly Stock Session Summary ===
+2025-12-15T20:50:18.3811854Z 2025-12-15 20:50:18,380 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-15T20:50:18.3813008Z 2025-12-15 20:50:18,380 [INFO] WEEKLY: Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-15T20:50:18.3813996Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-15T20:50:18.3814883Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: COIN     15       252.05     3780.71      0        0.00       -         
+2025-12-15T20:50:18.3815717Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: DASH     8        222.91     1783.28      0        0.00       -         
+2025-12-15T20:50:18.3816491Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: DKNG     57       34.76      1981.32      0        0.00       -         
+2025-12-15T20:50:18.3817280Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: ORCL     20       183.43     3668.60      0        0.00       -         
+2025-12-15T20:50:18.3818151Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: SMCI     62       31.89      1977.18      0        0.00       -         
+2025-12-15T20:50:18.3818933Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-15T20:50:18.3819772Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: TOTAL Day PnL: $0.00 | TOTAL VOL: $13,191.09
+2025-12-15T20:50:18.3820651Z 2025-12-15 20:50:18,381 [INFO] WEEKLY: === End Summary ===
+2025-12-15T20:50:18.3822914Z 2025-12-15 20:50:18,382 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-15T21:47:51.0566822Z ##[error]The operation was canceled.

@@ -1,0 +1,5 @@
+﻿2025-12-15T14:40:28.3763885Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-15T14:40:28.3764206Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-15T14:40:28.3764382Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-15T14:40:28.3785191Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-15T14:40:28.3785424Z ##[endgroup]

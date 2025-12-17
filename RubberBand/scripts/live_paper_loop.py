@@ -56,6 +56,9 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--force-run", type=int, default=0)
     p.add_argument("--slope-threshold", type=float, default=None,
                    help="Require slope to be steeper than this (e.g. -0.20) to enter")
+    p.add_argument("--rsi-entry", type=float, default=None, help="RSI entry threshold")
+    p.add_argument("--tp-r", type=float, default=None, help="Take Profit R-multiple")
+    p.add_argument("--sl-atr", type=float, default=None, help="Stop Loss ATR multiplier")
     return p.parse_args()
 
 
@@ -159,6 +162,24 @@ def main() -> int:
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
         print(f"[config] Slope Threshold overridden to: {args.slope_threshold}", flush=True)
+
+    # CLI override for RSI
+    if args.rsi_entry is not None:
+        if "filters" not in cfg:
+            cfg["filters"] = {}
+        cfg["filters"]["rsi_oversold"] = args.rsi_entry
+        print(f"[config] RSI Entry overridden to: {args.rsi_entry}", flush=True)
+
+    # CLI override for TP/SL
+    if args.tp_r is not None or args.sl_atr is not None:
+        if "brackets" not in cfg:
+            cfg["brackets"] = {}
+        if args.tp_r is not None:
+            cfg["brackets"]["take_profit_r"] = args.tp_r
+            print(f"[config] Take Profit R overridden to: {args.tp_r}", flush=True)
+        if args.sl_atr is not None:
+            cfg["brackets"]["atr_mult_sl"] = args.sl_atr
+            print(f"[config] Stop Loss ATR overridden to: {args.sl_atr}", flush=True)
 
     # Reference timeframe
     intervals = cfg.get("intervals") or ["15m"]

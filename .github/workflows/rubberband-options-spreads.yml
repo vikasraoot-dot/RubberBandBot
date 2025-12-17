@@ -106,7 +106,7 @@ jobs:
           
           # Get inputs with defaults
           $dryRun = if ("${{ github.event.inputs.dry_run }}" -ne "") { "${{ github.event.inputs.dry_run }}" } else { "0" }
-          $dte = if ("${{ github.event.inputs.dte }}" -ne "") { "${{ github.event.inputs.dte }}" } else { "3" }
+          $dte = if ("${{ github.event.inputs.dte }}" -ne "") { "${{ github.event.inputs.dte }}" } else { "6" }
           $slopeInput = "${{ github.event.inputs.slope_threshold }}"
           $slopeArg = if ($slopeInput -ne "") { "--slope-threshold $slopeInput" } else { "" }
           

@@ -94,7 +94,7 @@ jobs:
           echo "15-Minute Options Spread Backtest"
           echo "=========================================="
           echo "Period: ${{ github.event.inputs.days || '30' }} days"
-          echo "DTE: ${{ github.event.inputs.dte || '2' }}"
+          echo "DTE: ${{ github.event.inputs.dte || '6' }}"
           echo "Spread Width: ${{ github.event.inputs.spread_width || '1.5' }} ATR"
           echo "SMA Period: ${{ github.event.inputs.sma_period || '20' }}"
           echo "Max Debit: ${{ github.event.inputs.max_debit || '2.0' }}"
@@ -112,7 +112,7 @@ jobs:
             --config RubberBand/config.yaml \
             --tickers "${{ github.event.inputs.tickers || 'RubberBand/tickers_options.txt' }}" \
             --days "${{ github.event.inputs.days || '30' }}" \
-            --dte "${{ github.event.inputs.dte || '2' }}" \
+            --dte "${{ github.event.inputs.dte || '6' }}" \
             --spread-width "${{ github.event.inputs.spread_width || '1.5' }}" \
             --sma-period "${{ github.event.inputs.sma_period || '20' }}" \
             --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \

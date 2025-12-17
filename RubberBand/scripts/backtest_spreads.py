@@ -38,7 +38,7 @@ from RubberBand.strategy import attach_verifiers
 # Spread Simulation Parameters
 # ──────────────────────────────────────────────────────────────────────────────
 DEFAULT_OPTS = {
-    "dte": 3,                   # Days to expiration (matches live bot default)
+    "dte": 6,                   # Days to expiration (matches live bot default)
     "spread_width_atr": 1.5,    # OTM strike = ATM + this * ATR
     "max_debit": 2.00,          # Max $ per share for the spread (matches production)
     "contracts": 1,             # Contracts per trade
@@ -414,7 +414,7 @@ def main():
     ap.add_argument("--tickers", default="RubberBand/tickers.txt")
     ap.add_argument("--symbols", default="")
     ap.add_argument("--days", type=int, default=30)
-    ap.add_argument("--dte", type=int, default=3, help="Target days to expiration")
+    ap.add_argument("--dte", type=int, default=6, help="Target days to expiration")
     ap.add_argument("--min-dte", type=int, default=3, help="Minimum DTE (Thu/Fri roll to next week if < min_dte)")
     ap.add_argument("--spread-width", type=float, default=1.5, help="Spread width in ATR")
     ap.add_argument("--max-debit", type=float, default=1.0, help="Max debit per share")

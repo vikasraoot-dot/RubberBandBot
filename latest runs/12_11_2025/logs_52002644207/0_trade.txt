@@ -1,0 +1,739 @@
+﻿2025-12-11T14:48:18.6093405Z Current runner version: '2.329.0'
+2025-12-11T14:48:18.6115474Z ##[group]Runner Image Provisioner
+2025-12-11T14:48:18.6116220Z Hosted Compute Agent
+2025-12-11T14:48:18.6116897Z Version: 20251124.448
+2025-12-11T14:48:18.6117544Z Commit: fda5086b43ec66ade217e5fcd18146c879571177
+2025-12-11T14:48:18.6118207Z Build Date: 2025-11-24T21:16:26Z
+2025-12-11T14:48:18.6118923Z ##[endgroup]
+2025-12-11T14:48:18.6119693Z ##[group]Operating System
+2025-12-11T14:48:18.6120215Z Ubuntu
+2025-12-11T14:48:18.6120763Z 24.04.3
+2025-12-11T14:48:18.6121254Z LTS
+2025-12-11T14:48:18.6121657Z ##[endgroup]
+2025-12-11T14:48:18.6122221Z ##[group]Runner Image
+2025-12-11T14:48:18.6122770Z Image: ubuntu-24.04
+2025-12-11T14:48:18.6123234Z Version: 20251126.144.1
+2025-12-11T14:48:18.6124332Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251126.144/images/ubuntu/Ubuntu2404-Readme.md
+2025-12-11T14:48:18.6125928Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251126.144
+2025-12-11T14:48:18.6126971Z ##[endgroup]
+2025-12-11T14:48:18.6128025Z ##[group]GITHUB_TOKEN Permissions
+2025-12-11T14:48:18.6130103Z Contents: read
+2025-12-11T14:48:18.6130697Z Metadata: read
+2025-12-11T14:48:18.6131322Z Packages: read
+2025-12-11T14:48:18.6131810Z ##[endgroup]
+2025-12-11T14:48:18.6133867Z Secret source: Actions
+2025-12-11T14:48:18.6134636Z Prepare workflow directory
+2025-12-11T14:48:18.6513110Z Prepare all required actions
+2025-12-11T14:48:18.6567933Z Getting action download info
+2025-12-11T14:48:19.0398726Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+2025-12-11T14:48:19.1782308Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+2025-12-11T14:48:19.2972491Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-11T14:48:19.7722298Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-11T14:48:20.0058229Z Complete job name: trade
+2025-12-11T14:48:20.0823930Z ##[group]Run actions/checkout@v3
+2025-12-11T14:48:20.0825217Z with:
+2025-12-11T14:48:20.0826053Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:48:20.0827401Z   token: ***
+2025-12-11T14:48:20.0828157Z   ssh-strict: true
+2025-12-11T14:48:20.0828988Z   persist-credentials: true
+2025-12-11T14:48:20.0830062Z   clean: true
+2025-12-11T14:48:20.0830894Z   sparse-checkout-cone-mode: true
+2025-12-11T14:48:20.0831876Z   fetch-depth: 1
+2025-12-11T14:48:20.0832659Z   fetch-tags: false
+2025-12-11T14:48:20.0833448Z   lfs: false
+2025-12-11T14:48:20.0834198Z   submodules: false
+2025-12-11T14:48:20.0835020Z   set-safe-directory: true
+2025-12-11T14:48:20.0836139Z ##[endgroup]
+2025-12-11T14:48:20.1685921Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:48:20.1688763Z ##[group]Getting Git version info
+2025-12-11T14:48:20.1690511Z Working directory is '/home/runner/work/RubberBandBot/RubberBandBot'
+2025-12-11T14:48:20.1692520Z [command]/usr/bin/git version
+2025-12-11T14:48:20.1776589Z git version 2.52.0
+2025-12-11T14:48:20.1803857Z ##[endgroup]
+2025-12-11T14:48:20.1818420Z Temporarily overriding HOME='/home/runner/work/_temp/10332927-509d-49f5-9b36-48dd614ae4f4' before making global git config changes
+2025-12-11T14:48:20.1822352Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-11T14:48:20.1826121Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/RubberBandBot/RubberBandBot
+2025-12-11T14:48:20.1867450Z Deleting the contents of '/home/runner/work/RubberBandBot/RubberBandBot'
+2025-12-11T14:48:20.1871341Z ##[group]Initializing the repository
+2025-12-11T14:48:20.1873897Z [command]/usr/bin/git init /home/runner/work/RubberBandBot/RubberBandBot
+2025-12-11T14:48:20.1993319Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-12-11T14:48:20.1995781Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2025-12-11T14:48:20.1998698Z hint: to use in all of your new repositories, which will suppress this warning,
+2025-12-11T14:48:20.2000560Z hint: call:
+2025-12-11T14:48:20.2001400Z hint:
+2025-12-11T14:48:20.2002453Z hint: 	git config --global init.defaultBranch <name>
+2025-12-11T14:48:20.2003993Z hint:
+2025-12-11T14:48:20.2005252Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-12-11T14:48:20.2007550Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-12-11T14:48:20.2009230Z hint:
+2025-12-11T14:48:20.2010218Z hint: 	git branch -m <name>
+2025-12-11T14:48:20.2011078Z hint:
+2025-12-11T14:48:20.2012400Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-12-11T14:48:20.2014460Z Initialized empty Git repository in /home/runner/work/RubberBandBot/RubberBandBot/.git/
+2025-12-11T14:48:20.2017813Z [command]/usr/bin/git remote add origin https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-11T14:48:20.2045266Z ##[endgroup]
+2025-12-11T14:48:20.2046704Z ##[group]Disabling automatic garbage collection
+2025-12-11T14:48:20.2047937Z [command]/usr/bin/git config --local gc.auto 0
+2025-12-11T14:48:20.2073322Z ##[endgroup]
+2025-12-11T14:48:20.2074617Z ##[group]Setting up auth
+2025-12-11T14:48:20.2077937Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-11T14:48:20.2104173Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-11T14:48:20.2465042Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-11T14:48:20.2493350Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-11T14:48:20.2706710Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-12-11T14:48:20.2737824Z ##[endgroup]
+2025-12-11T14:48:20.2739202Z ##[group]Fetching the repository
+2025-12-11T14:48:20.2746210Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +fbacfd27d2fbd77d9b37bd4d48237c0e3d21271b:refs/remotes/origin/main
+2025-12-11T14:48:20.4971683Z remote: Enumerating objects: 211, done.        
+2025-12-11T14:48:20.4974565Z remote: Counting objects:   0% (1/211)        
+2025-12-11T14:48:20.4976276Z remote: Counting objects:   1% (3/211)        
+2025-12-11T14:48:20.4977749Z remote: Counting objects:   2% (5/211)        
+2025-12-11T14:48:20.4979204Z remote: Counting objects:   3% (7/211)        
+2025-12-11T14:48:20.4980932Z remote: Counting objects:   4% (9/211)        
+2025-12-11T14:48:20.4982503Z remote: Counting objects:   5% (11/211)        
+2025-12-11T14:48:20.4983985Z remote: Counting objects:   6% (13/211)        
+2025-12-11T14:48:20.4985463Z remote: Counting objects:   7% (15/211)        
+2025-12-11T14:48:20.4986657Z remote: Counting objects:   8% (17/211)        
+2025-12-11T14:48:20.4987790Z remote: Counting objects:   9% (19/211)        
+2025-12-11T14:48:20.4988916Z remote: Counting objects:  10% (22/211)        
+2025-12-11T14:48:20.4990168Z remote: Counting objects:  11% (24/211)        
+2025-12-11T14:48:20.4991310Z remote: Counting objects:  12% (26/211)        
+2025-12-11T14:48:20.4992710Z remote: Counting objects:  13% (28/211)        
+2025-12-11T14:48:20.4993960Z remote: Counting objects:  14% (30/211)        
+2025-12-11T14:48:20.4995259Z remote: Counting objects:  15% (32/211)        
+2025-12-11T14:48:20.4996408Z remote: Counting objects:  16% (34/211)        
+2025-12-11T14:48:20.4997550Z remote: Counting objects:  17% (36/211)        
+2025-12-11T14:48:20.4998695Z remote: Counting objects:  18% (38/211)        
+2025-12-11T14:48:20.4999945Z remote: Counting objects:  19% (41/211)        
+2025-12-11T14:48:20.5001100Z remote: Counting objects:  20% (43/211)        
+2025-12-11T14:48:20.5002501Z remote: Counting objects:  21% (45/211)        
+2025-12-11T14:48:20.5003648Z remote: Counting objects:  22% (47/211)        
+2025-12-11T14:48:20.5004768Z remote: Counting objects:  23% (49/211)        
+2025-12-11T14:48:20.5005898Z remote: Counting objects:  24% (51/211)        
+2025-12-11T14:48:20.5007031Z remote: Counting objects:  25% (53/211)        
+2025-12-11T14:48:20.5008170Z remote: Counting objects:  26% (55/211)        
+2025-12-11T14:48:20.5009295Z remote: Counting objects:  27% (57/211)        
+2025-12-11T14:48:20.5010638Z remote: Counting objects:  28% (60/211)        
+2025-12-11T14:48:20.5011785Z remote: Counting objects:  29% (62/211)        
+2025-12-11T14:48:20.5012911Z remote: Counting objects:  30% (64/211)        
+2025-12-11T14:48:20.5014047Z remote: Counting objects:  31% (66/211)        
+2025-12-11T14:48:20.5015202Z remote: Counting objects:  32% (68/211)        
+2025-12-11T14:48:20.5016338Z remote: Counting objects:  33% (70/211)        
+2025-12-11T14:48:20.5017491Z remote: Counting objects:  34% (72/211)        
+2025-12-11T14:48:20.5018638Z remote: Counting objects:  35% (74/211)        
+2025-12-11T14:48:20.5019867Z remote: Counting objects:  36% (76/211)        
+2025-12-11T14:48:20.5021003Z remote: Counting objects:  37% (79/211)        
+2025-12-11T14:48:20.5022136Z remote: Counting objects:  38% (81/211)        
+2025-12-11T14:48:20.5023296Z remote: Counting objects:  39% (83/211)        
+2025-12-11T14:48:20.5024437Z remote: Counting objects:  40% (85/211)        
+2025-12-11T14:48:20.5025563Z remote: Counting objects:  41% (87/211)        
+2025-12-11T14:48:20.5026695Z remote: Counting objects:  42% (89/211)        
+2025-12-11T14:48:20.5027831Z remote: Counting objects:  43% (91/211)        
+2025-12-11T14:48:20.5028962Z remote: Counting objects:  44% (93/211)        
+2025-12-11T14:48:20.5030192Z remote: Counting objects:  45% (95/211)        
+2025-12-11T14:48:20.5031325Z remote: Counting objects:  46% (98/211)        
+2025-12-11T14:48:20.5032468Z remote: Counting objects:  47% (100/211)        
+2025-12-11T14:48:20.5033769Z remote: Counting objects:  48% (102/211)        
+2025-12-11T14:48:20.5034975Z remote: Counting objects:  49% (104/211)        
+2025-12-11T14:48:20.5036123Z remote: Counting objects:  50% (106/211)        
+2025-12-11T14:48:20.5037253Z remote: Counting objects:  51% (108/211)        
+2025-12-11T14:48:20.5038383Z remote: Counting objects:  52% (110/211)        
+2025-12-11T14:48:20.5039622Z remote: Counting objects:  53% (112/211)        
+2025-12-11T14:48:20.5040757Z remote: Counting objects:  54% (114/211)        
+2025-12-11T14:48:20.5041884Z remote: Counting objects:  55% (117/211)        
+2025-12-11T14:48:20.5043029Z remote: Counting objects:  56% (119/211)        
+2025-12-11T14:48:20.5044169Z remote: Counting objects:  57% (121/211)        
+2025-12-11T14:48:20.5045314Z remote: Counting objects:  58% (123/211)        
+2025-12-11T14:48:20.5046447Z remote: Counting objects:  59% (125/211)        
+2025-12-11T14:48:20.5047563Z remote: Counting objects:  60% (127/211)        
+2025-12-11T14:48:20.5048742Z remote: Counting objects:  61% (129/211)        
+2025-12-11T14:48:20.5050029Z remote: Counting objects:  62% (131/211)        
+2025-12-11T14:48:20.5051142Z remote: Counting objects:  63% (133/211)        
+2025-12-11T14:48:20.5052283Z remote: Counting objects:  64% (136/211)        
+2025-12-11T14:48:20.5053403Z remote: Counting objects:  65% (138/211)        
+2025-12-11T14:48:20.5054529Z remote: Counting objects:  66% (140/211)        
+2025-12-11T14:48:20.5055641Z remote: Counting objects:  67% (142/211)        
+2025-12-11T14:48:20.5056757Z remote: Counting objects:  68% (144/211)        
+2025-12-11T14:48:20.5057885Z remote: Counting objects:  69% (146/211)        
+2025-12-11T14:48:20.5059007Z remote: Counting objects:  70% (148/211)        
+2025-12-11T14:48:20.5060261Z remote: Counting objects:  71% (150/211)        
+2025-12-11T14:48:20.5061380Z remote: Counting objects:  72% (152/211)        
+2025-12-11T14:48:20.5062490Z remote: Counting objects:  73% (155/211)        
+2025-12-11T14:48:20.5063768Z remote: Counting objects:  74% (157/211)        
+2025-12-11T14:48:20.5064889Z remote: Counting objects:  75% (159/211)        
+2025-12-11T14:48:20.5066007Z remote: Counting objects:  76% (161/211)        
+2025-12-11T14:48:20.5067126Z remote: Counting objects:  77% (163/211)        
+2025-12-11T14:48:20.5068249Z remote: Counting objects:  78% (165/211)        
+2025-12-11T14:48:20.5069489Z remote: Counting objects:  79% (167/211)        
+2025-12-11T14:48:20.5127037Z remote: Counting objects:  80% (169/211)        
+2025-12-11T14:48:20.5129673Z remote: Counting objects:  81% (171/211)        
+2025-12-11T14:48:20.5131688Z remote: Counting objects:  82% (174/211)        
+2025-12-11T14:48:20.5133406Z remote: Counting objects:  83% (176/211)        
+2025-12-11T14:48:20.5135063Z remote: Counting objects:  84% (178/211)        
+2025-12-11T14:48:20.5136384Z remote: Counting objects:  85% (180/211)        
+2025-12-11T14:48:20.5138017Z remote: Counting objects:  86% (182/211)        
+2025-12-11T14:48:20.5139997Z remote: Counting objects:  87% (184/211)        
+2025-12-11T14:48:20.5141708Z remote: Counting objects:  88% (186/211)        
+2025-12-11T14:48:20.5143619Z remote: Counting objects:  89% (188/211)        
+2025-12-11T14:48:20.5145096Z remote: Counting objects:  90% (190/211)        
+2025-12-11T14:48:20.5146358Z remote: Counting objects:  91% (193/211)        
+2025-12-11T14:48:20.5147486Z remote: Counting objects:  92% (195/211)        
+2025-12-11T14:48:20.5148764Z remote: Counting objects:  93% (197/211)        
+2025-12-11T14:48:20.5150033Z remote: Counting objects:  94% (199/211)        
+2025-12-11T14:48:20.5151170Z remote: Counting objects:  95% (201/211)        
+2025-12-11T14:48:20.5152332Z remote: Counting objects:  96% (203/211)        
+2025-12-11T14:48:20.5153469Z remote: Counting objects:  97% (205/211)        
+2025-12-11T14:48:20.5154610Z remote: Counting objects:  98% (207/211)        
+2025-12-11T14:48:20.5156145Z remote: Counting objects:  99% (209/211)        
+2025-12-11T14:48:20.5158123Z remote: Counting objects: 100% (211/211)        
+2025-12-11T14:48:20.5159592Z remote: Counting objects: 100% (211/211), done.        
+2025-12-11T14:48:20.5160823Z remote: Compressing objects:   0% (1/187)        
+2025-12-11T14:48:20.5162018Z remote: Compressing objects:   1% (2/187)        
+2025-12-11T14:48:20.5163191Z remote: Compressing objects:   2% (4/187)        
+2025-12-11T14:48:20.5164360Z remote: Compressing objects:   3% (6/187)        
+2025-12-11T14:48:20.5165503Z remote: Compressing objects:   4% (8/187)        
+2025-12-11T14:48:20.5166662Z remote: Compressing objects:   5% (10/187)        
+2025-12-11T14:48:20.5167985Z remote: Compressing objects:   6% (12/187)        
+2025-12-11T14:48:20.5169798Z remote: Compressing objects:   7% (14/187)        
+2025-12-11T14:48:20.5171422Z remote: Compressing objects:   8% (15/187)        
+2025-12-11T14:48:20.5172615Z remote: Compressing objects:   9% (17/187)        
+2025-12-11T14:48:20.5173791Z remote: Compressing objects:  10% (19/187)        
+2025-12-11T14:48:20.5175334Z remote: Compressing objects:  11% (21/187)        
+2025-12-11T14:48:20.5177123Z remote: Compressing objects:  12% (23/187)        
+2025-12-11T14:48:20.5178309Z remote: Compressing objects:  13% (25/187)        
+2025-12-11T14:48:20.5179643Z remote: Compressing objects:  14% (27/187)        
+2025-12-11T14:48:20.5180824Z remote: Compressing objects:  15% (29/187)        
+2025-12-11T14:48:20.5181991Z remote: Compressing objects:  16% (30/187)        
+2025-12-11T14:48:20.5183154Z remote: Compressing objects:  17% (32/187)        
+2025-12-11T14:48:20.5184311Z remote: Compressing objects:  18% (34/187)        
+2025-12-11T14:48:20.5185475Z remote: Compressing objects:  19% (36/187)        
+2025-12-11T14:48:20.5187203Z remote: Compressing objects:  20% (38/187)        
+2025-12-11T14:48:20.5188478Z remote: Compressing objects:  21% (40/187)        
+2025-12-11T14:48:20.5189820Z remote: Compressing objects:  22% (42/187)        
+2025-12-11T14:48:20.5190994Z remote: Compressing objects:  23% (44/187)        
+2025-12-11T14:48:20.5192414Z remote: Compressing objects:  24% (45/187)        
+2025-12-11T14:48:20.5194159Z remote: Compressing objects:  25% (47/187)        
+2025-12-11T14:48:20.5195482Z remote: Compressing objects:  26% (49/187)        
+2025-12-11T14:48:20.5196662Z remote: Compressing objects:  27% (51/187)        
+2025-12-11T14:48:20.5197829Z remote: Compressing objects:  28% (53/187)        
+2025-12-11T14:48:20.5199004Z remote: Compressing objects:  29% (55/187)        
+2025-12-11T14:48:20.5200293Z remote: Compressing objects:  30% (57/187)        
+2025-12-11T14:48:20.5201458Z remote: Compressing objects:  31% (58/187)        
+2025-12-11T14:48:20.5203245Z remote: Compressing objects:  32% (60/187)        
+2025-12-11T14:48:20.5204477Z remote: Compressing objects:  33% (62/187)        
+2025-12-11T14:48:20.5205651Z remote: Compressing objects:  34% (64/187)        
+2025-12-11T14:48:20.5206836Z remote: Compressing objects:  35% (66/187)        
+2025-12-11T14:48:20.5208003Z remote: Compressing objects:  36% (68/187)        
+2025-12-11T14:48:20.5209657Z remote: Compressing objects:  37% (70/187)        
+2025-12-11T14:48:20.5211149Z remote: Compressing objects:  38% (72/187)        
+2025-12-11T14:48:20.5212324Z remote: Compressing objects:  39% (73/187)        
+2025-12-11T14:48:20.5213490Z remote: Compressing objects:  40% (75/187)        
+2025-12-11T14:48:20.5282961Z remote: Compressing objects:  41% (77/187)        
+2025-12-11T14:48:20.5284486Z remote: Compressing objects:  42% (79/187)        
+2025-12-11T14:48:20.5285811Z remote: Compressing objects:  43% (81/187)        
+2025-12-11T14:48:20.5286969Z remote: Compressing objects:  44% (83/187)        
+2025-12-11T14:48:20.5288138Z remote: Compressing objects:  45% (85/187)        
+2025-12-11T14:48:20.5289302Z remote: Compressing objects:  46% (87/187)        
+2025-12-11T14:48:20.5290671Z remote: Compressing objects:  47% (88/187)        
+2025-12-11T14:48:20.5305683Z remote: Compressing objects:  48% (90/187)        
+2025-12-11T14:48:20.5309783Z remote: Compressing objects:  49% (92/187)        
+2025-12-11T14:48:20.5312175Z remote: Compressing objects:  50% (94/187)        
+2025-12-11T14:48:20.5316318Z remote: Compressing objects:  51% (96/187)        
+2025-12-11T14:48:20.5318117Z remote: Compressing objects:  52% (98/187)        
+2025-12-11T14:48:20.5320552Z remote: Compressing objects:  53% (100/187)        
+2025-12-11T14:48:20.5322063Z remote: Compressing objects:  54% (101/187)        
+2025-12-11T14:48:20.5324357Z remote: Compressing objects:  55% (103/187)        
+2025-12-11T14:48:20.5326167Z remote: Compressing objects:  56% (105/187)        
+2025-12-11T14:48:20.5335198Z remote: Compressing objects:  57% (107/187)        
+2025-12-11T14:48:20.5336947Z remote: Compressing objects:  58% (109/187)        
+2025-12-11T14:48:20.5338204Z remote: Compressing objects:  59% (111/187)        
+2025-12-11T14:48:20.5363577Z remote: Compressing objects:  60% (113/187)        
+2025-12-11T14:48:20.5365840Z remote: Compressing objects:  61% (115/187)        
+2025-12-11T14:48:20.5367372Z remote: Compressing objects:  62% (116/187)        
+2025-12-11T14:48:20.5463184Z remote: Compressing objects:  63% (118/187)        
+2025-12-11T14:48:20.5488044Z remote: Compressing objects:  64% (120/187)        
+2025-12-11T14:48:20.5492653Z remote: Compressing objects:  65% (122/187)        
+2025-12-11T14:48:20.5495143Z remote: Compressing objects:  66% (124/187)        
+2025-12-11T14:48:20.5499081Z remote: Compressing objects:  67% (126/187)        
+2025-12-11T14:48:20.5504259Z remote: Compressing objects:  68% (128/187)        
+2025-12-11T14:48:20.5507331Z remote: Compressing objects:  69% (130/187)        
+2025-12-11T14:48:20.5515396Z remote: Compressing objects:  70% (131/187)        
+2025-12-11T14:48:20.5517354Z remote: Compressing objects:  71% (133/187)        
+2025-12-11T14:48:20.5522283Z remote: Compressing objects:  72% (135/187)        
+2025-12-11T14:48:20.5524067Z remote: Compressing objects:  73% (137/187)        
+2025-12-11T14:48:20.5527969Z remote: Compressing objects:  74% (139/187)        
+2025-12-11T14:48:20.5529829Z remote: Compressing objects:  75% (141/187)        
+2025-12-11T14:48:20.5531145Z remote: Compressing objects:  76% (143/187)        
+2025-12-11T14:48:20.5543644Z remote: Compressing objects:  77% (144/187)        
+2025-12-11T14:48:20.5549922Z remote: Compressing objects:  78% (146/187)        
+2025-12-11T14:48:20.5555464Z remote: Compressing objects:  79% (148/187)        
+2025-12-11T14:48:20.5573788Z remote: Compressing objects:  80% (150/187)        
+2025-12-11T14:48:20.5590562Z remote: Compressing objects:  81% (152/187)        
+2025-12-11T14:48:20.5596280Z remote: Compressing objects:  82% (154/187)        
+2025-12-11T14:48:20.5598905Z remote: Compressing objects:  83% (156/187)        
+2025-12-11T14:48:20.5600822Z remote: Compressing objects:  84% (158/187)        
+2025-12-11T14:48:20.5604123Z remote: Compressing objects:  85% (159/187)        
+2025-12-11T14:48:20.5611225Z remote: Compressing objects:  86% (161/187)        
+2025-12-11T14:48:20.5613142Z remote: Compressing objects:  87% (163/187)        
+2025-12-11T14:48:20.5614491Z remote: Compressing objects:  88% (165/187)        
+2025-12-11T14:48:20.5615785Z remote: Compressing objects:  89% (167/187)        
+2025-12-11T14:48:20.5617091Z remote: Compressing objects:  90% (169/187)        
+2025-12-11T14:48:20.5618372Z remote: Compressing objects:  91% (171/187)        
+2025-12-11T14:48:20.5619844Z remote: Compressing objects:  92% (173/187)        
+2025-12-11T14:48:20.5621132Z remote: Compressing objects:  93% (174/187)        
+2025-12-11T14:48:20.5622420Z remote: Compressing objects:  94% (176/187)        
+2025-12-11T14:48:20.5623700Z remote: Compressing objects:  95% (178/187)        
+2025-12-11T14:48:20.5624978Z remote: Compressing objects:  96% (180/187)        
+2025-12-11T14:48:20.5626252Z remote: Compressing objects:  97% (182/187)        
+2025-12-11T14:48:20.5627484Z remote: Compressing objects:  98% (184/187)        
+2025-12-11T14:48:20.5628840Z remote: Compressing objects:  99% (186/187)        
+2025-12-11T14:48:20.5630732Z remote: Compressing objects: 100% (187/187)        
+2025-12-11T14:48:20.5633412Z remote: Compressing objects: 100% (187/187), done.        
+2025-12-11T14:48:20.5664678Z Receiving objects:   0% (1/211)
+2025-12-11T14:48:20.5666217Z Receiving objects:   1% (3/211)
+2025-12-11T14:48:20.5667752Z Receiving objects:   2% (5/211)
+2025-12-11T14:48:20.5669316Z Receiving objects:   3% (7/211)
+2025-12-11T14:48:20.5671490Z Receiving objects:   4% (9/211)
+2025-12-11T14:48:20.5672934Z Receiving objects:   5% (11/211)
+2025-12-11T14:48:20.5674353Z Receiving objects:   6% (13/211)
+2025-12-11T14:48:20.5675467Z Receiving objects:   7% (15/211)
+2025-12-11T14:48:20.5676966Z Receiving objects:   8% (17/211)
+2025-12-11T14:48:20.5678239Z Receiving objects:   9% (19/211)
+2025-12-11T14:48:20.5679174Z Receiving objects:  10% (22/211)
+2025-12-11T14:48:20.5680364Z Receiving objects:  11% (24/211)
+2025-12-11T14:48:20.5681293Z Receiving objects:  12% (26/211)
+2025-12-11T14:48:20.5682222Z Receiving objects:  13% (28/211)
+2025-12-11T14:48:20.5683544Z Receiving objects:  14% (30/211)
+2025-12-11T14:48:20.5686077Z Receiving objects:  15% (32/211)
+2025-12-11T14:48:20.5707296Z Receiving objects:  16% (34/211)
+2025-12-11T14:48:20.5717325Z Receiving objects:  17% (36/211)
+2025-12-11T14:48:20.5719041Z Receiving objects:  18% (38/211)
+2025-12-11T14:48:20.5720353Z Receiving objects:  19% (41/211)
+2025-12-11T14:48:20.5721318Z Receiving objects:  20% (43/211)
+2025-12-11T14:48:20.5823483Z Receiving objects:  21% (45/211)
+2025-12-11T14:48:20.5825534Z Receiving objects:  22% (47/211)
+2025-12-11T14:48:20.5826568Z Receiving objects:  23% (49/211)
+2025-12-11T14:48:20.5827553Z Receiving objects:  24% (51/211)
+2025-12-11T14:48:20.5828503Z Receiving objects:  25% (53/211)
+2025-12-11T14:48:20.5833857Z Receiving objects:  26% (55/211)
+2025-12-11T14:48:20.5845333Z Receiving objects:  27% (57/211)
+2025-12-11T14:48:20.5848204Z Receiving objects:  28% (60/211)
+2025-12-11T14:48:20.5850127Z Receiving objects:  29% (62/211)
+2025-12-11T14:48:20.5852501Z Receiving objects:  30% (64/211)
+2025-12-11T14:48:20.5857837Z Receiving objects:  31% (66/211)
+2025-12-11T14:48:20.5862151Z Receiving objects:  32% (68/211)
+2025-12-11T14:48:20.5865044Z Receiving objects:  33% (70/211)
+2025-12-11T14:48:20.5866775Z Receiving objects:  34% (72/211)
+2025-12-11T14:48:20.5869279Z Receiving objects:  35% (74/211)
+2025-12-11T14:48:20.5920048Z Receiving objects:  36% (76/211)
+2025-12-11T14:48:20.5921723Z Receiving objects:  37% (79/211)
+2025-12-11T14:48:20.5923461Z Receiving objects:  38% (81/211)
+2025-12-11T14:48:20.5924969Z Receiving objects:  39% (83/211)
+2025-12-11T14:48:20.5927841Z Receiving objects:  40% (85/211)
+2025-12-11T14:48:20.5960461Z Receiving objects:  41% (87/211)
+2025-12-11T14:48:20.5961868Z Receiving objects:  42% (89/211)
+2025-12-11T14:48:20.5963592Z Receiving objects:  43% (91/211)
+2025-12-11T14:48:20.5979003Z Receiving objects:  44% (93/211)
+2025-12-11T14:48:20.5988985Z Receiving objects:  45% (95/211)
+2025-12-11T14:48:20.5992238Z Receiving objects:  46% (98/211)
+2025-12-11T14:48:20.6001306Z Receiving objects:  47% (100/211)
+2025-12-11T14:48:20.6003017Z Receiving objects:  48% (102/211)
+2025-12-11T14:48:20.6004435Z Receiving objects:  49% (104/211)
+2025-12-11T14:48:20.6007395Z Receiving objects:  50% (106/211)
+2025-12-11T14:48:20.6009556Z Receiving objects:  51% (108/211)
+2025-12-11T14:48:20.6013916Z Receiving objects:  52% (110/211)
+2025-12-11T14:48:20.6016177Z Receiving objects:  53% (112/211)
+2025-12-11T14:48:20.6017912Z Receiving objects:  54% (114/211)
+2025-12-11T14:48:20.6019803Z Receiving objects:  55% (117/211)
+2025-12-11T14:48:20.6021790Z Receiving objects:  56% (119/211)
+2025-12-11T14:48:20.6023462Z Receiving objects:  57% (121/211)
+2025-12-11T14:48:20.6025180Z Receiving objects:  58% (123/211)
+2025-12-11T14:48:20.6026360Z Receiving objects:  59% (125/211)
+2025-12-11T14:48:20.6027495Z Receiving objects:  60% (127/211)
+2025-12-11T14:48:20.6028461Z Receiving objects:  61% (129/211)
+2025-12-11T14:48:20.6030356Z Receiving objects:  62% (131/211)
+2025-12-11T14:48:20.6036280Z Receiving objects:  63% (133/211)
+2025-12-11T14:48:20.6038915Z Receiving objects:  64% (136/211)
+2025-12-11T14:48:20.6040847Z Receiving objects:  65% (138/211)
+2025-12-11T14:48:20.6042519Z Receiving objects:  66% (140/211)
+2025-12-11T14:48:20.6044268Z Receiving objects:  67% (142/211)
+2025-12-11T14:48:20.6045973Z Receiving objects:  68% (144/211)
+2025-12-11T14:48:20.6047627Z Receiving objects:  69% (146/211)
+2025-12-11T14:48:20.6086329Z Receiving objects:  70% (148/211)
+2025-12-11T14:48:20.6111668Z Receiving objects:  71% (150/211)
+2025-12-11T14:48:20.6211308Z Receiving objects:  72% (152/211)
+2025-12-11T14:48:20.6213068Z Receiving objects:  73% (155/211)
+2025-12-11T14:48:20.6215015Z Receiving objects:  74% (157/211)
+2025-12-11T14:48:20.6225312Z Receiving objects:  75% (159/211)
+2025-12-11T14:48:20.6226974Z Receiving objects:  76% (161/211)
+2025-12-11T14:48:20.6230880Z Receiving objects:  77% (163/211)
+2025-12-11T14:48:20.6238136Z Receiving objects:  78% (165/211)
+2025-12-11T14:48:20.6240158Z Receiving objects:  79% (167/211)
+2025-12-11T14:48:20.6241509Z Receiving objects:  80% (169/211)
+2025-12-11T14:48:20.6290139Z Receiving objects:  81% (171/211)
+2025-12-11T14:48:20.6297459Z Receiving objects:  82% (174/211)
+2025-12-11T14:48:20.6312481Z Receiving objects:  83% (176/211)
+2025-12-11T14:48:20.6316051Z Receiving objects:  84% (178/211)
+2025-12-11T14:48:20.6317925Z Receiving objects:  85% (180/211)
+2025-12-11T14:48:20.6319903Z Receiving objects:  86% (182/211)
+2025-12-11T14:48:20.6321421Z Receiving objects:  87% (184/211)
+2025-12-11T14:48:20.6322540Z Receiving objects:  88% (186/211)
+2025-12-11T14:48:20.6327525Z Receiving objects:  89% (188/211)
+2025-12-11T14:48:20.6350972Z Receiving objects:  90% (190/211)
+2025-12-11T14:48:20.6352896Z Receiving objects:  91% (193/211)
+2025-12-11T14:48:20.6354560Z Receiving objects:  92% (195/211)
+2025-12-11T14:48:20.6355870Z Receiving objects:  93% (197/211)
+2025-12-11T14:48:20.6358587Z Receiving objects:  94% (199/211)
+2025-12-11T14:48:20.6360580Z Receiving objects:  95% (201/211)
+2025-12-11T14:48:20.6438737Z Receiving objects:  96% (203/211)
+2025-12-11T14:48:20.6442475Z remote: Total 211 (delta 21), reused 145 (delta 10), pack-reused 0 (from 0)        
+2025-12-11T14:48:20.6458439Z Receiving objects:  97% (205/211)
+2025-12-11T14:48:20.6464955Z Receiving objects:  98% (207/211)
+2025-12-11T14:48:20.6473898Z Receiving objects:  99% (209/211)
+2025-12-11T14:48:20.6475888Z Receiving objects: 100% (211/211)
+2025-12-11T14:48:20.6478560Z Receiving objects: 100% (211/211), 1.19 MiB | 14.67 MiB/s, done.
+2025-12-11T14:48:20.6482298Z Resolving deltas:   0% (0/21)
+2025-12-11T14:48:20.6483951Z Resolving deltas:   4% (1/21)
+2025-12-11T14:48:20.6485513Z Resolving deltas:   9% (2/21)
+2025-12-11T14:48:20.6487153Z Resolving deltas:  14% (3/21)
+2025-12-11T14:48:20.6488813Z Resolving deltas:  19% (4/21)
+2025-12-11T14:48:20.6490606Z Resolving deltas:  23% (5/21)
+2025-12-11T14:48:20.6492173Z Resolving deltas:  28% (6/21)
+2025-12-11T14:48:20.6493672Z Resolving deltas:  33% (7/21)
+2025-12-11T14:48:20.6495506Z Resolving deltas:  38% (8/21)
+2025-12-11T14:48:20.6497641Z Resolving deltas:  42% (9/21)
+2025-12-11T14:48:20.6500814Z Resolving deltas:  47% (10/21)
+2025-12-11T14:48:20.6503026Z Resolving deltas:  52% (11/21)
+2025-12-11T14:48:20.6504633Z Resolving deltas:  57% (12/21)
+2025-12-11T14:48:20.6505595Z Resolving deltas:  61% (13/21)
+2025-12-11T14:48:20.6506512Z Resolving deltas:  66% (14/21)
+2025-12-11T14:48:20.6507452Z Resolving deltas:  71% (15/21)
+2025-12-11T14:48:20.6508355Z Resolving deltas:  76% (16/21)
+2025-12-11T14:48:20.6509250Z Resolving deltas:  80% (17/21)
+2025-12-11T14:48:20.6510466Z Resolving deltas:  85% (18/21)
+2025-12-11T14:48:20.6511371Z Resolving deltas:  90% (19/21)
+2025-12-11T14:48:20.6606418Z Resolving deltas:  95% (20/21)
+2025-12-11T14:48:20.6608250Z Resolving deltas: 100% (21/21)
+2025-12-11T14:48:20.6610056Z Resolving deltas: 100% (21/21), done.
+2025-12-11T14:48:20.6772606Z From https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-11T14:48:20.6777135Z  * [new ref]         fbacfd27d2fbd77d9b37bd4d48237c0e3d21271b -> origin/main
+2025-12-11T14:48:20.6813962Z ##[endgroup]
+2025-12-11T14:48:20.6816270Z ##[group]Determining the checkout info
+2025-12-11T14:48:20.6819102Z ##[endgroup]
+2025-12-11T14:48:20.6821750Z ##[group]Checking out the ref
+2025-12-11T14:48:20.6824401Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-12-11T14:48:20.7124755Z Switched to a new branch 'main'
+2025-12-11T14:48:20.7127358Z branch 'main' set up to track 'origin/main'.
+2025-12-11T14:48:20.7137001Z ##[endgroup]
+2025-12-11T14:48:20.7168798Z [command]/usr/bin/git log -1 --format='%H'
+2025-12-11T14:48:20.7189843Z 'fbacfd27d2fbd77d9b37bd4d48237c0e3d21271b'
+2025-12-11T14:48:20.7453916Z ##[group]Run actions/setup-python@v4
+2025-12-11T14:48:20.7454902Z with:
+2025-12-11T14:48:20.7455600Z   python-version: 3.10
+2025-12-11T14:48:20.7456416Z   check-latest: false
+2025-12-11T14:48:20.7457445Z   token: ***
+2025-12-11T14:48:20.7458196Z   update-environment: true
+2025-12-11T14:48:20.7459099Z   allow-prereleases: false
+2025-12-11T14:48:20.7460108Z ##[endgroup]
+2025-12-11T14:48:20.9243153Z ##[group]Installed versions
+2025-12-11T14:48:20.9356276Z Successfully set up CPython (3.10.19)
+2025-12-11T14:48:20.9359071Z ##[endgroup]
+2025-12-11T14:48:20.9494771Z ##[group]Run python -m pip install --upgrade pip
+2025-12-11T14:48:20.9496080Z [36;1mpython -m pip install --upgrade pip[0m
+2025-12-11T14:48:20.9497742Z [36;1mif [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi[0m
+2025-12-11T14:48:20.9499749Z [36;1mpip install pandas requests pyyaml numpy alpaca-trade-api[0m
+2025-12-11T14:48:20.9546495Z shell: /usr/bin/bash -e {0}
+2025-12-11T14:48:20.9547372Z env:
+2025-12-11T14:48:20.9548263Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:20.9549917Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T14:48:20.9551390Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:20.9552992Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:20.9554332Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:20.9555658Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T14:48:20.9556815Z ##[endgroup]
+2025-12-11T14:48:22.8166920Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (25.3)
+2025-12-11T14:48:23.6734423Z Collecting pandas>=2.2 (from -r RubberBand/requirements.txt (line 1))
+2025-12-11T14:48:23.7363714Z   Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+2025-12-11T14:48:24.0256178Z Collecting numpy>=1.26 (from -r RubberBand/requirements.txt (line 2))
+2025-12-11T14:48:24.0295922Z   Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+2025-12-11T14:48:24.0644768Z Collecting requests>=2.31 (from -r RubberBand/requirements.txt (line 3))
+2025-12-11T14:48:24.0684220Z   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+2025-12-11T14:48:24.1186608Z Collecting pyyaml>=6.0 (from -r RubberBand/requirements.txt (line 4))
+2025-12-11T14:48:24.1232149Z   Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+2025-12-11T14:48:24.1650650Z Collecting pytz>=2024.1 (from -r RubberBand/requirements.txt (line 5))
+2025-12-11T14:48:24.1686751Z   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+2025-12-11T14:48:24.1921825Z Collecting python-dateutil>=2.8.2 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-11T14:48:24.1958442Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+2025-12-11T14:48:24.2166075Z Collecting tzdata>=2022.7 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-11T14:48:24.2201360Z   Downloading tzdata-2025.2-py2.py3-none-any.whl.metadata (1.4 kB)
+2025-12-11T14:48:24.3418684Z Collecting charset_normalizer<4,>=2 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-11T14:48:24.3469922Z   Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+2025-12-11T14:48:24.3643742Z Collecting idna<4,>=2.5 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-11T14:48:24.3689958Z   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+2025-12-11T14:48:24.4019002Z Collecting urllib3<3,>=1.21.1 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-11T14:48:24.4052770Z   Downloading urllib3-2.6.1-py3-none-any.whl.metadata (6.6 kB)
+2025-12-11T14:48:24.4305412Z Collecting certifi>=2017.4.17 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+2025-12-11T14:48:24.4347283Z   Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+2025-12-11T14:48:24.4524175Z Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+2025-12-11T14:48:24.4558904Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+2025-12-11T14:48:24.4638396Z Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+2025-12-11T14:48:24.5420369Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.8/12.8 MB 177.0 MB/s  0:00:00
+2025-12-11T14:48:24.5455357Z Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+2025-12-11T14:48:24.6072339Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.8/16.8 MB 279.9 MB/s  0:00:00
+2025-12-11T14:48:24.6114422Z Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+2025-12-11T14:48:24.6173476Z Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+2025-12-11T14:48:24.6233602Z Downloading idna-3.11-py3-none-any.whl (71 kB)
+2025-12-11T14:48:24.6289684Z Downloading urllib3-2.6.1-py3-none-any.whl (131 kB)
+2025-12-11T14:48:24.6361520Z Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+2025-12-11T14:48:24.6431359Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 770.3/770.3 kB 124.0 MB/s  0:00:00
+2025-12-11T14:48:24.6471908Z Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+2025-12-11T14:48:24.6564829Z Downloading certifi-2025.11.12-py3-none-any.whl (159 kB)
+2025-12-11T14:48:24.6644973Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+2025-12-11T14:48:24.6718306Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+2025-12-11T14:48:24.6775468Z Downloading tzdata-2025.2-py2.py3-none-any.whl (347 kB)
+2025-12-11T14:48:24.8289740Z Installing collected packages: pytz, urllib3, tzdata, six, pyyaml, numpy, idna, charset_normalizer, certifi, requests, python-dateutil, pandas
+2025-12-11T14:48:30.9251928Z 
+2025-12-11T14:48:30.9280638Z Successfully installed certifi-2025.11.12 charset_normalizer-3.4.4 idna-3.11 numpy-2.2.6 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2025.2 pyyaml-6.0.3 requests-2.32.5 six-1.17.0 tzdata-2025.2 urllib3-2.6.1
+2025-12-11T14:48:31.3560575Z Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.3.3)
+2025-12-11T14:48:31.3563927Z Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.32.5)
+2025-12-11T14:48:31.3567174Z Requirement already satisfied: pyyaml in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (6.0.3)
+2025-12-11T14:48:31.3572526Z Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.2.6)
+2025-12-11T14:48:31.4454837Z Collecting alpaca-trade-api
+2025-12-11T14:48:31.4994152Z   Downloading alpaca_trade_api-3.2.0-py3-none-any.whl.metadata (29 kB)
+2025-12-11T14:48:31.5453460Z Requirement already satisfied: python-dateutil>=2.8.2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+2025-12-11T14:48:31.5458946Z Requirement already satisfied: pytz>=2020.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+2025-12-11T14:48:31.5464746Z Requirement already satisfied: tzdata>=2022.7 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+2025-12-11T14:48:31.5485382Z Requirement already satisfied: charset_normalizer<4,>=2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.4.4)
+2025-12-11T14:48:31.5491499Z Requirement already satisfied: idna<4,>=2.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.11)
+2025-12-11T14:48:31.5497423Z Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2.6.1)
+2025-12-11T14:48:31.5503002Z Requirement already satisfied: certifi>=2017.4.17 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2025.11.12)
+2025-12-11T14:48:31.5968784Z Collecting urllib3<3,>=1.21.1 (from requests)
+2025-12-11T14:48:31.6007947Z   Downloading urllib3-1.26.20-py2.py3-none-any.whl.metadata (50 kB)
+2025-12-11T14:48:31.6395350Z Collecting websocket-client<2,>=0.56.0 (from alpaca-trade-api)
+2025-12-11T14:48:31.6427873Z   Downloading websocket_client-1.9.0-py3-none-any.whl.metadata (8.3 kB)
+2025-12-11T14:48:31.7623921Z Collecting websockets<11,>=9.0 (from alpaca-trade-api)
+2025-12-11T14:48:31.7658452Z   Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.4 kB)
+2025-12-11T14:48:31.8456482Z Collecting msgpack==1.0.3 (from alpaca-trade-api)
+2025-12-11T14:48:31.8492059Z   Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.7 kB)
+2025-12-11T14:48:32.4788695Z Collecting aiohttp<4,>=3.8.3 (from alpaca-trade-api)
+2025-12-11T14:48:32.4834025Z   Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+2025-12-11T14:48:32.5291556Z Collecting pyyaml
+2025-12-11T14:48:32.5325078Z   Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+2025-12-11T14:48:32.5439536Z Collecting deprecation==2.1.0 (from alpaca-trade-api)
+2025-12-11T14:48:32.5474749Z   Downloading deprecation-2.1.0-py2.py3-none-any.whl.metadata (4.6 kB)
+2025-12-11T14:48:32.5691769Z Collecting packaging (from deprecation==2.1.0->alpaca-trade-api)
+2025-12-11T14:48:32.5725289Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-12-11T14:48:32.5901036Z Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:32.5933472Z   Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+2025-12-11T14:48:32.6038110Z Collecting aiosignal>=1.4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:32.6070323Z   Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+2025-12-11T14:48:32.6210142Z Collecting async-timeout<6.0,>=4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:32.6245651Z   Downloading async_timeout-5.0.1-py3-none-any.whl.metadata (5.1 kB)
+2025-12-11T14:48:32.6423546Z Collecting attrs>=17.3.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:32.6455830Z   Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+2025-12-11T14:48:32.7283099Z Collecting frozenlist>=1.1.1 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:32.7321524Z   Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+2025-12-11T14:48:33.0463238Z Collecting multidict<7.0,>=4.5 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:33.0503223Z   Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+2025-12-11T14:48:33.1175006Z Collecting propcache>=0.2.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:33.1213478Z   Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+2025-12-11T14:48:33.4752718Z Collecting yarl<2.0,>=1.17.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:33.4795179Z   Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (75 kB)
+2025-12-11T14:48:33.5053126Z Collecting typing-extensions>=4.1.0 (from multidict<7.0,>=4.5->aiohttp<4,>=3.8.3->alpaca-trade-api)
+2025-12-11T14:48:33.5085960Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2025-12-11T14:48:33.5449229Z Requirement already satisfied: six>=1.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+2025-12-11T14:48:33.5533897Z Downloading alpaca_trade_api-3.2.0-py3-none-any.whl (34 kB)
+2025-12-11T14:48:33.5597735Z Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (705 kB)
+2025-12-11T14:48:33.5683104Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 705.5/705.5 kB 82.3 MB/s  0:00:00
+2025-12-11T14:48:33.5718854Z Downloading deprecation-2.1.0-py2.py3-none-any.whl (11 kB)
+2025-12-11T14:48:33.5780901Z Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (323 kB)
+2025-12-11T14:48:33.5860056Z Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+2025-12-11T14:48:33.5974300Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.7/1.7 MB 153.6 MB/s  0:00:00
+2025-12-11T14:48:33.6008833Z Downloading async_timeout-5.0.1-py3-none-any.whl (6.2 kB)
+2025-12-11T14:48:33.6066298Z Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (241 kB)
+2025-12-11T14:48:33.6134485Z Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+2025-12-11T14:48:33.6194375Z Downloading websocket_client-1.9.0-py3-none-any.whl (82 kB)
+2025-12-11T14:48:33.6251942Z Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (106 kB)
+2025-12-11T14:48:33.6310289Z Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (346 kB)
+2025-12-11T14:48:33.6376173Z Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+2025-12-11T14:48:33.6430075Z Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+2025-12-11T14:48:33.6484455Z Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+2025-12-11T14:48:33.6540555Z Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (219 kB)
+2025-12-11T14:48:33.6601814Z Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (196 kB)
+2025-12-11T14:48:33.6663195Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2025-12-11T14:48:33.6720355Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
+2025-12-11T14:48:33.7343217Z Installing collected packages: msgpack, websockets, websocket-client, urllib3, typing-extensions, pyyaml, propcache, packaging, frozenlist, attrs, async-timeout, aiohappyeyeballs, multidict, deprecation, aiosignal, yarl, aiohttp, alpaca-trade-api
+2025-12-11T14:48:33.8556199Z   Attempting uninstall: urllib3
+2025-12-11T14:48:33.8563307Z     Found existing installation: urllib3 2.6.1
+2025-12-11T14:48:33.8612707Z     Uninstalling urllib3-2.6.1:
+2025-12-11T14:48:33.8625298Z       Successfully uninstalled urllib3-2.6.1
+2025-12-11T14:48:33.9564236Z   Attempting uninstall: pyyaml
+2025-12-11T14:48:33.9571887Z     Found existing installation: PyYAML 6.0.3
+2025-12-11T14:48:33.9604504Z     Uninstalling PyYAML-6.0.3:
+2025-12-11T14:48:33.9615779Z       Successfully uninstalled PyYAML-6.0.3
+2025-12-11T14:48:34.3494735Z 
+2025-12-11T14:48:34.3544138Z Successfully installed aiohappyeyeballs-2.6.1 aiohttp-3.13.2 aiosignal-1.4.0 alpaca-trade-api-3.2.0 async-timeout-5.0.1 attrs-25.4.0 deprecation-2.1.0 frozenlist-1.8.0 msgpack-1.0.3 multidict-6.7.0 packaging-25.0 propcache-0.4.1 pyyaml-6.0.1 typing-extensions-4.15.0 urllib3-1.26.20 websocket-client-1.9.0 websockets-10.4 yarl-1.22.0
+2025-12-11T14:48:34.6048834Z ##[group]Run actions/download-artifact@v4
+2025-12-11T14:48:34.6049152Z with:
+2025-12-11T14:48:34.6049549Z   name: position-registry-WK_OPT
+2025-12-11T14:48:34.6049823Z   path: .position_registry/
+2025-12-11T14:48:34.6050058Z   merge-multiple: false
+2025-12-11T14:48:34.6050290Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-11T14:48:34.6050550Z   run-id: 20137097619
+2025-12-11T14:48:34.6050741Z env:
+2025-12-11T14:48:34.6050969Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.6051373Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T14:48:34.6051770Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.6052116Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.6052455Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.6052800Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T14:48:34.6053108Z ##[endgroup]
+2025-12-11T14:48:34.8004349Z Downloading single artifact
+2025-12-11T14:48:34.9679641Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-WK_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-11T14:48:34.9787434Z ##[group]Run # Scheduled runs = LIVE, Manual runs = whatever is specified (default simulation)
+2025-12-11T14:48:34.9788075Z [36;1m# Scheduled runs = LIVE, Manual runs = whatever is specified (default simulation)[0m
+2025-12-11T14:48:34.9788473Z [36;1mif [ "schedule" = "schedule" ]; then[0m
+2025-12-11T14:48:34.9788755Z [36;1m  DRY_RUN=0  # Scheduled runs are LIVE[0m
+2025-12-11T14:48:34.9789006Z [36;1melse[0m
+2025-12-11T14:48:34.9789224Z [36;1m  DRY_RUN=1  # Manual default to simulation[0m
+2025-12-11T14:48:34.9789969Z [36;1mfi[0m
+2025-12-11T14:48:34.9790156Z [36;1mMAX_PREMIUM=2000[0m
+2025-12-11T14:48:34.9790370Z [36;1mMODE=full[0m
+2025-12-11T14:48:34.9790550Z [36;1m[0m
+2025-12-11T14:48:34.9790742Z [36;1m# Use Eastern timezone for logging[0m
+2025-12-11T14:48:34.9791103Z [36;1mDAY_OF_WEEK=$(TZ=America/New_York date +%u)  # 1=Monday, 2=Tuesday, etc.[0m
+2025-12-11T14:48:34.9791431Z [36;1m[0m
+2025-12-11T14:48:34.9791749Z [36;1m# ALWAYS run in FULL mode (scan + trade) unless manually set to monitor[0m
+2025-12-11T14:48:34.9792119Z [36;1mif [ "$MODE" = "full" ] || [ "$MODE" = "auto" ]; then[0m
+2025-12-11T14:48:34.9792401Z [36;1m  RUN_MODE="full"[0m
+2025-12-11T14:48:34.9792607Z [36;1melse[0m
+2025-12-11T14:48:34.9792786Z [36;1m  RUN_MODE="$MODE"[0m
+2025-12-11T14:48:34.9792983Z [36;1mfi[0m
+2025-12-11T14:48:34.9793151Z [36;1m[0m
+2025-12-11T14:48:34.9793353Z [36;1mecho "========================================"[0m
+2025-12-11T14:48:34.9793649Z [36;1mecho "Weekly Options V3 Live Trading"[0m
+2025-12-11T14:48:34.9793939Z [36;1mecho "========================================"[0m
+2025-12-11T14:48:34.9794212Z [36;1mecho "Day of Week: $DAY_OF_WEEK"[0m
+2025-12-11T14:48:34.9794461Z [36;1mecho "Run Mode: $RUN_MODE"[0m
+2025-12-11T14:48:34.9794697Z [36;1mecho "Dry Run: $DRY_RUN"[0m
+2025-12-11T14:48:34.9794942Z [36;1mecho "Max Premium: $MAX_PREMIUM"[0m
+2025-12-11T14:48:34.9795206Z [36;1mecho "Strategy: Delta 0.65, 45-DTE"[0m
+2025-12-11T14:48:34.9795484Z [36;1mecho "========================================"[0m
+2025-12-11T14:48:34.9795730Z [36;1m[0m
+2025-12-11T14:48:34.9795909Z [36;1mif [ "$RUN_MODE" = "monitor" ]; then[0m
+2025-12-11T14:48:34.9796240Z [36;1m  echo "📊 MONITOR MODE: Checking positions for exits only"[0m
+2025-12-11T14:48:34.9796635Z [36;1m  python RubberBand/scripts/live_weekly_options_loop.py \[0m
+2025-12-11T14:48:34.9796956Z [36;1m    --dry-run $DRY_RUN \[0m
+2025-12-11T14:48:34.9797197Z [36;1m    --max-premium $MAX_PREMIUM \[0m
+2025-12-11T14:48:34.9797455Z [36;1m    --monitor-only[0m
+2025-12-11T14:48:34.9797664Z [36;1melse[0m
+2025-12-11T14:48:34.9797914Z [36;1m  echo "🚀 FULL MODE: Scanning for signals + managing positions"[0m
+2025-12-11T14:48:34.9798308Z [36;1m  python RubberBand/scripts/live_weekly_options_loop.py \[0m
+2025-12-11T14:48:34.9798621Z [36;1m    --dry-run $DRY_RUN \[0m
+2025-12-11T14:48:34.9798854Z [36;1m    --max-premium $MAX_PREMIUM[0m
+2025-12-11T14:48:34.9799086Z [36;1mfi[0m
+2025-12-11T14:48:34.9834466Z shell: /usr/bin/bash -e {0}
+2025-12-11T14:48:34.9834703Z env:
+2025-12-11T14:48:34.9834956Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.9835356Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T14:48:34.9835759Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.9836118Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.9836482Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:34.9836848Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T14:48:34.9837436Z   APCA_API_KEY_ID: ***
+2025-12-11T14:48:34.9837743Z   APCA_API_SECRET_KEY: ***
+2025-12-11T14:48:34.9838034Z   APCA_API_BASE_URL: https://paper-api.alpaca.markets
+2025-12-11T14:48:34.9838322Z ##[endgroup]
+2025-12-11T14:48:34.9941262Z ========================================
+2025-12-11T14:48:34.9941743Z Weekly Options V3 Live Trading
+2025-12-11T14:48:34.9942252Z ========================================
+2025-12-11T14:48:34.9942541Z Day of Week: 4
+2025-12-11T14:48:34.9942750Z Run Mode: full
+2025-12-11T14:48:34.9942961Z Dry Run: 0
+2025-12-11T14:48:34.9943168Z Max Premium: 2000
+2025-12-11T14:48:34.9943402Z Strategy: Delta 0.65, 45-DTE
+2025-12-11T14:48:34.9943664Z ========================================
+2025-12-11T14:48:34.9944260Z 🚀 FULL MODE: Scanning for signals + managing positions
+2025-12-11T14:48:35.5479755Z {"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":55,"type":"HEARTBEAT","ts":"2025-12-11T14:48:35Z","ts_et":"2025-12-11 09:48:35 ET"}
+2025-12-11T14:48:35.5481465Z {"ts": "2025-12-11T09:48:35.547711-05:00", "msg": "Weekly Options V3 Started", "tickers": 55}
+2025-12-11T14:48:36.2749702Z {"ts": "2025-12-11T09:48:36.274630-05:00", "msg": "Starting weekly options scan", "dry_run": false, "monitor_only": false, "max_premium": 2000.0, "target_delta": 0.65, "bot_tag": "WK_OPT", "registry_positions": 0}
+2025-12-11T14:48:36.3603384Z {"ts": "2025-12-11T09:48:36.360109-05:00", "msg": "Managing 2 weekly option positions"}
+2025-12-11T14:48:36.8873156Z {"event":"positions_checked","all_positions":2,"my_positions":0,"my_underlyings":[],"type":"HEARTBEAT","ts":"2025-12-11T14:48:36Z","ts_et":"2025-12-11 09:48:36 ET"}
+2025-12-11T14:48:36.8874876Z {"ts": "2025-12-11T09:48:36.887112-05:00", "msg": "Positions: 0 mine / 2 total", "my_underlyings": [], "bot_tag": "WK_OPT"}
+2025-12-11T14:48:43.8782859Z {"ts": "2025-12-11T09:48:43.878098-05:00", "msg": "Found 0 weekly signals", "signals": []}
+2025-12-11T14:48:43.8785445Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":0,"type":"HEARTBEAT","ts":"2025-12-11T14:48:43Z","ts_et":"2025-12-11 09:48:43 ET"}
+2025-12-11T14:48:43.8786405Z {"ts": "2025-12-11T09:48:43.878443-05:00", "msg": "Weekly options scan complete", "signals": 0, "new_entries": 0, "total_positions": 0}
+2025-12-11T14:48:43.8788529Z {"ts": "2025-12-11T09:48:43.878761-05:00", "msg": "\n=== Weekly Options Session Summary ==="}
+2025-12-11T14:48:43.9639176Z {"ts": "2025-12-11T09:48:43.963757-05:00", "msg": "No trades filled today for WK_OPT."}
+2025-12-11T14:48:43.9640125Z {"ts": "2025-12-11T09:48:43.963796-05:00", "msg": "=== End Summary ==="}
+2025-12-11T14:48:44.0173488Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T14:48:44.0173783Z with:
+2025-12-11T14:48:44.0173988Z   name: weekly-options-trades-20137097619
+2025-12-11T14:48:44.0174283Z   path: results/weekly_options_trades_*.json
+2025-12-11T14:48:44.0174561Z   if-no-files-found: warn
+2025-12-11T14:48:44.0174792Z   compression-level: 6
+2025-12-11T14:48:44.0174999Z   overwrite: false
+2025-12-11T14:48:44.0175202Z   include-hidden-files: false
+2025-12-11T14:48:44.0175412Z env:
+2025-12-11T14:48:44.0175643Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.0176056Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T14:48:44.0176445Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.0176788Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.0177137Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.0177521Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T14:48:44.0177820Z ##[endgroup]
+2025-12-11T14:48:44.2291738Z With the provided path, there will be 1 file uploaded
+2025-12-11T14:48:44.2297811Z Artifact name is valid!
+2025-12-11T14:48:44.2298813Z Root directory input is valid!
+2025-12-11T14:48:44.4024785Z Beginning upload of artifact content to blob storage
+2025-12-11T14:48:44.5274589Z Uploaded bytes 204
+2025-12-11T14:48:44.5606231Z Finished uploading artifact content to blob storage!
+2025-12-11T14:48:44.5609550Z SHA256 digest of uploaded artifact zip is 7857e47fa0eaa7859e0c70f830dacfd979131f7586eb1a80bddd5db0049f7843
+2025-12-11T14:48:44.5611536Z Finalizing artifact upload
+2025-12-11T14:48:44.7806673Z Artifact weekly-options-trades-20137097619.zip successfully finalized. Artifact ID 4838848713
+2025-12-11T14:48:44.7808315Z Artifact weekly-options-trades-20137097619 has been successfully uploaded! Final size is 204 bytes. Artifact ID is 4838848713
+2025-12-11T14:48:44.7816029Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20137097619/artifacts/4838848713
+2025-12-11T14:48:44.7925720Z ##[group]Run actions/upload-artifact@v4
+2025-12-11T14:48:44.7926011Z with:
+2025-12-11T14:48:44.7926206Z   name: position-registry-WK_OPT
+2025-12-11T14:48:44.7926488Z   path: .position_registry/WK_OPT_positions.json
+2025-12-11T14:48:44.7926950Z   if-no-files-found: warn
+2025-12-11T14:48:44.7927168Z   retention-days: 90
+2025-12-11T14:48:44.7927364Z   overwrite: true
+2025-12-11T14:48:44.7927559Z   compression-level: 6
+2025-12-11T14:48:44.7927768Z   include-hidden-files: false
+2025-12-11T14:48:44.7927987Z env:
+2025-12-11T14:48:44.7928226Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.7928627Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+2025-12-11T14:48:44.7929027Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.7929661Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.7930028Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+2025-12-11T14:48:44.7930428Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+2025-12-11T14:48:44.7930725Z ##[endgroup]
+2025-12-11T14:48:45.0045380Z With the provided path, there will be 1 file uploaded
+2025-12-11T14:48:45.2453912Z Artifact name is valid!
+2025-12-11T14:48:45.2456406Z Root directory input is valid!
+2025-12-11T14:48:45.3291582Z Beginning upload of artifact content to blob storage
+2025-12-11T14:48:45.4819919Z Uploaded bytes 258
+2025-12-11T14:48:45.5233389Z Finished uploading artifact content to blob storage!
+2025-12-11T14:48:45.5236813Z SHA256 digest of uploaded artifact zip is ae43c6e025a996602c984a8028515b402508c4c00ec934c4e4c291e90ca264f2
+2025-12-11T14:48:45.5237515Z Finalizing artifact upload
+2025-12-11T14:48:45.6432690Z Artifact position-registry-WK_OPT.zip successfully finalized. Artifact ID 4838848907
+2025-12-11T14:48:45.6434343Z Artifact position-registry-WK_OPT has been successfully uploaded! Final size is 258 bytes. Artifact ID is 4838848907
+2025-12-11T14:48:45.6441319Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20137097619/artifacts/4838848907
+2025-12-11T14:48:45.6550443Z Post job cleanup.
+2025-12-11T14:48:45.8125030Z Post job cleanup.
+2025-12-11T14:48:45.8888053Z [command]/usr/bin/git version
+2025-12-11T14:48:45.8927664Z git version 2.52.0
+2025-12-11T14:48:45.8972680Z Temporarily overriding HOME='/home/runner/work/_temp/53433144-a803-4c55-abcc-f73577b7fe13' before making global git config changes
+2025-12-11T14:48:45.8973933Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-11T14:48:45.8977494Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/RubberBandBot/RubberBandBot
+2025-12-11T14:48:45.9011755Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-12-11T14:48:45.9043380Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-12-11T14:48:45.9288273Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-11T14:48:45.9308635Z http.https://github.com/.extraheader
+2025-12-11T14:48:45.9320046Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-12-11T14:48:45.9347593Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-12-11T14:48:45.9667563Z Cleaning up orphan processes

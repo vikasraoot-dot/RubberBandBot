@@ -1,0 +1,823 @@
+﻿2025-12-12T16:18:25.0291000Z Current runner version: '2.329.0'
+2025-12-12T16:18:25.0308416Z Runner name: 'VHOMEPC'
+2025-12-12T16:18:25.0310267Z Runner group name: 'Default'
+2025-12-12T16:18:25.0311825Z Machine name: 'VHOMEPC'
+2025-12-12T16:18:25.0317707Z ##[group]GITHUB_TOKEN Permissions
+2025-12-12T16:18:25.0320896Z Contents: read
+2025-12-12T16:18:25.0321320Z Metadata: read
+2025-12-12T16:18:25.0321706Z Packages: read
+2025-12-12T16:18:25.0322104Z ##[endgroup]
+2025-12-12T16:18:25.0324785Z Secret source: Actions
+2025-12-12T16:18:25.0325392Z Prepare workflow directory
+2025-12-12T16:18:25.1138026Z Prepare all required actions
+2025-12-12T16:18:25.1239064Z Getting action download info
+2025-12-12T16:18:25.7539646Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-12T16:18:28.3333621Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-12T16:18:47.6974937Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-12T16:18:50.3826824Z Complete job name: trade
+2025-12-12T16:18:50.5514354Z ##[group]Run actions/checkout@v4
+2025-12-12T16:18:50.5515825Z with:
+2025-12-12T16:18:50.5516186Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T16:18:50.5517021Z   token: ***
+2025-12-12T16:18:50.5517316Z   ssh-strict: true
+2025-12-12T16:18:50.5517573Z   ssh-user: git
+2025-12-12T16:18:50.5517852Z   persist-credentials: true
+2025-12-12T16:18:50.5518157Z   clean: true
+2025-12-12T16:18:50.5518433Z   sparse-checkout-cone-mode: true
+2025-12-12T16:18:50.5518775Z   fetch-depth: 1
+2025-12-12T16:18:50.5519055Z   fetch-tags: false
+2025-12-12T16:18:50.5519343Z   show-progress: true
+2025-12-12T16:18:50.5519875Z   lfs: false
+2025-12-12T16:18:50.5520158Z   submodules: false
+2025-12-12T16:18:50.5520551Z   set-safe-directory: true
+2025-12-12T16:18:50.5522389Z ##[endgroup]
+2025-12-12T16:18:51.0773345Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-12T16:18:51.0777380Z ##[group]Getting Git version info
+2025-12-12T16:18:51.0778838Z Working directory is 'C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot'
+2025-12-12T16:18:51.0939707Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T16:18:51.1575229Z git version 2.52.0.windows.1
+2025-12-12T16:18:51.1659299Z ##[endgroup]
+2025-12-12T16:18:51.1703263Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\22280401-c04f-4d09-b255-a45c5a0490fc' before making global git config changes
+2025-12-12T16:18:51.1705608Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T16:18:51.1717166Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-12T16:18:51.2540226Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-12T16:18:51.3122183Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-12T16:18:51.3234144Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-12T16:18:51.3243522Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-12T16:18:51.3843902Z refs/heads/main
+2025-12-12T16:18:51.3944144Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-12T16:18:51.4972781Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-12T16:18:51.4975127Z M	RubberBand/__pycache__/strategy.cpython-313.pyc
+2025-12-12T16:18:51.4975888Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-12T16:18:51.4976412Z M	RubberBand/src/__pycache__/data.cpython-313.pyc
+2025-12-12T16:18:51.4976908Z M	RubberBand/src/__pycache__/indicators.cpython-313.pyc
+2025-12-12T16:18:51.4977431Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-12T16:18:51.4977938Z M	RubberBand/src/__pycache__/utils.cpython-313.pyc
+2025-12-12T16:18:51.4978349Z M	backtest_health.json
+2025-12-12T16:18:51.4978646Z M	backtest_summary.json
+2025-12-12T16:18:51.4978953Z M	daily_stats.csv
+2025-12-12T16:18:51.4982508Z M	detailed_trades.csv
+2025-12-12T16:18:51.4982868Z M	loss_analysis.csv
+2025-12-12T16:18:51.4988747Z HEAD is now at 043e8ae fix: Disable kill switch (PnL bug) + fix NoneType errors in options spread PnL calc
+2025-12-12T16:18:51.6432063Z ##[endgroup]
+2025-12-12T16:18:51.6441250Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-12T16:18:52.7772041Z ##[group]Cleaning the repository
+2025-12-12T16:18:52.7782436Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-12T16:18:52.8405444Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-12T16:18:52.9452259Z HEAD is now at 043e8ae fix: Disable kill switch (PnL bug) + fix NoneType errors in options spread PnL calc
+2025-12-12T16:18:52.9540278Z ##[endgroup]
+2025-12-12T16:18:52.9548757Z ##[group]Disabling automatic garbage collection
+2025-12-12T16:18:52.9558929Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-12T16:18:53.0177345Z ##[endgroup]
+2025-12-12T16:18:53.0178143Z ##[group]Setting up auth
+2025-12-12T16:18:53.0182142Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T16:18:53.0799132Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T16:18:54.1638656Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T16:18:54.2250101Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T16:18:55.3086055Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T16:18:55.3857230Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T16:18:56.4869291Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-12T16:18:56.5601849Z ##[endgroup]
+2025-12-12T16:18:56.5602465Z ##[group]Fetching the repository
+2025-12-12T16:18:56.5613825Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +043e8ae3e39ae325ba97b4f66ee723d6f4a982df:refs/remotes/origin/main
+2025-12-12T16:18:57.2866156Z ##[endgroup]
+2025-12-12T16:18:57.2868209Z ##[group]Determining the checkout info
+2025-12-12T16:18:57.2869312Z ##[endgroup]
+2025-12-12T16:18:57.2881584Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-12T16:18:57.3732186Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-12T16:18:57.4386111Z ##[group]Checking out the ref
+2025-12-12T16:18:57.4405085Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-12T16:18:57.5381485Z branch 'main' set up to track 'origin/main'.
+2025-12-12T16:18:57.5381952Z Your branch is up to date with 'origin/main'.
+2025-12-12T16:18:57.5391673Z Switched to and reset branch 'main'
+2025-12-12T16:18:57.5468982Z ##[endgroup]
+2025-12-12T16:18:57.6101634Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-12T16:18:57.6589421Z 043e8ae3e39ae325ba97b4f66ee723d6f4a982df
+2025-12-12T16:18:57.7144905Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-12T16:18:57.7145307Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-12T16:18:57.7145555Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-12T16:18:57.7169095Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T16:18:57.7169496Z ##[endgroup]
+2025-12-12T16:18:58.2729877Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-12T16:18:58.2731461Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-12T16:18:58.2731998Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-12T16:18:58.2769327Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T16:18:58.2770132Z env:
+2025-12-12T16:18:58.2770700Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:18:58.2771144Z ##[endgroup]
+2025-12-12T16:18:59.6711721Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T16:19:00.3773370Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-12T16:19:03.3883693Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-12T16:19:04.0928765Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-12T16:19:04.0936041Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-12T16:19:04.0948725Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-12T16:19:04.0952634Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-12T16:19:04.0959157Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-12T16:19:04.1031891Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-12T16:19:04.1041160Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-12T16:19:04.1198838Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-12T16:19:04.1211564Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-12T16:19:04.1223505Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-12T16:19:04.1235272Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-12T16:19:04.1428726Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-12T16:19:04.5449450Z ##[group]Run chcp 65001 > $null
+2025-12-12T16:19:04.5450331Z [36;1mchcp 65001 > $null[0m
+2025-12-12T16:19:04.5451298Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-12T16:19:04.5452481Z [36;1mfunction Get-Clock {[0m
+2025-12-12T16:19:04.5454338Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-12T16:19:04.5455195Z [36;1m}[0m
+2025-12-12T16:19:04.5455575Z [36;1m$maxWaitMin = 20[0m
+2025-12-12T16:19:04.5456017Z [36;1m$start = Get-Date[0m
+2025-12-12T16:19:04.5456469Z [36;1mwhile ($true) {[0m
+2025-12-12T16:19:04.5456889Z [36;1m  try {[0m
+2025-12-12T16:19:04.5457262Z [36;1m    $clk = Get-Clock[0m
+2025-12-12T16:19:04.5457969Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-12T16:19:04.5458756Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-12T16:19:04.5459537Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-12T16:19:04.5460229Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-12T16:19:04.5460914Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-12T16:19:04.5461815Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-12T16:19:04.5462612Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-12T16:19:04.5463374Z [36;1m    } else {[0m
+2025-12-12T16:19:04.5463939Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-12T16:19:04.5464568Z [36;1m      break[0m
+2025-12-12T16:19:04.5464939Z [36;1m    }[0m
+2025-12-12T16:19:04.5465523Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-12T16:19:04.5466434Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-12T16:19:04.5467123Z [36;1m      break[0m
+2025-12-12T16:19:04.5467504Z [36;1m    }[0m
+2025-12-12T16:19:04.5467883Z [36;1m  } catch {[0m
+2025-12-12T16:19:04.5468575Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-12T16:19:04.5469434Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-12T16:19:04.5469962Z [36;1m  }[0m
+2025-12-12T16:19:04.5470305Z [36;1m}[0m
+2025-12-12T16:19:04.5521292Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T16:19:04.5521789Z env:
+2025-12-12T16:19:04.5522045Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:19:04.5522446Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T16:19:04.5522984Z   APCA_API_KEY_ID: ***
+2025-12-12T16:19:04.5523346Z   APCA_API_SECRET_KEY: ***
+2025-12-12T16:19:04.5523579Z ##[endgroup]
+2025-12-12T16:19:05.4414496Z Market is open â†’ proceed.
+2025-12-12T16:19:05.5374941Z ##[group]Run actions/download-artifact@v4
+2025-12-12T16:19:05.5375660Z with:
+2025-12-12T16:19:05.5375925Z   name: position-registry-15M_OPT
+2025-12-12T16:19:05.5376224Z   path: .position_registry/
+2025-12-12T16:19:05.5376476Z   merge-multiple: false
+2025-12-12T16:19:05.5376738Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-12T16:19:05.5377027Z   run-id: 20172786914
+2025-12-12T16:19:05.5377226Z env:
+2025-12-12T16:19:05.5377496Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:19:05.5377966Z ##[endgroup]
+2025-12-12T16:19:06.6656064Z Downloading single artifact
+2025-12-12T16:19:07.1321875Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-12T16:19:07.1899781Z ##[group]Run chcp 65001 > $null
+2025-12-12T16:19:07.1900637Z [36;1mchcp 65001 > $null[0m
+2025-12-12T16:19:07.1901228Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-12T16:19:07.1901822Z [36;1m[0m
+2025-12-12T16:19:07.1902214Z [36;1m# Get inputs with defaults[0m
+2025-12-12T16:19:07.1902834Z [36;1m$dryRun = if ("0" -ne "") { "0" } else { "0" }[0m
+2025-12-12T16:19:07.1903479Z [36;1m$dte = if ("3" -ne "") { "3" } else { "3" }[0m
+2025-12-12T16:19:07.1904023Z [36;1m[0m
+2025-12-12T16:19:07.1905306Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte)"[0m
+2025-12-12T16:19:07.1906100Z [36;1m[0m
+2025-12-12T16:19:07.1906469Z [36;1m# Run the spreads loop[0m
+2025-12-12T16:19:07.1907575Z [36;1m& "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/live_spreads_loop.py `[0m
+2025-12-12T16:19:07.1908417Z [36;1m  --config RubberBand/config.yaml `[0m
+2025-12-12T16:19:07.1909154Z [36;1m  --tickers RubberBand/tickers_options.txt `[0m
+2025-12-12T16:19:07.1909939Z [36;1m  --dry-run $dryRun `[0m
+2025-12-12T16:19:07.1910429Z [36;1m  --dte $dte `[0m
+2025-12-12T16:19:07.1910870Z [36;1m  --max-debit 3.00[0m
+2025-12-12T16:19:07.1966004Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-12T16:19:07.1966963Z env:
+2025-12-12T16:19:07.1967855Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T16:19:07.1968675Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-12T16:19:07.1969624Z   APCA_API_KEY_ID: ***
+2025-12-12T16:19:07.1970383Z   APCA_API_SECRET_KEY: ***
+2025-12-12T16:19:07.1970938Z   ALPACA_KEY: ***
+2025-12-12T16:19:07.1971560Z   ALPACA_SECRET: ***
+2025-12-12T16:19:07.1972004Z   PYTHONUNBUFFERED: 1
+2025-12-12T16:19:07.1972446Z ##[endgroup]
+2025-12-12T16:19:07.8267769Z Starting Options Spreads Loop (dry_run=0, dte=3)
+2025-12-12T16:19:10.2179667Z {"event":"startup","dry_run":false,"dte":3,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-50.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-12T16:19:10Z","ts_et":"2025-12-12 11:19:10 ET"}
+2025-12-12T16:19:10.2505616Z {"event":"symbols_loaded","count":120,"sample":["RKLB","HOOD","INTC","WDC","VRT"],"type":"HEARTBEAT","ts":"2025-12-12T16:19:10Z","ts_et":"2025-12-12 11:19:10 ET"}
+2025-12-12T16:19:10.5698373Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-12T16:19:10Z","ts_et":"2025-12-12 11:19:10 ET"}
+2025-12-12T16:19:10.8864402Z {"event":"scan_cycle_start","cycle":1,"time":"11:19","type":"HEARTBEAT","ts":"2025-12-12T16:19:10Z","ts_et":"2025-12-12 11:19:10 ET"}
+2025-12-12T16:19:10.8866024Z {"event":"scan_start","current_time":"11:19","type":"HEARTBEAT","ts":"2025-12-12T16:19:10Z","ts_et":"2025-12-12 11:19:10 ET"}
+2025-12-12T16:19:11.5027009Z [options] Position closed: DKNG260130C00035000
+2025-12-12T16:19:11.5033142Z {"type":"SPREAD_EXIT","underlying":"DKNG","long_symbol":"DKNG260130C00035000","short_symbol":"","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-350.0,"pnl_pct":-100.0,"ts":"2025-12-12T16:19:11Z","ts_et":"2025-12-12 11:19:11 ET"}
+2025-12-12T16:19:11.7968458Z [options] Position closed: SMCI260130C00033000
+2025-12-12T16:19:11.7973390Z {"type":"SPREAD_EXIT","underlying":"SMCI","long_symbol":"SMCI260130C00033000","short_symbol":"","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-595.0,"pnl_pct":-100.0,"ts":"2025-12-12T16:19:11Z","ts_et":"2025-12-12 11:19:11 ET"}
+2025-12-12T16:19:28.9529621Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.04<SMA20=123.71)","ts":"2025-12-12T16:19:28Z","ts_et":"2025-12-12 11:19:28 ET"}
+2025-12-12T16:19:29.9226950Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.39<SMA20=173.94)","ts":"2025-12-12T16:19:29Z","ts_et":"2025-12-12 11:19:29 ET"}
+2025-12-12T16:19:30.6023833Z {"type":"SPREAD_SIGNAL","underlying":"MU","signal_reason":"RSI_oversold(20.0)","entry_price":241.045,"rsi":19.95,"atr":2.5763,"ts":"2025-12-12T16:19:30Z","ts_et":"2025-12-12 11:19:30 ET"}
+2025-12-12T16:19:32.1646247Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=188.29<SMA20=209.81)","ts":"2025-12-12T16:19:32Z","ts_et":"2025-12-12 11:19:32 ET"}
+2025-12-12T16:19:33.0917688Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.73<SMA20=33.82)","ts":"2025-12-12T16:19:33Z","ts_et":"2025-12-12 11:19:33 ET"}
+2025-12-12T16:19:34.0163708Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=360.13<SMA20=376.93)","ts":"2025-12-12T16:19:34Z","ts_et":"2025-12-12 11:19:34 ET"}
+2025-12-12T16:19:36.1904920Z {"type":"SPREAD_SIGNAL","underlying":"TER","signal_reason":"RSI_oversold(24.6)","entry_price":193.74,"rsi":24.61,"atr":1.6188,"ts":"2025-12-12T16:19:36Z","ts_et":"2025-12-12 11:19:36 ET"}
+2025-12-12T16:19:37.1375196Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=255.00<SMA20=258.38)","ts":"2025-12-12T16:19:37Z","ts_et":"2025-12-12 11:19:37 ET"}
+2025-12-12T16:19:37.7143223Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=501.69<SMA20=513.23)","ts":"2025-12-12T16:19:37Z","ts_et":"2025-12-12 11:19:37 ET"}
+2025-12-12T16:19:38.6783722Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.63<SMA20=182.05)","ts":"2025-12-12T16:19:38Z","ts_et":"2025-12-12 11:19:38 ET"}
+2025-12-12T16:19:39.3540628Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.20<SMA20=127.05)","ts":"2025-12-12T16:19:39Z","ts_et":"2025-12-12 11:19:39 ET"}
+2025-12-12T16:19:40.0030201Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.06<SMA20=157.67)","ts":"2025-12-12T16:19:40Z","ts_et":"2025-12-12 11:19:40 ET"}
+2025-12-12T16:19:43.1832697Z {"type":"SPREAD_SIGNAL","underlying":"GLW","signal_reason":"RSI_oversold(15.8)","entry_price":88.66,"rsi":15.79,"atr":0.8294,"ts":"2025-12-12T16:19:43Z","ts_et":"2025-12-12 11:19:43 ET"}
+2025-12-12T16:19:45.3342502Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.36<SMA20=308.46)","ts":"2025-12-12T16:19:45Z","ts_et":"2025-12-12 11:19:45 ET"}
+2025-12-12T16:19:46.2435745Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.48<SMA20=309.00)","ts":"2025-12-12T16:19:46Z","ts_et":"2025-12-12 11:19:46 ET"}
+2025-12-12T16:19:46.5799784Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.39<SMA20=340.01)","ts":"2025-12-12T16:19:46Z","ts_et":"2025-12-12 11:19:46 ET"}
+2025-12-12T16:19:47.5781726Z {"type":"SPREAD_SIGNAL","underlying":"TSM","signal_reason":"RSI_oversold(24.0)","entry_price":293.37,"rsi":24.03,"atr":1.7937,"ts":"2025-12-12T16:19:47Z","ts_et":"2025-12-12 11:19:47 ET"}
+2025-12-12T16:19:48.2603794Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.11<SMA20=26.27)","ts":"2025-12-12T16:19:48Z","ts_et":"2025-12-12 11:19:48 ET"}
+2025-12-12T16:19:49.8606010Z {"type":"SPREAD_SIGNAL","underlying":"KKR","signal_reason":"RSI_oversold(20.2)","entry_price":138.14,"rsi":20.19,"atr":0.9352,"ts":"2025-12-12T16:19:49Z","ts_et":"2025-12-12 11:19:49 ET"}
+2025-12-12T16:19:51.4121847Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.32<SMA20=298.90)","ts":"2025-12-12T16:19:51Z","ts_et":"2025-12-12 11:19:51 ET"}
+2025-12-12T16:19:58.6617224Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.28<SMA20=228.55)","ts":"2025-12-12T16:19:58Z","ts_et":"2025-12-12 11:19:58 ET"}
+2025-12-12T16:20:06.7516680Z {"event":"signals_found","count":5,"symbols":["MU","TER","GLW","TSM","KKR"],"type":"HEARTBEAT","ts":"2025-12-12T16:20:06Z","ts_et":"2025-12-12 11:20:06 ET"}
+2025-12-12T16:20:07.9621538Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for MU
+2025-12-12T16:20:07.9622348Z [spreads] MU: Long 242.5 / Short 247.5 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:20:08.5458140Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Debit_too_high(3.45>3.00)","ts":"2025-12-12T16:20:08Z","ts_et":"2025-12-12 11:20:08 ET"}
+2025-12-12T16:20:09.7210653Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for TER
+2025-12-12T16:20:09.7212887Z [spreads] TER: Long 192.5 / Short 197.5 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:20:10.3136149Z {"type":"SPREAD_SKIP","underlying":"TER","skip_reason":"Debit_too_high(3.14>3.00)","ts":"2025-12-12T16:20:10Z","ts_et":"2025-12-12 11:20:10 ET"}
+2025-12-12T16:20:11.5689172Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for GLW
+2025-12-12T16:20:11.5690275Z [spreads] GLW: Long 91.0 / Short 93.0 (width=$2.00, exp=2025-12-19)
+2025-12-12T16:20:13.0377822Z [options] Submitting spread: GLW251219C00091000 (buy) / GLW251219C00093000 (sell) @ $0.87 debit
+2025-12-12T16:20:13.3757807Z [options] Spread order submitted: f8bdd0b1-3e7f-4302-84f2-8585239d3e40
+2025-12-12T16:20:13.3760518Z [registry] Recorded entry: GLW251219C00091000 (order_id=15M_OPT_GLW251219C00091000_176...)
+2025-12-12T16:20:13.3766004Z {"type":"SPREAD_ENTRY","underlying":"GLW","long_symbol":"GLW251219C00091000","short_symbol":"GLW251219C00093000","atm_strike":91.0,"otm_strike":93.0,"spread_width":2.0,"net_debit":0.83,"total_cost":83.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(15.8)","signal_rsi":15.79,"signal_atr":0.8294,"entry_ts":"2025-12-12T16:20:13Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:20:13Z","ts_et":"2025-12-12 11:20:13 ET"}
+2025-12-12T16:20:14.5449781Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for TSM
+2025-12-12T16:20:14.5451095Z [spreads] TSM: Long 295.0 / Short 300.0 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:20:16.1129697Z [options] Submitting spread: TSM251219C00295000 (buy) / TSM251219C00300000 (sell) @ $2.61 debit
+2025-12-12T16:20:16.4695201Z [options] Spread order submitted: 53392c80-fd4d-4fa1-bf92-4113fffb4b97
+2025-12-12T16:20:16.4697628Z [registry] Recorded entry: TSM251219C00295000 (order_id=15M_OPT_TSM251219C00295000_176...)
+2025-12-12T16:20:16.4699572Z {"type":"SPREAD_ENTRY","underlying":"TSM","long_symbol":"TSM251219C00295000","short_symbol":"TSM251219C00300000","atm_strike":295.0,"otm_strike":300.0,"spread_width":5.0,"net_debit":2.61,"total_cost":261.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(24.0)","signal_rsi":24.03,"signal_atr":1.7937,"entry_ts":"2025-12-12T16:20:16Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:20:16Z","ts_et":"2025-12-12 11:20:16 ET"}
+2025-12-12T16:20:17.6587323Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for KKR
+2025-12-12T16:20:17.6587983Z [spreads] KKR: Long 138.0 / Short 141.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T16:20:19.2290692Z [options] Submitting spread: KKR251219C00138000 (buy) / KKR251219C00141000 (sell) @ $1.68 debit
+2025-12-12T16:20:19.5703541Z [options] Spread order submitted: f2f0c3b4-7c60-4268-8091-8b01112545ea
+2025-12-12T16:20:19.5715872Z [registry] Recorded entry: KKR251219C00138000 (order_id=15M_OPT_KKR251219C00138000_176...)
+2025-12-12T16:20:19.5720340Z {"type":"SPREAD_ENTRY","underlying":"KKR","long_symbol":"KKR251219C00138000","short_symbol":"KKR251219C00141000","atm_strike":138.0,"otm_strike":141.0,"spread_width":3.0,"net_debit":1.68,"total_cost":168.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(20.2)","signal_rsi":20.19,"signal_atr":0.9352,"entry_ts":"2025-12-12T16:20:19Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:20:19Z","ts_et":"2025-12-12 11:20:19 ET"}
+2025-12-12T16:20:19.5724441Z {"event":"scan_complete","signals":5,"new_entries":3,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T16:20:19Z","ts_et":"2025-12-12 11:20:19 ET"}
+2025-12-12T16:20:19.5726156Z {"event":"scan_cycle_end","cycle":1,"new_entries":3,"type":"HEARTBEAT","ts":"2025-12-12T16:20:19Z","ts_et":"2025-12-12 11:20:19 ET"}
+2025-12-12T16:20:19.5727823Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:20","type":"HEARTBEAT","ts":"2025-12-12T16:20:19Z","ts_et":"2025-12-12 11:20:19 ET"}
+2025-12-12T16:35:20.0706030Z {"event":"scan_cycle_start","cycle":2,"time":"11:35","type":"HEARTBEAT","ts":"2025-12-12T16:35:20Z","ts_et":"2025-12-12 11:35:20 ET"}
+2025-12-12T16:35:20.0716519Z {"event":"scan_start","current_time":"11:35","type":"HEARTBEAT","ts":"2025-12-12T16:35:20Z","ts_et":"2025-12-12 11:35:20 ET"}
+2025-12-12T16:35:20.9766577Z [options] Attempting spread close:
+2025-12-12T16:35:20.9766991Z [options]   Long: GLW251219C00091000 @ bid=1.01
+2025-12-12T16:35:20.9767274Z [options]   Short: GLW251219C00093000 @ ask=0.7
+2025-12-12T16:35:20.9767539Z [options]   Net credit: $0.31, limit_price: $0.31
+2025-12-12T16:35:20.9793451Z [options] Closing spread: GLW251219C00091000 (sell) / GLW251219C00093000 (buy) @ $0.31 credit
+2025-12-12T16:35:21.2960249Z [options] Spread close order submitted: f8d363aa-0107-4700-b72a-47a575210f64
+2025-12-12T16:35:21.2971166Z {"type":"SPREAD_EXIT","underlying":"GLW","long_symbol":"GLW251219C00091000","short_symbol":"GLW251219C00093000","exit_value":0.27,"exit_reason":"SL_hit(-80.4%<=-50.0%)","pnl":-111.0,"pnl_pct":-80.4,"ts":"2025-12-12T16:35:21Z","ts_et":"2025-12-12 11:35:21 ET"}
+2025-12-12T16:35:21.2998992Z [registry] Recorded exit: GLW251219C00091000 (SL_hit(-80.4%<=-50.0%))
+2025-12-12T16:35:21.2999603Z [positions] Registry updated: removed GLW251219C00091000
+2025-12-12T16:35:21.8909259Z [options] Attempting spread close:
+2025-12-12T16:35:21.8909730Z [options]   Long: KKR251219C00138000 @ bid=1.78
+2025-12-12T16:35:21.8910059Z [options]   Short: KKR251219C00141000 @ ask=1.22
+2025-12-12T16:35:21.8910373Z [options]   Net credit: $0.56, limit_price: $0.56
+2025-12-12T16:35:21.8911413Z [options] Closing spread: KKR251219C00138000 (sell) / KKR251219C00141000 (buy) @ $0.56 credit
+2025-12-12T16:35:22.2425471Z [options] Spread close order submitted: 658bb237-7f4c-4c87-8512-000f373966a1
+2025-12-12T16:35:22.2428719Z {"type":"SPREAD_EXIT","underlying":"KKR","long_symbol":"KKR251219C00138000","short_symbol":"KKR251219C00141000","exit_value":0.6,"exit_reason":"SL_hit(-78.9%<=-50.0%)","pnl":-225.0,"pnl_pct":-78.9,"ts":"2025-12-12T16:35:22Z","ts_et":"2025-12-12 11:35:22 ET"}
+2025-12-12T16:35:22.2441715Z [registry] Recorded exit: KKR251219C00138000 (SL_hit(-78.9%<=-50.0%))
+2025-12-12T16:35:22.2442717Z [positions] Registry updated: removed KKR251219C00138000
+2025-12-12T16:35:22.8207556Z [options] Attempting spread close:
+2025-12-12T16:35:22.8208141Z [options]   Long: TSM251219C00295000 @ bid=5.19
+2025-12-12T16:35:22.8208751Z [options]   Short: TSM251219C00300000 @ ask=3.48
+2025-12-12T16:35:22.8209099Z [options]   Net credit: $1.71, limit_price: $1.71
+2025-12-12T16:35:22.8210025Z [options] Closing spread: TSM251219C00295000 (sell) / TSM251219C00300000 (buy) @ $1.71 credit
+2025-12-12T16:35:23.1178638Z [options] Spread close order submitted: 12a5a705-496b-4d27-809f-a8b68d3597a4
+2025-12-12T16:35:23.1218457Z {"type":"SPREAD_EXIT","underlying":"TSM","long_symbol":"TSM251219C00295000","short_symbol":"TSM251219C00300000","exit_value":1.75,"exit_reason":"SL_hit(-69.3%<=-50.0%)","pnl":-395.0,"pnl_pct":-69.3,"ts":"2025-12-12T16:35:23Z","ts_et":"2025-12-12 11:35:23 ET"}
+2025-12-12T16:35:23.1257329Z [registry] Recorded exit: TSM251219C00295000 (SL_hit(-69.3%<=-50.0%))
+2025-12-12T16:35:23.1273128Z [positions] Registry updated: removed TSM251219C00295000
+2025-12-12T16:35:39.3665385Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.83<SMA20=123.65)","ts":"2025-12-12T16:35:39Z","ts_et":"2025-12-12 11:35:39 ET"}
+2025-12-12T16:35:40.3312556Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.92<SMA20=173.91)","ts":"2025-12-12T16:35:40Z","ts_et":"2025-12-12 11:35:40 ET"}
+2025-12-12T16:35:42.5071374Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=187.88<SMA20=209.77)","ts":"2025-12-12T16:35:42Z","ts_et":"2025-12-12 11:35:42 ET"}
+2025-12-12T16:35:43.4513574Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.85<SMA20=33.83)","ts":"2025-12-12T16:35:43Z","ts_et":"2025-12-12 11:35:43 ET"}
+2025-12-12T16:35:44.4042250Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=364.12<SMA20=377.01)","ts":"2025-12-12T16:35:44Z","ts_et":"2025-12-12 11:35:44 ET"}
+2025-12-12T16:35:46.2515077Z {"type":"SPREAD_SIGNAL","underlying":"TER","signal_reason":"RSI_oversold(24.6)","entry_price":193.73,"rsi":24.59,"atr":1.6225,"ts":"2025-12-12T16:35:46Z","ts_et":"2025-12-12 11:35:46 ET"}
+2025-12-12T16:35:46.5684898Z {"type":"SPREAD_SIGNAL","underlying":"DELL","signal_reason":"RSI_oversold(23.3)","entry_price":133.14,"rsi":23.32,"atr":1.086,"ts":"2025-12-12T16:35:46Z","ts_et":"2025-12-12 11:35:46 ET"}
+2025-12-12T16:35:47.2148784Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.22<SMA20=258.20)","ts":"2025-12-12T16:35:47Z","ts_et":"2025-12-12 11:35:47 ET"}
+2025-12-12T16:35:47.8196487Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=502.00<SMA20=513.16)","ts":"2025-12-12T16:35:47Z","ts_et":"2025-12-12 11:35:47 ET"}
+2025-12-12T16:35:48.7504725Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.65<SMA20=182.02)","ts":"2025-12-12T16:35:48Z","ts_et":"2025-12-12 11:35:48 ET"}
+2025-12-12T16:35:49.3686375Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.48<SMA20=127.01)","ts":"2025-12-12T16:35:49Z","ts_et":"2025-12-12 11:35:49 ET"}
+2025-12-12T16:35:49.9870087Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.89<SMA20=157.64)","ts":"2025-12-12T16:35:49Z","ts_et":"2025-12-12 11:35:49 ET"}
+2025-12-12T16:35:53.0980873Z {"type":"SPREAD_SIGNAL","underlying":"GLW","signal_reason":"RSI_oversold(21.5)","entry_price":89.185,"rsi":21.49,"atr":0.8366,"ts":"2025-12-12T16:35:53Z","ts_et":"2025-12-12 11:35:53 ET"}
+2025-12-12T16:35:55.3004260Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.57<SMA20=308.43)","ts":"2025-12-12T16:35:55Z","ts_et":"2025-12-12 11:35:55 ET"}
+2025-12-12T16:35:56.2347991Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=307.90<SMA20=308.97)","ts":"2025-12-12T16:35:56Z","ts_et":"2025-12-12 11:35:56 ET"}
+2025-12-12T16:35:56.5545704Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.62<SMA20=339.94)","ts":"2025-12-12T16:35:56Z","ts_et":"2025-12-12 11:35:56 ET"}
+2025-12-12T16:35:58.1316737Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.14<SMA20=26.27)","ts":"2025-12-12T16:35:58Z","ts_et":"2025-12-12 11:35:58 ET"}
+2025-12-12T16:35:59.7238783Z {"type":"SPREAD_SIGNAL","underlying":"KKR","signal_reason":"RSI_oversold(17.0)","entry_price":137.03,"rsi":17.01,"atr":0.9512,"ts":"2025-12-12T16:35:59Z","ts_et":"2025-12-12 11:35:59 ET"}
+2025-12-12T16:36:01.3191530Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.16<SMA20=298.88)","ts":"2025-12-12T16:36:01Z","ts_et":"2025-12-12 11:36:01 ET"}
+2025-12-12T16:36:04.7578731Z {"type":"SPREAD_SIGNAL","underlying":"CAT","signal_reason":"RSI_oversold(24.5)","entry_price":602.36,"rsi":24.49,"atr":3.8802,"ts":"2025-12-12T16:36:04Z","ts_et":"2025-12-12 11:36:04 ET"}
+2025-12-12T16:36:08.0649788Z {"type":"SPREAD_SIGNAL","underlying":"IBM","signal_reason":"RSI_oversold(23.5)","entry_price":304.705,"rsi":23.51,"atr":1.1556,"ts":"2025-12-12T16:36:08Z","ts_et":"2025-12-12 11:36:08 ET"}
+2025-12-12T16:36:08.7232558Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.03<SMA20=228.53)","ts":"2025-12-12T16:36:08Z","ts_et":"2025-12-12 11:36:08 ET"}
+2025-12-12T16:36:16.5923383Z {"event":"signals_found","count":6,"symbols":["TER","DELL","GLW","KKR","CAT","IBM"],"type":"HEARTBEAT","ts":"2025-12-12T16:36:16Z","ts_et":"2025-12-12 11:36:16 ET"}
+2025-12-12T16:36:17.7826316Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for TER
+2025-12-12T16:36:17.7828302Z [spreads] TER: Long 192.5 / Short 197.5 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:36:18.3447256Z {"type":"SPREAD_SKIP","underlying":"TER","skip_reason":"Debit_too_high(3.17>3.00)","ts":"2025-12-12T16:36:18Z","ts_et":"2025-12-12 11:36:18 ET"}
+2025-12-12T16:36:19.5136453Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for DELL
+2025-12-12T16:36:19.5138861Z [spreads] DELL: Long 131.0 / Short 134.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T16:36:20.0817143Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Debit_too_high(3.47>3.00)","ts":"2025-12-12T16:36:20Z","ts_et":"2025-12-12 11:36:20 ET"}
+2025-12-12T16:36:21.2355690Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for GLW
+2025-12-12T16:36:21.2358335Z [spreads] GLW: Long 88.0 / Short 90.0 (width=$2.00, exp=2025-12-19)
+2025-12-12T16:36:22.8091202Z [options] Submitting spread: GLW251219C00088000 (buy) / GLW251219C00090000 (sell) @ $1.2 debit
+2025-12-12T16:36:23.1527207Z [options] Spread order submitted: 70293670-295b-4e0d-a9e2-6044908d1ec9
+2025-12-12T16:36:23.1538970Z [registry] Recorded entry: GLW251219C00088000 (order_id=15M_OPT_GLW251219C00088000_176...)
+2025-12-12T16:36:23.1542879Z {"type":"SPREAD_ENTRY","underlying":"GLW","long_symbol":"GLW251219C00088000","short_symbol":"GLW251219C00090000","atm_strike":88.0,"otm_strike":90.0,"spread_width":2.0,"net_debit":1.2,"total_cost":120.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(21.5)","signal_rsi":21.49,"signal_atr":0.8366,"entry_ts":"2025-12-12T16:36:23Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:36:23Z","ts_et":"2025-12-12 11:36:23 ET"}
+2025-12-12T16:36:24.3327505Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for KKR
+2025-12-12T16:36:24.3329101Z [spreads] KKR: Long 136.0 / Short 139.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T16:36:25.8552109Z [options] Submitting spread: KKR251219C00136000 (buy) / KKR251219C00139000 (sell) @ $1.81 debit
+2025-12-12T16:36:26.1658285Z [options] Spread order submitted: b6c5dd3b-d0ff-4c0f-95d2-4ce195cd1570
+2025-12-12T16:36:26.1678749Z [registry] Recorded entry: KKR251219C00136000 (order_id=15M_OPT_KKR251219C00136000_176...)
+2025-12-12T16:36:26.1683113Z {"type":"SPREAD_ENTRY","underlying":"KKR","long_symbol":"KKR251219C00136000","short_symbol":"KKR251219C00139000","atm_strike":136.0,"otm_strike":139.0,"spread_width":3.0,"net_debit":1.81,"total_cost":181.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(17.0)","signal_rsi":17.01,"signal_atr":0.9512,"entry_ts":"2025-12-12T16:36:26Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:36:26Z","ts_et":"2025-12-12 11:36:26 ET"}
+2025-12-12T16:36:27.3519410Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for CAT
+2025-12-12T16:36:27.3522783Z [spreads] CAT: Long 597.5 / Short 610.0 (width=$12.50, exp=2025-12-19)
+2025-12-12T16:36:27.9598003Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Debit_too_high(7.06>3.00)","ts":"2025-12-12T16:36:27Z","ts_et":"2025-12-12 11:36:27 ET"}
+2025-12-12T16:36:29.1618139Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for IBM
+2025-12-12T16:36:29.1618795Z [spreads] IBM: Long 295.0 / Short 302.5 (width=$7.50, exp=2025-12-19)
+2025-12-12T16:36:29.7439410Z {"type":"SPREAD_SKIP","underlying":"IBM","skip_reason":"Debit_too_high(5.99>3.00)","ts":"2025-12-12T16:36:29Z","ts_et":"2025-12-12 11:36:29 ET"}
+2025-12-12T16:36:29.7443457Z {"event":"scan_complete","signals":6,"new_entries":2,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T16:36:29Z","ts_et":"2025-12-12 11:36:29 ET"}
+2025-12-12T16:36:29.7446092Z {"event":"scan_cycle_end","cycle":2,"new_entries":2,"type":"HEARTBEAT","ts":"2025-12-12T16:36:29Z","ts_et":"2025-12-12 11:36:29 ET"}
+2025-12-12T16:36:29.7448147Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:36","type":"HEARTBEAT","ts":"2025-12-12T16:36:29Z","ts_et":"2025-12-12 11:36:29 ET"}
+2025-12-12T16:51:30.0752210Z {"event":"scan_cycle_start","cycle":3,"time":"11:51","type":"HEARTBEAT","ts":"2025-12-12T16:51:30Z","ts_et":"2025-12-12 11:51:30 ET"}
+2025-12-12T16:51:30.0754217Z {"event":"scan_start","current_time":"11:51","type":"HEARTBEAT","ts":"2025-12-12T16:51:30Z","ts_et":"2025-12-12 11:51:30 ET"}
+2025-12-12T16:51:31.5430840Z [options] Attempting spread close:
+2025-12-12T16:51:31.5432592Z [options]   Long: GLW251219C00088000 @ bid=2.36
+2025-12-12T16:51:31.5432997Z [options]   Short: GLW251219C00090000 @ ask=1.66
+2025-12-12T16:51:31.5433404Z [options]   Net credit: $0.70, limit_price: $0.70
+2025-12-12T16:51:31.5434063Z [options] Closing spread: GLW251219C00088000 (sell) / GLW251219C00090000 (buy) @ $0.7 credit
+2025-12-12T16:51:31.8402027Z [options] Spread close order submitted: b91878b1-44eb-488c-abfc-32aee0494f18
+2025-12-12T16:51:31.8408418Z {"type":"SPREAD_EXIT","underlying":"GLW","long_symbol":"GLW251219C00088000","short_symbol":"GLW251219C00090000","exit_value":0.71,"exit_reason":"SL_hit(-72.3%<=-50.0%)","pnl":-185.0,"pnl_pct":-72.3,"ts":"2025-12-12T16:51:31Z","ts_et":"2025-12-12 11:51:31 ET"}
+2025-12-12T16:51:31.8417524Z [registry] Recorded exit: GLW251219C00088000 (SL_hit(-72.3%<=-50.0%))
+2025-12-12T16:51:31.8418680Z [positions] Registry updated: removed GLW251219C00088000
+2025-12-12T16:51:32.4322235Z [options] Attempting spread close:
+2025-12-12T16:51:32.4323101Z [options]   Long: KKR251219C00136000 @ bid=2.58
+2025-12-12T16:51:32.4323819Z [options]   Short: KKR251219C00139000 @ ask=1.77
+2025-12-12T16:51:32.4324325Z [options]   Net credit: $0.81, limit_price: $0.81
+2025-12-12T16:51:32.4324813Z [options] Closing spread: KKR251219C00136000 (sell) / KKR251219C00139000 (buy) @ $0.81 credit
+2025-12-12T16:51:32.7292038Z [options] Spread close order submitted: dfbbe0d9-fa1e-4874-80ed-f830e1007e43
+2025-12-12T16:51:32.7298144Z {"type":"SPREAD_EXIT","underlying":"KKR","long_symbol":"KKR251219C00136000","short_symbol":"KKR251219C00139000","exit_value":0.85,"exit_reason":"SL_hit(-73.4%<=-50.0%)","pnl":-235.0,"pnl_pct":-73.4,"ts":"2025-12-12T16:51:32Z","ts_et":"2025-12-12 11:51:32 ET"}
+2025-12-12T16:51:32.7319549Z [registry] Recorded exit: KKR251219C00136000 (SL_hit(-73.4%<=-50.0%))
+2025-12-12T16:51:32.7320333Z [positions] Registry updated: removed KKR251219C00136000
+2025-12-12T16:51:48.6385580Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=118.57<SMA20=123.68)","ts":"2025-12-12T16:51:48Z","ts_et":"2025-12-12 11:51:48 ET"}
+2025-12-12T16:51:49.6223181Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.17<SMA20=173.97)","ts":"2025-12-12T16:51:49Z","ts_et":"2025-12-12 11:51:49 ET"}
+2025-12-12T16:51:49.9175517Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=264.48<SMA20=264.85)","ts":"2025-12-12T16:51:49Z","ts_et":"2025-12-12 11:51:49 ET"}
+2025-12-12T16:51:50.8494092Z {"type":"SPREAD_SIGNAL","underlying":"STX","signal_reason":"RSI_oversold(24.3)","entry_price":282.93,"rsi":24.33,"atr":3.6746,"ts":"2025-12-12T16:51:50Z","ts_et":"2025-12-12 11:51:50 ET"}
+2025-12-12T16:51:51.7537228Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=187.79<SMA20=209.76)","ts":"2025-12-12T16:51:51Z","ts_et":"2025-12-12 11:51:51 ET"}
+2025-12-12T16:51:52.7118859Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.75<SMA20=33.82)","ts":"2025-12-12T16:51:52Z","ts_et":"2025-12-12 11:51:52 ET"}
+2025-12-12T16:51:53.6787794Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=363.01<SMA20=376.91)","ts":"2025-12-12T16:51:53Z","ts_et":"2025-12-12 11:51:53 ET"}
+2025-12-12T16:51:55.5927651Z {"type":"SPREAD_SIGNAL","underlying":"TER","signal_reason":"RSI_oversold(22.1)","entry_price":192.42,"rsi":22.1,"atr":1.6002,"ts":"2025-12-12T16:51:55Z","ts_et":"2025-12-12 11:51:55 ET"}
+2025-12-12T16:51:55.8917505Z {"type":"SPREAD_SIGNAL","underlying":"DELL","signal_reason":"RSI_oversold(21.3)","entry_price":132.415,"rsi":21.26,"atr":1.1002,"ts":"2025-12-12T16:51:55Z","ts_et":"2025-12-12 11:51:55 ET"}
+2025-12-12T16:51:56.5694795Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=251.24<SMA20=258.21)","ts":"2025-12-12T16:51:56Z","ts_et":"2025-12-12 11:51:56 ET"}
+2025-12-12T16:51:57.1923256Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=501.76<SMA20=513.19)","ts":"2025-12-12T16:51:57Z","ts_et":"2025-12-12 11:51:57 ET"}
+2025-12-12T16:51:58.1616981Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=175.97<SMA20=182.01)","ts":"2025-12-12T16:51:58Z","ts_et":"2025-12-12 11:51:58 ET"}
+2025-12-12T16:51:58.7745430Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.08<SMA20=127.03)","ts":"2025-12-12T16:51:58Z","ts_et":"2025-12-12 11:51:58 ET"}
+2025-12-12T16:51:59.4159207Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.35<SMA20=157.63)","ts":"2025-12-12T16:51:59Z","ts_et":"2025-12-12 11:51:59 ET"}
+2025-12-12T16:52:02.5361214Z {"type":"SPREAD_SIGNAL","underlying":"GLW","signal_reason":"RSI_oversold(19.3)","entry_price":88.35,"rsi":19.26,"atr":0.8643,"ts":"2025-12-12T16:52:02Z","ts_et":"2025-12-12 11:52:02 ET"}
+2025-12-12T16:52:04.7333334Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=306.98<SMA20=308.49)","ts":"2025-12-12T16:52:04Z","ts_et":"2025-12-12 11:52:04 ET"}
+2025-12-12T16:52:05.6889863Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=308.38<SMA20=309.03)","ts":"2025-12-12T16:52:05Z","ts_et":"2025-12-12 11:52:05 ET"}
+2025-12-12T16:52:05.9819570Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=331.00<SMA20=339.96)","ts":"2025-12-12T16:52:05Z","ts_et":"2025-12-12 11:52:05 ET"}
+2025-12-12T16:52:07.4900796Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.04<SMA20=26.27)","ts":"2025-12-12T16:52:07Z","ts_et":"2025-12-12 11:52:07 ET"}
+2025-12-12T16:52:09.0868037Z {"type":"SPREAD_SIGNAL","underlying":"KKR","signal_reason":"RSI_oversold(16.1)","entry_price":136.67,"rsi":16.12,"atr":0.9661,"ts":"2025-12-12T16:52:09Z","ts_et":"2025-12-12 11:52:09 ET"}
+2025-12-12T16:52:10.6566902Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.84<SMA20=298.86)","ts":"2025-12-12T16:52:10Z","ts_et":"2025-12-12 11:52:10 ET"}
+2025-12-12T16:52:14.2284031Z {"type":"SPREAD_SIGNAL","underlying":"CAT","signal_reason":"RSI_oversold(23.3)","entry_price":600.815,"rsi":23.29,"atr":4.0702,"ts":"2025-12-12T16:52:14Z","ts_et":"2025-12-12 11:52:14 ET"}
+2025-12-12T16:52:17.3405512Z {"type":"SPREAD_SIGNAL","underlying":"IBM","signal_reason":"RSI_oversold(23.2)","entry_price":304.58,"rsi":23.18,"atr":1.1634,"ts":"2025-12-12T16:52:17Z","ts_et":"2025-12-12 11:52:17 ET"}
+2025-12-12T16:52:17.9439678Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=225.78<SMA20=228.55)","ts":"2025-12-12T16:52:17Z","ts_et":"2025-12-12 11:52:17 ET"}
+2025-12-12T16:52:25.7517937Z {"event":"signals_found","count":7,"symbols":["STX","TER","DELL","GLW","KKR","CAT","IBM"],"type":"HEARTBEAT","ts":"2025-12-12T16:52:25Z","ts_et":"2025-12-12 11:52:25 ET"}
+2025-12-12T16:52:26.9502630Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for STX
+2025-12-12T16:52:26.9503847Z [spreads] STX: Long 277.5 / Short 282.5 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:52:27.5610870Z {"type":"SPREAD_SKIP","underlying":"STX","skip_reason":"Debit_too_high(4.95>3.00)","ts":"2025-12-12T16:52:27Z","ts_et":"2025-12-12 11:52:27 ET"}
+2025-12-12T16:52:28.7125671Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for TER
+2025-12-12T16:52:28.7126808Z [spreads] TER: Long 192.5 / Short 197.5 (width=$5.00, exp=2025-12-19)
+2025-12-12T16:52:30.2585550Z [options] Submitting spread: TER251219C00192500 (buy) / TER251219C00197500 (sell) @ $2.94 debit
+2025-12-12T16:52:30.5814695Z [options] Spread order submitted: a0d67d38-ce53-4275-8b99-9e16faac594c
+2025-12-12T16:52:30.5826564Z [registry] Recorded entry: TER251219C00192500 (order_id=15M_OPT_TER251219C00192500_176...)
+2025-12-12T16:52:30.5831209Z {"type":"SPREAD_ENTRY","underlying":"TER","long_symbol":"TER251219C00192500","short_symbol":"TER251219C00197500","atm_strike":192.5,"otm_strike":197.5,"spread_width":5.0,"net_debit":2.94,"total_cost":294.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(22.1)","signal_rsi":22.1,"signal_atr":1.6002,"entry_ts":"2025-12-12T16:52:30Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:52:30Z","ts_et":"2025-12-12 11:52:30 ET"}
+2025-12-12T16:52:31.8081386Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for DELL
+2025-12-12T16:52:31.8082471Z [spreads] DELL: Long 131.0 / Short 134.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T16:52:32.3962488Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Debit_too_high(3.15>3.00)","ts":"2025-12-12T16:52:32Z","ts_et":"2025-12-12 11:52:32 ET"}
+2025-12-12T16:52:33.6139385Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for GLW
+2025-12-12T16:52:33.6140873Z [spreads] GLW: Long 88.0 / Short 90.0 (width=$2.00, exp=2025-12-19)
+2025-12-12T16:52:35.1644001Z [options] Submitting spread: GLW251219C00088000 (buy) / GLW251219C00090000 (sell) @ $1.29 debit
+2025-12-12T16:52:35.4955311Z [options] Spread order submitted: 2f032a93-ef79-4a4b-b742-34b7195a47d9
+2025-12-12T16:52:35.4966404Z [registry] Recorded entry: GLW251219C00088000 (order_id=15M_OPT_GLW251219C00088000_176...)
+2025-12-12T16:52:35.4970133Z {"type":"SPREAD_ENTRY","underlying":"GLW","long_symbol":"GLW251219C00088000","short_symbol":"GLW251219C00090000","atm_strike":88.0,"otm_strike":90.0,"spread_width":2.0,"net_debit":1.29,"total_cost":129.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(19.3)","signal_rsi":19.26,"signal_atr":0.8643,"entry_ts":"2025-12-12T16:52:35Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:52:35Z","ts_et":"2025-12-12 11:52:35 ET"}
+2025-12-12T16:52:36.7019671Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for KKR
+2025-12-12T16:52:36.7020712Z [spreads] KKR: Long 136.0 / Short 139.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T16:52:38.3182455Z [options] Submitting spread: KKR251219C00136000 (buy) / KKR251219C00139000 (sell) @ $1.78 debit
+2025-12-12T16:52:38.6429606Z [options] Spread order submitted: 8cb1cb46-543c-44b0-8487-0cd3e872b77f
+2025-12-12T16:52:38.6441637Z [registry] Recorded entry: KKR251219C00136000 (order_id=15M_OPT_KKR251219C00136000_176...)
+2025-12-12T16:52:38.6443385Z {"type":"SPREAD_ENTRY","underlying":"KKR","long_symbol":"KKR251219C00136000","short_symbol":"KKR251219C00139000","atm_strike":136.0,"otm_strike":139.0,"spread_width":3.0,"net_debit":1.78,"total_cost":178.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(16.1)","signal_rsi":16.12,"signal_atr":0.9661,"entry_ts":"2025-12-12T16:52:38Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:52:38Z","ts_et":"2025-12-12 11:52:38 ET"}
+2025-12-12T16:52:39.8257863Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for CAT
+2025-12-12T16:52:39.8258712Z [spreads] CAT: Long 600.0 / Short 612.5 (width=$12.50, exp=2025-12-19)
+2025-12-12T16:52:40.4737073Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Debit_too_high(7.31>3.00)","ts":"2025-12-12T16:52:40Z","ts_et":"2025-12-12 11:52:40 ET"}
+2025-12-12T16:52:41.8023908Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for IBM
+2025-12-12T16:52:41.8025251Z [spreads] IBM: Long 307.5 / Short 315.0 (width=$7.50, exp=2025-12-19)
+2025-12-12T16:52:43.3941746Z [options] Submitting spread: IBM251219C00307500 (buy) / IBM251219C00315000 (sell) @ $2.46 debit
+2025-12-12T16:52:43.6975483Z [options] Spread order submitted: aff64bfd-bd4d-444d-a8da-10d478d3b873
+2025-12-12T16:52:43.6992084Z [registry] Recorded entry: IBM251219C00307500 (order_id=15M_OPT_IBM251219C00307500_176...)
+2025-12-12T16:52:43.6996459Z {"type":"SPREAD_ENTRY","underlying":"IBM","long_symbol":"IBM251219C00307500","short_symbol":"IBM251219C00315000","atm_strike":307.5,"otm_strike":315.0,"spread_width":7.5,"net_debit":2.46,"total_cost":246.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(23.2)","signal_rsi":23.18,"signal_atr":1.1634,"entry_ts":"2025-12-12T16:52:43Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T16:52:43Z","ts_et":"2025-12-12 11:52:43 ET"}
+2025-12-12T16:52:43.7001611Z {"event":"scan_complete","signals":7,"new_entries":4,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-12T16:52:43Z","ts_et":"2025-12-12 11:52:43 ET"}
+2025-12-12T16:52:43.7003176Z {"event":"scan_cycle_end","cycle":3,"new_entries":4,"type":"HEARTBEAT","ts":"2025-12-12T16:52:43Z","ts_et":"2025-12-12 11:52:43 ET"}
+2025-12-12T16:52:43.7004635Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"11:52","type":"HEARTBEAT","ts":"2025-12-12T16:52:43Z","ts_et":"2025-12-12 11:52:43 ET"}
+2025-12-12T17:07:44.0207292Z {"event":"scan_cycle_start","cycle":4,"time":"12:07","type":"HEARTBEAT","ts":"2025-12-12T17:07:44Z","ts_et":"2025-12-12 12:07:44 ET"}
+2025-12-12T17:07:44.0211320Z {"event":"scan_start","current_time":"12:07","type":"HEARTBEAT","ts":"2025-12-12T17:07:44Z","ts_et":"2025-12-12 12:07:44 ET"}
+2025-12-12T17:07:44.8685365Z [options] Attempting spread close:
+2025-12-12T17:07:44.8687798Z [options]   Long: GLW251219C00088000 @ bid=2.8
+2025-12-12T17:07:44.8688129Z [options]   Short: GLW251219C00090000 @ ask=1.91
+2025-12-12T17:07:44.8689317Z [options]   Net credit: $0.89, limit_price: $0.89
+2025-12-12T17:07:44.8690229Z [options] Closing spread: GLW251219C00088000 (sell) / GLW251219C00090000 (buy) @ $0.89 credit
+2025-12-12T17:07:45.1734970Z [options] Spread close order submitted: c610bf60-4d7c-4970-bbae-4a1b47ec4d2e
+2025-12-12T17:07:45.1736190Z {"type":"SPREAD_EXIT","underlying":"GLW","long_symbol":"GLW251219C00088000","short_symbol":"GLW251219C00090000","exit_value":0.82,"exit_reason":"SL_hit(-68.8%<=-50.0%)","pnl":-181.0,"pnl_pct":-68.8,"ts":"2025-12-12T17:07:45Z","ts_et":"2025-12-12 12:07:45 ET"}
+2025-12-12T17:07:45.1737354Z [registry] Recorded exit: GLW251219C00088000 (SL_hit(-68.8%<=-50.0%))
+2025-12-12T17:07:45.1737881Z [positions] Registry updated: removed GLW251219C00088000
+2025-12-12T17:07:45.7531946Z [options] Attempting spread close:
+2025-12-12T17:07:45.7533551Z [options]   Long: KKR251219C00136000 @ bid=3.02
+2025-12-12T17:07:45.7534833Z [options]   Short: KKR251219C00139000 @ ask=1.98
+2025-12-12T17:07:45.7535487Z [options]   Net credit: $1.04, limit_price: $1.04
+2025-12-12T17:07:45.7536238Z [options] Closing spread: KKR251219C00136000 (sell) / KKR251219C00139000 (buy) @ $1.04 credit
+2025-12-12T17:07:46.0797053Z [options] Spread close order submitted: 2265eb71-f3c5-47f0-bffa-8ac6afa2335d
+2025-12-12T17:07:46.0801057Z {"type":"SPREAD_EXIT","underlying":"KKR","long_symbol":"KKR251219C00136000","short_symbol":"KKR251219C00139000","exit_value":1.0,"exit_reason":"SL_hit(-68.8%<=-50.0%)","pnl":-220.0,"pnl_pct":-68.8,"ts":"2025-12-12T17:07:46Z","ts_et":"2025-12-12 12:07:46 ET"}
+2025-12-12T17:07:46.0811622Z [registry] Recorded exit: KKR251219C00136000 (SL_hit(-68.8%<=-50.0%))
+2025-12-12T17:07:46.0812485Z [positions] Registry updated: removed KKR251219C00136000
+2025-12-12T17:08:02.2552210Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.77<SMA20=123.76)","ts":"2025-12-12T17:08:02Z","ts_et":"2025-12-12 12:08:02 ET"}
+2025-12-12T17:08:03.2041332Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.84<SMA20=174.04)","ts":"2025-12-12T17:08:03Z","ts_et":"2025-12-12 12:08:03 ET"}
+2025-12-12T17:08:03.5163299Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=264.19<SMA20=264.96)","ts":"2025-12-12T17:08:03Z","ts_et":"2025-12-12 12:08:03 ET"}
+2025-12-12T17:08:05.4215318Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=187.64<SMA20=209.86)","ts":"2025-12-12T17:08:05Z","ts_et":"2025-12-12 12:08:05 ET"}
+2025-12-12T17:08:06.3538224Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.71<SMA20=33.84)","ts":"2025-12-12T17:08:06Z","ts_et":"2025-12-12 12:08:06 ET"}
+2025-12-12T17:08:07.3204083Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=361.02<SMA20=377.05)","ts":"2025-12-12T17:08:07Z","ts_et":"2025-12-12 12:08:07 ET"}
+2025-12-12T17:08:10.1465209Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=253.47<SMA20=258.45)","ts":"2025-12-12T17:08:10Z","ts_et":"2025-12-12 12:08:10 ET"}
+2025-12-12T17:08:10.7320885Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=501.35<SMA20=513.32)","ts":"2025-12-12T17:08:10Z","ts_et":"2025-12-12 12:08:10 ET"}
+2025-12-12T17:08:11.6469989Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=175.83<SMA20=182.06)","ts":"2025-12-12T17:08:11Z","ts_et":"2025-12-12 12:08:11 ET"}
+2025-12-12T17:08:12.2494591Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.18<SMA20=127.07)","ts":"2025-12-12T17:08:12Z","ts_et":"2025-12-12 12:08:12 ET"}
+2025-12-12T17:08:12.8848065Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.31<SMA20=157.65)","ts":"2025-12-12T17:08:12Z","ts_et":"2025-12-12 12:08:12 ET"}
+2025-12-12T17:08:18.2097521Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=307.75<SMA20=308.60)","ts":"2025-12-12T17:08:18Z","ts_et":"2025-12-12 12:08:18 ET"}
+2025-12-12T17:08:19.4696317Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=331.65<SMA20=340.05)","ts":"2025-12-12T17:08:19Z","ts_et":"2025-12-12 12:08:19 ET"}
+2025-12-12T17:08:20.9741660Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.02<SMA20=26.27)","ts":"2025-12-12T17:08:20Z","ts_et":"2025-12-12 12:08:20 ET"}
+2025-12-12T17:08:24.0500213Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.90<SMA20=298.86)","ts":"2025-12-12T17:08:24Z","ts_et":"2025-12-12 12:08:24 ET"}
+2025-12-12T17:08:31.0423052Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.29<SMA20=228.58)","ts":"2025-12-12T17:08:31Z","ts_et":"2025-12-12 12:08:31 ET"}
+2025-12-12T17:08:38.6415805Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T17:08:38Z","ts_et":"2025-12-12 12:08:38 ET"}
+2025-12-12T17:08:38.6417573Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-12T17:08:38Z","ts_et":"2025-12-12 12:08:38 ET"}
+2025-12-12T17:08:38.6419314Z {"event":"scan_cycle_end","cycle":4,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T17:08:38Z","ts_et":"2025-12-12 12:08:38 ET"}
+2025-12-12T17:08:38.6421180Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:08","type":"HEARTBEAT","ts":"2025-12-12T17:08:38Z","ts_et":"2025-12-12 12:08:38 ET"}
+2025-12-12T17:23:38.9415423Z {"event":"scan_cycle_start","cycle":5,"time":"12:23","type":"HEARTBEAT","ts":"2025-12-12T17:23:38Z","ts_et":"2025-12-12 12:23:38 ET"}
+2025-12-12T17:23:38.9416909Z {"event":"scan_start","current_time":"12:23","type":"HEARTBEAT","ts":"2025-12-12T17:23:38Z","ts_et":"2025-12-12 12:23:38 ET"}
+2025-12-12T17:23:55.0710452Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.68<SMA20=123.76)","ts":"2025-12-12T17:23:55Z","ts_et":"2025-12-12 12:23:55 ET"}
+2025-12-12T17:23:55.9787150Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.66<SMA20=174.15)","ts":"2025-12-12T17:23:55Z","ts_et":"2025-12-12 12:23:55 ET"}
+2025-12-12T17:23:58.0987559Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=188.46<SMA20=209.87)","ts":"2025-12-12T17:23:58Z","ts_et":"2025-12-12 12:23:58 ET"}
+2025-12-12T17:23:58.9916977Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.08<SMA20=33.84)","ts":"2025-12-12T17:23:58Z","ts_et":"2025-12-12 12:23:58 ET"}
+2025-12-12T17:23:59.9062349Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=364.03<SMA20=377.12)","ts":"2025-12-12T17:23:59Z","ts_et":"2025-12-12 12:23:59 ET"}
+2025-12-12T17:24:02.6300886Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=257.15<SMA20=258.55)","ts":"2025-12-12T17:24:02Z","ts_et":"2025-12-12 12:24:02 ET"}
+2025-12-12T17:24:03.2432639Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=504.56<SMA20=513.43)","ts":"2025-12-12T17:24:03Z","ts_et":"2025-12-12 12:24:03 ET"}
+2025-12-12T17:24:04.1944820Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.86<SMA20=182.08)","ts":"2025-12-12T17:24:04Z","ts_et":"2025-12-12 12:24:04 ET"}
+2025-12-12T17:24:04.7917124Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.92<SMA20=127.07)","ts":"2025-12-12T17:24:04Z","ts_et":"2025-12-12 12:24:04 ET"}
+2025-12-12T17:24:05.3876510Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.74<SMA20=157.67)","ts":"2025-12-12T17:24:05Z","ts_et":"2025-12-12 12:24:05 ET"}
+2025-12-12T17:24:11.8253614Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.88<SMA20=340.11)","ts":"2025-12-12T17:24:11Z","ts_et":"2025-12-12 12:24:11 ET"}
+2025-12-12T17:24:13.4377933Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.12<SMA20=26.27)","ts":"2025-12-12T17:24:13Z","ts_et":"2025-12-12 12:24:13 ET"}
+2025-12-12T17:24:16.5440015Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.94<SMA20=298.85)","ts":"2025-12-12T17:24:16Z","ts_et":"2025-12-12 12:24:16 ET"}
+2025-12-12T17:24:23.5868805Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.38<SMA20=228.58)","ts":"2025-12-12T17:24:23Z","ts_et":"2025-12-12 12:24:23 ET"}
+2025-12-12T17:24:31.2780159Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T17:24:31Z","ts_et":"2025-12-12 12:24:31 ET"}
+2025-12-12T17:24:31.2781783Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-12T17:24:31Z","ts_et":"2025-12-12 12:24:31 ET"}
+2025-12-12T17:24:31.2783460Z {"event":"scan_cycle_end","cycle":5,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T17:24:31Z","ts_et":"2025-12-12 12:24:31 ET"}
+2025-12-12T17:24:31.2785177Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:24","type":"HEARTBEAT","ts":"2025-12-12T17:24:31Z","ts_et":"2025-12-12 12:24:31 ET"}
+2025-12-12T17:39:31.5680464Z {"event":"scan_cycle_start","cycle":6,"time":"12:39","type":"HEARTBEAT","ts":"2025-12-12T17:39:31Z","ts_et":"2025-12-12 12:39:31 ET"}
+2025-12-12T17:39:31.5682065Z {"event":"scan_start","current_time":"12:39","type":"HEARTBEAT","ts":"2025-12-12T17:39:31Z","ts_et":"2025-12-12 12:39:31 ET"}
+2025-12-12T17:39:47.5158935Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.86<SMA20=123.73)","ts":"2025-12-12T17:39:47Z","ts_et":"2025-12-12 12:39:47 ET"}
+2025-12-12T17:39:48.4124095Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.07<SMA20=174.09)","ts":"2025-12-12T17:39:48Z","ts_et":"2025-12-12 12:39:48 ET"}
+2025-12-12T17:39:50.4431827Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=265.62<SMA20=266.73)","ts":"2025-12-12T17:39:50Z","ts_et":"2025-12-12 12:39:50 ET"}
+2025-12-12T17:39:50.7596206Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=188.57<SMA20=209.88)","ts":"2025-12-12T17:39:50Z","ts_et":"2025-12-12 12:39:50 ET"}
+2025-12-12T17:39:51.7060964Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.94<SMA20=33.84)","ts":"2025-12-12T17:39:51Z","ts_et":"2025-12-12 12:39:51 ET"}
+2025-12-12T17:39:52.6119422Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=362.79<SMA20=376.97)","ts":"2025-12-12T17:39:52Z","ts_et":"2025-12-12 12:39:52 ET"}
+2025-12-12T17:39:55.4428072Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=257.72<SMA20=258.51)","ts":"2025-12-12T17:39:55Z","ts_et":"2025-12-12 12:39:55 ET"}
+2025-12-12T17:39:56.0311299Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=504.05<SMA20=513.33)","ts":"2025-12-12T17:39:56Z","ts_et":"2025-12-12 12:39:56 ET"}
+2025-12-12T17:39:56.9851027Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.52<SMA20=182.07)","ts":"2025-12-12T17:39:56Z","ts_et":"2025-12-12 12:39:56 ET"}
+2025-12-12T17:39:57.6035969Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.50<SMA20=127.04)","ts":"2025-12-12T17:39:57Z","ts_et":"2025-12-12 12:39:57 ET"}
+2025-12-12T17:39:58.2030498Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.65<SMA20=157.65)","ts":"2025-12-12T17:39:58Z","ts_et":"2025-12-12 12:39:58 ET"}
+2025-12-12T17:40:03.4994470Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=308.26<SMA20=308.60)","ts":"2025-12-12T17:40:03Z","ts_et":"2025-12-12 12:40:03 ET"}
+2025-12-12T17:40:04.7853679Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.84<SMA20=340.05)","ts":"2025-12-12T17:40:04Z","ts_et":"2025-12-12 12:40:04 ET"}
+2025-12-12T17:40:06.3520328Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.11<SMA20=26.27)","ts":"2025-12-12T17:40:06Z","ts_et":"2025-12-12 12:40:06 ET"}
+2025-12-12T17:40:09.4219377Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.76<SMA20=298.88)","ts":"2025-12-12T17:40:09Z","ts_et":"2025-12-12 12:40:09 ET"}
+2025-12-12T17:40:16.5091019Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.34<SMA20=228.59)","ts":"2025-12-12T17:40:16Z","ts_et":"2025-12-12 12:40:16 ET"}
+2025-12-12T17:40:24.2621199Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T17:40:24Z","ts_et":"2025-12-12 12:40:24 ET"}
+2025-12-12T17:40:24.2625073Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":7,"type":"HEARTBEAT","ts":"2025-12-12T17:40:24Z","ts_et":"2025-12-12 12:40:24 ET"}
+2025-12-12T17:40:24.2628886Z {"event":"scan_cycle_end","cycle":6,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T17:40:24Z","ts_et":"2025-12-12 12:40:24 ET"}
+2025-12-12T17:40:24.2631002Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:40","type":"HEARTBEAT","ts":"2025-12-12T17:40:24Z","ts_et":"2025-12-12 12:40:24 ET"}
+2025-12-12T17:55:24.5582648Z {"event":"scan_cycle_start","cycle":7,"time":"12:55","type":"HEARTBEAT","ts":"2025-12-12T17:55:24Z","ts_et":"2025-12-12 12:55:24 ET"}
+2025-12-12T17:55:24.5584248Z {"event":"scan_start","current_time":"12:55","type":"HEARTBEAT","ts":"2025-12-12T17:55:24Z","ts_et":"2025-12-12 12:55:24 ET"}
+2025-12-12T17:55:25.4351956Z [options] Attempting spread close:
+2025-12-12T17:55:25.4352669Z [options]   Long: TER251219C00192500 @ bid=6.98
+2025-12-12T17:55:25.4353347Z [options]   Short: TER251219C00197500 @ ask=4.91
+2025-12-12T17:55:25.4354010Z [options]   Net credit: $2.07, limit_price: $2.07
+2025-12-12T17:55:25.4354985Z [options] Closing spread: TER251219C00192500 (sell) / TER251219C00197500 (buy) @ $2.07 credit
+2025-12-12T17:55:25.7646338Z [options] Spread close order submitted: e4fdfea4-a291-43c2-8ad1-5696844bd0a1
+2025-12-12T17:55:25.7651500Z {"type":"SPREAD_EXIT","underlying":"TER","long_symbol":"TER251219C00192500","short_symbol":"TER251219C00197500","exit_value":2.1,"exit_reason":"SL_hit(-64.4%<=-50.0%)","pnl":-380.0,"pnl_pct":-64.4,"ts":"2025-12-12T17:55:25Z","ts_et":"2025-12-12 12:55:25 ET"}
+2025-12-12T17:55:25.7676685Z [registry] Recorded exit: TER251219C00192500 (SL_hit(-64.4%<=-50.0%))
+2025-12-12T17:55:25.7677691Z [positions] Registry updated: removed TER251219C00192500
+2025-12-12T17:55:41.5844702Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.07<SMA20=123.75)","ts":"2025-12-12T17:55:41Z","ts_et":"2025-12-12 12:55:41 ET"}
+2025-12-12T17:55:42.5569562Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.11<SMA20=174.13)","ts":"2025-12-12T17:55:42Z","ts_et":"2025-12-12 12:55:42 ET"}
+2025-12-12T17:55:44.4411188Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=265.32<SMA20=266.78)","ts":"2025-12-12T17:55:44Z","ts_et":"2025-12-12 12:55:44 ET"}
+2025-12-12T17:55:44.7449537Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=189.81<SMA20=209.94)","ts":"2025-12-12T17:55:44Z","ts_et":"2025-12-12 12:55:44 ET"}
+2025-12-12T17:55:45.6429519Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.04<SMA20=33.84)","ts":"2025-12-12T17:55:45Z","ts_et":"2025-12-12 12:55:45 ET"}
+2025-12-12T17:55:46.5362071Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=362.81<SMA20=377.03)","ts":"2025-12-12T17:55:46Z","ts_et":"2025-12-12 12:55:46 ET"}
+2025-12-12T17:55:48.9399734Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=354.58<SMA20=355.61)","ts":"2025-12-12T17:55:48Z","ts_et":"2025-12-12 12:55:48 ET"}
+2025-12-12T17:55:49.2433824Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=257.91<SMA20=258.57)","ts":"2025-12-12T17:55:49Z","ts_et":"2025-12-12 12:55:49 ET"}
+2025-12-12T17:55:49.8299107Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=504.70<SMA20=513.42)","ts":"2025-12-12T17:55:49Z","ts_et":"2025-12-12 12:55:49 ET"}
+2025-12-12T17:55:50.7759507Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.35<SMA20=182.07)","ts":"2025-12-12T17:55:50Z","ts_et":"2025-12-12 12:55:50 ET"}
+2025-12-12T17:55:51.3686865Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.22<SMA20=127.05)","ts":"2025-12-12T17:55:51Z","ts_et":"2025-12-12 12:55:51 ET"}
+2025-12-12T17:55:51.9847840Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=154.86<SMA20=157.68)","ts":"2025-12-12T17:55:51Z","ts_et":"2025-12-12 12:55:51 ET"}
+2025-12-12T17:55:58.2937080Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=333.43<SMA20=340.10)","ts":"2025-12-12T17:55:58Z","ts_et":"2025-12-12 12:55:58 ET"}
+2025-12-12T17:55:59.8252401Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.21<SMA20=26.28)","ts":"2025-12-12T17:55:59Z","ts_et":"2025-12-12 12:55:59 ET"}
+2025-12-12T17:56:02.9738842Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.52<SMA20=298.87)","ts":"2025-12-12T17:56:02Z","ts_et":"2025-12-12 12:56:02 ET"}
+2025-12-12T17:56:10.1718341Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.45<SMA20=228.58)","ts":"2025-12-12T17:56:10Z","ts_et":"2025-12-12 12:56:10 ET"}
+2025-12-12T17:56:17.7404605Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T17:56:17Z","ts_et":"2025-12-12 12:56:17 ET"}
+2025-12-12T17:56:17.7405353Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T17:56:17Z","ts_et":"2025-12-12 12:56:17 ET"}
+2025-12-12T17:56:17.7406050Z {"event":"scan_cycle_end","cycle":7,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T17:56:17Z","ts_et":"2025-12-12 12:56:17 ET"}
+2025-12-12T17:56:17.7406732Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"12:56","type":"HEARTBEAT","ts":"2025-12-12T17:56:17Z","ts_et":"2025-12-12 12:56:17 ET"}
+2025-12-12T18:11:18.1253911Z {"event":"scan_cycle_start","cycle":8,"time":"13:11","type":"HEARTBEAT","ts":"2025-12-12T18:11:18Z","ts_et":"2025-12-12 13:11:18 ET"}
+2025-12-12T18:11:18.1256012Z {"event":"scan_start","current_time":"13:11","type":"HEARTBEAT","ts":"2025-12-12T18:11:18Z","ts_et":"2025-12-12 13:11:18 ET"}
+2025-12-12T18:11:34.7335808Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.23<SMA20=123.73)","ts":"2025-12-12T18:11:34Z","ts_et":"2025-12-12 13:11:34 ET"}
+2025-12-12T18:11:35.7063045Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.51<SMA20=174.14)","ts":"2025-12-12T18:11:35Z","ts_et":"2025-12-12 13:11:35 ET"}
+2025-12-12T18:11:37.5533798Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=266.38<SMA20=266.78)","ts":"2025-12-12T18:11:37Z","ts_et":"2025-12-12 13:11:37 ET"}
+2025-12-12T18:11:37.8609805Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=190.46<SMA20=210.00)","ts":"2025-12-12T18:11:37Z","ts_et":"2025-12-12 13:11:37 ET"}
+2025-12-12T18:11:38.7763336Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.04<SMA20=33.84)","ts":"2025-12-12T18:11:38Z","ts_et":"2025-12-12 13:11:38 ET"}
+2025-12-12T18:11:39.6740685Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=362.67<SMA20=377.04)","ts":"2025-12-12T18:11:39Z","ts_et":"2025-12-12 13:11:39 ET"}
+2025-12-12T18:11:42.6128224Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=354.90<SMA20=355.55)","ts":"2025-12-12T18:11:42Z","ts_et":"2025-12-12 13:11:42 ET"}
+2025-12-12T18:11:42.9143835Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=258.36<SMA20=258.56)","ts":"2025-12-12T18:11:42Z","ts_et":"2025-12-12 13:11:42 ET"}
+2025-12-12T18:11:43.5270382Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=506.26<SMA20=513.49)","ts":"2025-12-12T18:11:43Z","ts_et":"2025-12-12 13:11:43 ET"}
+2025-12-12T18:11:44.4021489Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.88<SMA20=182.07)","ts":"2025-12-12T18:11:44Z","ts_et":"2025-12-12 13:11:44 ET"}
+2025-12-12T18:11:44.9919208Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.71<SMA20=127.06)","ts":"2025-12-12T18:11:44Z","ts_et":"2025-12-12 13:11:44 ET"}
+2025-12-12T18:11:45.5854609Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.12<SMA20=157.69)","ts":"2025-12-12T18:11:45Z","ts_et":"2025-12-12 13:11:45 ET"}
+2025-12-12T18:11:51.9668002Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.74<SMA20=340.11)","ts":"2025-12-12T18:11:51Z","ts_et":"2025-12-12 13:11:51 ET"}
+2025-12-12T18:11:53.5604145Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.20<SMA20=26.28)","ts":"2025-12-12T18:11:53Z","ts_et":"2025-12-12 13:11:53 ET"}
+2025-12-12T18:11:55.0896821Z {"type":"SPREAD_SIGNAL","underlying":"KKR","signal_reason":"RSI_oversold(21.6)","entry_price":136.6,"rsi":21.6,"atr":0.8438,"ts":"2025-12-12T18:11:55Z","ts_et":"2025-12-12 13:11:55 ET"}
+2025-12-12T18:11:56.6753693Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.72<SMA20=298.88)","ts":"2025-12-12T18:11:56Z","ts_et":"2025-12-12 13:11:56 ET"}
+2025-12-12T18:12:03.7635145Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.51<SMA20=228.57)","ts":"2025-12-12T18:12:03Z","ts_et":"2025-12-12 13:12:03 ET"}
+2025-12-12T18:12:11.4857897Z {"event":"signals_found","count":1,"symbols":["KKR"],"type":"HEARTBEAT","ts":"2025-12-12T18:12:11Z","ts_et":"2025-12-12 13:12:11 ET"}
+2025-12-12T18:12:12.6955864Z [spreads] Using 5 DTE (2025-12-19) instead of 3 DTE for KKR
+2025-12-12T18:12:12.6956604Z [spreads] KKR: Long 140.0 / Short 143.0 (width=$3.00, exp=2025-12-19)
+2025-12-12T18:12:14.2137926Z [options] Submitting spread: KKR251219C00140000 (buy) / KKR251219C00143000 (sell) @ $1.05 debit
+2025-12-12T18:12:14.5179216Z [options] Spread order submitted: 0f257b45-04e7-41e1-b11f-2f55b7a35329
+2025-12-12T18:12:14.5196505Z [registry] Recorded entry: KKR251219C00140000 (order_id=15M_OPT_KKR251219C00140000_176...)
+2025-12-12T18:12:14.5199733Z {"type":"SPREAD_ENTRY","underlying":"KKR","long_symbol":"KKR251219C00140000","short_symbol":"KKR251219C00143000","atm_strike":140.0,"otm_strike":143.0,"spread_width":3.0,"net_debit":1.05,"total_cost":105.0,"contracts":1,"expiration":"2025-12-19","entry_reason":"RSI_oversold(21.6)","signal_rsi":21.6,"signal_atr":0.8438,"entry_ts":"2025-12-12T18:12:14Z","exit_ts":null,"exit_reason":null,"exit_value":null,"pnl":null,"ts":"2025-12-12T18:12:14Z","ts_et":"2025-12-12 13:12:14 ET"}
+2025-12-12T18:12:14.5203502Z {"event":"scan_complete","signals":1,"new_entries":1,"total_positions":6,"type":"HEARTBEAT","ts":"2025-12-12T18:12:14Z","ts_et":"2025-12-12 13:12:14 ET"}
+2025-12-12T18:12:14.5205080Z {"event":"scan_cycle_end","cycle":8,"new_entries":1,"type":"HEARTBEAT","ts":"2025-12-12T18:12:14Z","ts_et":"2025-12-12 13:12:14 ET"}
+2025-12-12T18:12:14.5206547Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:12","type":"HEARTBEAT","ts":"2025-12-12T18:12:14Z","ts_et":"2025-12-12 13:12:14 ET"}
+2025-12-12T18:27:14.8374837Z {"event":"scan_cycle_start","cycle":9,"time":"13:27","type":"HEARTBEAT","ts":"2025-12-12T18:27:14Z","ts_et":"2025-12-12 13:27:14 ET"}
+2025-12-12T18:27:14.8378000Z {"event":"scan_start","current_time":"13:27","type":"HEARTBEAT","ts":"2025-12-12T18:27:14Z","ts_et":"2025-12-12 13:27:14 ET"}
+2025-12-12T18:27:15.7238116Z [options] Attempting spread close:
+2025-12-12T18:27:15.7239089Z [options]   Long: KKR251219C00140000 @ bid=1.17
+2025-12-12T18:27:15.7239743Z [options]   Short: KKR251219C00143000 @ ask=0.68
+2025-12-12T18:27:15.7240408Z [options]   Net credit: $0.49, limit_price: $0.49
+2025-12-12T18:27:15.7241393Z [options] Closing spread: KKR251219C00140000 (sell) / KKR251219C00143000 (buy) @ $0.49 credit
+2025-12-12T18:27:16.0205295Z [options] Spread close order submitted: b45e71b8-30ba-4d4a-bb1a-ac983cf2e834
+2025-12-12T18:27:16.0207587Z {"type":"SPREAD_EXIT","underlying":"KKR","long_symbol":"KKR251219C00140000","short_symbol":"KKR251219C00143000","exit_value":0.45,"exit_reason":"SL_hit(-66.7%<=-50.0%)","pnl":-90.0,"pnl_pct":-66.7,"ts":"2025-12-12T18:27:16Z","ts_et":"2025-12-12 13:27:16 ET"}
+2025-12-12T18:27:16.0215314Z [registry] Recorded exit: KKR251219C00140000 (SL_hit(-66.7%<=-50.0%))
+2025-12-12T18:27:16.0215724Z [positions] Registry updated: removed KKR251219C00140000
+2025-12-12T18:27:32.4723609Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.64<SMA20=123.80)","ts":"2025-12-12T18:27:32Z","ts_et":"2025-12-12 13:27:32 ET"}
+2025-12-12T18:27:33.3875864Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=165.98<SMA20=174.25)","ts":"2025-12-12T18:27:33Z","ts_et":"2025-12-12 13:27:33 ET"}
+2025-12-12T18:27:35.1882267Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=266.07<SMA20=266.73)","ts":"2025-12-12T18:27:35Z","ts_et":"2025-12-12 13:27:35 ET"}
+2025-12-12T18:27:35.5066093Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=193.47<SMA20=210.05)","ts":"2025-12-12T18:27:35Z","ts_et":"2025-12-12 13:27:35 ET"}
+2025-12-12T18:27:36.4091175Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.30<SMA20=33.85)","ts":"2025-12-12T18:27:36Z","ts_et":"2025-12-12 13:27:36 ET"}
+2025-12-12T18:27:37.2810768Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=364.72<SMA20=377.04)","ts":"2025-12-12T18:27:37Z","ts_et":"2025-12-12 13:27:37 ET"}
+2025-12-12T18:27:40.6654036Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=508.67<SMA20=513.49)","ts":"2025-12-12T18:27:40Z","ts_et":"2025-12-12 13:27:40 ET"}
+2025-12-12T18:27:41.5738512Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.56<SMA20=182.08)","ts":"2025-12-12T18:27:41Z","ts_et":"2025-12-12 13:27:41 ET"}
+2025-12-12T18:27:42.2039923Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.19<SMA20=127.11)","ts":"2025-12-12T18:27:42Z","ts_et":"2025-12-12 13:27:42 ET"}
+2025-12-12T18:27:42.8091679Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.75<SMA20=157.71)","ts":"2025-12-12T18:27:42Z","ts_et":"2025-12-12 13:27:42 ET"}
+2025-12-12T18:27:49.2506730Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.89<SMA20=340.23)","ts":"2025-12-12T18:27:49Z","ts_et":"2025-12-12 13:27:49 ET"}
+2025-12-12T18:27:53.8193742Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.77<SMA20=298.86)","ts":"2025-12-12T18:27:53Z","ts_et":"2025-12-12 13:27:53 ET"}
+2025-12-12T18:28:00.8342000Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.84<SMA20=228.60)","ts":"2025-12-12T18:28:00Z","ts_et":"2025-12-12 13:28:00 ET"}
+2025-12-12T18:28:08.5205793Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T18:28:08Z","ts_et":"2025-12-12 13:28:08 ET"}
+2025-12-12T18:28:08.5207875Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T18:28:08Z","ts_et":"2025-12-12 13:28:08 ET"}
+2025-12-12T18:28:08.5209624Z {"event":"scan_cycle_end","cycle":9,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T18:28:08Z","ts_et":"2025-12-12 13:28:08 ET"}
+2025-12-12T18:28:08.5212181Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:28","type":"HEARTBEAT","ts":"2025-12-12T18:28:08Z","ts_et":"2025-12-12 13:28:08 ET"}
+2025-12-12T18:43:08.7992424Z {"event":"scan_cycle_start","cycle":10,"time":"13:43","type":"HEARTBEAT","ts":"2025-12-12T18:43:08Z","ts_et":"2025-12-12 13:43:08 ET"}
+2025-12-12T18:43:08.7993354Z {"event":"scan_start","current_time":"13:43","type":"HEARTBEAT","ts":"2025-12-12T18:43:08Z","ts_et":"2025-12-12 13:43:08 ET"}
+2025-12-12T18:43:25.3437711Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=121.83<SMA20=123.80)","ts":"2025-12-12T18:43:25Z","ts_et":"2025-12-12 13:43:25 ET"}
+2025-12-12T18:43:26.2416833Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=166.73<SMA20=174.16)","ts":"2025-12-12T18:43:26Z","ts_et":"2025-12-12 13:43:26 ET"}
+2025-12-12T18:43:28.0491617Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=265.52<SMA20=266.71)","ts":"2025-12-12T18:43:28Z","ts_et":"2025-12-12 13:43:28 ET"}
+2025-12-12T18:43:28.3375668Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=192.70<SMA20=210.05)","ts":"2025-12-12T18:43:28Z","ts_et":"2025-12-12 13:43:28 ET"}
+2025-12-12T18:43:29.2336116Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.28<SMA20=33.85)","ts":"2025-12-12T18:43:29Z","ts_et":"2025-12-12 13:43:29 ET"}
+2025-12-12T18:43:30.1667914Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=364.06<SMA20=377.03)","ts":"2025-12-12T18:43:30Z","ts_et":"2025-12-12 13:43:30 ET"}
+2025-12-12T18:43:33.4705180Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=507.12<SMA20=513.56)","ts":"2025-12-12T18:43:33Z","ts_et":"2025-12-12 13:43:33 ET"}
+2025-12-12T18:43:34.3845115Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.41<SMA20=182.09)","ts":"2025-12-12T18:43:34Z","ts_et":"2025-12-12 13:43:34 ET"}
+2025-12-12T18:43:35.0052735Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.81<SMA20=127.10)","ts":"2025-12-12T18:43:35Z","ts_et":"2025-12-12 13:43:35 ET"}
+2025-12-12T18:43:35.6229918Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.69<SMA20=157.72)","ts":"2025-12-12T18:43:35Z","ts_et":"2025-12-12 13:43:35 ET"}
+2025-12-12T18:43:42.0216570Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=337.25<SMA20=340.25)","ts":"2025-12-12T18:43:42Z","ts_et":"2025-12-12 13:43:42 ET"}
+2025-12-12T18:43:43.5510306Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.27<SMA20=26.28)","ts":"2025-12-12T18:43:43Z","ts_et":"2025-12-12 13:43:43 ET"}
+2025-12-12T18:43:46.5948603Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.25<SMA20=298.84)","ts":"2025-12-12T18:43:46Z","ts_et":"2025-12-12 13:43:46 ET"}
+2025-12-12T18:43:53.6323876Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.97<SMA20=228.61)","ts":"2025-12-12T18:43:53Z","ts_et":"2025-12-12 13:43:53 ET"}
+2025-12-12T18:44:01.2100156Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T18:44:01Z","ts_et":"2025-12-12 13:44:01 ET"}
+2025-12-12T18:44:01.2101976Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T18:44:01Z","ts_et":"2025-12-12 13:44:01 ET"}
+2025-12-12T18:44:01.2103731Z {"event":"scan_cycle_end","cycle":10,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T18:44:01Z","ts_et":"2025-12-12 13:44:01 ET"}
+2025-12-12T18:44:01.2105486Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:44","type":"HEARTBEAT","ts":"2025-12-12T18:44:01Z","ts_et":"2025-12-12 13:44:01 ET"}
+2025-12-12T18:59:01.5263116Z {"event":"scan_cycle_start","cycle":11,"time":"13:59","type":"HEARTBEAT","ts":"2025-12-12T18:59:01Z","ts_et":"2025-12-12 13:59:01 ET"}
+2025-12-12T18:59:01.5267234Z {"event":"scan_start","current_time":"13:59","type":"HEARTBEAT","ts":"2025-12-12T18:59:01Z","ts_et":"2025-12-12 13:59:01 ET"}
+2025-12-12T18:59:17.9528331Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=121.00<SMA20=123.77)","ts":"2025-12-12T18:59:17Z","ts_et":"2025-12-12 13:59:17 ET"}
+2025-12-12T18:59:18.8512493Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.17<SMA20=174.10)","ts":"2025-12-12T18:59:18Z","ts_et":"2025-12-12 13:59:18 ET"}
+2025-12-12T18:59:20.6338498Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=264.90<SMA20=266.71)","ts":"2025-12-12T18:59:20Z","ts_et":"2025-12-12 13:59:20 ET"}
+2025-12-12T18:59:20.9391610Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=192.27<SMA20=209.99)","ts":"2025-12-12T18:59:20Z","ts_et":"2025-12-12 13:59:20 ET"}
+2025-12-12T18:59:21.8451238Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.17<SMA20=33.84)","ts":"2025-12-12T18:59:21Z","ts_et":"2025-12-12 13:59:21 ET"}
+2025-12-12T18:59:22.7764606Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=362.32<SMA20=376.93)","ts":"2025-12-12T18:59:22Z","ts_et":"2025-12-12 13:59:22 ET"}
+2025-12-12T18:59:26.0934826Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=508.29<SMA20=513.52)","ts":"2025-12-12T18:59:26Z","ts_et":"2025-12-12 13:59:26 ET"}
+2025-12-12T18:59:27.0471359Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=177.18<SMA20=182.07)","ts":"2025-12-12T18:59:27Z","ts_et":"2025-12-12 13:59:27 ET"}
+2025-12-12T18:59:27.6358252Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=126.29<SMA20=127.05)","ts":"2025-12-12T18:59:27Z","ts_et":"2025-12-12 13:59:27 ET"}
+2025-12-12T18:59:28.2031917Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.75<SMA20=157.70)","ts":"2025-12-12T18:59:28Z","ts_et":"2025-12-12 13:59:28 ET"}
+2025-12-12T18:59:34.6684801Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=336.38<SMA20=340.21)","ts":"2025-12-12T18:59:34Z","ts_et":"2025-12-12 13:59:34 ET"}
+2025-12-12T18:59:39.2255282Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.77<SMA20=298.85)","ts":"2025-12-12T18:59:39Z","ts_et":"2025-12-12 13:59:39 ET"}
+2025-12-12T18:59:46.1482363Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.94<SMA20=228.61)","ts":"2025-12-12T18:59:46Z","ts_et":"2025-12-12 13:59:46 ET"}
+2025-12-12T18:59:53.8842001Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T18:59:53Z","ts_et":"2025-12-12 13:59:53 ET"}
+2025-12-12T18:59:53.8843536Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T18:59:53Z","ts_et":"2025-12-12 13:59:53 ET"}
+2025-12-12T18:59:53.8844930Z {"event":"scan_cycle_end","cycle":11,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T18:59:53Z","ts_et":"2025-12-12 13:59:53 ET"}
+2025-12-12T18:59:53.8846316Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"13:59","type":"HEARTBEAT","ts":"2025-12-12T18:59:53Z","ts_et":"2025-12-12 13:59:53 ET"}
+2025-12-12T19:14:54.2223988Z {"event":"scan_cycle_start","cycle":12,"time":"14:14","type":"HEARTBEAT","ts":"2025-12-12T19:14:54Z","ts_et":"2025-12-12 14:14:54 ET"}
+2025-12-12T19:14:54.2224699Z {"event":"scan_start","current_time":"14:14","type":"HEARTBEAT","ts":"2025-12-12T19:14:54Z","ts_et":"2025-12-12 14:14:54 ET"}
+2025-12-12T19:14:54.8120908Z [options] Position closed: CCL260130C00027000
+2025-12-12T19:14:54.8123167Z {"type":"SPREAD_EXIT","underlying":"CCL","long_symbol":"CCL260130C00027000","short_symbol":"","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-252.0,"pnl_pct":-100.0,"ts":"2025-12-12T19:14:54Z","ts_et":"2025-12-12 14:14:54 ET"}
+2025-12-12T19:15:13.1079265Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=121.04<SMA20=123.74)","ts":"2025-12-12T19:15:13Z","ts_et":"2025-12-12 14:15:13 ET"}
+2025-12-12T19:15:14.0247750Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=164.11<SMA20=174.04)","ts":"2025-12-12T19:15:14Z","ts_et":"2025-12-12 14:15:14 ET"}
+2025-12-12T19:15:15.9812507Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=265.27<SMA20=266.68)","ts":"2025-12-12T19:15:15Z","ts_et":"2025-12-12 14:15:15 ET"}
+2025-12-12T19:15:16.2771873Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=191.37<SMA20=209.91)","ts":"2025-12-12T19:15:16Z","ts_et":"2025-12-12 14:15:16 ET"}
+2025-12-12T19:15:17.1953342Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=33.20<SMA20=33.83)","ts":"2025-12-12T19:15:17Z","ts_et":"2025-12-12 14:15:17 ET"}
+2025-12-12T19:15:18.1823821Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=361.13<SMA20=376.88)","ts":"2025-12-12T19:15:18Z","ts_et":"2025-12-12 14:15:18 ET"}
+2025-12-12T19:15:22.0561341Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=505.04<SMA20=513.39)","ts":"2025-12-12T19:15:22Z","ts_et":"2025-12-12 14:15:22 ET"}
+2025-12-12T19:15:23.0776745Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.33<SMA20=182.04)","ts":"2025-12-12T19:15:23Z","ts_et":"2025-12-12 14:15:23 ET"}
+2025-12-12T19:15:23.7237335Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.72<SMA20=127.01)","ts":"2025-12-12T19:15:23Z","ts_et":"2025-12-12 14:15:23 ET"}
+2025-12-12T19:15:24.3732603Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.43<SMA20=157.69)","ts":"2025-12-12T19:15:24Z","ts_et":"2025-12-12 14:15:24 ET"}
+2025-12-12T19:15:31.3232309Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.50<SMA20=340.11)","ts":"2025-12-12T19:15:31Z","ts_et":"2025-12-12 14:15:31 ET"}
+2025-12-12T19:15:32.9749293Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.16<SMA20=26.27)","ts":"2025-12-12T19:15:32Z","ts_et":"2025-12-12 14:15:32 ET"}
+2025-12-12T19:15:36.3346561Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.44<SMA20=298.87)","ts":"2025-12-12T19:15:36Z","ts_et":"2025-12-12 14:15:36 ET"}
+2025-12-12T19:15:43.9810199Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.81<SMA20=228.59)","ts":"2025-12-12T19:15:43Z","ts_et":"2025-12-12 14:15:43 ET"}
+2025-12-12T19:15:52.1584934Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T19:15:52Z","ts_et":"2025-12-12 14:15:52 ET"}
+2025-12-12T19:15:52.1586790Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T19:15:52Z","ts_et":"2025-12-12 14:15:52 ET"}
+2025-12-12T19:15:52.1587656Z {"event":"scan_cycle_end","cycle":12,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T19:15:52Z","ts_et":"2025-12-12 14:15:52 ET"}
+2025-12-12T19:15:52.1588246Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:15","type":"HEARTBEAT","ts":"2025-12-12T19:15:52Z","ts_et":"2025-12-12 14:15:52 ET"}
+2025-12-12T19:30:52.4807875Z {"event":"scan_cycle_start","cycle":13,"time":"14:30","type":"HEARTBEAT","ts":"2025-12-12T19:30:52Z","ts_et":"2025-12-12 14:30:52 ET"}
+2025-12-12T19:30:52.4809180Z {"event":"scan_start","current_time":"14:30","type":"HEARTBEAT","ts":"2025-12-12T19:30:52Z","ts_et":"2025-12-12 14:30:52 ET"}
+2025-12-12T19:31:13.0256010Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.41<SMA20=123.76)","ts":"2025-12-12T19:31:13Z","ts_et":"2025-12-12 14:31:13 ET"}
+2025-12-12T19:31:13.3408191Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=38.08<SMA20=38.26)","ts":"2025-12-12T19:31:13Z","ts_et":"2025-12-12 14:31:13 ET"}
+2025-12-12T19:31:13.9739763Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.99<SMA20=174.04)","ts":"2025-12-12T19:31:13Z","ts_et":"2025-12-12 14:31:13 ET"}
+2025-12-12T19:31:15.9020707Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=264.41<SMA20=266.68)","ts":"2025-12-12T19:31:15Z","ts_et":"2025-12-12 14:31:15 ET"}
+2025-12-12T19:31:16.2229461Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=189.78<SMA20=209.93)","ts":"2025-12-12T19:31:16Z","ts_et":"2025-12-12 14:31:16 ET"}
+2025-12-12T19:31:17.1635662Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.84<SMA20=33.83)","ts":"2025-12-12T19:31:17Z","ts_et":"2025-12-12 14:31:17 ET"}
+2025-12-12T19:31:18.1213546Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=359.11<SMA20=376.85)","ts":"2025-12-12T19:31:18Z","ts_et":"2025-12-12 14:31:18 ET"}
+2025-12-12T19:31:20.4249764Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.76<SMA20=131.29)","ts":"2025-12-12T19:31:20Z","ts_et":"2025-12-12 14:31:20 ET"}
+2025-12-12T19:31:20.7436368Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=353.63<SMA20=355.56)","ts":"2025-12-12T19:31:20Z","ts_et":"2025-12-12 14:31:20 ET"}
+2025-12-12T19:31:21.0367540Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=257.75<SMA20=258.51)","ts":"2025-12-12T19:31:21Z","ts_et":"2025-12-12 14:31:21 ET"}
+2025-12-12T19:31:21.6786013Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=504.55<SMA20=513.41)","ts":"2025-12-12T19:31:21Z","ts_et":"2025-12-12 14:31:21 ET"}
+2025-12-12T19:31:22.6379447Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.23<SMA20=182.04)","ts":"2025-12-12T19:31:22Z","ts_et":"2025-12-12 14:31:22 ET"}
+2025-12-12T19:31:23.3132344Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.68<SMA20=127.00)","ts":"2025-12-12T19:31:23Z","ts_et":"2025-12-12 14:31:23 ET"}
+2025-12-12T19:31:23.9736952Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.22<SMA20=157.69)","ts":"2025-12-12T19:31:23Z","ts_et":"2025-12-12 14:31:23 ET"}
+2025-12-12T19:31:30.8385417Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.73<SMA20=340.13)","ts":"2025-12-12T19:31:30Z","ts_et":"2025-12-12 14:31:30 ET"}
+2025-12-12T19:31:32.4084483Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.14<SMA20=26.27)","ts":"2025-12-12T19:31:32Z","ts_et":"2025-12-12 14:31:32 ET"}
+2025-12-12T19:31:35.5187797Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=297.88<SMA20=298.89)","ts":"2025-12-12T19:31:35Z","ts_et":"2025-12-12 14:31:35 ET"}
+2025-12-12T19:31:42.8984302Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.84<SMA20=228.60)","ts":"2025-12-12T19:31:42Z","ts_et":"2025-12-12 14:31:42 ET"}
+2025-12-12T19:31:50.7224105Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T19:31:50Z","ts_et":"2025-12-12 14:31:50 ET"}
+2025-12-12T19:31:50.7225953Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T19:31:50Z","ts_et":"2025-12-12 14:31:50 ET"}
+2025-12-12T19:31:50.7227712Z {"event":"scan_cycle_end","cycle":13,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T19:31:50Z","ts_et":"2025-12-12 14:31:50 ET"}
+2025-12-12T19:31:50.7229405Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:31","type":"HEARTBEAT","ts":"2025-12-12T19:31:50Z","ts_et":"2025-12-12 14:31:50 ET"}
+2025-12-12T19:46:51.0255935Z {"event":"scan_cycle_start","cycle":14,"time":"14:46","type":"HEARTBEAT","ts":"2025-12-12T19:46:51Z","ts_et":"2025-12-12 14:46:51 ET"}
+2025-12-12T19:46:51.0256333Z {"event":"scan_start","current_time":"14:46","type":"HEARTBEAT","ts":"2025-12-12T19:46:51Z","ts_et":"2025-12-12 14:46:51 ET"}
+2025-12-12T19:46:51.6049120Z [options] Position closed: SMCI260130C00032000
+2025-12-12T19:46:51.6051180Z {"type":"SPREAD_EXIT","underlying":"SMCI","long_symbol":"SMCI260130C00032000","short_symbol":"","exit_value":0.0,"exit_reason":"SL_hit(-100.0%<=-50.0%)","pnl":-570.0,"pnl_pct":-100.0,"ts":"2025-12-12T19:46:51Z","ts_et":"2025-12-12 14:46:51 ET"}
+2025-12-12T19:47:07.4770036Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.69<SMA20=123.75)","ts":"2025-12-12T19:47:07Z","ts_et":"2025-12-12 14:47:07 ET"}
+2025-12-12T19:47:07.7983142Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=38.17<SMA20=38.26)","ts":"2025-12-12T19:47:07Z","ts_et":"2025-12-12 14:47:07 ET"}
+2025-12-12T19:47:08.4250885Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.97<SMA20=174.03)","ts":"2025-12-12T19:47:08Z","ts_et":"2025-12-12 14:47:08 ET"}
+2025-12-12T19:47:10.2908902Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=264.75<SMA20=266.69)","ts":"2025-12-12T19:47:10Z","ts_et":"2025-12-12 14:47:10 ET"}
+2025-12-12T19:47:10.5884166Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=189.90<SMA20=209.91)","ts":"2025-12-12T19:47:10Z","ts_et":"2025-12-12 14:47:10 ET"}
+2025-12-12T19:47:11.4751377Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.82<SMA20=33.82)","ts":"2025-12-12T19:47:11Z","ts_et":"2025-12-12 14:47:11 ET"}
+2025-12-12T19:47:12.3880848Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=360.03<SMA20=376.84)","ts":"2025-12-12T19:47:12Z","ts_et":"2025-12-12 14:47:12 ET"}
+2025-12-12T19:47:14.5695306Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=131.03<SMA20=131.30)","ts":"2025-12-12T19:47:14Z","ts_et":"2025-12-12 14:47:14 ET"}
+2025-12-12T19:47:15.1886626Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=258.43<SMA20=258.54)","ts":"2025-12-12T19:47:15Z","ts_et":"2025-12-12 14:47:15 ET"}
+2025-12-12T19:47:15.8216765Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=506.73<SMA20=513.48)","ts":"2025-12-12T19:47:15Z","ts_et":"2025-12-12 14:47:15 ET"}
+2025-12-12T19:47:16.7354620Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.29<SMA20=182.03)","ts":"2025-12-12T19:47:16Z","ts_et":"2025-12-12 14:47:16 ET"}
+2025-12-12T19:47:17.3890435Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=124.58<SMA20=126.99)","ts":"2025-12-12T19:47:17Z","ts_et":"2025-12-12 14:47:17 ET"}
+2025-12-12T19:47:17.9755502Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.59<SMA20=157.70)","ts":"2025-12-12T19:47:17Z","ts_et":"2025-12-12 14:47:17 ET"}
+2025-12-12T19:47:24.3837693Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.17<SMA20=340.08)","ts":"2025-12-12T19:47:24Z","ts_et":"2025-12-12 14:47:24 ET"}
+2025-12-12T19:47:25.9044324Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.11<SMA20=26.27)","ts":"2025-12-12T19:47:25Z","ts_et":"2025-12-12 14:47:25 ET"}
+2025-12-12T19:47:28.9039310Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.28<SMA20=298.91)","ts":"2025-12-12T19:47:28Z","ts_et":"2025-12-12 14:47:28 ET"}
+2025-12-12T19:47:36.0023696Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.72<SMA20=228.59)","ts":"2025-12-12T19:47:36Z","ts_et":"2025-12-12 14:47:36 ET"}
+2025-12-12T19:47:43.7357419Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T19:47:43Z","ts_et":"2025-12-12 14:47:43 ET"}
+2025-12-12T19:47:43.7358308Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T19:47:43Z","ts_et":"2025-12-12 14:47:43 ET"}
+2025-12-12T19:47:43.7359160Z {"event":"scan_cycle_end","cycle":14,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T19:47:43Z","ts_et":"2025-12-12 14:47:43 ET"}
+2025-12-12T19:47:43.7359965Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"14:47","type":"HEARTBEAT","ts":"2025-12-12T19:47:43Z","ts_et":"2025-12-12 14:47:43 ET"}
+2025-12-12T20:02:44.0485041Z {"event":"scan_cycle_start","cycle":15,"time":"15:02","type":"HEARTBEAT","ts":"2025-12-12T20:02:44Z","ts_et":"2025-12-12 15:02:44 ET"}
+2025-12-12T20:02:44.0488460Z {"event":"scan_start","current_time":"15:02","type":"HEARTBEAT","ts":"2025-12-12T20:02:44Z","ts_et":"2025-12-12 15:02:44 ET"}
+2025-12-12T20:03:00.2434797Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=120.47<SMA20=123.74)","ts":"2025-12-12T20:03:00Z","ts_et":"2025-12-12 15:03:00 ET"}
+2025-12-12T20:03:00.5390031Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=38.09<SMA20=38.25)","ts":"2025-12-12T20:03:00Z","ts_et":"2025-12-12 15:03:00 ET"}
+2025-12-12T20:03:01.1927194Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=162.72<SMA20=174.03)","ts":"2025-12-12T20:03:01Z","ts_et":"2025-12-12 15:03:01 ET"}
+2025-12-12T20:03:03.1089623Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=264.64<SMA20=266.69)","ts":"2025-12-12T20:03:03Z","ts_et":"2025-12-12 15:03:03 ET"}
+2025-12-12T20:03:03.4098492Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=189.96<SMA20=209.92)","ts":"2025-12-12T20:03:03Z","ts_et":"2025-12-12 15:03:03 ET"}
+2025-12-12T20:03:04.3207300Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.72<SMA20=33.82)","ts":"2025-12-12T20:03:04Z","ts_et":"2025-12-12 15:03:04 ET"}
+2025-12-12T20:03:05.2419412Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=358.78<SMA20=376.80)","ts":"2025-12-12T20:03:05Z","ts_et":"2025-12-12 15:03:05 ET"}
+2025-12-12T20:03:07.4473323Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.95<SMA20=131.31)","ts":"2025-12-12T20:03:07Z","ts_et":"2025-12-12 15:03:07 ET"}
+2025-12-12T20:03:08.0499596Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=258.12<SMA20=258.47)","ts":"2025-12-12T20:03:08Z","ts_et":"2025-12-12 15:03:08 ET"}
+2025-12-12T20:03:08.6953702Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=506.42<SMA20=513.46)","ts":"2025-12-12T20:03:08Z","ts_et":"2025-12-12 15:03:08 ET"}
+2025-12-12T20:03:09.6176183Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.29<SMA20=182.04)","ts":"2025-12-12T20:03:09Z","ts_et":"2025-12-12 15:03:09 ET"}
+2025-12-12T20:03:10.2759426Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.24<SMA20=127.04)","ts":"2025-12-12T20:03:10Z","ts_et":"2025-12-12 15:03:10 ET"}
+2025-12-12T20:03:10.9052755Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.53<SMA20=157.70)","ts":"2025-12-12T20:03:10Z","ts_et":"2025-12-12 15:03:10 ET"}
+2025-12-12T20:03:17.5692789Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=334.23<SMA20=340.08)","ts":"2025-12-12T20:03:17Z","ts_et":"2025-12-12 15:03:17 ET"}
+2025-12-12T20:03:19.1799355Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.07<SMA20=26.27)","ts":"2025-12-12T20:03:19Z","ts_et":"2025-12-12 15:03:19 ET"}
+2025-12-12T20:03:22.2257038Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.26<SMA20=298.92)","ts":"2025-12-12T20:03:22Z","ts_et":"2025-12-12 15:03:22 ET"}
+2025-12-12T20:03:31.0985971Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.91<SMA20=228.59)","ts":"2025-12-12T20:03:31Z","ts_et":"2025-12-12 15:03:31 ET"}
+2025-12-12T20:03:38.7568386Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T20:03:38Z","ts_et":"2025-12-12 15:03:38 ET"}
+2025-12-12T20:03:38.7570136Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T20:03:38Z","ts_et":"2025-12-12 15:03:38 ET"}
+2025-12-12T20:03:38.7571895Z {"event":"scan_cycle_end","cycle":15,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T20:03:38Z","ts_et":"2025-12-12 15:03:38 ET"}
+2025-12-12T20:03:38.7573540Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:03","type":"HEARTBEAT","ts":"2025-12-12T20:03:38Z","ts_et":"2025-12-12 15:03:38 ET"}
+2025-12-12T20:18:39.0746957Z {"event":"scan_cycle_start","cycle":16,"time":"15:18","type":"HEARTBEAT","ts":"2025-12-12T20:18:39Z","ts_et":"2025-12-12 15:18:39 ET"}
+2025-12-12T20:18:39.0749696Z {"event":"scan_start","current_time":"15:18","type":"HEARTBEAT","ts":"2025-12-12T20:18:39Z","ts_et":"2025-12-12 15:18:39 ET"}
+2025-12-12T20:18:55.3489550Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.79<SMA20=123.72)","ts":"2025-12-12T20:18:55Z","ts_et":"2025-12-12 15:18:55 ET"}
+2025-12-12T20:18:55.6517602Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.91<SMA20=38.25)","ts":"2025-12-12T20:18:55Z","ts_et":"2025-12-12 15:18:55 ET"}
+2025-12-12T20:18:56.2661520Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.31<SMA20=173.97)","ts":"2025-12-12T20:18:56Z","ts_et":"2025-12-12 15:18:56 ET"}
+2025-12-12T20:18:58.2498351Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=265.45<SMA20=266.68)","ts":"2025-12-12T20:18:58Z","ts_et":"2025-12-12 15:18:58 ET"}
+2025-12-12T20:18:58.5466207Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=190.04<SMA20=209.93)","ts":"2025-12-12T20:18:58Z","ts_et":"2025-12-12 15:18:58 ET"}
+2025-12-12T20:18:59.4513146Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.59<SMA20=33.81)","ts":"2025-12-12T20:18:59Z","ts_et":"2025-12-12 15:18:59 ET"}
+2025-12-12T20:19:00.4056659Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=357.61<SMA20=376.72)","ts":"2025-12-12T20:19:00Z","ts_et":"2025-12-12 15:19:00 ET"}
+2025-12-12T20:19:02.6794929Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=129.88<SMA20=131.27)","ts":"2025-12-12T20:19:02Z","ts_et":"2025-12-12 15:19:02 ET"}
+2025-12-12T20:19:03.0007960Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=355.25<SMA20=355.54)","ts":"2025-12-12T20:19:03Z","ts_et":"2025-12-12 15:19:03 ET"}
+2025-12-12T20:19:03.3058685Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=254.99<SMA20=258.41)","ts":"2025-12-12T20:19:03Z","ts_et":"2025-12-12 15:19:03 ET"}
+2025-12-12T20:19:03.9265279Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=506.07<SMA20=513.45)","ts":"2025-12-12T20:19:03Z","ts_et":"2025-12-12 15:19:03 ET"}
+2025-12-12T20:19:04.8486091Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=176.00<SMA20=182.02)","ts":"2025-12-12T20:19:04Z","ts_et":"2025-12-12 15:19:04 ET"}
+2025-12-12T20:19:05.4549263Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.04<SMA20=127.02)","ts":"2025-12-12T20:19:05Z","ts_et":"2025-12-12 15:19:05 ET"}
+2025-12-12T20:19:06.0620347Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.36<SMA20=157.69)","ts":"2025-12-12T20:19:06Z","ts_et":"2025-12-12 15:19:06 ET"}
+2025-12-12T20:19:12.6708498Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=332.43<SMA20=340.01)","ts":"2025-12-12T20:19:12Z","ts_et":"2025-12-12 15:19:12 ET"}
+2025-12-12T20:19:14.2309208Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.11<SMA20=26.27)","ts":"2025-12-12T20:19:14Z","ts_et":"2025-12-12 15:19:14 ET"}
+2025-12-12T20:19:17.3663122Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.45<SMA20=298.92)","ts":"2025-12-12T20:19:17Z","ts_et":"2025-12-12 15:19:17 ET"}
+2025-12-12T20:19:24.6300538Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.95<SMA20=228.60)","ts":"2025-12-12T20:19:24Z","ts_et":"2025-12-12 15:19:24 ET"}
+2025-12-12T20:19:32.4968260Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T20:19:32Z","ts_et":"2025-12-12 15:19:32 ET"}
+2025-12-12T20:19:32.4969047Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T20:19:32Z","ts_et":"2025-12-12 15:19:32 ET"}
+2025-12-12T20:19:32.4969764Z {"event":"scan_cycle_end","cycle":16,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T20:19:32Z","ts_et":"2025-12-12 15:19:32 ET"}
+2025-12-12T20:19:32.4971189Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:19","type":"HEARTBEAT","ts":"2025-12-12T20:19:32Z","ts_et":"2025-12-12 15:19:32 ET"}
+2025-12-12T20:34:32.8062146Z {"event":"scan_cycle_start","cycle":17,"time":"15:34","type":"HEARTBEAT","ts":"2025-12-12T20:34:32Z","ts_et":"2025-12-12 15:34:32 ET"}
+2025-12-12T20:34:32.8062769Z {"event":"scan_start","current_time":"15:34","type":"HEARTBEAT","ts":"2025-12-12T20:34:32Z","ts_et":"2025-12-12 15:34:32 ET"}
+2025-12-12T20:34:48.7294895Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.38<SMA20=123.68)","ts":"2025-12-12T20:34:48Z","ts_et":"2025-12-12 15:34:48 ET"}
+2025-12-12T20:34:49.0283164Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.85<SMA20=38.24)","ts":"2025-12-12T20:34:49Z","ts_et":"2025-12-12 15:34:49 ET"}
+2025-12-12T20:34:49.6428924Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=161.05<SMA20=173.93)","ts":"2025-12-12T20:34:49Z","ts_et":"2025-12-12 15:34:49 ET"}
+2025-12-12T20:34:51.4613687Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=263.94<SMA20=266.62)","ts":"2025-12-12T20:34:51Z","ts_et":"2025-12-12 15:34:51 ET"}
+2025-12-12T20:34:51.7733071Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=189.67<SMA20=209.90)","ts":"2025-12-12T20:34:51Z","ts_et":"2025-12-12 15:34:51 ET"}
+2025-12-12T20:34:52.6843137Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=32.39<SMA20=33.80)","ts":"2025-12-12T20:34:52Z","ts_et":"2025-12-12 15:34:52 ET"}
+2025-12-12T20:34:53.5921599Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=357.12<SMA20=376.69)","ts":"2025-12-12T20:34:53Z","ts_et":"2025-12-12 15:34:53 ET"}
+2025-12-12T20:34:55.7325420Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=130.12<SMA20=131.26)","ts":"2025-12-12T20:34:55Z","ts_et":"2025-12-12 15:34:55 ET"}
+2025-12-12T20:34:56.0227372Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=353.22<SMA20=355.41)","ts":"2025-12-12T20:34:56Z","ts_et":"2025-12-12 15:34:56 ET"}
+2025-12-12T20:34:56.3407665Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Bear_trend(close=256.11<SMA20=258.40)","ts":"2025-12-12T20:34:56Z","ts_et":"2025-12-12 15:34:56 ET"}
+2025-12-12T20:34:56.9393875Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=506.55<SMA20=513.39)","ts":"2025-12-12T20:34:56Z","ts_et":"2025-12-12 15:34:56 ET"}
+2025-12-12T20:34:57.8448275Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=175.91<SMA20=182.01)","ts":"2025-12-12T20:34:57Z","ts_et":"2025-12-12 15:34:57 ET"}
+2025-12-12T20:34:58.4100939Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=125.14<SMA20=127.02)","ts":"2025-12-12T20:34:58Z","ts_et":"2025-12-12 15:34:58 ET"}
+2025-12-12T20:34:59.0113957Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=155.38<SMA20=157.68)","ts":"2025-12-12T20:34:59Z","ts_et":"2025-12-12 15:34:59 ET"}
+2025-12-12T20:35:05.6207964Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=331.70<SMA20=339.96)","ts":"2025-12-12T20:35:05Z","ts_et":"2025-12-12 15:35:05 ET"}
+2025-12-12T20:35:07.1644432Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Bear_trend(close=26.05<SMA20=26.26)","ts":"2025-12-12T20:35:07Z","ts_et":"2025-12-12 15:35:07 ET"}
+2025-12-12T20:35:10.1910286Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=298.40<SMA20=298.91)","ts":"2025-12-12T20:35:10Z","ts_et":"2025-12-12 15:35:10 ET"}
+2025-12-12T20:35:17.2972416Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=226.72<SMA20=228.56)","ts":"2025-12-12T20:35:17Z","ts_et":"2025-12-12 15:35:17 ET"}
+2025-12-12T20:35:25.0280195Z {"event":"signals_found","count":0,"symbols":[],"type":"HEARTBEAT","ts":"2025-12-12T20:35:25Z","ts_et":"2025-12-12 15:35:25 ET"}
+2025-12-12T20:35:25.0283081Z {"event":"scan_complete","signals":0,"new_entries":0,"total_positions":5,"type":"HEARTBEAT","ts":"2025-12-12T20:35:25Z","ts_et":"2025-12-12 15:35:25 ET"}
+2025-12-12T20:35:25.0284932Z {"event":"scan_cycle_end","cycle":17,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T20:35:25Z","ts_et":"2025-12-12 15:35:25 ET"}
+2025-12-12T20:35:25.0286719Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:35","type":"HEARTBEAT","ts":"2025-12-12T20:35:25Z","ts_et":"2025-12-12 15:35:25 ET"}
+2025-12-12T20:50:25.3516605Z {"event":"scan_cycle_start","cycle":18,"time":"15:50","type":"HEARTBEAT","ts":"2025-12-12T20:50:25Z","ts_et":"2025-12-12 15:50:25 ET"}
+2025-12-12T20:50:25.3519111Z {"event":"outside_entry_window","current_time":"15:50","type":"HEARTBEAT","ts":"2025-12-12T20:50:25Z","ts_et":"2025-12-12 15:50:25 ET"}
+2025-12-12T20:50:25.6387165Z {"event":"scan_cycle_end","cycle":18,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-12T20:50:25Z","ts_et":"2025-12-12 15:50:25 ET"}
+2025-12-12T20:50:25.6388338Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"15:50","type":"HEARTBEAT","ts":"2025-12-12T20:50:25Z","ts_et":"2025-12-12 15:50:25 ET"}
+2025-12-12T21:05:25.6400654Z {"event":"market_close_reached","time":"16:05","type":"HEARTBEAT","ts":"2025-12-12T21:05:25Z","ts_et":"2025-12-12 16:05:25 ET"}
+2025-12-12T21:05:25.6402258Z {"event":"eod_processing","scan_count":18,"type":"HEARTBEAT","ts":"2025-12-12T21:05:25Z","ts_et":"2025-12-12 16:05:25 ET"}
+2025-12-12T21:05:25.9837287Z {"type":"EOD_SUMMARY","date":"2025-12-12","total_trades":10,"closed_trades":9,"open_trades":1,"total_pnl":-2022.0,"win_count":0,"loss_count":9,"win_rate_pct":0.0,"avg_win":0,"avg_loss":-224.67,"exit_reasons":{"SL_hit(-80.4%<=-50.0%)":{"count":1,"pnl":-111.0},"SL_hit(-69.3%<=-50.0%)":{"count":1,"pnl":-395.0},"SL_hit(-78.9%<=-50.0%)":{"count":1,"pnl":-225.0},"SL_hit(-72.3%<=-50.0%)":{"count":1,"pnl":-185.0},"SL_hit(-73.4%<=-50.0%)":{"count":1,"pnl":-235.0},"SL_hit(-64.4%<=-50.0%)":{"count":1,"pnl":-380.0},"SL_hit(-68.8%<=-50.0%)":{"count":2,"pnl":-401.0},"SL_hit(-66.7%<=-50.0%)":{"count":1,"pnl":-90.0}},"trades":[{"underlying":"GLW","entry_reason":"RSI_oversold(15.8)","exit_reason":"SL_hit(-80.4%<=-50.0%)","net_debit":0.83,"pnl":-111.0,"pnl_pct":-80.4},{"underlying":"TSM","entry_reason":"RSI_oversold(24.0)","exit_reason":"SL_hit(-69.3%<=-50.0%)","net_debit":2.61,"pnl":-395.0,"pnl_pct":-69.3},{"underlying":"KKR","entry_reason":"RSI_oversold(20.2)","exit_reason":"SL_hit(-78.9%<=-50.0%)","net_debit":1.68,"pnl":-225.0,"pnl_pct":-78.9},{"underlying":"GLW","entry_reason":"RSI_oversold(21.5)","exit_reason":"SL_hit(-72.3%<=-50.0%)","net_debit":1.2,"pnl":-185.0,"pnl_pct":-72.3},{"underlying":"KKR","entry_reason":"RSI_oversold(17.0)","exit_reason":"SL_hit(-73.4%<=-50.0%)","net_debit":1.81,"pnl":-235.0,"pnl_pct":-73.4},{"underlying":"TER","entry_reason":"RSI_oversold(22.1)","exit_reason":"SL_hit(-64.4%<=-50.0%)","net_debit":2.94,"pnl":-380.0,"pnl_pct":-64.4},{"underlying":"GLW","entry_reason":"RSI_oversold(19.3)","exit_reason":"SL_hit(-68.8%<=-50.0%)","net_debit":1.29,"pnl":-181.0,"pnl_pct":-68.8},{"underlying":"KKR","entry_reason":"RSI_oversold(16.1)","exit_reason":"SL_hit(-68.8%<=-50.0%)","net_debit":1.78,"pnl":-220.0,"pnl_pct":-68.8},{"underlying":"IBM","entry_reason":"RSI_oversold(23.2)","exit_reason":null,"net_debit":2.46,"pnl":null,"pnl_pct":null},{"underlying":"KKR","entry_reason":"RSI_oversold(21.6)","exit_reason":"SL_hit(-66.7%<=-50.0%)","net_debit":1.05,"pnl":-90.0,"pnl_pct":-66.7}],"ts":"2025-12-12T21:05:25Z","ts_et":"2025-12-12 16:05:25 ET"}
+2025-12-12T21:05:25.9846819Z 
+2025-12-12T21:05:25.9846965Z ============================================================
+2025-12-12T21:05:25.9851171Z EOD SUMMARY: 10 trades, PnL: $-2022.00
+2025-12-12T21:05:25.9851558Z Win Rate: 0.0%
+2025-12-12T21:05:25.9851760Z ============================================================
+2025-12-12T21:05:25.9852366Z 
+2025-12-12T21:05:26.5152433Z ##[group]Run actions/upload-artifact@v4
+2025-12-12T21:05:26.5153232Z with:
+2025-12-12T21:05:26.5153693Z   name: position-registry-15M_OPT
+2025-12-12T21:05:26.5154324Z   path: .position_registry/15M_OPT_positions.json
+2025-12-12T21:05:26.5154968Z   if-no-files-found: warn
+2025-12-12T21:05:26.5155442Z   retention-days: 90
+2025-12-12T21:05:26.5155853Z   overwrite: true
+2025-12-12T21:05:26.5156271Z   compression-level: 6
+2025-12-12T21:05:26.5156736Z   include-hidden-files: false
+2025-12-12T21:05:26.5157188Z env:
+2025-12-12T21:05:26.5157638Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-12T21:05:26.5158256Z ##[endgroup]
+2025-12-12T21:05:27.8823768Z With the provided path, there will be 1 file uploaded
+2025-12-12T21:05:28.4236261Z Artifact name is valid!
+2025-12-12T21:05:28.4238614Z Root directory input is valid!
+2025-12-12T21:05:28.6071703Z Beginning upload of artifact content to blob storage
+2025-12-12T21:05:29.1234528Z Uploaded bytes 1255
+2025-12-12T21:05:29.2451190Z Finished uploading artifact content to blob storage!
+2025-12-12T21:05:29.2453285Z SHA256 digest of uploaded artifact zip is 90bfaa655177f0e8228610f7a45ed7a986922d476759c95662f932ba0e52f5a0
+2025-12-12T21:05:29.2454414Z Finalizing artifact upload
+2025-12-12T21:05:29.4364426Z Artifact position-registry-15M_OPT.zip successfully finalized. Artifact ID 4855502395
+2025-12-12T21:05:29.4367004Z Artifact position-registry-15M_OPT has been successfully uploaded! Final size is 1255 bytes. Artifact ID is 4855502395
+2025-12-12T21:05:29.4382208Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20172786914/artifacts/4855502395
+2025-12-12T21:05:29.4919780Z Post job cleanup.
+2025-12-12T21:05:30.1077104Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-12T21:05:30.1597409Z git version 2.52.0.windows.1
+2025-12-12T21:05:30.1700133Z Temporarily overriding HOME='C:\Trades\RubberBandBot\_work\_temp\61871734-92cc-4334-831c-607e4ebcd61a' before making global git config changes
+2025-12-12T21:05:30.1701050Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-12T21:05:30.1707696Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\_work\RubberBandBot\RubberBandBot
+2025-12-12T21:05:30.2312488Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-12T21:05:30.2915079Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-12T21:05:31.4034266Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-12T21:05:31.4616673Z http.https://github.com/.extraheader
+2025-12-12T21:05:31.4716881Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-12T21:05:31.5397456Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-12T21:05:32.5956949Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-12T21:05:32.6594905Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-12T21:05:33.7553886Z Cleaning up orphan processes
