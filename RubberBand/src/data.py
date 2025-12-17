@@ -767,9 +767,9 @@ def submit_bracket_order(
     if limit_price is None:
         # Get current quote and apply buffer
         quote = get_latest_quote(base_url, key, secret, symbol)
-        if quote.get("error") or (quote.get("ask", 0) == 0 and quote.get("bid", 0) == 0):
-            # Fallback: Use TP/SL as reference if no quote available
-            print(f"[order] {symbol}: No quote available, using TP/SL reference")
+        if quote.get("error") or (side == "buy" and quote.get("ask", 0) == 0) or (side != "buy" and quote.get("bid", 0) == 0):
+            # Fallback: Use TP/SL as reference if need quote but it's unavailable
+            print(f"[order] {symbol}: No valid quote for {side} (ask={quote.get('ask')}, bid={quote.get('bid')}), using TP/SL reference")
             if side == "buy":
                 limit_price = take_profit_price * 0.98 if take_profit_price > 0 else stop_loss_price * 1.05
             else:
