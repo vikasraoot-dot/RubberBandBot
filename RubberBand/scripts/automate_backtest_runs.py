@@ -265,9 +265,15 @@ def main():
                 
                 # Locate results CSV for analysis
                 csv_file = None
+                is_stock_bot = "stock" in inputs.get("bot_type", "").lower() or "backtest.yml" in wf # Detection heuristic
+                
+                target_csv = "spread_backtest_trades.csv"
+                if "rubberband-backtest.yml" in wf:
+                    target_csv = "detailed_trades.csv"
+                    
                 for root, dirs, files in os.walk(exp_dir):
-                    if "spread_backtest_trades.csv" in files:
-                        csv_file = os.path.join(root, "spread_backtest_trades.csv")
+                    if target_csv in files:
+                        csv_file = os.path.join(root, target_csv)
                         break
                 
                 # Generate Block Report
@@ -275,6 +281,8 @@ def main():
                     block = generate_text_report(csv_file, name.upper(), inputs)
                     print("\n" + block)
                     full_text_report += block + "\n\n"
+                else:
+                    print(f"[{name}] Warning: {target_csv} not found in artifacts.")
                 
                 results_to_csv.append({
                     "experiment": name,

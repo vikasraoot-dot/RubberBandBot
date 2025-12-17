@@ -1,0 +1,101 @@
+[
+    {
+        "name": "RSI25_TP1.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "25",
+            "tp_r": "1.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI25_TP2.0",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "25",
+            "tp_r": "2.0",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI25_TP2.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "25",
+            "tp_r": "2.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI30_TP1.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "30",
+            "tp_r": "1.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI30_TP2.0",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "30",
+            "tp_r": "2.0",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI30_TP2.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "30",
+            "tp_r": "2.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI35_TP1.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "35",
+            "tp_r": "1.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI35_TP2.0",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "35",
+            "tp_r": "2.0",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    },
+    {
+        "name": "RSI35_TP2.5",
+        "workflow": "rubberband-backtest.yml",
+        "inputs": {
+            "days": "30",
+            "rsi_entry": "35",
+            "tp_r": "2.5",
+            "sl_atr": "1.5",
+            "slope_threshold": "-0.20"
+        }
+    }
+]

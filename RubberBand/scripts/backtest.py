@@ -445,8 +445,14 @@ def main():
     ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
-    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
-    ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 50-60)")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter")
+    ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled)")
+    
+    # Optimization Parameters
+    ap.add_argument("--rsi-entry", type=float, default=None, help="Override RSI Entry Threshold (e.g. 25, 30)")
+    ap.add_argument("--tp-r", type=float, default=None, help="Override Take Profit R-Multiple (e.g. 2.0)")
+    ap.add_argument("--sl-atr", type=float, default=None, help="Override Stop Loss ATR Multiplier (e.g. 1.5)")
+    
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
@@ -456,6 +462,20 @@ def main():
     cfg["_max_hold_days"] = args.max_hold_days
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
+
+    # Inject ADX/RSI overrides into 'filters' section
+    if "filters" not in cfg: cfg["filters"] = {}
+    if args.adx_max > 0:
+        cfg["filters"]["adx_threshold"] = args.adx_max
+    if args.rsi_entry is not None:
+        cfg["filters"]["rsi_oversold"] = args.rsi_entry
+        
+    # Inject Bracket overrides
+    if "brackets" not in cfg: cfg["brackets"] = {}
+    if args.tp_r is not None:
+        cfg["brackets"]["take_profit_r"] = args.tp_r
+    if args.sl_atr is not None:
+        cfg["brackets"]["atr_mult_sl"] = args.sl_atr
 
     if args.symbols.strip():
         symbols = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
