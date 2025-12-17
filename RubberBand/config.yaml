@@ -67,8 +67,9 @@ max_open_trades_per_ticker: 1
 # ──────────────────────────────────────────────────────────────────────────────
 brackets:
   enabled: true
-  atr_mult_sl: 2.5          # Stop Loss = 2.5 ATR (Option 2: Consistency)
-  take_profit_r: 1.5        # Take Profit = 1.5 ATR (Option 2: Consistency)
+  atr_mult_sl: 2.5          # Stop Loss = 2.5 ATR
+  stop_loss_pct: -0.80      # Loosened to -80% to avoid premature stops in 3DTE vol
+  take_profit_pct: 0.50
 
 # Breakeven (Optional)
 breakeven:

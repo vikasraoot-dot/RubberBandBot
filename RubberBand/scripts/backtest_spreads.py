@@ -236,9 +236,12 @@ def simulate_spread_trade(
                 actual_exit_idx = i
                 break
             
-            # Check for max loss (90% of max)
-            if current_pnl <= max_loss * 0.9:
-                exit_reason = "MAX_LOSS"
+            # Check for max loss (Stop Loss)
+            sl_pct = opts.get("sl_pct", 0.9) # Default to 90% if not specified
+            stop_loss_threshold = -cost * sl_pct
+            
+            if current_pnl <= stop_loss_threshold:
+                exit_reason = "STOP_LOSS"
                 exit_value = current_value
                 actual_exit_idx = i
                 break
@@ -421,6 +424,7 @@ def main():
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 25-30)")
     ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
     ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
+    ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80% loss). Default 0.80.")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
@@ -451,9 +455,9 @@ def main():
         "trend_filter": not args.no_trend_filter,
         "flatten_eod": args.flatten_eod,
         "adx_max": args.adx_max,
-        "adx_max": args.adx_max,
         "bars_stop": args.bars_stop,
         "slope_threshold": args.slope_threshold,
+        "sl_pct": args.sl_pct,
     }
     
     # Fetch 15-minute data
