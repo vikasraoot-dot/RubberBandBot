@@ -59,6 +59,11 @@ on:
         required: false
         default: '0'
         type: string
+      sl_pct:
+        description: 'Stop Loss % (e.g. 0.80 for 80%)'
+        required: false
+        default: '0.80'
+        type: string
 
 jobs:
   backtest:
@@ -113,6 +118,7 @@ jobs:
             --max-debit "${{ github.event.inputs.max_debit || '2.0' }}" \
             --bars-stop "${{ github.event.inputs.bars_stop || '10' }}" \
             --adx-max "${{ github.event.inputs.adx_max || '0' }}" \
+            --sl-pct "${{ github.event.inputs.sl_pct || '0.80' }}" \
             $SLOPE_ARG \
             ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
             ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}
