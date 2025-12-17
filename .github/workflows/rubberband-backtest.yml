@@ -88,3 +88,13 @@ jobs:
           }
           
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: backtest-results
+          path: |
+            detailed_trades.csv
+            backtest_summary.json
+            loss_analysis.csv
+            daily_stats.csv
