@@ -57,6 +57,7 @@ def run_once():
     dry = os.environ.get("DRY_RUN", "1")
     force = os.environ.get("FORCE_RUN", "0")
     slope_threshold = os.environ.get("SLOPE_THRESHOLD", "").strip()
+    slope_threshold_10 = os.environ.get("SLOPE_THRESHOLD_10", "").strip()
     rsi_entry = os.environ.get("RSI_ENTRY", "").strip()
     tp_r = os.environ.get("TP_R", "").strip()
     sl_atr = os.environ.get("SL_ATR", "").strip()
@@ -71,6 +72,8 @@ def run_once():
     # Pass overrides if provided
     if slope_threshold:
         args += ["--slope-threshold", slope_threshold]
+    if slope_threshold_10:
+        args += ["--slope-threshold-10", slope_threshold_10]
     if rsi_entry:
         args += ["--rsi-entry", rsi_entry]
     if tp_r:
