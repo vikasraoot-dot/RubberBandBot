@@ -979,9 +979,9 @@ def main() -> int:
     )
 
     if args.slope_threshold is not None:
-        logger.info(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
+        print(f"[config] Slope Threshold overridden to: {args.slope_threshold}", flush=True)
     if args.slope_threshold_10 is not None:
-        logger.info(f"[config] Slope Threshold 10-bar overridden to: {args.slope_threshold_10}")
+        print(f"[config] Slope Threshold 10-bar overridden to: {args.slope_threshold_10}", flush=True)
     
     # Load tickers
     try:
