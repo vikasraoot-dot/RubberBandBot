@@ -949,11 +949,9 @@ def main() -> int:
     # Inject command line overrides into config
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
-        logger.info(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
         
     if args.slope_threshold_10 is not None:
         cfg["slope_threshold_10"] = args.slope_threshold_10
-        logger.info(f"[config] Slope Threshold 10-bar overridden to: {args.slope_threshold_10}")
     
     # Spread config
     spread_cfg = {**DEFAULT_SPREAD_CONFIG}
@@ -979,6 +977,11 @@ def main() -> int:
         sl_pct=spread_cfg["sl_pct"],
         scan_interval_min=SCAN_INTERVAL_SECONDS // 60,
     )
+
+    if args.slope_threshold is not None:
+        logger.info(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
+    if args.slope_threshold_10 is not None:
+        logger.info(f"[config] Slope Threshold 10-bar overridden to: {args.slope_threshold_10}")
     
     # Load tickers
     try:
