@@ -50,7 +50,12 @@ on:
 
         type: string
       slope_threshold:
-        description: 'Slope Threshold (e.g. -0.20, leave empty to disable)'
+        description: 'Slope Threshold 3-bar (e.g. -0.20, leave empty to use config)'
+        required: false
+        default: ''
+        type: string
+      slope_threshold_10:
+        description: 'Slope Threshold 10-bar (e.g. -0.15, leave empty to use config)'
         required: false
         default: ''
         type: string
@@ -107,6 +112,11 @@ jobs:
           if [ -n "${{ github.event.inputs.slope_threshold }}" ]; then
             SLOPE_ARG="--slope-threshold ${{ github.event.inputs.slope_threshold }}"
           fi
+          
+          SLOPE10_ARG=""
+          if [ -n "${{ github.event.inputs.slope_threshold_10 }}" ]; then
+            SLOPE10_ARG="--slope-threshold-10 ${{ github.event.inputs.slope_threshold_10 }}"
+          fi
 
           python RubberBand/scripts/backtest_spreads.py \
             --config RubberBand/config.yaml \
@@ -120,6 +130,7 @@ jobs:
             --adx-max "${{ github.event.inputs.adx_max || '0' }}" \
             --sl-pct "${{ github.event.inputs.sl_pct || '0.80' }}" \
             $SLOPE_ARG \
+            $SLOPE10_ARG \
             ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
             ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}
 

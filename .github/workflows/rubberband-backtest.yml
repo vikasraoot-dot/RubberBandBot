@@ -7,9 +7,13 @@ on:
         required: true
         default: '30'
       slope_threshold:
-        description: 'Slope Threshold (e.g. -0.20). Leave empty to disable.'
+        description: 'Slope Threshold 3-bar (e.g. -0.20). Leave empty to use config.'
         required: false
         default: '-0.20'
+      slope_threshold_10:
+        description: 'Slope Threshold 10-bar (e.g. -0.15). Leave empty to use config.'
+        required: false
+        default: '-0.15'
       adx_max:
         description: 'Max ADX to allow entry (0=disabled, try 50-60)'
         required: false
@@ -65,6 +69,11 @@ jobs:
           if ("${{ inputs.slope_threshold }}" -ne "") {
             $args += "--slope-threshold"
             $args += "${{ inputs.slope_threshold }}"
+          }
+          
+          if ("${{ inputs.slope_threshold_10 }}" -ne "") {
+            $args += "--slope-threshold-10"
+            $args += "${{ inputs.slope_threshold_10 }}"
           }
           
           if ("${{ inputs.adx_max }}" -ne "0" -and "${{ inputs.adx_max }}" -ne "") {
