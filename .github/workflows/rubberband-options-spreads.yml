@@ -16,9 +16,13 @@ on:
         required: false
         default: '6'
       slope_threshold:
-        description: 'Slope Threshold (e.g. -0.12, leave empty to disable)'
+        description: 'Slope Threshold 3-bar (e.g. -0.20, leave empty to disable)'
         required: false
-        default: '-0.12'
+        default: '-0.20'
+      slope_threshold_10:
+        description: 'Slope Threshold 10-bar (e.g. -0.15, leave empty to disable)'
+        required: false
+        default: '-0.15'
 
 concurrency:
   group: rubberband-options-spreads-loop-am
@@ -108,7 +112,9 @@ jobs:
           $dryRun = if ("${{ github.event.inputs.dry_run }}" -ne "") { "${{ github.event.inputs.dry_run }}" } else { "0" }
           $dte = if ("${{ github.event.inputs.dte }}" -ne "") { "${{ github.event.inputs.dte }}" } else { "6" }
           $slopeInput = "${{ github.event.inputs.slope_threshold }}"
+          $slope10Input = "${{ github.event.inputs.slope_threshold_10 }}"
           $slopeArg = if ($slopeInput -ne "") { "--slope-threshold $slopeInput" } else { "" }
+          $slope10Arg = if ($slope10Input -ne "") { "--slope-threshold-10 $slope10Input" } else { "" }
           
           Write-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte, slope=$slopeInput)"
           
@@ -116,7 +122,7 @@ jobs:
           # We use Invoke-Expression or just simplistic string splicing if simple enough.
           # Ideally just pass args.
           
-          $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg"
+          $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg $slope10Arg"
           Invoke-Expression $cmd
       
       - name: Upload Position Registry

@@ -114,6 +114,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--dte", type=int, default=6, help="Days to expiration (default: 6)") # Optimized Default
     p.add_argument("--max-debit", type=float, default=3.00, help="Max debit per share")
     p.add_argument("--slope-threshold", type=float, default=-0.12, help="Keltner mean slope threshold (default: -0.12)") # Optimized Default
+    p.add_argument("--slope-threshold-10", type=float, default=None, help="10-bar Keltner mean slope threshold (e.g. -0.15)")
     p.add_argument("--contracts", type=int, default=1, help="Contracts per trade")
     return p.parse_args()
 
@@ -948,7 +949,11 @@ def main() -> int:
     # Inject command line overrides into config
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
-        print(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
+        logger.info(f"[config] Slope Threshold overridden to: {args.slope_threshold}")
+        
+    if args.slope_threshold_10 is not None:
+        cfg["slope_threshold_10"] = args.slope_threshold_10
+        logger.info(f"[config] Slope Threshold 10-bar overridden to: {args.slope_threshold_10}")
     
     # Spread config
     spread_cfg = {**DEFAULT_SPREAD_CONFIG}

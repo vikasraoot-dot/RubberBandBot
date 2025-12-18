@@ -56,6 +56,7 @@ def _parse_args() -> argparse.Namespace:
     p.add_argument("--force-run", type=int, default=0)
     p.add_argument("--slope-threshold", type=float, default=None,
                    help="Require slope to be steeper than this (e.g. -0.20) to enter")
+    p.add_argument("--slope-threshold-10", type=float, default=None, help="10-bar slope threshold")
     p.add_argument("--rsi-entry", type=float, default=None, help="RSI entry threshold")
     p.add_argument("--tp-r", type=float, default=None, help="Take Profit R-multiple")
     p.add_argument("--sl-atr", type=float, default=None, help="Stop Loss ATR multiplier")
@@ -162,6 +163,9 @@ def main() -> int:
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
         print(f"[config] Slope Threshold overridden to: {args.slope_threshold}", flush=True)
+    if args.slope_threshold_10 is not None:
+        cfg["slope_threshold_10"] = args.slope_threshold_10
+        print(f"[config] Slope Threshold 10 overridden to: {args.slope_threshold_10}", flush=True)
 
     # CLI override for RSI
     if args.rsi_entry is not None:

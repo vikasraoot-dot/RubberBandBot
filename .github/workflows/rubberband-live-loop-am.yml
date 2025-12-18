@@ -8,9 +8,13 @@ on:
   workflow_dispatch:
     inputs:
       slope_threshold:
-        description: 'Slope Threshold (e.g. -0.20, leave empty to use config.yaml)'
+        description: 'Slope Threshold 3-bar (e.g. -0.20, leave empty to use config.yaml)'
         required: false
         default: '-0.20'
+      slope_threshold_10:
+        description: 'Slope Threshold 10-bar (e.g. -0.15, leave empty to use config.yaml)'
+        required: false
+        default: '-0.15'
 
 concurrency:
   group: rubberband-live-paper-loop-am
@@ -93,6 +97,7 @@ jobs:
           DRY_RUN: "0"
           FORCE_RUN: "0"
           SLOPE_THRESHOLD: ${{ github.event.inputs.slope_threshold }}
+          SLOPE_THRESHOLD_10: ${{ github.event.inputs.slope_threshold_10 }}
           RSI_ENTRY: "25"
           TP_R: "2.0"
           SL_ATR: "1.5"
