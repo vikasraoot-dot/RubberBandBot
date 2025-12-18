@@ -105,6 +105,8 @@ jobs:
         run: |
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          # NOTE: We run market_loop.py (wrapper) which calls live_paper_loop.py (logic).
+          # Any new env vars (like SLOPE_THRESHOLD_10) MUST be passed explicitly in market_loop.py's run_once()!
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py
 
       - name: Upload Position Registry
