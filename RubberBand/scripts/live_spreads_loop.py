@@ -239,15 +239,29 @@ def get_long_signals(
             # We want to buy ONLY if slope is steep enough (Panic).
             # We skip if slope is too flat (Drift).
             # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP (gentle drift).
+            
+            # --- Dual-Slope Filter (Panic Persistency) ---
+            # Check 1: 3-bar slope (immediate crash, 45m)
             slope_threshold = cfg.get("slope_threshold")
             if slope_threshold is not None:
-                # Calculate slope (diff(3)/3)
                 if "kc_middle" in df.columns and len(df) >= 4:
-                    current_slope = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
-                    if current_slope > float(slope_threshold):
+                    current_slope_3 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
+                    if current_slope_3 > float(slope_threshold):
                          logger.spread_skip(
                             underlying=sym,
-                            skip_reason=f"Slope_too_flat({current_slope:.4f}>{slope_threshold})"
+                            skip_reason=f"Slope3_too_flat({current_slope_3:.4f}>{slope_threshold})"
+                         )
+                         continue
+            
+            # Check 2: 10-bar slope (sustained crash, 2.5h)
+            slope_threshold_10 = cfg.get("slope_threshold_10")
+            if slope_threshold_10 is not None:
+                if "kc_middle" in df.columns and len(df) >= 11:
+                    current_slope_10 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-11]) / 10
+                    if current_slope_10 > float(slope_threshold_10):
+                         logger.spread_skip(
+                            underlying=sym,
+                            skip_reason=f"Slope10_slow_bleed({current_slope_10:.4f}>{slope_threshold_10})"
                          )
                          continue
             

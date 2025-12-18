@@ -324,23 +324,34 @@ def simulate_spreads_for_symbol(
         if atr <= 0 or entry_price <= 0:
             continue
             
-        # Slope Filter (Anti-Falling Knife) matches live bot logic
+
+        # Slope Filter (Anti-Falling Knife) or (Panic Buyer)
+        # We calculate slopes FIRST so we can use them for filtering OR logging.
+        
+        slope_3 = 0.0
+        slope_10 = 0.0
+        
+        if "kc_middle" in df.columns:
+            # 3-bar slope
+            if i >= 4:
+                slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+            # 10-bar slope
+            if i >= 11:
+                slope_10 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-11]) / 10
+
         slope_threshold = opts.get("slope_threshold")
         if slope_threshold is not None:
-             if "kc_middle" in df.columns and i >= 4:
-                  # Calculate slope for entry bar (prev)
-                  # In live bot we use diff(3)/3. Matched indices: prev is entry signal bar.
-                  # We use i-1, i-4
-                  # If i=1, prev is idx 0. Need i>=4 (indices 4,3,2,1).
-                  current_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-                  # Inverted Logic (Panic Buyer):
-                  # We want to buy ONLY if slope is steep enough (Panic).
-                  # We skip if slope is too flat (Drift).
-                  # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
-                  # Slope -0.54 is < -0.20 -> KEEP.
-                  if current_slope > slope_threshold:
-                      continue
-        
+             # Default logic: Panic Buyer (skip if slope > threshold, i.e. too flat)
+             # If user passes very high/low threshold, this handles it.
+             # e.g. if threshold is -0.20, and slope is -0.10 (flat), we SKIP.
+             if slope_3 > slope_threshold:
+                 continue
+
+        # Check 2: 10-bar slope (sustained crash, 2.5h)
+        slope_threshold_10 = opts.get("slope_threshold_10")
+        if slope_threshold_10 is not None:
+            if slope_10 > slope_threshold_10:
+                continue
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
         if daily_sma is not None and opts.get("trend_filter", True):
             close_price = float(prev["close"])
@@ -360,10 +371,9 @@ def simulate_spreads_for_symbol(
         kc_lower = float(prev.get("kc_lower", 0))
         entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
         
-        # Calculate slope for logging (always, even if not filtering)
-        entry_slope = 0.0
-        if "kc_middle" in df.columns and i >= 4:
-            entry_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+        # Slopes are already calculated above
+        entry_slope = slope_3
+
         
         # Get entry time for variable DTE calculation
         entry_time = cur.name if hasattr(cur.name, 'weekday') else None
@@ -380,7 +390,8 @@ def simulate_spreads_for_symbol(
             result["entry_rsi"] = round(entry_rsi, 1)
             result["entry_close"] = round(entry_close, 2)
             result["kc_lower"] = round(kc_lower, 2)
-            result["entry_slope"] = round(entry_slope, 4)  # NEW: For slope analysis
+            result["entry_slope"] = round(entry_slope, 4)
+            result["entry_slope_10"] = round(slope_10, 4)  # NEW: For dual-slope analysis
             result["entry_adx"] = round(entry_adx, 1)     # NEW: For ADX analysis
             result["entry_reason"] = f"RSI={entry_rsi:.1f}, Close=${entry_close:.2f} < KC_Lower=${kc_lower:.2f}"
             
@@ -423,7 +434,8 @@ def main():
     ap.add_argument("--flatten-eod", action="store_true", help="Exit all positions at end of entry day (no overnight holds)")
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 25-30)")
     ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
-    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Require 3-bar slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
+    ap.add_argument("--slope-threshold-10", type=float, default=None, help="Require 10-bar slope to be steeper than this (e.g. -0.15) to enter (Values > thresh are skipped)")
     ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80% loss). Default 0.80.")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
@@ -444,6 +456,10 @@ def main():
     print(f"Tickers: {symbols}")
     print(f"{'='*60}\n")
     
+    # Resolve slope thresholds from CLI > config > None
+    slope_threshold_3 = args.slope_threshold if args.slope_threshold is not None else cfg.get("slope_threshold")
+    slope_threshold_10 = getattr(args, 'slope_threshold_10', None) if getattr(args, 'slope_threshold_10', None) is not None else cfg.get("slope_threshold_10")
+    
     opts = {
         "dte": args.dte,
         "min_dte": args.min_dte,
@@ -456,7 +472,8 @@ def main():
         "flatten_eod": args.flatten_eod,
         "adx_max": args.adx_max,
         "bars_stop": args.bars_stop,
-        "slope_threshold": args.slope_threshold,
+        "slope_threshold": slope_threshold_3,
+        "slope_threshold_10": slope_threshold_10,
         "sl_pct": args.sl_pct,
     }
     

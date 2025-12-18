@@ -35,8 +35,12 @@ atr_length: 14
 atr_length: 14
 rsi_length: 14
 
-# Slope Filter (Anti-Falling Knife)
-slope_threshold: -0.20
+# Slope Filter (Dual-Slope "Panic Persistency")
+# Logic: We SKIP trades that are NOT crashing fast enough.
+# Slope_3 checks immediate crash (45m lookback). Slope_10 checks sustained crash (2.5h).
+# Values > threshold = SKIP (too flat/slow bleed).
+slope_threshold: -0.20      # 3-bar slope: Must be <= -0.20 (steep crash)
+slope_threshold_10: -0.15   # 10-bar slope: Must be <= -0.15 (sustained crash)
 # ──────────────────────────────────────────────────────────────────────────────
 # RISK CONTROLS
 # ──────────────────────────────────────────────────────────────────────────────
