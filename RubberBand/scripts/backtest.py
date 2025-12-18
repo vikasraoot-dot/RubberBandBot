@@ -182,12 +182,22 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             # We want to buy ONLY if slope is steep enough (Panic).
             # We skip if slope is too flat (Drift).
             # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
+            
+            # Check 1: 3-bar slope (immediate crash, 45m)
             slope_threshold = cfg.get("slope_threshold")
             if slope_threshold is not None:
                  # Check sufficient history (need i >= 4)
                  if i >= 4 and "kc_middle" in df.columns:
-                      current_slope = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-                      if current_slope > float(slope_threshold):
+                      current_slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+                      if current_slope_3 > float(slope_threshold):
+                           continue
+            
+            # Check 2: 10-bar slope (sustained crash, 2.5h)
+            slope_threshold_10 = cfg.get("slope_threshold_10")
+            if slope_threshold_10 is not None:
+                 if i >= 11 and "kc_middle" in df.columns:
+                      current_slope_10 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-11]) / 10
+                      if current_slope_10 > float(slope_threshold_10):
                            continue
 
             # Trend Filter Check
@@ -445,7 +455,8 @@ def main():
     ap.add_argument("--max-hold-days", type=int, default=0, help="Max days to hold (0=infinite/until signal)")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
-    ap.add_argument("--slope-threshold", type=float, default=None, help="Require slope to be steeper than this (e.g. -0.20) to enter")
+    ap.add_argument("--slope-threshold", type=float, default=None, help="Require 3-bar slope to be steeper than this (e.g. -0.20) to enter")
+    ap.add_argument("--slope-threshold-10", type=float, default=None, help="Require 10-bar slope to be steeper than this (e.g. -0.15) to enter")
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled)")
     
     # Optimization Parameters
@@ -462,6 +473,8 @@ def main():
     cfg["_max_hold_days"] = args.max_hold_days
     if args.slope_threshold is not None:
         cfg["slope_threshold"] = args.slope_threshold
+    if getattr(args, 'slope_threshold_10', None) is not None:
+        cfg["slope_threshold_10"] = args.slope_threshold_10
 
     # Inject ADX/RSI overrides into 'filters' section
     if "filters" not in cfg: cfg["filters"] = {}
