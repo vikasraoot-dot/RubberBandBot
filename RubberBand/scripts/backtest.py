@@ -504,13 +504,16 @@ def main():
     
     max_days = max(days_list)
 
-    # Initialize Health Manager for Backtest
-    # Use a temp file to avoid messing with live data
+    # Initialize Health Manager for Backtest with DISABLED resilience
+    # Backtests should run all tickers regardless of prior trade history
     health_file = "backtest_health.json"
     if os.path.exists(health_file):
         os.remove(health_file)
     
-    health_mgr = TickerHealthManager(health_file, cfg.get("resilience", {}))
+    # Disable resilience in backtests - we want to see all trade opportunities
+    backtest_health_cfg = {"enabled": False}
+    health_mgr = TickerHealthManager(health_file, backtest_health_cfg)
+
 
     def _load(sym: str) -> pd.DataFrame:
         # Load max history once
