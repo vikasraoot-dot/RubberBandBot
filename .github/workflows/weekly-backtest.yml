@@ -57,11 +57,12 @@ jobs:
           echo "Tickers: ${{ github.event.inputs.tickers || 'RubberBand/tickers_weekly.txt' }}"
           echo "========================================"
           
+          set -o pipefail
           python RubberBand/scripts/backtest_weekly.py \
             --days $DAYS \
             --tickers ${{ github.event.inputs.tickers || 'RubberBand/tickers_weekly.txt' }} \
             --config RubberBand/config_weekly.yaml \
-            --adx-max "${{ github.event.inputs.adx_max || '0' }}"
+            --adx-max "${{ github.event.inputs.adx_max || '0' }}" 2>&1 | tee console.log
       
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4
@@ -71,3 +72,12 @@ jobs:
             weekly_backtest_summary.csv
             weekly_detailed_trades.csv
           if-no-files-found: warn
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-backtest-console-${{ github.run_id }}
+          path: console.log
+          if-no-files-found: warn
+          retention-days: 30

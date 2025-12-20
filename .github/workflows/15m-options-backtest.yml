@@ -11,7 +11,7 @@ on:
       dte:
         description: 'Days to expiration (1-3)'
         required: false
-        default: '2'
+        default: '6'
         type: string
       spread_width:
         description: 'Spread width in ATR multiples'
@@ -21,12 +21,12 @@ on:
       sma_period:
         description: 'SMA period for trend filter (20=short, 50=medium)'
         required: false
-        default: '20'
+        default: '50'
         type: string
       max_debit:
         description: 'Max debit per share ($)'
         required: false
-        default: '2.0'
+        default: '3.00'
         type: string
       tickers:
         description: 'Ticker file path'
@@ -52,12 +52,12 @@ on:
       slope_threshold:
         description: 'Slope Threshold 3-bar (e.g. -0.20, leave empty to use config)'
         required: false
-        default: ''
+        default: '-0.20'
         type: string
       slope_threshold_10:
         description: 'Slope Threshold 10-bar (e.g. -0.15, leave empty to use config)'
         required: false
-        default: ''
+        default: '-0.15'
         type: string
       adx_max:
         description: 'Max ADX to allow entry (0=disabled, try 50-60)'
@@ -118,6 +118,7 @@ jobs:
             SLOPE10_ARG="--slope-threshold-10 ${{ github.event.inputs.slope_threshold_10 }}"
           fi
 
+          set -o pipefail
           python RubberBand/scripts/backtest_spreads.py \
             --config RubberBand/config.yaml \
             --tickers "${{ github.event.inputs.tickers || 'RubberBand/tickers_options.txt' }}" \
@@ -132,7 +133,7 @@ jobs:
             $SLOPE_ARG \
             $SLOPE10_ARG \
             ${{ github.event.inputs.verbose == 'true' && '--verbose' || '' }} \
-            ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }}
+            ${{ github.event.inputs.flatten_eod == 'true' && '--flatten-eod' || '' }} 2>&1 | tee console.log
 
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4
@@ -141,6 +142,15 @@ jobs:
           path: |
             results/spread_backtest_trades.csv
             results/spread_backtest_summary.json
+          if-no-files-found: warn
+          retention-days: 30
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 15m-options-backtest-console-${{ github.run_id }}
+          path: console.log
           if-no-files-found: warn
           retention-days: 30
 

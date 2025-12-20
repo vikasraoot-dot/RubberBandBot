@@ -60,6 +60,7 @@ jobs:
           APCA_API_BASE_URL: https://paper-api.alpaca.markets
         run: |
           # Scheduled runs = LIVE, Manual runs = whatever is specified (default simulation)
+          set -o pipefail
           if [ "${{ github.event_name }}" = "schedule" ]; then
             DRY_RUN=0  # Scheduled runs are LIVE
           else
@@ -93,12 +94,12 @@ jobs:
             python RubberBand/scripts/live_weekly_options_loop.py \
               --dry-run $DRY_RUN \
               --max-premium $MAX_PREMIUM \
-              --monitor-only
+              --monitor-only 2>&1 | tee console.log
           else
             echo "🚀 FULL MODE: Scanning for signals + managing positions"
             python RubberBand/scripts/live_weekly_options_loop.py \
               --dry-run $DRY_RUN \
-              --max-premium $MAX_PREMIUM
+              --max-premium $MAX_PREMIUM 2>&1 | tee console.log
           fi
       
       - name: Upload Trade Logs
@@ -117,3 +118,12 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
           overwrite: true
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-options-console-log-${{ github.run_id }}
+          path: console.log
+          if-no-files-found: warn
+          retention-days: 30

@@ -56,10 +56,11 @@ jobs:
           echo "Tickers: $TICKERS"
           echo "========================================"
           
+          set -o pipefail
           python RubberBand/scripts/backtest_weekly_options.py \
             --days $DAYS \
             --tickers $TICKERS \
-            --adx-max "${{ github.event.inputs.adx_max || '0' }}"
+            --adx-max "${{ github.event.inputs.adx_max || '0' }}" 2>&1 | tee console.log
       
       - name: Upload Backtest Results
         uses: actions/upload-artifact@v4

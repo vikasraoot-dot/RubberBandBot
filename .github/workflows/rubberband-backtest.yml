@@ -21,7 +21,7 @@ on:
       rsi_entry:
         description: 'RSI Entry Threshold (e.g. 30)'
         required: false
-        default: '30'
+        default: '25'
       tp_r:
         description: 'Take Profit R-Multiple (e.g. 2.0)'
         required: false
@@ -96,7 +96,7 @@ jobs:
             $args += "${{ inputs.sl_atr }}"
           }
           
-          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args
+          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args *>&1 | Tee-Object -FilePath "console.log"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -107,3 +107,12 @@ jobs:
             backtest_summary.json
             loss_analysis.csv
             daily_stats.csv
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 15m-stock-backtest-console-${{ github.run_id }}
+          path: console.log
+          if-no-files-found: warn
+          retention-days: 30

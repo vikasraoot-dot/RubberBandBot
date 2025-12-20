@@ -122,7 +122,7 @@ jobs:
           # We use Invoke-Expression or just simplistic string splicing if simple enough.
           # Ideally just pass args.
           
-          $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg $slope10Arg"
+          $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg $slope10Arg *>&1 | Tee-Object -FilePath console.log"
           Invoke-Expression $cmd
       
       - name: Upload Position Registry
@@ -134,3 +134,12 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
           overwrite: true
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 15m-options-console-log-${{ github.run_id }}
+          path: console.log
+          if-no-files-found: warn
+          retention-days: 30
