@@ -57,7 +57,7 @@ resilience:
   
 trend_filter:
   enabled: true
-  sma_period: 20   # Changed from 200 to 20 for 15M options (better trade opportunity)
+  sma_period: 50   # Optimization: 50-day SMA captures profitable mean reversion (was 20)
 
 # POSITION / SIZING
 allow_shorts: false
