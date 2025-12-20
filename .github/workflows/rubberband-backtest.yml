@@ -63,6 +63,9 @@ jobs:
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
           
+          # Reset health file to prevent paused tickers from prior runs
+          Set-Content -Path "backtest_health.json" -Value "{}" -Force
+          
           # Construct args
           $args = @("--days", "${{ inputs.days }}")
           
