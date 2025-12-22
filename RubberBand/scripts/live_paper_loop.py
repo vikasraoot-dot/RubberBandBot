@@ -351,12 +351,39 @@ def main() -> int:
     positions = {p["symbol"]: p for p in positions_raw}
 
     # Daily cooldown: Get all tickers traded today (prevents re-entry after TP/SL)
+    # Daily cooldown: Get all tickers traded today
+    daily_fills = []
+    traded_today = set()
     try:
         daily_fills = get_daily_fills(base_url, key, secret, bot_tag=BOT_TAG) or []
         traded_today = set(f.get("symbol") for f in daily_fills if f.get("symbol"))
     except Exception as e:
         print(f"[warn] Could not fetch daily fills for cooldown: {e}", flush=True)
-        traded_today = set()
+
+    # Dead Knife Filter: Identify tickers with net losses today
+    has_loss_today = set()
+    if daily_fills:
+        fill_stats = {}
+        for f in daily_fills:
+            sym = f.get("symbol")
+            side = f.get("side")
+            qty = float(f.get("filled_qty", 0))
+            px = float(f.get("filled_avg_price", 0))
+             
+            if sym not in fill_stats: fill_stats[sym] = {"buy_vol": 0, "buy_qty": 0, "sell_vol": 0, "sell_qty": 0}
+            if side == "buy":
+                fill_stats[sym]["buy_vol"] += (qty * px)
+                fill_stats[sym]["buy_qty"] += qty
+            elif side == "sell":
+                fill_stats[sym]["sell_vol"] += (qty * px)
+                fill_stats[sym]["sell_qty"] += qty
+
+        for sym, s in fill_stats.items():
+            if s["sell_qty"] > 0 and s["buy_qty"] > 0:
+                avg_buy = s["buy_vol"] / s["buy_qty"]
+                avg_sell = s["sell_vol"] / s["sell_qty"]
+                if avg_sell < avg_buy:
+                    has_loss_today.add(sym)
 
     # Risk knobs
     brackets = cfg.get("brackets", {}) or {}
@@ -494,6 +521,23 @@ def main() -> int:
         # Filter Long Signal by Trend
         if long_signal and not is_bull_trend:
             long_signal = False
+
+        # --- Dead Knife Filter (Live) ---
+        # Skip re-entry if we had a loss today and RSI is still < 20 (Deep Oversold)
+        # This prevents "doubling down" on a falling knife that just stopped us out.
+        if long_signal and cfg.get("dead_knife_filter", False) and sym in has_loss_today:
+            # We use current RSI vs 20. Backtest uses last_loss_rsi < 20 check too, 
+            # but here "has_loss_today" implies we tried and failed.
+            if rsi is not None and rsi < 20:
+                print(json.dumps({
+                    "type": "DKF_SKIP",
+                    "symbol": sym,
+                    "reason": "Loss_today_and_RSI<20",
+                    "rsi": rsi,
+                    "ts": now_iso
+                }), flush=True)
+                continue
+        # --------------------------------
 
         # Entry price reference (Close of the signal bar)
         entry = close

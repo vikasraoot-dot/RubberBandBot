@@ -95,8 +95,10 @@ filters:
   rsi_min: 15
   rsi_max: 100
   adx_threshold: 80          # Optimized safety cutoff (was 0)
-  slope_threshold_pct: -0.12 # Optimized High Volume Entry (was -0.001)
+  slope_threshold: -0.12     # Optimized Panic Entry (was -0.001) - 3-bar slope
+  # slope_threshold_10: -0.05 # Optional: 10-bar sustained slope (disabled by default)
   require_fast_above_slow: false # Allow deep dips where fast EMA crosses slow
+  dead_knife_filter: true    # Enable Dead Knife Filter (Skip RSI<20 after loss)
 
 # ──────────────────────────────────────────────────────────────────────────────
 # EXIT STRATEGY
