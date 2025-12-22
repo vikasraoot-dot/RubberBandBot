@@ -30,6 +30,11 @@ on:
         description: 'Stop Loss ATR Multiplier (e.g. 1.5)'
         required: false
         default: '1.5'
+      dead_knife_filter:
+        description: 'Enable Dead Knife Filter? (true/false)'
+        type: boolean
+        required: false
+        default: false
   push:
     branches: [ "main" ]
     paths:
@@ -37,7 +42,7 @@ on:
 
 jobs:
   backtest:
-    runs-on: [self-hosted, windows]
+    runs-on: windows-latest
     timeout-minutes: 60
 
     steps:
@@ -97,6 +102,10 @@ jobs:
           if ("${{ inputs.sl_atr }}" -ne "") {
             $args += "--sl-atr"
             $args += "${{ inputs.sl_atr }}"
+          }
+
+          if ("${{ inputs.dead_knife_filter }}" -eq "true") {
+            $args += "--dead-knife-filter"
           }
           
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args *>&1 | Tee-Object -FilePath "console.log"
