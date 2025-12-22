@@ -297,24 +297,30 @@ def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
     """
     base, key, secret = _resolve_creds()
     
-    # Use options snapshots endpoint for greeks
-    data_url = f"https://data.alpaca.markets/v1beta1/options/snapshots/{option_symbol}"
+    # Use multi-symbol endpoint (single-symbol endpoint is unreliable for options)
+    data_url = f"https://data.alpaca.markets/v1beta1/options/snapshots"
+    params = {"symbols": option_symbol}
     
     try:
-        resp = requests.get(data_url, headers=_headers(key, secret), timeout=10)
+        resp = requests.get(data_url, headers=_headers(key, secret), params=params, timeout=10)
         if resp.status_code == 404:
             print(f"[options] No snapshot for {option_symbol}")
             return None
         resp.raise_for_status()
         data = resp.json()
         
+        # Extract snapshot for specific symbol
+        snapshot = data.get("snapshots", {}).get(option_symbol, {})
+        if not snapshot:
+             return None
+
         # Extract quote
-        quote = data.get("latestQuote", {})
+        quote = snapshot.get("latestQuote", {})
         bid = float(quote.get("bp", 0))
         ask = float(quote.get("ap", 0))
         
         # Extract greeks
-        greeks = data.get("greeks", {})
+        greeks = snapshot.get("greeks", {})
         
         return {
             "bid": bid,
