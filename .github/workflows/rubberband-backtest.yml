@@ -48,17 +48,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Ensure Python path
-        shell: powershell
-        run: |
-          $python = (Get-Command python.exe).Source
-          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
       - name: Install deps
         shell: powershell
         run: |
-          & "$env:PYTHON_EXE" -m pip install --upgrade pip
-          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -r RubberBand/requirements.txt
 
       - name: Run Backtest
         shell: powershell
@@ -108,7 +107,7 @@ jobs:
             $args += "--dead-knife-filter"
           }
           
-          & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/backtest.py @args *>&1 | Tee-Object -FilePath "console.log"
+          python -X utf8 -u RubberBand/scripts/backtest.py @args *>&1 | Tee-Object -FilePath "console.log"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
