@@ -108,22 +108,65 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
             
             df["trend_sma"] = df["date_only"].map(sma_map)
             df["trend_sma_2"] = df["date_only"].map(sma_map_2)
-            df.drop(columns=["date_only"], inplace=True)
+            # df.drop(columns=["date_only"], inplace=True) # Keep date_only for VIXY join
             
             # Check if we have NaNs
             if df["trend_sma"].isna().all():
                 print("WARNING: All Trend SMA values are NaN!")
+
+    # 3. Fetch VIXY for Regime Detection (Backtest Dynamic)
+    # We fetch enough daily VIXY history to cover the backtest period.
+    try:
+        vix_map, _ = fetch_latest_bars(
+            symbols=["VIXY"],
+            timeframe="1Day",
+            history_days=days+10,
+            feed=feed,
+            rth_only=False,
+            key=key,
+            secret=secret,
+            verbose=False
+        )
+        vixy_df = vix_map.get("VIXY", pd.DataFrame())
+        
+        if not vixy_df.empty:
+            # Shift VIXY by 1 day to simulate "Yesterday's Close" known at Open
+            vixy_df["vixy_close"] = vixy_df["close"].shift(1)
+            vixy_df["date_only"] = vixy_df.index.date
+            
+            # Create Mapping
+            vix_map_dict = vixy_df.set_index("date_only")["vixy_close"].to_dict()
+            
+            if "date_only" not in df.columns:
+                 df["date_only"] = df.index.date
+            
+            df["vixy_close"] = df["date_only"].map(vix_map_dict)
+            df.drop(columns=["date_only"], inplace=True)
+            
         else:
-            df["trend_sma"] = float('nan')
-            df["trend_sma_2"] = float('nan')
-    else:
+             df["vixy_close"] = float('nan')
+    except Exception as e:
+        print(f"Warning: Failed to fetch VIXY for backtest: {e}")
+        df["vixy_close"] = float('nan')
+
+    # Ensure columns exist if daily data missing
+    if "trend_sma" not in df.columns:
         df["trend_sma"] = float('nan')
+    if "trend_sma_2" not in df.columns:
         df["trend_sma_2"] = float('nan')
 
-    # Keep approx last N days
-    bars_per_day_15m = 390 // 15
-    approx_rows = int(days) * bars_per_day_15m
-    return df.tail(approx_rows)
+    return df # Return full DF to ensure we have enough history for indicators calculation
+    # Note: caller handles slicing if needed, but attached indicators are computed on full DF
+    # Actually, we should allow computing on full DF then slice?
+    # Backtest loop iterates range(1, len(df)).
+    # Getting too much data is fine.
+    
+    # Original logic had:
+    # bars_per_day_15m = 390 // 15
+    # approx_rows = int(days) * bars_per_day_15m
+    # return df.tail(approx_rows)
+    # But backtest main() asks for 'days'. 
+    # If we return everything, it's safer for lookbacks.
 
 # ------------------------------------------------------------------
 # Backtest simulator
@@ -188,20 +231,41 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             # We skip if slope is too flat (Drift).
             # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
             
-            # Slope Filter (Normalized Percentage)
-            # We treat slope_threshold as a PERCENTAGE (e.g. -0.12 means -0.12%)
-            slope_threshold = cfg.get("slope_threshold")
-            if slope_threshold is not None:
-                 if i >= 4 and "kc_middle" in df.columns:
-                      current_slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-                      price_ref = float(df["close"].iloc[i-1])
-                      if price_ref > 0:
-                          current_slope_pct = (current_slope_3 / price_ref) * 100
-                          if current_slope_pct > float(slope_threshold):
-                               continue # Too flat
+            # Dynamic Regime Logic
+            # --------------------
+            slope_threshold = float(cfg.get("slope_threshold", -0.12))
+            use_dkf = cfg.get("dead_knife_filter", False)
+            
+            vixy_val = cur.get("vixy_close", float('nan'))
+            regime_name = "DEFAULT"
+            
+            if not pd.isna(vixy_val):
+                if vixy_val < 35.0:
+                    slope_threshold = -0.08  # CALM
+                    use_dkf = False
+                    regime_name = "CALM"
+                elif vixy_val > 55.0:
+                    slope_threshold = -0.20  # PANIC
+                    use_dkf = True
+                    regime_name = "PANIC"
+                else:
+                    slope_threshold = -0.12  # NORMAL
+                    use_dkf = False 
+                    regime_name = "NORMAL"
+            
+
+
+            # Slope Filter (Normalized Percentage) (Dynamic Threshold)
+            # --------------------------------------------------------
+            if i >= 4 and "kc_middle" in df.columns:
+                  current_slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
+                  price_ref = float(df["close"].iloc[i-1])
+                  if price_ref > 0:
+                      current_slope_pct = (current_slope_3 / price_ref) * 100
+                      if current_slope_pct > slope_threshold:
+                           continue # Too flat
 
             # Check 2: 10-bar slope (Secondary)
-            # Also normalized if used
             slope_threshold_10 = cfg.get("slope_threshold_10")
             if slope_threshold_10 is not None:
                  if i >= 11 and "kc_middle" in df.columns:
