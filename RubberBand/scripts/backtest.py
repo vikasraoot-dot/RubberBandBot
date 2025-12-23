@@ -29,7 +29,7 @@ from RubberBand.src.ticker_health import TickerHealthManager
 # Data loading helper
 # ------------------------------------------------------------------
 def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
-                         timeframe_override=None, limit_override=None, rth_only_override=True, verbose=True) -> pd.DataFrame:
+                         timeframe_override=None, limit_override=None, rth_only_override=True, verbose=True, end_date=None) -> pd.DataFrame:
     # 1. Fetch Intraday Bars (15m)
     timeframe = timeframe_override or cfg.get("timeframe", "15Min")
     feed = cfg.get("feed", "iex")
@@ -54,7 +54,8 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
         bar_limit=bar_limit,
         key=key,
         secret=secret,
-        verbose=verbose
+        verbose=verbose,
+        end=end_date
     )
     
     df = bars_map.get(symbol, pd.DataFrame())
@@ -82,7 +83,8 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
             tz_name=tz_name,
             key=key,
             secret=secret,
-            verbose=False # Reduce noise
+            verbose=False, # Reduce noise
+            end=end_date
         )
         
         df_daily = daily_map.get(symbol, pd.DataFrame())
@@ -125,7 +127,8 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
             rth_only=False,
             key=key,
             secret=secret,
-            verbose=False
+            verbose=False,
+            end=end_date
         )
         vixy_df = vix_map.get("VIXY", pd.DataFrame())
         
@@ -560,6 +563,7 @@ def main():
     ap.add_argument("--tp-r", type=float, default=None, help="Override Take Profit R-Multiple (e.g. 2.0)")
     ap.add_argument("--sl-atr", type=float, default=None, help="Override Stop Loss ATR Multiplier (e.g. 1.5)")
     ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and PrevLossRSI<20)")
+    ap.add_argument("--end-date", type=str, default=None, help="End date (YYYY-MM-DD) for backtest")
     
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
@@ -629,7 +633,8 @@ def main():
             timeframe_override=args.timeframe,
             limit_override=args.limit,
             rth_only_override=args.rth_only,
-            verbose=not args.quiet
+            verbose=not args.quiet,
+            end_date=args.end_date
         )
 
     rows = []

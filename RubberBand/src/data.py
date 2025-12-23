@@ -581,6 +581,7 @@ def fetch_latest_bars(
     dollar_vol_window: int = 20,
     dollar_vol_min_periods: int = 7,
     verbose: bool = True,
+    end: Optional[Any] = None  # Accepts datetime, date, or ISO string
 ) -> Tuple[Dict[str, pd.DataFrame], Dict[str, Any]]:
     """
     Robust multi-symbol fetch with pagination & dual-shape handling. Emits rich diagnostics.
@@ -616,10 +617,37 @@ def fetch_latest_bars(
         })
         # still continue; requests will 401, but we won’t crash
 
-    end = _now_utc().replace(microsecond=0)
-    start = end - dt.timedelta(days=max(1, int(history_days)))
+    if end is None:
+        end_dt = _now_utc().replace(microsecond=0)
+    else:
+        # Normalize end to utc datetime
+        if isinstance(end, str):
+            try:
+                # Try simple date first YYYY-MM-DD
+                end_dt = dt.datetime.strptime(end, "%Y-%m-%d").replace(hour=23, minute=59, second=59, tzinfo=dt.timezone.utc)
+            except ValueError:
+                 try:
+                     end_dt = dt.datetime.fromisoformat(end.replace("Z", "+00:00"))
+                 except ValueError:
+                     # Fallback to pandas
+                     end_dt = pd.to_datetime(end).to_pydatetime()
+                     if end_dt.tzinfo is None:
+                         end_dt = end_dt.replace(tzinfo=dt.timezone.utc)
+        elif isinstance(end, (dt.date, dt.datetime)):
+             if isinstance(end, dt.date) and not isinstance(end, dt.datetime):
+                  end_dt = dt.datetime.combine(end, dt.time(23, 59, 59, tzinfo=dt.timezone.utc))
+             else:
+                  end_dt = end
+                  if end_dt.tzinfo is None:
+                      end_dt = end_dt.replace(tzinfo=dt.timezone.utc)
+        else:
+             end_dt = _now_utc()
+
+    start = end_dt - dt.timedelta(days=max(1, int(history_days)))
+    
+    # Format for Alpaca (RFC3339)
     start_iso = start.strftime(ISO_UTC)
-    end_iso = end.strftime(ISO_UTC)
+    end_iso = end_dt.strftime(ISO_UTC)
 
     chunks = list(_chunked([s.upper() for s in symbols], 25))
     if verbose:
@@ -702,7 +730,7 @@ def fetch_latest_bars(
             df["dollar_vol_avg"] = dv.ffill().fillna(0.0)
 
             last_ts = df.index[-1]
-            if (end - last_ts) > dt.timedelta(days=7):
+            if (end_dt - last_ts) > dt.timedelta(days=7):
                 stale_syms.append(s)
 
             bars_map[s] = df
