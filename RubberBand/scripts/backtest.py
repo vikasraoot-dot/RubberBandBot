@@ -140,6 +140,11 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
     if df is None or df.empty or len(df) < 30:
         return dict(trades=0, gross=0.0, net=0.0, win_rate=0.0, ret_pct=0.0, equity=start_cash, detailed_trades=[])
 
+    # Dead Knife Filter Config
+    use_dkf = cfg.get("dead_knife_filter", False)
+    dkf_tracker = {} # (date) -> rsi of last loss
+
+
     df = attach_verifiers(df, cfg).copy()
     
     # DEBUG: Print last 5 rows with indicators
@@ -183,22 +188,29 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             # We skip if slope is too flat (Drift).
             # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP.
             
-            # Check 1: 3-bar slope (immediate crash, 45m)
+            # Slope Filter (Normalized Percentage)
+            # We treat slope_threshold as a PERCENTAGE (e.g. -0.12 means -0.12%)
             slope_threshold = cfg.get("slope_threshold")
             if slope_threshold is not None:
-                 # Check sufficient history (need i >= 4)
                  if i >= 4 and "kc_middle" in df.columns:
                       current_slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-                      if current_slope_3 > float(slope_threshold):
-                           continue
-            
-            # Check 2: 10-bar slope (sustained crash, 2.5h)
+                      price_ref = float(df["close"].iloc[i-1])
+                      if price_ref > 0:
+                          current_slope_pct = (current_slope_3 / price_ref) * 100
+                          if current_slope_pct > float(slope_threshold):
+                               continue # Too flat
+
+            # Check 2: 10-bar slope (Secondary)
+            # Also normalized if used
             slope_threshold_10 = cfg.get("slope_threshold_10")
             if slope_threshold_10 is not None:
                  if i >= 11 and "kc_middle" in df.columns:
                       current_slope_10 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-11]) / 10
-                      if current_slope_10 > float(slope_threshold_10):
-                           continue
+                      price_ref = float(df["close"].iloc[i-1])
+                      if price_ref > 0:
+                          current_slope_10_pct = (current_slope_10 / price_ref) * 100
+                          if current_slope_10_pct > float(slope_threshold_10):
+                               continue
 
             # Trend Filter Check
             trend_sma = prev.get("trend_sma", float('nan'))
@@ -225,6 +237,21 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
 
             # LONG Entry Signal (Only in Bull Trend)
             if is_bull_trend and prev.get("long_signal", False):
+                
+                # --- Dead Knife Filter ---
+                if use_dkf:
+                    current_rsi = float(prev.get("rsi", 100))
+                    # Check today's history
+                    last_loss_rsi = dkf_tracker.get(cur.name.date())
+                    
+                    # If we have a loss today AND both current and last loss were Extreme Oversold (<20)
+                    if last_loss_rsi is not None and current_rsi < 20 and last_loss_rsi < 20:
+                        FILTER_REJECTS["DKF"] += 1
+                        if verbose:
+                            print(f"[{sym} {cur.name}] DKF SKIP: RSI {current_rsi:.1f} after Loss at RSI {last_loss_rsi:.1f}")
+                        continue
+                # -------------------------
+
                 # Risk Sizing
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
@@ -406,6 +433,11 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                     "tp_px": entry_state.get("tp_px", 0)
                 })
                 
+                # Update DKF Tracker if Dead Knife Filter is enabled and this was a losing trade
+                use_dkf = cfg.get("dead_knife_filter", False)
+                if use_dkf and pnl < 0:
+                    dkf_tracker[cur.name.date()] = entry_state.get("rsi", 0)
+                
                 # Verbose logging
                 if verbose:
                     pnl_sign = "+" if pnl >= 0 else ""
@@ -463,6 +495,7 @@ def main():
     ap.add_argument("--rsi-entry", type=float, default=None, help="Override RSI Entry Threshold (e.g. 25, 30)")
     ap.add_argument("--tp-r", type=float, default=None, help="Override Take Profit R-Multiple (e.g. 2.0)")
     ap.add_argument("--sl-atr", type=float, default=None, help="Override Stop Loss ATR Multiplier (e.g. 1.5)")
+    ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and PrevLossRSI<20)")
     
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
@@ -478,6 +511,9 @@ def main():
 
     # Inject ADX/RSI overrides into 'filters' section
     if "filters" not in cfg: cfg["filters"] = {}
+    
+    # Inject DKF flag
+    cfg["dead_knife_filter"] = args.dead_knife_filter
     if args.adx_max > 0:
         cfg["filters"]["adx_threshold"] = args.adx_max
     if args.rsi_entry is not None:

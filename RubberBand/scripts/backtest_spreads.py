@@ -51,20 +51,6 @@ DEFAULT_OPTS = {
 def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) -> int:
     """
     Calculate actual DTE based on entry day of week, matching live bot behavior.
-    
-    Live bot logic (from options_data.py select_spread_contracts):
-    - Tries target DTE first, then ±1, ±2, then rolls to next week (+7, +5, +6, etc.)
-    - Filters out any DTE < min_dte
-    
-    This simulates: On Thu/Fri when target DTE < min_dte, roll to next Friday.
-    
-    Args:
-        entry_date: The datetime of entry
-        target_dte: Target DTE from config (e.g., 3)
-        min_dte: Minimum DTE allowed (e.g., 3)
-    
-    Returns:
-        Actual DTE to use for this trade
     """
     # Type guard: if entry_date doesn't have weekday(), return target_dte
     if not hasattr(entry_date, 'weekday'):
@@ -83,6 +69,7 @@ def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) ->
     # Otherwise, roll to NEXT Friday (add 7 days)
     days_to_next_friday = days_to_friday + 7
     return days_to_next_friday
+
 
 
 
@@ -239,11 +226,13 @@ def simulate_spread_trade(
             # Check for max loss (Stop Loss)
             sl_pct = opts.get("sl_pct", 0.9) # Default to 90% if not specified
             stop_loss_threshold = -cost * sl_pct
-            
             if current_pnl <= stop_loss_threshold:
                 exit_reason = "STOP_LOSS"
                 exit_value = current_value
                 actual_exit_idx = i
+                
+                # Update DKF state
+                last_loss_date = df.iloc[i].name.date() if hasattr(df.iloc[i].name, 'date') else None
                 break
         
         if exit_reason != "EXPIRY":
@@ -306,8 +295,23 @@ def simulate_spreads_for_symbol(
     
     # Track position to avoid overlapping trades
     in_trade_until = -1
+    last_loss_date = None
     
-    for i in range(1, len(df)):
+    # Iterate bars
+    for i in range(20, len(df)): # Need warmup for SMA/ATR
+    
+        cur = df.iloc[i]
+        date_obj = cur.name.date() if hasattr(cur.name, "date") else None
+        
+        # Dead Knife Filter Logic (Pre-check)
+        # Skip if we already took a loss today and RSI is deep oversold (<20)
+        # This prevents "Doubling Down" on a falling knife.
+        if opts.get("dead_knife_filter") and last_loss_date == date_obj:
+            rsi_check = float(cur.get("rsi", 0))
+            if rsi_check < 20:
+                continue # Skip "Catching Falling Knife" re-entry 
+                 
+        # 1. Check for Exits (if in trade)
         if i <= in_trade_until:
             continue
         
@@ -339,18 +343,29 @@ def simulate_spreads_for_symbol(
             if i >= 11:
                 slope_10 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-11]) / 10
 
+        # Normalized Slope (Percentage)
+        # -----------------------------
+        # Convert absolute slope to percentage of price for consistent filtering.
+        # slope_pct = (slope / open_price) * 100
+        
+        entry_price_ref = float(cur["open"])
+        slope_3_pct = 0.0
+        slope_10_pct = 0.0
+        
+        if entry_price_ref > 0:
+            slope_3_pct = (slope_3 / entry_price_ref) * 100
+            slope_10_pct = (slope_10 / entry_price_ref) * 100
+
         slope_threshold = opts.get("slope_threshold")
         if slope_threshold is not None:
-             # Default logic: Panic Buyer (skip if slope > threshold, i.e. too flat)
-             # If user passes very high/low threshold, this handles it.
-             # e.g. if threshold is -0.20, and slope is -0.10 (flat), we SKIP.
-             if slope_3 > slope_threshold:
+             # Treat threshold as Percentage (e.g. -0.12 means -0.12%)
+             if slope_3_pct > float(slope_threshold):
                  continue
 
-        # Check 2: 10-bar slope (sustained crash, 2.5h)
+        # Check 2: 10-bar slope (sustained crash, 2.5h) - Normalized
         slope_threshold_10 = opts.get("slope_threshold_10")
         if slope_threshold_10 is not None:
-            if slope_10 > slope_threshold_10:
+            if slope_10_pct > float(slope_threshold_10):
                 continue
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
         if daily_sma is not None and opts.get("trend_filter", True):
@@ -390,8 +405,8 @@ def simulate_spreads_for_symbol(
             result["entry_rsi"] = round(entry_rsi, 1)
             result["entry_close"] = round(entry_close, 2)
             result["kc_lower"] = round(kc_lower, 2)
-            result["entry_slope"] = round(entry_slope, 4)
-            result["entry_slope_10"] = round(slope_10, 4)  # NEW: For dual-slope analysis
+            result["entry_slope"] = round(slope_3_pct, 4) # Log the PERCENTAGE
+            result["entry_slope_10"] = round(slope_10_pct, 4)  # Log the PERCENTAGE
             result["entry_adx"] = round(entry_adx, 1)     # NEW: For ADX analysis
             result["entry_reason"] = f"RSI={entry_rsi:.1f}, Close=${entry_close:.2f} < KC_Lower=${kc_lower:.2f}"
             
@@ -437,6 +452,7 @@ def main():
     ap.add_argument("--slope-threshold", type=float, default=None, help="Require 3-bar slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
     ap.add_argument("--slope-threshold-10", type=float, default=None, help="Require 10-bar slope to be steeper than this (e.g. -0.15) to enter (Values > thresh are skipped)")
     ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80% loss). Default 0.80.")
+    ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and Loss Today)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
@@ -474,7 +490,9 @@ def main():
         "bars_stop": args.bars_stop,
         "slope_threshold": slope_threshold_3,
         "slope_threshold_10": slope_threshold_10,
+        "slope_threshold_10": slope_threshold_10,
         "sl_pct": args.sl_pct,
+        "dead_knife_filter": args.dead_knife_filter,
     }
     
     # Fetch 15-minute data
