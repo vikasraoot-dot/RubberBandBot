@@ -875,6 +875,7 @@ def run_scan_cycle(
     logger: OptionsTradeLogger,
     registry: PositionRegistry,
     dry_run: bool,
+    regime_cfg: Dict[str, Any] = None, # Added parameter
 ) -> int:
     """Run a single scan cycle. Returns number of new entries."""
     windows = cfg.get("entry_windows", [])
@@ -914,7 +915,7 @@ def run_scan_cycle(
                     break
     
     # 3. Scan for new signals
-    signals = get_long_signals(symbols, cfg, logger)
+    signals = get_long_signals(symbols, cfg, logger, regime_cfg=regime_cfg)
     
     logger.heartbeat(
         event="signals_found",
@@ -990,6 +991,10 @@ def main() -> int:
         scan_interval_min=SCAN_INTERVAL_SECONDS // 60,
     )
 
+    # --- Dynamic Regime Detection ---
+    rm = RegimeManager(verbose=False)
+    # --------------------------------
+
     if args.slope_threshold is not None:
         print(f"[config] Slope Threshold overridden to: {args.slope_threshold}", flush=True)
     if args.slope_threshold_10 is not None:
@@ -1053,10 +1058,22 @@ def main() -> int:
         
         # Run scan cycle
         scan_count += 1
-        logger.heartbeat(event="scan_cycle_start", cycle=scan_count, time=now_et.strftime("%H:%M"))
+        
+        # Update Regime
+        current_regime = rm.update()
+        regime_cfg = rm.get_config_overrides()
+        
+        logger.heartbeat(
+            event="scan_cycle_start", 
+            cycle=scan_count, 
+            time=now_et.strftime("%H:%M"),
+            regime=current_regime,
+            vixy=rm.last_vixy,
+            slope_thresh=regime_cfg.get("slope_threshold_pct")
+        )
         
         try:
-            entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, registry, dry_run)
+            entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, registry, dry_run, regime_cfg=regime_cfg)
             logger.heartbeat(event="scan_cycle_end", cycle=scan_count, new_entries=entries)
         except Exception as e:
             logger.error(error=str(e), context="scan_cycle")
