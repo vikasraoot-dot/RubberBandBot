@@ -992,7 +992,7 @@ def main() -> int:
     )
 
     # --- Dynamic Regime Detection ---
-    rm = RegimeManager(verbose=False)
+    rm = RegimeManager(verbose=True)
     # --------------------------------
 
     if args.slope_threshold is not None:

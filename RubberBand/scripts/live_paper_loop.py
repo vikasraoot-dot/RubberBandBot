@@ -404,7 +404,7 @@ def main() -> int:
         max_notional = None
 
     # --- Dynamic Regime Detection ---
-    rm = RegimeManager(verbose=False)
+    rm = RegimeManager(verbose=True)
     current_regime = rm.update()
     regime_cfg = rm.get_config_overrides()
     
