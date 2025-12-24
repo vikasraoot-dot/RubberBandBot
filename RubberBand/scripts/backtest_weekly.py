@@ -247,6 +247,18 @@ def simulate_weekly_mean_reversion(
     # Trend filter
     trend_enabled = cfg.get("trend_filter", {}).get("enabled", False)
     
+    # Trend filter
+    trend_enabled = cfg.get("trend_filter", {}).get("enabled", False)
+    
+    # Regime Map (passed in cfg or separate arg? We'll inject it into cfg for now)
+    daily_vix_map = cfg.get("daily_vix_map", {}) # Date -> VIXY Close
+    # Regime Configs
+    regime_params = {
+        "CALM": {"rsi": 50, "dev": -3.0},
+        "NORMAL": {"rsi": 45, "dev": -5.0},
+        "PANIC": {"rsi": 30, "dev": -10.0}
+    }
+    
     # State
     equity = float(start_cash)
     in_pos = False
@@ -271,8 +283,38 @@ def simulate_weekly_mean_reversion(
             if trend_enabled and not pd.isna(prev.get("trend_sma", float("nan"))):
                 is_bull_trend = prev["close"] > prev["trend_sma"]
             
-            # Long Entry Signal
-            if is_bull_trend and prev.get("long_signal", False):
+            # Long Entry Signal with Regime Logic
+            # Determine Regime for this date
+            current_date = cur.name.date()
+            # Lookback 1 day for VIXY (simulating T-1 knowledge)
+            # Since this is weekly data, 'cur.name' is a Friday. 
+            # We can check VIXY from that Friday or PREV Friday? 
+            # Entry is on Open of THIS week (based on PREV week signal).
+            # So we need Regime at time of Entry (Monday Open).
+            # We can use VIXY from prev.name (Previous Friday).
+            
+            vix_val = daily_vix_map.get(prev.name.date(), 40.0) # Default Normal
+            if vix_val < 35:
+                regime = "CALM"
+            elif vix_val > 55:
+                regime = "PANIC"
+            else:
+                regime = "NORMAL"
+                
+            p = regime_params.get(regime)
+            
+            # Use Dynamic Thresholds
+            # prev.get("rsi") is already computed. 
+            # But "long_signal" in dataframe was computed with STATIC thresholds!
+            # We must re-evaluate signal dynamically here.
+            
+            prev_rsi = float(prev.get("rsi", 100))
+            prev_dev = float(prev.get("mean_deviation_pct", 0))
+            
+            # Re-eval:
+            is_regime_signal = (prev_rsi < p["rsi"]) and (prev_dev < p["dev"])
+            
+            if is_bull_trend and is_regime_signal:
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
                     continue
@@ -408,6 +450,17 @@ def main():
     rows = []
     all_trades = []
     
+    # Pre-fetch VIXY for Regime Logic
+    print("Fetching VIXY data for Regime Detection...")
+    vixy_map, _ = fetch_latest_bars(["VIXY"], "1Day", history_days=max_days+100, feed="alpaca", verbose=False)
+    daily_vix_map = {}
+    if "VIXY" in vixy_map and not vixy_map["VIXY"].empty:
+        vdf = vixy_map["VIXY"]
+        daily_vix_map = {row.Index.date(): row.close for row in vdf.itertuples()}
+    
+    # Inject map into cfg
+    cfg["daily_vix_map"] = daily_vix_map
+
     for sym in symbols:
         try:
             df_full = load_weekly_data(sym, cfg, history_weeks)
@@ -443,11 +496,15 @@ def main():
         print("\nNo results.")
         return
     
-    # Results Table
-    out = pd.DataFrame(rows).sort_values(["days", "net"], ascending=[True, False])
-    
     print(f"\n{'='*70}")
     print("RESULTS BY SYMBOL")
+    print(out.to_string(index=False))
+    
+    # Save Detailed Trades
+    if all_trades:
+        df_trades = pd.DataFrame(all_trades)
+        df_trades.to_csv("weekly_stock_backtest.csv", index=False)
+        print("\nSaved detailed trades to weekly_stock_backtest.csv")
     print(f"{'='*70}")
     print(out.to_string(index=False))
     

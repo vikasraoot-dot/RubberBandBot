@@ -29,21 +29,29 @@ class RegimeManager:
         self.last_update = None
         
         # Config Map
-        self.regime_configs = {
             "CALM": {
                 "description": "Low Volatility (<35). Aggressive Entry.",
                 "slope_threshold_pct": -0.08,
-                "dead_knife_filter": False
+                "dead_knife_filter": False,
+                # Weekly Bot Params
+                "weekly_rsi_oversold": 50,
+                "weekly_mean_dev_pct": -3.0
             },
             "NORMAL": {
                 "description": "Normal Volatility (35-55). Baseline.",
                 "slope_threshold_pct": -0.12,
-                "dead_knife_filter": False # Optional, dependent on bot strictness
+                "dead_knife_filter": False, # Optional, dependent on bot strictness
+                # Weekly Bot Params
+                "weekly_rsi_oversold": 45,
+                "weekly_mean_dev_pct": -5.0
             },
             "PANIC": {
                 "description": "High Volatility (>55). Defensive.",
                 "slope_threshold_pct": -0.20,
-                "dead_knife_filter": True
+                "dead_knife_filter": True,
+                # Weekly Bot Params
+                "weekly_rsi_oversold": 30,
+                "weekly_mean_dev_pct": -10.0
             }
         }
 

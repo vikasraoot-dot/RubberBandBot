@@ -62,6 +62,14 @@ def simulate_weekly_options(
     in_trade = False
     trade = {}
     
+    # Regime Map
+    daily_vix_map = cfg.get("daily_vix_map", {})
+    regime_params = {
+        "CALM": {"rsi": 50, "dev": -3.0},
+        "NORMAL": {"rsi": 45, "dev": -5.0},
+        "PANIC": {"rsi": 30, "dev": -10.0}
+    }
+    
     # Iterate
     for i in range(25, len(df)):
         cur = df.iloc[i]
@@ -70,7 +78,20 @@ def simulate_weekly_options(
 
         if not in_trade:
             # Check Signal (on previous closed bar)
-            if cur["prev_rsi"] < rsi_thresh and cur["prev_mean_dev"] < mean_dev_thresh:
+            # Dynamic Regime Logic
+            vix_val = daily_vix_map.get(cur.name.date() - pd.Timedelta(days=3), 40.0) 
+            # Note: cur.name is Monday Open (usually). prev bar was Friday close.
+            # We can approximate VIXY from prev bar time.
+            # Ideally: daily_vix_map should have daily resolution.
+            # We just grab VIXY from a few days ago (previous Friday) to be safe.
+            
+            if vix_val < 35: regime = "CALM"
+            elif vix_val > 55: regime = "PANIC"
+            else: regime = "NORMAL"
+            
+            p = regime_params.get(regime)
+            
+            if cur["prev_rsi"] < p["rsi"] and cur["prev_mean_dev"] < p["dev"]:
                 # ENTRY
                 entry_price = float(cur["open"]) # Open of current week
                 
@@ -176,6 +197,15 @@ def main():
         tickers = [line.strip() for line in f if line.strip()]
         
     print(f"Backtesting Weekly Options on {len(tickers)} tickers for {args.days} days...")
+    
+    # Pre-fetch VIXY
+    print("Fetching VIXY data for Regime Detection...")
+    vixy_map, _ = fetch_latest_bars(["VIXY"], "1Day", history_days=args.days+100, feed="alpaca", verbose=False)
+    daily_vix_map = {}
+    if "VIXY" in vixy_map and not vixy_map["VIXY"].empty:
+        vdf = vixy_map["VIXY"]
+        daily_vix_map = {row.Index.date(): row.close for row in vdf.itertuples()}
+    cfg["daily_vix_map"] = daily_vix_map
     
     all_trades = []
     

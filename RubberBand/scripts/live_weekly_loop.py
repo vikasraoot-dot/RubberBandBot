@@ -25,6 +25,7 @@ from RubberBand.src.data import (
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.position_registry import PositionRegistry
+from RubberBand.src.regime_manager import RegimeManager
 
 # Bot tag for position attribution
 BOT_TAG = "WK_STK"
@@ -59,6 +60,14 @@ def load_tickers():
 def run_weekly_cycle():
     cfg = load_config()
     tickers = load_tickers()
+    
+    # --- Dynamic Regime Detection ---
+    rm = RegimeManager(verbose=True)
+    current_regime = rm.update()
+    regime_cfg = rm.get_config_overrides()
+    
+    logging.info(f"Regime: {current_regime} (VIXY={rm.last_vixy:.2f})")
+    # --------------------------------
     
     logging.info("="*60)
     logging.info(f"Starting Weekly Strategy Cycle - {len(tickers)} Tickers")
@@ -242,8 +251,16 @@ def run_weekly_cycle():
             atr = float(cur["atr"]) if "atr" in cur.index else close * 0.03  # Fallback 3% ATR
             
             # Conditions
-            rsi_oversold = float(cfg["filters"]["rsi_oversold"])  # 45
-            mean_dev_thresh = float(cfg["filters"].get("mean_deviation_threshold", -5)) / 100.0
+            # Use Regime Config if available, else fallback to static config
+            rsi_oversold = float(regime_cfg.get("weekly_rsi_oversold", cfg["filters"]["rsi_oversold"]))
+            
+            # Regime dev is pct (e.g. -5.0), static config might be int (-5)
+            # Normalize to decimal (e.g. -0.05)
+            regime_dev_pct = regime_cfg.get("weekly_mean_dev_pct")
+            if regime_dev_pct is not None:
+                mean_dev_thresh = float(regime_dev_pct) / 100.0
+            else:
+                 mean_dev_thresh = float(cfg["filters"].get("mean_deviation_threshold", -5)) / 100.0
             
             mean_dev_pct = (close - sma_20) / sma_20
             

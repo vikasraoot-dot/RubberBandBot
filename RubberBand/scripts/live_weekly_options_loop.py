@@ -54,6 +54,7 @@ from RubberBand.src.options_execution import (
 )
 from RubberBand.src.options_trade_logger import OptionsTradeLogger
 from RubberBand.src.position_registry import PositionRegistry
+from RubberBand.src.regime_manager import RegimeManager
 
 ET = ZoneInfo("US/Eastern")
 
@@ -157,7 +158,7 @@ def _log(msg: str, data: dict = None):
 # ──────────────────────────────────────────────────────────────────────────────
 # Weekly Signal Detection
 # ──────────────────────────────────────────────────────────────────────────────
-def get_weekly_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
+def get_weekly_signals(symbols: List[str], cfg: dict, regime_cfg: Dict[str, Any] = None) -> List[Dict[str, Any]]:
     """
     Scan for weekly mean reversion signals.
     
@@ -165,8 +166,14 @@ def get_weekly_signals(symbols: List[str], cfg: dict) -> List[Dict[str, Any]]:
     """
     signals = []
     
-    rsi_thresh = float(cfg.get("filters", {}).get("rsi_oversold", 45))
-    mean_dev_thresh = float(cfg.get("filters", {}).get("mean_deviation_threshold", -5)) / 100.0
+    # Use Regime Config if available, else fallback
+    if regime_cfg:
+        rsi_thresh = float(regime_cfg.get("weekly_rsi_oversold", 45))
+        regime_dev_pct = regime_cfg.get("weekly_mean_dev_pct", -5.0)
+        mean_dev_thresh = float(regime_dev_pct) / 100.0
+    else:
+        rsi_thresh = float(cfg.get("filters", {}).get("rsi_oversold", 45))
+        mean_dev_thresh = float(cfg.get("filters", {}).get("mean_deviation_threshold", -5)) / 100.0
     
     for sym in symbols:
         try:
@@ -454,6 +461,13 @@ def main() -> int:
     args = _parse_args()
     cfg = _load_config(args.config)
     
+    # --- Dynamic Regime Detection ---
+    rm = RegimeManager(verbose=True)
+    current_regime = rm.update()
+    regime_cfg = rm.get_config_overrides()
+    _log(f"Regime: {current_regime} (VIXY={rm.last_vixy:.2f})")
+    # --------------------------------
+    
     # Options config
     opts_cfg = {**WEEKLY_OPTIONS_CONFIG}
     opts_cfg["max_premium_per_trade"] = args.max_premium
@@ -560,7 +574,7 @@ def main() -> int:
         return 0
     
     # 3. Scan for new weekly signals
-    signals = get_weekly_signals(symbols, cfg)
+    signals = get_weekly_signals(symbols, cfg, regime_cfg=regime_cfg)
     _log(f"Found {len(signals)} weekly signals", {
         "signals": [(s["symbol"], f"RSI={s['rsi']:.1f}") for s in signals]
     })
