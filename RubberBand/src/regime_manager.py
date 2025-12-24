@@ -29,6 +29,7 @@ class RegimeManager:
         self.last_update = None
         
         # Config Map
+        self.configs = {
             "CALM": {
                 "description": "Low Volatility (<35). Aggressive Entry.",
                 "slope_threshold_pct": -0.08,
