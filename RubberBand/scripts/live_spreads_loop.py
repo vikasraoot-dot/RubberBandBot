@@ -76,6 +76,7 @@ from RubberBand.src.options_execution import (
 print("[STARTUP] Loading loggers and registry...", flush=True)
 from RubberBand.src.options_trade_logger import OptionsTradeLogger
 from RubberBand.src.position_registry import PositionRegistry
+from RubberBand.src.regime_manager import RegimeManager
 
 print("[STARTUP] All imports complete!", flush=True)
 
@@ -175,6 +176,7 @@ def get_long_signals(
     cfg: dict,
     logger: OptionsTradeLogger,
     min_dte: int = 2,
+    regime_cfg: Dict[str, Any] = None,
 ) -> List[Dict[str, Any]]:
     """
     Scan for long signals using existing RubberBandBot strategy.
@@ -243,16 +245,26 @@ def get_long_signals(
             
             # --- Dual-Slope Filter (Panic Persistency) ---
             # Check 1: 3-bar slope (immediate crash, 45m)
-            slope_threshold = cfg.get("slope_threshold")
-            if slope_threshold is not None:
-                if "kc_middle" in df.columns and len(df) >= 4:
-                    current_slope_3 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
-                    if current_slope_3 > float(slope_threshold):
-                         logger.spread_skip(
-                            underlying=sym,
-                            skip_reason=f"Slope3_too_flat({current_slope_3:.4f}>{slope_threshold})"
-                         )
-                         continue
+            # --- Dual-Slope Filter (Panic Persistency) ---
+            # Check 1: 3-bar slope (Normalized Percentage)
+            # Use Regime Threshold if available (-0.08, -0.12, -0.20)
+            target_slope_pct = -0.12 # Default
+            if regime_cfg:
+                target_slope_pct = regime_cfg.get("slope_threshold_pct", -0.12)
+            else:
+                 # Fallback to CLI override if no regime
+                 target_slope_pct = float(cfg.get("slope_threshold", -0.12))
+
+            if "kc_middle" in df.columns and len(df) >= 4:
+                current_slope_3_abs = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
+                current_slope_3_pct = (current_slope_3_abs / close) * 100
+                
+                if current_slope_3_pct > target_slope_pct:
+                     logger.spread_skip(
+                        underlying=sym,
+                        skip_reason=f"Slope3_pct_too_flat({current_slope_3_pct:.4f}%>{target_slope_pct}%)"
+                     )
+                     continue
             
             # Check 2: 10-bar slope (sustained crash, 2.5h)
             slope_threshold_10 = cfg.get("slope_threshold_10")

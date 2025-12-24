@@ -279,6 +279,7 @@ def simulate_spreads_for_symbol(
     sym: str,
     opts: dict,
     daily_sma: Optional[float] = None,
+    daily_vix_map: Optional[dict] = None,
     verbose: bool = False,
 ) -> list:
     """
@@ -303,10 +304,36 @@ def simulate_spreads_for_symbol(
         cur = df.iloc[i]
         date_obj = cur.name.date() if hasattr(cur.name, "date") else None
         
+        # --- DYNAMIC REGIME LOGIC ---
+        # Default Params
+        current_slope_threshold = float(opts.get("slope_threshold") or -0.12)
+        current_use_dkf = opts.get("dead_knife_filter", False)
+        
+        # Check VIXY if map provided
+        if daily_vix_map and date_obj:
+            # We use 'date_obj' which is today's date.
+            # Ideally we want Yesterday's Close known at Open.
+            # The map passed in should be constructed such that key=Today -> value=YesterdayClose
+            # (Note: In main, we will shift it)
+            vix_val = daily_vix_map.get(date_obj, float('nan'))
+            
+            if not pd.isna(vix_val):
+                if vix_val < 35.0:
+                    current_slope_threshold = -0.08 # CALM
+                    current_use_dkf = False
+                elif vix_val > 55.0:
+                    current_slope_threshold = -0.20 # PANIC
+                    current_use_dkf = True
+                else:
+                    current_slope_threshold = -0.12 # NORMAL
+                    current_use_dkf = False
+                    
+        # ----------------------------
+
         # Dead Knife Filter Logic (Pre-check)
         # Skip if we already took a loss today and RSI is deep oversold (<20)
         # This prevents "Doubling Down" on a falling knife.
-        if opts.get("dead_knife_filter") and last_loss_date == date_obj:
+        if current_use_dkf and last_loss_date == date_obj:
             rsi_check = float(cur.get("rsi", 0))
             if rsi_check < 20:
                 continue # Skip "Catching Falling Knife" re-entry 
@@ -356,7 +383,7 @@ def simulate_spreads_for_symbol(
             slope_3_pct = (slope_3 / entry_price_ref) * 100
             slope_10_pct = (slope_10 / entry_price_ref) * 100
 
-        slope_threshold = opts.get("slope_threshold")
+        slope_threshold = current_slope_threshold
         if slope_threshold is not None:
              # Treat threshold as Percentage (e.g. -0.12 means -0.12%)
              if slope_3_pct > float(slope_threshold):
@@ -523,6 +550,26 @@ def main():
             feed=feed,
             verbose=False,
         )
+        
+    # --- FETCH VIXY FOR REGIME ---
+    print(f"Fetching VIXY daily bars for Regime Detection...")
+    vix_map, _ = fetch_latest_bars(
+        symbols=["VIXY"], timeframe="1Day", history_days=fetch_days, feed=feed, verbose=False
+    )
+    daily_vix_map = {}
+    vix_df = vix_map.get("VIXY")
+    if vix_df is not None and not vix_df.empty:
+        # Shift VIXY by 1 day so Today's lookup returns Yesterday's Close
+        vix_df["vixy_prev_close"] = vix_df["close"].shift(1)
+        # Create map: Date -> Prev Close
+        daily_vix_map = vix_df["vixy_prev_close"].dropna().to_dict()
+        # Convert keys to date objects if needed (index is usually datetime)
+        # .to_dict() on Series with DatetimeIndex returns Timestamp keys
+        daily_vix_map = {k.date(): v for k, v in daily_vix_map.items()}
+        print(f"  Loaded {len(daily_vix_map)} VIXY data points.")
+    else:
+        print("  WARNING: Could not fetch VIXY data. Dynamic Regime disabled.")
+    # -----------------------------
         skipped_no_data = 0
         skipped_short = 0
         for sym in symbols:
@@ -552,7 +599,7 @@ def main():
         # Get daily SMA for this symbol (None if not available)
         daily_sma = daily_sma_map.get(sym)
         
-        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma, verbose=args.verbose)
+        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma, daily_vix_map=daily_vix_map, verbose=args.verbose)
         all_trades.extend(trades)
         
         for t in trades:
