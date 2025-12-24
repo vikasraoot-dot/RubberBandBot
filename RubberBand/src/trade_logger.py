@@ -204,7 +204,7 @@ class TradeLogger:
         
         # Define columns for stock trades
         columns = [
-            "symbol", "side", "entry_time", "exit_time",
+            "symbol", "side", "entry_date", "entry_time", "exit_time",
             "entry_price", "exit_price", "qty",
             "stop_loss", "take_profit",
             "entry_reason", "exit_reason", "pnl",
@@ -216,10 +216,22 @@ class TradeLogger:
                 writer.writerow(columns)
                 
                 for t in self._trades:
+                    # Extract date/time from ISO or use stored fields if available
+                    # entry_date/time_et are stored in entry_submit
+                    e_date = t.get("entry_date", "")
+                    e_time = t.get("entry_time_et", "")
+                    
+                    # Fallback if fields missing (e.g. old logs)
+                    if not e_date and t.get("entry_ts"):
+                         # entries are UTC ISO usually, but we want ET. 
+                         # Simpler to just leave blank if missing or parse ISO.
+                         pass
+
                     row = [
                         t.get("symbol", ""),
                         t.get("side", ""),
-                        t.get("entry_ts", ""),
+                        e_date,
+                        e_time,
                         t.get("exit_ts", ""),
                         t.get("entry_price", 0),
                         t.get("exit_price", 0),

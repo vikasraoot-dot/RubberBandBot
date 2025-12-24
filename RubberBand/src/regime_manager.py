@@ -83,7 +83,16 @@ class RegimeManager:
                 self.current_regime = "NORMAL"
                 
             if self.verbose:
-                print(f"[RegimeManager] VIXY=${last_price:.2f} -> {self.current_regime}")
+                p = self.regime_configs.get(self.current_regime, {})
+                print("\n" + "="*50)
+                print(f" [RegimeManager] Market Environment Update")
+                print("="*50)
+                print(f"  • VIXY Price      : ${last_price:.2f}")
+                print(f"  • Current Regime  : {self.current_regime}")
+                print(f"  • Slope Threshold : {p.get('slope_threshold_pct', 'N/A')}")
+                print(f"  • Dead Knife Fltr : {'ENABLED' if p.get('dead_knife_filter') else 'DISABLED'}")
+                print(f"  • Weekly RSI Lim  : < {p.get('weekly_rsi_oversold', 'N/A')}")
+                print("="*50 + "\n")
                 
         except Exception as e:
             print(f"[RegimeManager] Error updating regime: {e}")

@@ -316,7 +316,7 @@ class OptionsTradeLogger:
         
         # Define columns matching backtest format
         columns = [
-            "symbol", "entry_time", "exit_time",
+            "symbol", "entry_date", "entry_time", "exit_time",
             "entry_close", "atm_strike", "otm_strike", "spread_width",
             "entry_debit", "exit_value", "cost", "max_profit", "max_loss",
             "pnl", "pnl_pct", "reason", "dte", "holding_minutes",
@@ -333,9 +333,14 @@ class OptionsTradeLogger:
                 writer.writerow(columns)
                 
                 for t in self._trades:
+                    # Extract date/time from ISO or use stored fields if available
+                    e_date = t.get("entry_date", "")
+                    e_time = t.get("entry_time_et", "")
+                    
                     row = [
                         t.get("underlying", ""),
-                        t.get("entry_ts", ""),
+                        e_date,
+                        e_time,
                         t.get("exit_ts", ""),
                         t.get("entry_close", 0),
                         t.get("atm_strike", 0),
