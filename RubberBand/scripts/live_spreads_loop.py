@@ -789,12 +789,17 @@ def manage_positions(
             else:
                 short_cost = 0.0
             
-            # For options, cost_basis is total cost. Debit per share = cost_basis / (qty * 100)
+            # For options, cost_basis is total cost. Debit per share = (long_cost - short_cost) / (qty * 100)
+            # BUG FIX: Must subtract short_cost (credit received) from long_cost to get NET debit
             qty_val = long_pos.get("qty")
             long_qty = abs(int(qty_val)) if qty_val is not None else 1
-            entry_debit = long_cost / (long_qty * 100) if long_qty > 0 else long_cost / 100
+            
+            # NET debit = long cost - short credit (short_cost is a credit, reduces our cost)
+            net_cost = long_cost - short_cost
+            entry_debit = net_cost / (long_qty * 100) if long_qty > 0 else net_cost / 100
+            
             if entry_debit <= 0:
-                entry_debit = 1.0  # Fallback to default
+                entry_debit = 1.0  # Fallback to default (shouldn't happen for debit spreads)
         
         # Calculate spread P&L
         pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)

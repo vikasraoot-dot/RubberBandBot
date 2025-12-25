@@ -40,7 +40,7 @@ rsi_length: 14
 # Slope_3 checks immediate crash (45m lookback). Slope_10 checks sustained crash (2.5h).
 # Values > threshold = SKIP (too flat/slow bleed).
 slope_threshold: -0.20      # 3-bar slope: Must be <= -0.20 (steep crash)
-slope_threshold_10: -0.15   # 10-bar slope: Must be <= -0.15 (sustained crash)
+# slope_threshold_10: -0.15   # DISABLED: Was blocking valid entries. Live bot doesn't use this.
 # ──────────────────────────────────────────────────────────────────────────────
 # RISK CONTROLS
 # ──────────────────────────────────────────────────────────────────────────────

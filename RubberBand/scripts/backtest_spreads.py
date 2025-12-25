@@ -79,34 +79,55 @@ def estimate_spread_value(
     otm_strike: float,
     dte_bars_remaining: int,
     total_dte_bars: int,
+    iv: float = 0.35,  # Implied volatility (default 35%)
 ) -> tuple:
     """
-    Estimate call spread value using simplified Black-Scholes-like approximation.
+    Estimate call spread value using IV-adjusted pricing model.
+    
+    More realistic than simple Black-Scholes approximation:
+    - Uses 40% base time value (down from 65%)
+    - IV-adjusted: higher IV = more time value
+    - Accelerated theta decay in final 50% of time
+    - Short call has ~40% of ATM time value (delta factor)
     
     For a bull call spread:
-    - Value at entry ≈ intrinsic + time value
+    - Value at entry ≈ intrinsic + IV-adjusted time value
     - Value at expiry = max(0, min(underlying - atm_strike, spread_width))
     
     Returns: (long_call_value, short_call_value, spread_value)
     """
     spread_width = otm_strike - atm_strike
     
-    # Time decay factor (linear approximation)
+    # Time factor (0 = expired, 1 = full time)
     time_factor = dte_bars_remaining / max(total_dte_bars, 1)
     
     # Intrinsic values
     long_intrinsic = max(0, underlying_price - atm_strike)
     short_intrinsic = max(0, underlying_price - otm_strike)
     
-    # Time value (rough estimate, decays with sqrt of time for options)
-    time_value_factor = (time_factor ** 0.5) * 0.65  # 65% of spread at entry (realistic)
+    # IV-adjusted time value calculation
+    # Base: 35% IV gives ~40% of spread as time value (more conservative than 65%)
+    iv_factor = min(iv / 0.35, 1.5)  # Cap at 1.5x for extreme IV
+    base_time_value_pct = 0.40 * iv_factor
     
-    # Long call value
-    long_time_value = spread_width * time_value_factor
+    # Theta decay: accelerates in final 50% of time
+    # Early: sqrt decay (slow)
+    # Late: power 0.7 decay (faster)
+    if time_factor > 0.5:
+        theta_decay = (time_factor ** 0.5)  # Slow decay early on
+    else:
+        theta_decay = (time_factor ** 0.7)  # Accelerated decay near expiry
+    
+    time_value_pct = base_time_value_pct * theta_decay
+    
+    # Long call: ATM has full time value
+    long_time_value = spread_width * time_value_pct
     long_value = long_intrinsic + long_time_value
     
-    # Short call value (less time value since OTM)
-    short_time_value = spread_width * time_value_factor * 0.5
+    # Short call: OTM has less time value (delta ~0.3-0.4)
+    # OTM call captures ~40% of ATM time value
+    short_delta_factor = 0.40
+    short_time_value = spread_width * time_value_pct * short_delta_factor
     short_value = short_intrinsic + short_time_value
     
     spread_value = long_value - short_value
@@ -157,6 +178,11 @@ def simulate_spread_trade(
     
     # Cap at max debit
     entry_debit = min(entry_spread_value, max_debit)
+    
+    # Apply entry slippage (bid-ask spread increases cost)
+    entry_slippage_pct = opts.get("entry_slippage_pct", 0.03)  # 3% default
+    entry_debit = entry_debit * (1 + entry_slippage_pct)
+    
     if entry_debit <= 0:
         return None
     
@@ -249,7 +275,11 @@ def simulate_spread_trade(
         exit_value = long_intrinsic - short_intrinsic
     
     # Calculate final P&L
-    pnl = (exit_value - entry_debit) * 100 * contracts
+    # Apply exit slippage (bid-ask spread reduces credit received)
+    exit_slippage_pct = opts.get("exit_slippage_pct", 0.03)  # 3% default
+    actual_exit_value = exit_value * (1 - exit_slippage_pct)
+    
+    pnl = (actual_exit_value - entry_debit) * 100 * contracts
     pnl = max(pnl, max_loss)  # Can't lose more than debit
     pnl = min(pnl, max_profit)  # Can't win more than spread width - debit
     
@@ -306,7 +336,7 @@ def simulate_spreads_for_symbol(
         
         # --- DYNAMIC REGIME LOGIC ---
         # Default Params
-        current_slope_threshold = float(opts.get("slope_threshold") or -0.12)
+        current_slope_threshold = float(opts.get("slope_threshold") or -0.08)  # Match live bot CALM regime
         current_use_dkf = opts.get("dead_knife_filter", False)
         
         # Check VIXY if map provided
@@ -349,12 +379,21 @@ def simulate_spreads_for_symbol(
         if not prev.get("long_signal", False):
             continue
         
+        # DEBUG: Signal found!
+        if sym == "TSLA" and verbose:
+            print(f"  [DEBUG-LOOP] TSLA signal at i={i}, prev={prev.name}")
+        
         entry_price = float(cur["open"])
         atr = float(prev.get("atr", 0))
         
         if atr <= 0 or entry_price <= 0:
+            if sym == "TSLA" and verbose:
+                print(f"  [DEBUG-SKIP] ATR/price: atr={atr}, entry_price={entry_price}")
             continue
             
+        # DEBUG: Passed ATR check
+        if sym == "TSLA" and verbose:
+            print(f"  [DEBUG-PASS] ATR check passed: atr={atr:.2f}, entry={entry_price:.2f}")
 
         # Slope Filter (Anti-Falling Knife) or (Panic Buyer)
         # We calculate slopes FIRST so we can use them for filtering OR logging.
@@ -384,20 +423,28 @@ def simulate_spreads_for_symbol(
             slope_10_pct = (slope_10 / entry_price_ref) * 100
 
         slope_threshold = current_slope_threshold
+        if sym == "TSLA" and verbose:
+            print(f"  [DEBUG-SLOPE] slope_3_pct={slope_3_pct:.4f}, threshold={slope_threshold}")
         if slope_threshold is not None:
              # Treat threshold as Percentage (e.g. -0.12 means -0.12%)
              if slope_3_pct > float(slope_threshold):
+                 if sym == "TSLA" and verbose:
+                     print(f"  [DEBUG-SKIP] Slope3: {slope_3_pct:.4f} > {slope_threshold}")
                  continue
 
         # Check 2: 10-bar slope (sustained crash, 2.5h) - Normalized
         slope_threshold_10 = opts.get("slope_threshold_10")
         if slope_threshold_10 is not None:
             if slope_10_pct > float(slope_threshold_10):
+                if sym == "TSLA" and verbose:
+                    print(f"  [DEBUG-SKIP] Slope10: {slope_10_pct:.4f} > {slope_threshold_10}")
                 continue
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
         if daily_sma is not None and opts.get("trend_filter", True):
             close_price = float(prev["close"])
             if close_price < daily_sma:
+                if sym == "TSLA" and verbose:
+                    print(f"  [DEBUG-SKIP] SMA: close={close_price:.2f} < sma={daily_sma:.2f}")
                 continue  # Skip - in bear trend
         
         # ADX Filter: Skip if ADX > threshold (strong trend = mean reversion fails)
@@ -421,7 +468,11 @@ def simulate_spreads_for_symbol(
         entry_time = cur.name if hasattr(cur.name, 'weekday') else None
         
         # Simulate the spread trade (pass entry_time for variable DTE)
+        if sym == "TSLA" and verbose:
+            print(f"  [DEBUG-PRE-SIM] Calling simulate_spread_trade: i={i}, entry_price={entry_price:.2f}, atr={atr:.2f}")
         result = simulate_spread_trade(df, i, entry_price, atr, opts, entry_time=entry_time)
+        if sym == "TSLA" and verbose:
+            print(f"  [DEBUG-POST-SIM] result={result}")
         
         if result:
             result["symbol"] = sym
@@ -541,7 +592,7 @@ def main():
     # Fetch daily data for SMA trend filter
     daily_sma_map = {}
     if opts["trend_filter"]:
-        sma_history_days = max(args.sma_period * 2, 60)  # At least 60 days for reliable SMA
+        sma_history_days = max(args.sma_period * 2, 100)  # At least 100 days for reliable SMA-50
         print(f"Fetching daily bars for SMA-{args.sma_period} trend filter (history={sma_history_days} days)...")
         daily_bars_map, _ = fetch_latest_bars(
             symbols=symbols,
@@ -550,11 +601,18 @@ def main():
             feed=feed,
             verbose=False,
         )
+        # DEBUG: Print daily_bars_map contents
+        print(f"  [DEBUG] daily_bars_map keys: {list(daily_bars_map.keys())}")
+        for sym in symbols[:5]:
+            df_tmp = daily_bars_map.get(sym)
+            print(f"    {sym}: {len(df_tmp) if df_tmp is not None and not df_tmp.empty else 'None/Empty'}")
+    else:
+        daily_bars_map = {}  # Initialize empty if trend filter disabled
         
     # --- FETCH VIXY FOR REGIME ---
     print(f"Fetching VIXY daily bars for Regime Detection...")
     vix_map, _ = fetch_latest_bars(
-        symbols=["VIXY"], timeframe="1Day", history_days=fetch_days, feed=feed, verbose=False
+        symbols=["VIXY"], timeframe="1Day", history_days=100, feed=feed, verbose=False
     )
     daily_vix_map = {}
     vix_df = vix_map.get("VIXY")
@@ -569,23 +627,25 @@ def main():
         print(f"  Loaded {len(daily_vix_map)} VIXY data points.")
     else:
         print("  WARNING: Could not fetch VIXY data. Dynamic Regime disabled.")
-    # -----------------------------
-        skipped_no_data = 0
-        skipped_short = 0
-        for sym in symbols:
-            df_daily = daily_bars_map.get(sym)
-            if df_daily is None or df_daily.empty:
-                skipped_no_data += 1
-                continue
-            if len(df_daily) < args.sma_period:
-                skipped_short += 1
-                continue
-            sma_val = df_daily["close"].rolling(window=args.sma_period).mean().iloc[-1]
-            if not pd.isna(sma_val):
-                daily_sma_map[sym] = float(sma_val)
-        print(f"  Calculated SMA for {len(daily_sma_map)} symbols")
-        if skipped_no_data > 0 or skipped_short > 0:
-            print(f"  Skipped: {skipped_no_data} no data, {skipped_short} insufficient history")
+    
+    # Calculate SMA for each symbol (MUST be outside the VIXY if/else block)
+    skipped_no_data = 0
+    skipped_short = 0
+    for sym in symbols:
+        df_daily = daily_bars_map.get(sym)
+        if df_daily is None or df_daily.empty:
+            skipped_no_data += 1
+            continue
+        if len(df_daily) < args.sma_period:
+            skipped_short += 1
+            continue
+        sma_val = df_daily["close"].rolling(window=args.sma_period).mean().iloc[-1]
+        if not pd.isna(sma_val):
+            daily_sma_map[sym] = float(sma_val)
+    print(f"  Calculated SMA for {len(daily_sma_map)} symbols")
+    if skipped_no_data > 0 or skipped_short > 0:
+        print(f"  Skipped: {skipped_no_data} no data, {skipped_short} insufficient history")
+
     
     # Run simulation
     all_trades = []
@@ -595,6 +655,10 @@ def main():
         df = bars_map.get(sym, pd.DataFrame())
         if df.empty:
             continue
+        
+        # DEBUG: Print data info for TSLA
+        if sym == "TSLA":
+            print(f"  [DEBUG] TSLA: {len(df)} bars, daily_sma={daily_sma_map.get(sym)}, vixy_pts={len(daily_vix_map)}")
         
         # Get daily SMA for this symbol (None if not available)
         daily_sma = daily_sma_map.get(sym)
