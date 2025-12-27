@@ -238,18 +238,15 @@ def get_long_signals(
                     )
                     continue
             
-            # Check Slope Threshold (Panic Buyer Logic)
-            # We want to buy ONLY if slope is steep enough (Panic).
-            # We skip if slope is too flat (Drift).
-            # E.g. Thresh -0.20. Slope -0.14 is > -0.20 -> SKIP (gentle drift).
+            # Check Slope Threshold (Panic Buyer Logic vs Safety Logic)
+            # ---------------------------------------------------------
+            # We use the Regime Manager's 'dead_knife_filter' flag to determine behavior.
             
-            # --- Dual-Slope Filter (Panic Persistency) ---
-            # Check 1: 3-bar slope (immediate crash, 45m)
-            # --- Dual-Slope Filter (Panic Persistency) ---
-            # Check 1: 3-bar slope (Normalized Percentage)
-            # Use Regime Threshold if available (-0.08, -0.12, -0.20)
+            is_dead_knife_mode = False
             target_slope_pct = -0.12 # Default
+            
             if regime_cfg:
+                is_dead_knife_mode = regime_cfg.get("dead_knife_filter", False)
                 target_slope_pct = regime_cfg.get("slope_threshold_pct", -0.12)
             else:
                  # Fallback to CLI override if no regime
@@ -259,12 +256,28 @@ def get_long_signals(
                 current_slope_3_abs = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
                 current_slope_3_pct = (current_slope_3_abs / close) * 100
                 
-                if current_slope_3_pct > target_slope_pct:
-                     logger.spread_skip(
-                        underlying=sym,
-                        skip_reason=f"Slope3_pct_too_flat({current_slope_3_pct:.4f}%>{target_slope_pct}%)"
-                     )
-                     continue
+                if is_dead_knife_mode:
+                    # --- SAFETY MODE (Panic Regime) ---
+                    # Logic: Avoid catching falling knives.
+                    # Effect: SKIP if the slope is STEEPER than threshold (more negative).
+                    # E.g. Thresh -0.20. Slope -0.25 is < -0.20 -> SKIP (Crash too violent).
+                    if current_slope_3_pct < target_slope_pct:
+                         logger.spread_skip(
+                            underlying=sym,
+                            skip_reason=f"Safety_Knife_Filter({current_slope_3_pct:.4f}%<{target_slope_pct}%)"
+                         )
+                         continue
+                else:
+                    # --- AGGRESSIVE MODE (Calm/Normal Regime) ---
+                    # Logic: Panic Buyer / V-Bottom Hunter.
+                    # Effect: SKIP if the slope is FLATTER than threshold (not enough panic).
+                    # E.g. Thresh -0.12. Slope -0.05 is > -0.12 -> SKIP (Too calm).
+                    if current_slope_3_pct > target_slope_pct:
+                         logger.spread_skip(
+                            underlying=sym,
+                            skip_reason=f"Slope3_pct_too_flat({current_slope_3_pct:.4f}%>{target_slope_pct}%)"
+                         )
+                         continue
             
             # Check 2: 10-bar slope (sustained crash, 2.5h)
             slope_threshold_10 = cfg.get("slope_threshold_10")

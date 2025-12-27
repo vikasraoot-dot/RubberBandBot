@@ -495,7 +495,14 @@ def main() -> int:
         # We convert the absolute slope to a percentage of the closing price.
         # This ensures consistent behavior across tickers of different prices.
         
-        slope_pct_threshold = regime_cfg.get("slope_threshold_pct", -0.12)
+        # This ensures consistent behavior across tickers of different prices.
+        
+        slope_pct_threshold = -0.12
+        is_dead_knife_mode = False
+        
+        if regime_cfg:
+            slope_pct_threshold = regime_cfg.get("slope_threshold_pct", -0.12)
+            is_dead_knife_mode = regime_cfg.get("dead_knife_filter", False)
         
         # Override with CLI if provided (Assuming CLI is now passing a % or we strictly use Regime?)
         # For this "Phase 2", we prioritize the Regime Manager. 
@@ -507,7 +514,21 @@ def main() -> int:
             current_slope_3 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
             current_slope_3_pct = (current_slope_3 / close) * 100
             
-            if current_slope_3_pct > slope_pct_threshold:
+            skip = False
+            skip_msg = ""
+            
+            if is_dead_knife_mode:
+                # SAFETY MODE (Panic): Skip if crash is TOO STEEP (Falling Knife)
+                if current_slope_3_pct < slope_pct_threshold:
+                    skip = True
+                    skip_msg = f"Safety_Knife_Filter({current_slope_3_pct:.4f}%<{slope_pct_threshold}%)"
+            else:
+                # AGGRESSIVE MODE (Calm): Skip if trend is TOO FLAT (Panic Buyer)
+                if current_slope_3_pct > slope_pct_threshold:
+                    skip = True
+                    skip_msg = f"Slope3_pct_too_flat({current_slope_3_pct:.4f}%>{slope_pct_threshold}%)"
+            
+            if skip:
                 print(json.dumps({
                     "type": "SKIP_SLOPE3",
                     "symbol": sym,
@@ -515,6 +536,8 @@ def main() -> int:
                     "threshold_pct": slope_pct_threshold,
                     "slope_abs": round(current_slope_3, 4),
                     "price": close,
+                    "mode": "DEAD_KNIFE_SAFETY" if is_dead_knife_mode else "PANIC_BUYER",
+                    "reason": skip_msg,
                     "ts": now_iso,
                 }), flush=True)
                 continue
