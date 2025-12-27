@@ -1,0 +1,22 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2025-12-23T16:03:12.719581-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "ADBE260102C00352500",
+      "underlying": "ADBE",
+      "client_order_id": "15M_OPT_ADBE260102C00352500_1766514408",
+      "order_id": "2e4b7755-0156-4c2f-8b85-c4bf737b818a",
+      "qty": 1,
+      "entry_price": 1.3000000000000003,
+      "entry_date": "2025-12-23T13:26:49.088043-05:00",
+      "status": "closed",
+      "short_symbol": "ADBE260102C00355000",
+      "exit_price": 0.75,
+      "exit_date": "2025-12-23T14:13:26.090223-05:00",
+      "exit_reason": "SL_hit(-85.0%<=-80.0%)",
+      "pnl": -425.0
+    }
+  ]
+}

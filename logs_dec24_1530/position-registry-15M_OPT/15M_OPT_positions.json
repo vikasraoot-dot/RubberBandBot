@@ -1,0 +1,22 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2025-12-24T10:47:07.888537-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "TSLA260102C00477500",
+      "underlying": "TSLA",
+      "client_order_id": "15M_OPT_TSLA260102C00477500_1766590325",
+      "order_id": "ee3bd71d-c6bb-4ea6-8bee-136a34047f6d",
+      "qty": 1,
+      "entry_price": 1.1099999999999994,
+      "entry_date": "2025-12-24T10:32:06.209815-05:00",
+      "status": "closed",
+      "short_symbol": "TSLA260102C00480000",
+      "exit_price": 1.1500000000000004,
+      "exit_date": "2025-12-24T10:47:07.885481-05:00",
+      "exit_reason": "SL_hit(-90.7%<=-80.0%)",
+      "pnl": -1125.0
+    }
+  ]
+}

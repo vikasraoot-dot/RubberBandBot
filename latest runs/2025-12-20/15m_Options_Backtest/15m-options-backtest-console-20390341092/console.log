@@ -1,0 +1,62 @@
+
+============================================================
+LOADED TICKERS FROM: RubberBand/tickers_options.txt
+============================================================
+Total: 120 symbols
+Tickers: ['RKLB', 'HOOD', 'INTC', 'WDC', 'VRT', 'COIN', 'MU', 'CIEN', 'STX', 'APP', 'BURL', 'ORCL', 'CVNA', 'MDB', 'SMCI', 'DKNG', 'ON', 'AVGO', 'DASH', 'SHOP', 'PLTR', 'LRCX', 'B', 'TER', 'DELL', 'CEG', 'FSLR', 'DG', 'CRWD', 'RCL', 'HPE', 'NVDA', 'MCHP', 'ANET', 'TSLA', 'BABA', 'NET', 'ULTA', 'CCL', 'NVO', 'UAL', 'AMAT', 'NEM', 'WBD', 'DHI', 'GLW', 'HUM', 'SPOT', 'WDAY', 'NXPI', 'BA', 'DAL', 'GOOGL', 'FCX', 'SNPS', 'GOOG', 'ETN', 'ADI', 'CMG', 'TSM', 'TGT', 'PINS', 'TXN', 'HAL', 'INTU', 'SLB', 'KKR', 'BMY', 'ACN', 'NKE', 'ADBE', 'ADSK', 'CRM', 'CRH', 'TEVA', 'EXPE', 'ABNB', 'UNH', 'CVS', 'VRTX', 'APO', 'URI', 'CAT', 'META', 'WMT', 'JPM', 'CMCSA', 'QCOM', 'C', 'BX', 'COF', 'GS', 'IBM', 'CDNS', 'AMZN', 'COP', 'WFC', 'NOW', 'PFE', 'MS', 'GM', 'LOW', 'RTX', 'AXP', 'LMT', 'CSCO', 'SCHW', 'DIS', 'USB', 'BAC', 'AAPL', 'DHR', 'XOM', 'CSX', 'PEP', 'MCD', 'TJX', 'UNP', 'JNJ', 'MO']
+============================================================
+
+Fetching 120 symbols for 45 days...
+SMA Trend Filter: ENABLED (SMA-50)
+{"type":"UNIVERSE","loaded":120,"sample":["RKLB","HOOD","INTC","WDC","VRT","COIN","MU","CIEN","STX","APP"],"when":"2025-12-20T06:18:03Z"}
+{"type":"BARS_FETCH_START","requested":120,"chunks":5,"timeframe":"15Min","feed":"iex","start":"2025-10-09T06:18:03Z","end":"2025-12-20T06:18:03Z","when":"2025-12-20T06:18:03Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":13}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":2,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":14}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":3,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":13}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":4,"symbols_in_chunk":25,"pages":20,"source_shape":"dict","collected_symbols":14}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":5,"symbols_in_chunk":20,"pages":20,"source_shape":"dict","collected_symbols":13}
+{"type":"BARS_FETCH_SUMMARY","requested":120,"with_data":67,"empty":53,"stale":5,"sample_with_data":["HOOD","INTC","COIN","CIEN"],"sample_empty":["RKLB","WDC","VRT","MU","STX","ORCL","MDB","SMCI","ON","SHOP"],"when":"2025-12-20T06:18:22Z"}
+Fetching daily bars for SMA-50 trend filter (history=100 days)...
+  Calculated SMA for 120 symbols
+
+============================================================
+BULL CALL SPREAD BACKTEST RESULTS
+============================================================
+Period: 45 days
+Symbols: 120
+Spread Config: DTE=6, Width=1.5 ATR
+------------------------------------------------------------
+Total Trades: 97
+Total Cost: $7,832.62
+Total P&L: $9,625.68
+ROI: 122.9%
+Win Rate: 64.9% (63W / 34L)
+Avg Win: $157.44
+Avg Loss: $-8.62
+Avg Bars Held: 5.6
+------------------------------------------------------------
+Exit @ Max Profit: 59 (60.8%)
+Exit @ Max Loss: 0 (0.0%)
+Exit @ Expiry: 0 (0.0%)
+============================================================
+
+Top 10 Symbols by P&L:
+  CDNS: $888.26 (5 trades, 80% WR)
+  DASH: $807.70 (8 trades, 62% WR)
+  CAT: $701.44 (4 trades, 50% WR)
+  HUM: $658.14 (6 trades, 83% WR)
+  LMT: $645.24 (5 trades, 100% WR)
+  BA: $561.97 (6 trades, 67% WR)
+  ADBE: $525.64 (5 trades, 80% WR)
+  AMZN: $453.00 (5 trades, 80% WR)
+  ANET: $400.92 (4 trades, 50% WR)
+  ETN: $352.34 (2 trades, 50% WR)
+
+Bottom 5 Symbols:
+  JNJ: $-1.75 (1 trades, 0% WR)
+  GLW: $-4.82 (1 trades, 0% WR)
+  CIEN: $-5.55 (1 trades, 0% WR)
+  CEG: $-9.36 (3 trades, 0% WR)
+  ADI: $-29.86 (1 trades, 0% WR)
+
+Saved results to results/spread_backtest_*.csv/json

@@ -1,16 +1,18 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2025-12-11T22:56:30.622789-05:00",
-  "positions": {
-    "UBER": {
+  "updated_at": "2025-12-23T12:58:17.002702-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
       "symbol": "UBER",
       "client_order_id": "15M_STK_UBER_1765311315",
       "qty": 23,
       "entry_price": 89.17,
       "entry_date": "2025-12-09T20:15:16.22657Z",
-      "status": "open",
-      "restored_from_broker": true
+      "status": "closed",
+      "restored_from_broker": true,
+      "exit_date": "2025-12-23T12:58:17.002421-05:00",
+      "exit_reason": "orphaned_sync"
     }
-  },
-  "closed_positions": []
+  ]
 }

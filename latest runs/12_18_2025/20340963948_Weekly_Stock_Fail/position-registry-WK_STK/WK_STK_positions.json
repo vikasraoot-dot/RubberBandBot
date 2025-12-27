@@ -1,0 +1,53 @@
+{
+  "bot_tag": "WK_STK",
+  "updated_at": "2025-12-18T09:52:09.521858-05:00",
+  "positions": {
+    "BA": {
+      "symbol": "BA",
+      "client_order_id": "WK_STK_BA_1765464593",
+      "qty": 9,
+      "entry_price": 200.02,
+      "entry_date": "2025-12-11T14:49:54.242484Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "META": {
+      "symbol": "META",
+      "client_order_id": "WK_STK_META_1765464596",
+      "qty": 3,
+      "entry_price": 648.063333,
+      "entry_date": "2025-12-11T14:49:57.261081Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "ORCL": {
+      "symbol": "ORCL",
+      "client_order_id": "WK_STK_ORCL_1765464594",
+      "qty": 10,
+      "entry_price": 191.35,
+      "entry_date": "2025-12-11T14:49:56.096388Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "RBLX": {
+      "symbol": "RBLX",
+      "client_order_id": "WK_STK_RBLX_1765464590",
+      "qty": 21,
+      "entry_price": 94.8,
+      "entry_date": "2025-12-11T14:49:51.211149Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "COIN": {
+      "symbol": "COIN",
+      "underlying": "COIN",
+      "client_order_id": "WK_STK_COIN_1766069528",
+      "order_id": "aaf79d48-bb90-49e5-a780-a2a25056a163",
+      "qty": 8,
+      "entry_price": 246.3,
+      "entry_date": "2025-12-18T09:52:09.407465-05:00",
+      "status": "open"
+    }
+  },
+  "closed_positions": []
+}

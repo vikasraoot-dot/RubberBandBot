@@ -117,3 +117,12 @@ jobs:
           path: .position_registry/
           retention-days: 90
           overwrite: true
+
+      - name: Upload Console Log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 15m-stock-console-log-${{ github.run_id }}
+          path: console.log
+          if-no-files-found: warn
+          retention-days: 30

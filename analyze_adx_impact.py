@@ -1,124 +1,108 @@
-
 import pandas as pd
-import numpy as np
-import sys
 import os
-from datetime import datetime, timedelta
 
-# Usage: python analyze_adx_impact.py
-
-def analyze_impact():
-    print("Loading detailed_trades.csv...")
-    try:
-        df_trades = pd.read_csv("detailed_trades.csv")
-    except FileNotFoundError:
-        print("detailed_trades.csv not found.")
+def analyze_adx_threshold():
+    # Load all three CSVs
+    periods = {
+        "90d": "artifacts/options-90d/15m-options-backtest-20326921935/spread_backtest_trades.csv",
+        "60d": "artifacts/options-60d/15m-options-backtest-20326920825/spread_backtest_trades.csv",
+        "30d": "artifacts/options-30d/15m-options-backtest-20326916934/spread_backtest_trades.csv",
+    }
+    
+    all_trades = []
+    for period, path in periods.items():
+        if os.path.exists(path):
+            df = pd.read_csv(path)
+            df['period'] = period
+            all_trades.append(df)
+    
+    if not all_trades:
+        print("No trade files found")
         return
-
-    # Helper to parse ADX/DI from "entry_reason" or recreate if missing
-    # Since we can't easily recreate exact history for 1000 trades quickly, 
-    # we will look for 'adx' column if it exists, or infer from context.
-    # WAIT - detailed_trades.csv might not have ADX column.
-    # Let's check columns first.
     
-    print(f"Columns: {df_trades.columns.tolist()}")
+    df = pd.concat(all_trades, ignore_index=True)
     
-    # If no ADX column, we have to fetch history for each trade... that's slow.
-    # ALTERNATIVE: run a quick backtest re-simulation with and without the filter.
-    # But user wants to know about "profitable trades would have gone".
+    # Remove duplicates (same trade appears in multiple time windows)
+    df = df.drop_duplicates(subset=['symbol', 'entry_time', 'pnl'])
     
-    # Let's try to map the trades to the 15m bar data we can fetch.
-    # We will fetch 30 days of 15m data for the top tickers and cross-reference.
+    print("="*80)
+    print("ADX THRESHOLD IMPACT ANALYSIS")
+    print("="*80)
+    print(f"\nTotal Unique Trades: {len(df)}")
     
-    # 1. Identify distinct symbols in winners
-    winners = df_trades[df_trades['pnl'] > 0]
-    symbols = winners['symbol'].unique().tolist()
-    print(f"Analyzing {len(winners)} winning trades across {len(symbols)} symbols...")
+    # Test multiple thresholds
+    thresholds = [30, 35, 40, 45, 50]
     
-    # Load historical data
-    from RubberBand.src.data import fetch_latest_bars
-    from RubberBand.src.indicators import ta_add_adx_di
+    print("\n" + "-"*80)
+    print(f"{'ADX Thresh':<12} | {'Trades':<8} | {'Winners':<8} | {'Losers':<8} | {'Win%':<8} | {'Total PnL':<12} | {'Avg PnL':<10}")
+    print("-"*80)
     
-    print("Fetching 60 days of history to cover trades...")
-    bars_map, _ = fetch_latest_bars(
-        symbols=symbols[:10], # Limit to top 10 distinct symbols for speed/quota if needed, or all if feasible
-        timeframe="15Min",
-        history_days=60,
-        feed="iex",
-        verbose=False
-    )
+    # Baseline (no filter)
+    baseline_trades = len(df)
+    baseline_winners = len(df[df['pnl'] > 0])
+    baseline_losers = len(df[df['pnl'] <= 0])
+    baseline_pnl = df['pnl'].sum()
+    baseline_wr = baseline_winners / baseline_trades * 100
+    baseline_avg = df['pnl'].mean()
+    print(f"{'None':<12} | {baseline_trades:<8} | {baseline_winners:<8} | {baseline_losers:<8} | {baseline_wr:<7.1f}% | ${baseline_pnl:<11,.2f} | ${baseline_avg:<9.2f}")
     
-    false_positives = 0
-    total_checked = 0
-    
-    print("\nChecking Top Winners against ADX Filter (ADX > 25 & -DI > +DI)...")
-    print(f"{'Symbol':<8} {'Entry Time':<20} {'PnL':<10} {'ADX':<6} {'-DI':<6} {'+DI':<6} {'Result'}")
-    
-    for idx, row in winners.iterrows():
-        sym = row['symbol']
-        if sym not in bars_map:
-            continue
-            
-        entry_time_str = str(row['entry_time'])
-        # Try to parse entry time
-        try:
-            # Format usually: 2025-12-15 09:30:00-05:00
-            # Pandas timestamp to string
-            entry_ts = pd.Timestamp(entry_time_str)
-        except:
-            continue
-            
-        df = bars_map[sym]
-        if df.empty: continue
+    # With each threshold
+    for thresh in thresholds:
+        filtered = df[df['entry_adx'] <= thresh]
+        n_trades = len(filtered)
+        n_winners = len(filtered[filtered['pnl'] > 0])
+        n_losers = n_trades - n_winners
+        total_pnl = filtered['pnl'].sum()
+        avg_pnl = filtered['pnl'].mean() if n_trades > 0 else 0
+        wr = n_winners / n_trades * 100 if n_trades > 0 else 0
         
-        # Add ADX
-        if "ADX" not in df.columns:
-            df = ta_add_adx_di(df)
-            
-        # Find bar at or before entry time
-        # Ensure index is tz-aware compatible
-        if df.index.tz is None:
-             df.index = df.index.tz_localize('UTC') # Assuming data comes as UTC
+        # Calculate impact vs baseline
+        trades_lost = baseline_trades - n_trades
+        pnl_lost = baseline_pnl - total_pnl
+        winners_lost = baseline_winners - n_winners
+        losers_filtered = baseline_losers - n_losers
         
-        # Convert entry_ts to match df index tz
-        try:
-            target_ts = entry_ts.tz_convert(df.index.tz)
-        except:
-            target_ts = entry_ts # hope for best
-            
-        # Get bar
-        # We need the bar *leading up to* entry.
-        # If entry is 09:45, signal was likely closed 09:45 bar or 09:30 bar? 
-        # Signals are usually "on close of previous bar".
-        # So look for bar timestamp <= target_ts
-        
-        try:
-            loc_idx = df.index.get_indexer([target_ts], method='pad')[0]
-            if loc_idx == -1: continue
-            
-            bar = df.iloc[loc_idx]
-            
-            # Check filter
-            adx = bar['ADX']
-            pdi = bar['+DI']
-            mdi = bar['-DI']
-            
-            total_checked += 1
-            
-            # Filter condition: ADX > 25 AND -DI > +DI
-            if adx > 25 and mdi > pdi:
-                print(f"{sym:<8} {entry_time_str[:19]:<20} ${row['pnl']:<9.2f} {adx:<6.1f} {mdi:<6.1f} {pdi:<6.1f} BLOCKED (Profitable Trade Lost)")
-                false_positives += 1
-            #else:
-            #    print(f"{sym:<8} {entry_time_str[:19]:<20} ${row['pnl']:<9.2f} {adx:<6.1f} {mdi:<6.1f} {pdi:<6.1f} KEPT")
-                
-        except Exception as e:
-            pass
-            
-    print(f"\nAnalysis Complete.")
-    print(f"Total Winners Checked: {total_checked}")
-    print(f"Profitable Trades Blocked by ADX Filter: {false_positives}")
-    print(f"Percentage Lost: {false_positives/max(1, total_checked)*100:.1f}%")
+        print(f"ADX <= {thresh:<5} | {n_trades:<8} | {n_winners:<8} | {n_losers:<8} | {wr:<7.1f}% | ${total_pnl:<11,.2f} | ${avg_pnl:<9.2f}")
+    
+    print("-"*80)
+    
+    # Detailed impact for ADX <= 40
+    print("\n" + "="*80)
+    print("DETAILED IMPACT: ADX <= 40")
+    print("="*80)
+    
+    thresh = 40
+    kept = df[df['entry_adx'] <= thresh]
+    dropped = df[df['entry_adx'] > thresh]
+    
+    kept_winners = kept[kept['pnl'] > 0]
+    kept_losers = kept[kept['pnl'] <= 0]
+    dropped_winners = dropped[dropped['pnl'] > 0]
+    dropped_losers = dropped[dropped['pnl'] <= 0]
+    
+    print(f"\n--- TRADES KEPT (ADX <= {thresh}) ---")
+    print(f"Total: {len(kept)} trades")
+    print(f"Winners: {len(kept_winners)} (Total: ${kept_winners['pnl'].sum():,.2f})")
+    print(f"Losers: {len(kept_losers)} (Total: ${kept_losers['pnl'].sum():,.2f})")
+    print(f"Net PnL: ${kept['pnl'].sum():,.2f}")
+    
+    print(f"\n--- TRADES DROPPED (ADX > {thresh}) ---")
+    print(f"Total: {len(dropped)} trades")
+    print(f"Winners SACRIFICED: {len(dropped_winners)} (Total: ${dropped_winners['pnl'].sum():,.2f})")
+    print(f"Losers AVOIDED: {len(dropped_losers)} (Total: ${dropped_losers['pnl'].sum():,.2f})")
+    print(f"Net Impact: ${dropped_winners['pnl'].sum() + dropped_losers['pnl'].sum():,.2f} (Positive = We lost profit)")
+    
+    if len(dropped_winners) > 0:
+        print(f"\n--- WINNERS WE WOULD SACRIFICE ---")
+        cols = ['symbol', 'entry_time', 'pnl', 'entry_adx', 'entry_slope']
+        cols_avail = [c for c in cols if c in dropped_winners.columns]
+        print(dropped_winners[cols_avail].sort_values('pnl', ascending=False).head(10).to_string())
+    
+    if len(dropped_losers) > 0:
+        print(f"\n--- LOSERS WE WOULD AVOID ---")
+        cols = ['symbol', 'entry_time', 'pnl', 'entry_adx', 'entry_slope']
+        cols_avail = [c for c in cols if c in dropped_losers.columns]
+        print(dropped_losers[cols_avail].sort_values('pnl').to_string())
 
 if __name__ == "__main__":
-    analyze_impact()
+    analyze_adx_threshold()

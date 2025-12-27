@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load data
-df = pd.read_csv(r"C:\Users\vraoo\GitHub\RubberBandBot\RubberBandBot\latest runs\12_16_2025\15m-options-backtest-20279741528\spread_backtest_trades.csv")
+df = pd.read_csv(r"C:\Users\vraoo\GitHub\RubberBandBot\RubberBandBot\results\spread_backtest_trades.csv")
 
 # Split by win/loss
 wins = df[df['pnl'] > 0]

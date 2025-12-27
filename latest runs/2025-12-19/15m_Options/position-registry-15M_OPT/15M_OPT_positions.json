@@ -1,0 +1,22 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2025-12-19T16:05:52.486385-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "TGT251226C00097000",
+      "underlying": "TGT",
+      "client_order_id": "15M_OPT_TGT251226C00097000_1766161282",
+      "order_id": "f264049e-6f28-49f4-9a56-bf683f297eeb",
+      "qty": 1,
+      "entry_price": 0.44000000000000006,
+      "entry_date": "2025-12-19T11:21:23.695377-05:00",
+      "status": "closed",
+      "short_symbol": "TGT251226C00098000",
+      "exit_price": 0.23999999999999988,
+      "exit_date": "2025-12-19T11:36:25.184828-05:00",
+      "exit_reason": "SL_hit(-80.6%<=-80.0%)",
+      "pnl": -100.0
+    }
+  ]
+}

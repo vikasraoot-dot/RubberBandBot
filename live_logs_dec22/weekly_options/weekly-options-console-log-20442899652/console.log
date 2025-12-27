@@ -1,0 +1,4 @@
+{"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":120,"type":"HEARTBEAT","ts":"2025-12-22T20:15:55Z","ts_et":"2025-12-22 15:15:55 ET"}
+{"ts": "2025-12-22T15:15:55.985521-05:00", "msg": "Weekly Options V3 Started", "tickers": 120}
+{"event":"options_cutoff","type":"HEARTBEAT","ts":"2025-12-22T20:15:56Z","ts_et":"2025-12-22 15:15:56 ET"}
+{"ts": "2025-12-22T15:15:56.473096-05:00", "msg": "Options trading cutoff reached (after 3:00 PM ET), exiting"}

@@ -1,0 +1,1002 @@
+﻿trade	UNKNOWN STEP	∩╗┐2025-12-26T14:48:10.1600440Z Current runner version: '2.330.0'
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1623237Z ##[group]Runner Image Provisioner
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1623997Z Hosted Compute Agent
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1624639Z Version: 20251211.462
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1625268Z Commit: 6cbad8c2bb55d58165063d031ccabf57e2d2db61
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1625868Z Build Date: 2025-12-11T16:28:49Z
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1626458Z Worker ID: {05a9b092-379f-4d7c-abd0-98fed1a48110}
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1627119Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1627543Z ##[group]Operating System
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1628021Z Ubuntu
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1628471Z 24.04.3
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1628861Z LTS
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1629281Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1629763Z ##[group]Runner Image
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1630283Z Image: ubuntu-24.04
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1630698Z Version: 20251215.174.1
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1631631Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20251215.174/images/ubuntu/Ubuntu2404-Readme.md
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1633000Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20251215.174
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1633901Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1634955Z ##[group]GITHUB_TOKEN Permissions
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1636783Z Contents: read
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1637290Z Metadata: read
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1637742Z Packages: read
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1638267Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1640198Z Secret source: Actions
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1640840Z Prepare workflow directory
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1946482Z Prepare all required actions
+trade	UNKNOWN STEP	2025-12-26T14:48:10.1985498Z Getting action download info
+trade	UNKNOWN STEP	2025-12-26T14:48:12.3108955Z Download action repository 'actions/checkout@v3' (SHA:f43a0e5ff2bd294095638e18286ca9a3d1956744)
+trade	UNKNOWN STEP	2025-12-26T14:48:12.4196973Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+trade	UNKNOWN STEP	2025-12-26T14:48:12.5408782Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+trade	UNKNOWN STEP	2025-12-26T14:48:13.3646557Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+trade	UNKNOWN STEP	2025-12-26T14:48:13.5486945Z Complete job name: trade
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6172985Z ##[group]Run actions/checkout@v3
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6173607Z with:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6173934Z   repository: vikasraoot-dot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6174702Z   token: ***
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6174990Z   ssh-strict: true
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6175297Z   persist-credentials: true
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6175601Z   clean: true
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6175908Z   sparse-checkout-cone-mode: true
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6176244Z   fetch-depth: 1
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6176516Z   fetch-tags: false
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6176794Z   lfs: false
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6177063Z   submodules: false
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6177352Z   set-safe-directory: true
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6177859Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6963458Z Syncing repository: vikasraoot-dot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6965113Z ##[group]Getting Git version info
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6965742Z Working directory is '/home/runner/work/RubberBandBot/RubberBandBot'
+trade	UNKNOWN STEP	2025-12-26T14:48:13.6966538Z [command]/usr/bin/git version
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7025949Z git version 2.52.0
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7048810Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7061385Z Temporarily overriding HOME='/home/runner/work/_temp/92ba26bf-9755-4ca3-af35-2ecfd497b8b0' before making global git config changes
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7062218Z Adding repository directory to the temporary git global config as a safe directory
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7065712Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/RubberBandBot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7097485Z Deleting the contents of '/home/runner/work/RubberBandBot/RubberBandBot'
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7100373Z ##[group]Initializing the repository
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7103178Z [command]/usr/bin/git init /home/runner/work/RubberBandBot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7195417Z hint: Using 'master' as the name for the initial branch. This default branch name
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7196410Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7197597Z hint: to use in all of your new repositories, which will suppress this warning,
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7198406Z hint: call:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7198824Z hint:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7199394Z hint: 	git config --global init.defaultBranch <name>
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7199934Z hint:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7200330Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7200880Z hint: 'development'. The just-created branch can be renamed via this command:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7201315Z hint:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7201598Z hint: 	git branch -m <name>
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7201892Z hint:
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7202281Z hint: Disable this message with "git config set advice.defaultBranchName false"
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7202923Z Initialized empty Git repository in /home/runner/work/RubberBandBot/RubberBandBot/.git/
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7207342Z [command]/usr/bin/git remote add origin https://github.com/vikasraoot-dot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7232997Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7233571Z ##[group]Disabling automatic garbage collection
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7235870Z [command]/usr/bin/git config --local gc.auto 0
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7256281Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7256781Z ##[group]Setting up auth
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7260841Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7281940Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7552014Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7573982Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7737414Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7765168Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7765775Z ##[group]Fetching the repository
+trade	UNKNOWN STEP	2025-12-26T14:48:13.7772173Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --progress --no-recurse-submodules --depth=1 origin +63678cdbdafea59d0942330b8d3fdc4dc7679fd6:refs/remotes/origin/main
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1003724Z remote: Enumerating objects: 541, done.        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1005660Z remote: Counting objects:   0% (1/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1006579Z remote: Counting objects:   1% (6/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1007166Z remote: Counting objects:   2% (11/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1007833Z remote: Counting objects:   3% (17/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1008525Z remote: Counting objects:   4% (22/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1009264Z remote: Counting objects:   5% (28/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1010038Z remote: Counting objects:   6% (33/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1010842Z remote: Counting objects:   7% (38/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1011636Z remote: Counting objects:   8% (44/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1012403Z remote: Counting objects:   9% (49/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1012921Z remote: Counting objects:  10% (55/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1013364Z remote: Counting objects:  11% (60/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1013817Z remote: Counting objects:  12% (65/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1014269Z remote: Counting objects:  13% (71/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1014967Z remote: Counting objects:  14% (76/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1015404Z remote: Counting objects:  15% (82/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1015926Z remote: Counting objects:  16% (87/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1016370Z remote: Counting objects:  17% (92/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1016751Z remote: Counting objects:  18% (98/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1017117Z remote: Counting objects:  19% (103/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1017781Z remote: Counting objects:  20% (109/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1018177Z remote: Counting objects:  21% (114/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1018546Z remote: Counting objects:  22% (120/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1018920Z remote: Counting objects:  23% (125/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1019295Z remote: Counting objects:  24% (130/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1019661Z remote: Counting objects:  25% (136/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1020034Z remote: Counting objects:  26% (141/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1020401Z remote: Counting objects:  27% (147/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1020762Z remote: Counting objects:  28% (152/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1021130Z remote: Counting objects:  29% (157/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1021496Z remote: Counting objects:  30% (163/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1021862Z remote: Counting objects:  31% (168/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1022232Z remote: Counting objects:  32% (174/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1022606Z remote: Counting objects:  33% (179/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1022977Z remote: Counting objects:  34% (184/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1023331Z remote: Counting objects:  35% (190/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1023701Z remote: Counting objects:  36% (195/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1024064Z remote: Counting objects:  37% (201/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1024651Z remote: Counting objects:  38% (206/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1025025Z remote: Counting objects:  39% (211/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1025394Z remote: Counting objects:  40% (217/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1025756Z remote: Counting objects:  41% (222/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1026125Z remote: Counting objects:  42% (228/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1026497Z remote: Counting objects:  43% (233/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1026863Z remote: Counting objects:  44% (239/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1027233Z remote: Counting objects:  45% (244/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1027614Z remote: Counting objects:  46% (249/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1028073Z remote: Counting objects:  47% (255/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1028449Z remote: Counting objects:  48% (260/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1028821Z remote: Counting objects:  49% (266/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1029192Z remote: Counting objects:  50% (271/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1029557Z remote: Counting objects:  51% (276/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1029935Z remote: Counting objects:  52% (282/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1030314Z remote: Counting objects:  53% (287/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1030682Z remote: Counting objects:  54% (293/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1031051Z remote: Counting objects:  55% (298/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1031422Z remote: Counting objects:  56% (303/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1031786Z remote: Counting objects:  57% (309/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1032152Z remote: Counting objects:  58% (314/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1032527Z remote: Counting objects:  59% (320/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1032898Z remote: Counting objects:  60% (325/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1033270Z remote: Counting objects:  61% (331/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1033639Z remote: Counting objects:  62% (336/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1034003Z remote: Counting objects:  63% (341/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1034573Z remote: Counting objects:  64% (347/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1034956Z remote: Counting objects:  65% (352/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1035340Z remote: Counting objects:  66% (358/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1035704Z remote: Counting objects:  67% (363/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1036080Z remote: Counting objects:  68% (368/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1036456Z remote: Counting objects:  69% (374/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1036825Z remote: Counting objects:  70% (379/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1037189Z remote: Counting objects:  71% (385/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1037571Z remote: Counting objects:  72% (390/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1038051Z remote: Counting objects:  73% (395/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1038409Z remote: Counting objects:  74% (401/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1038786Z remote: Counting objects:  75% (406/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1039163Z remote: Counting objects:  76% (412/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1039529Z remote: Counting objects:  77% (417/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1039919Z remote: Counting objects:  78% (422/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1040293Z remote: Counting objects:  79% (428/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1040659Z remote: Counting objects:  80% (433/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1041027Z remote: Counting objects:  81% (439/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1041397Z remote: Counting objects:  82% (444/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1041760Z remote: Counting objects:  83% (450/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1042127Z remote: Counting objects:  84% (455/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1042492Z remote: Counting objects:  85% (460/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1042858Z remote: Counting objects:  86% (466/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1043233Z remote: Counting objects:  87% (471/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1043598Z remote: Counting objects:  88% (477/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1043969Z remote: Counting objects:  89% (482/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1044484Z remote: Counting objects:  90% (487/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1044862Z remote: Counting objects:  91% (493/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1045235Z remote: Counting objects:  92% (498/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1045600Z remote: Counting objects:  93% (504/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1325179Z remote: Counting objects:  94% (509/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1326001Z remote: Counting objects:  95% (514/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1326743Z remote: Counting objects:  96% (520/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1327413Z remote: Counting objects:  97% (525/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1328048Z remote: Counting objects:  98% (531/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1328738Z remote: Counting objects:  99% (536/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1329734Z remote: Counting objects: 100% (541/541)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1330432Z remote: Counting objects: 100% (541/541), done.        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1331062Z remote: Compressing objects:   0% (1/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1331605Z remote: Compressing objects:   1% (4/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1331991Z remote: Compressing objects:   2% (8/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1332367Z remote: Compressing objects:   3% (11/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1332742Z remote: Compressing objects:   4% (15/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1333127Z remote: Compressing objects:   5% (19/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1333509Z remote: Compressing objects:   6% (22/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1333911Z remote: Compressing objects:   7% (26/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1334488Z remote: Compressing objects:   8% (30/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1334924Z remote: Compressing objects:   9% (33/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1335335Z remote: Compressing objects:  10% (37/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1335730Z remote: Compressing objects:  11% (41/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1336112Z remote: Compressing objects:  12% (44/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1336503Z remote: Compressing objects:  13% (48/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1336873Z remote: Compressing objects:  14% (51/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1337248Z remote: Compressing objects:  15% (55/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1382415Z remote: Compressing objects:  16% (59/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1408894Z remote: Compressing objects:  17% (62/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1418075Z remote: Compressing objects:  18% (66/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1438353Z remote: Compressing objects:  19% (70/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1448313Z remote: Compressing objects:  20% (73/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1455703Z remote: Compressing objects:  21% (77/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1458180Z remote: Compressing objects:  22% (81/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1489366Z remote: Compressing objects:  23% (84/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1489953Z remote: Compressing objects:  24% (88/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1490420Z remote: Compressing objects:  25% (91/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1490876Z remote: Compressing objects:  26% (95/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1491349Z remote: Compressing objects:  27% (99/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1491803Z remote: Compressing objects:  28% (102/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1500739Z remote: Compressing objects:  29% (106/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1501463Z remote: Compressing objects:  30% (110/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1502591Z remote: Compressing objects:  31% (113/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1503202Z remote: Compressing objects:  32% (117/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1503663Z remote: Compressing objects:  33% (121/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1537177Z remote: Compressing objects:  34% (124/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1537722Z remote: Compressing objects:  35% (128/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1548288Z remote: Compressing objects:  36% (132/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1568581Z remote: Compressing objects:  37% (135/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1588972Z remote: Compressing objects:  38% (139/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1602090Z remote: Compressing objects:  39% (142/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1648896Z remote: Compressing objects:  40% (146/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1656349Z remote: Compressing objects:  41% (150/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1661769Z remote: Compressing objects:  42% (153/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1663798Z remote: Compressing objects:  43% (157/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1664615Z remote: Compressing objects:  44% (161/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1672704Z remote: Compressing objects:  45% (164/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1680018Z remote: Compressing objects:  46% (168/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1683802Z remote: Compressing objects:  47% (172/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1701543Z remote: Compressing objects:  48% (175/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1703437Z remote: Compressing objects:  49% (179/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1703893Z remote: Compressing objects:  50% (182/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1704393Z remote: Compressing objects:  51% (186/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1704816Z remote: Compressing objects:  52% (190/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1731791Z remote: Compressing objects:  53% (193/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1738818Z remote: Compressing objects:  54% (197/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1749328Z remote: Compressing objects:  55% (201/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1754819Z remote: Compressing objects:  56% (204/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1761714Z remote: Compressing objects:  57% (208/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1762622Z remote: Compressing objects:  58% (212/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1763430Z remote: Compressing objects:  59% (215/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1764219Z remote: Compressing objects:  60% (219/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1764869Z remote: Compressing objects:  61% (223/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1765333Z remote: Compressing objects:  62% (226/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1765794Z remote: Compressing objects:  63% (230/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1809615Z remote: Compressing objects:  64% (233/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1810448Z remote: Compressing objects:  65% (237/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1811387Z remote: Compressing objects:  66% (241/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1812166Z remote: Compressing objects:  67% (244/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1812633Z remote: Compressing objects:  68% (248/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1813096Z remote: Compressing objects:  69% (252/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1813736Z remote: Compressing objects:  70% (255/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1814598Z remote: Compressing objects:  71% (259/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1815414Z remote: Compressing objects:  72% (263/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1816224Z remote: Compressing objects:  73% (266/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1816691Z remote: Compressing objects:  74% (270/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1817076Z remote: Compressing objects:  75% (273/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1817462Z remote: Compressing objects:  76% (277/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1899166Z remote: Compressing objects:  77% (281/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1899760Z remote: Compressing objects:  78% (284/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1900228Z remote: Compressing objects:  79% (288/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1900697Z remote: Compressing objects:  80% (292/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1901146Z remote: Compressing objects:  81% (295/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1901607Z remote: Compressing objects:  82% (299/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1902057Z remote: Compressing objects:  83% (303/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1902539Z remote: Compressing objects:  84% (306/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1902982Z remote: Compressing objects:  85% (310/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1903449Z remote: Compressing objects:  86% (314/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1903905Z remote: Compressing objects:  87% (317/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1904489Z remote: Compressing objects:  88% (321/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1905227Z remote: Compressing objects:  89% (324/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1905845Z remote: Compressing objects:  90% (328/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1906284Z remote: Compressing objects:  91% (332/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1906733Z remote: Compressing objects:  92% (335/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1907183Z remote: Compressing objects:  93% (339/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1907637Z remote: Compressing objects:  94% (343/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1908086Z remote: Compressing objects:  95% (346/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1908537Z remote: Compressing objects:  96% (350/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1908992Z remote: Compressing objects:  97% (354/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1909445Z remote: Compressing objects:  98% (357/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1910077Z remote: Compressing objects:  99% (361/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1910544Z remote: Compressing objects: 100% (364/364)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1911041Z remote: Compressing objects: 100% (364/364), done.        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1954499Z Receiving objects:   0% (1/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1979162Z Receiving objects:   1% (6/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1991783Z Receiving objects:   2% (11/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1992907Z Receiving objects:   3% (17/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.1993549Z Receiving objects:   4% (22/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2041104Z Receiving objects:   5% (28/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2152779Z Receiving objects:   6% (33/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2194642Z Receiving objects:   7% (38/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2222072Z Receiving objects:   8% (44/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2224533Z Receiving objects:   9% (49/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2420425Z Receiving objects:  10% (55/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2653532Z Receiving objects:  11% (60/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2964816Z Receiving objects:  12% (65/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.2976356Z Receiving objects:  13% (71/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3023056Z Receiving objects:  14% (76/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3118548Z Receiving objects:  15% (82/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3120955Z Receiving objects:  16% (87/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3155471Z Receiving objects:  17% (92/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3159548Z Receiving objects:  18% (98/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3218935Z Receiving objects:  19% (103/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3234444Z Receiving objects:  20% (109/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3420323Z Receiving objects:  21% (114/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3449595Z Receiving objects:  22% (120/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3454156Z Receiving objects:  23% (125/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3458946Z Receiving objects:  24% (130/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3461914Z Receiving objects:  25% (136/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3462900Z Receiving objects:  26% (141/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3464440Z Receiving objects:  27% (147/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3621002Z Receiving objects:  28% (152/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.3944729Z Receiving objects:  29% (157/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4003929Z Receiving objects:  30% (163/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4043068Z Receiving objects:  31% (168/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4045452Z Receiving objects:  32% (174/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4047219Z Receiving objects:  33% (179/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4055939Z Receiving objects:  34% (184/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4056438Z Receiving objects:  35% (190/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4170626Z Receiving objects:  36% (195/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4177089Z Receiving objects:  37% (201/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4192012Z Receiving objects:  38% (206/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4255138Z Receiving objects:  39% (211/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4276792Z Receiving objects:  40% (217/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4300292Z Receiving objects:  41% (222/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4310625Z Receiving objects:  42% (228/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4314400Z Receiving objects:  43% (233/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4331356Z Receiving objects:  44% (239/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4352907Z Receiving objects:  45% (244/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4353474Z Receiving objects:  46% (249/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4380760Z Receiving objects:  47% (255/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4384709Z Receiving objects:  48% (260/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4410061Z Receiving objects:  49% (266/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4418632Z Receiving objects:  50% (271/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4420736Z Receiving objects:  51% (276/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4421891Z Receiving objects:  52% (282/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4423109Z Receiving objects:  53% (287/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4426427Z Receiving objects:  54% (293/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4428942Z Receiving objects:  55% (298/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4436992Z Receiving objects:  56% (303/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4439441Z Receiving objects:  57% (309/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4442929Z Receiving objects:  58% (314/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4443956Z Receiving objects:  59% (320/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4445358Z Receiving objects:  60% (325/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4445956Z Receiving objects:  61% (331/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4449606Z Receiving objects:  62% (336/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4454172Z Receiving objects:  63% (341/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4454805Z Receiving objects:  64% (347/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4455211Z Receiving objects:  65% (352/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4455778Z Receiving objects:  66% (358/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4456251Z Receiving objects:  67% (363/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4457076Z Receiving objects:  68% (368/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4470559Z Receiving objects:  69% (374/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4473084Z Receiving objects:  70% (379/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4473893Z Receiving objects:  71% (385/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4474862Z Receiving objects:  72% (390/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4482261Z Receiving objects:  73% (395/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4483288Z Receiving objects:  74% (401/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4485103Z Receiving objects:  75% (406/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4486101Z Receiving objects:  76% (412/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4486870Z Receiving objects:  77% (417/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4487447Z Receiving objects:  78% (422/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4488001Z Receiving objects:  79% (428/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4488571Z Receiving objects:  80% (433/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4489062Z Receiving objects:  81% (439/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4489634Z Receiving objects:  82% (444/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4490831Z Receiving objects:  83% (450/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4491711Z Receiving objects:  84% (455/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4492263Z Receiving objects:  85% (460/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4492997Z Receiving objects:  86% (466/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4537865Z Receiving objects:  87% (471/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4538454Z Receiving objects:  88% (477/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4541136Z Receiving objects:  89% (482/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4548249Z Receiving objects:  90% (487/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4553094Z Receiving objects:  91% (493/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4560869Z Receiving objects:  92% (498/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4562684Z Receiving objects:  93% (504/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4563383Z Receiving objects:  94% (509/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4593127Z Receiving objects:  95% (514/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4593861Z Receiving objects:  96% (520/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4600592Z Receiving objects:  97% (525/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4667272Z Receiving objects:  98% (531/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4668093Z remote: Total 541 (delta 150), reused 469 (delta 137), pack-reused 0 (from 0)        
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4690677Z Receiving objects:  99% (536/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4691314Z Receiving objects: 100% (541/541)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4692065Z Receiving objects: 100% (541/541), 2.70 MiB | 9.84 MiB/s, done.
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4694589Z Resolving deltas:   0% (0/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4695703Z Resolving deltas:   1% (2/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4696389Z Resolving deltas:   2% (3/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4696964Z Resolving deltas:   4% (6/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4697320Z Resolving deltas:   5% (8/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4697709Z Resolving deltas:   6% (9/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4698175Z Resolving deltas:   7% (11/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4700453Z Resolving deltas:   8% (12/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4701493Z Resolving deltas:   9% (14/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4702466Z Resolving deltas:  10% (15/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4704057Z Resolving deltas:  11% (17/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4706663Z Resolving deltas:  12% (18/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4707312Z Resolving deltas:  13% (20/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4708542Z Resolving deltas:  14% (21/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4716058Z Resolving deltas:  16% (24/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4717940Z Resolving deltas:  17% (26/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4719335Z Resolving deltas:  18% (27/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4719895Z Resolving deltas:  19% (29/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4720434Z Resolving deltas:  20% (30/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4720983Z Resolving deltas:  21% (32/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4721523Z Resolving deltas:  22% (33/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4722061Z Resolving deltas:  23% (35/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4722624Z Resolving deltas:  24% (36/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4723387Z Resolving deltas:  25% (38/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4723930Z Resolving deltas:  26% (39/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4724798Z Resolving deltas:  27% (41/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4725355Z Resolving deltas:  28% (42/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4725908Z Resolving deltas:  29% (44/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4729317Z Resolving deltas:  30% (45/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4733829Z Resolving deltas:  31% (47/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4734543Z Resolving deltas:  32% (48/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4735136Z Resolving deltas:  33% (50/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4751787Z Resolving deltas:  34% (51/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4772028Z Resolving deltas:  35% (53/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4792626Z Resolving deltas:  36% (54/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4795224Z Resolving deltas:  37% (56/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4796959Z Resolving deltas:  38% (57/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4798100Z Resolving deltas:  39% (59/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4798841Z Resolving deltas:  40% (60/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4800350Z Resolving deltas:  41% (62/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4800897Z Resolving deltas:  42% (63/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4801462Z Resolving deltas:  43% (65/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4802005Z Resolving deltas:  44% (66/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4802551Z Resolving deltas:  45% (68/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4804269Z Resolving deltas:  46% (69/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4805195Z Resolving deltas:  47% (71/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4805835Z Resolving deltas:  48% (72/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4807296Z Resolving deltas:  49% (74/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4807858Z Resolving deltas:  50% (75/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4808398Z Resolving deltas:  51% (77/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4826106Z Resolving deltas:  52% (78/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4828176Z Resolving deltas:  53% (80/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4838503Z Resolving deltas:  54% (81/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4839952Z Resolving deltas:  56% (84/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4840501Z Resolving deltas:  57% (86/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4841367Z Resolving deltas:  58% (87/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4844915Z Resolving deltas:  59% (89/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4845784Z Resolving deltas:  60% (90/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4846510Z Resolving deltas:  61% (92/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4847035Z Resolving deltas:  62% (93/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4847559Z Resolving deltas:  63% (95/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4847915Z Resolving deltas:  64% (96/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4848213Z Resolving deltas:  65% (98/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4848508Z Resolving deltas:  66% (99/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4848838Z Resolving deltas:  67% (101/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4849153Z Resolving deltas:  68% (102/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4849469Z Resolving deltas:  69% (104/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4849777Z Resolving deltas:  70% (105/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4850082Z Resolving deltas:  71% (107/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4850471Z Resolving deltas:  72% (108/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4851178Z Resolving deltas:  73% (110/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4852283Z Resolving deltas:  74% (111/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4857183Z Resolving deltas:  75% (113/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4863310Z Resolving deltas:  76% (114/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4866066Z Resolving deltas:  77% (116/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4866761Z Resolving deltas:  78% (117/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4874039Z Resolving deltas:  79% (119/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4875018Z Resolving deltas:  81% (122/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4876339Z Resolving deltas:  82% (123/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4876941Z Resolving deltas:  83% (125/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4877504Z Resolving deltas:  84% (126/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4878027Z Resolving deltas:  85% (128/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4880331Z Resolving deltas:  86% (129/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4880881Z Resolving deltas:  87% (131/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4881309Z Resolving deltas:  88% (132/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4881830Z Resolving deltas:  89% (134/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4882255Z Resolving deltas:  90% (135/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4882576Z Resolving deltas:  91% (137/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4882891Z Resolving deltas:  92% (138/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4883229Z Resolving deltas:  93% (140/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4883725Z Resolving deltas:  94% (142/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4884033Z Resolving deltas:  96% (144/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4884512Z Resolving deltas:  97% (146/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4885975Z Resolving deltas:  98% (147/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4887739Z Resolving deltas:  99% (149/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4888358Z Resolving deltas: 100% (150/150)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4888947Z Resolving deltas: 100% (150/150), done.
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4968941Z From https://github.com/vikasraoot-dot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4969508Z  * [new ref]         63678cdbdafea59d0942330b8d3fdc4dc7679fd6 -> origin/main
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4997641Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4998138Z ##[group]Determining the checkout info
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4999478Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:14.4999941Z ##[group]Checking out the ref
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5003152Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5511544Z Switched to a new branch 'main'
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5512342Z branch 'main' set up to track 'origin/main'.
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5521764Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5556086Z [command]/usr/bin/git log -1 --format='%H'
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5573441Z '63678cdbdafea59d0942330b8d3fdc4dc7679fd6'
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5765019Z ##[group]Run actions/setup-python@v4
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5765399Z with:
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5765647Z   python-version: 3.10
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5765927Z   check-latest: false
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5766363Z   token: ***
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5766628Z   update-environment: true
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5766925Z   allow-prereleases: false
+trade	UNKNOWN STEP	2025-12-26T14:48:14.5767211Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7376334Z ##[group]Installed versions
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7514709Z Successfully set up CPython (3.10.19)
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7516116Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7609302Z ##[group]Run python -m pip install --upgrade pip
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7609868Z [36;1mpython -m pip install --upgrade pip[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7610671Z [36;1mif [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7611268Z [36;1mpip install pandas requests pyyaml numpy alpaca-trade-api[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7685258Z shell: /usr/bin/bash -e {0}
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7685602Z env:
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7685940Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7686423Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7686889Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7687313Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7687734Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7688168Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+trade	UNKNOWN STEP	2025-12-26T14:48:14.7688582Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:16.8090889Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (25.3)
+trade	UNKNOWN STEP	2025-12-26T14:48:17.6531107Z Collecting pandas>=2.2 (from -r RubberBand/requirements.txt (line 1))
+trade	UNKNOWN STEP	2025-12-26T14:48:17.7439145Z   Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (91 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.0288022Z Collecting numpy>=1.26 (from -r RubberBand/requirements.txt (line 2))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.0394172Z   Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.0831212Z Collecting requests>=2.31 (from -r RubberBand/requirements.txt (line 3))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.0938688Z   Downloading requests-2.32.5-py3-none-any.whl.metadata (4.9 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.1450858Z Collecting pyyaml>=6.0 (from -r RubberBand/requirements.txt (line 4))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.1557054Z   Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2029486Z Collecting pytz>=2024.1 (from -r RubberBand/requirements.txt (line 5))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2137829Z   Downloading pytz-2025.2-py2.py3-none-any.whl.metadata (22 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2440532Z Collecting python-dateutil>=2.8.2 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2542803Z   Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl.metadata (8.4 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2800876Z Collecting tzdata>=2022.7 (from pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.2902906Z   Downloading tzdata-2025.3-py2.py3-none-any.whl.metadata (1.4 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.4113850Z Collecting charset_normalizer<4,>=2 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.4219343Z   Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (37 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.4475158Z Collecting idna<4,>=2.5 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.4577677Z   Downloading idna-3.11-py3-none-any.whl.metadata (8.4 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.4961133Z Collecting urllib3<3,>=1.21.1 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5066504Z   Downloading urllib3-2.6.2-py3-none-any.whl.metadata (6.6 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5370555Z Collecting certifi>=2017.4.17 (from requests>=2.31->-r RubberBand/requirements.txt (line 3))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5474064Z   Downloading certifi-2025.11.12-py3-none-any.whl.metadata (2.5 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5705665Z Collecting six>=1.5 (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1))
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5810982Z   Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:18.5962216Z Downloading pandas-2.3.3-cp310-cp310-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.8 MB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.0332886Z    ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü 12.8/12.8 MB 31.2 MB/s  0:00:00
+trade	UNKNOWN STEP	2025-12-26T14:48:19.0439443Z Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2014981Z    ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü 16.8/16.8 MB 107.8 MB/s  0:00:00
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2126352Z Downloading requests-2.32.5-py3-none-any.whl (64 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2271270Z Downloading charset_normalizer-3.4.4-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (153 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2416199Z Downloading idna-3.11-py3-none-any.whl (71 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2563139Z Downloading urllib3-2.6.2-py3-none-any.whl (131 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2695537Z Downloading pyyaml-6.0.3-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (770 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2767933Z    ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü 770.3/770.3 kB 104.4 MB/s  0:00:00
+trade	UNKNOWN STEP	2025-12-26T14:48:19.2870478Z Downloading pytz-2025.2-py2.py3-none-any.whl (509 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.3037606Z Downloading certifi-2025.11.12-py3-none-any.whl (159 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.3161043Z Downloading python_dateutil-2.9.0.post0-py2.py3-none-any.whl (229 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.3288739Z Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.3407399Z Downloading tzdata-2025.3-py2.py3-none-any.whl (348 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:19.4805646Z Installing collected packages: pytz, urllib3, tzdata, six, pyyaml, numpy, idna, charset_normalizer, certifi, requests, python-dateutil, pandas
+trade	UNKNOWN STEP	2025-12-26T14:48:24.7452627Z 
+trade	UNKNOWN STEP	2025-12-26T14:48:24.7474828Z Successfully installed certifi-2025.11.12 charset_normalizer-3.4.4 idna-3.11 numpy-2.2.6 pandas-2.3.3 python-dateutil-2.9.0.post0 pytz-2025.2 pyyaml-6.0.3 requests-2.32.5 six-1.17.0 tzdata-2025.3 urllib3-2.6.2
+trade	UNKNOWN STEP	2025-12-26T14:48:25.1353223Z Requirement already satisfied: pandas in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.3.3)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.1357441Z Requirement already satisfied: requests in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.32.5)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.1361167Z Requirement already satisfied: pyyaml in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (6.0.3)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.1365043Z Requirement already satisfied: numpy in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (2.2.6)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.2383540Z Collecting alpaca-trade-api
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3137839Z   Downloading alpaca_trade_api-3.2.0-py3-none-any.whl.metadata (29 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3588859Z Requirement already satisfied: python-dateutil>=2.8.2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2.9.0.post0)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3592540Z Requirement already satisfied: pytz>=2020.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.2)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3597599Z Requirement already satisfied: tzdata>=2022.7 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from pandas) (2025.3)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3616631Z Requirement already satisfied: charset_normalizer<4,>=2 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.4.4)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3621730Z Requirement already satisfied: idna<4,>=2.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (3.11)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3627263Z Requirement already satisfied: urllib3<3,>=1.21.1 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2.6.2)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.3632147Z Requirement already satisfied: certifi>=2017.4.17 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from requests) (2025.11.12)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.4149050Z Collecting urllib3<3,>=1.21.1 (from requests)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.4255269Z   Downloading urllib3-1.26.20-py2.py3-none-any.whl.metadata (50 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.4792013Z Collecting websocket-client<2,>=0.56.0 (from alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.4900058Z   Downloading websocket_client-1.9.0-py3-none-any.whl.metadata (8.3 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.6024240Z Collecting websockets<11,>=9.0 (from alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.6134602Z   Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.4 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.6906016Z Collecting msgpack==1.0.3 (from alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:25.7016455Z   Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (8.7 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.2433891Z Collecting aiohttp<4,>=3.8.3 (from alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.2541264Z   Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (8.1 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3003357Z Collecting pyyaml
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3109266Z   Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3285413Z Collecting deprecation==2.1.0 (from alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3388141Z   Downloading deprecation-2.1.0-py2.py3-none-any.whl.metadata (4.6 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3641924Z Collecting packaging (from deprecation==2.1.0->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3744213Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.3980007Z Collecting aiohappyeyeballs>=2.5.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4082457Z   Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl.metadata (5.9 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4259260Z Collecting aiosignal>=1.4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4362102Z   Downloading aiosignal-1.4.0-py3-none-any.whl.metadata (3.7 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4562588Z Collecting async-timeout<6.0,>=4.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4665700Z   Downloading async_timeout-5.0.1-py3-none-any.whl.metadata (5.1 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4893527Z Collecting attrs>=17.3.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.4995406Z   Downloading attrs-25.4.0-py3-none-any.whl.metadata (10 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.5775104Z Collecting frozenlist>=1.1.1 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.5880804Z   Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (20 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.8621488Z Collecting multidict<7.0,>=4.5 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.8727153Z   Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (5.3 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.9365714Z Collecting propcache>=0.2.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:26.9470414Z   Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (13 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.2517711Z Collecting yarl<2.0,>=1.17.0 (from aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.2626016Z   Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (75 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.3018410Z Collecting typing-extensions>=4.1.0 (from multidict<7.0,>=4.5->aiohttp<4,>=3.8.3->alpaca-trade-api)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.3122203Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.3452044Z Requirement already satisfied: six>=1.5 in /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages (from python-dateutil>=2.8.2->pandas) (1.17.0)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.3602595Z Downloading alpaca_trade_api-3.2.0-py3-none-any.whl (34 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.3765673Z Downloading PyYAML-6.0.1-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (705 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.4595260Z    ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü 705.5/705.5 kB 9.2 MB/s  0:00:00
+trade	UNKNOWN STEP	2025-12-26T14:48:27.4700380Z Downloading deprecation-2.1.0-py2.py3-none-any.whl (11 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.4831932Z Downloading msgpack-1.0.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (323 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.5211838Z Downloading aiohttp-3.13.2-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (1.7 MB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6234157Z    ΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöüΓöü 1.7/1.7 MB 17.3 MB/s  0:00:00
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6336536Z Downloading async_timeout-5.0.1-py3-none-any.whl (6.2 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6457724Z Downloading multidict-6.7.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (241 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6671902Z Downloading urllib3-1.26.20-py2.py3-none-any.whl (144 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6837785Z Downloading websocket_client-1.9.0-py3-none-any.whl (82 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.6985308Z Downloading websockets-10.4-cp310-cp310-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (106 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7129600Z Downloading yarl-1.22.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (346 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7372873Z Downloading aiohappyeyeballs-2.6.1-py3-none-any.whl (15 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7495668Z Downloading aiosignal-1.4.0-py3-none-any.whl (7.5 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7618625Z Downloading attrs-25.4.0-py3-none-any.whl (67 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7755124Z Downloading frozenlist-1.8.0-cp310-cp310-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (219 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.7931827Z Downloading propcache-0.4.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (196 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.8106168Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.8233086Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
+trade	UNKNOWN STEP	2025-12-26T14:48:27.8806560Z Installing collected packages: msgpack, websockets, websocket-client, urllib3, typing-extensions, pyyaml, propcache, packaging, frozenlist, attrs, async-timeout, aiohappyeyeballs, multidict, deprecation, aiosignal, yarl, aiohttp, alpaca-trade-api
+trade	UNKNOWN STEP	2025-12-26T14:48:27.9787264Z   Attempting uninstall: urllib3
+trade	UNKNOWN STEP	2025-12-26T14:48:27.9794105Z     Found existing installation: urllib3 2.6.2
+trade	UNKNOWN STEP	2025-12-26T14:48:27.9832729Z     Uninstalling urllib3-2.6.2:
+trade	UNKNOWN STEP	2025-12-26T14:48:27.9842722Z       Successfully uninstalled urllib3-2.6.2
+trade	UNKNOWN STEP	2025-12-26T14:48:28.0567353Z   Attempting uninstall: pyyaml
+trade	UNKNOWN STEP	2025-12-26T14:48:28.0572898Z     Found existing installation: PyYAML 6.0.3
+trade	UNKNOWN STEP	2025-12-26T14:48:28.0598109Z     Uninstalling PyYAML-6.0.3:
+trade	UNKNOWN STEP	2025-12-26T14:48:28.0606503Z       Successfully uninstalled PyYAML-6.0.3
+trade	UNKNOWN STEP	2025-12-26T14:48:28.3896600Z 
+trade	UNKNOWN STEP	2025-12-26T14:48:28.3934817Z Successfully installed aiohappyeyeballs-2.6.1 aiohttp-3.13.2 aiosignal-1.4.0 alpaca-trade-api-3.2.0 async-timeout-5.0.1 attrs-25.4.0 deprecation-2.1.0 frozenlist-1.8.0 msgpack-1.0.3 multidict-6.7.0 packaging-25.0 propcache-0.4.1 pyyaml-6.0.1 typing-extensions-4.15.0 urllib3-1.26.20 websocket-client-1.9.0 websockets-10.4 yarl-1.22.0
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5853312Z ##[group]Run actions/download-artifact@v4
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5853579Z with:
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5853781Z   name: position-registry-WK_STK
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5854019Z   path: .position_registry/
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5854233Z   merge-multiple: false
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5854670Z   repository: vikasraoot-dot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5854927Z   run-id: 20524319269
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5855101Z env:
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5855330Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5855709Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5926374Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5926870Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5927250Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5927610Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+trade	UNKNOWN STEP	2025-12-26T14:48:28.5927897Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:28.7737840Z Downloading single artifact
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0441896Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-WK_STK
+trade	UNKNOWN STEP	        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+trade	UNKNOWN STEP	        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0522258Z ##[group]Run DRY_RUN=0
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0522512Z [36;1mDRY_RUN=0[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0522701Z [36;1m[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0522896Z [36;1m# Determine day of week (Monday = 1)[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0523188Z [36;1mDAY_OF_WEEK=$(TZ=America/New_York date +%u)[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0523444Z [36;1m[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0523643Z [36;1mecho "========================================"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0523912Z [36;1mecho "Weekly Stock Trading V1"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0524177Z [36;1mecho "========================================"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0524638Z [36;1mecho "Day of Week: $DAY_OF_WEEK (1=Monday)"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0524897Z [36;1mecho "Dry Run: $DRY_RUN"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0525149Z [36;1mecho "========================================"[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0525391Z [36;1m[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0525564Z [36;1m# Create logs directory[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0525822Z [36;1mmkdir -p logs[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0526057Z [36;1m[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0526236Z [36;1m# Run the weekly stock cycle[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0526480Z [36;1mset -o pipefail[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0526793Z [36;1mpython RubberBand/scripts/live_weekly_loop.py 2>&1 | tee console.log[0m
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0548308Z shell: /usr/bin/bash -e {0}
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0548536Z env:
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0548793Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0549188Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0549575Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0549913Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0550250Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0550584Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0551117Z   APCA_API_KEY_ID: ***
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0551428Z   APCA_API_SECRET_KEY: ***
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0551719Z   APCA_API_BASE_URL: https://paper-api.alpaca.markets
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0552079Z   PYTHONPATH: /home/runner/work/RubberBandBot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0552367Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0646260Z ========================================
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0646854Z Weekly Stock Trading V1
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0647288Z ========================================
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0647778Z Day of Week: 5 (1=Monday)
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0648194Z Dry Run: 0
+trade	UNKNOWN STEP	2025-12-26T14:48:29.0648539Z ========================================
+trade	UNKNOWN STEP	2025-12-26T14:48:30.4136802Z [registry] Loaded 4 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T14:48:30.4137534Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T14:48:30Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:30.4138276Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T14:48:30Z","end":"2025-12-26T14:48:30Z","when":"2025-12-26T14:48:30Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7485238Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7512059Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T14:48:30Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7524958Z 
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7525169Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7525716Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7526218Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7526715Z   ΓÇó VIXY Price      : $26.19
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7527016Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7527352Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7527653Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7527953Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7528225Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7528421Z 
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7528853Z 2025-12-26 14:48:30,752 [INFO] WEEKLY: Regime: CALM (VIXY=26.19)
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7529454Z 2025-12-26 14:48:30,752 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7529962Z 2025-12-26 14:48:30,752 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T14:48:30.7530435Z 2025-12-26 14:48:30,752 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T14:48:31.1935449Z [registry] Loaded 4 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T14:48:31.1936086Z 2025-12-26 14:48:31,193 [INFO] WEEKLY: Registry loaded: 4 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2773847Z 2025-12-26 14:48:32,276 [INFO] WEEKLY: Open Positions (WK_STK): 4
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2774882Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2775733Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2776692Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2777646Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: BA       9      200.02     218.26     164.16     9.12    %
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2778519Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: META     3      648.06     668.57     61.52      3.16    %
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2779318Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: ORCL     70     187.98     197.45     662.79     5.04    %
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2779806Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: RBLX     21     94.80      81.39      -281.61    -14.15  %
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2780305Z 2025-12-26 14:48:32,277 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2782794Z 2025-12-26 14:48:32,278 [INFO] WEEKLY: Analyzing RKLB...
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2783554Z {"type":"UNIVERSE","loaded":1,"sample":["RKLB"],"when":"2025-12-26T14:48:32Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:32.2784684Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-21T14:48:32Z","end":"2025-12-26T14:48:32Z","when":"2025-12-26T14:48:32Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:32.7640508Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T14:48:32.7680418Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["RKLB"],"sample_empty":[],"when":"2025-12-26T14:48:32Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:32.7795926Z 2025-12-26 14:48:32,779 [INFO] WEEKLY: Analyzing HOOD...
+trade	UNKNOWN STEP	2025-12-26T14:48:32.7796541Z {"type":"UNIVERSE","loaded":1,"sample":["HOOD"],"when":"2025-12-26T14:48:32Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:32.7798518Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-21T14:48:32Z","end":"2025-12-26T14:48:32Z","when":"2025-12-26T14:48:32Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:33.5558131Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T14:48:33.5601841Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["HOOD"],"sample_empty":[],"when":"2025-12-26T14:48:33Z"}
+trade	UNKNOWN STEP	2025-12-26T14:48:33.5713261Z 2025-12-26 14:48:33,571 [INFO] WEEKLY: ≡ƒöÑ SIGNAL FOUND for HOOD: RSI=48.3, Dev=-3.3%
+trade	UNKNOWN STEP	2025-12-26T14:48:33.5714117Z 2025-12-26 14:48:33,571 [INFO] WEEKLY: Submitting Bracket Order: HOOD x 16 @ Market, SL=81.79, TP=214.27
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9770935Z [order] HOOD: Using limit price $123.59 (buy, buffer=1.0%)
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9772161Z 2025-12-26 14:48:33,976 [INFO] WEEKLY: Γ£à Order placed: 658478c4-cb5e-40ce-a695-8a7bcec1ac7d
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9773647Z {"symbol":"HOOD","side":"buy","qty":16,"entry_price":119.64,"stop_loss_price":81.786,"take_profit_price":214.27499999999998,"entry_reason":"Weekly RB: RSI=48.3, Dev=-3.3%","type":"ENTRY_SUBMIT","ts":"2025-12-26T14:48:33Z","ts_et":"2025-12-26 09:48:33 ET"}
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9775692Z [registry] Recorded entry: HOOD (order_id=WK_STK_HOOD_1766760513...)
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9776336Z 2025-12-26 14:48:33,977 [INFO] WEEKLY: Max positions limit reached. Stopping.
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9777126Z 2025-12-26 14:48:33,977 [INFO] WEEKLY: 
+trade	UNKNOWN STEP	2025-12-26T14:48:33.9777662Z === Weekly Stock Session Summary ===
+trade	UNKNOWN STEP	2025-12-26T14:48:34.4097172Z 2025-12-26 14:48:34,409 [INFO] WEEKLY: No trades filled today for WK_STK.
+trade	UNKNOWN STEP	2025-12-26T14:48:34.4099465Z 2025-12-26 14:48:34,409 [INFO] WEEKLY: === End Summary ===
+trade	UNKNOWN STEP	2025-12-26T14:48:34.4101583Z 2025-12-26 14:48:34,410 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T15:48:34.7445931Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T15:48:34Z"}
+trade	UNKNOWN STEP	2025-12-26T15:48:34.7446991Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T15:48:34Z","end":"2025-12-26T15:48:34Z","when":"2025-12-26T15:48:34Z"}
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0054167Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0071377Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T15:48:35Z"}
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0084877Z 
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0085430Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0085952Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0086369Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0087021Z   ΓÇó VIXY Price      : $26.20
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0087438Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0087850Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0088292Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0088687Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0089037Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0089320Z 
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0089544Z 2025-12-26 15:48:35,008 [INFO] WEEKLY: Regime: CALM (VIXY=26.20)
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0090223Z 2025-12-26 15:48:35,008 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0090902Z 2025-12-26 15:48:35,008 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T15:48:35.0091743Z 2025-12-26 15:48:35,008 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T15:48:35.2318384Z [registry] Loaded 5 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T15:48:35.2319252Z 2025-12-26 15:48:35,231 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8399875Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$9.00, total=$9.00, invested=$5751.00
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8400899Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: Open Positions (WK_STK): 5
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8401636Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8402501Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8403459Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8404502Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: BA       9      200.02     217.20     154.62     8.59    %
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8405199Z 2025-12-26 15:48:35,839 [INFO] WEEKLY: HOOD     48     119.81     120.00     9.00       0.16    %
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8405686Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: META     3      648.06     664.39     48.98      2.52    %
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8406172Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: ORCL     70     187.98     197.74     683.31     5.19    %
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8406667Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: RBLX     21     94.80      81.78      -273.42    -13.73  %
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8407164Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8408846Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: Max positions reached. No new entries.
+trade	UNKNOWN STEP	2025-12-26T15:48:35.8409675Z 2025-12-26 15:48:35,840 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T16:48:36.3643615Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T16:48:36Z"}
+trade	UNKNOWN STEP	2025-12-26T16:48:36.3645140Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T16:48:36Z","end":"2025-12-26T16:48:36Z","when":"2025-12-26T16:48:36Z"}
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9479895Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9497655Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T16:48:36Z"}
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9511763Z 
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9511970Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9512548Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9513016Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9513765Z   ΓÇó VIXY Price      : $26.22
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9514067Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9514583Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9514909Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9515243Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9515524Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9515729Z 
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9515901Z 2025-12-26 16:48:36,950 [INFO] WEEKLY: Regime: CALM (VIXY=26.22)
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9516360Z 2025-12-26 16:48:36,951 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9516842Z 2025-12-26 16:48:36,951 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T16:48:36.9517331Z 2025-12-26 16:48:36,951 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T16:48:37.1739456Z [registry] Loaded 5 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T16:48:37.1740160Z 2025-12-26 16:48:37,173 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3130734Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-3.00, total=$-3.00, invested=$5751.00
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3131783Z 2025-12-26 16:48:38,312 [INFO] WEEKLY: Open Positions (WK_STK): 5
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3132569Z 2025-12-26 16:48:38,312 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3133427Z 2025-12-26 16:48:38,312 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3134531Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3135445Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: BA       9      200.02     216.56     148.89     8.27    %
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3136366Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: HOOD     48     119.81     119.71     -4.92      -0.09   %
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3137035Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: META     3      648.06     664.16     48.29      2.48    %
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3137518Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: ORCL     70     187.98     198.64     746.31     5.67    %
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3138009Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: RBLX     21     94.80      82.02      -268.38    -13.48  %
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3138508Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3140516Z 2025-12-26 16:48:38,313 [INFO] WEEKLY: Max positions reached. No new entries.
+trade	UNKNOWN STEP	2025-12-26T16:48:38.3141307Z 2025-12-26 16:48:38,314 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T17:48:38.9729728Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T17:48:38Z"}
+trade	UNKNOWN STEP	2025-12-26T17:48:38.9730512Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T17:48:38Z","end":"2025-12-26T17:48:38Z","when":"2025-12-26T17:48:38Z"}
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1905285Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1922429Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T17:48:39Z"}
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1935439Z 
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1936111Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1936744Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1937165Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1937836Z   ΓÇó VIXY Price      : $26.15
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1938242Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1938658Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1939112Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1939514Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1939857Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1940138Z 
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1940389Z 2025-12-26 17:48:39,193 [INFO] WEEKLY: Regime: CALM (VIXY=26.15)
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1941038Z 2025-12-26 17:48:39,193 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1941755Z 2025-12-26 17:48:39,193 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T17:48:39.1942537Z 2025-12-26 17:48:39,193 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T17:48:39.6288557Z [registry] Loaded 5 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T17:48:39.6289240Z 2025-12-26 17:48:39,628 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7383376Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$2.76, total=$2.76, invested=$5751.00
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7384434Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: Open Positions (WK_STK): 5
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7385051Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7385778Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7386487Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7387137Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: BA       9      200.02     216.66     149.72     8.32    %
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7387629Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: HOOD     48     119.81     119.87     2.76       0.05    %
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7388148Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: META     3      648.06     663.44     46.13      2.37    %
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7388624Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: ORCL     70     187.98     198.80     757.51     5.76    %
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7389119Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: RBLX     21     94.80      82.00      -268.80    -13.50  %
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7389638Z 2025-12-26 17:48:40,738 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7392696Z 2025-12-26 17:48:40,739 [INFO] WEEKLY: Max positions reached. No new entries.
+trade	UNKNOWN STEP	2025-12-26T17:48:40.7393600Z 2025-12-26 17:48:40,739 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T18:48:41.0203477Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T18:48:41Z"}
+trade	UNKNOWN STEP	2025-12-26T18:48:41.0204511Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T18:48:41Z","end":"2025-12-26T18:48:41Z","when":"2025-12-26T18:48:41Z"}
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6362753Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6380958Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T18:48:41Z"}
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6394777Z 
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6395141Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6395700Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6396102Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6396904Z   ΓÇó VIXY Price      : $26.16
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6397325Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6397719Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6398151Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6398568Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6398902Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6399502Z 
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6399981Z 2025-12-26 18:48:41,639 [INFO] WEEKLY: Regime: CALM (VIXY=26.16)
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6400593Z 2025-12-26 18:48:41,639 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6401313Z 2025-12-26 18:48:41,639 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T18:48:41.6402096Z 2025-12-26 18:48:41,639 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T18:48:41.8507073Z [registry] Loaded 5 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T18:48:41.8507952Z 2025-12-26 18:48:41,850 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9713232Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$9.94, total=$9.94, invested=$5751.00
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9714240Z 2025-12-26 18:48:42,970 [INFO] WEEKLY: Open Positions (WK_STK): 5
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9715128Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9716011Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9716846Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9717651Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: BA       9      200.02     216.60     149.22     8.29    %
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9718391Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: HOOD     48     119.81     120.02     9.94       0.17    %
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9719179Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: META     3      648.06     662.01     41.85      2.15    %
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9720055Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: ORCL     70     187.98     198.10     708.51     5.38    %
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9720910Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: RBLX     21     94.80      82.12      -266.28    -13.38  %
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9721808Z 2025-12-26 18:48:42,971 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9725994Z 2025-12-26 18:48:42,972 [INFO] WEEKLY: Max positions reached. No new entries.
+trade	UNKNOWN STEP	2025-12-26T18:48:42.9726644Z 2025-12-26 18:48:42,972 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T19:48:43.4591758Z {"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T19:48:43Z"}
+trade	UNKNOWN STEP	2025-12-26T19:48:43.4592643Z {"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T19:48:43Z","end":"2025-12-26T19:48:43Z","when":"2025-12-26T19:48:43Z"}
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8617196Z {"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8635024Z {"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T19:48:43Z"}
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8648001Z 
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8648645Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8649158Z  [RegimeManager] Market Environment Update
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8649593Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8650292Z   ΓÇó VIXY Price      : $26.25
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8650690Z   ΓÇó Current Regime  : CALM
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8651106Z   ΓÇó Slope Threshold : -0.08
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8651543Z   ΓÇó Dead Knife Fltr : DISABLED
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8651950Z   ΓÇó Weekly RSI Lim  : < 50
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8652288Z ==================================================
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8652561Z 
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8652819Z 2025-12-26 19:48:43,864 [INFO] WEEKLY: Regime: CALM (VIXY=26.25)
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8653443Z 2025-12-26 19:48:43,864 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8654193Z 2025-12-26 19:48:43,864 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+trade	UNKNOWN STEP	2025-12-26T19:48:43.8655135Z 2025-12-26 19:48:43,864 [INFO] WEEKLY: ============================================================
+trade	UNKNOWN STEP	2025-12-26T19:48:44.1391660Z [registry] Loaded 5 open positions for WK_STK
+trade	UNKNOWN STEP	2025-12-26T19:48:44.1394605Z 2025-12-26 19:48:44,138 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4788052Z [KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-9.72, total=$-9.72, invested=$5751.00
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4788991Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: Open Positions (WK_STK): 5
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4789639Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: --- Current Holdings ---
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4790286Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4791046Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4791747Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: BA       9      200.02     216.37     147.15     8.17    %
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4792537Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: HOOD     48     119.81     119.61     -9.72      -0.17   %
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4793285Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: META     3      648.06     663.02     44.87      2.31    %
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4794104Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: ORCL     70     187.98     197.89     693.80     5.27    %
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4795141Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: RBLX     21     94.80      82.23      -263.97    -13.26  %
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4795949Z 2025-12-26 19:48:45,478 [INFO] WEEKLY: ---------------------------------------------------------
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4799172Z 2025-12-26 19:48:45,479 [INFO] WEEKLY: Max positions reached. No new entries.
+trade	UNKNOWN STEP	2025-12-26T19:48:45.4800113Z 2025-12-26 19:48:45,479 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0692907Z ##[error]The operation was canceled.
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0732038Z ##[group]Run actions/upload-artifact@v4
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0732296Z with:
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0732488Z   name: position-registry-WK_STK
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0732789Z   path: .position_registry/WK_STK_positions.json
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0733059Z   if-no-files-found: warn
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0733270Z   retention-days: 90
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0733470Z   overwrite: true
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0733663Z   compression-level: 6
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0733882Z   include-hidden-files: false
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0734086Z env:
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0734450Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0734985Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0735358Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0735697Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0736031Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0736404Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+trade	UNKNOWN STEP	2025-12-26T20:48:22.0736685Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T20:48:22.2715786Z With the provided path, there will be 1 file uploaded
+trade	UNKNOWN STEP	2025-12-26T20:48:22.5260638Z Artifact name is valid!
+trade	UNKNOWN STEP	2025-12-26T20:48:22.5262938Z Root directory input is valid!
+trade	UNKNOWN STEP	2025-12-26T20:48:22.6057384Z Beginning upload of artifact content to blob storage
+trade	UNKNOWN STEP	2025-12-26T20:48:22.9750260Z Uploaded bytes 591
+trade	UNKNOWN STEP	2025-12-26T20:48:22.9754579Z Finished uploading artifact content to blob storage!
+trade	UNKNOWN STEP	2025-12-26T20:48:22.9755415Z SHA256 digest of uploaded artifact zip is dd6504a578af8fc53ee92346b53e73a1bdfeb45202288e621cee42db1f199196
+trade	UNKNOWN STEP	2025-12-26T20:48:22.9755942Z Finalizing artifact upload
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0680312Z Artifact position-registry-WK_STK.zip successfully finalized. Artifact ID 4972674680
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0680951Z Artifact position-registry-WK_STK has been successfully uploaded! Final size is 591 bytes. Artifact ID is 4972674680
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0681716Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20524319269/artifacts/4972674680
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0743936Z ##[group]Run actions/upload-artifact@v4
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0744217Z with:
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0744689Z   name: weekly-stock-console-log-20524319269
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0744973Z   path: console.log
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0745330Z   if-no-files-found: warn
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0745548Z   retention-days: 30
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0745755Z   compression-level: 6
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0745955Z   overwrite: false
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0746154Z   include-hidden-files: false
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0746376Z env:
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0746616Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0747006Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib/pkgconfig
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0747390Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0747735Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0748072Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.19/x64
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0748454Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.19/x64/lib
+trade	UNKNOWN STEP	2025-12-26T20:48:23.0748744Z ##[endgroup]
+trade	UNKNOWN STEP	2025-12-26T20:48:23.2792782Z With the provided path, there will be 1 file uploaded
+trade	UNKNOWN STEP	2025-12-26T20:48:23.2794023Z Artifact name is valid!
+trade	UNKNOWN STEP	2025-12-26T20:48:23.2794686Z Root directory input is valid!
+trade	UNKNOWN STEP	2025-12-26T20:48:23.5035902Z Beginning upload of artifact content to blob storage
+trade	UNKNOWN STEP	2025-12-26T20:48:23.7395948Z Uploaded bytes 2529
+trade	UNKNOWN STEP	2025-12-26T20:48:23.8017385Z Finished uploading artifact content to blob storage!
+trade	UNKNOWN STEP	2025-12-26T20:48:23.8020337Z SHA256 digest of uploaded artifact zip is c20d4764350bcc16457dbb4e100aec872fb19ea743bea027f7bd4a890d36cea0
+trade	UNKNOWN STEP	2025-12-26T20:48:23.8022411Z Finalizing artifact upload
+trade	UNKNOWN STEP	2025-12-26T20:48:23.9286400Z Artifact weekly-stock-console-log-20524319269.zip successfully finalized. Artifact ID 4972674733
+trade	UNKNOWN STEP	2025-12-26T20:48:23.9288095Z Artifact weekly-stock-console-log-20524319269 has been successfully uploaded! Final size is 2529 bytes. Artifact ID is 4972674733
+trade	UNKNOWN STEP	2025-12-26T20:48:23.9295334Z Artifact download URL: https://github.com/vikasraoot-dot/RubberBandBot/actions/runs/20524319269/artifacts/4972674733
+trade	UNKNOWN STEP	2025-12-26T20:48:23.9393053Z Post job cleanup.
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0060426Z [command]/usr/bin/git version
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0090649Z git version 2.52.0
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0126080Z Temporarily overriding HOME='/home/runner/work/_temp/065ac94a-ef24-470d-8e42-e5def2fc05e5' before making global git config changes
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0127060Z Adding repository directory to the temporary git global config as a safe directory
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0129123Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/RubberBandBot/RubberBandBot
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0154635Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0177628Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0353218Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0371157Z http.https://github.com/.extraheader
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0380948Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0405274Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0689410Z Cleaning up orphan processes
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0808617Z Terminate orphan process: pid (2207) (python)
+trade	UNKNOWN STEP	2025-12-26T20:48:24.0838824Z Terminate orphan process: pid (2208) (tee)

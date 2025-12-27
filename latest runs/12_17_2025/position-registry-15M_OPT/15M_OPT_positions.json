@@ -1,0 +1,52 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2025-12-17T16:06:26.256555-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "LRCX251226C00162500",
+      "underlying": "LRCX",
+      "client_order_id": "15M_OPT_LRCX251226C00162500_1765986606",
+      "order_id": "ac13aa9e-195b-424c-bffe-062fecbf801b",
+      "qty": 1,
+      "entry_price": 1.35,
+      "entry_date": "2025-12-17T10:50:07.727667-05:00",
+      "status": "closed",
+      "short_symbol": "LRCX251226C00165000",
+      "exit_price": 0.3599999999999999,
+      "exit_date": "2025-12-17T11:05:09.194940-05:00",
+      "exit_reason": "SL_hit(-89.9%<=-80.0%)",
+      "pnl": -319.0
+    },
+    {
+      "symbol": "CRH251226C00125000",
+      "underlying": "CRH",
+      "client_order_id": "15M_OPT_CRH251226C00125000_1765987564",
+      "order_id": "940b30af-3d51-47ef-8b43-2ec39626a731",
+      "qty": 1,
+      "entry_price": 0.5899999999999999,
+      "entry_date": "2025-12-17T11:06:05.663880-05:00",
+      "status": "closed",
+      "short_symbol": "CRH251226C00126000",
+      "exit_price": 0.1499999999999999,
+      "exit_date": "2025-12-17T11:21:07.121968-05:00",
+      "exit_reason": "SL_hit(-90.9%<=-80.0%)",
+      "pnl": -150.0
+    },
+    {
+      "symbol": "ADI251226C00272500",
+      "underlying": "ADI",
+      "client_order_id": "15M_OPT_ADI251226C00272500_1765995195",
+      "order_id": "2cb4c2ed-aea7-4f2d-a31d-eb4df33d9649",
+      "qty": 1,
+      "entry_price": 1.8099999999999996,
+      "entry_date": "2025-12-17T13:13:16.600033-05:00",
+      "status": "closed",
+      "short_symbol": "ADI251226C00275000",
+      "exit_price": 0.3999999999999999,
+      "exit_date": "2025-12-17T13:28:18.125526-05:00",
+      "exit_reason": "SL_hit(-90.7%<=-80.0%)",
+      "pnl": -390.0
+    }
+  ]
+}

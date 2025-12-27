@@ -1,0 +1,147 @@
+[registry] Loaded 4 open positions for WK_STK
+2025-12-22 14:49:24,895 [INFO] WEEKLY: ============================================================
+2025-12-22 14:49:24,895 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 14:49:24,895 [INFO] WEEKLY: ============================================================
+[registry] Loaded 4 open positions for WK_STK
+2025-12-22 14:49:24,956 [INFO] WEEKLY: Registry loaded: 4 positions in WK_STK registry
+2025-12-22 14:49:25,158 [INFO] WEEKLY: Open Positions (WK_STK): 4
+2025-12-22 14:49:25,158 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 14:49:25,158 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 14:49:25,158 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 14:49:25,159 [INFO] WEEKLY: BA       9      200.02     214.74     132.44     7.36    %
+2025-12-22 14:49:25,159 [INFO] WEEKLY: META     3      648.06     672.32     72.77      3.74    %
+2025-12-22 14:49:25,159 [INFO] WEEKLY: ORCL     70     187.98     194.04     424.66     3.23    %
+2025-12-22 14:49:25,159 [INFO] WEEKLY: RBLX     21     94.80      82.66      -254.93    -12.81  %
+2025-12-22 14:49:25,159 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 14:49:25,159 [INFO] WEEKLY: Analyzing RKLB...
+{"type":"UNIVERSE","loaded":1,"sample":["RKLB"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["RKLB"],"sample_empty":[],"when":"2025-12-22T14:49:25Z"}
+2025-12-22 14:49:25,502 [INFO] WEEKLY: Analyzing HOOD...
+{"type":"UNIVERSE","loaded":1,"sample":["HOOD"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["HOOD"],"sample_empty":[],"when":"2025-12-22T14:49:25Z"}
+2025-12-22 14:49:25,586 [INFO] WEEKLY: Analyzing INTC...
+{"type":"UNIVERSE","loaded":1,"sample":["INTC"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["INTC"],"sample_empty":[],"when":"2025-12-22T14:49:25Z"}
+2025-12-22 14:49:25,665 [INFO] WEEKLY: Analyzing WDC...
+{"type":"UNIVERSE","loaded":1,"sample":["WDC"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["WDC"],"sample_empty":[],"when":"2025-12-22T14:49:25Z"}
+2025-12-22 14:49:25,744 [INFO] WEEKLY: Analyzing VRT...
+{"type":"UNIVERSE","loaded":1,"sample":["VRT"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VRT"],"sample_empty":[],"when":"2025-12-22T14:49:25Z"}
+2025-12-22 14:49:25,829 [INFO] WEEKLY: Analyzing COIN...
+{"type":"UNIVERSE","loaded":1,"sample":["COIN"],"when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-17T14:49:25Z","end":"2025-12-22T14:49:25Z","when":"2025-12-22T14:49:25Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["COIN"],"sample_empty":[],"when":"2025-12-22T14:49:26Z"}
+2025-12-22 14:49:26,511 [INFO] WEEKLY: 🔥 SIGNAL FOUND for COIN: RSI=36.6, Dev=-18.1%
+2025-12-22 14:49:26,511 [INFO] WEEKLY: Submitting Bracket Order: COIN x 7 @ Market, SL=173.84, TP=444.30
+[order] COIN: Using limit price $257.55 (buy, buffer=1.0%)
+2025-12-22 14:49:26,622 [INFO] WEEKLY: ✅ Order placed: ae5b89db-4015-4036-a455-9299e267eef0
+{"symbol":"COIN","side":"buy","qty":7,"entry_price":251.11,"stop_loss_price":173.835,"take_profit_price":444.2975,"entry_reason":"Weekly RB: RSI=36.6, Dev=-18.1%","type":"ENTRY_SUBMIT","ts":"2025-12-22T14:49:26Z","ts_et":"2025-12-22 09:49:26 ET"}
+[registry] Recorded entry: COIN (order_id=WK_STK_COIN_1766414966...)
+2025-12-22 14:49:26,623 [INFO] WEEKLY: Max positions limit reached. Stopping.
+2025-12-22 14:49:26,623 [INFO] WEEKLY: 
+=== Weekly Stock Session Summary ===
+2025-12-22 14:49:26,674 [INFO] WEEKLY: No trades filled today for WK_STK.
+2025-12-22 14:49:26,675 [INFO] WEEKLY: === End Summary ===
+2025-12-22 14:49:26,675 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-22 15:49:26,794 [INFO] WEEKLY: ============================================================
+2025-12-22 15:49:26,794 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 15:49:26,794 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-22 15:49:26,852 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$92.55, total=$92.55, invested=$13035.79
+2025-12-22 15:49:27,256 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-22 15:49:27,257 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 15:49:27,257 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 15:49:27,257 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 15:49:27,257 [INFO] WEEKLY: BA       9      200.02     216.45     147.87     8.21    %
+2025-12-22 15:49:27,257 [INFO] WEEKLY: COIN     52     250.69     252.47     92.55      0.71    %
+2025-12-22 15:49:27,257 [INFO] WEEKLY: META     3      648.06     660.89     38.48      1.98    %
+2025-12-22 15:49:27,257 [INFO] WEEKLY: ORCL     70     187.98     196.46     593.84     4.51    %
+2025-12-22 15:49:27,257 [INFO] WEEKLY: RBLX     21     94.80      82.22      -264.18    -13.27  %
+2025-12-22 15:49:27,257 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 15:49:27,258 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-22 15:49:27,258 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-22 16:49:27,423 [INFO] WEEKLY: ============================================================
+2025-12-22 16:49:27,423 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 16:49:27,424 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-22 16:49:27,479 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$68.65, total=$68.65, invested=$13035.79
+2025-12-22 16:49:27,658 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-22 16:49:27,658 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 16:49:27,658 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 16:49:27,658 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 16:49:27,658 [INFO] WEEKLY: BA       9      200.02     216.25     146.07     8.11    %
+2025-12-22 16:49:27,658 [INFO] WEEKLY: COIN     52     250.69     252.01     68.65      0.53    %
+2025-12-22 16:49:27,659 [INFO] WEEKLY: META     3      648.06     659.62     34.69      1.78    %
+2025-12-22 16:49:27,659 [INFO] WEEKLY: ORCL     70     187.98     196.95     628.01     4.77    %
+2025-12-22 16:49:27,659 [INFO] WEEKLY: RBLX     21     94.80      82.05      -267.75    -13.45  %
+2025-12-22 16:49:27,659 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 16:49:27,659 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-22 16:49:27,659 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-22 17:49:27,774 [INFO] WEEKLY: ============================================================
+2025-12-22 17:49:27,774 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 17:49:27,774 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-22 17:49:27,830 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$33.88, total=$33.88, invested=$13035.79
+2025-12-22 17:49:28,153 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-22 17:49:28,154 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 17:49:28,154 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 17:49:28,154 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 17:49:28,154 [INFO] WEEKLY: BA       9      200.02     216.35     146.99     8.17    %
+2025-12-22 17:49:28,154 [INFO] WEEKLY: COIN     52     250.69     251.34     33.88      0.26    %
+2025-12-22 17:49:28,154 [INFO] WEEKLY: META     3      648.06     659.19     33.38      1.72    %
+2025-12-22 17:49:28,154 [INFO] WEEKLY: ORCL     70     187.98     197.09     637.81     4.85    %
+2025-12-22 17:49:28,154 [INFO] WEEKLY: RBLX     21     94.80      82.36      -261.24    -13.12  %
+2025-12-22 17:49:28,154 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 17:49:28,155 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-22 17:49:28,155 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-22 18:49:28,318 [INFO] WEEKLY: ============================================================
+2025-12-22 18:49:28,318 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 18:49:28,318 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-22 18:49:28,373 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-48.27, total=$-48.27, invested=$13035.79
+2025-12-22 18:49:28,543 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-22 18:49:28,543 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 18:49:28,543 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 18:49:28,543 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 18:49:28,543 [INFO] WEEKLY: BA       9      200.02     215.92     143.10     7.95    %
+2025-12-22 18:49:28,543 [INFO] WEEKLY: COIN     52     250.69     249.76     -48.27     -0.37   %
+2025-12-22 18:49:28,543 [INFO] WEEKLY: META     3      648.06     661.46     40.19      2.07    %
+2025-12-22 18:49:28,543 [INFO] WEEKLY: ORCL     70     187.98     197.74     683.24     5.19    %
+2025-12-22 18:49:28,543 [INFO] WEEKLY: RBLX     21     94.80      82.34      -261.68    -13.14  %
+2025-12-22 18:49:28,543 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 18:49:28,544 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-22 18:49:28,544 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-22 19:49:28,681 [INFO] WEEKLY: ============================================================
+2025-12-22 19:49:28,681 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-22 19:49:28,681 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-22 19:49:28,736 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-65.42, total=$-65.42, invested=$13035.79
+2025-12-22 19:49:28,913 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-22 19:49:28,913 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-22 19:49:28,913 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-22 19:49:28,913 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 19:49:28,913 [INFO] WEEKLY: BA       9      200.02     216.30     146.52     8.14    %
+2025-12-22 19:49:28,913 [INFO] WEEKLY: COIN     52     250.69     249.43     -65.42     -0.50   %
+2025-12-22 19:49:28,913 [INFO] WEEKLY: META     3      648.06     659.00     32.81      1.69    %
+2025-12-22 19:49:28,913 [INFO] WEEKLY: ORCL     70     187.98     198.50     736.16     5.59    %
+2025-12-22 19:49:28,914 [INFO] WEEKLY: RBLX     21     94.80      81.57      -277.83    -13.96  %
+2025-12-22 19:49:28,914 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-22 19:49:28,914 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-22 19:49:28,914 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...

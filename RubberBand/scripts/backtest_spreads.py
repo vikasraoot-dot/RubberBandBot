@@ -32,7 +32,7 @@ if _REPO_ROOT not in sys.path:
 
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
-from RubberBand.strategy import attach_verifiers
+from RubberBand.strategy import attach_verifiers, check_slope_filter
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Spread Simulation Parameters
@@ -395,50 +395,44 @@ def simulate_spreads_for_symbol(
         if sym == "TSLA" and verbose:
             print(f"  [DEBUG-PASS] ATR check passed: atr={atr:.2f}, entry={entry_price:.2f}")
 
-        # Slope Filter (Anti-Falling Knife) or (Panic Buyer)
-        # We calculate slopes FIRST so we can use them for filtering OR logging.
+        # Slope Filter (Shared Logic)
+        # ---------------------------
+        # Use Policy Object matching Live Bot
+        regime_cfg = {
+            "slope_threshold_pct": current_slope_threshold,
+            "dead_knife_filter": current_use_dkf
+        }
         
-        slope_3 = 0.0
-        slope_10 = 0.0
+        # We need a mini-dataframe window to pass to strategy check
+        # But strategy expects a full DF or at least columns. 
+        # The 'check_slope_filter' looks at iloc[-1] vs iloc[-4].
+        # So we pass the sliced DF up to current index 'i' (inclusive).
+        # We need to be careful about performance, but for backtest it's acceptable.
         
-        if "kc_middle" in df.columns:
-            # 3-bar slope
-            if i >= 4:
-                slope_3 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-4]) / 3
-            # 10-bar slope
-            if i >= 11:
-                slope_10 = (df["kc_middle"].iloc[i-1] - df["kc_middle"].iloc[i-11]) / 10
-
-        # Normalized Slope (Percentage)
-        # -----------------------------
-        # Convert absolute slope to percentage of price for consistent filtering.
-        # slope_pct = (slope / open_price) * 100
+        # Slice: df.iloc[:i+1] (contains row i as last element)
+        # check_slope_filter uses df['kc_middle'] and df['close']
         
-        entry_price_ref = float(cur["open"])
-        slope_3_pct = 0.0
-        slope_10_pct = 0.0
+        should_skip, reason = check_slope_filter(df.iloc[:i+1], regime_cfg)
         
-        if entry_price_ref > 0:
-            slope_3_pct = (slope_3 / entry_price_ref) * 100
-            slope_10_pct = (slope_10 / entry_price_ref) * 100
-
-        slope_threshold = current_slope_threshold
-        if sym == "TSLA" and verbose:
-            print(f"  [DEBUG-SLOPE] slope_3_pct={slope_3_pct:.4f}, threshold={slope_threshold}")
-        if slope_threshold is not None:
-             # Treat threshold as Percentage (e.g. -0.12 means -0.12%)
-             if slope_3_pct > float(slope_threshold):
-                 if sym == "TSLA" and verbose:
-                     print(f"  [DEBUG-SKIP] Slope3: {slope_3_pct:.4f} > {slope_threshold}")
-                 continue
+        if should_skip:
+            if verbose:
+                # We relax the TSLA-only debug constraint for general verbose runs
+                print(f"  [SKIP] {reason} at {cur.name}")
+            continue
 
         # Check 2: 10-bar slope (sustained crash, 2.5h) - Normalized
+        # (check_slope_filter only handles 3-bar primary slope for now. 
+        #  If we want 10-bar, we keep this legacy block or add it to strategy later.
+        #  For reconciliation, 3-bar is the main filter.)
         slope_threshold_10 = opts.get("slope_threshold_10")
-        if slope_threshold_10 is not None:
-            if slope_10_pct > float(slope_threshold_10):
-                if sym == "TSLA" and verbose:
-                    print(f"  [DEBUG-SKIP] Slope10: {slope_10_pct:.4f} > {slope_threshold_10}")
-                continue
+        if slope_threshold_10 is not None and "kc_middle" in df.columns and i >= 11:
+             slope_10 = (df["kc_middle"].iloc[i] - df["kc_middle"].iloc[i-10]) / 10
+             entry_price_ref = float(cur["open"])
+             slope_10_pct = (slope_10 / entry_price_ref) * 100
+             if slope_10_pct > float(slope_threshold_10):
+                 if verbose:
+                     print(f"  [SKIP] Slope10: {slope_10_pct:.4f} > {slope_threshold_10}")
+                 continue
         # SMA Trend Filter: Skip if close < daily SMA (matching live bot)
         if daily_sma is not None and opts.get("trend_filter", True):
             close_price = float(prev["close"])
@@ -529,7 +523,7 @@ def main():
     ap.add_argument("--bars-stop", type=int, default=10, help="Time stop: exit after N bars if no TP/SL (default=10)")
     ap.add_argument("--slope-threshold", type=float, default=None, help="Require 3-bar slope to be steeper than this (e.g. -0.20) to enter (Values > thresh are skipped)")
     ap.add_argument("--slope-threshold-10", type=float, default=None, help="Require 10-bar slope to be steeper than this (e.g. -0.15) to enter (Values > thresh are skipped)")
-    ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80% loss). Default 0.80.")
+    ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80%% loss). Default 0.80.")
     ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and Loss Today)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")

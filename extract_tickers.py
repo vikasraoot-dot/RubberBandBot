@@ -1,22 +1,19 @@
 import pandas as pd
 import os
 
-# Path to candidates file
-csv_path = r"C:\Users\vraoo\GitHub\RubberBandBot\RubberBandBot\latest runs\candidates.csv"
-output_path = "candidates_tickers.txt"
+def extract():
+    path = "temp_scan/bot-scan-results-20122220584/scan_results.csv"
+    if not os.path.exists(path):
+        print(f"Error: {path} not found")
+        return
 
-if not os.path.exists(csv_path):
-    print(f"Error: {csv_path} not found.")
-    exit(1)
-
-try:
-    df = pd.read_csv(csv_path)
-    tickers = df['symbol'].tolist()
+    df = pd.read_csv(path)
+    tickers = sorted(df['symbol'].unique())
     
-    with open(output_path, 'w') as f:
-        f.write('\n'.join(tickers))
+    with open("tickers_scanned.txt", "w", encoding="utf-8") as f:
+        f.write("\n".join(tickers))
         
-    print(f"Successfully extracted {len(tickers)} tickers to {output_path}")
+    print(f"Extracted {len(tickers)} tickers to tickers_scanned.txt")
 
-except Exception as e:
-    print(f"Error: {e}")
+if __name__ == "__main__":
+    extract()

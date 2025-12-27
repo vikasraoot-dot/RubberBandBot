@@ -1,0 +1,380 @@
+﻿2025-12-17T14:40:48.5266784Z Current runner version: '2.329.0'
+2025-12-17T14:40:48.5283979Z Runner name: 'OptionsRunner'
+2025-12-17T14:40:48.5285361Z Runner group name: 'Default'
+2025-12-17T14:40:48.5286879Z Machine name: 'VHOMEPC'
+2025-12-17T14:40:48.5293509Z ##[group]GITHUB_TOKEN Permissions
+2025-12-17T14:40:48.5298318Z Contents: read
+2025-12-17T14:40:48.5300121Z Metadata: read
+2025-12-17T14:40:48.5301248Z Packages: read
+2025-12-17T14:40:48.5302556Z ##[endgroup]
+2025-12-17T14:40:48.5308176Z Secret source: Actions
+2025-12-17T14:40:48.5309122Z Prepare workflow directory
+2025-12-17T14:40:48.6143815Z Prepare all required actions
+2025-12-17T14:40:48.6218351Z Getting action download info
+2025-12-17T14:40:49.2612805Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+2025-12-17T14:40:50.8504862Z Download action repository 'actions/download-artifact@v4' (SHA:d3f86a106a0bac45b974a628896c90dbdf5c8093)
+2025-12-17T14:40:53.2870793Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2025-12-17T14:40:56.4084417Z Complete job name: trade
+2025-12-17T14:40:56.5594669Z ##[group]Run actions/checkout@v4
+2025-12-17T14:40:56.5596373Z with:
+2025-12-17T14:40:56.5597004Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-17T14:40:56.5598280Z   token: ***
+2025-12-17T14:40:56.5598514Z   ssh-strict: true
+2025-12-17T14:40:56.5598766Z   ssh-user: git
+2025-12-17T14:40:56.5599774Z   persist-credentials: true
+2025-12-17T14:40:56.5600672Z   clean: true
+2025-12-17T14:40:56.5601274Z   sparse-checkout-cone-mode: true
+2025-12-17T14:40:56.5602118Z   fetch-depth: 1
+2025-12-17T14:40:56.5602787Z   fetch-tags: false
+2025-12-17T14:40:56.5603392Z   show-progress: true
+2025-12-17T14:40:56.5604416Z   lfs: false
+2025-12-17T14:40:56.5605125Z   submodules: false
+2025-12-17T14:40:56.5605714Z   set-safe-directory: true
+2025-12-17T14:40:56.5641415Z ##[endgroup]
+2025-12-17T14:40:57.0826384Z Syncing repository: vikasraoot-dot/RubberBandBot
+2025-12-17T14:40:57.0829406Z ##[group]Getting Git version info
+2025-12-17T14:40:57.0830912Z Working directory is 'C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot'
+2025-12-17T14:40:57.1008846Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-17T14:40:57.1547381Z git version 2.52.0.windows.1
+2025-12-17T14:40:57.1616687Z ##[endgroup]
+2025-12-17T14:40:57.1651975Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\f5dc3187-a07d-4ba6-87c3-1edd4a353cd1' before making global git config changes
+2025-12-17T14:40:57.1653170Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-17T14:40:57.1669216Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-17T14:40:57.2265047Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --get remote.origin.url
+2025-12-17T14:40:57.2714858Z https://github.com/vikasraoot-dot/RubberBandBot
+2025-12-17T14:40:57.2790551Z ##[group]Removing previously created refs, to avoid conflicts
+2025-12-17T14:40:57.2797408Z [command]"C:\Program Files\Git\cmd\git.exe" rev-parse --symbolic-full-name --verify --quiet HEAD
+2025-12-17T14:40:57.3338981Z refs/heads/main
+2025-12-17T14:40:57.3398762Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --detach
+2025-12-17T14:40:57.4208901Z M	RubberBand/__pycache__/__init__.cpython-313.pyc
+2025-12-17T14:40:57.4209623Z M	RubberBand/src/__pycache__/__init__.cpython-313.pyc
+2025-12-17T14:40:57.4210084Z M	RubberBand/src/__pycache__/ticker_health.cpython-313.pyc
+2025-12-17T14:40:57.4221861Z HEAD is now at 5155dbe fix: remove duplicate argparse definitions and unify DTE defaults to 6
+2025-12-17T14:40:57.5525607Z ##[endgroup]
+2025-12-17T14:40:57.5531602Z [command]"C:\Program Files\Git\cmd\git.exe" submodule status
+2025-12-17T14:40:58.6709373Z ##[group]Cleaning the repository
+2025-12-17T14:40:58.6722763Z [command]"C:\Program Files\Git\cmd\git.exe" clean -ffdx
+2025-12-17T14:40:58.7413040Z Removing .pytest_cache/
+2025-12-17T14:40:58.7413924Z Removing tests/__pycache__/test_resilience.cpython-313-pytest-8.4.2.pyc
+2025-12-17T14:40:58.7510573Z [command]"C:\Program Files\Git\cmd\git.exe" reset --hard HEAD
+2025-12-17T14:40:58.8416133Z HEAD is now at 5155dbe fix: remove duplicate argparse definitions and unify DTE defaults to 6
+2025-12-17T14:40:58.8503592Z ##[endgroup]
+2025-12-17T14:40:58.8512583Z ##[group]Disabling automatic garbage collection
+2025-12-17T14:40:58.8523792Z [command]"C:\Program Files\Git\cmd\git.exe" config --local gc.auto 0
+2025-12-17T14:40:58.9107785Z ##[endgroup]
+2025-12-17T14:40:58.9108769Z ##[group]Setting up auth
+2025-12-17T14:40:58.9117797Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-17T14:40:58.9657018Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-17T14:40:59.9714187Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-17T14:41:00.0366742Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-17T14:41:01.0896136Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-17T14:41:01.1514711Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-17T14:41:02.2006916Z [command]"C:\Program Files\Git\cmd\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2025-12-17T14:41:02.2680094Z ##[endgroup]
+2025-12-17T14:41:02.2680697Z ##[group]Fetching the repository
+2025-12-17T14:41:02.2695026Z [command]"C:\Program Files\Git\cmd\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +5155dbead96217586547ffe631ca69b35cd0dc2a:refs/remotes/origin/main
+2025-12-17T14:41:02.9793615Z ##[endgroup]
+2025-12-17T14:41:02.9794422Z ##[group]Determining the checkout info
+2025-12-17T14:41:02.9796300Z ##[endgroup]
+2025-12-17T14:41:02.9813184Z [command]"C:\Program Files\Git\cmd\git.exe" sparse-checkout disable
+2025-12-17T14:41:03.0603498Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all extensions.worktreeConfig
+2025-12-17T14:41:03.1259885Z ##[group]Checking out the ref
+2025-12-17T14:41:03.1267099Z [command]"C:\Program Files\Git\cmd\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2025-12-17T14:41:03.2559451Z branch 'main' set up to track 'origin/main'.
+2025-12-17T14:41:03.2559835Z Your branch is up to date with 'origin/main'.
+2025-12-17T14:41:03.2568423Z Switched to and reset branch 'main'
+2025-12-17T14:41:03.2669899Z ##[endgroup]
+2025-12-17T14:41:03.3336949Z [command]"C:\Program Files\Git\cmd\git.exe" log -1 --format=%H
+2025-12-17T14:41:03.3830675Z 5155dbead96217586547ffe631ca69b35cd0dc2a
+2025-12-17T14:41:03.4502504Z ##[group]Run $python = (Get-Command python.exe).Source
+2025-12-17T14:41:03.4503382Z [36;1m$python = (Get-Command python.exe).Source[0m
+2025-12-17T14:41:03.4503763Z [36;1mecho "PYTHON_EXE=$python" >> $env:GITHUB_ENV[0m
+2025-12-17T14:41:03.4551898Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-17T14:41:03.4552449Z ##[endgroup]
+2025-12-17T14:41:04.0483601Z ##[group]Run & "$env:PYTHON_EXE" -m pip install --upgrade pip
+2025-12-17T14:41:04.0484753Z [36;1m& "$env:PYTHON_EXE" -m pip install --upgrade pip[0m
+2025-12-17T14:41:04.0485163Z [36;1m& "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt[0m
+2025-12-17T14:41:04.0524849Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-17T14:41:04.0526846Z env:
+2025-12-17T14:41:04.0527117Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-17T14:41:04.0527425Z ##[endgroup]
+2025-12-17T14:41:05.2118402Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-17T14:41:05.8483773Z Requirement already satisfied: pip in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (25.3)
+2025-12-17T14:41:08.4027872Z Defaulting to user installation because normal site-packages is not writeable
+2025-12-17T14:41:09.0535882Z Requirement already satisfied: pandas>=2.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 1)) (2.3.2)
+2025-12-17T14:41:09.0542413Z Requirement already satisfied: numpy>=1.26 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 2)) (2.3.3)
+2025-12-17T14:41:09.0552452Z Requirement already satisfied: requests>=2.31 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 3)) (2.32.3)
+2025-12-17T14:41:09.0557168Z Requirement already satisfied: pyyaml>=6.0 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 4)) (6.0.1)
+2025-12-17T14:41:09.0562553Z Requirement already satisfied: pytz>=2024.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from -r RubberBand/requirements.txt (line 5)) (2024.1)
+2025-12-17T14:41:09.0650272Z Requirement already satisfied: python-dateutil>=2.8.2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2.9.0.post0)
+2025-12-17T14:41:09.0666027Z Requirement already satisfied: tzdata>=2022.7 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (2025.2)
+2025-12-17T14:41:09.0967952Z Requirement already satisfied: charset-normalizer<4,>=2 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.4.3)
+2025-12-17T14:41:09.0984403Z Requirement already satisfied: idna<4,>=2.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (3.10)
+2025-12-17T14:41:09.0997429Z Requirement already satisfied: urllib3<3,>=1.21.1 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (1.26.20)
+2025-12-17T14:41:09.1009583Z Requirement already satisfied: certifi>=2017.4.17 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from requests>=2.31->-r RubberBand/requirements.txt (line 3)) (2025.8.3)
+2025-12-17T14:41:09.1208273Z Requirement already satisfied: six>=1.5 in c:\windows\serviceprofiles\networkservice\appdata\roaming\python\python313\site-packages (from python-dateutil>=2.8.2->pandas>=2.2->-r RubberBand/requirements.txt (line 1)) (1.17.0)
+2025-12-17T14:41:09.6759137Z ##[group]Run chcp 65001 > $null
+2025-12-17T14:41:09.6759370Z [36;1mchcp 65001 > $null[0m
+2025-12-17T14:41:09.6759619Z [36;1m$H = @{ "APCA-API-KEY-ID" = "${env:APCA_API_KEY_ID}"; "APCA-API-SECRET-KEY" = "${env:APCA_API_SECRET_KEY}" }[0m
+2025-12-17T14:41:09.6759863Z [36;1mfunction Get-Clock {[0m
+2025-12-17T14:41:09.6760090Z [36;1m  Invoke-RestMethod -Uri "$env:APCA_BASE_URL/v2/clock" -Headers $H -TimeoutSec 8[0m
+2025-12-17T14:41:09.6760314Z [36;1m}[0m
+2025-12-17T14:41:09.6760412Z [36;1m$maxWaitMin = 20[0m
+2025-12-17T14:41:09.6760540Z [36;1m$start = Get-Date[0m
+2025-12-17T14:41:09.6760667Z [36;1mwhile ($true) {[0m
+2025-12-17T14:41:09.6760778Z [36;1m  try {[0m
+2025-12-17T14:41:09.6761109Z [36;1m    $clk = Get-Clock[0m
+2025-12-17T14:41:09.6761299Z [36;1m    if ($clk.is_open) { Write-Host "Market is open → proceed."; break }[0m
+2025-12-17T14:41:09.6761493Z [36;1m    $now = [DateTimeOffset]::UtcNow[0m
+2025-12-17T14:41:09.6761721Z [36;1m    $nextOpen = [DateTimeOffset]::Parse($clk.next_open)[0m
+2025-12-17T14:41:09.6761900Z [36;1m    if ($now -lt $nextOpen) {[0m
+2025-12-17T14:41:09.6762084Z [36;1m      $sec = [int][Math]::Min(30, ($nextOpen - $now).TotalSeconds)[0m
+2025-12-17T14:41:09.6762315Z [36;1m      Write-Host "Waiting $sec s until next_open $($clk.next_open)..."[0m
+2025-12-17T14:41:09.6762518Z [36;1m      Start-Sleep -Seconds $sec[0m
+2025-12-17T14:41:09.6762651Z [36;1m    } else {[0m
+2025-12-17T14:41:09.6762806Z [36;1m      Write-Host "Past next_open window; continuing."[0m
+2025-12-17T14:41:09.6762974Z [36;1m      break[0m
+2025-12-17T14:41:09.6763078Z [36;1m    }[0m
+2025-12-17T14:41:09.6763246Z [36;1m    if ((Get-Date) - $start -gt (New-TimeSpan -Minutes $maxWaitMin)) {[0m
+2025-12-17T14:41:09.6763482Z [36;1m      Write-Host "Exceeded $maxWaitMin min wait. Continuing."[0m
+2025-12-17T14:41:09.6763651Z [36;1m      break[0m
+2025-12-17T14:41:09.6763768Z [36;1m    }[0m
+2025-12-17T14:41:09.6763881Z [36;1m  } catch {[0m
+2025-12-17T14:41:09.6764155Z [36;1m    Write-Host "Clock check failed: $($_.Exception.Message). Retrying in 15s..."[0m
+2025-12-17T14:41:09.6764384Z [36;1m    Start-Sleep -Seconds 15[0m
+2025-12-17T14:41:09.6764537Z [36;1m  }[0m
+2025-12-17T14:41:09.6764643Z [36;1m}[0m
+2025-12-17T14:41:09.6781317Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-17T14:41:09.6781550Z env:
+2025-12-17T14:41:09.6781814Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-17T14:41:09.6782063Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-17T14:41:09.6782377Z   APCA_API_KEY_ID: ***
+2025-12-17T14:41:09.6782558Z   APCA_API_SECRET_KEY: ***
+2025-12-17T14:41:09.6782690Z ##[endgroup]
+2025-12-17T14:41:11.2390637Z Market is open â†’ proceed.
+2025-12-17T14:41:11.3698549Z ##[group]Run actions/download-artifact@v4
+2025-12-17T14:41:11.3698758Z with:
+2025-12-17T14:41:11.3698882Z   name: position-registry-15M_OPT
+2025-12-17T14:41:11.3699020Z   path: .position_registry/
+2025-12-17T14:41:11.3699157Z   merge-multiple: false
+2025-12-17T14:41:11.3699294Z   repository: vikasraoot-dot/RubberBandBot
+2025-12-17T14:41:11.3699441Z   run-id: 20306575174
+2025-12-17T14:41:11.3699542Z env:
+2025-12-17T14:41:11.3699695Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-17T14:41:11.3699856Z ##[endgroup]
+2025-12-17T14:41:12.6588200Z Downloading single artifact
+2025-12-17T14:41:13.1959535Z ##[error]Unable to download artifact(s): Artifact not found for name: position-registry-15M_OPT
+        Please ensure that your artifact is not expired and the artifact was uploaded using a compatible version of toolkit/upload-artifact.
+        For more information, visit the GitHub Artifacts FAQ: https://github.com/actions/toolkit/blob/main/packages/artifact/docs/faq.md
+2025-12-17T14:41:13.2477047Z ##[group]Run chcp 65001 > $null
+2025-12-17T14:41:13.2477833Z [36;1mchcp 65001 > $null[0m
+2025-12-17T14:41:13.2478122Z [36;1m$env:PYTHONPATH = "$env:GITHUB_WORKSPACE"[0m
+2025-12-17T14:41:13.2478410Z [36;1m[0m
+2025-12-17T14:41:13.2478603Z [36;1m# Get inputs with defaults[0m
+2025-12-17T14:41:13.2478907Z [36;1m$dryRun = if ("0" -ne "") { "0" } else { "0" }[0m
+2025-12-17T14:41:13.2479219Z [36;1m$dte = if ("6" -ne "") { "6" } else { "6" }[0m
+2025-12-17T14:41:13.2479499Z [36;1m$slopeInput = "-0.15"[0m
+2025-12-17T14:41:13.2479889Z [36;1m$slopeArg = if ($slopeInput -ne "") { "--slope-threshold $slopeInput" } else { "" }[0m
+2025-12-17T14:41:13.2480278Z [36;1m[0m
+2025-12-17T14:41:13.2480616Z [36;1mWrite-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte, slope=$slopeInput)"[0m
+2025-12-17T14:41:13.2481134Z [36;1m[0m
+2025-12-17T14:41:13.2481504Z [36;1m# Run the spreads loop[0m
+2025-12-17T14:41:13.2482733Z [36;1m# We use Invoke-Expression or just simplistic string splicing if simple enough.[0m
+2025-12-17T14:41:13.2483628Z [36;1m# Ideally just pass args.[0m
+2025-12-17T14:41:13.2484132Z [36;1m[0m
+2025-12-17T14:41:13.2485126Z [36;1m$cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg"[0m
+2025-12-17T14:41:13.2486074Z [36;1mInvoke-Expression $cmd[0m
+2025-12-17T14:41:13.2547722Z shell: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.EXE -command ". '{0}'"
+2025-12-17T14:41:13.2548637Z env:
+2025-12-17T14:41:13.2548960Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-17T14:41:13.2549277Z   APCA_BASE_URL: https://paper-api.alpaca.markets
+2025-12-17T14:41:13.2550195Z   APCA_API_KEY_ID: ***
+2025-12-17T14:41:13.2550887Z   APCA_API_SECRET_KEY: ***
+2025-12-17T14:41:13.2551456Z   ALPACA_KEY: ***
+2025-12-17T14:41:13.2552057Z   ALPACA_SECRET: ***
+2025-12-17T14:41:13.2552499Z   PYTHONUNBUFFERED: 1
+2025-12-17T14:41:13.2552929Z ##[endgroup]
+2025-12-17T14:41:13.8787341Z Starting Options Spreads Loop (dry_run=0, dte=6, slope=-0.15)
+2025-12-17T14:41:14.0299196Z ============================================================
+2025-12-17T14:41:14.0300088Z [STARTUP] 15M Options Spreads Loop - Initializing...
+2025-12-17T14:41:14.0301024Z [STARTUP] Python: 3.13.7 (tags/v3.13.7:bcee1c3, Aug 14 2025, 14:15:11) [MSC v.1944 64 bit (AMD64)]
+2025-12-17T14:41:14.0301430Z ============================================================
+2025-12-17T14:41:14.0781317Z [STARTUP] Core imports complete
+2025-12-17T14:41:15.2885718Z [STARTUP] Repo root: C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-17T14:41:15.2886609Z [STARTUP] Loading RubberBand.src.data...
+2025-12-17T14:41:16.1497315Z [STARTUP] Loading RubberBand.strategy...
+2025-12-17T14:41:16.1664278Z [STARTUP] Loading RubberBand.src.options_data...
+2025-12-17T14:41:16.1859929Z [STARTUP] Loading RubberBand.src.options_execution...
+2025-12-17T14:41:16.2041291Z [STARTUP] Loading loggers and registry...
+2025-12-17T14:41:16.2279062Z [STARTUP] All imports complete!
+2025-12-17T14:41:16.2936696Z [config] Slope Threshold overridden to: -0.15
+2025-12-17T14:41:16.2950041Z {"event":"startup","dry_run":false,"dte":6,"max_debit":3.0,"contracts":1,"tp_pct":80.0,"sl_pct":-80.0,"scan_interval_min":15,"type":"HEARTBEAT","ts":"2025-12-17T14:41:16Z","ts_et":"2025-12-17 09:41:16 ET"}
+2025-12-17T14:41:16.3169080Z {"event":"symbols_loaded","count":120,"sample":["RKLB","HOOD","INTC","WDC","VRT"],"type":"HEARTBEAT","ts":"2025-12-17T14:41:16Z","ts_et":"2025-12-17 09:41:16 ET"}
+2025-12-17T14:41:16.6704214Z {"event":"registry_loaded","bot_tag":"15M_OPT","my_positions":0,"type":"HEARTBEAT","ts":"2025-12-17T14:41:16Z","ts_et":"2025-12-17 09:41:16 ET"}
+2025-12-17T14:41:18.0028038Z {"event":"scan_cycle_start","cycle":1,"time":"09:41","type":"HEARTBEAT","ts":"2025-12-17T14:41:18Z","ts_et":"2025-12-17 09:41:18 ET"}
+2025-12-17T14:41:18.0032322Z {"event":"outside_entry_window","current_time":"09:41","type":"HEARTBEAT","ts":"2025-12-17T14:41:18Z","ts_et":"2025-12-17 09:41:18 ET"}
+2025-12-17T14:41:18.3300716Z {"event":"scan_cycle_end","cycle":1,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-17T14:41:18Z","ts_et":"2025-12-17 09:41:18 ET"}
+2025-12-17T14:41:18.3301233Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:41","type":"HEARTBEAT","ts":"2025-12-17T14:41:18Z","ts_et":"2025-12-17 09:41:18 ET"}
+2025-12-17T14:56:18.8265985Z {"event":"scan_cycle_start","cycle":2,"time":"09:56","type":"HEARTBEAT","ts":"2025-12-17T14:56:18Z","ts_et":"2025-12-17 09:56:18 ET"}
+2025-12-17T14:56:18.8267542Z {"event":"scan_start","current_time":"09:56","type":"HEARTBEAT","ts":"2025-12-17T14:56:18Z","ts_et":"2025-12-17 09:56:18 ET"}
+2025-12-17T14:56:33.7295585Z {"type":"SPREAD_SKIP","underlying":"RKLB","skip_reason":"Slope_too_flat(0.0066>-0.15)","ts":"2025-12-17T14:56:33Z","ts_et":"2025-12-17 09:56:33 ET"}
+2025-12-17T14:56:34.0101760Z {"type":"SPREAD_SKIP","underlying":"HOOD","skip_reason":"Bear_trend(close=119.90<SMA20=123.89)","ts":"2025-12-17T14:56:34Z","ts_et":"2025-12-17 09:56:34 ET"}
+2025-12-17T14:56:34.3993886Z {"type":"SPREAD_SKIP","underlying":"INTC","skip_reason":"Bear_trend(close=37.35<SMA20=38.62)","ts":"2025-12-17T14:56:34Z","ts_et":"2025-12-17 09:56:34 ET"}
+2025-12-17T14:56:34.7098193Z {"type":"SPREAD_SKIP","underlying":"WDC","skip_reason":"Slope_too_flat(0.1638>-0.15)","ts":"2025-12-17T14:56:34Z","ts_et":"2025-12-17 09:56:34 ET"}
+2025-12-17T14:56:35.0263699Z {"type":"SPREAD_SKIP","underlying":"VRT","skip_reason":"Bear_trend(close=154.92<SMA20=172.64)","ts":"2025-12-17T14:56:35Z","ts_et":"2025-12-17 09:56:35 ET"}
+2025-12-17T14:56:35.3478203Z {"type":"SPREAD_SKIP","underlying":"COIN","skip_reason":"Bear_trend(close=254.19<SMA20=262.56)","ts":"2025-12-17T14:56:35Z","ts_et":"2025-12-17 09:56:35 ET"}
+2025-12-17T14:56:35.6421667Z {"type":"SPREAD_SKIP","underlying":"MU","skip_reason":"Bear_trend(close=233.46<SMA20=234.79)","ts":"2025-12-17T14:56:35Z","ts_et":"2025-12-17 09:56:35 ET"}
+2025-12-17T14:56:35.9247677Z {"type":"SPREAD_SKIP","underlying":"CIEN","skip_reason":"Slope_too_flat(-0.0140>-0.15)","ts":"2025-12-17T14:56:35Z","ts_et":"2025-12-17 09:56:35 ET"}
+2025-12-17T14:56:36.2455997Z {"type":"SPREAD_SKIP","underlying":"STX","skip_reason":"Slope_too_flat(0.3008>-0.15)","ts":"2025-12-17T14:56:36Z","ts_et":"2025-12-17 09:56:36 ET"}
+2025-12-17T14:56:36.5315225Z {"type":"SPREAD_SKIP","underlying":"APP","skip_reason":"Slope_too_flat(0.5453>-0.15)","ts":"2025-12-17T14:56:36Z","ts_et":"2025-12-17 09:56:36 ET"}
+2025-12-17T14:56:37.2579302Z {"type":"SPREAD_SKIP","underlying":"BURL","skip_reason":"Bear_trend(close=264.00<SMA20=264.97)","ts":"2025-12-17T14:56:37Z","ts_et":"2025-12-17 09:56:37 ET"}
+2025-12-17T14:56:37.6756742Z {"type":"SPREAD_SKIP","underlying":"ORCL","skip_reason":"Bear_trend(close=181.90<SMA20=204.47)","ts":"2025-12-17T14:56:37Z","ts_et":"2025-12-17 09:56:37 ET"}
+2025-12-17T14:56:37.9919616Z {"type":"SPREAD_SKIP","underlying":"CVNA","skip_reason":"Slope_too_flat(0.0986>-0.15)","ts":"2025-12-17T14:56:37Z","ts_et":"2025-12-17 09:56:37 ET"}
+2025-12-17T14:56:38.3074674Z {"type":"SPREAD_SKIP","underlying":"MDB","skip_reason":"Slope_too_flat(0.2003>-0.15)","ts":"2025-12-17T14:56:38Z","ts_et":"2025-12-17 09:56:38 ET"}
+2025-12-17T14:56:38.6144389Z {"type":"SPREAD_SKIP","underlying":"SMCI","skip_reason":"Bear_trend(close=31.41<SMA20=33.25)","ts":"2025-12-17T14:56:38Z","ts_et":"2025-12-17 09:56:38 ET"}
+2025-12-17T14:56:38.9082753Z {"type":"SPREAD_SKIP","underlying":"DKNG","skip_reason":"Slope_too_flat(-0.0192>-0.15)","ts":"2025-12-17T14:56:38Z","ts_et":"2025-12-17 09:56:38 ET"}
+2025-12-17T14:56:39.2272664Z {"type":"SPREAD_SKIP","underlying":"ON","skip_reason":"Slope_too_flat(0.0234>-0.15)","ts":"2025-12-17T14:56:39Z","ts_et":"2025-12-17 09:56:39 ET"}
+2025-12-17T14:56:39.5367554Z {"type":"SPREAD_SKIP","underlying":"AVGO","skip_reason":"Bear_trend(close=334.61<SMA20=376.30)","ts":"2025-12-17T14:56:39Z","ts_et":"2025-12-17 09:56:39 ET"}
+2025-12-17T14:56:39.8258586Z {"type":"SPREAD_SKIP","underlying":"DASH","skip_reason":"Slope_too_flat(0.0283>-0.15)","ts":"2025-12-17T14:56:39Z","ts_et":"2025-12-17 09:56:39 ET"}
+2025-12-17T14:56:40.1322913Z {"type":"SPREAD_SKIP","underlying":"SHOP","skip_reason":"Slope_too_flat(0.2105>-0.15)","ts":"2025-12-17T14:56:40Z","ts_et":"2025-12-17 09:56:40 ET"}
+2025-12-17T14:56:40.4270605Z {"type":"SPREAD_SKIP","underlying":"PLTR","skip_reason":"Slope_too_flat(0.0889>-0.15)","ts":"2025-12-17T14:56:40Z","ts_et":"2025-12-17 09:56:40 ET"}
+2025-12-17T14:56:40.7153605Z {"type":"SPREAD_SKIP","underlying":"LRCX","skip_reason":"Slope_too_flat(0.0521>-0.15)","ts":"2025-12-17T14:56:40Z","ts_et":"2025-12-17 09:56:40 ET"}
+2025-12-17T14:56:41.0127540Z {"type":"SPREAD_SKIP","underlying":"B","skip_reason":"Slope_too_flat(0.0105>-0.15)","ts":"2025-12-17T14:56:41Z","ts_et":"2025-12-17 09:56:41 ET"}
+2025-12-17T14:56:41.3117647Z {"type":"SPREAD_SKIP","underlying":"TER","skip_reason":"Slope_too_flat(0.1506>-0.15)","ts":"2025-12-17T14:56:41Z","ts_et":"2025-12-17 09:56:41 ET"}
+2025-12-17T14:56:41.6008023Z {"type":"SPREAD_SKIP","underlying":"DELL","skip_reason":"Bear_trend(close=131.64<SMA20=132.08)","ts":"2025-12-17T14:56:41Z","ts_et":"2025-12-17 09:56:41 ET"}
+2025-12-17T14:56:41.9232909Z {"type":"SPREAD_SKIP","underlying":"CEG","skip_reason":"Bear_trend(close=356.55<SMA20=358.60)","ts":"2025-12-17T14:56:41Z","ts_et":"2025-12-17 09:56:41 ET"}
+2025-12-17T14:56:42.2312190Z {"type":"SPREAD_SKIP","underlying":"FSLR","skip_reason":"Slope_too_flat(0.4541>-0.15)","ts":"2025-12-17T14:56:42Z","ts_et":"2025-12-17 09:56:42 ET"}
+2025-12-17T14:56:42.5287615Z {"type":"SPREAD_SKIP","underlying":"DG","skip_reason":"Slope_too_flat(-0.0430>-0.15)","ts":"2025-12-17T14:56:42Z","ts_et":"2025-12-17 09:56:42 ET"}
+2025-12-17T14:56:42.8461310Z {"type":"SPREAD_SKIP","underlying":"CRWD","skip_reason":"Bear_trend(close=486.94<SMA20=507.36)","ts":"2025-12-17T14:56:42Z","ts_et":"2025-12-17 09:56:42 ET"}
+2025-12-17T14:56:43.1570050Z {"type":"SPREAD_SKIP","underlying":"RCL","skip_reason":"Slope_too_flat(0.0679>-0.15)","ts":"2025-12-17T14:56:43Z","ts_et":"2025-12-17 09:56:43 ET"}
+2025-12-17T14:56:43.4675202Z {"type":"SPREAD_SKIP","underlying":"HPE","skip_reason":"Slope_too_flat(0.0109>-0.15)","ts":"2025-12-17T14:56:43Z","ts_et":"2025-12-17 09:56:43 ET"}
+2025-12-17T14:56:43.7590870Z {"type":"SPREAD_SKIP","underlying":"NVDA","skip_reason":"Bear_trend(close=174.10<SMA20=180.47)","ts":"2025-12-17T14:56:43Z","ts_et":"2025-12-17 09:56:43 ET"}
+2025-12-17T14:56:44.0585611Z {"type":"SPREAD_SKIP","underlying":"MCHP","skip_reason":"Slope_too_flat(-0.0007>-0.15)","ts":"2025-12-17T14:56:44Z","ts_et":"2025-12-17 09:56:44 ET"}
+2025-12-17T14:56:44.3622025Z {"type":"SPREAD_SKIP","underlying":"ANET","skip_reason":"Bear_trend(close=123.66<SMA20=126.74)","ts":"2025-12-17T14:56:44Z","ts_et":"2025-12-17 09:56:44 ET"}
+2025-12-17T14:56:44.6577329Z {"type":"SPREAD_SKIP","underlying":"TSLA","skip_reason":"Slope_too_flat(0.8136>-0.15)","ts":"2025-12-17T14:56:44Z","ts_et":"2025-12-17 09:56:44 ET"}
+2025-12-17T14:56:44.9544752Z {"type":"SPREAD_SKIP","underlying":"BABA","skip_reason":"Bear_trend(close=150.64<SMA20=156.59)","ts":"2025-12-17T14:56:44Z","ts_et":"2025-12-17 09:56:44 ET"}
+2025-12-17T14:56:45.2962221Z {"type":"SPREAD_SKIP","underlying":"NET","skip_reason":"Bear_trend(close=196.61<SMA20=199.96)","ts":"2025-12-17T14:56:45Z","ts_et":"2025-12-17 09:56:45 ET"}
+2025-12-17T14:56:45.9071432Z {"type":"SPREAD_SKIP","underlying":"CCL","skip_reason":"Slope_too_flat(-0.0094>-0.15)","ts":"2025-12-17T14:56:45Z","ts_et":"2025-12-17 09:56:45 ET"}
+2025-12-17T14:56:46.2111540Z {"type":"SPREAD_SKIP","underlying":"NVO","skip_reason":"Slope_too_flat(-0.0098>-0.15)","ts":"2025-12-17T14:56:46Z","ts_et":"2025-12-17 09:56:46 ET"}
+2025-12-17T14:56:46.5278941Z {"type":"SPREAD_SKIP","underlying":"UAL","skip_reason":"Slope_too_flat(0.1581>-0.15)","ts":"2025-12-17T14:56:46Z","ts_et":"2025-12-17 09:56:46 ET"}
+2025-12-17T14:56:46.8253070Z {"type":"SPREAD_SKIP","underlying":"AMAT","skip_reason":"Slope_too_flat(0.0820>-0.15)","ts":"2025-12-17T14:56:46Z","ts_et":"2025-12-17 09:56:46 ET"}
+2025-12-17T14:56:47.1155520Z {"type":"SPREAD_SKIP","underlying":"NEM","skip_reason":"Slope_too_flat(0.0115>-0.15)","ts":"2025-12-17T14:56:47Z","ts_et":"2025-12-17 09:56:47 ET"}
+2025-12-17T14:56:47.4023363Z {"type":"SPREAD_SKIP","underlying":"WBD","skip_reason":"Slope_too_flat(-0.0317>-0.15)","ts":"2025-12-17T14:56:47Z","ts_et":"2025-12-17 09:56:47 ET"}
+2025-12-17T14:56:47.7168847Z {"type":"SPREAD_SKIP","underlying":"DHI","skip_reason":"Bear_trend(close=152.76<SMA20=153.51)","ts":"2025-12-17T14:56:47Z","ts_et":"2025-12-17 09:56:47 ET"}
+2025-12-17T14:56:48.0262299Z {"type":"SPREAD_SKIP","underlying":"GLW","skip_reason":"Slope_too_flat(0.0606>-0.15)","ts":"2025-12-17T14:56:48Z","ts_et":"2025-12-17 09:56:48 ET"}
+2025-12-17T14:56:48.6630674Z {"type":"SPREAD_SKIP","underlying":"SPOT","skip_reason":"Bear_trend(close=577.37<SMA20=584.34)","ts":"2025-12-17T14:56:48Z","ts_et":"2025-12-17 09:56:48 ET"}
+2025-12-17T14:56:48.9514639Z {"type":"SPREAD_SKIP","underlying":"WDAY","skip_reason":"Bear_trend(close=217.19<SMA20=220.00)","ts":"2025-12-17T14:56:48Z","ts_et":"2025-12-17 09:56:48 ET"}
+2025-12-17T14:56:49.2456904Z {"type":"SPREAD_SKIP","underlying":"NXPI","skip_reason":"Slope_too_flat(0.0328>-0.15)","ts":"2025-12-17T14:56:49Z","ts_et":"2025-12-17 09:56:49 ET"}
+2025-12-17T14:56:49.5318610Z {"type":"SPREAD_SKIP","underlying":"BA","skip_reason":"Slope_too_flat(0.0909>-0.15)","ts":"2025-12-17T14:56:49Z","ts_et":"2025-12-17 09:56:49 ET"}
+2025-12-17T14:56:49.8602053Z {"type":"SPREAD_SKIP","underlying":"DAL","skip_reason":"Slope_too_flat(0.0276>-0.15)","ts":"2025-12-17T14:56:49Z","ts_et":"2025-12-17 09:56:49 ET"}
+2025-12-17T14:56:50.1611091Z {"type":"SPREAD_SKIP","underlying":"GOOGL","skip_reason":"Bear_trend(close=300.37<SMA20=312.06)","ts":"2025-12-17T14:56:50Z","ts_et":"2025-12-17 09:56:50 ET"}
+2025-12-17T14:56:50.4790799Z {"type":"SPREAD_SKIP","underlying":"FCX","skip_reason":"Slope_too_flat(0.0348>-0.15)","ts":"2025-12-17T14:56:50Z","ts_et":"2025-12-17 09:56:50 ET"}
+2025-12-17T14:56:50.7691507Z {"type":"SPREAD_SKIP","underlying":"SNPS","skip_reason":"Slope_too_flat(0.2965>-0.15)","ts":"2025-12-17T14:56:50Z","ts_et":"2025-12-17 09:56:50 ET"}
+2025-12-17T14:56:51.0824906Z {"type":"SPREAD_SKIP","underlying":"GOOG","skip_reason":"Bear_trend(close=301.79<SMA20=312.67)","ts":"2025-12-17T14:56:51Z","ts_et":"2025-12-17 09:56:51 ET"}
+2025-12-17T14:56:51.4085285Z {"type":"SPREAD_SKIP","underlying":"ETN","skip_reason":"Bear_trend(close=326.94<SMA20=337.72)","ts":"2025-12-17T14:56:51Z","ts_et":"2025-12-17 09:56:51 ET"}
+2025-12-17T14:56:51.7162643Z {"type":"SPREAD_SKIP","underlying":"ADI","skip_reason":"Slope_too_flat(-0.0057>-0.15)","ts":"2025-12-17T14:56:51Z","ts_et":"2025-12-17 09:56:51 ET"}
+2025-12-17T14:56:52.0106688Z {"type":"SPREAD_SKIP","underlying":"CMG","skip_reason":"Slope_too_flat(0.0233>-0.15)","ts":"2025-12-17T14:56:52Z","ts_et":"2025-12-17 09:56:52 ET"}
+2025-12-17T14:56:52.3145711Z {"type":"SPREAD_SKIP","underlying":"TSM","skip_reason":"Bear_trend(close=285.10<SMA20=291.07)","ts":"2025-12-17T14:56:52Z","ts_et":"2025-12-17 09:56:52 ET"}
+2025-12-17T14:56:52.6058497Z {"type":"SPREAD_SKIP","underlying":"TGT","skip_reason":"Slope_too_flat(-0.0604>-0.15)","ts":"2025-12-17T14:56:52Z","ts_et":"2025-12-17 09:56:52 ET"}
+2025-12-17T14:56:52.8948649Z {"type":"SPREAD_SKIP","underlying":"PINS","skip_reason":"Slope_too_flat(0.0204>-0.15)","ts":"2025-12-17T14:56:52Z","ts_et":"2025-12-17 09:56:52 ET"}
+2025-12-17T14:56:53.3761638Z {"type":"SPREAD_SKIP","underlying":"TXN","skip_reason":"Slope_too_flat(0.0860>-0.15)","ts":"2025-12-17T14:56:53Z","ts_et":"2025-12-17 09:56:53 ET"}
+2025-12-17T14:56:53.6667420Z {"type":"SPREAD_SKIP","underlying":"HAL","skip_reason":"Slope_too_flat(0.0044>-0.15)","ts":"2025-12-17T14:56:53Z","ts_et":"2025-12-17 09:56:53 ET"}
+2025-12-17T14:56:53.9603202Z {"type":"SPREAD_SKIP","underlying":"INTU","skip_reason":"Slope_too_flat(0.5516>-0.15)","ts":"2025-12-17T14:56:53Z","ts_et":"2025-12-17 09:56:53 ET"}
+2025-12-17T14:56:54.2758597Z {"type":"SPREAD_SKIP","underlying":"SLB","skip_reason":"Slope_too_flat(-0.0112>-0.15)","ts":"2025-12-17T14:56:54Z","ts_et":"2025-12-17 09:56:54 ET"}
+2025-12-17T14:56:54.5834267Z {"type":"SPREAD_SKIP","underlying":"KKR","skip_reason":"Slope_too_flat(0.0055>-0.15)","ts":"2025-12-17T14:56:54Z","ts_et":"2025-12-17 09:56:54 ET"}
+2025-12-17T14:56:54.8785229Z {"type":"SPREAD_SKIP","underlying":"BMY","skip_reason":"Slope_too_flat(0.0165>-0.15)","ts":"2025-12-17T14:56:54Z","ts_et":"2025-12-17 09:56:54 ET"}
+2025-12-17T14:56:55.1602994Z {"type":"SPREAD_SKIP","underlying":"ACN","skip_reason":"Slope_too_flat(0.1165>-0.15)","ts":"2025-12-17T14:56:55Z","ts_et":"2025-12-17 09:56:55 ET"}
+2025-12-17T14:56:55.5025833Z {"type":"SPREAD_SKIP","underlying":"NKE","skip_reason":"Slope_too_flat(-0.0297>-0.15)","ts":"2025-12-17T14:56:55Z","ts_et":"2025-12-17 09:56:55 ET"}
+2025-12-17T14:56:55.8047073Z {"type":"SPREAD_SKIP","underlying":"ADBE","skip_reason":"Slope_too_flat(0.0488>-0.15)","ts":"2025-12-17T14:56:55Z","ts_et":"2025-12-17 09:56:55 ET"}
+2025-12-17T14:56:56.1155576Z {"type":"SPREAD_SKIP","underlying":"ADSK","skip_reason":"Bear_trend(close=296.19<SMA20=298.93)","ts":"2025-12-17T14:56:56Z","ts_et":"2025-12-17 09:56:56 ET"}
+2025-12-17T14:56:56.4276682Z {"type":"SPREAD_SKIP","underlying":"CRM","skip_reason":"Slope_too_flat(0.1887>-0.15)","ts":"2025-12-17T14:56:56Z","ts_et":"2025-12-17 09:56:56 ET"}
+2025-12-17T14:56:56.7412172Z {"type":"SPREAD_SKIP","underlying":"CRH","skip_reason":"Slope_too_flat(-0.0412>-0.15)","ts":"2025-12-17T14:56:56Z","ts_et":"2025-12-17 09:56:56 ET"}
+2025-12-17T14:56:57.0300430Z {"type":"SPREAD_SKIP","underlying":"TEVA","skip_reason":"Slope_too_flat(-0.0067>-0.15)","ts":"2025-12-17T14:56:57Z","ts_et":"2025-12-17 09:56:57 ET"}
+2025-12-17T14:56:57.3492762Z {"type":"SPREAD_SKIP","underlying":"EXPE","skip_reason":"Slope_too_flat(-0.1410>-0.15)","ts":"2025-12-17T14:56:57Z","ts_et":"2025-12-17 09:56:57 ET"}
+2025-12-17T14:56:57.6615964Z {"type":"SPREAD_SKIP","underlying":"ABNB","skip_reason":"Slope_too_flat(0.1607>-0.15)","ts":"2025-12-17T14:56:57Z","ts_et":"2025-12-17 09:56:57 ET"}
+2025-12-17T14:56:57.9618509Z {"type":"SPREAD_SKIP","underlying":"UNH","skip_reason":"Slope_too_flat(-0.0894>-0.15)","ts":"2025-12-17T14:56:57Z","ts_et":"2025-12-17 09:56:57 ET"}
+2025-12-17T14:56:58.2807025Z {"type":"SPREAD_SKIP","underlying":"CVS","skip_reason":"Bear_trend(close=77.33<SMA20=78.06)","ts":"2025-12-17T14:56:58Z","ts_et":"2025-12-17 09:56:58 ET"}
+2025-12-17T14:56:58.5790588Z {"type":"SPREAD_SKIP","underlying":"VRTX","skip_reason":"Slope_too_flat(-0.0068>-0.15)","ts":"2025-12-17T14:56:58Z","ts_et":"2025-12-17 09:56:58 ET"}
+2025-12-17T14:56:58.8906266Z {"type":"SPREAD_SKIP","underlying":"APO","skip_reason":"Slope_too_flat(0.0596>-0.15)","ts":"2025-12-17T14:56:58Z","ts_et":"2025-12-17 09:56:58 ET"}
+2025-12-17T14:56:59.2177248Z {"type":"SPREAD_SKIP","underlying":"URI","skip_reason":"Slope_too_flat(0.0945>-0.15)","ts":"2025-12-17T14:56:59Z","ts_et":"2025-12-17 09:56:59 ET"}
+2025-12-17T14:56:59.5588147Z {"type":"SPREAD_SKIP","underlying":"CAT","skip_reason":"Slope_too_flat(-0.1394>-0.15)","ts":"2025-12-17T14:56:59Z","ts_et":"2025-12-17 09:56:59 ET"}
+2025-12-17T14:56:59.8558904Z {"type":"SPREAD_SKIP","underlying":"META","skip_reason":"Slope_too_flat(0.3513>-0.15)","ts":"2025-12-17T14:56:59Z","ts_et":"2025-12-17 09:56:59 ET"}
+2025-12-17T14:57:00.1616161Z {"type":"SPREAD_SKIP","underlying":"WMT","skip_reason":"Slope_too_flat(-0.0217>-0.15)","ts":"2025-12-17T14:57:00Z","ts_et":"2025-12-17 09:57:00 ET"}
+2025-12-17T14:57:00.4941972Z {"type":"SPREAD_SKIP","underlying":"JPM","skip_reason":"Slope_too_flat(0.0100>-0.15)","ts":"2025-12-17T14:57:00Z","ts_et":"2025-12-17 09:57:00 ET"}
+2025-12-17T14:57:00.8277202Z {"type":"SPREAD_SKIP","underlying":"CMCSA","skip_reason":"Slope_too_flat(0.0416>-0.15)","ts":"2025-12-17T14:57:00Z","ts_et":"2025-12-17 09:57:00 ET"}
+2025-12-17T14:57:01.1330260Z {"type":"SPREAD_SKIP","underlying":"QCOM","skip_reason":"Slope_too_flat(0.0303>-0.15)","ts":"2025-12-17T14:57:01Z","ts_et":"2025-12-17 09:57:01 ET"}
+2025-12-17T14:57:01.4496973Z {"type":"SPREAD_SKIP","underlying":"C","skip_reason":"Slope_too_flat(0.0121>-0.15)","ts":"2025-12-17T14:57:01Z","ts_et":"2025-12-17 09:57:01 ET"}
+2025-12-17T14:57:01.7594870Z {"type":"SPREAD_SKIP","underlying":"BX","skip_reason":"Slope_too_flat(0.1809>-0.15)","ts":"2025-12-17T14:57:01Z","ts_et":"2025-12-17 09:57:01 ET"}
+2025-12-17T14:57:02.1100440Z {"type":"SPREAD_SKIP","underlying":"COF","skip_reason":"Slope_too_flat(0.1315>-0.15)","ts":"2025-12-17T14:57:02Z","ts_et":"2025-12-17 09:57:02 ET"}
+2025-12-17T14:57:02.4536897Z {"type":"SPREAD_SKIP","underlying":"GS","skip_reason":"Slope_too_flat(0.0164>-0.15)","ts":"2025-12-17T14:57:02Z","ts_et":"2025-12-17 09:57:02 ET"}
+2025-12-17T14:57:02.7598229Z {"type":"SPREAD_SKIP","underlying":"IBM","skip_reason":"Slope_too_flat(0.0694>-0.15)","ts":"2025-12-17T14:57:02Z","ts_et":"2025-12-17 09:57:02 ET"}
+2025-12-17T14:57:03.0595942Z {"type":"SPREAD_SKIP","underlying":"CDNS","skip_reason":"Bear_trend(close=319.15<SMA20=319.96)","ts":"2025-12-17T14:57:03Z","ts_et":"2025-12-17 09:57:03 ET"}
+2025-12-17T14:57:03.3741119Z {"type":"SPREAD_SKIP","underlying":"AMZN","skip_reason":"Bear_trend(close=224.10<SMA20=227.50)","ts":"2025-12-17T14:57:03Z","ts_et":"2025-12-17 09:57:03 ET"}
+2025-12-17T14:57:03.6788807Z {"type":"SPREAD_SKIP","underlying":"COP","skip_reason":"Slope_too_flat(0.0082>-0.15)","ts":"2025-12-17T14:57:03Z","ts_et":"2025-12-17 09:57:03 ET"}
+2025-12-17T14:57:03.9676117Z {"type":"SPREAD_SKIP","underlying":"WFC","skip_reason":"Slope_too_flat(0.0203>-0.15)","ts":"2025-12-17T14:57:03Z","ts_et":"2025-12-17 09:57:03 ET"}
+2025-12-17T14:57:04.3009297Z {"type":"SPREAD_SKIP","underlying":"NOW","skip_reason":"Bear_trend(close=790.79<SMA20=824.65)","ts":"2025-12-17T14:57:04Z","ts_et":"2025-12-17 09:57:04 ET"}
+2025-12-17T14:57:04.6522099Z {"type":"SPREAD_SKIP","underlying":"PFE","skip_reason":"Bear_trend(close=25.20<SMA20=25.51)","ts":"2025-12-17T14:57:04Z","ts_et":"2025-12-17 09:57:04 ET"}
+2025-12-17T14:57:04.9688445Z {"type":"SPREAD_SKIP","underlying":"MS","skip_reason":"Slope_too_flat(0.0158>-0.15)","ts":"2025-12-17T14:57:04Z","ts_et":"2025-12-17 09:57:04 ET"}
+2025-12-17T14:57:05.2646559Z {"type":"SPREAD_SKIP","underlying":"GM","skip_reason":"Slope_too_flat(-0.0037>-0.15)","ts":"2025-12-17T14:57:05Z","ts_et":"2025-12-17 09:57:05 ET"}
+2025-12-17T14:57:05.5855255Z {"type":"SPREAD_SKIP","underlying":"LOW","skip_reason":"Slope_too_flat(-0.0699>-0.15)","ts":"2025-12-17T14:57:05Z","ts_et":"2025-12-17 09:57:05 ET"}
+2025-12-17T14:57:05.9055477Z {"type":"SPREAD_SKIP","underlying":"RTX","skip_reason":"Slope_too_flat(-0.0689>-0.15)","ts":"2025-12-17T14:57:05Z","ts_et":"2025-12-17 09:57:05 ET"}
+2025-12-17T14:57:06.2104550Z {"type":"SPREAD_SKIP","underlying":"AXP","skip_reason":"Slope_too_flat(0.0492>-0.15)","ts":"2025-12-17T14:57:06Z","ts_et":"2025-12-17 09:57:06 ET"}
+2025-12-17T14:57:06.5687524Z {"type":"SPREAD_SIGNAL","underlying":"LMT","signal_reason":"RSI_oversold(20.1)","entry_price":468.03,"rsi":20.13,"atr":2.0058,"ts":"2025-12-17T14:57:06Z","ts_et":"2025-12-17 09:57:06 ET"}
+2025-12-17T14:57:06.8961731Z {"type":"SPREAD_SKIP","underlying":"CSCO","skip_reason":"Slope_too_flat(-0.0146>-0.15)","ts":"2025-12-17T14:57:06Z","ts_et":"2025-12-17 09:57:06 ET"}
+2025-12-17T14:57:07.1951523Z {"type":"SPREAD_SKIP","underlying":"SCHW","skip_reason":"Slope_too_flat(0.0331>-0.15)","ts":"2025-12-17T14:57:07Z","ts_et":"2025-12-17 09:57:07 ET"}
+2025-12-17T14:57:07.5192438Z {"type":"SPREAD_SKIP","underlying":"DIS","skip_reason":"Slope_too_flat(-0.0117>-0.15)","ts":"2025-12-17T14:57:07Z","ts_et":"2025-12-17 09:57:07 ET"}
+2025-12-17T14:57:07.8277567Z {"type":"SPREAD_SKIP","underlying":"USB","skip_reason":"Slope_too_flat(0.0150>-0.15)","ts":"2025-12-17T14:57:07Z","ts_et":"2025-12-17 09:57:07 ET"}
+2025-12-17T14:57:08.1433222Z {"type":"SPREAD_SKIP","underlying":"BAC","skip_reason":"Slope_too_flat(-0.0025>-0.15)","ts":"2025-12-17T14:57:08Z","ts_et":"2025-12-17 09:57:08 ET"}
+2025-12-17T14:57:08.4628457Z {"type":"SPREAD_SKIP","underlying":"AAPL","skip_reason":"Bear_trend(close=275.63<SMA20=277.14)","ts":"2025-12-17T14:57:08Z","ts_et":"2025-12-17 09:57:08 ET"}
+2025-12-17T14:57:08.7885785Z {"type":"SPREAD_SKIP","underlying":"DHR","skip_reason":"Bear_trend(close=226.10<SMA20=226.71)","ts":"2025-12-17T14:57:08Z","ts_et":"2025-12-17 09:57:08 ET"}
+2025-12-17T14:57:09.1244368Z {"type":"SPREAD_SKIP","underlying":"XOM","skip_reason":"Bear_trend(close=115.60<SMA20=116.82)","ts":"2025-12-17T14:57:09Z","ts_et":"2025-12-17 09:57:09 ET"}
+2025-12-17T14:57:09.4728339Z {"type":"SPREAD_SKIP","underlying":"CSX","skip_reason":"Slope_too_flat(-0.0176>-0.15)","ts":"2025-12-17T14:57:09Z","ts_et":"2025-12-17 09:57:09 ET"}
+2025-12-17T14:57:09.7661655Z {"type":"SPREAD_SKIP","underlying":"PEP","skip_reason":"Slope_too_flat(-0.0127>-0.15)","ts":"2025-12-17T14:57:09Z","ts_et":"2025-12-17 09:57:09 ET"}
+2025-12-17T14:57:10.0586852Z {"type":"SPREAD_SKIP","underlying":"MCD","skip_reason":"Slope_too_flat(-0.0316>-0.15)","ts":"2025-12-17T14:57:10Z","ts_et":"2025-12-17 09:57:10 ET"}
+2025-12-17T14:57:10.3573386Z {"type":"SPREAD_SKIP","underlying":"TJX","skip_reason":"Slope_too_flat(-0.0208>-0.15)","ts":"2025-12-17T14:57:10Z","ts_et":"2025-12-17 09:57:10 ET"}
+2025-12-17T14:57:10.6841595Z {"type":"SPREAD_SKIP","underlying":"UNP","skip_reason":"Slope_too_flat(-0.0727>-0.15)","ts":"2025-12-17T14:57:10Z","ts_et":"2025-12-17 09:57:10 ET"}
+2025-12-17T14:57:10.9740653Z {"type":"SPREAD_SKIP","underlying":"JNJ","skip_reason":"Slope_too_flat(-0.0838>-0.15)","ts":"2025-12-17T14:57:10Z","ts_et":"2025-12-17 09:57:10 ET"}
+2025-12-17T14:57:11.2984331Z {"type":"SPREAD_SKIP","underlying":"MO","skip_reason":"Slope_too_flat(0.0054>-0.15)","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T14:57:11.2988966Z {"event":"signals_found","count":1,"symbols":["LMT"],"type":"HEARTBEAT","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T14:57:11.6127392Z [spreads] Cannot get price for LMT
+2025-12-17T14:57:11.6141060Z {"type":"SPREAD_SKIP","underlying":"LMT","skip_reason":"No_contracts_available","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T14:57:11.6147926Z {"event":"scan_complete","signals":1,"new_entries":0,"total_positions":4,"type":"HEARTBEAT","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T14:57:11.6149015Z {"event":"scan_cycle_end","cycle":2,"new_entries":0,"type":"HEARTBEAT","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T14:57:11.6184598Z {"event":"waiting_for_next_scan","next_scan_in_min":15,"current_time":"09:57","type":"HEARTBEAT","ts":"2025-12-17T14:57:11Z","ts_et":"2025-12-17 09:57:11 ET"}
+2025-12-17T15:00:44.3902636Z Traceback (most recent call last):
+2025-12-17T15:00:44.3950121Z   File "C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_spreads_loop.py", line 1075, in <module>
+2025-12-17T15:00:44.3951282Z     raise SystemExit(main())
+2025-12-17T15:00:44.3951589Z                      ~~~~^^
+2025-12-17T15:00:44.3952190Z   File "C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot\RubberBand\scripts\live_spreads_loop.py", line 1043, in main
+2025-12-17T15:00:44.3952832Z     time.sleep(SCAN_INTERVAL_SECONDS)
+2025-12-17T15:00:44.3953104Z     ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+2025-12-17T15:00:44.3953342Z KeyboardInterrupt
+2025-12-17T15:00:44.7464823Z ##[error]The operation was canceled.
+2025-12-17T15:00:44.8200900Z ##[group]Run actions/upload-artifact@v4
+2025-12-17T15:00:44.8201139Z with:
+2025-12-17T15:00:44.8201254Z   name: position-registry-15M_OPT
+2025-12-17T15:00:44.8201423Z   path: .position_registry/15M_OPT_positions.json
+2025-12-17T15:00:44.8201592Z   if-no-files-found: warn
+2025-12-17T15:00:44.8201708Z   retention-days: 90
+2025-12-17T15:00:44.8201826Z   overwrite: true
+2025-12-17T15:00:44.8201938Z   compression-level: 6
+2025-12-17T15:00:44.8202056Z   include-hidden-files: false
+2025-12-17T15:00:44.8202201Z env:
+2025-12-17T15:00:44.8202348Z   PYTHON_EXE: C:\Program Files\Python313\python.exe
+2025-12-17T15:00:44.8202495Z ##[endgroup]
+2025-12-17T15:00:45.8508842Z ##[warning]No files were found with the provided path: .position_registry/15M_OPT_positions.json. No artifacts will be uploaded.
+2025-12-17T15:00:45.9397250Z Post job cleanup.
+2025-12-17T15:00:46.1664420Z [command]"C:\Program Files\Git\cmd\git.exe" version
+2025-12-17T15:00:46.2051250Z git version 2.52.0.windows.1
+2025-12-17T15:00:46.2154450Z Temporarily overriding HOME='C:\Trades\RubberBandBot\actions-runner-2\_work\_temp\92b899e0-7b95-4ed7-a5b9-79af741e5e40' before making global git config changes
+2025-12-17T15:00:46.2155318Z Adding repository directory to the temporary git global config as a safe directory
+2025-12-17T15:00:46.2167331Z [command]"C:\Program Files\Git\cmd\git.exe" config --global --add safe.directory C:\Trades\RubberBandBot\actions-runner-2\_work\RubberBandBot\RubberBandBot
+2025-12-17T15:00:46.2588334Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2025-12-17T15:00:46.3023276Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2025-12-17T15:00:47.0090543Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-12-17T15:00:47.0509012Z http.https://github.com/.extraheader
+2025-12-17T15:00:47.0567830Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2025-12-17T15:00:47.1049939Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2025-12-17T15:00:47.8007563Z [command]"C:\Program Files\Git\cmd\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2025-12-17T15:00:47.8519688Z [command]"C:\Program Files\Git\cmd\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2025-12-17T15:00:48.6404382Z Cleaning up orphan processes

@@ -1,0 +1,82 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2025-12-16T16:04:59.531661-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "MU251219C00240000",
+      "underlying": "MU",
+      "client_order_id": "15M_OPT_MU251219C00240000_1765896364",
+      "order_id": "ea7c7e79-fee8-4c15-b90f-ee3d2f01f81b",
+      "qty": 1,
+      "entry_price": 1.38,
+      "entry_date": "2025-12-16T09:46:05.682857-05:00",
+      "status": "closed",
+      "short_symbol": "MU251219C00242500",
+      "exit_price": 0.6500000000000004,
+      "exit_date": "2025-12-16T10:01:08.409849-05:00",
+      "exit_reason": "SL_hit(-92.4%<=-50.0%)",
+      "pnl": -794.9999999999999
+    },
+    {
+      "symbol": "CIEN251219C00210000",
+      "underlying": "CIEN",
+      "client_order_id": "15M_OPT_CIEN251219C00210000_1765898270",
+      "order_id": "3526b869-0fb4-4b16-98b0-3aa55feeca26",
+      "qty": 1,
+      "entry_price": 1.9699999999999998,
+      "entry_date": "2025-12-16T10:17:52.107304-05:00",
+      "status": "closed",
+      "short_symbol": "CIEN251219C00212500",
+      "exit_price": -0.09999999999999964,
+      "exit_date": "2025-12-16T10:48:43.919373-05:00",
+      "exit_reason": "SL_hit(-101.5%<=-50.0%)",
+      "pnl": -680.0
+    },
+    {
+      "symbol": "JNJ251219C00210000",
+      "underlying": "JNJ",
+      "client_order_id": "15M_OPT_JNJ251219C00210000_1765903981",
+      "order_id": "a9c6358b-1d37-48e6-96c0-0d9fd41a26ea",
+      "qty": 1,
+      "entry_price": 1.44,
+      "entry_date": "2025-12-16T11:53:02.504582-05:00",
+      "status": "closed",
+      "short_symbol": "JNJ251219C00212500",
+      "exit_price": 0.79,
+      "exit_date": "2025-12-16T12:08:03.944106-05:00",
+      "exit_reason": "SL_hit(-65.7%<=-50.0%)",
+      "pnl": -150.99999999999997
+    },
+    {
+      "symbol": "UNH251219C00337500",
+      "underlying": "UNH",
+      "client_order_id": "15M_OPT_UNH251219C00337500_1765908739",
+      "order_id": "81e06e60-46ea-4e8e-981a-122646e6a524",
+      "qty": 1,
+      "entry_price": 0.9199999999999999,
+      "entry_date": "2025-12-16T13:12:20.696784-05:00",
+      "status": "closed",
+      "short_symbol": "UNH251219C00340000",
+      "exit_price": 0.49,
+      "exit_date": "2025-12-16T13:27:22.483352-05:00",
+      "exit_reason": "SL_hit(-81.4%<=-50.0%)",
+      "pnl": -213.99999999999997
+    },
+    {
+      "symbol": "UNP251219C00235000",
+      "underlying": "UNP",
+      "client_order_id": "15M_OPT_UNP251219C00235000_1765910642",
+      "order_id": "1b95d41d-53de-4ead-9b7e-475a41842028",
+      "qty": 1,
+      "entry_price": 1.93,
+      "entry_date": "2025-12-16T13:44:03.588820-05:00",
+      "status": "closed",
+      "short_symbol": "UNP251219C00237500",
+      "exit_price": 0.8500000000000001,
+      "exit_date": "2025-12-16T13:59:05.114867-05:00",
+      "exit_reason": "SL_hit(-72.6%<=-50.0%)",
+      "pnl": -225.0
+    }
+  ]
+}

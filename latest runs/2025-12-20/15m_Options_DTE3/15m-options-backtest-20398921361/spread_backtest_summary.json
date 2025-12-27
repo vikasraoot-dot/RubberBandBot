@@ -1,0 +1,27 @@
+{
+  "days": 45,
+  "symbols": 120,
+  "total_trades": 90,
+  "total_cost": 7480.49,
+  "total_pnl": 10123.14,
+  "roi_pct": 135.33,
+  "win_rate": 68.9,
+  "avg_win": 166.83,
+  "avg_loss": -7.88,
+  "opts": {
+    "dte": 3,
+    "min_dte": 3,
+    "spread_width_atr": 1.5,
+    "max_debit": 2.0,
+    "contracts": 1,
+    "bars_per_day": 26,
+    "sma_period": 50,
+    "trend_filter": true,
+    "flatten_eod": false,
+    "adx_max": 0.0,
+    "bars_stop": 10,
+    "slope_threshold": -0.2,
+    "slope_threshold_10": -0.15,
+    "sl_pct": 0.8
+  }
+}

@@ -1,0 +1,63 @@
+2025-12-24 07:33:59,776 [INFO] WEEKLY: Regime: CALM (VIXY=26.12)
+2025-12-24 07:33:59,777 [INFO] WEEKLY: ============================================================
+2025-12-24 07:33:59,777 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-24 07:33:59,777 [INFO] WEEKLY: ============================================================
+2025-12-24 07:34:00,434 [INFO] WEEKLY: Registry loaded: 4 positions in WK_STK registry
+2025-12-24 07:34:02,234 [INFO] WEEKLY: Open Positions (WK_STK): 4
+2025-12-24 07:34:02,235 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-24 07:34:02,236 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-24 07:34:02,236 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 07:34:02,236 [INFO] WEEKLY: BA       9      200.02     217.71     159.21     8.84    %
+2025-12-24 07:34:02,236 [INFO] WEEKLY: META     3      648.06     665.14     51.23      2.64    %
+2025-12-24 07:34:02,236 [INFO] WEEKLY: ORCL     70     187.98     197.30     652.51     4.96    %
+2025-12-24 07:34:02,237 [INFO] WEEKLY: RBLX     21     94.80      81.41      -281.17    -14.12  %
+2025-12-24 07:34:02,237 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 07:34:02,237 [INFO] WEEKLY: Analyzing RKLB...
+2025-12-24 07:34:03,068 [INFO] WEEKLY: Analyzing HOOD...
+2025-12-24 07:34:03,958 [INFO] WEEKLY: Submitting Bracket Order: HOOD x 16 @ Market, SL=82.02, TP=214.50
+2025-12-24 07:34:05,846 [INFO] WEEKLY: Max positions limit reached. Stopping.
+2025-12-24 07:34:05,847 [INFO] WEEKLY: 
+=== Weekly Stock Session Summary ===
+2025-12-24 07:34:06,514 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-24 07:34:06,515 [INFO] WEEKLY: Ticker   Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+2025-12-24 07:34:06,515 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-24 07:34:06,515 [INFO] WEEKLY: HOOD     16       120.09     1921.44      0        0.00       -         
+2025-12-24 07:34:06,516 [INFO] WEEKLY: ------------------------------------------------------------------------
+2025-12-24 07:34:06,516 [INFO] WEEKLY: TOTAL Day PnL: $0.00 | TOTAL VOL: $1,921.44
+2025-12-24 07:34:06,518 [INFO] WEEKLY: === End Summary ===
+2025-12-24 07:34:06,518 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-24 08:34:08,264 [INFO] WEEKLY: Regime: CALM (VIXY=26.14)
+2025-12-24 08:34:08,265 [INFO] WEEKLY: ============================================================
+2025-12-24 08:34:08,266 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-24 08:34:08,266 [INFO] WEEKLY: ============================================================
+2025-12-24 08:34:08,901 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+2025-12-24 08:34:10,619 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-24 08:34:10,619 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-24 08:34:10,620 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-24 08:34:10,620 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 08:34:10,620 [INFO] WEEKLY: BA       9      200.02     218.38     165.24     9.18    %
+2025-12-24 08:34:10,620 [INFO] WEEKLY: HOOD     32     120.07     120.18     3.63       0.09    %
+2025-12-24 08:34:10,620 [INFO] WEEKLY: META     3      648.06     666.26     54.59      2.81    %
+2025-12-24 08:34:10,622 [INFO] WEEKLY: ORCL     70     187.98     197.29     651.81     4.95    %
+2025-12-24 08:34:10,622 [INFO] WEEKLY: RBLX     21     94.80      81.96      -269.64    -13.54  %
+2025-12-24 08:34:10,622 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 08:34:10,625 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-24 08:34:10,628 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-24 09:34:12,124 [INFO] WEEKLY: Regime: CALM (VIXY=26.26)
+2025-12-24 09:34:12,125 [INFO] WEEKLY: ============================================================
+2025-12-24 09:34:12,126 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-24 09:34:12,127 [INFO] WEEKLY: ============================================================
+2025-12-24 09:34:12,697 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+2025-12-24 09:34:14,408 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-24 09:34:14,409 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-24 09:34:14,409 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-24 09:34:14,409 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 09:34:14,409 [INFO] WEEKLY: BA       9      200.02     218.99     170.73     9.48    %
+2025-12-24 09:34:14,409 [INFO] WEEKLY: HOOD     32     120.07     120.44     11.69      0.30    %
+2025-12-24 09:34:14,410 [INFO] WEEKLY: META     3      648.06     667.30     57.73      2.97    %
+2025-12-24 09:34:14,410 [INFO] WEEKLY: ORCL     70     187.98     197.53     668.61     5.08    %
+2025-12-24 09:34:14,410 [INFO] WEEKLY: RBLX     21     94.80      81.91      -270.69    -13.60  %
+2025-12-24 09:34:14,410 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-24 09:34:14,414 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-24 09:34:14,415 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+2025-12-24 10:34:15,109 [INFO] WEEKLY: Market is closed. Saving registry and exporting logs.
