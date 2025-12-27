@@ -105,7 +105,19 @@ def close_position(base_url: Optional[str], key: Optional[str], secret: Optional
         r.raise_for_status()
     return {"ok": True}
 
-# Positions (return a LIST to match live loop usage)
+    return {"ok": True}
+
+def get_account(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> Dict[str, Any]:
+    """Get account details including equity and balance."""
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.get(f"{base}/v2/account", headers=_alpaca_headers(key, secret), timeout=10)
+        r.raise_for_status()
+        return r.json() or {}
+    except Exception as e:
+        print(f"[warn] get_account error: {type(e).__name__}: {e}")
+        return {}
+
 def get_positions(base_url: Optional[str] = None, key: Optional[str] = None, secret: Optional[str] = None) -> List[Dict[str, Any]]:
     base = _base_url_from_env(base_url)
     try:
@@ -365,6 +377,36 @@ def check_kill_switch(
     fills = get_daily_fills(base_url, key, secret, bot_tag)
     today_symbols = {f.get("symbol") for f in fills if f.get("side") == "buy"}
     
+    # --- SAFETY NET: Account-Wide Equity Check ---
+    # This catches "invisible losses" from overnight positions that were closed today
+    # but not captured by 'today_symbols' or daily fill logic.
+    try:
+        acct = get_account(base_url, key, secret)
+        if acct:
+            equity = float(acct.get("equity", 0))
+            last_equity = float(acct.get("last_equity", 0))
+            
+            # Daily PnL at account level
+            account_daily_pnl = equity - last_equity
+            
+            # If we have invested capital (from either method)
+            # We use a conservative estimate: if account drops > 25% of its value? 
+            # Or > 25% of "invested"? 
+            # Let's align with the existing logic: Loss > 25% of *Invested*.
+            # But "Invested" is tricky for account-wide.
+            # Let's fallback to: if Account Daily Loss > 5% of TOTAL ACCOUNT VALUE (hard stop).
+            # This is a "Circuit Breaker".
+            
+            account_loss_pct = (account_daily_pnl / last_equity) * 100 if last_equity > 0 else 0
+            if account_loss_pct < -5.0: # Hard 5% account daily stop
+                 print(f"[KILL SWITCH] 🛑 ACCOUNT CRASH PROTECTION ({bot_tag}): Daily Loss {account_loss_pct:.2f}% < -5.0%")
+                 return True
+
+            # If we rely on the specific bot tag logic below, we might miss the overnight ones.
+            # So we also check if account_daily_pnl is overwhelmingly negative compared to "invested".
+    except Exception as e:
+        print(f"[KILL SWITCH] ⚠️ Error fetching account equity: {e}")
+
     if not today_symbols:
         return False  # No activity today for this bot
     
@@ -830,9 +872,19 @@ def submit_bracket_order(
     tp = _round_to_tick(float(take_profit_price), tick)
     sl = _round_to_tick(float(stop_loss_price), tick)
 
-    min_tp = _round_to_tick(base_hint + tick, tick)
-    if tp < min_tp:
-        tp = min_tp
+    # SAFETY FIX: Handle logic based on SIDE
+    if side == "buy":
+         min_tp = _round_to_tick(base_hint + tick, tick)
+         if tp < min_tp:
+             tp = min_tp
+    else: # Sell (Short)
+         # For shorts, TP must be BELOW entry (limit_price)
+         max_tp = _round_to_tick(base_hint - tick, tick)
+         # If TP is HIGHER than (limit - tick), it's invalid for a short profit take
+         # (Or if it's 0, which means no TP)
+         if tp > max_tp and tp > 0:
+             tp = max_tp
+
 
     payload["order_class"] = "bracket"
     payload["take_profit"] = {"limit_price": tp}
