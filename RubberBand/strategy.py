@@ -76,3 +76,50 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     df["long_signal"] = df["below_lower_band"] & df["rsi_oversold"] & df["trend_ok"] & df["time_ok"]
     
     return df
+
+def check_slope_filter(df: pd.DataFrame, regime_cfg: dict) -> tuple[bool, str]:
+    """
+    Check if the trade should be SKIPPED based on the slope of the Keltner Middle Band.
+    
+    Logic Matrix:
+    - PANIC Regime (dead_knife_filter=True):
+        - Skip if Slope < Threshold (Too Steep / Falling Knife)
+    - CALM/NORMAL Regime (dead_knife_filter=False):
+        - Skip if Slope > Threshold (Too Flat / Panic Buyer)
+        
+    Args:
+        df: DataFrame with 'kc_middle' column
+        regime_cfg: Regime configuration dict from RegimeManager
+        
+    Returns:
+        (should_skip, reason)
+    """
+    # Defaults
+    threshold_pct = -0.12
+    is_dead_knife_mode = False
+    
+    if regime_cfg:
+        threshold_pct = regime_cfg.get("slope_threshold_pct", -0.12)
+        is_dead_knife_mode = regime_cfg.get("dead_knife_filter", False)
+        
+    if "kc_middle" not in df.columns or len(df) < 4:
+        return False, "" # Cannot calc slope
+        
+    # Calculate 3-bar slope
+    current_slope_3 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
+    # Normalize to % of Close
+    close = df["close"].iloc[-1]
+    slope_pct = (current_slope_3 / close) * 100
+    
+    if is_dead_knife_mode:
+        # SAFETY MODE (Panic)
+        # Skip if crashing too hard (Falling Knife)
+        if slope_pct < threshold_pct:
+            return True, f"Safety_Knife_Filter({slope_pct:.4f}% < {threshold_pct}%)"
+    else:
+        # AGGRESSIVE MODE (Calm)
+        # Skip if too flat (Panic Buyer)
+        if slope_pct > threshold_pct:
+            return True, f"Slope3_Too_Flat({slope_pct:.4f}% > {threshold_pct}%)"
+            
+    return False, ""

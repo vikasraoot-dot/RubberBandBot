@@ -29,7 +29,7 @@ from RubberBand.src.data import (
     order_exists_today,
     KillSwitchTriggered,
 )
-from RubberBand.strategy import attach_verifiers
+from RubberBand.strategy import attach_verifiers, check_slope_filter
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.src.ticker_health import TickerHealthManager
 from RubberBand.src.position_registry import PositionRegistry
@@ -497,50 +497,15 @@ def main() -> int:
         
         # This ensures consistent behavior across tickers of different prices.
         
-        slope_pct_threshold = -0.12
-        is_dead_knife_mode = False
-        
-        if regime_cfg:
-            slope_pct_threshold = regime_cfg.get("slope_threshold_pct", -0.12)
-            is_dead_knife_mode = regime_cfg.get("dead_knife_filter", False)
-        
-        # Override with CLI if provided (Assuming CLI is now passing a % or we strictly use Regime?)
-        # For this "Phase 2", we prioritize the Regime Manager. 
-        # But if legacy absolute threshold is passed, we might ignore or warn.
-        # We will log the computed % for transparency.
-
-        # Check 1: 3-bar slope (Primary)
-        if "kc_middle" in df.columns and len(df) >= 4:
-            current_slope_3 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-4]) / 3
-            current_slope_3_pct = (current_slope_3 / close) * 100
-            
-            skip = False
-            skip_msg = ""
-            
-            if is_dead_knife_mode:
-                # SAFETY MODE (Panic): Skip if crash is TOO STEEP (Falling Knife)
-                if current_slope_3_pct < slope_pct_threshold:
-                    skip = True
-                    skip_msg = f"Safety_Knife_Filter({current_slope_3_pct:.4f}%<{slope_pct_threshold}%)"
-            else:
-                # AGGRESSIVE MODE (Calm): Skip if trend is TOO FLAT (Panic Buyer)
-                if current_slope_3_pct > slope_pct_threshold:
-                    skip = True
-                    skip_msg = f"Slope3_pct_too_flat({current_slope_3_pct:.4f}%>{slope_pct_threshold}%)"
-            
-            if skip:
-                print(json.dumps({
-                    "type": "SKIP_SLOPE3",
-                    "symbol": sym,
-                    "slope_pct": round(current_slope_3_pct, 4),
-                    "threshold_pct": slope_pct_threshold,
-                    "slope_abs": round(current_slope_3, 4),
-                    "price": close,
-                    "mode": "DEAD_KNIFE_SAFETY" if is_dead_knife_mode else "PANIC_BUYER",
-                    "reason": skip_msg,
-                    "ts": now_iso,
-                }), flush=True)
-                continue
+        should_skip, reason = check_slope_filter(df, regime_cfg)
+        if should_skip:
+             print(json.dumps({
+                "type": "SKIP_SLOPE3",
+                "symbol": sym,
+                "reason": reason,
+                "ts": now_iso,
+            }), flush=True)
+             continue
         
         # Check 2: 10-bar slope (Secondary/Sustained)
         # Only use if explicitly enabled in config, and normalize it.
