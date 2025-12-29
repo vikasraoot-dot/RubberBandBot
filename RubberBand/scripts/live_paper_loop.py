@@ -307,7 +307,7 @@ def main() -> int:
 
     bars_map, bars_meta = res
 
-    # Fetch Daily Bars for Trend Filter (SMA 200)
+    # Fetch Daily Bars for Trend Filter (SMA 20)
     trend_cfg = cfg.get("trend_filter", {})
     daily_map = {}
     if trend_cfg.get("enabled", False):

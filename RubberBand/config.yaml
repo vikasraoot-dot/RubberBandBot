@@ -57,7 +57,7 @@ resilience:
   
 trend_filter:
   enabled: true
-  sma_period: 50   # Optimization: 50-day SMA captures profitable mean reversion (was 20)
+  sma_period: 20   # Optimization: 20-day SMA captures profitable mean reversion (was 50)
 
 # POSITION / SIZING
 allow_shorts: false
