@@ -100,11 +100,13 @@ jobs:
                 Write-Host "Auditor results committed successfully"
               }
             } else {
-              Write-Host "No changes to commit"
+              Write-Host "No changes to commit (state unchanged)"
             }
           } else {
             Write-Host "No auditor output files found (first run with no logs to process)"
           }
+          # Always exit success - no changes is not an error
+          exit 0
 
       - name: Upload Auditor State
         if: always()
