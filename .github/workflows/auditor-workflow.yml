@@ -1,0 +1,93 @@
+name: "[BOT] Auditor - Shadow Ledger"
+
+on:
+  schedule:
+    # Run every 20 minutes during market hours (offset from bot cycles)
+    # 14:05, 14:25, 14:45 ... 21:05 UTC = ~9:05 AM - 4:05 PM EST
+    - cron: "5,25,45 14-21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run mode (1=no shadow trades, 0=full shadow portfolio)'
+        required: false
+        default: '0'
+
+concurrency:
+  group: auditor-shadow-ledger
+  cancel-in-progress: false  # Don't cancel - we want continuous monitoring
+
+jobs:
+  audit:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Latest Commits
+        shell: powershell
+        run: |
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot-Auditor"
+          git pull origin main --rebase || git pull origin main || Write-Host "Pull failed, continuing with local"
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = (Get-Command python.exe).Source
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip --quiet
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt --quiet
+
+      - name: Run Auditor Bot
+        shell: powershell
+        env:
+          APCA_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $dryRun = if ("${{ github.event.inputs.dry_run }}" -ne "") { "${{ github.event.inputs.dry_run }}" } else { "0" }
+          
+          Write-Host "=== Auditor Bot Starting ==="
+          Write-Host "Log Directory: auditor_logs/"
+          Write-Host "Dry Run: $dryRun"
+          
+          # Run auditor with log directory argument
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/auditor_bot.py --log-dir auditor_logs --single-pass
+          
+          Write-Host "=== Auditor Bot Complete ==="
+
+      - name: Commit Auditor Results
+        if: always()
+        shell: powershell
+        run: |
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+          git add auditor_state.json auditor_log.csv 2>$null
+          git commit -m "[AUDITOR] Shadow Ledger Update $timestamp" 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            git push 2>$null || Write-Host "Push failed (concurrent edit?)"
+            Write-Host "Auditor results committed successfully"
+          } else {
+            Write-Host "No changes to commit"
+          }
+
+      - name: Upload Auditor State
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: auditor-state-${{ github.run_id }}
+          path: |
+            auditor_state.json
+            auditor_log.csv
+          if-no-files-found: warn
+          retention-days: 30
