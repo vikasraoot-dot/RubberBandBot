@@ -33,7 +33,15 @@ jobs:
         run: |
           git config user.email "bot@rubberband.local"
           git config user.name "RubberBandBot-Auditor"
-          git pull origin main --rebase || git pull origin main || Write-Host "Pull failed, continuing with local"
+          try {
+            git pull origin main --rebase 2>&1 | Out-Null
+          } catch {
+            try {
+              git pull origin main 2>&1 | Out-Null
+            } catch {
+              Write-Host "Pull failed, continuing with local"
+            }
+          }
 
       - name: Ensure Python path
         shell: powershell
@@ -75,8 +83,12 @@ jobs:
           git add auditor_state.json auditor_log.csv 2>$null
           git commit -m "[AUDITOR] Shadow Ledger Update $timestamp" 2>$null
           if ($LASTEXITCODE -eq 0) {
-            git push 2>$null || Write-Host "Push failed (concurrent edit?)"
-            Write-Host "Auditor results committed successfully"
+            $pushResult = git push 2>&1
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "Push failed (concurrent edit?)"
+            } else {
+              Write-Host "Auditor results committed successfully"
+            }
           } else {
             Write-Host "No changes to commit"
           }
