@@ -97,56 +97,84 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
     """
     Commit JSONL logs to auditor_logs/ for real-time auditing.
     Called after each trading cycle to enable the Auditor Bot to see logs during the day.
+    
+    Uses line tracking to avoid re-processing the same log lines on each cycle.
     """
     from datetime import datetime
     
     date = datetime.now().strftime("%Y%m%d")
     log_file = f"auditor_logs/{bot_tag}_{date}.jsonl"
+    processed_file = f"auditor_logs/.{bot_tag}_{date}_processed.txt"
     
     # Check if we're in GitHub Actions (where git is configured)
     if not os.environ.get("GITHUB_ACTIONS"):
         return  # Only commit when running in GitHub Actions
     
     try:
-        # Extract JSON lines from console.log if it exists
         console_log = "console.log"
-        if os.path.exists(console_log):
-            # Read console.log and extract JSON lines
-            import json
-            os.makedirs("auditor_logs", exist_ok=True)
+        if not os.path.exists(console_log):
+            return  # No log file to process
+        
+        import json
+        os.makedirs("auditor_logs", exist_ok=True)
+        
+        # Read the number of lines already processed
+        start_line = 0
+        if os.path.exists(processed_file):
+            try:
+                with open(processed_file, "r") as f:
+                    start_line = int(f.read().strip())
+            except (ValueError, FileNotFoundError):
+                start_line = 0
+        
+        with open(console_log, "r", encoding="utf-8") as f:
+            all_lines = f.readlines()
+        
+        # Only process new lines
+        new_lines = all_lines[start_line:]
+        if not new_lines:
+            return  # No new lines to process
+        
+        # Filter and tag JSON lines
+        json_lines = []
+        for line in new_lines:
+            line = line.strip()
+            if line.startswith("{"):
+                try:
+                    obj = json.loads(line)
+                    obj["bot_tag"] = bot_tag
+                    json_lines.append(json.dumps(obj))
+                except json.JSONDecodeError:
+                    pass
+        
+        if json_lines:
+            # Append only new events to log file
+            with open(log_file, "a", encoding="utf-8") as f:
+                for jl in json_lines:
+                    f.write(jl + "\n")
             
-            with open(console_log, "r", encoding="utf-8") as f:
-                lines = f.readlines()
+            # Update processed line count
+            with open(processed_file, "w") as f:
+                f.write(str(len(all_lines)))
             
-            # Filter and tag JSON lines
-            json_lines = []
-            for line in lines:
-                line = line.strip()
-                if line.startswith("{"):
-                    try:
-                        obj = json.loads(line)
-                        obj["bot_tag"] = bot_tag
-                        json_lines.append(json.dumps(obj))
-                    except json.JSONDecodeError:
-                        pass
+            # Pull latest to avoid conflicts
+            subprocess.run(["git", "pull", "--rebase"], check=False, capture_output=True)
             
-            if json_lines:
-                # Append to log file
-                with open(log_file, "a", encoding="utf-8") as f:
-                    for jl in json_lines:
-                        f.write(jl + "\n")
-                
-                # Commit and push
-                subprocess.run(["git", "add", log_file], check=False, capture_output=True)
-                result = subprocess.run(
-                    ["git", "commit", "-m", f"[AUTO] {bot_tag} log update {datetime.now().strftime('%H:%M')}"],
-                    check=False, capture_output=True
-                )
-                if result.returncode == 0:
-                    subprocess.run(["git", "push"], check=False, capture_output=True)
-                    print(f"[loop] Committed auditor log ({len(json_lines)} events)", flush=True)
-                else:
-                    print(f"[loop] No new auditor log changes to commit", flush=True)
+            # Commit and push
+            subprocess.run(["git", "add", log_file, processed_file], check=False, capture_output=True)
+            result = subprocess.run(
+                ["git", "commit", "-m", f"[AUTO] {bot_tag} log update {datetime.now().strftime('%H:%M')}"],
+                check=False, capture_output=True
+            )
+            if result.returncode == 0:
+                subprocess.run(["git", "push"], check=False, capture_output=True)
+                print(f"[loop] Committed auditor log ({len(json_lines)} new events)", flush=True)
+            else:
+                print(f"[loop] No new auditor log changes to commit", flush=True)
+        else:
+            # Update processed count even if no JSON found
+            with open(processed_file, "w") as f:
+                f.write(str(len(all_lines)))
     except Exception as e:
         print(f"[loop] Auditor log commit error: {e}", flush=True)
 
