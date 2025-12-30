@@ -127,8 +127,13 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
             except (ValueError, FileNotFoundError):
                 start_line = 0
         
-        with open(console_log, "r", encoding="utf-8") as f:
-            all_lines = f.readlines()
+        # Read console log with encoding fallback (PowerShell often uses UTF-16)
+        try:
+            with open(console_log, "r", encoding="utf-8") as f:
+                all_lines = f.readlines()
+        except UnicodeError:
+            with open(console_log, "r", encoding="utf-16") as f:
+                all_lines = f.readlines()
         
         # Only process new lines
         new_lines = all_lines[start_line:]
