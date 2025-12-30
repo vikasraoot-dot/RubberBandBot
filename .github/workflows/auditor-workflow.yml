@@ -31,15 +31,14 @@ jobs:
       - name: Pull Latest Commits
         shell: powershell
         run: |
+          $ErrorActionPreference = "Continue"
           git config user.email "bot@rubberband.local"
           git config user.name "RubberBandBot-Auditor"
-          try {
-            git pull origin main --rebase 2>&1 | Out-Null
-          } catch {
-            try {
-              git pull origin main 2>&1 | Out-Null
-            } catch {
-              Write-Host "Pull failed, continuing with local"
+          $pullResult = git pull origin main --rebase 2>&1
+          if ($LASTEXITCODE -ne 0) {
+            $pullResult = git pull origin main 2>&1
+            if ($LASTEXITCODE -ne 0) {
+              Write-Host "Pull failed, continuing with local checkout"
             }
           }
 
