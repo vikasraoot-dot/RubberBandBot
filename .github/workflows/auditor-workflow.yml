@@ -80,17 +80,27 @@ jobs:
         shell: powershell
         run: |
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
-          git add auditor_state.json auditor_log.csv 2>$null
-          git commit -m "[AUDITOR] Shadow Ledger Update $timestamp" 2>$null
-          if ($LASTEXITCODE -eq 0) {
-            $pushResult = git push 2>&1
-            if ($LASTEXITCODE -ne 0) {
-              Write-Host "Push failed (concurrent edit?)"
+          
+          # Check if any auditor output files exist
+          $hasState = Test-Path "auditor_state.json"
+          $hasLog = Test-Path "auditor_log.csv"
+          
+          if ($hasState -or $hasLog) {
+            if ($hasState) { git add auditor_state.json }
+            if ($hasLog) { git add auditor_log.csv }
+            git commit -m "[AUDITOR] Shadow Ledger Update $timestamp" 2>$null
+            if ($LASTEXITCODE -eq 0) {
+              $pushResult = git push 2>&1
+              if ($LASTEXITCODE -ne 0) {
+                Write-Host "Push failed (concurrent edit?)"
+              } else {
+                Write-Host "Auditor results committed successfully"
+              }
             } else {
-              Write-Host "Auditor results committed successfully"
+              Write-Host "No changes to commit"
             }
           } else {
-            Write-Host "No changes to commit"
+            Write-Host "No auditor output files found (first run with no logs to process)"
           }
 
       - name: Upload Auditor State
