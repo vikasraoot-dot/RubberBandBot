@@ -92,6 +92,64 @@ def _load_cfg(path="RubberBand/config.yaml"):
     except Exception:
         return {}
 
+
+def commit_auditor_log(bot_tag: str = "15M_STK"):
+    """
+    Commit JSONL logs to auditor_logs/ for real-time auditing.
+    Called after each trading cycle to enable the Auditor Bot to see logs during the day.
+    """
+    from datetime import datetime
+    
+    date = datetime.now().strftime("%Y%m%d")
+    log_file = f"auditor_logs/{bot_tag}_{date}.jsonl"
+    
+    # Check if we're in GitHub Actions (where git is configured)
+    if not os.environ.get("GITHUB_ACTIONS"):
+        return  # Only commit when running in GitHub Actions
+    
+    try:
+        # Extract JSON lines from console.log if it exists
+        console_log = "console.log"
+        if os.path.exists(console_log):
+            # Read console.log and extract JSON lines
+            import json
+            os.makedirs("auditor_logs", exist_ok=True)
+            
+            with open(console_log, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+            
+            # Filter and tag JSON lines
+            json_lines = []
+            for line in lines:
+                line = line.strip()
+                if line.startswith("{"):
+                    try:
+                        obj = json.loads(line)
+                        obj["bot_tag"] = bot_tag
+                        json_lines.append(json.dumps(obj))
+                    except json.JSONDecodeError:
+                        pass
+            
+            if json_lines:
+                # Append to log file
+                with open(log_file, "a", encoding="utf-8") as f:
+                    for jl in json_lines:
+                        f.write(jl + "\n")
+                
+                # Commit and push
+                subprocess.run(["git", "add", log_file], check=False, capture_output=True)
+                result = subprocess.run(
+                    ["git", "commit", "-m", f"[AUTO] {bot_tag} log update {datetime.now().strftime('%H:%M')}"],
+                    check=False, capture_output=True
+                )
+                if result.returncode == 0:
+                    subprocess.run(["git", "push"], check=False, capture_output=True)
+                    print(f"[loop] Committed auditor log ({len(json_lines)} events)", flush=True)
+                else:
+                    print(f"[loop] No new auditor log changes to commit", flush=True)
+    except Exception as e:
+        print(f"[loop] Auditor log commit error: {e}", flush=True)
+
 def main():
     fast_loop = os.environ.get("FAST_LOOP", "0") == "1"
     cfg_path = os.environ.get("EMA_CONFIG", "RubberBand/config.yaml")
@@ -137,6 +195,8 @@ def main():
 
         try:
             run_once()
+            # Commit auditor logs after each cycle for real-time auditing
+            commit_auditor_log("15M_STK")
         except Exception as e:
             print(f"[loop] ERROR: {e}", flush=True)
 
