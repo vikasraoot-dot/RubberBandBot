@@ -16,6 +16,9 @@ concurrency:
   group: auditor-shadow-ledger
   cancel-in-progress: false  # Don't cancel - we want continuous monitoring
 
+permissions:
+  contents: write  # Required for git push
+
 jobs:
   audit:
     runs-on: [self-hosted, windows]
@@ -78,6 +81,7 @@ jobs:
         if: always()
         shell: powershell
         run: |
+          $ErrorActionPreference = "Continue"
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
           
           # Check if any auditor output files exist
