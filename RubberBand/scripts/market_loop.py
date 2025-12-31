@@ -162,18 +162,22 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
             with open(processed_file, "w") as f:
                 f.write(str(len(all_lines)))
             
-            # Pull latest to avoid conflicts
-            subprocess.run(["git", "pull", "--rebase"], check=False, capture_output=True)
-            
-            # Commit and push
+            # Commit (stage local changes first)
             subprocess.run(["git", "add", log_file, processed_file], check=False, capture_output=True)
             result = subprocess.run(
                 ["git", "commit", "-m", f"[AUTO] {bot_tag} log update {datetime.now().strftime('%H:%M')}"],
                 check=False, capture_output=True
             )
+            
             if result.returncode == 0:
-                subprocess.run(["git", "push"], check=False, capture_output=True)
-                print(f"[loop] Committed auditor log ({len(json_lines)} new events)", flush=True)
+                # Then split push into pull --rebase then push
+                subprocess.run(["git", "pull", "--rebase"], check=False, capture_output=True)
+                push_res = subprocess.run(["git", "push"], check=False, capture_output=True)
+                
+                if push_res.returncode == 0:
+                    print(f"[loop] Committed auditor log ({len(json_lines)} new events)", flush=True)
+                else:
+                    print(f"[loop] Push failed after commit", flush=True)
             else:
                 print(f"[loop] No new auditor log changes to commit", flush=True)
         else:
