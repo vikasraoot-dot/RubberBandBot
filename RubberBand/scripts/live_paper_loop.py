@@ -437,6 +437,28 @@ def main() -> int:
             continue
 
         df = attach_verifiers(df, cfg)
+        
+        # --- CRITICAL FIX: FORCE CLOSED CANDLES ONLY ---
+        # Live data often includes the current "forming" bar as the last row.
+        # This causes "phantom dips" (intra-bar noise) that vanish at close.
+        # We strictly drop the last bar if its timestamp is recent (within timeframe).
+        last_ts = df.index[-1]
+        
+        # Calculate age of last bar
+        # Note: df.index is timezone-aware (UTC usually from Alpaca/IEX)
+        if last_ts.tzinfo is None:
+            # Fallback if tz-naive (shouldn't happen with our data pipeline)
+            age_sec = (datetime.now() - last_ts).total_seconds()
+        else:
+            age_sec = (now_utc - last_ts).total_seconds()
+            
+        # Timeframe is 15Min, so check if diff < 15 minutes
+        if age_sec < 15 * 60:
+            # Drop the forming bar
+            df = df.iloc[:-1]
+            if df.empty:
+                continue
+
         last = df.iloc[-1]
         close = float(last["close"])
 
