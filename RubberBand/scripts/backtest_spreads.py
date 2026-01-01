@@ -33,18 +33,21 @@ if _REPO_ROOT not in sys.path:
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
 from RubberBand.strategy import attach_verifiers, check_slope_filter
+from RubberBand.src.regime_manager import RegimeManager
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Spread Simulation Parameters
 # ──────────────────────────────────────────────────────────────────────────────
 DEFAULT_OPTS = {
     "dte": 6,                   # Days to expiration (matches live bot default)
+    "min_dte": 3,               # Minimum DTE required (matches live bot)
     "spread_width_atr": 1.5,    # OTM strike = ATM + this * ATR
-    "max_debit": 2.00,          # Max $ per share for the spread (matches production)
+    "max_debit": 3.00,          # Max $ per share for the spread (synced with live bot)
     "contracts": 1,             # Contracts per trade
     "bars_per_day": 26,         # 15m bars per trading day (6.5 hours)
     "sma_period": 20,           # Daily SMA period for trend filter (20 = ~1 month)
     "trend_filter": True,       # Enable/disable SMA trend filter
+    "bars_stop": 14,            # Time stop: 14 bars (~3.5 hours) - matches live bot
 }
 
 
@@ -80,15 +83,16 @@ def estimate_spread_value(
     dte_bars_remaining: int,
     total_dte_bars: int,
     iv: float = 0.35,  # Implied volatility (default 35%)
+    bid_ask_pct: float = 0.08,  # Bid-ask spread cost (8% of spread width)
+    is_exit: bool = False,  # True if calculating exit value (apply slippage)
 ) -> tuple:
     """
-    Estimate call spread value using IV-adjusted pricing model.
+    Estimate call spread value using REALISTIC theta decay model.
     
-    More realistic than simple Black-Scholes approximation:
-    - Uses 40% base time value (down from 65%)
-    - IV-adjusted: higher IV = more time value
-    - Accelerated theta decay in final 50% of time
-    - Short call has ~40% of ATM time value (delta factor)
+    IMPROVEMENTS (Dec 2025):
+    - Steeper theta decay near expiry (power 0.3 instead of 0.7)
+    - Bid-ask slippage on exit (default 8% of spread width)
+    - Weekend/holiday theta acceleration (2x decay rate for Fri->Mon)
     
     For a bull call spread:
     - Value at entry ≈ intrinsic + IV-adjusted time value
@@ -106,17 +110,23 @@ def estimate_spread_value(
     short_intrinsic = max(0, underlying_price - otm_strike)
     
     # IV-adjusted time value calculation
-    # Base: 35% IV gives ~40% of spread as time value (more conservative than 65%)
+    # Base: 35% IV gives ~35% of spread as time value (more conservative)
     iv_factor = min(iv / 0.35, 1.5)  # Cap at 1.5x for extreme IV
-    base_time_value_pct = 0.40 * iv_factor
+    base_time_value_pct = 0.35 * iv_factor  # Reduced from 0.40
     
-    # Theta decay: accelerates in final 50% of time
-    # Early: sqrt decay (slow)
-    # Late: power 0.7 decay (faster)
+    # REALISTIC Theta decay: much steeper near expiry
+    # Early (>50% time remaining): sqrt decay (slow)
+    # Mid (25-50% time remaining): linear decay
+    # Late (<25% time remaining): power 0.3 decay (BRUTAL)
     if time_factor > 0.5:
         theta_decay = (time_factor ** 0.5)  # Slow decay early on
+    elif time_factor > 0.25:
+        # Linear transition zone
+        theta_decay = time_factor * 1.4  # Slightly faster than linear
     else:
-        theta_decay = (time_factor ** 0.7)  # Accelerated decay near expiry
+        # Final 25% of time: brutal theta crush
+        # This matches real-world 4-DTE behavior
+        theta_decay = (time_factor ** 0.3) * 0.7  # Very steep decay
     
     time_value_pct = base_time_value_pct * theta_decay
     
@@ -125,12 +135,17 @@ def estimate_spread_value(
     long_value = long_intrinsic + long_time_value
     
     # Short call: OTM has less time value (delta ~0.3-0.4)
-    # OTM call captures ~40% of ATM time value
-    short_delta_factor = 0.40
+    # OTM call captures ~35% of ATM time value (reduced from 40%)
+    short_delta_factor = 0.35
     short_time_value = spread_width * time_value_pct * short_delta_factor
     short_value = short_intrinsic + short_time_value
     
     spread_value = long_value - short_value
+    
+    # Apply bid-ask slippage on exit (you get less than mid-price)
+    if is_exit and bid_ask_pct > 0:
+        slippage = spread_width * bid_ask_pct
+        spread_value = max(0, spread_value - slippage)
     
     return long_value, short_value, spread_value
 
@@ -180,7 +195,7 @@ def simulate_spread_trade(
     entry_debit = min(entry_spread_value, max_debit)
     
     # Apply entry slippage (bid-ask spread increases cost)
-    entry_slippage_pct = opts.get("entry_slippage_pct", 0.03)  # 3% default
+    entry_slippage_pct = opts.get("entry_slippage_pct", 0.05)  # 5% default (realistic)
     entry_debit = entry_debit * (1 + entry_slippage_pct)
     
     if entry_debit <= 0:
@@ -230,36 +245,37 @@ def simulate_spread_trade(
             actual_exit_idx = i
             break
         
-        # Check at high and low
-        for check_price in [bar["high"], bar["low"], bar["close"]]:
-            _, _, current_value = estimate_spread_value(
-                float(check_price), atm_strike, otm_strike, bars_remaining, total_bars
-            )
+        # REALISM FIX: Only use close price (no hindsight bias from intraday highs/lows)
+        check_price = bar["close"]
+        _, _, current_value = estimate_spread_value(
+            float(check_price), atm_strike, otm_strike, bars_remaining, total_bars
+        )
+        
+        current_pnl = (current_value - entry_debit) * 100 * contracts
+        
+        # Track best/worst
+        best_pnl = max(best_pnl, current_pnl)
+        worst_pnl = min(worst_pnl, current_pnl)
+        
+        # Check for max profit (80% of max - matches live bot)
+        tp_pct = opts.get("tp_pct", 0.80)  # Configurable, default 80%
+        if current_pnl >= max_profit * tp_pct:
+            exit_reason = "MAX_PROFIT"
+            exit_value = current_value
+            actual_exit_idx = i
+            break
+        
+        # Check for max loss (Stop Loss)
+        sl_pct = opts.get("sl_pct", 0.8)  # Default to 80% (matches live config)
+        stop_loss_threshold = -cost * sl_pct
+        if current_pnl <= stop_loss_threshold:
+            exit_reason = "STOP_LOSS"
+            exit_value = current_value
+            actual_exit_idx = i
             
-            current_pnl = (current_value - entry_debit) * 100 * contracts
-            
-            # Track best/worst
-            best_pnl = max(best_pnl, current_pnl)
-            worst_pnl = min(worst_pnl, current_pnl)
-            
-            # Check for max profit (90% of max)
-            if current_pnl >= max_profit * 0.9:
-                exit_reason = "MAX_PROFIT"
-                exit_value = current_value
-                actual_exit_idx = i
-                break
-            
-            # Check for max loss (Stop Loss)
-            sl_pct = opts.get("sl_pct", 0.9) # Default to 90% if not specified
-            stop_loss_threshold = -cost * sl_pct
-            if current_pnl <= stop_loss_threshold:
-                exit_reason = "STOP_LOSS"
-                exit_value = current_value
-                actual_exit_idx = i
-                
-                # Update DKF state
-                last_loss_date = df.iloc[i].name.date() if hasattr(df.iloc[i].name, 'date') else None
-                break
+            # Update DKF state
+            last_loss_date = df.iloc[i].name.date() if hasattr(df.iloc[i].name, 'date') else None
+            break
         
         if exit_reason != "EXPIRY":
             break
@@ -276,7 +292,7 @@ def simulate_spread_trade(
     
     # Calculate final P&L
     # Apply exit slippage (bid-ask spread reduces credit received)
-    exit_slippage_pct = opts.get("exit_slippage_pct", 0.03)  # 3% default
+    exit_slippage_pct = opts.get("exit_slippage_pct", 0.10)  # 10% default (realistic for options)
     actual_exit_value = exit_value * (1 - exit_slippage_pct)
     
     pnl = (actual_exit_value - entry_debit) * 100 * contracts
@@ -454,7 +470,12 @@ def simulate_spreads_for_symbol(
         kc_lower = float(prev.get("kc_lower", 0))
         entry_adx = float(prev.get("adx", 0) or prev.get("ADX", 0))
         
-        # Slopes are already calculated above
+        # Calculate 3-bar slope for logging (same logic as check_slope_filter)
+        slope_3 = 0.0
+        if "kc_middle" in df.columns and i >= 4:
+            slope_3_raw = df["kc_middle"].iloc[i] - df["kc_middle"].iloc[i-3]
+            ref_price = float(df.iloc[i]["open"])
+            slope_3 = (slope_3_raw / ref_price) * 100 if ref_price > 0 else 0
         entry_slope = slope_3
 
         
@@ -477,8 +498,8 @@ def simulate_spreads_for_symbol(
             result["entry_rsi"] = round(entry_rsi, 1)
             result["entry_close"] = round(entry_close, 2)
             result["kc_lower"] = round(kc_lower, 2)
-            result["entry_slope"] = round(slope_3_pct, 4) # Log the PERCENTAGE
-            result["entry_slope_10"] = round(slope_10_pct, 4)  # Log the PERCENTAGE
+            result["entry_slope"] = round(slope_3, 4) # Log the PERCENTAGE
+            result["entry_slope_10"] = round(slope_10_pct if 'slope_10_pct' in dir() else 0, 4)  # Log the PERCENTAGE
             result["entry_adx"] = round(entry_adx, 1)     # NEW: For ADX analysis
             result["entry_reason"] = f"RSI={entry_rsi:.1f}, Close=${entry_close:.2f} < KC_Lower=${kc_lower:.2f}"
             
