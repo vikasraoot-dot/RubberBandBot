@@ -623,7 +623,8 @@ def fetch_latest_bars(
     dollar_vol_window: int = 20,
     dollar_vol_min_periods: int = 7,
     verbose: bool = True,
-    end: Optional[Any] = None  # Accepts datetime, date, or ISO string
+    end: Optional[Any] = None,  # Accepts datetime, date, or ISO string
+    incomplete: bool = False, # If True, enables returning the incomplete (forming) last bar
 ) -> Tuple[Dict[str, pd.DataFrame], Dict[str, Any]]:
     """
     Robust multi-symbol fetch with pagination & dual-shape handling. Emits rich diagnostics.
@@ -759,7 +760,10 @@ def fetch_latest_bars(
             is_daily_or_longer = timeframe.lower() in ("1day", "1d", "day", "1week", "1w", "week")
             if rth_only and not is_daily_or_longer:
                 df = filter_rth(df, tz_name=tz_name, start_hm=rth_start, end_hm=rth_end)
-            df = drop_unclosed_last_bar(df, timeframe)
+            
+            # Drop unclosed last bar UNLESS specifically requested for auditing (incomplete=True)
+            if not incomplete:
+                df = drop_unclosed_last_bar(df, timeframe)
 
             if df.empty:
                 syms_empty.append(s)
