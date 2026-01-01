@@ -25,7 +25,7 @@ print("=" * 60, flush=True)
 import argparse
 import json
 import os
-from datetime import datetime, time as dt_time
+from datetime import datetime, timedelta, time as dt_time
 from typing import List, Dict, Any, Optional, Tuple
 
 print("[STARTUP] Core imports complete", flush=True)
@@ -311,14 +311,48 @@ def get_long_signals(
         logger.error(error=str(e), context="fetch_bars")
         return signals
     
+    # Track both for auditing
+    confirmed_signals = []
+    forming_signals = []
+    
     for sym in symbols:
         df = bars_map.get(sym)
         if df is None or df.empty or len(df) < 20:
             continue
         
         try:
-            df = attach_verifiers(df, cfg)
-            last = df.iloc[-1]
+            # Analyze FORMING bar (last row) for Audit Logs
+            # ---------------------------------------------
+            df_full = attach_verifiers(df.copy(), cfg)
+            last_idx = df_full.index[-1]
+            now_utc = datetime.now(ZoneInfo("UTC"))
+            age_sec = (now_utc - last_idx).total_seconds()
+            is_forming = age_sec < 15 * 60
+            
+            if is_forming:
+                row = df_full.iloc[-1]
+                if bool(row.get("long_signal", False)):
+                    # Extract forming signal details (no execution, just log)
+                    forming_signals.append({
+                        "symbol": sym,
+                        "time": last_idx,
+                        "rsi": float(row.get("rsi", 0)),
+                        "close": float(row.get("close", 0)),
+                        "slope": float(row.get("slope", 0)) if "slope" in row else 0.0
+                    })
+
+            # Analyze CLOSED bar (Force drop last if forming)
+            # -----------------------------------------------
+            # We strictly drop the last bar if it is forming to ensure we trade on CLOSED data only.
+            if is_forming:
+                df_closed = df_full.iloc[:-1]
+            else:
+                df_closed = df_full
+                
+            if df_closed.empty:
+                continue
+                
+            last = df_closed.iloc[-1]
             close = float(last["close"])
             
             # Check trend filter FIRST (before checking signal)
@@ -326,40 +360,29 @@ def get_long_signals(
                 daily_sma = get_daily_sma(sym, sma_period, feed)
                 if daily_sma is not None and close < daily_sma:
                     # Skip - in bear trend (below SMA)
-                    logger.spread_skip(
-                        underlying=sym,
-                        skip_reason=f"Bear_trend(close={close:.2f}<SMA{sma_period}={daily_sma:.2f})"
-                    )
-                    continue
+                    continue # Silent skip to reduce log noise? Or log debug?
             
-            # Check Slope Threshold (Panic Buyer Logic vs Safety Logic)
-            # ---------------------------------------------------------
-            should_skip, reason = check_slope_filter(df, regime_cfg)
+            # Check Slope Threshold
+            should_skip, reason = check_slope_filter(df_closed, regime_cfg)
             if should_skip:
-                logger.spread_skip(underlying=sym, skip_reason=reason)
+                # logger.spread_skip(underlying=sym, skip_reason=reason) # Too noisy for 1m loop?
                 continue
             
-            # Check 2: 10-bar slope (sustained crash, 2.5h)
+            # Check 10-bar Slope
             slope_threshold_10 = cfg.get("slope_threshold_10")
             if slope_threshold_10 is not None:
-                if "kc_middle" in df.columns and len(df) >= 11:
-                    current_slope_10 = (df["kc_middle"].iloc[-1] - df["kc_middle"].iloc[-11]) / 10
+                if "kc_middle" in df_closed.columns and len(df_closed) >= 11:
+                    current_slope_10 = (df_closed["kc_middle"].iloc[-1] - df_closed["kc_middle"].iloc[-11]) / 10
                     if current_slope_10 > float(slope_threshold_10):
-                         logger.spread_skip(
-                            underlying=sym,
-                            skip_reason=f"Slope10_slow_bleed({current_slope_10:.4f}>{slope_threshold_10})"
-                         )
                          continue
-            
+
             if bool(last.get("long_signal", False)):
-                # Safely handle None values (get returns None if key exists but value is None)
                 rsi_val = last.get("rsi")
                 atr_val = last.get("atr")
                 rsi = float(rsi_val) if rsi_val is not None else 0.0
                 atr = float(atr_val) if atr_val is not None else 0.0
                 entry_price = close
                 
-                # Build entry reason from signal components
                 entry_reasons = []
                 if last.get("rsi_oversold", False):
                     entry_reasons.append(f"RSI_oversold({rsi:.1f})")
@@ -370,26 +393,21 @@ def get_long_signals(
                 
                 entry_reason = " + ".join(entry_reasons) if entry_reasons else "RubberBand_long_signal"
                 
-                logger.spread_signal(
-                    underlying=sym,
-                    signal_reason=entry_reason,
-                    entry_price=entry_price,
-                    rsi=rsi,
-                    atr=atr
-                )
-                
-                signals.append({
+                # Check duplication happens in MAIN loop now (idempotency)
+                confirmed_signals.append({
                     "symbol": sym,
                     "entry_price": entry_price,
                     "rsi": rsi,
                     "atr": atr,
                     "entry_reason": entry_reason,
+                    "signal_time": last.name, # Timestamp of the closed bar
                 })
+                
         except Exception as e:
             logger.error(error=str(e), context=f"process_{sym}")
             continue
     
-    return signals
+    return confirmed_signals, forming_signals
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -992,32 +1010,60 @@ def run_scan_cycle(
                     position_underlyings.add(sym[:i])
                     break
     
+    
     # 3. Scan for new signals
-    signals = get_long_signals(symbols, cfg, logger, regime_cfg=regime_cfg)
+    signals, forming_signals = get_long_signals(symbols, cfg, logger, regime_cfg=regime_cfg)
     
-    logger.heartbeat(
-        event="signals_found",
-        count=len(signals),
-        symbols=[s["symbol"] for s in signals]
-    )
+    # AUDIT LOGGING: Log all forming signals ("Transient Observations")
+    if forming_signals:
+        for f in forming_signals:
+            # We log this as a "heartbeat" or specific "audit" event so the user can see it but it's not a trade
+            logger.heartbeat(
+                event="audit_forming_signal",
+                symbol=f["symbol"],
+                rsi=f["rsi"],
+                slope=f["slope"],
+                close=f["close"],
+                note="Signal observed on forming bar (waiting for close)"
+            )
     
-    # 4. Enter new spreads
+    if signals:
+         logger.heartbeat(
+            event="signals_found",
+            count=len(signals),
+            symbols=[s["symbol"] for s in signals]
+        )
+    
+    # 4. Enter new spreads (Confirmed Only)
     entries = 0
     for signal in signals:
         if signal["symbol"] in position_underlyings:
-            logger.spread_skip(
-                underlying=signal["symbol"],
-                skip_reason="Already_have_position"
-            )
+            # Silent skip or minimal log
             continue
+        
+        # LOG CONFIRMED SIGNAL NOW (Use spread_signal here so it shows up as a "Real" signal)
+        logger.spread_signal(
+            underlying=signal["symbol"],
+            signal_reason=signal["entry_reason"],
+            entry_price=signal["entry_price"],
+            rsi=signal["rsi"],
+            atr=signal["atr"]
+        )
         
         if try_spread_entry(signal, spread_cfg, logger, registry, dry_run):
             entries += 1
             position_underlyings.add(signal["symbol"])
+            # Log audit alignment
+            logger.heartbeat(
+                event="audit_signal_confirmed",
+                symbol=signal["symbol"],
+                note="Signal persisted at close -> TRADED"
+            )
     
     logger.heartbeat(
         event="scan_complete",
         signals=len(signals),
+        forming=len(forming_signals),
         new_entries=entries,
         total_positions=len(current_positions) + entries,
     )
@@ -1028,7 +1074,7 @@ def run_scan_cycle(
 # ──────────────────────────────────────────────────────────────────────────────
 # Main Loop
 # ──────────────────────────────────────────────────────────────────────────────
-SCAN_INTERVAL_SECONDS = 15 * 60  # 15 minutes between scans
+SCAN_INTERVAL_SECONDS = 60  # 1 minute scan (for intra-bar auditing)
 
 
 def main() -> int:
@@ -1164,14 +1210,25 @@ def main() -> int:
             logger.heartbeat(event="market_close_reached", time=now_et.strftime("%H:%M"))
             break
         
-        # Wait until next scan
-        next_scan = now_et.strftime("%H:%M")
+        # Wait until next scan (Align to top of minute + 5s buffer)
+        # This ensures we run shortly after bars close, preventing drift.
+        now = datetime.now()
+        seconds_to_next_minute = 60 - now.second
+        sleep_seconds = seconds_to_next_minute + 5  # Wake up at HH:MM:05
+        
+        # If we are already close to the target (e.g. processing took long and we are at :02),
+        # sleep_seconds will be roughly 63s. Ideally we want the NEXT minute.
+        # Logic: 60 - 2 + 5 = 63s -> Wakes at :05 next minute. Correct.
+        # If we are at :58. 60 - 58 + 5 = 7s -> Wakes at :05 next minute. Correct.
+        
+        next_scan_time = now + timedelta(seconds=sleep_seconds)
+        
         logger.heartbeat(
             event="waiting_for_next_scan",
-            next_scan_in_min=SCAN_INTERVAL_SECONDS // 60,
-            current_time=next_scan,
+            next_scan_at=next_scan_time.strftime("%H:%M:%S"),
+            sleep_sec=sleep_seconds,
         )
-        time.sleep(SCAN_INTERVAL_SECONDS)
+        time.sleep(sleep_seconds)
     
     # ──────────────────────────────────────────────────────────────────────────
     # End of Day

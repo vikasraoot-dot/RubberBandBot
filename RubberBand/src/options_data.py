@@ -343,10 +343,10 @@ def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
 def is_options_trading_allowed() -> bool:
     """Check if we're within options trading hours (before 3:00 PM ET cutoff)."""
     now_et = datetime.now(ET)
-    cutoff = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
+    cutoff = now_et.replace(hour=15, minute=45, second=0, microsecond=0)
     market_open = now_et.replace(hour=9, minute=30, second=0, microsecond=0)
     
-    # Must be after market open and before 3:00 PM
+    # Must be after market open and before 3:45 PM
     return market_open <= now_et < cutoff
 
 
