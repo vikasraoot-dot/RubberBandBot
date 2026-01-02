@@ -103,6 +103,8 @@ jobs:
           SL_ATR: "1.5"
           PYTHONUNBUFFERED: "1"
         run: |
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot"
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
           # NOTE: We run market_loop.py (wrapper) which calls live_paper_loop.py (logic).

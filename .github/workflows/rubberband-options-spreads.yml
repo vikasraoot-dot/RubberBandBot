@@ -105,6 +105,8 @@ jobs:
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
           PYTHONUNBUFFERED: "1"
         run: |
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot"
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
           
