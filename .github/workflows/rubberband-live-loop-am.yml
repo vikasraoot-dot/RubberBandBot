@@ -20,6 +20,9 @@ concurrency:
   group: rubberband-live-paper-loop-am
   cancel-in-progress: true
 
+permissions:
+  contents: write
+
 jobs:
   trade:
     runs-on: [self-hosted, windows]
