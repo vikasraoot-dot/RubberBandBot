@@ -1,11 +1,11 @@
 name: "[BOT] Weekly Stock - Live"
 
 on:
-#   schedule:
-#     # Monday 9:35 AM ET (14:35 UTC) - Primary entry day
-#     - cron: '35 14 * * 1'
-#     # Tuesday-Friday 9:35 AM ET - Position monitoring only
-#     - cron: '35 14 * * 2-5'
+  schedule:
+    # Monday 9:35 AM ET (14:35 UTC) - Primary entry day
+    - cron: '35 14 * * 1'
+    # Tuesday-Friday 9:35 AM ET - Position monitoring only
+    - cron: '35 14 * * 2-5'
   workflow_dispatch:
     inputs:
       dry_run:
