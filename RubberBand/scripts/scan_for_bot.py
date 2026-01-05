@@ -61,7 +61,7 @@ BOT_PROFILES = {
         "atr_pct_min": 4.0,
         "atr_pct_max": 15.0,
         "dollar_vol_min": 50_000_000,  # $50M daily
-        "sma_period": 120,  # 120-day SMA for weekly trend filter
+        "sma_period": 0,  # 0 = Disabled (Allow falling knives for mean reversion)
         "require_options": False,
     },
     "WK_OPT": {
@@ -71,7 +71,7 @@ BOT_PROFILES = {
         "atr_pct_min": 2.5,
         "atr_pct_max": 5.0,
         "dollar_vol_min": 30_000_000,  # $30M daily
-        "sma_period": 120,  # 120-day SMA for weekly trend filter
+        "sma_period": 0,  # 0 = Disabled (Allow falling knives for mean reversion)
         "require_options": True,
     },
 }

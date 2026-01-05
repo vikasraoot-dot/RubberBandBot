@@ -65,9 +65,9 @@ def simulate_weekly_options(
     # Regime Map
     daily_vix_map = cfg.get("daily_vix_map", {})
     regime_params = {
-        "CALM": {"rsi": 50, "dev": -3.0},
-        "NORMAL": {"rsi": 45, "dev": -5.0},
-        "PANIC": {"rsi": 30, "dev": -10.0}
+        "CALM": {"rsi": 50, "dev": -3.0 / 100.0},
+        "NORMAL": {"rsi": 45, "dev": -5.0 / 100.0},
+        "PANIC": {"rsi": 30, "dev": -10.0 / 100.0}
     }
     
     # Iterate
