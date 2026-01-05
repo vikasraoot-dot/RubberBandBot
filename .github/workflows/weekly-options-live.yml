@@ -3,10 +3,10 @@ name: "[BOT] Weekly Options - Live"
 on:
   # NEW ENTRIES: Monday 9:35 AM ET (scan + enter positions)
   # POSITION CHECKS: Mon-Fri at 9:35 AM and 3:00 PM ET (monitor exits)
-  schedule:
-    - cron: '35 14 * * 1'    # Monday 9:35 AM ET - Full scan + entries
-    - cron: '35 14 * * 2-5'  # Tue-Fri 9:35 AM ET - Position checks only
-    - cron: '00 20 * * 1-5'  # Mon-Fri 3:00 PM ET - Afternoon position checks
+#   schedule:
+#     - cron: '35 14 * * 1'    # Monday 9:35 AM ET - Full scan + entries
+#     - cron: '35 14 * * 2-5'  # Tue-Fri 9:35 AM ET - Position checks only
+#     - cron: '00 20 * * 1-5'  # Mon-Fri 3:00 PM ET - Afternoon position checks
   
   # Manual trigger
   workflow_dispatch:
