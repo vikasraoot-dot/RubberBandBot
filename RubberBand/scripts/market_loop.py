@@ -176,9 +176,11 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
                 import random
                 max_retries = 5
                 
-                for attempt in range(max_retries):
-                    # Always pull --rebase before pushing to resolve concurrent edits
-                    pull_res = subprocess.run(["git", "pull", "origin", "main", "--rebase"], check=False, capture_output=True)
+                    # Always pull --rebase (with autostash) before pushing
+                    pull_res = subprocess.run(["git", "pull", "origin", "main", "--rebase", "--autostash"], check=False, capture_output=True)
+                    if pull_res.returncode != 0:
+                        print(f"[loop] Pull failed: {pull_res.stderr.decode().strip()}", flush=True)
+
                     
                     # Push
                     push_res = subprocess.run(["git", "push"], check=False, capture_output=True)
