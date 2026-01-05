@@ -176,6 +176,7 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
                 import random
                 max_retries = 5
                 
+                for attempt in range(max_retries):
                     # Always pull --rebase (with autostash) before pushing
                     pull_res = subprocess.run(["git", "pull", "origin", "main", "--rebase", "--autostash"], check=False, capture_output=True)
                     if pull_res.returncode != 0:
