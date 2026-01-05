@@ -162,14 +162,31 @@ def commit_auditor_log(bot_tag: str = BOT_TAG):
             )
             
             if result.returncode == 0:
-                # Then split push into pull --rebase then push
-                subprocess.run(["git", "pull", "--rebase"], check=False, capture_output=True)
-                push_res = subprocess.run(["git", "push"], check=False, capture_output=True)
+                # Attempt to push with retries
+                import time
+                import random
+                max_retries = 5
                 
-                if push_res.returncode == 0:
-                    print(f"[spreads] Committed auditor log ({len(json_lines)} new events)", flush=True)
+                for attempt in range(max_retries):
+                    # Always pull --rebase before pushing to resolve concurrent edits
+                    pull_res = subprocess.run(["git", "pull", "origin", "main", "--rebase"], check=False, capture_output=True)
+                    
+                    # Push
+                    push_res = subprocess.run(["git", "push"], check=False, capture_output=True)
+                    
+                    if push_res.returncode == 0:
+                        print(f"[spreads] Committed auditor log ({len(json_lines)} new events)", flush=True)
+                        break
+                    else:
+                        # Log error and retry
+                        err_msg = push_res.stderr.decode().strip() or "Unknown error"
+                        print(f"[spreads] Push failed (attempt {attempt+1}/{max_retries}): {err_msg}", flush=True)
+                        if attempt < max_retries - 1:
+                            sleep_time = random.uniform(5, 15)
+                            print(f"[spreads] Retrying in {sleep_time:.1f}s...", flush=True)
+                            time.sleep(sleep_time)
                 else:
-                    print(f"[spreads] Push failed after commit", flush=True)
+                    print(f"[spreads] All {max_retries} push attempts failed. Logs saved locally but not pushed.", flush=True)
             else:
                 print(f"[spreads] No new auditor log changes to commit", flush=True)
         else:
