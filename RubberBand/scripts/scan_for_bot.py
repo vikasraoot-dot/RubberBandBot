@@ -41,7 +41,7 @@ BOT_PROFILES = {
         "atr_pct_min": 1.5,
         "atr_pct_max": 5.0,
         "dollar_vol_min": 5_000_000,  # $5M daily
-        "sma_period": 20,
+        "sma_period": 0,  # 0 = Disabled (Mean Reversion catches falling knives)
         "require_options": False,
     },
     "15M_OPT": {
@@ -51,7 +51,7 @@ BOT_PROFILES = {
         "atr_pct_min": 2.0,
         "atr_pct_max": 6.0,
         "dollar_vol_min": 20_000_000,  # $20M daily
-        "sma_period": 20,
+        "sma_period": 100, # 100-day SMA for trend following (required for options)
         "require_options": True,
     },
     "WK_STK": {
@@ -99,7 +99,7 @@ def calculate_indicators(df: pd.DataFrame, sma_period: int = 20) -> Dict[str, An
     
     Returns dict with: price, atr_14, atr_pct, dollar_vol, sma, in_uptrend
     """
-    if len(df) < max(sma_period, 20):
+    if len(df) < max(sma_period if sma_period > 0 else 20, 20):
         return {}
     
     close = df["close"]
@@ -125,8 +125,12 @@ def calculate_indicators(df: pd.DataFrame, sma_period: int = 20) -> Dict[str, An
     dollar_vol = float((close * volume).rolling(window=20).mean().iloc[-1])
     
     # SMA for trend filter
-    sma = float(close.rolling(window=sma_period).mean().iloc[-1])
-    in_uptrend = current_price > sma
+    if sma_period > 0:
+        sma = float(close.rolling(window=sma_period).mean().iloc[-1])
+        in_uptrend = current_price > sma
+    else:
+        sma = 0.0
+        in_uptrend = True # Bypass filter
     
     return {
         "price": round(current_price, 2),
@@ -208,11 +212,14 @@ def scan_for_bot(
     }
     
     sma_period = profile.get("sma_period", 20)
+    # Handle sma=0
+    sma_period_calc = sma_period if sma_period > 0 else 20
+    
     require_options = profile.get("require_options", False)
     
     # Fetch data in batches
     BATCH_SIZE = 50
-    history_days = max(sma_period * 3, 100)  # Enough history for SMA
+    history_days = max(sma_period_calc * 3, 100)  # Enough history for SMA
     
     for i in range(0, len(symbols), BATCH_SIZE):
         batch = symbols[i:i+BATCH_SIZE]
@@ -264,6 +271,7 @@ def scan_for_bot(
                 stats["passed_volume"] += 1
                 
                 if not in_uptrend:
+                    # Filter only if sma_period > 0 (handled inside calculate_indicators via in_uptrend=True)
                     continue
                 stats["passed_trend"] += 1
                 
