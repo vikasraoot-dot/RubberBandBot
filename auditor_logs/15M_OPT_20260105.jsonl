@@ -56,3 +56,7 @@
 {"event": "scan_cycle_start", "cycle": 7, "time": "09:36", "regime": "CALM", "vixy": 25.03, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-05T14:36:05Z", "ts_et": "2026-01-05 09:36:05 ET", "bot_tag": "15M_OPT"}
 {"event": "outside_entry_window", "current_time": "09:36", "type": "HEARTBEAT", "ts": "2026-01-05T14:36:05Z", "ts_et": "2026-01-05 09:36:05 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 7, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-05T14:36:06Z", "ts_et": "2026-01-05 09:36:06 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 7, "time": "11:35", "regime": "CALM", "vixy": 25.41, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-05T16:35:05Z", "ts_et": "2026-01-05 11:35:05 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:35", "type": "HEARTBEAT", "ts": "2026-01-05T16:35:05Z", "ts_et": "2026-01-05 11:35:05 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 16, "type": "HEARTBEAT", "ts": "2026-01-05T16:35:20Z", "ts_et": "2026-01-05 11:35:20 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 7, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-05T16:35:20Z", "ts_et": "2026-01-05 11:35:20 ET", "bot_tag": "15M_OPT"}
