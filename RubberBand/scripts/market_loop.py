@@ -170,7 +170,7 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
             )
             
             if result.returncode == 0:
-            if result.returncode == 0:
+
                 # Attempt to push with retries
                 import time
                 import random

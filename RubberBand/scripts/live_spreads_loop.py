@@ -161,7 +161,7 @@ def commit_auditor_log(bot_tag: str = BOT_TAG):
                 check=False, capture_output=True
             )
             
-            if result.returncode == 0:
+
                 # Attempt to push with retries
                 import time
                 import random

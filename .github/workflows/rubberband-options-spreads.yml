@@ -149,38 +149,4 @@ jobs:
           if-no-files-found: warn
           retention-days: 30
 
-      - name: Commit Auditor Log
-        if: always()
-        shell: powershell
-        run: |
-          $date = Get-Date -Format "yyyyMMdd"
-          $logFile = "auditor_logs/15M_OPT_$date.jsonl"
-          New-Item -ItemType Directory -Force -Path "auditor_logs" | Out-Null
-          # Extract JSON lines from console.log and tag them with bot_tag
-          if (Test-Path "console.log") {
-            Get-Content "console.log" -Encoding UTF8 | Where-Object { $_ -match '^\s*\{' } | ForEach-Object {
-              try {
-                $obj = $_ | ConvertFrom-Json
-                $obj | Add-Member -NotePropertyName "bot_tag" -NotePropertyValue "15M_OPT" -Force
-                $obj | ConvertTo-Json -Compress
-              } catch {
-                # Skip non-JSON lines
-              }
-            } | Out-File -Append -Encoding utf8 $logFile
-          }
-          git config user.email "bot@rubberband.local"
-          git config user.name "RubberBandBot"
-          # Pull latest to avoid conflicts
-          $pullResult = git pull origin main --rebase 2>&1
-          if ($LASTEXITCODE -ne 0) {
-            $pullResult = git pull origin main 2>&1
-            if ($LASTEXITCODE -ne 0) { Write-Host "Pull skipped" }
-          }
-          git add auditor_logs/
-          git commit -m "[AUTO] 15M_OPT auditor log $date" 2>$null
-          if ($LASTEXITCODE -eq 0) {
-            $pushResult = git push 2>&1
-            if ($LASTEXITCODE -ne 0) { Write-Host "Push failed (concurrent edit?)" }
-          } else {
-            Write-Host "No changes to commit"
-          }
+
