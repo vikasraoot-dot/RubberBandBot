@@ -57,7 +57,7 @@ resilience:
   
 trend_filter:
   enabled: true
-  sma_period: 20   # Optimization: 20-day SMA captures profitable mean reversion (was 50)
+  sma_period: 100   # Optimization: 100-day SMA captures All-Weather trends (was 20)
 
 # POSITION / SIZING
 allow_shorts: false

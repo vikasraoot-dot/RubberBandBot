@@ -297,7 +297,7 @@ def get_long_signals(
     # Get trend filter settings
     trend_cfg = cfg.get("trend_filter", {})
     trend_enabled = trend_cfg.get("enabled", True)  # Default enabled for options
-    sma_period = int(trend_cfg.get("sma_period", 20))  # Default 20-day SMA (matches config)
+    sma_period = int(trend_cfg.get("sma_period", 100))  # Default 100-day SMA (Optimized for All-Weather)
     
     try:
         bars_map, _ = fetch_latest_bars(

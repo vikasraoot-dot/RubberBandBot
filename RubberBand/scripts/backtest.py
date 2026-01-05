@@ -107,6 +107,7 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
             
             # DEBUG
             # print(f"=== DAILY BARS: {len(df_daily)} (Requested: {daily_days}) ===")
+            print(f"[DEBUG] {symbol} loaded {len(df_daily)} Daily bars. SMA Period={sma_period}")
             
             df["trend_sma"] = df["date_only"].map(sma_map)
             df["trend_sma_2"] = df["date_only"].map(sma_map_2)
@@ -114,7 +115,7 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
             
             # Check if we have NaNs
             if df["trend_sma"].isna().all():
-                print("WARNING: All Trend SMA values are NaN!")
+                print(f"WARNING: All Trend SMA values are NaN! (First daily date: {df_daily.index[0] if not df_daily.empty else 'None'})")
 
     # 3. Fetch VIXY for Regime Detection (Backtest Dynamic)
     # We fetch enough daily VIXY history to cover the backtest period.
@@ -561,38 +562,80 @@ def main():
     # Optimization Parameters
     ap.add_argument("--rsi-entry", type=float, default=None, help="Override RSI Entry Threshold (e.g. 25, 30)")
     ap.add_argument("--tp-r", type=float, default=None, help="Override Take Profit R-Multiple (e.g. 2.0)")
-    ap.add_argument("--sl-atr", type=float, default=None, help="Override Stop Loss ATR Multiplier (e.g. 1.5)")
+    ap.add_argument("--sl-atr", type=float, help="Override Stop Loss ATR Multiplier (e.g. 1.5)")
     ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and PrevLossRSI<20)")
-    ap.add_argument("--end-date", type=str, default=None, help="End date (YYYY-MM-DD) for backtest")
+    ap.add_argument("--end-date", type=str, help="End date (YYYY-MM-DD) for backtest")
+    ap.add_argument("--sma-period", type=int, help="SMA Period for Trend Filter (e.g. 100)")
+    ap.add_argument("--trend-filter", action="store_true", help="Enable SMA Trend Filter")
     
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
 
     cfg = load_config(args.config)
-    # Override config with CLI args if needed
+    
+    # Overrides
     cfg["_flatten_eod"] = args.flatten_eod
     cfg["_max_hold_days"] = args.max_hold_days
+    if args.cash:
+        pass # cash handled in loop
+    if args.risk:
+        pass 
     if args.slope_threshold is not None:
-        cfg["slope_threshold"] = args.slope_threshold
+        cfg["filters"] = cfg.get("filters", {})
+        cfg["filters"]["slope_threshold"] = args.slope_threshold
+        print(f"OVERRIDE: slope_threshold = {args.slope_threshold}")
     if getattr(args, 'slope_threshold_10', None) is not None:
-        cfg["slope_threshold_10"] = args.slope_threshold_10
+         cfg["filters"] = cfg.get("filters", {})
+         cfg["filters"]["slope_threshold_10"] = args.slope_threshold_10
+         print(f"OVERRIDE: slope_threshold_10 = {args.slope_threshold_10}")
 
-    # Inject ADX/RSI overrides into 'filters' section
-    if "filters" not in cfg: cfg["filters"] = {}
-    
+    # SMA Argument Logic
+    if args.sma_period:
+        # Update Stock Bot Logic
+        cfg["filters"] = cfg.get("filters", {})
+        cfg["filters"]["trend_filter_sma"] = args.sma_period
+        # Update Data Fetcher Logic (Needs 'trend_filter' block enabled to fetch Daily data)
+        cfg["trend_filter"] = cfg.get("trend_filter", {})
+        cfg["trend_filter"]["enabled"] = True
+        cfg["trend_filter"]["sma_period"] = args.sma_period
+        print(f"OVERRIDE: trend_filter_sma = {args.sma_period}")
+    elif args.trend_filter:
+        # Update Stock Bot Logic
+        cfg["filters"] = cfg.get("filters", {})
+        cfg["filters"]["trend_filter_sma"] = 100
+        # Update Data Fetcher Logic
+        cfg["trend_filter"] = cfg.get("trend_filter", {})
+        cfg["trend_filter"]["enabled"] = True
+        cfg["trend_filter"]["sma_period"] = 100
+        print(f"OVERRIDE: trend_filter_sma = 100 (Default Enabled)")
+    else:
+        # Explicit disable if neither is provided, or rely on config
+        # User wants to comparison "with and without".
+        # If they don't pass anything, we use config (which is 0/disabled).
+        pass
+
+    if args.adx_max > 0:
+        cfg["filters"] = cfg.get("filters", {})
+        cfg["filters"]["adx_threshold"] = args.adx_max
+        print(f"OVERRIDE: adx_threshold = {args.adx_max}")
+    if args.rsi_entry is not None:
+        cfg["filters"] = cfg.get("filters", {})
+        cfg["filters"]["rsi_oversold"] = args.rsi_entry
+        print(f"OVERRIDE: rsi_oversold = {args.rsi_entry}")
+        
     # Inject DKF flag
     cfg["dead_knife_filter"] = args.dead_knife_filter
-    if args.adx_max > 0:
-        cfg["filters"]["adx_threshold"] = args.adx_max
-    if args.rsi_entry is not None:
-        cfg["filters"]["rsi_oversold"] = args.rsi_entry
-        
+    if args.dead_knife_filter:
+        print(f"OVERRIDE: Dead Knife Filter = ENABLED")
+
     # Inject Bracket overrides
     if "brackets" not in cfg: cfg["brackets"] = {}
     if args.tp_r is not None:
         cfg["brackets"]["take_profit_r"] = args.tp_r
+        print(f"OVERRIDE: take_profit_r = {args.tp_r}")
     if args.sl_atr is not None:
         cfg["brackets"]["atr_mult_sl"] = args.sl_atr
+        print(f"OVERRIDE: atr_mult_sl = {args.sl_atr}")
 
     if args.symbols.strip():
         symbols = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]

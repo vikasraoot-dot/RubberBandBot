@@ -45,7 +45,7 @@ DEFAULT_OPTS = {
     "max_debit": 3.00,          # Max $ per share for the spread (synced with live bot)
     "contracts": 1,             # Contracts per trade
     "bars_per_day": 26,         # 15m bars per trading day (6.5 hours)
-    "sma_period": 20,           # Daily SMA period for trend filter (20 = ~1 month)
+    "sma_period": 100,          # Daily SMA period for trend filter (Optimized All-Weather)
     "trend_filter": True,       # Enable/disable SMA trend filter
     "bars_stop": 14,            # Time stop: 14 bars (~3.5 hours) - matches live bot
 }
@@ -547,6 +547,8 @@ def main():
     ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80%% loss). Default 0.80.")
     ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and Loss Today)")
     ap.add_argument("--quiet", action="store_true")
+    ap.add_argument("--start-date", type=str, help="Start date for backtest (YYYY-MM-DD)")
+    ap.add_argument("--end-date", type=str, help="End date for backtest (YYYY-MM-DD)")
     ap.add_argument("--verbose", "-v", action="store_true", help="Show detailed entry/exit for each trade")
     args = ap.parse_args()
     
@@ -583,7 +585,6 @@ def main():
         "bars_stop": args.bars_stop,
         "slope_threshold": slope_threshold_3,
         "slope_threshold_10": slope_threshold_10,
-        "slope_threshold_10": slope_threshold_10,
         "sl_pct": args.sl_pct,
         "dead_knife_filter": args.dead_knife_filter,
     }
@@ -591,9 +592,28 @@ def main():
     # Fetch 15-minute data
     timeframe = "15Min"
     feed = cfg.get("feed", "iex")
-    fetch_days = int(args.days * 1.6)
     
-    print(f"Fetching {len(symbols)} symbols for {args.days} days...", flush=True)
+    # Determine Fetch Period
+    fetch_end = None
+    if args.end_date:
+        fetch_end = args.end_date
+        if args.start_date:
+            start_dt = datetime.strptime(args.start_date, "%Y-%m-%d")
+            end_dt = datetime.strptime(args.end_date, "%Y-%m-%d")
+            days_diff = (end_dt - start_dt).days
+            fetch_days = int(days_diff * 1.6) # Add padding for weekends/holidays
+        else:
+            fetch_days = int(args.days * 1.6)
+    else:
+        # Default behavior: back from today
+        fetch_days = int(args.days * 1.6)
+        # Check if start_date is provided without end_date (implied end=today)
+        if args.start_date:
+             start_dt = datetime.strptime(args.start_date, "%Y-%m-%d")
+             days_diff = (datetime.now() - start_dt).days
+             fetch_days = int(days_diff * 1.6)
+
+    print(f"Fetching {len(symbols)} symbols for {fetch_days} days (End: {fetch_end if fetch_end else 'Now'})...", flush=True)
     print(f"SMA Trend Filter: {'ENABLED' if opts['trend_filter'] else 'DISABLED'} (SMA-{args.sma_period})")
     
     bars_map, _ = fetch_latest_bars(
@@ -602,6 +622,7 @@ def main():
         history_days=fetch_days,
         feed=feed,
         verbose=not args.quiet,
+        end=fetch_end,
     )
     
     # Fetch daily data for SMA trend filter
