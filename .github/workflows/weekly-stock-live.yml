@@ -21,6 +21,7 @@ concurrency:
 jobs:
   trade:
     runs-on: ubuntu-latest
+    timeout-minutes: 480
     
     steps:
       - name: Checkout repository

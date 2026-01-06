@@ -433,6 +433,29 @@ def check_kill_switch(
         if current <= 0:
             print(f"[KILL SWITCH] ⚠️ Missing price for {sym}, skipping PnL check to avoid false trigger.")
             continue
+            
+        # --- FLASH CRASH PROTECTION ---
+        # If price shows > 90% drop, verify with live quote provided avg_entry valid
+        avg_entry = cost_basis / qty if qty else 0
+        if avg_entry > 0 and current < (avg_entry * 0.1): 
+             # Suspicious 90% drop. Check Real-Time Quote.
+             try:
+                 q = get_latest_quote(base_url, key, secret, sym)
+                 bid = float(q.get("bid", 0))
+                 ask = float(q.get("ask", 0))
+                 
+                 # If we have a valid bid that is HIGHER than current, use it
+                 if bid > current:
+                     print(f"[KILL SWITCH] ⚠️ {sym} Flash Crash Detected? Current={current}, Bid={bid}. Using Bid.")
+                     current = bid
+                 elif ask > 0 and current < (ask * 0.1):
+                     # Current is < 10% of Ask? (e.g. Price=0.01, Ask=10.00)
+                     # Likely bad data. Use Ask/2 or skip.
+                     print(f"[KILL SWITCH] ⚠️ {sym} Bad Data? Current={current}, Ask={ask}. Using Ask/2.")
+                     current = ask / 2
+             except Exception as rx:
+                 print(f"[KILL SWITCH] Error verifying quote for {sym}: {rx}")
+        # -----------------------------
         
         # Add full cost basis to invested (not just today's portion)
         invested += cost_basis
