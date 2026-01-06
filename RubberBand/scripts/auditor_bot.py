@@ -176,6 +176,12 @@ class AuditorBot:
 
     def _process_log_file(self, log_file: str):
         """Process all entries in a log file."""
+        # Use relative path for state tracking to ensure consistency across runners
+        try:
+            rel_path = os.path.relpath(log_file, _REPO_ROOT)
+        except ValueError:
+            rel_path = os.path.basename(log_file) # Fallback
+
         basename = os.path.basename(log_file)
         
         # Determine bot type from filename
@@ -187,7 +193,7 @@ class AuditorBot:
             default_bot_type = "STOCK"
         
         # Track which lines we've already processed
-        start_line = self.processed_lines.get(log_file, 0)
+        start_line = self.processed_lines.get(rel_path, 0)
         
         try:
             with open(log_file, "r", encoding="utf-8") as f:
@@ -210,7 +216,7 @@ class AuditorBot:
                     except json.JSONDecodeError:
                         continue
                     
-                    self.processed_lines[log_file] = i + 1
+                    self.processed_lines[rel_path] = i + 1
                     
         except Exception as e:
             logger.error(f"Error processing {log_file}: {e}")
@@ -296,9 +302,17 @@ class AuditorBot:
         if existing:
             return  # Don't double-enter
         
-        # Unique ID for this shadow trade
-        shadow_id = f"SHADOW_{bot_tag}_{symbol}_{int(datetime.now().timestamp())}"
+        # Deterministic ID for this shadow trade to prevent duplicates on re-processing
+        # Use TS + Symbol + Reason as unique key
+        safe_ts = ts.replace(":", "").replace("-", "").replace(".", "")
+        shadow_id = f"SHADOW_{bot_tag}_{symbol}_{safe_ts}"
         
+        # Check if this ID was already processed (in open OR closed positions)
+        if any(p.get("id") == shadow_id for p in self.closed_positions):
+            return # Already closed this exact shadow trade
+        if shadow_id in self.positions:
+            return # Already open
+
         if bot_type == "STOCK":
             # Simulate a Stock Buy
             try:
@@ -326,6 +340,7 @@ class AuditorBot:
                 pass 
             
             self.positions[shadow_id] = {
+                "id": shadow_id,
                 "type": "STOCK",
                 "bot_tag": bot_tag,
                 "symbol": symbol,
@@ -372,6 +387,7 @@ class AuditorBot:
             debit = l_quote["ask"] - s_quote["bid"]
             
             self.positions[shadow_id] = {
+                "id": shadow_id,
                 "type": "SPREAD",
                 "bot_tag": bot_tag,
                 "symbol": symbol,
