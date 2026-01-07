@@ -78,7 +78,9 @@ def place_oco_order(symbol: str, qty: int, tp_price: float, sl_price: float) -> 
         "type": "limit",
         "time_in_force": "gtc",
         "order_class": "oco",
-        "limit_price": str(tp_price),
+        "take_profit": {
+            "limit_price": str(tp_price)
+        },
         "stop_loss": {
             "stop_price": str(sl_price)
         }
