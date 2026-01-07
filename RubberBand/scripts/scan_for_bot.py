@@ -40,7 +40,7 @@ BOT_PROFILES = {
         "price_max": 1000,
         "atr_pct_min": 1.5,
         "atr_pct_max": 5.0,
-        "dollar_vol_min": 5_000_000,  # $5M daily
+        "dollar_vol_min": 20_000_000,  # $20M daily (Raised from $5M to improve quality)
         "sma_period": 0,  # 0 = Disabled (Mean Reversion catches falling knives)
         "require_options": False,
     },
