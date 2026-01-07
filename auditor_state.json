@@ -15,21 +15,6 @@
       "current_price": 69.77000000000001,
       "unrealized_pnl": 0.0
     },
-    "SHADOW_15M_STK_KMI_1767371819": {
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "KMI",
-      "entry_price": 27.605,
-      "entry_time": "2026-01-02T16:13:43.407481+00:00",
-      "reason": "Slope3_Too_Flat(0.0181% > -0.08%)",
-      "qty": 100,
-      "tp_price": 27.881050000000002,
-      "sl_price": 27.32895,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 27.505000000000003,
-      "unrealized_pnl": -9.999999999999787
-    },
     "SHADOW_15M_STK_WBD_1767371825": {
       "type": "STOCK",
       "bot_tag": "15M_STK",
@@ -42,38 +27,8 @@
       "sl_price": 28.38825,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 28.655,
-      "unrealized_pnl": -1.9999999999999574
-    },
-    "SHADOW_15M_STK_NVDA_1767389078": {
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "NVDA",
-      "entry_price": 189.785,
-      "entry_time": "2026-01-02T16:13:43.407481+00:00",
-      "reason": "Slope3_Too_Flat(0.0654% > -0.08%)",
-      "qty": 100,
-      "tp_price": 191.68285,
-      "sl_price": 187.88715,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 190.2,
-      "unrealized_pnl": 41.499999999999204
-    },
-    "SHADOW_15M_STK_ORCL_1767389090": {
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "ORCL",
-      "entry_price": 197.54500000000002,
-      "entry_time": "2026-01-02T16:13:43.407481+00:00",
-      "reason": "Slope3_Too_Flat(-0.0356% > -0.08%)",
-      "qty": 100,
-      "tp_price": 199.52045,
-      "sl_price": 195.56955000000002,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 195.89,
-      "unrealized_pnl": -165.50000000000296
+      "current_price": 28.425,
+      "unrealized_pnl": -25.0
     },
     "SHADOW_15M_STK_CLH_1767389091": {
       "type": "STOCK",
@@ -1440,11 +1395,70 @@
       "exit_time": "2026-01-05T15:57:16.293993+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 313.99999999999864
+    },
+    {
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "KMI",
+      "entry_price": 27.605,
+      "entry_time": "2026-01-02T16:13:43.407481+00:00",
+      "reason": "Slope3_Too_Flat(0.0181% > -0.08%)",
+      "qty": 100,
+      "tp_price": 27.881050000000002,
+      "sl_price": 27.32895,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 26.905,
+      "unrealized_pnl": -69.99999999999993,
+      "exit_price": 26.905,
+      "exit_time": "2026-01-07T14:35:36.927470+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -69.99999999999993
+    },
+    {
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "NVDA",
+      "entry_price": 189.785,
+      "entry_time": "2026-01-02T16:13:43.407481+00:00",
+      "reason": "Slope3_Too_Flat(0.0654% > -0.08%)",
+      "qty": 100,
+      "tp_price": 191.68285,
+      "sl_price": 187.88715,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 187.7,
+      "unrealized_pnl": -208.5000000000008,
+      "exit_price": 187.7,
+      "exit_time": "2026-01-07T14:35:37.465098+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -208.5000000000008
+    },
+    {
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "ORCL",
+      "entry_price": 197.54500000000002,
+      "entry_time": "2026-01-02T16:13:43.407481+00:00",
+      "reason": "Slope3_Too_Flat(-0.0356% > -0.08%)",
+      "qty": 100,
+      "tp_price": 199.52045,
+      "sl_price": 195.56955000000002,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 195.38,
+      "unrealized_pnl": -216.50000000000205,
+      "exit_price": 195.38,
+      "exit_time": "2026-01-07T14:35:37.739726+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -216.50000000000205
     }
   ],
   "processed_lines": {
     "C:\\Trades\\RubberBandBot\\_work\\RubberBandBot\\RubberBandBot\\auditor_logs\\15M_STK_20260102.jsonl": 480,
     "C:\\Trades\\RubberBandBot\\actions-runner-2\\_work\\RubberBandBot\\RubberBandBot\\auditor_logs\\15M_STK_20260102.jsonl": 480,
-    "C:\\Trades\\RubberBandBot\\actions-runner-2\\_work\\RubberBandBot\\RubberBandBot\\auditor_logs\\15M_OPT_20260105.jsonl": 58
+    "C:\\Trades\\RubberBandBot\\actions-runner-2\\_work\\RubberBandBot\\RubberBandBot\\auditor_logs\\15M_OPT_20260105.jsonl": 58,
+    "auditor_logs\\15M_STK_20260107.jsonl": 6,
+    "auditor_logs\\15M_OPT_20260107.jsonl": 50
   }
 }
