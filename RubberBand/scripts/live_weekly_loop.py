@@ -18,9 +18,11 @@ from RubberBand.src.data import (
     get_positions,
     get_daily_fills,
     check_kill_switch,
+    check_capital_limit,
     order_exists_today,
     close_position,
     KillSwitchTriggered,
+    CapitalLimitExceeded,
 )
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
@@ -285,6 +287,20 @@ def run_weekly_cycle():
                 
                 # Generate client_order_id for position attribution
                 coid = registry.generate_order_id(symbol)
+                
+                # Capital limit check
+                trade_value = qty * close
+                max_capital = float(cfg.get("max_capital", 100000))
+                try:
+                    check_capital_limit(
+                        base_url=None, key=None, secret=None,
+                        proposed_trade_value=trade_value,
+                        max_capital=max_capital,
+                        bot_tag=BOT_TAG,
+                    )
+                except CapitalLimitExceeded as e:
+                    logging.warning(f"Capital limit exceeded for {symbol}: {e}")
+                    continue
                 
                 # Submit bracket order (uses env credentials)
                 result = submit_bracket_order(

@@ -1,0 +1,66 @@
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-05T14:51:42Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-03T14:51:42Z","end":"2026-01-05T14:51:42Z","when":"2026-01-05T14:51:42Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-05T14:51:43Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.25
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+{"ts": "2026-01-05T09:51:43.247020-05:00", "msg": "Regime: CALM (VIXY=25.25)"}
+{"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":120,"type":"HEARTBEAT","ts":"2026-01-05T14:51:43Z","ts_et":"2026-01-05 09:51:43 ET"}
+{"ts": "2026-01-05T09:51:43.247579-05:00", "msg": "Weekly Options V3 Started", "tickers": 120}
+{"ts": "2026-01-05T09:51:44.096090-05:00", "msg": "Starting weekly options scan", "dry_run": false, "monitor_only": false, "max_premium": 2000.0, "target_delta": 0.65, "bot_tag": "WK_OPT", "registry_positions": 0}
+{"ts": "2026-01-05T09:51:44.472982-05:00", "msg": "Managing 11 weekly option positions"}
+{"event":"positions_checked","all_positions":11,"my_positions":0,"my_underlyings":[],"type":"HEARTBEAT","ts":"2026-01-05T14:51:44Z","ts_et":"2026-01-05 09:51:44 ET"}
+{"ts": "2026-01-05T09:51:44.524109-05:00", "msg": "Positions: 0 mine / 11 total", "my_underlyings": [], "bot_tag": "WK_OPT"}
+{"ts": "2026-01-05T09:51:56.130991-05:00", "msg": "Found 25 weekly signals", "signals": [["HOOD", "RSI=47.7"], ["COIN", "RSI=37.8"], ["ORCL", "RSI=22.7"], ["SMCI", "RSI=32.3"], ["DASH", "RSI=36.3"], ["PLTR", "RSI=46.6"], ["DELL", "RSI=48.6"], ["CRWD", "RSI=43.4"], ["RCL", "RSI=37.5"], ["ANET", "RSI=45.8"], ["NET", "RSI=43.3"], ["DHI", "RSI=37.0"], ["SPOT", "RSI=27.0"], ["WDAY", "RSI=28.0"], ["ETN", "RSI=34.9"], ["PINS", "RSI=31.5"], ["INTU", "RSI=37.3"], ["NKE", "RSI=43.1"], ["ADBE", "RSI=40.9"], ["ADSK", "RSI=31.2"], ["URI", "RSI=36.0"], ["META", "RSI=36.9"], ["CDNS", "RSI=37.6"], ["NOW", "RSI=9.6"], ["MO", "RSI=25.2"]]}
+[options] Selected ITM: HOOD260220C00115000 strike=115.0 (3.5% ITM, underlying=119.19)
+[options] Order submitted: HOOD260220C00115000 buy 1 @ 12.82
+[options] Fill verified: HOOD260220C00115000 (took 1s)
+{"ts": "2026-01-05T09:51:57.464039-05:00", "msg": "Order submitted for HOOD260220C00115000", "order_id": "fc35bc0a-b75e-4e77-8990-f25dbb24244d", "client_order_id": "WK_OPT_HOOD260220C00115000_1767624716", "qty": 1, "limit_price": 12.82, "status": "filled"}
+[registry] Recorded entry: HOOD260220C00115000 (order_id=WK_OPT_HOOD260220C00115000_176...)
+[options] Selected ITM: COIN260220C00250000 strike=250.0 (1.2% ITM, underlying=253.05)
+{"ts": "2026-01-05T09:51:57.617541-05:00", "msg": "Premium too high for COIN260220C00250000", "ask": 23.2, "total_cost": 2320.0, "max": 2000.0}
+[options] Selected ITM: ORCL260220C00190000 strike=190.0 (3.2% ITM, underlying=196.32)
+[options] Order submitted: ORCL260220C00190000 buy 1 @ 16.4
+[options] Fill verified: ORCL260220C00190000 (took 1s)
+{"ts": "2026-01-05T09:51:58.976664-05:00", "msg": "Order submitted for ORCL260220C00190000", "order_id": "7bcf30d5-c8ab-4ebf-a7b1-f51727896fa4", "client_order_id": "WK_OPT_ORCL260220C00190000_1767624717", "qty": 1, "limit_price": 16.4, "status": "filled"}
+[registry] Recorded entry: ORCL260220C00190000 (order_id=WK_OPT_ORCL260220C00190000_176...)
+[options] Selected ITM: SMCI260220C00030000 strike=30.0 (3.6% ITM, underlying=31.13)
+[options] Order submitted: SMCI260220C00030000 buy 1 @ 3.97
+[options] Fill verified: SMCI260220C00030000 (took 1s)
+{"ts": "2026-01-05T09:52:00.321808-05:00", "msg": "Order submitted for SMCI260220C00030000", "order_id": "93743b62-5394-453f-964a-58930c203544", "client_order_id": "WK_OPT_SMCI260220C00030000_1767624719", "qty": 1, "limit_price": 3.97, "status": "filled"}
+[registry] Recorded entry: SMCI260220C00030000 (order_id=WK_OPT_SMCI260220C00030000_176...)
+[options] Selected ITM: DASH260220C00220000 strike=220.0 (1.5% ITM, underlying=223.30)
+[options] Order submitted: DASH260220C00220000 buy 1 @ 18.67
+[options] Fill verified: DASH260220C00220000 (took 1s)
+{"ts": "2026-01-05T09:52:01.680238-05:00", "msg": "Order submitted for DASH260220C00220000", "order_id": "ff8ed098-a985-48a8-a620-d082ac814209", "client_order_id": "WK_OPT_DASH260220C00220000_1767624720", "qty": 1, "limit_price": 18.67, "status": "filled"}
+[registry] Recorded entry: DASH260220C00220000 (order_id=WK_OPT_DASH260220C00220000_176...)
+[options] Selected ITM: PLTR260220C00170000 strike=170.0 (2.3% ITM, underlying=174.09)
+[options] Order submitted: PLTR260220C00170000 buy 1 @ 16.65
+[options] Fill verified: PLTR260220C00170000 (took 1s)
+{"ts": "2026-01-05T09:52:02.993003-05:00", "msg": "Order submitted for PLTR260220C00170000", "order_id": "5f16c6ab-1207-4999-ad58-5672d1435c59", "client_order_id": "WK_OPT_PLTR260220C00170000_1767624721", "qty": 1, "limit_price": 16.65, "status": "filled"}
+[registry] Recorded entry: PLTR260220C00170000 (order_id=WK_OPT_PLTR260220C00170000_176...)
+{"event":"scan_complete","signals":25,"new_entries":5,"total_positions":5,"type":"HEARTBEAT","ts":"2026-01-05T14:52:02Z","ts_et":"2026-01-05 09:52:02 ET"}
+{"ts": "2026-01-05T09:52:02.993926-05:00", "msg": "Weekly options scan complete", "signals": 25, "new_entries": 5, "total_positions": 5}
+{"type":"EOD_SUMMARY","date":"2026-01-05","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2026-01-05T14:52:02Z","ts_et":"2026-01-05 09:52:02 ET"}
+[logger] No trades to export
+{"ts": "2026-01-05T09:52:02.994451-05:00", "msg": "\n=== Weekly Options Session Summary ==="}
+-----------------------------------------------------------------------------------------
+Symbol                    Bought   Avg Ent    Basis        Sold     Avg Ex     Day PnL   
+-----------------------------------------------------------------------------------------
+DASH260220C00220000       1        18.55      1855.00      0        0.00       -         
+HOOD260220C00115000       1        12.80      1280.00      0        0.00       -         
+ORCL260220C00190000       1        16.35      1635.00      0        0.00       -         
+PLTR260220C00170000       1        16.50      1650.00      0        0.00       -         
+SMCI260220C00030000       1        3.95       395.00       0        0.00       -         
+-----------------------------------------------------------------------------------------
+TOTAL Day PnL: $0.00 | TOTAL VOL: $6,815.00
+{"ts": "2026-01-05T09:52:03.045965-05:00", "msg": "=== End Summary ==="}

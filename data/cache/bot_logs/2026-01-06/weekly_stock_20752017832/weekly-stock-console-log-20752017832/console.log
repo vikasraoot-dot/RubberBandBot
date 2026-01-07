@@ -1,0 +1,315 @@
+[registry] Loaded 4 open positions for WK_STK
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T14:53:11Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T14:53:11Z","end":"2026-01-06T14:53:11Z","when":"2026-01-06T14:53:11Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T14:53:12Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.24
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 14:53:12,292 [INFO] WEEKLY: Regime: CALM (VIXY=25.24)
+2026-01-06 14:53:12,292 [INFO] WEEKLY: ============================================================
+2026-01-06 14:53:12,292 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 14:53:12,292 [INFO] WEEKLY: ============================================================
+[registry] Loaded 4 open positions for WK_STK
+2026-01-06 14:53:12,427 [INFO] WEEKLY: Registry loaded: 4 positions in WK_STK registry
+[registry] Removing orphaned position: BA
+[registry] Removing orphaned position: RBLX
+2026-01-06 14:53:13,469 [INFO] WEEKLY: Open Positions (WK_STK): 2
+2026-01-06 14:53:13,469 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 14:53:13,469 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 14:53:13,469 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 14:53:13,469 [INFO] WEEKLY: META     3      648.06     654.74     20.03      1.03    %
+2026-01-06 14:53:13,469 [INFO] WEEKLY: ORCL     70     187.98     191.99     280.90     2.13    %
+2026-01-06 14:53:13,469 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 14:53:13,470 [INFO] WEEKLY: Analyzing RKLB...
+{"type":"UNIVERSE","loaded":1,"sample":["RKLB"],"when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:13Z","end":"2026-01-06T14:53:13Z","when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["RKLB"],"sample_empty":[],"when":"2026-01-06T14:53:13Z"}
+2026-01-06 14:53:13,884 [INFO] WEEKLY: Analyzing HOOD...
+{"type":"UNIVERSE","loaded":1,"sample":["HOOD"],"when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:13Z","end":"2026-01-06T14:53:13Z","when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["HOOD"],"sample_empty":[],"when":"2026-01-06T14:53:13Z"}
+2026-01-06 14:53:13,958 [INFO] WEEKLY: Analyzing INTC...
+{"type":"UNIVERSE","loaded":1,"sample":["INTC"],"when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:13Z","end":"2026-01-06T14:53:13Z","when":"2026-01-06T14:53:13Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["INTC"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,299 [INFO] WEEKLY: Analyzing WDC...
+{"type":"UNIVERSE","loaded":1,"sample":["WDC"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["WDC"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,369 [INFO] WEEKLY: Analyzing VRT...
+{"type":"UNIVERSE","loaded":1,"sample":["VRT"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VRT"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,515 [INFO] WEEKLY: Analyzing COIN...
+{"type":"UNIVERSE","loaded":1,"sample":["COIN"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["COIN"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,722 [INFO] WEEKLY: 🔥 SIGNAL FOUND for COIN: RSI=26.4, Dev=-14.4%
+2026-01-06 14:53:14,722 [INFO] WEEKLY: Submitting Bracket Order: COIN x 7 @ Market, SL=186.20, TP=428.39
+[order] COIN: Using limit price $259.82 (buy, buffer=1.0%)
+2026-01-06 14:53:14,805 [INFO] WEEKLY: ✅ Order placed: 9758da25-63d0-45aa-a645-a259f4f31d06
+{"symbol":"COIN","side":"buy","qty":7,"entry_price":255.4,"stop_loss_price":186.203,"take_profit_price":428.39250000000004,"entry_reason":"Weekly RB: RSI=26.4, Dev=-14.4%","type":"ENTRY_SUBMIT","ts":"2026-01-06T14:53:14Z","ts_et":"2026-01-06 09:53:14 ET"}
+[registry] Recorded entry: COIN (order_id=WK_STK_COIN_1767711194...)
+2026-01-06 14:53:14,806 [INFO] WEEKLY: Analyzing MU...
+{"type":"UNIVERSE","loaded":1,"sample":["MU"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["MU"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,871 [INFO] WEEKLY: Analyzing CIEN...
+{"type":"UNIVERSE","loaded":1,"sample":["CIEN"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["CIEN"],"sample_empty":[],"when":"2026-01-06T14:53:14Z"}
+2026-01-06 14:53:14,937 [INFO] WEEKLY: Analyzing STX...
+{"type":"UNIVERSE","loaded":1,"sample":["STX"],"when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:14Z","end":"2026-01-06T14:53:14Z","when":"2026-01-06T14:53:14Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["STX"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,030 [INFO] WEEKLY: Analyzing APP...
+{"type":"UNIVERSE","loaded":1,"sample":["APP"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["APP"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,110 [INFO] WEEKLY: Analyzing BURL...
+{"type":"UNIVERSE","loaded":1,"sample":["BURL"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["BURL"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,176 [INFO] WEEKLY: Analyzing CVNA...
+{"type":"UNIVERSE","loaded":1,"sample":["CVNA"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["CVNA"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,247 [INFO] WEEKLY: Analyzing MDB...
+{"type":"UNIVERSE","loaded":1,"sample":["MDB"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["MDB"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,309 [INFO] WEEKLY: Analyzing SMCI...
+{"type":"UNIVERSE","loaded":1,"sample":["SMCI"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["SMCI"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,386 [INFO] WEEKLY: 🔥 SIGNAL FOUND for SMCI: RSI=20.3, Dev=-25.0%
+2026-01-06 14:53:15,387 [INFO] WEEKLY: Submitting Bracket Order: SMCI x 66 @ Market, SL=21.02, TP=53.49
+[order] SMCI: Using limit price $30.59 (buy, buffer=1.0%)
+2026-01-06 14:53:15,697 [INFO] WEEKLY: ✅ Order placed: 515a7e2d-9c8e-4fd8-9e02-7d4150285bcb
+{"symbol":"SMCI","side":"buy","qty":66,"entry_price":30.295,"stop_loss_price":21.017,"take_profit_price":53.49000000000001,"entry_reason":"Weekly RB: RSI=20.3, Dev=-25.0%","type":"ENTRY_SUBMIT","ts":"2026-01-06T14:53:15Z","ts_et":"2026-01-06 09:53:15 ET"}
+[registry] Recorded entry: SMCI (order_id=WK_STK_SMCI_1767711195...)
+2026-01-06 14:53:15,697 [INFO] WEEKLY: Analyzing DKNG...
+{"type":"UNIVERSE","loaded":1,"sample":["DKNG"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["DKNG"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,762 [INFO] WEEKLY: Analyzing ON...
+{"type":"UNIVERSE","loaded":1,"sample":["ON"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["ON"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,842 [INFO] WEEKLY: Analyzing AVGO...
+{"type":"UNIVERSE","loaded":1,"sample":["AVGO"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["AVGO"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,912 [INFO] WEEKLY: Analyzing DASH...
+{"type":"UNIVERSE","loaded":1,"sample":["DASH"],"when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-12-02T14:53:15Z","end":"2026-01-06T14:53:15Z","when":"2026-01-06T14:53:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["DASH"],"sample_empty":[],"when":"2026-01-06T14:53:15Z"}
+2026-01-06 14:53:15,974 [INFO] WEEKLY: 🔥 SIGNAL FOUND for DASH: RSI=36.8, Dev=-3.5%
+2026-01-06 14:53:15,974 [INFO] WEEKLY: Submitting Bracket Order: DASH x 8 @ Market, SL=184.96, TP=341.70
+[order] DASH: Using limit price $240.62 (buy, buffer=1.0%)
+2026-01-06 14:53:16,059 [INFO] WEEKLY: ✅ Order placed: ee235857-6309-451d-a945-55394685ae01
+{"symbol":"DASH","side":"buy","qty":8,"entry_price":229.74,"stop_loss_price":184.957,"take_profit_price":341.69750000000005,"entry_reason":"Weekly RB: RSI=36.8, Dev=-3.5%","type":"ENTRY_SUBMIT","ts":"2026-01-06T14:53:16Z","ts_et":"2026-01-06 09:53:16 ET"}
+[registry] Recorded entry: DASH (order_id=WK_STK_DASH_1767711195...)
+2026-01-06 14:53:16,060 [INFO] WEEKLY: Max positions limit reached. Stopping.
+2026-01-06 14:53:16,060 [INFO] WEEKLY: 
+=== Weekly Stock Session Summary ===
+2026-01-06 14:53:16,104 [INFO] WEEKLY: No trades filled today for WK_STK.
+2026-01-06 14:53:16,104 [INFO] WEEKLY: === End Summary ===
+2026-01-06 14:53:16,105 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T15:53:16Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T15:53:16Z","end":"2026-01-06T15:53:16Z","when":"2026-01-06T15:53:16Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T15:53:16Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.38
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 15:53:16,411 [INFO] WEEKLY: Regime: CALM (VIXY=25.38)
+2026-01-06 15:53:16,411 [INFO] WEEKLY: ============================================================
+2026-01-06 15:53:16,412 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 15:53:16,412 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2026-01-06 15:53:16,553 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$16.78, unrealized_pnl=$223.49, total=$240.27, invested=$29657.11
+2026-01-06 15:53:16,737 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2026-01-06 15:53:16,738 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 15:53:16,738 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 15:53:16,738 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 15:53:16,738 [INFO] WEEKLY: COIN     67     250.26     252.23     132.32     0.79    %
+2026-01-06 15:53:16,738 [INFO] WEEKLY: DASH     48     226.89     229.48     124.16     1.14    %
+2026-01-06 15:53:16,738 [INFO] WEEKLY: META     3      648.06     656.73     26.01      1.34    %
+2026-01-06 15:53:16,738 [INFO] WEEKLY: ORCL     70     187.98     192.78     336.11     2.55    %
+2026-01-06 15:53:16,738 [INFO] WEEKLY: SMCI     66     30.29      29.79      -32.99     -1.65   %
+2026-01-06 15:53:16,738 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 15:53:16,739 [INFO] WEEKLY: Max positions reached. No new entries.
+2026-01-06 15:53:16,739 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T16:53:16Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T16:53:16Z","end":"2026-01-06T16:53:16Z","when":"2026-01-06T16:53:16Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T16:53:17Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.34
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 16:53:17,242 [INFO] WEEKLY: Regime: CALM (VIXY=25.34)
+2026-01-06 16:53:17,242 [INFO] WEEKLY: ============================================================
+2026-01-06 16:53:17,242 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 16:53:17,242 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2026-01-06 16:53:17,284 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$16.78, unrealized_pnl=$-6.65, total=$10.13, invested=$29657.11
+2026-01-06 16:53:17,674 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2026-01-06 16:53:17,674 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 16:53:17,674 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 16:53:17,674 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 16:53:17,674 [INFO] WEEKLY: COIN     67     250.26     249.23     -68.68     -0.41   %
+2026-01-06 16:53:17,674 [INFO] WEEKLY: DASH     48     226.89     228.94     98.00      0.90    %
+2026-01-06 16:53:17,675 [INFO] WEEKLY: META     3      648.06     653.65     16.76      0.86    %
+2026-01-06 16:53:17,675 [INFO] WEEKLY: ORCL     70     187.98     192.28     301.11     2.29    %
+2026-01-06 16:53:17,675 [INFO] WEEKLY: SMCI     66     30.29      29.75      -35.97     -1.80   %
+2026-01-06 16:53:17,675 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 16:53:17,676 [INFO] WEEKLY: Max positions reached. No new entries.
+2026-01-06 16:53:17,676 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T17:53:18Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T17:53:18Z","end":"2026-01-06T17:53:18Z","when":"2026-01-06T17:53:18Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T17:53:18Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.35
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 17:53:18,348 [INFO] WEEKLY: Regime: CALM (VIXY=25.35)
+2026-01-06 17:53:18,348 [INFO] WEEKLY: ============================================================
+2026-01-06 17:53:18,348 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 17:53:18,348 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2026-01-06 17:53:18,717 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$16.78, unrealized_pnl=$-73.73, total=$-56.94, invested=$29657.11
+2026-01-06 17:53:19,147 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2026-01-06 17:53:19,147 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 17:53:19,147 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 17:53:19,147 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 17:53:19,147 [INFO] WEEKLY: COIN     67     250.26     247.21     -204.35    -1.22   %
+2026-01-06 17:53:19,147 [INFO] WEEKLY: DASH     48     226.89     230.44     170.24     1.56    %
+2026-01-06 17:53:19,148 [INFO] WEEKLY: META     3      648.06     656.57     25.52      1.31    %
+2026-01-06 17:53:19,148 [INFO] WEEKLY: ORCL     70     187.98     192.53     318.26     2.42    %
+2026-01-06 17:53:19,148 [INFO] WEEKLY: SMCI     66     30.29      29.69      -39.61     -1.98   %
+2026-01-06 17:53:19,148 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 17:53:19,149 [INFO] WEEKLY: Max positions reached. No new entries.
+2026-01-06 17:53:19,149 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T18:53:19Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T18:53:19Z","end":"2026-01-06T18:53:19Z","when":"2026-01-06T18:53:19Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T18:53:19Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.25
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 18:53:19,617 [INFO] WEEKLY: Regime: CALM (VIXY=25.25)
+2026-01-06 18:53:19,617 [INFO] WEEKLY: ============================================================
+2026-01-06 18:53:19,618 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 18:53:19,618 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2026-01-06 18:53:20,241 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$16.78, unrealized_pnl=$-32.46, total=$-15.68, invested=$29657.11
+2026-01-06 18:53:20,909 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2026-01-06 18:53:20,909 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 18:53:20,910 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 18:53:20,910 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 18:53:20,910 [INFO] WEEKLY: COIN     67     250.26     247.74     -168.51    -1.01   %
+2026-01-06 18:53:20,910 [INFO] WEEKLY: DASH     48     226.89     230.75     184.88     1.70    %
+2026-01-06 18:53:20,910 [INFO] WEEKLY: META     3      648.06     660.58     37.55      1.93    %
+2026-01-06 18:53:20,910 [INFO] WEEKLY: ORCL     70     187.98     193.55     390.01     2.96    %
+2026-01-06 18:53:20,910 [INFO] WEEKLY: SMCI     66     30.29      29.55      -49.17     -2.46   %
+2026-01-06 18:53:20,910 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 18:53:20,911 [INFO] WEEKLY: Max positions reached. No new entries.
+2026-01-06 18:53:20,911 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T19:53:21Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T19:53:21Z","end":"2026-01-06T19:53:21Z","when":"2026-01-06T19:53:21Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T19:53:21Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.27
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2026-01-06 19:53:21,083 [INFO] WEEKLY: Regime: CALM (VIXY=25.27)
+2026-01-06 19:53:21,083 [INFO] WEEKLY: ============================================================
+2026-01-06 19:53:21,083 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2026-01-06 19:53:21,083 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2026-01-06 19:53:21,118 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$16.78, unrealized_pnl=$120.64, total=$137.43, invested=$29657.11
+2026-01-06 19:53:21,307 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2026-01-06 19:53:21,307 [INFO] WEEKLY: --- Current Holdings ---
+2026-01-06 19:53:21,307 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2026-01-06 19:53:21,307 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 19:53:21,307 [INFO] WEEKLY: COIN     67     250.26     249.23     -68.68     -0.41   %
+2026-01-06 19:53:21,307 [INFO] WEEKLY: DASH     48     226.89     231.34     213.44     1.96    %
+2026-01-06 19:53:21,307 [INFO] WEEKLY: META     3      648.06     661.01     38.84      2.00    %
+2026-01-06 19:53:21,307 [INFO] WEEKLY: ORCL     70     187.98     194.37     447.41     3.40    %
+2026-01-06 19:53:21,308 [INFO] WEEKLY: SMCI     66     30.29      29.92      -24.12     -1.21   %
+2026-01-06 19:53:21,308 [INFO] WEEKLY: ---------------------------------------------------------
+2026-01-06 19:53:21,308 [INFO] WEEKLY: Max positions reached. No new entries.
+2026-01-06 19:53:21,309 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...

@@ -1,0 +1,68 @@
+Positons held:
+Asset	Price	Qty	Side	Market Value	Avg Entry	Cost Basis	Today's P/L (%)	Today's P/L ($)	Total P/L (%)
+ANET	$133.10	15	Long	$1,996.43	$127.50	$1,912.50	0.0158	$30.98	0.0439
+BA	$227.00	9	Long	$2,043.00	$200.02	$1,800.18	0.0455	$88.92	0.1349
+C	$118.81	17	Long	$2,019.77	$116.91	$1,987.47	0.0182	$36.04	0.0163
+CMG260130C00035000	$2.75	2	Long	$550.00	$2.46	$491.00	0.0536	$28.00	0.1202
+COIN	$237.40	60	Long	$14,244.00	$249.64	$14,978.59	0.0498	$675.60	-4.90%
+DASH	$220.00	40	Long	$8,800.00	$226.34	$9,053.60	-2.86%	-$259.20	-2.80%
+DELL260220C00125000	$9.05	3	Long	$2,715.00	$9.70	$2,910.00	0.1104	$270.00	-6.70%
+DKNG	$35.69	336	Long	$11,993.05	$35.39	$11,889.89	0.0358	$414.49	0.0087
+DKNG260220C00032500	$4.50	2	Long	$900.00	$4.18	$835.00	0.1688	$130.00	0.0778
+DKNG260220C00035000	$3.05	1	Long	$305.00	$2.80	$280.00	0.0893	$25.00	0.0893
+HOOD	$115.45	132	Long	$15,239.40	$117.26	$15,477.93	0.0208	$310.20	-1.54%
+HOOD260220C00105000	$15.65	1	Long	$1,565.00	$14.80	$1,480.00	0.0574	$85.00	0.0574
+HOOD260220C00110000	$12.90	2	Long	$2,580.00	$13.85	$2,770.00	0.1026	$240.00	-6.86%
+META	$649.65	3	Long	$1,948.95	$648.06	$1,944.19	-1.58%	-$31.32	0.0024
+ORCL	$195.42	70	Long	$13,679.40	$187.98	$13,158.49	0.0026	$35.70	0.0396
+ORCL260130C00175000	$21.05	1	Long	$2,105.00	$17.55	$1,755.00	-10.92%	-$258.00	0.1994
+ORCL260220C00190000	$15.35	1	Long	$1,535.00	$16.05	$1,605.00	-1.41%	-$22.00	-4.36%
+ORCL260220C00195000	$12.75	1	Long	$1,275.00	$13.90	$1,390.00	-8.27%	-$115.00	-8.27%
+RBLX	$80.99	21	Long	$1,700.79	$94.80	$1,990.80	-0.05%	-$0.84	-14.57%
+RCL	$283.26	21	Long	$5,948.46	$278.57	$5,849.90	0.0156	$91.14	0.0168
+SMCI	$31.03	366	Long	$11,356.98	$32.44	$11,874.78	0.0601	$644.16	-4.36%
+SMCI260220C00029000	$4.15	2	Long	$830.00	$3.63	$725.00	0.2769	$180.00	0.1448
+SMCI260220C00030000	$3.70	1	Long	$370.00	$3.60	$360.00	0.0278	$10.00	0.0278
+TSLA	$439.76	4	Long	$1,759.04	$477.69	$1,910.76	-2.21%	-$39.84	-7.94%
+TSM	$319.90	6	Long	$1,919.40	$293.29	$1,759.72	0.0527	$96.06	0.0907
+TXN	$177.52	11	Long	$1,952.72	$177.60	$1,953.60	0.0232	$44.33	
+
+
+Broker side log history of orders:
+Asset	Order Type	Side	Qty	Filled Qty	Avg. Fill Price	Status	Source	Submitted At	Filled At	Expires At
+2-Leg Order	Limit @ $0.04	-	1	1	0.04	filled	-	Jan 02, 2026, 8:32:07 AM	Jan 02, 2026, 8:32:08 AM	-
+ABNB260109C00137000	Limit @ -	sell	1	1	0.51	filled	-	Jan 02, 2026, 8:32:07 AM	Jan 02, 2026, 8:32:08 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00138000	Limit @ -	buy	1	1	0.55	filled	-	Jan 02, 2026, 8:32:07 AM	Jan 02, 2026, 8:32:08 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.70	-	1	1	0.66	filled	access_key	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00137000	Limit @ -	buy	1	1	0.96	filled	access_key	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00138000	Limit @ -	sell	1	1	0.3	filled	access_key	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 8:31:06 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.05	-	1	1	-0.05	filled	access_key	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 1:00:00 PM
+DIS260109C00114000	Limit @ -	sell	1	1	0.45	filled	access_key	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 1:00:00 PM
+DIS260109C00115000	Limit @ -	buy	1	1	0.4	filled	access_key	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 7:04:07 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.42	-	1	1	0.38	filled	access_key	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00135000	Limit @ -	sell	1	1	1.07	filled	access_key	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00136000	Limit @ -	buy	1	1	1.45	filled	access_key	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 7:02:06 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.39	-	1	1	0.29	filled	access_key	Jan 02, 2026, 7:01:01 AM	Jan 02, 2026, 7:03:14 AM	Jan 02, 2026, 1:00:00 PM
+DIS260109C00114000	Limit @ -	buy	1	1	0.58	filled	access_key	Jan 02, 2026, 7:01:01 AM	Jan 02, 2026, 7:03:14 AM	Jan 02, 2026, 1:00:00 PM
+DIS260109C00115000	Limit @ -	sell	1	1	0.29	filled	access_key	Jan 02, 2026, 7:01:01 AM	Jan 02, 2026, 7:03:14 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.90	-	1	1	0.86	filled	access_key	Jan 02, 2026, 7:00:57 AM	Jan 02, 2026, 7:00:58 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00135000	Limit @ -	buy	1	1	1.5	filled	access_key	Jan 02, 2026, 7:00:57 AM	Jan 02, 2026, 7:00:58 AM	Jan 02, 2026, 1:00:00 PM
+ABNB260109C00136000	Limit @ -	sell	1	1	0.64	filled	access_key	Jan 02, 2026, 7:00:57 AM	Jan 02, 2026, 7:00:58 AM	Jan 02, 2026, 1:00:00 PM
+HOOD	Limit @ $114.42	buy	17	17	113.258824	filled	access_key	Jan 02, 2026, 6:49:23 AM	Jan 02, 2026, 6:49:26 AM	Jan 02, 2026, 1:00:00 PM
+DELL260220C00125000	Limit @ $9.47	buy	1	1	9.45	filled	access_key	Jan 02, 2026, 6:49:12 AM	Jan 02, 2026, 6:49:12 AM	Jan 02, 2026, 1:00:00 PM
+DKNG260220C00035000	Limit @ $2.85	buy	1	1	2.8	filled	access_key	Jan 02, 2026, 6:49:06 AM	Jan 02, 2026, 6:49:10 AM	Jan 02, 2026, 1:00:00 PM
+SMCI260220C00030000	Limit @ $3.67	buy	1	1	3.6	filled	access_key	Jan 02, 2026, 6:48:59 AM	Jan 02, 2026, 6:49:58 AM	Jan 02, 2026, 1:00:00 PM
+ORCL260220C00195000	Limit @ $13.92	buy	1	1	13.9	filled	access_key	Jan 02, 2026, 6:48:56 AM	Jan 02, 2026, 6:48:56 AM	Jan 02, 2026, 1:00:00 PM
+HOOD260220C00105000	Limit @ $14.82	buy	1	1	14.8	filled	access_key	Jan 02, 2026, 6:48:48 AM	Jan 02, 2026, 6:58:44 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.35	-	1	1	0.35	filled	access_key	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 1:00:00 PM
+C260109C00117000	Limit @ -	sell	1	1	1.15	filled	access_key	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 1:00:00 PM
+C260109C00118000	Limit @ -	buy	1	1	1.5	filled	access_key	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 6:33:07 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.36	-	1	1	-0.25	filled	access_key	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 1:00:00 PM
+LRCX260109C00172500	Limit @ -	sell	1	1	7.75	filled	access_key	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 1:00:00 PM
+LRCX260109C00175000	Limit @ -	buy	1	1	7.5	filled	access_key	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 6:32:06 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.15	-	1	1	-0.1	filled	access_key	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 1:00:00 PM
+TSLA260102C00465000	Limit @ -	sell	1	1	0.57	filled	access_key	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 1:00:00 PM
+TSLA260102C00467500	Limit @ -	buy	1	1	0.47	filled	access_key	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 6:30:08 AM	Jan 02, 2026, 1:00:00 PM
+2-Leg Order	Limit @ $0.43	-	1	1	0.39	filled	access_key	Jan 02, 2026, 6:30:07 AM	Jan 02, 2026, 6:30:07 AM	Jan 02, 2026, 1:00:00 PM
+GM260109C00082000	Limit @ -	sell	1	1	0.53	filled	access_key	Jan 02, 2026, 6:30:07 AM	Jan 02, 2026, 6:30:07 AM	Jan 02, 2026, 1:00:00 PM
+GM260109C00083000	Limit @ -	buy	1	1	0.92	filled	access_key	Jan 2, 2026, 6:30:07 AM	Jan 02, 2026, 6:30:07 AM	Jan 02, 2026, 01:00:00 PM

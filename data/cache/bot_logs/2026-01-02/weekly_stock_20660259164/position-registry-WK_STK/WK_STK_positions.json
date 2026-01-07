@@ -1,0 +1,53 @@
+{
+  "bot_tag": "WK_STK",
+  "updated_at": "2026-01-02T09:49:23.877265-05:00",
+  "positions": {
+    "BA": {
+      "symbol": "BA",
+      "client_order_id": "WK_STK_BA_1765464593",
+      "qty": 9,
+      "entry_price": 200.02,
+      "entry_date": "2025-12-11T14:49:54.242484Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "META": {
+      "symbol": "META",
+      "client_order_id": "WK_STK_META_1765464596",
+      "qty": 3,
+      "entry_price": 648.063333,
+      "entry_date": "2025-12-11T14:49:57.261081Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "ORCL": {
+      "symbol": "ORCL",
+      "client_order_id": "WK_STK_ORCL_1765464594",
+      "qty": 10,
+      "entry_price": 191.35,
+      "entry_date": "2025-12-11T14:49:56.096388Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "RBLX": {
+      "symbol": "RBLX",
+      "client_order_id": "WK_STK_RBLX_1765464590",
+      "qty": 21,
+      "entry_price": 94.8,
+      "entry_date": "2025-12-11T14:49:51.211149Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "HOOD": {
+      "symbol": "HOOD",
+      "underlying": "HOOD",
+      "client_order_id": "WK_STK_HOOD_1767365363",
+      "order_id": "36c06837-d2fd-4d69-962e-c19b98851074",
+      "qty": 17,
+      "entry_price": 113.51,
+      "entry_date": "2026-01-02T09:49:23.823195-05:00",
+      "status": "open"
+    }
+  },
+  "closed_positions": []
+}

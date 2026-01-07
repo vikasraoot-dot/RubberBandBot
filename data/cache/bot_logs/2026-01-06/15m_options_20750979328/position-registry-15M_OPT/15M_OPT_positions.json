@@ -1,0 +1,45 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2026-01-06T16:00:05.388650-05:00",
+  "positions": {
+    "TSLA260116C00437500": {
+      "symbol": "TSLA260116C00437500",
+      "underlying": "TSLA",
+      "client_order_id": "15M_OPT_TSLA260116C00437500_1767710728",
+      "order_id": "4695b9e7-934a-4660-bd79-7698857a259f",
+      "qty": 1,
+      "entry_price": 2.49,
+      "entry_date": "2026-01-06T09:45:29.623877-05:00",
+      "status": "open",
+      "short_symbol": "TSLA260116C00442500"
+    },
+    "AMD260116C00207500": {
+      "symbol": "AMD260116C00207500",
+      "underlying": "AMD",
+      "client_order_id": "15M_OPT_AMD260116C00207500_1767714325",
+      "order_id": "9674edc2-64a8-4fc3-89e2-6833f555b57f",
+      "qty": 1,
+      "entry_price": 1.7299999999999986,
+      "entry_date": "2026-01-06T10:45:26.572657-05:00",
+      "status": "open",
+      "short_symbol": "AMD260116C00210000"
+    }
+  },
+  "closed_positions": [
+    {
+      "symbol": "VRT260116C00167500",
+      "underlying": "VRT",
+      "client_order_id": "15M_OPT_VRT260116C00167500_1767710782",
+      "order_id": "8388c864-ccae-4860-8a52-0940b381770d",
+      "qty": 1,
+      "entry_price": 2.0,
+      "entry_date": "2026-01-06T09:46:24.049655-05:00",
+      "status": "closed",
+      "short_symbol": "VRT260116C00170000",
+      "exit_price": 0.2999999999999998,
+      "exit_date": "2026-01-06T09:49:07.335520-05:00",
+      "exit_reason": "SL_hit(-82.4%<=-80.0%)",
+      "pnl": -140.0
+    }
+  ]
+}

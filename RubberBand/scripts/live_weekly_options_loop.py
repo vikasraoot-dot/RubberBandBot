@@ -37,7 +37,9 @@ from RubberBand.src.data import (
     alpaca_market_open,
     get_daily_fills,
     check_kill_switch,
+    check_capital_limit,
     KillSwitchTriggered,
+    CapitalLimitExceeded,
     order_exists_today,
 )
 from RubberBand.scripts.backtest_weekly import attach_indicators
@@ -316,6 +318,19 @@ def try_weekly_option_entry(
         # Idempotency check - prevent duplicate orders on restart
         if order_exists_today(client_order_id=client_order_id):
             _log(f"[skip] Order already exists: {client_order_id}")
+            return False
+        
+        # Capital limit check (option cost = premium * contracts * 100)
+        trade_value = ask_price * max_contracts * 100
+        max_capital = float(opts_cfg.get("max_capital", 100000))
+        try:
+            check_capital_limit(
+                proposed_trade_value=trade_value,
+                max_capital=max_capital,
+                bot_tag=BOT_TAG,
+            )
+        except CapitalLimitExceeded as e:
+            _log(f"[skip] Capital limit exceeded for {option_symbol}: {e}")
             return False
         
         result = submit_option_order(

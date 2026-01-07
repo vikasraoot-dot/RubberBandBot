@@ -1,0 +1,22 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2026-01-02T16:00:06.076786-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "ABNB260109C00137000",
+      "underlying": "ABNB",
+      "client_order_id": "15M_OPT_ABNB260109C00137000_1767371464",
+      "order_id": "c183ff27-aeb9-4448-a07a-2ae218b1500c",
+      "qty": 1,
+      "entry_price": 0.7,
+      "entry_date": "2026-01-02T11:31:06.941119-05:00",
+      "status": "closed",
+      "short_symbol": "ABNB260109C00138000",
+      "exit_price": -0.040000000000000036,
+      "exit_date": "2026-01-02T11:32:08.029049-05:00",
+      "exit_reason": "SL_hit(-106.1%<=-80.0%)",
+      "pnl": -70.0
+    }
+  ]
+}

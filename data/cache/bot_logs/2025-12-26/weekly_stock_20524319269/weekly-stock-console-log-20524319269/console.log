@@ -1,0 +1,223 @@
+[registry] Loaded 4 open positions for WK_STK
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T14:48:30Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T14:48:30Z","end":"2025-12-26T14:48:30Z","when":"2025-12-26T14:48:30Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T14:48:30Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.19
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 14:48:30,752 [INFO] WEEKLY: Regime: CALM (VIXY=26.19)
+2025-12-26 14:48:30,752 [INFO] WEEKLY: ============================================================
+2025-12-26 14:48:30,752 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 14:48:30,752 [INFO] WEEKLY: ============================================================
+[registry] Loaded 4 open positions for WK_STK
+2025-12-26 14:48:31,193 [INFO] WEEKLY: Registry loaded: 4 positions in WK_STK registry
+2025-12-26 14:48:32,276 [INFO] WEEKLY: Open Positions (WK_STK): 4
+2025-12-26 14:48:32,277 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 14:48:32,277 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 14:48:32,277 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 14:48:32,277 [INFO] WEEKLY: BA       9      200.02     218.26     164.16     9.12    %
+2025-12-26 14:48:32,277 [INFO] WEEKLY: META     3      648.06     668.57     61.52      3.16    %
+2025-12-26 14:48:32,277 [INFO] WEEKLY: ORCL     70     187.98     197.45     662.79     5.04    %
+2025-12-26 14:48:32,277 [INFO] WEEKLY: RBLX     21     94.80      81.39      -281.61    -14.15  %
+2025-12-26 14:48:32,277 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 14:48:32,278 [INFO] WEEKLY: Analyzing RKLB...
+{"type":"UNIVERSE","loaded":1,"sample":["RKLB"],"when":"2025-12-26T14:48:32Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-21T14:48:32Z","end":"2025-12-26T14:48:32Z","when":"2025-12-26T14:48:32Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["RKLB"],"sample_empty":[],"when":"2025-12-26T14:48:32Z"}
+2025-12-26 14:48:32,779 [INFO] WEEKLY: Analyzing HOOD...
+{"type":"UNIVERSE","loaded":1,"sample":["HOOD"],"when":"2025-12-26T14:48:32Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2024-11-21T14:48:32Z","end":"2025-12-26T14:48:32Z","when":"2025-12-26T14:48:32Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["HOOD"],"sample_empty":[],"when":"2025-12-26T14:48:33Z"}
+2025-12-26 14:48:33,571 [INFO] WEEKLY: 🔥 SIGNAL FOUND for HOOD: RSI=48.3, Dev=-3.3%
+2025-12-26 14:48:33,571 [INFO] WEEKLY: Submitting Bracket Order: HOOD x 16 @ Market, SL=81.79, TP=214.27
+[order] HOOD: Using limit price $123.59 (buy, buffer=1.0%)
+2025-12-26 14:48:33,976 [INFO] WEEKLY: ✅ Order placed: 658478c4-cb5e-40ce-a695-8a7bcec1ac7d
+{"symbol":"HOOD","side":"buy","qty":16,"entry_price":119.64,"stop_loss_price":81.786,"take_profit_price":214.27499999999998,"entry_reason":"Weekly RB: RSI=48.3, Dev=-3.3%","type":"ENTRY_SUBMIT","ts":"2025-12-26T14:48:33Z","ts_et":"2025-12-26 09:48:33 ET"}
+[registry] Recorded entry: HOOD (order_id=WK_STK_HOOD_1766760513...)
+2025-12-26 14:48:33,977 [INFO] WEEKLY: Max positions limit reached. Stopping.
+2025-12-26 14:48:33,977 [INFO] WEEKLY: 
+=== Weekly Stock Session Summary ===
+2025-12-26 14:48:34,409 [INFO] WEEKLY: No trades filled today for WK_STK.
+2025-12-26 14:48:34,409 [INFO] WEEKLY: === End Summary ===
+2025-12-26 14:48:34,410 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T15:48:34Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T15:48:34Z","end":"2025-12-26T15:48:34Z","when":"2025-12-26T15:48:34Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T15:48:35Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.20
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 15:48:35,008 [INFO] WEEKLY: Regime: CALM (VIXY=26.20)
+2025-12-26 15:48:35,008 [INFO] WEEKLY: ============================================================
+2025-12-26 15:48:35,008 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 15:48:35,008 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-26 15:48:35,231 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$9.00, total=$9.00, invested=$5751.00
+2025-12-26 15:48:35,839 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-26 15:48:35,839 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 15:48:35,839 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 15:48:35,839 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 15:48:35,839 [INFO] WEEKLY: BA       9      200.02     217.20     154.62     8.59    %
+2025-12-26 15:48:35,839 [INFO] WEEKLY: HOOD     48     119.81     120.00     9.00       0.16    %
+2025-12-26 15:48:35,840 [INFO] WEEKLY: META     3      648.06     664.39     48.98      2.52    %
+2025-12-26 15:48:35,840 [INFO] WEEKLY: ORCL     70     187.98     197.74     683.31     5.19    %
+2025-12-26 15:48:35,840 [INFO] WEEKLY: RBLX     21     94.80      81.78      -273.42    -13.73  %
+2025-12-26 15:48:35,840 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 15:48:35,840 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-26 15:48:35,840 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T16:48:36Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T16:48:36Z","end":"2025-12-26T16:48:36Z","when":"2025-12-26T16:48:36Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T16:48:36Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.22
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 16:48:36,950 [INFO] WEEKLY: Regime: CALM (VIXY=26.22)
+2025-12-26 16:48:36,951 [INFO] WEEKLY: ============================================================
+2025-12-26 16:48:36,951 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 16:48:36,951 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-26 16:48:37,173 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-3.00, total=$-3.00, invested=$5751.00
+2025-12-26 16:48:38,312 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-26 16:48:38,312 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 16:48:38,312 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 16:48:38,313 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 16:48:38,313 [INFO] WEEKLY: BA       9      200.02     216.56     148.89     8.27    %
+2025-12-26 16:48:38,313 [INFO] WEEKLY: HOOD     48     119.81     119.71     -4.92      -0.09   %
+2025-12-26 16:48:38,313 [INFO] WEEKLY: META     3      648.06     664.16     48.29      2.48    %
+2025-12-26 16:48:38,313 [INFO] WEEKLY: ORCL     70     187.98     198.64     746.31     5.67    %
+2025-12-26 16:48:38,313 [INFO] WEEKLY: RBLX     21     94.80      82.02      -268.38    -13.48  %
+2025-12-26 16:48:38,313 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 16:48:38,313 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-26 16:48:38,314 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T17:48:38Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T17:48:38Z","end":"2025-12-26T17:48:38Z","when":"2025-12-26T17:48:38Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T17:48:39Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.15
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 17:48:39,193 [INFO] WEEKLY: Regime: CALM (VIXY=26.15)
+2025-12-26 17:48:39,193 [INFO] WEEKLY: ============================================================
+2025-12-26 17:48:39,193 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 17:48:39,193 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-26 17:48:39,628 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$2.76, total=$2.76, invested=$5751.00
+2025-12-26 17:48:40,738 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-26 17:48:40,738 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 17:48:40,738 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 17:48:40,738 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 17:48:40,738 [INFO] WEEKLY: BA       9      200.02     216.66     149.72     8.32    %
+2025-12-26 17:48:40,738 [INFO] WEEKLY: HOOD     48     119.81     119.87     2.76       0.05    %
+2025-12-26 17:48:40,738 [INFO] WEEKLY: META     3      648.06     663.44     46.13      2.37    %
+2025-12-26 17:48:40,738 [INFO] WEEKLY: ORCL     70     187.98     198.80     757.51     5.76    %
+2025-12-26 17:48:40,738 [INFO] WEEKLY: RBLX     21     94.80      82.00      -268.80    -13.50  %
+2025-12-26 17:48:40,738 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 17:48:40,739 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-26 17:48:40,739 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T18:48:41Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T18:48:41Z","end":"2025-12-26T18:48:41Z","when":"2025-12-26T18:48:41Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T18:48:41Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.16
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 18:48:41,639 [INFO] WEEKLY: Regime: CALM (VIXY=26.16)
+2025-12-26 18:48:41,639 [INFO] WEEKLY: ============================================================
+2025-12-26 18:48:41,639 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 18:48:41,639 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-26 18:48:41,850 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$9.94, total=$9.94, invested=$5751.00
+2025-12-26 18:48:42,970 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-26 18:48:42,971 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 18:48:42,971 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 18:48:42,971 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 18:48:42,971 [INFO] WEEKLY: BA       9      200.02     216.60     149.22     8.29    %
+2025-12-26 18:48:42,971 [INFO] WEEKLY: HOOD     48     119.81     120.02     9.94       0.17    %
+2025-12-26 18:48:42,971 [INFO] WEEKLY: META     3      648.06     662.01     41.85      2.15    %
+2025-12-26 18:48:42,971 [INFO] WEEKLY: ORCL     70     187.98     198.10     708.51     5.38    %
+2025-12-26 18:48:42,971 [INFO] WEEKLY: RBLX     21     94.80      82.12      -266.28    -13.38  %
+2025-12-26 18:48:42,971 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 18:48:42,972 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-26 18:48:42,972 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-26T19:48:43Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-24T19:48:43Z","end":"2025-12-26T19:48:43Z","when":"2025-12-26T19:48:43Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-26T19:48:43Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $26.25
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+2025-12-26 19:48:43,864 [INFO] WEEKLY: Regime: CALM (VIXY=26.25)
+2025-12-26 19:48:43,864 [INFO] WEEKLY: ============================================================
+2025-12-26 19:48:43,864 [INFO] WEEKLY: Starting Weekly Strategy Cycle - 120 Tickers
+2025-12-26 19:48:43,864 [INFO] WEEKLY: ============================================================
+[registry] Loaded 5 open positions for WK_STK
+2025-12-26 19:48:44,138 [INFO] WEEKLY: Registry loaded: 5 positions in WK_STK registry
+[KILL SWITCH DEBUG] WK_STK: realized_pnl=$0.00, unrealized_pnl=$-9.72, total=$-9.72, invested=$5751.00
+2025-12-26 19:48:45,478 [INFO] WEEKLY: Open Positions (WK_STK): 5
+2025-12-26 19:48:45,478 [INFO] WEEKLY: --- Current Holdings ---
+2025-12-26 19:48:45,478 [INFO] WEEKLY: Ticker   Qty    Entry      Current    PnL $      PnL %   
+2025-12-26 19:48:45,478 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 19:48:45,478 [INFO] WEEKLY: BA       9      200.02     216.37     147.15     8.17    %
+2025-12-26 19:48:45,478 [INFO] WEEKLY: HOOD     48     119.81     119.61     -9.72      -0.17   %
+2025-12-26 19:48:45,478 [INFO] WEEKLY: META     3      648.06     663.02     44.87      2.31    %
+2025-12-26 19:48:45,478 [INFO] WEEKLY: ORCL     70     187.98     197.89     693.80     5.27    %
+2025-12-26 19:48:45,478 [INFO] WEEKLY: RBLX     21     94.80      82.23      -263.97    -13.26  %
+2025-12-26 19:48:45,478 [INFO] WEEKLY: ---------------------------------------------------------
+2025-12-26 19:48:45,479 [INFO] WEEKLY: Max positions reached. No new entries.
+2025-12-26 19:48:45,479 [INFO] WEEKLY: Cycle complete. Sleeping 60 mins...

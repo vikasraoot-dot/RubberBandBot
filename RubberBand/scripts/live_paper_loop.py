@@ -26,8 +26,10 @@ from RubberBand.src.data import (
     get_positions,
     get_daily_fills,
     check_kill_switch,
+    check_capital_limit,
     order_exists_today,
     KillSwitchTriggered,
+    CapitalLimitExceeded,
 )
 from RubberBand.strategy import attach_verifiers, check_slope_filter
 from RubberBand.src.trade_logger import TradeLogger
@@ -735,6 +737,20 @@ def main() -> int:
                 # Idempotency check - prevent duplicate orders
                 if order_exists_today(base_url, key, secret, coid):
                     print(f"[order] SKIP {sym}: Order {coid} already exists today", flush=True)
+                    continue
+                
+                # Capital limit check - prevent exceeding max deployed capital
+                trade_value = qty * entry
+                max_capital = float(cfg.get("max_capital", 100000))
+                try:
+                    check_capital_limit(
+                        base_url, key, secret,
+                        proposed_trade_value=trade_value,
+                        max_capital=max_capital,
+                        bot_tag=BOT_TAG,
+                    )
+                except CapitalLimitExceeded as e:
+                    print(f"[order] SKIP {sym}: {e}", flush=True)
                     continue
                 
                 resp = submit_bracket_order(

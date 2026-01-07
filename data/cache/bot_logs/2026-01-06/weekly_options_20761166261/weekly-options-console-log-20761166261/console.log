@@ -1,0 +1,61 @@
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-06T20:30:15Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2026-01-04T20:30:15Z","end":"2026-01-06T20:30:15Z","when":"2026-01-06T20:30:15Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-06T20:30:15Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.25
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+{"ts": "2026-01-06T15:30:15.692565-05:00", "msg": "Regime: CALM (VIXY=25.25)"}
+{"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":120,"type":"HEARTBEAT","ts":"2026-01-06T20:30:15Z","ts_et":"2026-01-06 15:30:15 ET"}
+{"ts": "2026-01-06T15:30:15.693158-05:00", "msg": "Weekly Options V3 Started", "tickers": 120}
+{"ts": "2026-01-06T15:30:16.546179-05:00", "msg": "Starting weekly options scan", "dry_run": false, "monitor_only": false, "max_premium": 2000.0, "target_delta": 0.65, "bot_tag": "WK_OPT", "registry_positions": 0}
+{"ts": "2026-01-06T15:30:16.610717-05:00", "msg": "Managing 18 weekly option positions"}
+{"event":"positions_checked","all_positions":18,"my_positions":0,"my_underlyings":[],"type":"HEARTBEAT","ts":"2026-01-06T20:30:16Z","ts_et":"2026-01-06 15:30:16 ET"}
+{"ts": "2026-01-06T15:30:16.672685-05:00", "msg": "Positions: 0 mine / 18 total", "my_underlyings": [], "bot_tag": "WK_OPT"}
+{"ts": "2026-01-06T15:30:35.974922-05:00", "msg": "Found 25 weekly signals", "signals": [["HOOD", "RSI=47.7"], ["COIN", "RSI=37.8"], ["ORCL", "RSI=22.7"], ["SMCI", "RSI=32.3"], ["DASH", "RSI=36.3"], ["PLTR", "RSI=46.6"], ["DELL", "RSI=48.6"], ["CRWD", "RSI=43.4"], ["RCL", "RSI=37.5"], ["ANET", "RSI=45.8"], ["NET", "RSI=43.3"], ["DHI", "RSI=37.0"], ["SPOT", "RSI=27.0"], ["WDAY", "RSI=28.0"], ["ETN", "RSI=34.9"], ["PINS", "RSI=31.5"], ["INTU", "RSI=37.3"], ["NKE", "RSI=43.1"], ["ADBE", "RSI=40.9"], ["ADSK", "RSI=31.2"], ["URI", "RSI=36.0"], ["META", "RSI=36.9"], ["CDNS", "RSI=37.6"], ["NOW", "RSI=9.6"], ["MO", "RSI=25.2"]]}
+{"ts": "2026-01-06T15:30:36.080614-05:00", "msg": "No ITM contract for HOOD", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.184144-05:00", "msg": "No ITM contract for COIN", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.288332-05:00", "msg": "No ITM contract for ORCL", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.398098-05:00", "msg": "No ITM contract for SMCI", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.505185-05:00", "msg": "No ITM contract for DASH", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.614652-05:00", "msg": "No ITM contract for PLTR", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.730373-05:00", "msg": "No ITM contract for DELL", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for CRWD, cannot select ITM
+{"ts": "2026-01-06T15:30:36.777718-05:00", "msg": "No ITM contract for CRWD", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:36.892245-05:00", "msg": "No ITM contract for RCL", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.000363-05:00", "msg": "No ITM contract for ANET", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.093340-05:00", "msg": "No ITM contract for NET", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for DHI, cannot select ITM
+{"ts": "2026-01-06T15:30:37.140924-05:00", "msg": "No ITM contract for DHI", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.246504-05:00", "msg": "No ITM contract for SPOT", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for WDAY, cannot select ITM
+{"ts": "2026-01-06T15:30:37.293392-05:00", "msg": "No ITM contract for WDAY", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.404931-05:00", "msg": "No ITM contract for ETN", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.505776-05:00", "msg": "No ITM contract for PINS", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for INTU, cannot select ITM
+{"ts": "2026-01-06T15:30:37.553673-05:00", "msg": "No ITM contract for INTU", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.648908-05:00", "msg": "No ITM contract for NKE", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.740963-05:00", "msg": "No ITM contract for ADBE", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:37.850922-05:00", "msg": "No ITM contract for ADSK", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for URI, cannot select ITM
+{"ts": "2026-01-06T15:30:37.897330-05:00", "msg": "No ITM contract for URI", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:38.002314-05:00", "msg": "No ITM contract for META", "expiration": "2026-02-27", "target_delta": 0.65}
+[options] Cannot get price for CDNS, cannot select ITM
+{"ts": "2026-01-06T15:30:38.053782-05:00", "msg": "No ITM contract for CDNS", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:38.151150-05:00", "msg": "No ITM contract for NOW", "expiration": "2026-02-27", "target_delta": 0.65}
+{"ts": "2026-01-06T15:30:38.250103-05:00", "msg": "No ITM contract for MO", "expiration": "2026-02-27", "target_delta": 0.65}
+{"event":"scan_complete","signals":25,"new_entries":0,"total_positions":0,"type":"HEARTBEAT","ts":"2026-01-06T20:30:38Z","ts_et":"2026-01-06 15:30:38 ET"}
+{"ts": "2026-01-06T15:30:38.250482-05:00", "msg": "Weekly options scan complete", "signals": 25, "new_entries": 0, "total_positions": 0}
+{"type":"EOD_SUMMARY","date":"2026-01-06","total_trades":0,"closed_trades":0,"open_trades":0,"total_pnl":0,"win_count":0,"loss_count":0,"win_rate_pct":0,"avg_win":0,"avg_loss":0,"exit_reasons":{},"trades":[],"ts":"2026-01-06T20:30:38Z","ts_et":"2026-01-06 15:30:38 ET"}
+[logger] No trades to export
+{"ts": "2026-01-06T15:30:38.250893-05:00", "msg": "\n=== Weekly Options Session Summary ==="}
+{"ts": "2026-01-06T15:30:38.306253-05:00", "msg": "No trades filled today for WK_OPT."}
+{"ts": "2026-01-06T15:30:38.306306-05:00", "msg": "=== End Summary ==="}

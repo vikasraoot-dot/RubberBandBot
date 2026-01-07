@@ -1,0 +1,37 @@
+{
+  "bot_tag": "15M_OPT",
+  "updated_at": "2026-01-02T10:04:07.581903-05:00",
+  "positions": {},
+  "closed_positions": [
+    {
+      "symbol": "ABNB260109C00135000",
+      "underlying": "ABNB",
+      "client_order_id": "15M_OPT_ABNB260109C00135000_1767366056",
+      "order_id": "ade55fd4-03fb-40a7-b7c0-263e41ee7677",
+      "qty": 1,
+      "entry_price": 0.9,
+      "entry_date": "2026-01-02T10:00:57.998477-05:00",
+      "status": "closed",
+      "short_symbol": "ABNB260109C00136000",
+      "exit_price": -0.3799999999999999,
+      "exit_date": "2026-01-02T10:02:06.764877-05:00",
+      "exit_reason": "SL_hit(-144.2%<=-80.0%)",
+      "pnl": -123.99999999999997
+    },
+    {
+      "symbol": "DIS260109C00114000",
+      "underlying": "DIS",
+      "client_order_id": "15M_OPT_DIS260109C00114000_1767366059",
+      "order_id": "3c6d3530-0487-4655-9c30-0d4e0a156ecf",
+      "qty": 1,
+      "entry_price": 0.39,
+      "entry_date": "2026-01-02T10:01:01.158103-05:00",
+      "status": "closed",
+      "short_symbol": "DIS260109C00115000",
+      "exit_price": 0.04999999999999999,
+      "exit_date": "2026-01-02T10:04:07.581628-05:00",
+      "exit_reason": "SL_hit(-82.8%<=-80.0%)",
+      "pnl": -24.0
+    }
+  ]
+}

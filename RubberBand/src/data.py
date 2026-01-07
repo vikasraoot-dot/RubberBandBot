@@ -351,6 +351,63 @@ def get_daily_invested_capital(
         for f in buys
     )
 
+
+class CapitalLimitExceeded(Exception):
+    """Raised when aggregate capital usage exceeds the configured limit."""
+    pass
+
+
+def get_total_invested_capital(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+) -> float:
+    """
+    Get TOTAL capital invested across ALL positions (cost basis sum).
+    This is the aggregate amount of money deployed, regardless of which bot placed it.
+    """
+    try:
+        positions = get_positions(base_url, key, secret)
+        total = sum(float(p.get("cost_basis", 0)) for p in positions)
+        return total
+    except Exception as e:
+        print(f"[CAPITAL CHECK] Error fetching positions: {e}")
+        return 0.0
+
+
+def check_capital_limit(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    proposed_trade_value: float = 0.0,
+    max_capital: float = 100000.0,
+    bot_tag: str = "",
+) -> None:
+    """
+    Check if adding this trade would exceed maximum capital limit.
+    
+    Args:
+        proposed_trade_value: Estimated cost of the proposed trade
+        max_capital: Maximum total capital to deploy (default $100K)
+        bot_tag: Bot identifier for logging
+    
+    Raises:
+        CapitalLimitExceeded: If adding this trade would exceed limit
+    """
+    current_invested = get_total_invested_capital(base_url, key, secret)
+    projected_total = current_invested + proposed_trade_value
+    
+    utilization_pct = (current_invested / max_capital) * 100 if max_capital > 0 else 0
+    
+    print(f"[CAPITAL CHECK] {bot_tag}: Current=${current_invested:,.0f} + Trade=${proposed_trade_value:,.0f} = ${projected_total:,.0f} (Max=${max_capital:,.0f}, {utilization_pct:.1f}% utilized)")
+    
+    if projected_total > max_capital:
+        raise CapitalLimitExceeded(
+            f"Capital limit exceeded: ${projected_total:,.0f} > ${max_capital:,.0f} "
+            f"(current=${current_invested:,.0f}, trade=${proposed_trade_value:,.0f})"
+        )
+
+
 def check_kill_switch(
     base_url: Optional[str] = None,
     key: Optional[str] = None,

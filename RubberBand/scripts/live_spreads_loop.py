@@ -48,7 +48,9 @@ from RubberBand.src.data import (
     fetch_latest_bars,
     alpaca_market_open,
     check_kill_switch,
+    check_capital_limit,
     KillSwitchTriggered,
+    CapitalLimitExceeded,
     order_exists_today,
 )
 
@@ -614,6 +616,19 @@ def try_spread_entry(
         # Idempotency check - prevent duplicate orders on restart
         if order_exists_today(client_order_id=client_order_id):
             logger.spread_skip(underlying=sym, skip_reason="Order_already_exists")
+            return False
+        
+        # Capital limit check (spread cost = max_debit * contracts * 100)
+        trade_value = max_debit * contracts * 100
+        max_capital = float(cfg.get("max_capital", 100000))
+        try:
+            check_capital_limit(
+                proposed_trade_value=trade_value,
+                max_capital=max_capital,
+                bot_tag=BOT_TAG,
+            )
+        except CapitalLimitExceeded as e:
+            logger.spread_skip(underlying=sym, skip_reason=f"Capital_limit: {e}")
             return False
         
         result = submit_spread_order(

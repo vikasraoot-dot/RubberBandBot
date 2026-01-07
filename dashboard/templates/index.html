@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RubberBandBot Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>📊 RubberBandBot Dashboard</h1>
+            <div class="controls">
+                <div class="control-group">
+                    <label>Date:</label>
+                    <input type="date" id="dateSelect" />
+                </div>
+                <div class="control-group">
+                    <label>Chart Period:</label>
+                    <select id="periodSelect">
+                        <option value="7d">Last 7 Days</option>
+                        <option value="30d">Last 30 Days</option>
+                        <option value="ytd">Year to Date</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>Bot Filter:</label>
+                    <select id="botSelect">
+                        <option value="all">All Bots</option>
+                        <option value="15m_stock">15m Stock</option>
+                        <option value="15m_options">15m Options</option>
+                        <option value="weekly_stock">Weekly Stock</option>
+                        <option value="weekly_options">Weekly Options</option>
+                    </select>
+                </div>
+                <button id="refreshBtn">🔄 Refresh</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Portfolio Value Card -->
+            <div class="portfolio-section">
+                <div class="portfolio-card">
+                    <div class="portfolio-main">
+                        <span class="label">Portfolio Value</span>
+                        <span class="value" id="portfolioValue">$0.00</span>
+                    </div>
+                    <div class="portfolio-stats">
+                        <div class="stat">
+                            <span class="label">Day Change</span>
+                            <span class="value" id="dayChange">+$0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Cash</span>
+                            <span class="value" id="cashBalance">$0.00</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">Buying Power</span>
+                            <span class="value" id="buyingPower">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="cards">
+                <div class="card realized">
+                    <h3>💵 Realized PnL <span class="date-label">(selected date)</span></h3>
+                    <p id="realizedPnl">$0.00</p>
+                </div>
+                <div class="card unrealized">
+                    <h3>📈 Unrealized PnL <span class="date-label">(current)</span></h3>
+                    <p id="unrealizedPnl">$0.00</p>
+                </div>
+                <div class="card net">
+                    <h3>💰 Net PnL</h3>
+                    <p id="netPnl">$0.00</p>
+                </div>
+                <div class="card trades">
+                    <h3>📊 Entries Today <span class="date-label">(selected date)</span></h3>
+                    <p id="totalTrades">0</p>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts">
+                <div class="chart-container">
+                    <h3>PnL Trend <span class="filter-label">(filtered by bot)</span></h3>
+                    <canvas id="pnlChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Entries Per Day <span class="filter-label">(filtered by bot)</span></h3>
+                    <canvas id="tradesChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Bot Performance Cards -->
+            <div class="section-header">
+                <h2>Bot Performance <span class="date-label">(for selected date: <span
+                            id="selectedDateLabel">-</span>)</span></h2>
+            </div>
+            <div class="bot-cards">
+                <div class="bot-card" id="card15mStock">
+                    <h3>🏦 15m Stock Bot</h3>
+                    <div class="stats">
+                        <span class="entries">Entries: <b>0</b></span>
+                        <span class="trades">Round Trips: <b>0</b></span>
+                        <span class="winrate">Win Rate: <b>0%</b></span>
+                        <span class="pnl">Realized: <b>$0</b></span>
+                    </div>
+                </div>
+                <div class="bot-card" id="card15mOptions">
+                    <h3>📈 15m Options Bot</h3>
+                    <div class="stats">
+                        <span class="entries">Entries: <b>0</b></span>
+                        <span class="open">Open Positions: <b>0</b></span>
+                        <span class="realized">Realized: <b>$0</b></span>
+                        <span class="unrealized">Unrealized: <b>$0</b></span>
+                    </div>
+                </div>
+                <div class="bot-card" id="cardWeeklyStock">
+                    <h3>📅 Weekly Stock Bot</h3>
+                    <div class="stats">
+                        <span class="entries">Entries: <b>0</b></span>
+                        <span class="trades">Round Trips: <b>0</b></span>
+                        <span class="winrate">Win Rate: <b>0%</b></span>
+                        <span class="pnl">Realized: <b>$0</b></span>
+                    </div>
+                </div>
+                <div class="bot-card" id="cardWeeklyOptions">
+                    <h3>📅 Weekly Options Bot</h3>
+                    <div class="stats">
+                        <span class="entries">Entries: <b>0</b></span>
+                        <span class="trades">Round Trips: <b>0</b></span>
+                        <span class="winrate">Win Rate: <b>0%</b></span>
+                        <span class="pnl">Realized: <b>$0</b></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Open Positions -->
+            <div class="section-header">
+                <h2>Open Positions <span class="date-label">(current - live data)</span></h2>
+            </div>
+
+            <!-- Stocks Table -->
+            <div class="positions-section">
+                <h3>📊 Stocks</h3>
+                <table id="stocksTable">
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Qty</th>
+                            <th>Entry</th>
+                            <th>Current</th>
+                            <th>P&L</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <!-- Options Table -->
+            <div class="positions-section">
+                <h3>📈 Options (Spreads Consolidated)</h3>
+                <table id="optionsTable">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Type</th>
+                            <th>Qty</th>
+                            <th>Entry</th>
+                            <th>Current</th>
+                            <th>P&L</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </main>
+
+        <footer>
+            <p>Last updated: <span id="lastUpdate">-</span></p>
+        </footer>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2026-01-02T20:15:49Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-31T20:15:49Z","end":"2026-01-02T20:15:49Z","when":"2026-01-02T20:15:49Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2026-01-02T20:15:49Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.32
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+{"ts": "2026-01-02T15:15:49.748402-05:00", "msg": "Regime: CALM (VIXY=25.32)"}
+{"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":120,"type":"HEARTBEAT","ts":"2026-01-02T20:15:49Z","ts_et":"2026-01-02 15:15:49 ET"}
+{"ts": "2026-01-02T15:15:49.749114-05:00", "msg": "Weekly Options V3 Started", "tickers": 120}
+[KILL SWITCH DEBUG] WK_OPT: realized_pnl=$0.00, unrealized_pnl=$-6357.10, total=$-6357.10, invested=$6420.00
+[KILL SWITCH] WK_OPT exceeded 25.0% loss: -99.0% (P&L: $-6357.10, Invested: $6420.00)
+{"error":"WK_OPT exceeded 25% daily loss - HALTING","type":"ERROR","ts":"2026-01-02T20:15:51Z","ts_et":"2026-01-02 15:15:51 ET"}
+Traceback (most recent call last):
+  File "/home/runner/work/RubberBandBot/RubberBandBot/RubberBand/scripts/live_weekly_options_loop.py", line 674, in <module>
+    raise SystemExit(main())
+  File "/home/runner/work/RubberBandBot/RubberBandBot/RubberBand/scripts/live_weekly_options_loop.py", line 523, in main
+    raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
+RubberBand.src.data.KillSwitchTriggered: WK_OPT exceeded 25% daily loss

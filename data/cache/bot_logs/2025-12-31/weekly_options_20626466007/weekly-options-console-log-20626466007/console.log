@@ -1,0 +1,20 @@
+{"type":"UNIVERSE","loaded":1,"sample":["VIXY"],"when":"2025-12-31T20:15:48Z"}
+{"type":"BARS_FETCH_START","requested":1,"chunks":1,"timeframe":"1Day","feed":"iex","start":"2025-12-29T20:15:48Z","end":"2025-12-31T20:15:48Z","when":"2025-12-31T20:15:48Z"}
+{"type":"BARS_FETCH_CHUNK_COLLECTED","chunk_index":1,"symbols_in_chunk":1,"pages":1,"source_shape":"dict","collected_symbols":1}
+{"type":"BARS_FETCH_SUMMARY","requested":1,"with_data":1,"empty":0,"stale":0,"sample_with_data":["VIXY"],"sample_empty":[],"when":"2025-12-31T20:15:49Z"}
+
+==================================================
+ [RegimeManager] Market Environment Update
+==================================================
+  • VIXY Price      : $25.69
+  • Current Regime  : CALM
+  • Slope Threshold : -0.08
+  • Dead Knife Fltr : DISABLED
+  • Weekly RSI Lim  : < 50
+==================================================
+
+{"ts": "2025-12-31T15:15:49.355946-05:00", "msg": "Regime: CALM (VIXY=25.69)"}
+{"event":"startup","dry_run":false,"monitor_only":false,"max_premium":2000.0,"target_delta":0.65,"tickers_count":120,"type":"HEARTBEAT","ts":"2025-12-31T20:15:49Z","ts_et":"2025-12-31 15:15:49 ET"}
+{"ts": "2025-12-31T15:15:49.356385-05:00", "msg": "Weekly Options V3 Started", "tickers": 120}
+{"event":"options_cutoff","type":"HEARTBEAT","ts":"2025-12-31T20:15:49Z","ts_et":"2025-12-31 15:15:49 ET"}
+{"ts": "2025-12-31T15:15:49.731728-05:00", "msg": "Options trading cutoff reached (after 3:00 PM ET), exiting"}

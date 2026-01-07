@@ -1,0 +1,78 @@
+{
+  "bot_tag": "WK_STK",
+  "updated_at": "2026-01-06T09:53:16.104645-05:00",
+  "positions": {
+    "META": {
+      "symbol": "META",
+      "client_order_id": "WK_STK_META_1765464596",
+      "qty": 3,
+      "entry_price": 648.063333,
+      "entry_date": "2025-12-11T14:49:57.261081Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "ORCL": {
+      "symbol": "ORCL",
+      "client_order_id": "WK_STK_ORCL_1765464594",
+      "qty": 10,
+      "entry_price": 191.35,
+      "entry_date": "2025-12-11T14:49:56.096388Z",
+      "status": "open",
+      "restored_from_broker": true
+    },
+    "COIN": {
+      "symbol": "COIN",
+      "underlying": "COIN",
+      "client_order_id": "WK_STK_COIN_1767711194",
+      "order_id": "9758da25-63d0-45aa-a645-a259f4f31d06",
+      "qty": 7,
+      "entry_price": 255.4,
+      "entry_date": "2026-01-06T09:53:14.806118-05:00",
+      "status": "open"
+    },
+    "SMCI": {
+      "symbol": "SMCI",
+      "underlying": "SMCI",
+      "client_order_id": "WK_STK_SMCI_1767711195",
+      "order_id": "515a7e2d-9c8e-4fd8-9e02-7d4150285bcb",
+      "qty": 66,
+      "entry_price": 30.295,
+      "entry_date": "2026-01-06T09:53:15.697569-05:00",
+      "status": "open"
+    },
+    "DASH": {
+      "symbol": "DASH",
+      "underlying": "DASH",
+      "client_order_id": "WK_STK_DASH_1767711195",
+      "order_id": "ee235857-6309-451d-a945-55394685ae01",
+      "qty": 8,
+      "entry_price": 229.74,
+      "entry_date": "2026-01-06T09:53:16.059779-05:00",
+      "status": "open"
+    }
+  },
+  "closed_positions": [
+    {
+      "symbol": "BA",
+      "client_order_id": "WK_STK_BA_1765464593",
+      "qty": 9,
+      "entry_price": 200.02,
+      "entry_date": "2025-12-11T14:49:54.242484Z",
+      "status": "closed",
+      "restored_from_broker": true,
+      "exit_date": "2026-01-06T09:53:12.550484-05:00",
+      "exit_reason": "orphaned_sync"
+    },
+    {
+      "symbol": "RBLX",
+      "client_order_id": "WK_STK_RBLX_1765464590",
+      "qty": 21,
+      "entry_price": 94.8,
+      "entry_date": "2025-12-11T14:49:51.211149Z",
+      "status": "closed",
+      "restored_from_broker": true,
+      "exit_date": "2026-01-06T09:53:12.550500-05:00",
+      "exit_reason": "orphaned_sync"
+    }
+  ]
+}
