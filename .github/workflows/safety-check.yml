@@ -29,10 +29,9 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
       
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
+      # Self-hosted runner has Python pre-installed, skip setup-python
+      - name: Verify Python
+        run: python --version
       
       - name: Install Dependencies
         run: pip install requests
