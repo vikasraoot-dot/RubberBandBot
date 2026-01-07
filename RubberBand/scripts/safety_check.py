@@ -26,12 +26,10 @@ import requests
 DRY_RUN = False
 
 def _alpaca_creds() -> tuple:
-    base = os.environ.get("APCA_API_BASE_URL", "https://paper-api.alpaca.markets")
-    key = os.environ.get("APCA_API_KEY_ID", "")
-    secret = os.environ.get("APCA_API_SECRET_KEY", "")
-    if not key or not secret:
-        key = os.environ.get("ALPACA_KEY_ID", "")
-        secret = os.environ.get("ALPACA_SECRET_KEY", "")
+    # Use 'or' to handle both missing AND empty env vars
+    base = os.environ.get("APCA_API_BASE_URL") or "https://paper-api.alpaca.markets"
+    key = os.environ.get("APCA_API_KEY_ID") or os.environ.get("ALPACA_KEY_ID") or ""
+    secret = os.environ.get("APCA_API_SECRET_KEY") or os.environ.get("ALPACA_SECRET_KEY") or ""
     return base, key, secret
 
 def _headers(key: str, secret: str) -> Dict[str, str]:
