@@ -26,8 +26,8 @@ if _REPO_ROOT not in sys.path:
 from RubberBand.src.data import fetch_latest_bars, load_symbols_from_file
 
 def calculate_indicators(df: pd.DataFrame) -> dict:
-    """Calculate SMA 120, SMA 22, ATR 14, Dollar Vol."""
-    if len(df) < 120:
+    """Calculate SMA 100, ATR 14, Dollar Vol."""
+    if len(df) < 100:
         return {}
 
     close = df["close"]
@@ -36,8 +36,7 @@ def calculate_indicators(df: pd.DataFrame) -> dict:
     volume = df["volume"]
 
     # SMAs
-    sma_120 = close.rolling(window=120).mean().iloc[-1]
-    sma_22 = close.rolling(window=22).mean().iloc[-1]
+    sma_100 = close.rolling(window=100).mean().iloc[-1]
 
     # ATR 14
     tr1 = high - low
@@ -53,8 +52,7 @@ def calculate_indicators(df: pd.DataFrame) -> dict:
     
     return {
         "price": current_price,
-        "sma_120": sma_120,
-        "sma_22": sma_22,
+        "sma_100": sma_100,
         "atr_14": atr_14,
         "atr_pct": (atr_14 / current_price) * 100.0 if current_price > 0 else 0.0,
         "dollar_vol": dollar_vol
@@ -96,8 +94,8 @@ def main():
     bars_map, meta = fetch_latest_bars(
         symbols=tickers,
         timeframe="1Day",
-        history_days=250, # 250 calendar days ~ 170 trading days. Wait, need 200 trading days?
-                          # SMA 120 needs 120 trading days. 250 calendar is plenty.
+        history_days=200, # 200 calendar days is sufficient for SMA 100
+                          # SMA 100 needs 100 trading days (~145 calendar). 200 is plenty.
         feed="iex",       # Use IEX for free tier compatibility if needed, or sip if available
         rth_only=False,
         verbose=True
@@ -122,14 +120,14 @@ def main():
                 continue
 
             price = inds["price"]
-            sma_120 = inds["sma_120"]
-            sma_22 = inds["sma_22"]
+            sma_100 = inds["sma_100"]
             dollar_vol = inds["dollar_vol"]
             atr_pct = inds["atr_pct"]
 
             # --- FILTERS ---
-            # 1. Strong Bull: Price > SMA 120 AND Price > SMA 22
-            is_strong_bull = (price > sma_120) and (price > sma_22)
+            # 1. Trend: Price > SMA 100 (aligned with config.yaml)
+            # We REMOVE the SMA 22 check because we want to allow stocks that are dipping (Price < SMA 20).
+            is_uptrend = (price > sma_100)
 
             # 2. Liquidity: > $2M
             is_liquid = (dollar_vol > 2_000_000)
@@ -137,12 +135,11 @@ def main():
             # 3. Volatility: ATR% > 1.5%
             is_volatile = (atr_pct > 1.5)
 
-            if is_strong_bull and is_liquid and is_volatile:
+            if is_uptrend and is_liquid and is_volatile:
                 results.append({
                     "symbol": sym,
                     "price": round(price, 2),
-                    "sma_120": round(sma_120, 2),
-                    "sma_22": round(sma_22, 2),
+                    "sma_100": round(sma_100, 2),
                     "atr_pct": round(atr_pct, 2),
                     "dollar_vol_m": round(dollar_vol / 1_000_000, 2)
                 })
