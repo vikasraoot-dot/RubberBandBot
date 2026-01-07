@@ -313,7 +313,7 @@ def run_weekly_cycle():
                     limit_price=None,  # Market order
                     take_profit_price=tp_price,
                     stop_loss_price=sl_price,
-                    tif="day",
+                    tif="gtc",  # GTC so TP/SL persist overnight
                     client_order_id=coid,
                 )
                 

@@ -894,7 +894,7 @@ def submit_bracket_order(
     limit_price: Optional[float] = None,
     take_profit_price: float = 0.0,
     stop_loss_price: float = 0.0,
-    tif: str = "day",
+    tif: str = "gtc",  # GTC so TP/SL exit orders persist overnight
     client_order_id: Optional[str] = None,
     limit_buffer_pct: float = 1.0,  # Buffer for limit orders when no price specified
     verify_fill: bool = False,      # Whether to verify fill status

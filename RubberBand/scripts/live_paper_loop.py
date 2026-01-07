@@ -703,7 +703,7 @@ def main() -> int:
                 take_profit_price=take_profit,
                 atr=round(atr_val, 4),
                 method="bracket",
-                tif="day",
+                tif="gtc",  # GTC so TP/SL persist overnight
                 dry_run=bool(args.dry_run),
                 entry_reason=entry_reason,
                 rsi=rsi,
@@ -763,7 +763,7 @@ def main() -> int:
                     limit_price=None,  # Uses limit with 1% buffer now
                     take_profit_price=take_profit,
                     stop_loss_price=stop_price,
-                    tif="day",
+                    tif="gtc",  # GTC so TP/SL persist overnight
                     client_order_id=coid,
                     verify_fill=True,  # Wait and verify fill
                     verify_timeout=5,  # 5 second timeout
