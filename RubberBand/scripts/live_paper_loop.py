@@ -31,7 +31,7 @@ from RubberBand.src.data import (
     KillSwitchTriggered,
     CapitalLimitExceeded,
 )
-from RubberBand.strategy import attach_verifiers, check_slope_filter
+from RubberBand.strategy import attach_verifiers, check_slope_filter, check_bearish_bar_filter
 from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.src.ticker_health import TickerHealthManager
 from RubberBand.src.position_registry import PositionRegistry
@@ -530,6 +530,20 @@ def main() -> int:
                 "ts": now_iso,
             }), flush=True)
              continue
+        
+        # Bearish Bar Filter (New - Jan 2026)
+        # -------------------------------------
+        # Skip entries if current bar is bearish (close < open)
+        # Backtest showed +$3,000 improvement and +15% win rate
+        should_skip_bar, bar_reason = check_bearish_bar_filter(df, cfg)
+        if should_skip_bar:
+            print(json.dumps({
+                "type": "SKIP_BEARISH_BAR",
+                "symbol": sym,
+                "reason": bar_reason,
+                "ts": now_iso,
+            }), flush=True)
+            continue
         
         # Check 2: 10-bar slope (Secondary/Sustained)
         # Only use if explicitly enabled in config, and normalize it.

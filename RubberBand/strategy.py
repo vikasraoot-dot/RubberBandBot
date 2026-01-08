@@ -123,3 +123,46 @@ def check_slope_filter(df: pd.DataFrame, regime_cfg: dict) -> tuple[bool, str]:
             return True, f"Slope3_Too_Flat({slope_pct:.4f}% > {threshold_pct}%)"
             
     return False, ""
+
+
+def check_bearish_bar_filter(df: pd.DataFrame, cfg: dict) -> tuple[bool, str]:
+    """
+    Check if the trade should be SKIPPED based on the current bar being bearish.
+    
+    A bearish bar is when Close < Open, indicating selling pressure during
+    the signal bar. Mean reversion entries on bearish bars have lower success rates.
+    
+    Args:
+        df: DataFrame with 'open' and 'close' columns
+        cfg: Configuration dict with optional 'bearish_bar_filter' key
+        
+    Returns:
+        (should_skip, reason) - True and reason if bar is bearish and filter enabled
+    """
+    # Check if filter is enabled
+    if not cfg.get("bearish_bar_filter", False):
+        return False, ""
+    
+    if df.empty or len(df) < 1:
+        return False, ""
+    
+    if "open" not in df.columns or "close" not in df.columns:
+        return False, ""
+    
+    last = df.iloc[-1]
+    open_px = float(last["open"])
+    close_px = float(last["close"])
+    
+    # Calculate close position within bar (0% = at low, 100% = at high)
+    # Note: pd.Series.get() may return NaN if key exists with NaN value, so we use notna check
+    high = float(last["high"]) if "high" in last.index and pd.notna(last["high"]) else close_px
+    low = float(last["low"]) if "low" in last.index and pd.notna(last["low"]) else close_px
+    bar_range = high - low if high > low else 0.01
+    close_pct = ((close_px - low) / bar_range) * 100
+    
+    # Check if bearish (close < open)
+    if close_px < open_px:
+        return True, f"BearishBar_Filter(Close={close_px:.2f} < Open={open_px:.2f}, ClosePct={close_pct:.1f}%)"
+    
+    return False, ""
+

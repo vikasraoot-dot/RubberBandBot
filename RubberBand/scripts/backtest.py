@@ -306,6 +306,17 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             # LONG Entry Signal (Only in Bull Trend)
             if is_bull_trend and prev.get("long_signal", False):
                 
+                # --- Bearish Bar Filter (New) ---
+                # Skip if current bar is bearish (close < open)
+                if cfg.get("bearish_bar_filter", False):
+                    if cur["close"] < cur["open"]:
+                        FILTER_REJECTS["BearishBar"] += 1
+                        if verbose:
+                            close_pct = ((cur["close"] - cur["low"]) / max(cur["high"] - cur["low"], 0.01)) * 100
+                            print(f"[{sym} {cur.name}] BEARISH BAR SKIP: Close < Open (Close%={close_pct:.1f})")
+                        continue
+                # -------------------------
+                
                 # --- Dead Knife Filter ---
                 if use_dkf:
                     current_rsi = float(prev.get("rsi", 100))
@@ -349,11 +360,17 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                 side = "LONG"
                 entry_ts = cur.name
                 
+                # Calculate close% for the entry bar (0% = at low, 100% = at high)
+                bar_range = max(cur["high"] - cur["low"], 0.01)
+                entry_bar_close_pct = ((cur["close"] - cur["low"]) / bar_range) * 100
+                
                 entry_state = {
                     "rsi": float(prev.get("rsi", 0)),
                     "atr": atr_val,
                     "sl_px": entry_px - (atr_val * atr_mult_sl) if use_brackets else 0.0,
-                    "tp_px": entry_px + (atr_val * take_profit_r) if use_brackets else 0.0
+                    "tp_px": entry_px + (atr_val * take_profit_r) if use_brackets else 0.0,
+                    "entry_bar_close_pct": entry_bar_close_pct,
+                    "entry_bar_bullish": cur["close"] >= cur["open"]
                 }
                 continue
 
@@ -498,7 +515,9 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
                     "entry_rsi": entry_state.get("rsi", 0),
                     "entry_atr": entry_state.get("atr", 0),
                     "sl_px": entry_state.get("sl_px", 0),
-                    "tp_px": entry_state.get("tp_px", 0)
+                    "tp_px": entry_state.get("tp_px", 0),
+                    "entry_bar_close_pct": entry_state.get("entry_bar_close_pct", 0),
+                    "entry_bar_bullish": entry_state.get("entry_bar_bullish", True)
                 })
                 
                 # Update DKF Tracker if Dead Knife Filter is enabled and this was a losing trade
@@ -567,6 +586,7 @@ def main():
     ap.add_argument("--end-date", type=str, help="End date (YYYY-MM-DD) for backtest")
     ap.add_argument("--sma-period", type=int, help="SMA Period for Trend Filter (e.g. 100)")
     ap.add_argument("--trend-filter", action="store_true", help="Enable SMA Trend Filter")
+    ap.add_argument("--bearish-bar-filter", action="store_true", help="Skip entries if current bar is bearish (close < open)")
     
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
@@ -627,6 +647,11 @@ def main():
     cfg["dead_knife_filter"] = args.dead_knife_filter
     if args.dead_knife_filter:
         print(f"OVERRIDE: Dead Knife Filter = ENABLED")
+    
+    # Inject Bearish Bar Filter flag
+    cfg["bearish_bar_filter"] = getattr(args, 'bearish_bar_filter', False)
+    if cfg["bearish_bar_filter"]:
+        print(f"OVERRIDE: Bearish Bar Filter = ENABLED")
 
     # Inject Bracket overrides
     if "brackets" not in cfg: cfg["brackets"] = {}

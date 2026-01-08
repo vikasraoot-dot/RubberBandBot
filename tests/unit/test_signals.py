@@ -76,3 +76,105 @@ def test_slope_panic_mode(mock_df_flat, mock_df_crash, mock_df_dip):
     skip, reason = check_slope_filter(mock_df_crash, regime_cfg)
     assert skip is True
     assert "Safety_Knife_Filter" in reason
+
+
+# ============================================================================
+# Bearish Bar Filter Tests
+# ============================================================================
+from RubberBand.strategy import check_bearish_bar_filter
+
+
+@pytest.fixture
+def mock_df_bullish_bar():
+    """Bar where close > open (bullish)"""
+    return pd.DataFrame({
+        "open": [100.0],
+        "high": [105.0],
+        "low": [99.0],
+        "close": [104.0],  # Close above open
+    })
+
+
+@pytest.fixture
+def mock_df_bearish_bar():
+    """Bar where close < open (bearish)"""
+    return pd.DataFrame({
+        "open": [104.0],
+        "high": [105.0],
+        "low": [99.0],
+        "close": [100.0],  # Close below open
+    })
+
+
+@pytest.fixture
+def mock_df_doji_bar():
+    """Bar where close == open (doji)"""
+    return pd.DataFrame({
+        "open": [100.0],
+        "high": [105.0],
+        "low": [99.0],
+        "close": [100.0],  # Close equals open
+    })
+
+
+def test_bearish_bar_filter_disabled():
+    """When filter is disabled, should never skip."""
+    df = pd.DataFrame({
+        "open": [104.0],
+        "high": [105.0],
+        "low": [99.0],
+        "close": [100.0],  # Bearish bar
+    })
+    cfg = {"bearish_bar_filter": False}
+    
+    skip, reason = check_bearish_bar_filter(df, cfg)
+    assert skip is False
+    assert reason == ""
+
+
+def test_bearish_bar_filter_bullish_bar(mock_df_bullish_bar):
+    """Bullish bar (close > open) should NOT be skipped."""
+    cfg = {"bearish_bar_filter": True}
+    
+    skip, reason = check_bearish_bar_filter(mock_df_bullish_bar, cfg)
+    assert skip is False
+    assert reason == ""
+
+
+def test_bearish_bar_filter_bearish_bar(mock_df_bearish_bar):
+    """Bearish bar (close < open) SHOULD be skipped."""
+    cfg = {"bearish_bar_filter": True}
+    
+    skip, reason = check_bearish_bar_filter(mock_df_bearish_bar, cfg)
+    assert skip is True
+    assert "BearishBar_Filter" in reason
+    assert "Close=100.00" in reason
+    assert "Open=104.00" in reason
+
+
+def test_bearish_bar_filter_doji(mock_df_doji_bar):
+    """Doji bar (close == open) should NOT be skipped."""
+    cfg = {"bearish_bar_filter": True}
+    
+    skip, reason = check_bearish_bar_filter(mock_df_doji_bar, cfg)
+    assert skip is False
+    assert reason == ""
+
+
+def test_bearish_bar_filter_empty_df():
+    """Empty DataFrame should not skip."""
+    cfg = {"bearish_bar_filter": True}
+    df = pd.DataFrame()
+    
+    skip, reason = check_bearish_bar_filter(df, cfg)
+    assert skip is False
+
+
+def test_bearish_bar_filter_missing_columns():
+    """DataFrame missing open/close columns should not skip."""
+    cfg = {"bearish_bar_filter": True}
+    df = pd.DataFrame({"high": [105.0], "low": [99.0]})  # Missing open and close
+    
+    skip, reason = check_bearish_bar_filter(df, cfg)
+    assert skip is False
+
