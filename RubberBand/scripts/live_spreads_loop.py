@@ -55,7 +55,7 @@ from RubberBand.src.data import (
 )
 
 print("[STARTUP] Loading RubberBand.strategy...", flush=True)
-from RubberBand.strategy import attach_verifiers, check_slope_filter
+from RubberBand.strategy import attach_verifiers, check_slope_filter, check_bearish_bar_filter
 
 print("[STARTUP] Loading RubberBand.src.options_data...", flush=True)
 from RubberBand.src.options_data import (
@@ -388,6 +388,14 @@ def get_long_signals(
             should_skip, reason = check_slope_filter(df_closed, regime_cfg)
             if should_skip:
                 # logger.spread_skip(underlying=sym, skip_reason=reason) # Too noisy for 1m loop?
+                continue
+            
+            # Bearish Bar Filter (New - Jan 2026)
+            # Skip entries if current bar is bearish (close < open)
+            # Live analysis showed 100% of losses on bearish bars, 100% of wins on bullish
+            should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, cfg)
+            if should_skip_bar:
+                logger.info(f"SKIP_BEARISH_BAR: {sym} - {bar_reason}")
                 continue
             
             # Check 10-bar Slope
