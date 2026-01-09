@@ -1806,3 +1806,12 @@
 {"event": "scan_start", "current_time": "12:40", "type": "HEARTBEAT", "ts": "2026-01-09T17:40:06Z", "ts_et": "2026-01-09 12:40:06 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 14, "type": "HEARTBEAT", "ts": "2026-01-09T17:40:21Z", "ts_et": "2026-01-09 12:40:21 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 191, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-09T17:40:21Z", "ts_et": "2026-01-09 12:40:21 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "09:41:05", "sleep_sec": 41, "type": "HEARTBEAT", "ts": "2026-01-09T17:40:24Z", "ts_et": "2026-01-09 12:40:24 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-09T17:41:05Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-07T17:41:05Z", "end": "2026-01-09T17:41:05Z", "when": "2026-01-09T17:41:05Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-09T17:41:05Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 192, "time": "12:41", "regime": "CALM", "vixy": 24.935, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-09T17:41:05Z", "ts_et": "2026-01-09 12:41:05 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "12:41", "type": "HEARTBEAT", "ts": "2026-01-09T17:41:05Z", "ts_et": "2026-01-09 12:41:05 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 14, "type": "HEARTBEAT", "ts": "2026-01-09T17:41:20Z", "ts_et": "2026-01-09 12:41:20 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 192, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-09T17:41:20Z", "ts_et": "2026-01-09 12:41:20 ET", "bot_tag": "15M_OPT"}
