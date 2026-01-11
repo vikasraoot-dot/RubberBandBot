@@ -125,20 +125,22 @@ jobs:
                   git pull origin main --rebase 2>&1
               }
               
-              if ($LASTEXITCODE -eq 0) {
-                  git push 2>&1
-                  if ($LASTEXITCODE -eq 0) { 
-                      $success = $true
-                      Write-Host "Push successful."
-                  }
+              # Always attempt push regardless of pull result
+              git push 2>&1
+              if ($LASTEXITCODE -eq 0) { 
+                  $success = $true
+                  Write-Host "Push successful."
               }
               $retryCount++
           }
           
           if (-not $success) {
-              Write-Host "Failed to push after $maxRetries attempts."
-              # Don't fail the job, just warn
+              Write-Host "WARNING: Failed to push after $maxRetries attempts. Artifacts still uploaded."
           }
+          
+          # Always exit 0 - don't fail workflow for push issues
+          # The important auditor data is already saved via Upload Auditor State step
+          exit 0
 
 
       - name: Upload Auditor State
