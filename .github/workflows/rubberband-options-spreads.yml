@@ -42,7 +42,13 @@ jobs:
       - name: Ensure Python path
         shell: powershell
         run: |
-          $python = (Get-Command python.exe).Source
+          # Hardcoded path for self-hosted Windows runners (services don't inherit PATH)
+          $python = "C:\Python313\python.exe"
+          if (-not (Test-Path $python)) {
+            # Fallback to dynamic detection if hardcoded path doesn't exist
+            $python = (Get-Command python.exe -ErrorAction SilentlyContinue).Source
+            if (-not $python) { throw "Python not found!" }
+          }
           echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
 
       - name: Install deps

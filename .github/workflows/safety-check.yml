@@ -31,14 +31,14 @@ jobs:
       
       # Self-hosted runner has Python pre-installed, skip setup-python
       - name: Verify Python
-        run: python --version
+        run: C:\Python313\python.exe --version
       
       - name: Install Dependencies
-        run: pip install requests
+        run: C:\Python313\python.exe -m pip install requests
       
       - name: Run Safety Check
         run: |
-          python RubberBand/scripts/safety_check.py ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}
+          C:\Python313\python.exe RubberBand/scripts/safety_check.py ${{ github.event.inputs.dry_run == 'true' && '--dry-run' || '' }}
       
       - name: Upload Report
         uses: actions/upload-artifact@v4
