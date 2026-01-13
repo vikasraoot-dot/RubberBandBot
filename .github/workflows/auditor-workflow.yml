@@ -35,6 +35,10 @@ jobs:
         shell: powershell
         run: |
           $ErrorActionPreference = "Continue"
+          
+          # Fix git "dubious ownership" error for NETWORK SERVICE account
+          git config --global --add safe.directory $env:GITHUB_WORKSPACE
+          
           git config user.email "bot@rubberband.local"
           git config user.name "RubberBandBot-Auditor"
           
