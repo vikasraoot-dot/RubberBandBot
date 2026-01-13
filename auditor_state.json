@@ -60,24 +60,8 @@
       "sl_price": 383.13495,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 387.05499999999995,
-      "unrealized_pnl": 4.9999999999954525
-    },
-    "SHADOW_15M_STK_AMZN_20260109T144501356456+0000": {
-      "id": "SHADOW_15M_STK_AMZN_20260109T144501356456+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "AMZN",
-      "entry_price": 245.57999999999998,
-      "entry_time": "2026-01-09T14:45:01.356456+00:00",
-      "reason": "Slope3_Too_Flat(-0.0013% > -0.08%)",
-      "qty": 100,
-      "tp_price": 248.0358,
-      "sl_price": 243.12419999999997,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 243.92000000000002,
-      "unrealized_pnl": -165.99999999999682
+      "current_price": 388.0,
+      "unrealized_pnl": 99.50000000000045
     },
     "SHADOW_15M_STK_GIS_20260109T144501356456+0000": {
       "id": "SHADOW_15M_STK_GIS_20260109T144501356456+0000",
@@ -92,8 +76,8 @@
       "sl_price": 43.4214,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 44.004999999999995,
-      "unrealized_pnl": 14.499999999999602
+      "current_price": 44.085,
+      "unrealized_pnl": 22.500000000000142
     },
     "SHADOW_15M_STK_URI_20260109T152501947952+0000": {
       "id": "SHADOW_15M_STK_URI_20260109T152501947952+0000",
@@ -124,8 +108,8 @@
       "sl_price": 55.147949999999994,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 55.18,
-      "unrealized_pnl": -52.49999999999986
+      "current_price": 55.3,
+      "unrealized_pnl": -40.500000000000114
     },
     "SHADOW_15M_STK_HLT_20260109T160001710018+0000": {
       "id": "SHADOW_15M_STK_HLT_20260109T160001710018+0000",
@@ -11008,6 +10992,26 @@
       "exit_time": "2026-01-13T17:14:54.290039+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 268.5000000000002
+    },
+    {
+      "id": "SHADOW_15M_STK_AMZN_20260109T144501356456+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "AMZN",
+      "entry_price": 245.57999999999998,
+      "entry_time": "2026-01-09T14:45:01.356456+00:00",
+      "reason": "Slope3_Too_Flat(-0.0013% > -0.08%)",
+      "qty": 100,
+      "tp_price": 248.0358,
+      "sl_price": 243.12419999999997,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 242.8,
+      "unrealized_pnl": -277.99999999999727,
+      "exit_price": 242.8,
+      "exit_time": "2026-01-13T18:45:22.657649+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -277.99999999999727
     }
   ],
   "processed_lines": {
