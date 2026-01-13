@@ -60,8 +60,8 @@
       "sl_price": 383.13495,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 388.47,
-      "unrealized_pnl": 146.50000000000318
+      "current_price": 389.265,
+      "unrealized_pnl": 225.9999999999991
     },
     "SHADOW_15M_STK_GIS_20260109T144501356456+0000": {
       "id": "SHADOW_15M_STK_GIS_20260109T144501356456+0000",
@@ -76,8 +76,8 @@
       "sl_price": 43.4214,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 44.224999999999994,
-      "unrealized_pnl": 36.49999999999949
+      "current_price": 44.165,
+      "unrealized_pnl": 30.49999999999997
     },
     "SHADOW_15M_STK_URI_20260109T152501947952+0000": {
       "id": "SHADOW_15M_STK_URI_20260109T152501947952+0000",
@@ -95,22 +95,6 @@
       "current_price": 939.5550000000001,
       "unrealized_pnl": 82.50000000000455
     },
-    "SHADOW_15M_STK_CARR_20260109T160001710018+0000": {
-      "id": "SHADOW_15M_STK_CARR_20260109T160001710018+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "CARR",
-      "entry_price": 55.705,
-      "entry_time": "2026-01-09T16:00:01.710018+00:00",
-      "reason": "Slope3_Too_Flat(0.1304% > -0.08%)",
-      "qty": 100,
-      "tp_price": 56.26205,
-      "sl_price": 55.147949999999994,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 55.370000000000005,
-      "unrealized_pnl": -33.499999999999375
-    },
     "SHADOW_15M_STK_HLT_20260109T160001710018+0000": {
       "id": "SHADOW_15M_STK_HLT_20260109T160001710018+0000",
       "type": "STOCK",
@@ -124,8 +108,8 @@
       "sl_price": 297.33164999999997,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 299.305,
-      "unrealized_pnl": -102.99999999999727
+      "current_price": 300.38,
+      "unrealized_pnl": 4.500000000001592
     }
   },
   "closed_positions": [
@@ -11012,6 +10996,26 @@
       "exit_time": "2026-01-13T18:45:22.657649+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -277.99999999999727
+    },
+    {
+      "id": "SHADOW_15M_STK_CARR_20260109T160001710018+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "CARR",
+      "entry_price": 55.705,
+      "entry_time": "2026-01-09T16:00:01.710018+00:00",
+      "reason": "Slope3_Too_Flat(0.1304% > -0.08%)",
+      "qty": 100,
+      "tp_price": 56.26205,
+      "sl_price": 55.147949999999994,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 54.065,
+      "unrealized_pnl": -164.00000000000006,
+      "exit_price": 54.065,
+      "exit_time": "2026-01-13T19:52:13.852366+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -164.00000000000006
     }
   ],
   "processed_lines": {
