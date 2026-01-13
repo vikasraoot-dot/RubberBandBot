@@ -76,8 +76,8 @@
       "sl_price": 104.70239999999998,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 106.06,
-      "unrealized_pnl": 30.000000000001137
+      "current_price": 105.095,
+      "unrealized_pnl": -66.4999999999992
     },
     "SHADOW_15M_STK_AMZN_20260109T144501356456+0000": {
       "id": "SHADOW_15M_STK_AMZN_20260109T144501356456+0000",
@@ -92,24 +92,8 @@
       "sl_price": 243.12419999999997,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 244.18,
-      "unrealized_pnl": -139.99999999999773
-    },
-    "SHADOW_15M_STK_IBM_20260109T144501356456+0000": {
-      "id": "SHADOW_15M_STK_IBM_20260109T144501356456+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "IBM",
-      "entry_price": 302.82500000000005,
-      "entry_time": "2026-01-09T14:45:01.356456+00:00",
-      "reason": "Slope3_Too_Flat(0.0546% > -0.08%)",
-      "qty": 100,
-      "tp_price": 305.85325000000006,
-      "sl_price": 299.79675000000003,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 300.45,
-      "unrealized_pnl": -237.50000000000568
+      "current_price": 246.54000000000002,
+      "unrealized_pnl": 96.00000000000364
     },
     "SHADOW_15M_STK_GIS_20260109T144501356456+0000": {
       "id": "SHADOW_15M_STK_GIS_20260109T144501356456+0000",
@@ -124,40 +108,8 @@
       "sl_price": 43.4214,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 44.025000000000006,
-      "unrealized_pnl": 16.500000000000625
-    },
-    "SHADOW_15M_STK_WFC_20260109T144501356456+0000": {
-      "id": "SHADOW_15M_STK_WFC_20260109T144501356456+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "WFC",
-      "entry_price": 95.61500000000001,
-      "entry_time": "2026-01-09T14:45:01.356456+00:00",
-      "reason": "Slope3_Too_Flat(0.0174% > -0.08%)",
-      "qty": 100,
-      "tp_price": 96.57115,
-      "sl_price": 94.65885000000002,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 94.92500000000001,
-      "unrealized_pnl": -68.99999999999977
-    },
-    "SHADOW_15M_STK_AAPL_20260109T144501356456+0000": {
-      "id": "SHADOW_15M_STK_AAPL_20260109T144501356456+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "AAPL",
-      "entry_price": 257.65,
-      "entry_time": "2026-01-09T14:45:01.356456+00:00",
-      "reason": "Slope3_Too_Flat(0.0333% > -0.08%)",
-      "qty": 100,
-      "tp_price": 260.2265,
-      "sl_price": 255.07349999999997,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 259.895,
-      "unrealized_pnl": 224.50000000000045
+      "current_price": 43.835,
+      "unrealized_pnl": -2.499999999999858
     },
     "SHADOW_15M_STK_URI_20260109T152501947952+0000": {
       "id": "SHADOW_15M_STK_URI_20260109T152501947952+0000",
@@ -172,8 +124,8 @@
       "sl_price": 929.3427,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 944.895,
-      "unrealized_pnl": 616.4999999999964
+      "current_price": 939.48,
+      "unrealized_pnl": 75.0
     },
     "SHADOW_15M_STK_CARR_20260109T160001710018+0000": {
       "id": "SHADOW_15M_STK_CARR_20260109T160001710018+0000",
@@ -188,8 +140,8 @@
       "sl_price": 55.147949999999994,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 55.445,
-      "unrealized_pnl": -25.9999999999998
+      "current_price": 55.21,
+      "unrealized_pnl": -49.499999999999744
     },
     "SHADOW_15M_STK_HLT_20260109T160001710018+0000": {
       "id": "SHADOW_15M_STK_HLT_20260109T160001710018+0000",
@@ -10992,6 +10944,66 @@
       "exit_time": "2026-01-13T15:59:59.409885+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 1141.4999999999964
+    },
+    {
+      "id": "SHADOW_15M_STK_IBM_20260109T144501356456+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "IBM",
+      "entry_price": 302.82500000000005,
+      "entry_time": "2026-01-09T14:45:01.356456+00:00",
+      "reason": "Slope3_Too_Flat(0.0546% > -0.08%)",
+      "qty": 100,
+      "tp_price": 305.85325000000006,
+      "sl_price": 299.79675000000003,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 316.215,
+      "unrealized_pnl": 1338.999999999993,
+      "exit_price": 316.215,
+      "exit_time": "2026-01-13T16:45:41.798349+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 1338.999999999993
+    },
+    {
+      "id": "SHADOW_15M_STK_WFC_20260109T144501356456+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "WFC",
+      "entry_price": 95.61500000000001,
+      "entry_time": "2026-01-09T14:45:01.356456+00:00",
+      "reason": "Slope3_Too_Flat(0.0174% > -0.08%)",
+      "qty": 100,
+      "tp_price": 96.57115,
+      "sl_price": 94.65885000000002,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 94.64500000000001,
+      "unrealized_pnl": -96.99999999999989,
+      "exit_price": 94.64500000000001,
+      "exit_time": "2026-01-13T16:45:44.070077+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -96.99999999999989
+    },
+    {
+      "id": "SHADOW_15M_STK_AAPL_20260109T144501356456+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "AAPL",
+      "entry_price": 257.65,
+      "entry_time": "2026-01-09T14:45:01.356456+00:00",
+      "reason": "Slope3_Too_Flat(0.0333% > -0.08%)",
+      "qty": 100,
+      "tp_price": 260.2265,
+      "sl_price": 255.07349999999997,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 261.4,
+      "unrealized_pnl": 375.0,
+      "exit_price": 261.4,
+      "exit_time": "2026-01-13T16:45:45.123001+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 375.0
     }
   ],
   "processed_lines": {
