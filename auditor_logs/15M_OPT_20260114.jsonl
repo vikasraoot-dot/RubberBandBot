@@ -213,3 +213,96 @@
 {"type": "SPREAD_SKIP", "underlying": "MDB", "skip_reason": "Debit_too_high(5.52>3.00)", "ts": "2026-01-14T15:00:18Z", "ts_et": "2026-01-14 10:00:18 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 2, "forming": 0, "new_entries": 0, "total_positions": 12, "type": "HEARTBEAT", "ts": "2026-01-14T15:00:18Z", "ts_et": "2026-01-14 10:00:18 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 23, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-14T15:00:18Z", "ts_et": "2026-01-14 10:00:18 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:01:05", "sleep_sec": 42, "type": "HEARTBEAT", "ts": "2026-01-14T15:00:23Z", "ts_et": "2026-01-14 10:00:23 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:01:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:01:07Z", "end": "2026-01-14T15:01:07Z", "when": "2026-01-14T15:01:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:01:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 24, "time": "10:01", "regime": "CALM", "vixy": 26.86, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:01:08Z", "ts_et": "2026-01-14 10:01:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:01", "type": "HEARTBEAT", "ts": "2026-01-14T15:01:08Z", "ts_et": "2026-01-14 10:01:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:02:19Z", "ts_et": "2026-01-14 10:02:19 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:02:19Z", "ts_et": "2026-01-14 10:02:19 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(4.58>3.00)", "ts": "2026-01-14T15:02:27Z", "ts_et": "2026-01-14 10:02:27 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:02:27Z", "ts_et": "2026-01-14 10:02:27 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:02:39Z", "ts_et": "2026-01-14 10:02:39 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:03:05", "sleep_sec": 26, "type": "HEARTBEAT", "ts": "2026-01-14T15:02:39Z", "ts_et": "2026-01-14 10:02:39 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:03:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:03:06Z", "end": "2026-01-14T15:03:06Z", "when": "2026-01-14T15:03:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:03:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 25, "time": "10:03", "regime": "CALM", "vixy": 26.9, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:03:08Z", "ts_et": "2026-01-14 10:03:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:03", "type": "HEARTBEAT", "ts": "2026-01-14T15:03:08Z", "ts_et": "2026-01-14 10:03:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:04:18Z", "ts_et": "2026-01-14 10:04:18 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:04:18Z", "ts_et": "2026-01-14 10:04:18 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(4.14>3.00)", "ts": "2026-01-14T15:04:27Z", "ts_et": "2026-01-14 10:04:27 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:04:27Z", "ts_et": "2026-01-14 10:04:27 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:04:39Z", "ts_et": "2026-01-14 10:04:39 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:05:05", "sleep_sec": 26, "type": "HEARTBEAT", "ts": "2026-01-14T15:04:39Z", "ts_et": "2026-01-14 10:04:39 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:05:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:05:07Z", "end": "2026-01-14T15:05:07Z", "when": "2026-01-14T15:05:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:05:09Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 26, "time": "10:05", "regime": "CALM", "vixy": 26.845, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:05:09Z", "ts_et": "2026-01-14 10:05:09 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:05", "type": "HEARTBEAT", "ts": "2026-01-14T15:05:09Z", "ts_et": "2026-01-14 10:05:09 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:06:20Z", "ts_et": "2026-01-14 10:06:20 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:06:20Z", "ts_et": "2026-01-14 10:06:20 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(5.37>3.00)", "ts": "2026-01-14T15:06:26Z", "ts_et": "2026-01-14 10:06:26 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:06:26Z", "ts_et": "2026-01-14 10:06:26 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:06:37Z", "ts_et": "2026-01-14 10:06:37 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:07:05", "sleep_sec": 28, "type": "HEARTBEAT", "ts": "2026-01-14T15:06:37Z", "ts_et": "2026-01-14 10:06:37 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:07:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:07:06Z", "end": "2026-01-14T15:07:06Z", "when": "2026-01-14T15:07:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:07:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 27, "time": "10:07", "regime": "CALM", "vixy": 26.685, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:07:07Z", "ts_et": "2026-01-14 10:07:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:07", "type": "HEARTBEAT", "ts": "2026-01-14T15:07:07Z", "ts_et": "2026-01-14 10:07:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:08:03Z", "ts_et": "2026-01-14 10:08:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:08:03Z", "ts_et": "2026-01-14 10:08:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(5.23>3.00)", "ts": "2026-01-14T15:08:10Z", "ts_et": "2026-01-14 10:08:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:08:10Z", "ts_et": "2026-01-14 10:08:10 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:08:20Z", "ts_et": "2026-01-14 10:08:20 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:09:05", "sleep_sec": 45, "type": "HEARTBEAT", "ts": "2026-01-14T15:08:20Z", "ts_et": "2026-01-14 10:08:20 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:09:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:09:06Z", "end": "2026-01-14T15:09:06Z", "when": "2026-01-14T15:09:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:09:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 28, "time": "10:09", "regime": "CALM", "vixy": 26.71, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:09:07Z", "ts_et": "2026-01-14 10:09:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:09", "type": "HEARTBEAT", "ts": "2026-01-14T15:09:07Z", "ts_et": "2026-01-14 10:09:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:10:03Z", "ts_et": "2026-01-14 10:10:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:10:03Z", "ts_et": "2026-01-14 10:10:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(4.28>3.00)", "ts": "2026-01-14T15:10:11Z", "ts_et": "2026-01-14 10:10:11 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:10:11Z", "ts_et": "2026-01-14 10:10:11 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:10:22Z", "ts_et": "2026-01-14 10:10:22 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:11:05", "sleep_sec": 43, "type": "HEARTBEAT", "ts": "2026-01-14T15:10:22Z", "ts_et": "2026-01-14 10:10:22 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:11:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:11:07Z", "end": "2026-01-14T15:11:07Z", "when": "2026-01-14T15:11:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:11:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 29, "time": "10:11", "regime": "CALM", "vixy": 26.64, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:11:08Z", "ts_et": "2026-01-14 10:11:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:11", "type": "HEARTBEAT", "ts": "2026-01-14T15:11:08Z", "ts_et": "2026-01-14 10:11:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:12:04Z", "ts_et": "2026-01-14 10:12:04 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:12:04Z", "ts_et": "2026-01-14 10:12:04 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(4.97>3.00)", "ts": "2026-01-14T15:12:11Z", "ts_et": "2026-01-14 10:12:11 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:12:11Z", "ts_et": "2026-01-14 10:12:11 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:12:21Z", "ts_et": "2026-01-14 10:12:21 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:13:05", "sleep_sec": 44, "type": "HEARTBEAT", "ts": "2026-01-14T15:12:21Z", "ts_et": "2026-01-14 10:12:21 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:13:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:13:07Z", "end": "2026-01-14T15:13:07Z", "when": "2026-01-14T15:13:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:13:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 30, "time": "10:13", "regime": "CALM", "vixy": 26.345, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:13:08Z", "ts_et": "2026-01-14 10:13:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:13", "type": "HEARTBEAT", "ts": "2026-01-14T15:13:08Z", "ts_et": "2026-01-14 10:13:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["CLS", "C"], "type": "HEARTBEAT", "ts": "2026-01-14T15:14:03Z", "ts_et": "2026-01-14 10:14:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "CLS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 308.95, "rsi": 24.34, "atr": 3.206, "ts": "2026-01-14T15:14:03Z", "ts_et": "2026-01-14 10:14:03 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "CLS", "skip_reason": "Debit_too_high(4.36>3.00)", "ts": "2026-01-14T15:14:10Z", "ts_et": "2026-01-14 10:14:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "C", "signal_reason": "RSI_oversold(23.0)", "entry_price": 113.335, "rsi": 23.05, "atr": 0.7504, "ts": "2026-01-14T15:14:10Z", "ts_et": "2026-01-14 10:14:10 ET", "bot_tag": "15M_OPT"}
+{"error": "name 'cfg' is not defined", "context": "scan_cycle", "type": "ERROR", "ts": "2026-01-14T15:14:20Z", "ts_et": "2026-01-14 10:14:20 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:15:05", "sleep_sec": 45, "type": "HEARTBEAT", "ts": "2026-01-14T15:14:20Z", "ts_et": "2026-01-14 10:14:20 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-14T15:15:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-12T15:15:06Z", "end": "2026-01-14T15:15:06Z", "when": "2026-01-14T15:15:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-14T15:15:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 31, "time": "10:15", "regime": "CALM", "vixy": 26.26, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-14T15:15:07Z", "ts_et": "2026-01-14 10:15:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:15", "type": "HEARTBEAT", "ts": "2026-01-14T15:15:07Z", "ts_et": "2026-01-14 10:15:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 12, "type": "HEARTBEAT", "ts": "2026-01-14T15:16:14Z", "ts_et": "2026-01-14 10:16:14 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 31, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-14T15:16:14Z", "ts_et": "2026-01-14 10:16:14 ET", "bot_tag": "15M_OPT"}
