@@ -9708,3 +9708,6 @@
 {"type": "SKIP_SLOPE3", "symbol": "AAPL", "reason": "Slope3_Too_Flat(0.0548% > -0.08%)", "ts": "2026-01-14T20:45:01.303639+00:00", "bot_tag": "15M_STK"}
 {"type": "SKIP_SLOPE3", "symbol": "JPM", "reason": "Slope3_Too_Flat(-0.0227% > -0.08%)", "ts": "2026-01-14T20:45:01.303639+00:00", "bot_tag": "15M_STK"}
 {"type": "EOD_SUMMARY", "date": "2026-01-14", "total_trades": 0, "closed_trades": 0, "open_trades": 0, "total_pnl": 5.8, "total_volume": 17480.79, "win_count": 0, "loss_count": 0, "win_rate_pct": 0, "avg_win": 0, "avg_loss": 0, "exit_reasons": {}, "trades": [], "ts": "2026-01-14T20:46:15Z", "ts_et": "2026-01-14 15:46:15 ET", "bot_tag": "15M_STK"}
+{"type": "REGISTRY_SYNC", "registry_positions": 0, "alpaca_stock_positions": 7, "my_symbols": [], "ts": "2026-01-14T20:50:09.278616+00:00", "bot_tag": "15M_STK"}
+{"type": "UNIVERSE", "loaded": 146, "sample": ["COHR", "CIEN", "MU", "STX", "SOFI", "VRT", "INSM", "CEG", "HOOD", "SMCI"], "when": "2026-01-14T20:50:09.278616+00:00", "bot_tag": "15M_STK"}
+{"type": "HEARTBEAT", "session": "PM", "market_open": true, "ts": "2026-01-14T20:50:09.278616+00:00", "bot_tag": "15M_STK"}
