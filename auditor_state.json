@@ -78,22 +78,6 @@
       "pnl": 0.0,
       "current_price": 942.09,
       "unrealized_pnl": 336.00000000000136
-    },
-    "SHADOW_15M_STK_HLT_20260109T160001710018+0000": {
-      "id": "SHADOW_15M_STK_HLT_20260109T160001710018+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "HLT",
-      "entry_price": 300.335,
-      "entry_time": "2026-01-09T16:00:01.710018+00:00",
-      "reason": "Slope3_Too_Flat(0.0591% > -0.08%)",
-      "qty": 100,
-      "tp_price": 303.33835,
-      "sl_price": 297.33164999999997,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 300.625,
-      "unrealized_pnl": 29.000000000002046
     }
   },
   "closed_positions": [
@@ -11020,6 +11004,26 @@
       "exit_time": "2026-01-13T20:56:36.430012+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 45.49999999999983
+    },
+    {
+      "id": "SHADOW_15M_STK_HLT_20260109T160001710018+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "HLT",
+      "entry_price": 300.335,
+      "entry_time": "2026-01-09T16:00:01.710018+00:00",
+      "reason": "Slope3_Too_Flat(0.0591% > -0.08%)",
+      "qty": 100,
+      "tp_price": 303.33835,
+      "sl_price": 297.33164999999997,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 295.69,
+      "unrealized_pnl": -464.4999999999982,
+      "exit_price": 295.69,
+      "exit_time": "2026-01-14T14:36:56.530317+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -464.4999999999982
     }
   ],
   "processed_lines": {
@@ -11031,6 +11035,8 @@
     "auditor_logs\\15M_STK_20260108.jsonl": 1682,
     "auditor_logs\\15M_OPT_20260108.jsonl": 4394,
     "auditor_logs\\15M_STK_20260109.jsonl": 11120,
-    "auditor_logs\\15M_OPT_20260109.jsonl": 3623
+    "auditor_logs\\15M_OPT_20260109.jsonl": 3623,
+    "auditor_logs\\15M_STK_20260114.jsonl": 6,
+    "auditor_logs\\15M_OPT_20260114.jsonl": 57
   }
 }
