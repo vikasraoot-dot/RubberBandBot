@@ -390,13 +390,14 @@ def get_long_signals(
                 # logger.spread_skip(underlying=sym, skip_reason=reason) # Too noisy for 1m loop?
                 continue
             
-            # Bearish Bar Filter (New - Jan 2026)
-            # Skip entries if current bar is bearish (close < open)
-            # Live analysis showed 100% of losses on bearish bars, 100% of wins on bullish
-            should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, cfg)
-            if should_skip_bar:
-                logger.info(f"SKIP_BEARISH_BAR: {sym} - {bar_reason}")
-                continue
+            # Bearish Bar Filter (Jan 2026)
+            # UPDATE (Jan 16 2026): Disabled for Options Bot (High Vol tickers need to catch falling knife)
+            # Original rationale: 100% of losses on bearish bars in Stock Bot backtest.
+            # However, Options Bot targets volatile tickers where signals inherently occur on Red bars.
+            # should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, cfg)
+            # if should_skip_bar:
+            #     logger.info(f"SKIP_BEARISH_BAR: {sym} - {bar_reason}")
+            #     continue
             
             # Check 10-bar Slope
             slope_threshold_10 = cfg.get("slope_threshold_10")
