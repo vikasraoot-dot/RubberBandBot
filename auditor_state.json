@@ -47,22 +47,6 @@
       "current_price": 330.945,
       "unrealized_pnl": 0.0
     },
-    "SHADOW_15M_STK_MSI_20260108T150002243201+0000": {
-      "id": "SHADOW_15M_STK_MSI_20260108T150002243201+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "MSI",
-      "entry_price": 387.005,
-      "entry_time": "2026-01-08T15:00:02.243201+00:00",
-      "reason": "Slope3_Too_Flat(0.0252% > -0.08%)",
-      "qty": 100,
-      "tp_price": 390.87505,
-      "sl_price": 383.13495,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 390.285,
-      "unrealized_pnl": 328.00000000000296
-    },
     "SHADOW_15M_STK_URI_20260109T152501947952+0000": {
       "id": "SHADOW_15M_STK_URI_20260109T152501947952+0000",
       "type": "STOCK",
@@ -11024,6 +11008,26 @@
       "exit_time": "2026-01-14T14:36:56.530317+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -464.4999999999982
+    },
+    {
+      "id": "SHADOW_15M_STK_MSI_20260108T150002243201+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "MSI",
+      "entry_price": 387.005,
+      "entry_time": "2026-01-08T15:00:02.243201+00:00",
+      "reason": "Slope3_Too_Flat(0.0252% > -0.08%)",
+      "qty": 100,
+      "tp_price": 390.87505,
+      "sl_price": 383.13495,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 376.535,
+      "unrealized_pnl": -1046.999999999997,
+      "exit_price": 376.535,
+      "exit_time": "2026-01-16T14:59:02.979655+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -1046.999999999997
     }
   ],
   "processed_lines": {
@@ -11039,6 +11043,8 @@
     "auditor_logs\\15M_STK_20260114.jsonl": 6,
     "auditor_logs\\15M_OPT_20260114.jsonl": 57,
     "auditor_logs\\15M_STK_20260115.jsonl": 6,
-    "auditor_logs\\15M_OPT_20260115.jsonl": 50
+    "auditor_logs\\15M_OPT_20260115.jsonl": 50,
+    "auditor_logs\\15M_STK_20260116.jsonl": 3,
+    "auditor_logs\\15M_OPT_20260116.jsonl": 185
   }
 }
