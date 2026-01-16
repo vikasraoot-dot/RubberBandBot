@@ -11028,6 +11028,26 @@
       "exit_time": "2026-01-16T14:59:02.979655+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -1046.999999999997
+    },
+    {
+      "id": "SHADOW_15M_OPT_CLS_20260116T153229Z",
+      "type": "SPREAD",
+      "bot_tag": "15M_OPT",
+      "symbol": "CLS",
+      "long_symbol": "CLS260123C00300000",
+      "short_symbol": "CLS260123C00305000",
+      "entry_debit": 4.280000000000001,
+      "entry_time": "2026-01-16T15:32:29Z",
+      "reason": "Debit_too_high(3.50>3.00)",
+      "qty": 1,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_val": 0.16999999999999993,
+      "unrealized_pnl": -411.0000000000001,
+      "exit_price": 0.16999999999999993,
+      "exit_time": "2026-01-16T15:34:54.873004+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -411.0000000000001
     }
   ],
   "processed_lines": {
@@ -11045,6 +11065,6 @@
     "auditor_logs\\15M_STK_20260115.jsonl": 6,
     "auditor_logs\\15M_OPT_20260115.jsonl": 50,
     "auditor_logs\\15M_STK_20260116.jsonl": 3,
-    "auditor_logs\\15M_OPT_20260116.jsonl": 185
+    "auditor_logs\\15M_OPT_20260116.jsonl": 360
   }
 }
