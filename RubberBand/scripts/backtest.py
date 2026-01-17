@@ -649,7 +649,9 @@ def main():
         print(f"OVERRIDE: Dead Knife Filter = ENABLED")
     
     # Inject Bearish Bar Filter flag
-    cfg["bearish_bar_filter"] = getattr(args, 'bearish_bar_filter', False)
+    # Logic: Respect config.yaml (True) OR allow CLI override (True)
+    # This prevents CLI default (False) from disabling the config setting.
+    cfg["bearish_bar_filter"] = cfg.get("bearish_bar_filter", False) or getattr(args, 'bearish_bar_filter', False)
     if cfg["bearish_bar_filter"]:
         print(f"OVERRIDE: Bearish Bar Filter = ENABLED")
 
