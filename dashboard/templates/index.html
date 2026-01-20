@@ -14,6 +14,9 @@
         <header>
             <h1>📊 RubberBandBot Dashboard</h1>
             <div class="controls">
+                <a href="/" class="nav-link active">📊 Dashboard</a>
+                <a href="/auditor" class="nav-link">👁️ Auditor</a>
+                <a href="/reports" class="nav-link">📄 Reports</a>
                 <div class="control-group">
                     <label>Date:</label>
                     <input type="date" id="dateSelect" />
@@ -143,7 +146,7 @@
 
             <!-- Open Positions -->
             <div class="section-header">
-                <h2>Open Positions <span class="date-label">(current - live data)</span></h2>
+                <h2>Open Positions <span class="date-label">(Live Data - Not filtered by date)</span></h2>
             </div>
 
             <!-- Stocks Table -->
@@ -153,10 +156,12 @@
                     <thead>
                         <tr>
                             <th>Symbol</th>
+                            <th>Entry Date</th>
                             <th>Qty</th>
                             <th>Entry</th>
                             <th>Current</th>
                             <th>P&L</th>
+                            <th>P&L%</th>
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -171,10 +176,13 @@
                         <tr>
                             <th>Position</th>
                             <th>Type</th>
+                            <th>DTE</th>
+                            <th>Entry Date</th>
                             <th>Qty</th>
                             <th>Entry</th>
                             <th>Current</th>
                             <th>P&L</th>
+                            <th>P&L%</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

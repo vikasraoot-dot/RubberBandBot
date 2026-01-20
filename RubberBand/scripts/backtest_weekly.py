@@ -314,6 +314,60 @@ def simulate_weekly_mean_reversion(
             # Re-eval:
             is_regime_signal = (prev_rsi < p["rsi"]) and (prev_dev < p["dev"])
             
+            # ==========================================
+            # FILTER HYPOTHESIS TESTING
+            # ==========================================
+            
+            # Filter A: Capitulation Filter
+            # Skip entries when previous week shows extreme bearishness
+            capitulation_filter_enabled = cfg.get("capitulation_filter", False)
+            if capitulation_filter_enabled and is_regime_signal:
+                prev_high = float(prev.get("high", 0))
+                prev_low = float(prev.get("low", 0))
+                prev_close = float(prev.get("close", 0))
+                prev_open = float(prev.get("open", 1))
+                bar_range = prev_high - prev_low
+                if bar_range > 0:
+                    close_position = (prev_close - prev_low) / bar_range
+                    pct_change = (prev_close - prev_open) / prev_open * 100
+                    if close_position < 0.20 and pct_change < -8:
+                        continue
+            
+            # Filter B: Multi-Week Confirmation
+            # Require 2 consecutive weeks of oversold conditions
+            multi_week_filter_enabled = cfg.get("multi_week_filter", False)
+            if multi_week_filter_enabled and is_regime_signal and i >= 2:
+                prev_2 = df.iloc[i - 2]  # Two weeks ago
+                prev_2_rsi = float(prev_2.get("rsi", 100))
+                prev_2_dev = float(prev_2.get("mean_deviation_pct", 0))
+                # Both weeks must be oversold
+                if not (prev_2_rsi < p["rsi"] and prev_2_dev < p["dev"]):
+                    continue  # Skip - not confirmed over 2 weeks
+            
+            # Filter C: Volume Spike Filter
+            # Skip when volume is significantly above average (panic selling)
+            volume_spike_filter_enabled = cfg.get("volume_spike_filter", False)
+            if volume_spike_filter_enabled and is_regime_signal:
+                # Calculate 20-week avg volume
+                if i >= 20:
+                    avg_volume = df.iloc[i-20:i]["volume"].mean()
+                    prev_volume = float(prev.get("volume", 0))
+                    if prev_volume > 2.0 * avg_volume:
+                        continue  # Skip - panic selling
+            
+            # Filter D: Bullish Close Filter
+            # Only enter when prev week closed in top 50% of range (showing buying interest)
+            bullish_close_filter_enabled = cfg.get("bullish_close_filter", False)
+            if bullish_close_filter_enabled and is_regime_signal:
+                prev_high = float(prev.get("high", 0))
+                prev_low = float(prev.get("low", 0))
+                prev_close = float(prev.get("close", 0))
+                bar_range = prev_high - prev_low
+                if bar_range > 0:
+                    close_position = (prev_close - prev_low) / bar_range
+                    if close_position < 0.50:
+                        continue  # Skip - closed in bottom half
+            
             if is_bull_trend and is_regime_signal:
                 atr_val = float(prev.get("atr", 0.0))
                 if atr_val <= 0:
@@ -414,6 +468,10 @@ def main():
     ap.add_argument("--cash", type=float, default=10_000, help="Starting cash")
     ap.add_argument("--quiet", action="store_true", help="Suppress verbose output")
     ap.add_argument("--adx-max", type=float, default=0, help="Skip entries when ADX > this value (0=disabled, try 50-60)")
+    ap.add_argument("--capitulation-filter", action="store_true", help="Skip entries when prev week closed in bottom 20%% AND was >8%% down")
+    ap.add_argument("--multi-week-filter", action="store_true", help="Require 2 consecutive weeks of oversold conditions")
+    ap.add_argument("--volume-spike-filter", action="store_true", help="Skip when volume is >2x avg (panic selling)")
+    ap.add_argument("--bullish-close-filter", action="store_true", help="Only enter when prev week closed in top 50%% of range")
     args = ap.parse_args()
     
     # Load config
@@ -460,6 +518,12 @@ def main():
     
     # Inject map into cfg
     cfg["daily_vix_map"] = daily_vix_map
+    
+    # Inject filter settings from CLI
+    cfg["capitulation_filter"] = getattr(args, "capitulation_filter", False)
+    cfg["multi_week_filter"] = getattr(args, "multi_week_filter", False)
+    cfg["volume_spike_filter"] = getattr(args, "volume_spike_filter", False)
+    cfg["bullish_close_filter"] = getattr(args, "bullish_close_filter", False)
 
     for sym in symbols:
         try:
@@ -495,6 +559,8 @@ def main():
     if not rows:
         print("\nNo results.")
         return
+    
+    out = pd.DataFrame(rows)
     
     print(f"\n{'='*70}")
     print("RESULTS BY SYMBOL")

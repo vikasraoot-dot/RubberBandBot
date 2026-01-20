@@ -3,10 +3,18 @@
 let pnlChart = null;
 let tradesChart = null;
 
+// Helper to format date in local timezone (YYYY-MM-DD)
+function formatLocalDate(date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Set default date to today
-    const today = new Date().toISOString().split('T')[0];
+    // Set default date to today (local timezone)
+    const today = formatLocalDate(new Date());
     document.getElementById('dateSelect').value = today;
 
     // Load initial data
@@ -19,6 +27,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('botSelect').addEventListener('change', loadDashboard);
 });
 
+async function syncFromGitHub() {
+    try {
+        const resp = await fetch('/api/sync');
+        const result = await resp.json();
+        console.log('Sync result:', result.message);
+        return result.success;
+    } catch (err) {
+        console.error('Sync failed:', err);
+        return false;
+    }
+}
+
 async function loadDashboard() {
     const date = document.getElementById('dateSelect').value;
     const period = document.getElementById('periodSelect').value;
@@ -28,6 +48,9 @@ async function loadDashboard() {
     document.getElementById('selectedDateLabel').textContent = date;
 
     try {
+        // Sync from GitHub first (for auditor data in daily reports)
+        await syncFromGitHub();
+
         // Load portfolio value
         const portfolioRes = await fetch('/api/portfolio');
         if (portfolioRes.ok) {
@@ -41,10 +64,14 @@ async function loadDashboard() {
         updateSummaryCards(pnl, bot);
         updateBotCards(pnl);
 
-        // Load positions
-        const posRes = await fetch('/api/positions');
+        // Load positions (filtered by bot)
+        const posRes = await fetch(`/api/positions?bot=${bot}`);
         const positions = await posRes.json();
         updatePositionsTables(positions);
+
+        // Update Dynamic Titles
+        const botName = document.getElementById('botSelect').options[document.getElementById('botSelect').selectedIndex].text;
+        document.querySelectorAll('.filter-label').forEach(el => el.textContent = `(Filter: ${botName})`);
 
         // Load charts (filtered by bot and period)
         await loadCharts(period, bot);
@@ -138,51 +165,71 @@ function updatePositionsTables(positions) {
     const stocksTbody = document.querySelector('#stocksTable tbody');
     stocksTbody.innerHTML = '';
 
-    positions.stocks.forEach(pos => {
-        const row = document.createElement('tr');
-        const pnlClass = pos.unrealized_pnl >= 0 ? 'positive' : 'negative';
-        row.innerHTML = `
-            <td>${pos.symbol}</td>
-            <td>${pos.qty}</td>
-            <td>$${pos.avg_entry.toFixed(2)}</td>
-            <td>$${pos.current_price.toFixed(2)}</td>
-            <td class="${pnlClass}">${formatCurrency(pos.unrealized_pnl)}</td>
-        `;
-        stocksTbody.appendChild(row);
-    });
+    if (positions.stocks.length === 0) {
+        stocksTbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#8b949e">No stock positions found (check Bot Filter)</td></tr>';
+    } else {
+        positions.stocks.forEach(pos => {
+            const row = document.createElement('tr');
+            const pnlClass = pos.unrealized_pnl >= 0 ? 'positive' : 'negative';
+            const pnlPct = pos.avg_entry > 0 ? ((pos.current_price - pos.avg_entry) / pos.avg_entry * 100) : 0;
+            row.innerHTML = `
+                <td>${pos.symbol}</td>
+                <td style="color:#8b949e; font-size:0.9em">${pos.entry_date || '-'}</td>
+                <td>${pos.qty}</td>
+                <td>$${pos.avg_entry.toFixed(2)}</td>
+                <td>$${pos.current_price.toFixed(2)}</td>
+                <td class="${pnlClass}">${formatCurrency(pos.unrealized_pnl)}</td>
+                <td class="${pnlClass}">${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(1)}%</td>
+            `;
+            stocksTbody.appendChild(row);
+        });
+    }
 
     // Options table (consolidated)
     const optionsTbody = document.querySelector('#optionsTable tbody');
     optionsTbody.innerHTML = '';
 
-    positions.options.forEach(pos => {
-        const row = document.createElement('tr');
-        const pnlClass = pos.unrealized_pnl >= 0 ? 'positive' : 'negative';
-        const typeBadge = pos.type === 'spread' ?
-            '<span class="spread-badge">SPREAD</span>' :
-            '<span class="single-badge">SINGLE</span>';
+    if (positions.options.length === 0) {
+        optionsTbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:#8b949e">No option positions found (check Bot Filter)</td></tr>';
+    } else {
+        positions.options.forEach(pos => {
+            const row = document.createElement('tr');
+            const pnlClass = pos.unrealized_pnl >= 0 ? 'positive' : 'negative';
+            const typeBadge = pos.type === 'spread' ?
+                '<span class="spread-badge">SPREAD</span>' :
+                '<span class="single-badge">SINGLE</span>';
+            const pnlPct = pos.avg_entry !== 0 ? (pos.unrealized_pnl / Math.abs(pos.avg_entry * pos.qty * 100) * 100) : 0;
 
-        row.innerHTML = `
-            <td>${pos.description}${typeBadge}</td>
-            <td>${pos.type === 'spread' ? 'Spread' : 'Single'}</td>
-            <td>${Math.abs(pos.qty)}</td>
-            <td>$${Math.abs(pos.avg_entry).toFixed(2)}</td>
-            <td>$${Math.abs(pos.current_price).toFixed(2)}</td>
-            <td class="${pnlClass}">${formatCurrency(pos.unrealized_pnl)}</td>
-        `;
-        optionsTbody.appendChild(row);
-    });
+            // DTE Color
+            let dteClass = '';
+            if (pos.dte <= 1) dteClass = 'negative'; // 0 or 1 day left
+            else if (pos.dte <= 5) dteClass = 'warning'; // Less than a week
+
+            row.innerHTML = `
+                <td>${pos.description}${typeBadge}</td>
+                <td>${pos.type === 'spread' ? 'Spread' : 'Single'}</td>
+                <td class="${dteClass}"><b>${pos.dte}d</b></td>
+                <td style="color:#8b949e; font-size:0.9em">${pos.entry_date || '-'}</td>
+                <td>${Math.abs(pos.qty)}</td>
+                <td>$${Math.abs(pos.avg_entry).toFixed(2)}</td>
+                <td>$${Math.abs(pos.current_price).toFixed(2)}</td>
+                <td class="${pnlClass}">${formatCurrency(pos.unrealized_pnl)}</td>
+                <td class="${pnlClass}">${pnlPct >= 0 ? '+' : ''}${pnlPct.toFixed(1)}%</td>
+            `;
+            optionsTbody.appendChild(row);
+        });
+    }
 }
 
 async function loadCharts(period, bot) {
     try {
         // PnL Chart (filtered by bot)
-        const pnlRes = await fetch(`/api/chart/pnl?period=${period}&bot=${bot}`);
+        const pnlRes = await fetch(`/ api / chart / pnl ? period = ${period}& bot=${bot} `);
         const pnlData = await pnlRes.json();
         renderPnlChart(pnlData);
 
         // Trades Chart (filtered by bot)
-        const tradesRes = await fetch(`/api/chart/trades?period=${period}&bot=${bot}`);
+        const tradesRes = await fetch(`/ api / chart / trades ? period = ${period}& bot=${bot} `);
         const tradesData = await tradesRes.json();
         renderTradesChart(tradesData);
     } catch (err) {
@@ -204,22 +251,43 @@ function renderPnlChart(data) {
         return acc;
     }, []);
 
+    // Daily PnL colors (green for positive, red for negative)
+    const dailyColors = values.map(v => v >= 0 ? 'rgba(63, 185, 80, 0.7)' : 'rgba(248, 81, 73, 0.7)');
+
     pnlChart = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels,
-            datasets: [{
-                label: 'Cumulative PnL',
-                data: cumulative,
-                borderColor: '#58a6ff',
-                backgroundColor: 'rgba(88, 166, 255, 0.1)',
-                fill: true,
-                tension: 0.4
-            }]
+            datasets: [
+                {
+                    label: 'Daily PnL',
+                    data: values,
+                    backgroundColor: dailyColors,
+                    borderColor: dailyColors,
+                    borderWidth: 1,
+                    order: 2
+                },
+                {
+                    label: 'Cumulative PnL',
+                    data: cumulative,
+                    type: 'line',
+                    borderColor: '#58a6ff',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    pointRadius: 3,
+                    order: 1
+                }
+            ]
         },
         options: {
             responsive: true,
-            plugins: { legend: { display: false } },
+            plugins: {
+                legend: {
+                    display: true,
+                    labels: { color: '#8b949e' }
+                }
+            },
             scales: {
                 y: { grid: { color: '#30363d' }, ticks: { color: '#8b949e' } },
                 x: { grid: { display: false }, ticks: { color: '#8b949e' } }
@@ -269,7 +337,7 @@ function renderTradesChart(data) {
 
 async function showTradeDetails(date, bot) {
     try {
-        const res = await fetch(`/api/trades?date=${date}&bot=${bot}`);
+        const res = await fetch(`/ api / trades ? date = ${date}& bot=${bot} `);
         const trades = await res.json();
 
         // Create modal if doesn't exist
@@ -279,14 +347,14 @@ async function showTradeDetails(date, bot) {
             modal.id = 'tradeModal';
             modal.className = 'modal';
             modal.innerHTML = `
-                <div class="modal-content">
+                < div class="modal-content" >
                     <div class="modal-header">
                         <h3>Trade Details - <span id="modalDate"></span></h3>
                         <button onclick="closeModal()">✕</button>
                     </div>
                     <div class="modal-body" id="modalBody"></div>
-                </div>
-            `;
+                </div >
+                `;
             document.body.appendChild(modal);
         }
 
@@ -298,13 +366,13 @@ async function showTradeDetails(date, bot) {
         } else {
             let html = '<table class="trades-table"><thead><tr><th>Symbol</th><th>Side</th><th>Qty</th><th>Price</th><th>Bot</th></tr></thead><tbody>';
             trades.forEach(t => {
-                html += `<tr>
+                html += `< tr >
                     <td>${t.symbol}</td>
                     <td class="${t.side === 'buy' ? 'positive' : 'negative'}">${t.side.toUpperCase()}</td>
                     <td>${t.qty}</td>
                     <td>$${t.price.toFixed(2)}</td>
                     <td>${t.category}</td>
-                </tr>`;
+                </tr > `;
             });
             html += '</tbody></table>';
             body.innerHTML = html;
