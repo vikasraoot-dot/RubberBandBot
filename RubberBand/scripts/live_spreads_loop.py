@@ -450,6 +450,7 @@ def try_spread_entry(
     logger: OptionsTradeLogger,
     registry: PositionRegistry,
     dry_run: bool = True,
+    cfg: Dict[str, Any] = None,
 ) -> bool:
     """Attempt to enter a bull call spread based on a stock signal."""
     sym = signal["symbol"]
@@ -1094,7 +1095,7 @@ def run_scan_cycle(
             atr=signal["atr"]
         )
         
-        if try_spread_entry(signal, spread_cfg, logger, registry, dry_run):
+        if try_spread_entry(signal, spread_cfg, logger, registry, dry_run, cfg):
             entries += 1
             position_underlyings.add(signal["symbol"])
             # Log audit alignment
