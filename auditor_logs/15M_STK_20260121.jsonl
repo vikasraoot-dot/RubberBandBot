@@ -2874,3 +2874,157 @@
 {"type": "SKIP_SLOPE3", "symbol": "AAPL", "reason": "Slope3_Too_Flat(-0.0062% > -0.08%)", "ts": "2026-01-21T16:20:00.275674+00:00", "bot_tag": "15M_STK"}
 {"type": "SKIP_SLOPE3", "symbol": "JPM", "reason": "Slope3_Too_Flat(-0.0452% > -0.08%)", "ts": "2026-01-21T16:20:00.275674+00:00", "bot_tag": "15M_STK"}
 {"type": "EOD_SUMMARY", "date": "2026-01-21", "total_trades": 0, "closed_trades": 0, "open_trades": 0, "total_pnl": -20.88, "total_volume": 7891.24, "win_count": 0, "loss_count": 0, "win_rate_pct": 0, "avg_win": 0, "avg_loss": 0, "exit_reasons": {}, "trades": [], "ts": "2026-01-21T16:21:04Z", "ts_et": "2026-01-21 11:21:04 ET", "bot_tag": "15M_STK"}
+{"type": "REGISTRY_SYNC", "registry_positions": 2, "alpaca_stock_positions": 11, "my_symbols": ["NVO", "RKT"], "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "UNIVERSE", "loaded": 146, "sample": ["COHR", "CIEN", "MU", "STX", "SOFI", "VRT", "INSM", "CEG", "HOOD", "SMCI"], "when": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "HEARTBEAT", "session": "AM", "market_open": true, "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_START", "requested": 146, "chunks": 2, "timeframe": "15Min", "feed": "iex", "start": "2026-01-11T16:25:00.424944+00:00", "end": "2026-01-21T16:25:00.424944+00:00", "when": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "UNIVERSE", "loaded": 146, "sample": ["COHR", "CIEN", "MU", "STX", "SOFI", "VRT", "INSM", "CEG", "HOOD", "SMCI"], "when": "2026-01-21T16:25:03Z", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_START", "requested": 146, "chunks": 6, "timeframe": "15Min", "feed": "iex", "start": "2026-01-11T16:25:03Z", "end": "2026-01-21T16:25:03Z", "when": "2026-01-21T16:25:03Z", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 25, "pages": 6, "source_shape": "dict", "collected_symbols": 25, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 2, "symbols_in_chunk": 25, "pages": 6, "source_shape": "dict", "collected_symbols": 25, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 3, "symbols_in_chunk": 25, "pages": 5, "source_shape": "dict", "collected_symbols": 25, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 4, "symbols_in_chunk": 25, "pages": 6, "source_shape": "dict", "collected_symbols": 25, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 5, "symbols_in_chunk": 25, "pages": 5, "source_shape": "dict", "collected_symbols": 25, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 6, "symbols_in_chunk": 21, "pages": 5, "source_shape": "dict", "collected_symbols": 21, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 146, "with_data": 146, "empty": 0, "stale": 0, "sample_with_data": ["COHR", "CIEN", "MU", "STX"], "sample_empty": [], "when": "2026-01-21T16:25:50Z", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 146, "with_data": 146, "empty": 0, "stale": 0, "sample_with_data": ["AAPL", "ABBV", "ABNB", "ACN"], "sample_empty": [], "when": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-21T16:26:03Z", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-19T16:26:03Z", "end": "2026-01-21T16:26:03Z", "when": "2026-01-21T16:26:03Z", "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_STK"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-21T16:26:04Z", "bot_tag": "15M_STK"}
+{"type": "REGIME_UPDATE", "regime": "CALM", "vixy_price": 26.61, "slope_threshold_pct": -0.08, "dkf_enabled": false, "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "COHR", "reason": "Slope3_Too_Flat(0.4800% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MU", "reason": "Slope3_Too_Flat(0.4184% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "STX", "reason": "Slope3_Too_Flat(0.3096% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SOFI", "reason": "Slope3_Too_Flat(0.0012% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "VRT", "reason": "Slope3_Too_Flat(0.2476% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CEG", "reason": "Slope3_Too_Flat(-0.0246% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HOOD", "reason": "Slope3_Too_Flat(0.0913% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SMCI", "reason": "Slope3_Too_Flat(0.1918% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TSLA", "reason": "Slope3_Too_Flat(0.0947% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "COIN", "reason": "Slope3_Too_Flat(0.0190% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "FSLR", "reason": "Slope3_Too_Flat(0.0495% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PLTR", "reason": "Slope3_Too_Flat(-0.0547% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CVNA", "reason": "Slope3_Too_Flat(0.0953% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "VST", "reason": "Slope3_Too_Flat(-0.0219% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MRVL", "reason": "Slope3_Too_Flat(0.3023% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SATS", "reason": "Slope3_Too_Flat(-0.0677% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "INTC", "reason": "Slope3_Too_Flat(0.5924% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CPNG", "reason": "Slope3_Too_Flat(-0.0644% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "LRCX", "reason": "Slope3_Too_Flat(0.1309% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "AMD", "reason": "Slope3_Too_Flat(0.4887% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ARM", "reason": "Slope3_Too_Flat(0.4105% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"symbol": "RKT", "session": "AM", "cid": "RB_RKT_20260121_162500", "decision": "BLOCK", "reasons": ["already in position"], "type": "GATE", "ts": "2026-01-21T16:26:05Z", "ts_et": "2026-01-21 11:26:05 ET", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CCL", "reason": "Slope3_Too_Flat(0.0343% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "NKE", "reason": "Slope3_Too_Flat(0.0790% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SE", "reason": "Slope3_Too_Flat(0.0619% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "NEM", "reason": "Slope3_Too_Flat(0.0708% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "DELL", "reason": "Slope3_Too_Flat(-0.0028% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MCHP", "reason": "Slope3_Too_Flat(0.2922% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"symbol": "NVO", "session": "AM", "cid": "RB_NVO_20260121_162500", "decision": "BLOCK", "reasons": ["already in position"], "type": "GATE", "ts": "2026-01-21T16:26:05Z", "ts_et": "2026-01-21 11:26:05 ET", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HAL", "reason": "Slope3_Too_Flat(0.1797% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MDB", "reason": "Slope3_Too_Flat(0.0765% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "B", "reason": "Slope3_Too_Flat(0.0112% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ANET", "reason": "Slope3_Too_Flat(0.0279% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GLW", "reason": "Slope3_Too_Flat(0.1036% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CMCSA", "reason": "Slope3_Too_Flat(0.0571% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ON", "reason": "Slope3_Too_Flat(0.3166% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "RCL", "reason": "Slope3_Too_Flat(0.1042% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "LULU", "reason": "Slope3_Too_Flat(-0.0459% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "AMAT", "reason": "Slope3_Too_Flat(0.1082% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "FCX", "reason": "Slope3_Too_Flat(0.1483% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "APH", "reason": "Slope3_Too_Flat(0.0987% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PDD", "reason": "Slope3_Too_Flat(0.0890% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SNOW", "reason": "Slope3_Too_Flat(0.0959% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SLB", "reason": "Slope3_Too_Flat(0.1984% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "DASH", "reason": "Slope3_Too_Flat(0.0092% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TGT", "reason": "Slope3_Too_Flat(-0.0507% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "COP", "reason": "Slope3_Too_Flat(0.0965% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "NXPI", "reason": "Slope3_Too_Flat(0.1154% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "NVDA", "reason": "Slope3_Too_Flat(0.1138% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SPOT", "reason": "Slope3_Too_Flat(-0.0096% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "VLO", "reason": "Slope3_Too_Flat(0.1397% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ALNY", "reason": "Slope3_Too_Flat(0.0820% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TSM", "reason": "Slope3_Too_Flat(0.0647% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "EQT", "reason": "Slope3_Too_Flat(0.3553% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "URI", "reason": "Slope3_Too_Flat(0.1169% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SNPS", "reason": "Slope3_Too_Flat(0.0731% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TT", "reason": "Slope3_Too_Flat(0.0980% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CRWD", "reason": "Slope3_Too_Flat(0.1421% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SBUX", "reason": "Slope3_Too_Flat(0.0435% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "BABA", "reason": "Slope3_Too_Flat(0.1913% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "JCI", "reason": "Slope3_Too_Flat(0.0986% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CMG", "reason": "Slope3_Too_Flat(0.0921% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "LUV", "reason": "Slope3_Too_Flat(0.1201% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ARES", "reason": "Slope3_Too_Flat(0.0300% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "UBER", "reason": "Slope3_Too_Flat(0.1644% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "DAL", "reason": "Slope3_Too_Flat(0.1152% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PINS", "reason": "Slope3_Too_Flat(0.0025% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ACN", "reason": "Slope3_Too_Flat(0.1760% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CARR", "reason": "Slope3_Too_Flat(0.1657% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PGR", "reason": "Slope3_Too_Flat(-0.0506% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "C", "reason": "Slope3_Too_Flat(0.0329% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CAT", "reason": "Slope3_Too_Flat(0.0632% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ETN", "reason": "Slope3_Too_Flat(0.0356% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "UNH", "reason": "Slope3_Too_Flat(0.1653% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TXN", "reason": "Slope3_Too_Flat(0.1749% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ADBE", "reason": "Slope3_Too_Flat(-0.0300% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "INTU", "reason": "Slope3_Too_Flat(-0.0439% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HPE", "reason": "Slope3_Too_Flat(0.1160% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "LMT", "reason": "Slope3_Too_Flat(0.0873% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "WBD", "reason": "Slope3_Too_Flat(0.0302% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "WDAY", "reason": "Slope3_Too_Flat(0.0210% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GS", "reason": "Slope3_Too_Flat(0.0933% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GILD", "reason": "Slope3_Too_Flat(0.1010% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CRM", "reason": "Slope3_Too_Flat(-0.0337% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CVX", "reason": "Slope3_Too_Flat(0.0522% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "META", "reason": "Slope3_Too_Flat(0.0919% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GE", "reason": "Slope3_Too_Flat(0.0407% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GOOGL", "reason": "Slope3_Too_Flat(0.1553% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PYPL", "reason": "Slope3_Too_Flat(0.0463% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MRK", "reason": "Slope3_Too_Flat(0.1193% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GOOG", "reason": "Slope3_Too_Flat(0.1525% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PANW", "reason": "Slope3_Too_Flat(-0.0536% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "AMZN", "reason": "Slope3_Too_Flat(0.0042% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "QCOM", "reason": "Slope3_Too_Flat(0.0889% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CRH", "reason": "Slope3_Too_Flat(-0.0116% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "WMB", "reason": "Slope3_Too_Flat(0.0566% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "IBM", "reason": "Slope3_Too_Flat(0.0362% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "BA", "reason": "Slope3_Too_Flat(0.0573% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "XOM", "reason": "Slope3_Too_Flat(0.1037% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ABNB", "reason": "Slope3_Too_Flat(0.1981% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ADI", "reason": "Slope3_Too_Flat(0.2071% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HCA", "reason": "Slope3_Too_Flat(0.0129% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HD", "reason": "Slope3_Too_Flat(0.1088% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ABBV", "reason": "Slope3_Too_Flat(0.1230% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "APO", "reason": "Slope3_Too_Flat(0.0221% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ZTS", "reason": "Slope3_Too_Flat(0.0144% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "REGN", "reason": "Slope3_Too_Flat(0.0756% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "PFE", "reason": "Slope3_Too_Flat(-0.0094% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"symbol": "PM", "session": "AM", "cid": "RB_PM_20260121_162500", "decision": "BLOCK", "reasons": ["traded_today"], "type": "GATE", "ts": "2026-01-21T16:26:07Z", "ts_et": "2026-01-21 11:26:07 ET", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "KKR", "reason": "Slope3_Too_Flat(-0.0008% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "BX", "reason": "Slope3_Too_Flat(0.0291% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MS", "reason": "Slope3_Too_Flat(0.0061% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "GM", "reason": "Slope3_Too_Flat(0.1569% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "BMY", "reason": "Slope3_Too_Flat(-0.0729% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "HLT", "reason": "Slope3_Too_Flat(0.0915% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "LOW", "reason": "Slope3_Too_Flat(0.0781% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SPGI", "reason": "Slope3_Too_Flat(0.0243% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CVS", "reason": "Slope3_Too_Flat(0.1167% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "DE", "reason": "Slope3_Too_Flat(0.0303% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "DIS", "reason": "Slope3_Too_Flat(0.0528% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "SHW", "reason": "Slope3_Too_Flat(0.0411% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "VRTX", "reason": "Slope3_Too_Flat(0.1777% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "ISRG", "reason": "Slope3_Too_Flat(-0.0313% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "BSX", "reason": "Slope3_Too_Flat(0.0647% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "TMO", "reason": "Slope3_Too_Flat(0.1263% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "WFC", "reason": "Slope3_Too_Flat(-0.0321% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "AMGN", "reason": "Slope3_Too_Flat(0.1694% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MSI", "reason": "Slope3_Too_Flat(0.0660% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "MDLZ", "reason": "Slope3_Too_Flat(-0.0730% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "CSCO", "reason": "Slope3_Too_Flat(0.0351% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "KR", "reason": "Slope3_Too_Flat(0.0767% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "COF", "reason": "Slope3_Too_Flat(0.0396% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "AAPL", "reason": "Slope3_Too_Flat(-0.0062% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "SKIP_SLOPE3", "symbol": "JPM", "reason": "Slope3_Too_Flat(-0.0452% > -0.08%)", "ts": "2026-01-21T16:25:00.424944+00:00", "bot_tag": "15M_STK"}
+{"type": "EOD_SUMMARY", "date": "2026-01-21", "total_trades": 0, "closed_trades": 0, "open_trades": 0, "total_pnl": -20.88, "total_volume": 7891.24, "win_count": 0, "loss_count": 0, "win_rate_pct": 0, "avg_win": 0, "avg_loss": 0, "exit_reasons": {}, "trades": [], "ts": "2026-01-21T16:26:09Z", "ts_et": "2026-01-21 11:26:09 ET", "bot_tag": "15M_STK"}
