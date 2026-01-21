@@ -520,3 +520,14 @@
 {"event": "scan_cycle_start", "cycle": 56, "time": "11:05", "regime": "CALM", "vixy": 26.57, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-21T16:05:07Z", "ts_et": "2026-01-21 11:05:07 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_start", "current_time": "11:05", "type": "HEARTBEAT", "ts": "2026-01-21T16:05:07Z", "ts_et": "2026-01-21 11:05:07 ET", "bot_tag": "15M_OPT"}
 {"event": "signals_found", "count": 1, "symbols": ["NVO"], "type": "HEARTBEAT", "ts": "2026-01-21T16:06:08Z", "ts_et": "2026-01-21 11:06:08 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "NVO", "signal_reason": "RSI_oversold(23.9)", "entry_price": 58.62, "rsi": 23.91, "atr": 0.4107, "ts": "2026-01-21T16:06:08Z", "ts_et": "2026-01-21 11:06:08 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "NVO", "skip_reason": "Daily_cooldown(NVO_already_traded_today)", "ts": "2026-01-21T16:06:08Z", "ts_et": "2026-01-21 11:06:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 3, "type": "HEARTBEAT", "ts": "2026-01-21T16:06:08Z", "ts_et": "2026-01-21 11:06:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 56, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-21T16:06:08Z", "ts_et": "2026-01-21 11:06:08 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "08:07:05", "sleep_sec": 46, "type": "HEARTBEAT", "ts": "2026-01-21T16:06:19Z", "ts_et": "2026-01-21 11:06:19 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-21T16:07:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-19T16:07:07Z", "end": "2026-01-21T16:07:07Z", "when": "2026-01-21T16:07:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-21T16:07:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 57, "time": "11:07", "regime": "CALM", "vixy": 26.58, "slope_thresh": -0.08, "type": "HEARTBEAT", "ts": "2026-01-21T16:07:08Z", "ts_et": "2026-01-21 11:07:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:07", "type": "HEARTBEAT", "ts": "2026-01-21T16:07:08Z", "ts_et": "2026-01-21 11:07:08 ET", "bot_tag": "15M_OPT"}
