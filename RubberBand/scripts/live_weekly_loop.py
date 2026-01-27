@@ -68,7 +68,7 @@ def run_weekly_cycle():
     current_regime = rm.update()
     regime_cfg = rm.get_config_overrides()
     
-    logging.info(f"Regime: {current_regime} (VIXY={rm.last_vixy:.2f})")
+    logging.info(f"Regime: {current_regime} (VIXY={rm.last_vixy_price:.2f})")
     # --------------------------------
     
     logging.info("="*60)

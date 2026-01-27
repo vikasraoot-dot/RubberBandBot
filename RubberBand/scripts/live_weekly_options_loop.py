@@ -480,7 +480,7 @@ def main() -> int:
     rm = RegimeManager(verbose=True)
     current_regime = rm.update()
     regime_cfg = rm.get_config_overrides()
-    _log(f"Regime: {current_regime} (VIXY={rm.last_vixy:.2f})")
+    _log(f"Regime: {current_regime} (VIXY={rm.last_vixy_price:.2f})")
     # --------------------------------
     
     # Options config

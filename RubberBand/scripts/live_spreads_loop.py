@@ -1237,7 +1237,7 @@ def main() -> int:
             cycle=scan_count, 
             time=now_et.strftime("%H:%M"),
             regime=current_regime,
-            vixy=rm.last_vixy,
+            vixy=rm.last_vixy_price,
             slope_thresh=regime_cfg.get("slope_threshold_pct")
         )
         

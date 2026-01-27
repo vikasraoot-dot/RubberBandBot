@@ -418,7 +418,7 @@ def main() -> int:
     print(json.dumps({
         "type": "REGIME_UPDATE",
         "regime": current_regime,
-        "vixy_price": rm.last_vixy,
+        "vixy_price": rm.last_vixy_price,
         "slope_threshold_pct": regime_cfg.get("slope_threshold_pct"),
         "dkf_enabled": use_dkf,
         "ts": now_iso
