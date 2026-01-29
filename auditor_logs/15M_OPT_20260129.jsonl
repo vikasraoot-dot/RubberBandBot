@@ -1878,3 +1878,11 @@
 {"event": "scan_cycle_start", "cycle": 168, "time": "15:55", "regime": "NORMAL", "vixy": 26.39, "slope_thresh": -0.12, "type": "HEARTBEAT", "ts": "2026-01-29T20:55:08Z", "ts_et": "2026-01-29 15:55:08 ET", "bot_tag": "15M_OPT"}
 {"event": "outside_entry_window", "current_time": "15:55", "type": "HEARTBEAT", "ts": "2026-01-29T20:55:08Z", "ts_et": "2026-01-29 15:55:08 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 168, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-29T20:55:09Z", "ts_et": "2026-01-29 15:55:09 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "12:56:05", "sleep_sec": 53, "type": "HEARTBEAT", "ts": "2026-01-29T20:55:12Z", "ts_et": "2026-01-29 15:55:12 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-29T20:56:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-25T20:56:06Z", "end": "2026-01-29T20:56:06Z", "when": "2026-01-29T20:56:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-29T20:56:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 169, "time": "15:56", "regime": "NORMAL", "vixy": 26.385, "slope_thresh": -0.12, "type": "HEARTBEAT", "ts": "2026-01-29T20:56:07Z", "ts_et": "2026-01-29 15:56:07 ET", "bot_tag": "15M_OPT"}
+{"event": "outside_entry_window", "current_time": "15:56", "type": "HEARTBEAT", "ts": "2026-01-29T20:56:07Z", "ts_et": "2026-01-29 15:56:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 169, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-29T20:56:08Z", "ts_et": "2026-01-29 15:56:08 ET", "bot_tag": "15M_OPT"}
