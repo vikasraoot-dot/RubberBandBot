@@ -994,3 +994,12 @@
 {"event": "scan_start", "current_time": "12:59", "type": "HEARTBEAT", "ts": "2026-01-29T17:59:07Z", "ts_et": "2026-01-29 12:59:07 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 8, "type": "HEARTBEAT", "ts": "2026-01-29T18:00:06Z", "ts_et": "2026-01-29 13:00:06 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 75, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-01-29T18:00:06Z", "ts_et": "2026-01-29 13:00:06 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "10:01:05", "sleep_sec": 56, "type": "HEARTBEAT", "ts": "2026-01-29T18:00:09Z", "ts_et": "2026-01-29 13:00:09 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-01-29T18:01:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-25T18:01:06Z", "end": "2026-01-29T18:01:06Z", "when": "2026-01-29T18:01:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-01-29T18:01:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 76, "time": "13:01", "regime": "NORMAL", "vixy": 26.92, "slope_thresh": -0.12, "type": "HEARTBEAT", "ts": "2026-01-29T18:01:08Z", "ts_et": "2026-01-29 13:01:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "13:01", "type": "HEARTBEAT", "ts": "2026-01-29T18:01:08Z", "ts_et": "2026-01-29 13:01:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 2, "symbols": ["MDB", "ACN"], "type": "HEARTBEAT", "ts": "2026-01-29T18:02:06Z", "ts_et": "2026-01-29 13:02:06 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "MDB", "signal_reason": "RSI_oversold(24.9)", "entry_price": 370.915, "rsi": 24.88, "atr": 4.0553, "ts": "2026-01-29T18:02:06Z", "ts_et": "2026-01-29 13:02:06 ET", "bot_tag": "15M_OPT"}
