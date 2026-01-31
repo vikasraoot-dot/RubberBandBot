@@ -391,12 +391,14 @@ def get_long_signals(
                 continue
             
             # Bearish Bar Filter (Jan 2026)
-            # NOTE: Disabled pending regime-based activation strategy (VIXY delta)
-            # Data from Jan 27-30 shows losses on red bars, but needs backtesting
-            # across all market regimes before enabling as default
-            # should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, cfg)
-            # if should_skip_bar:
-            #     continue
+            # Validated Jan 31: Regime-based activation (ON in Normal/Panic, OFF in Calm)
+            # significantly improves ROI/WinRate in backtests (159% vs 86%).
+            # We pass regime_cfg which contains the 'bearish_bar_filter' toggle for current regime.
+            should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, regime_cfg)
+            if should_skip_bar:
+                # Log skip
+                logger.spread_skip(underlying=sym, skip_reason=bar_reason)
+                continue
             
             # Check 10-bar Slope
             slope_threshold_10 = cfg.get("slope_threshold_10")
@@ -406,13 +408,8 @@ def get_long_signals(
                     if current_slope_10 > float(slope_threshold_10):
                          continue
 
+
             if bool(last.get("long_signal", False)):
-                # Price Confirmation Filter: Skip if bar is bearish (catching falling knife)
-                bar_open = float(last.get("open", 0))
-                if close < bar_open:
-                    # RED bar - signal on a falling candle, skip to avoid falling knife
-                    continue
-                
                 rsi_val = last.get("rsi")
                 atr_val = last.get("atr")
                 rsi = float(rsi_val) if rsi_val is not None else 0.0
@@ -1243,7 +1240,8 @@ def main() -> int:
             time=now_et.strftime("%H:%M"),
             regime=current_regime,
             vixy=rm.last_vixy_price,
-            slope_thresh=regime_cfg.get("slope_threshold_pct")
+            slope_thresh=regime_cfg.get("slope_threshold_pct"),
+            bearish_filter=regime_cfg.get("bearish_bar_filter")
         )
         
         try:

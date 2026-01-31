@@ -20,6 +20,7 @@ import os
 import sys
 import json
 import pandas as pd
+import numpy as np
 from collections import defaultdict
 from datetime import datetime
 from typing import Optional
@@ -32,7 +33,7 @@ if _REPO_ROOT not in sys.path:
 
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
-from RubberBand.strategy import attach_verifiers, check_slope_filter
+from RubberBand.strategy import attach_verifiers, check_slope_filter, check_bearish_bar_filter
 from RubberBand.src.regime_manager import RegimeManager
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -48,7 +49,89 @@ DEFAULT_OPTS = {
     "sma_period": 100,          # Daily SMA period for trend filter (Optimized All-Weather)
     "trend_filter": True,       # Enable/disable SMA trend filter
     "bars_stop": 14,            # Time stop: 14 bars (~3.5 hours) - matches live bot
+    "bearish_bar_filter": False, # Skip red bars (configurable)
 }
+
+
+def calculate_regime_history(df: pd.DataFrame) -> dict:
+    """
+    Calculate regime based on VIXY history using production logic (Hybrid Dynamic).
+    Returns a map of Date -> Regime Name (Effective for that trade date).
+    Logic aligns with src/regime_manager.py (Jan 2026 refactor).
+    """
+    if df is None or df.empty or len(df) < 20:
+        return {}
+    
+    # Copy to avoid modifying original
+    df = df.copy()
+    
+    # Calculate Indicators
+    df["sma_20"] = df["close"].rolling(window=20).mean()
+    df["std_20"] = df["close"].rolling(window=20).std()
+    df["vol_sma_20"] = df["volume"].rolling(window=20).mean()
+    df["upper_band"] = df["sma_20"] + (2.0 * df["std_20"])
+    
+    df["prev_close"] = df["close"].shift(1)
+    df["delta_pct"] = ((df["close"] - df["prev_close"]) / df["prev_close"]) * 100.0
+    
+    # Iterate to determine regime based on EACH DAY'S close
+    regime_series = []
+    below_sma_streak = 0
+    
+    # Pre-calculate conditions to speed up loop
+    is_panic_price = (df["close"] > df["upper_band"]) | (df["delta_pct"] > 8.0)
+    is_high_vol = (df["volume"] > 1.5 * df["vol_sma_20"])
+    closes = df["close"].values
+    smas = df["sma_20"].values
+    
+    for i in range(len(df)):
+        # Skip if indicators not ready (first 20 bars)
+        if pd.isna(smas[i]):
+            regime_series.append("NORMAL")
+            continue
+            
+        panic = is_panic_price.iloc[i]
+        vol = is_high_vol.iloc[i]
+        
+        row_regime = "NORMAL"
+        
+        if panic and vol:
+            row_regime = "PANIC"
+            below_sma_streak = 0
+        elif panic and not vol:
+            # Fakeout -> Normal
+            row_regime = "NORMAL"
+            if closes[i] < smas[i]:
+                 below_sma_streak += 1
+            else:
+                 below_sma_streak = 0
+        else:
+            # Check CALM
+            if closes[i] < smas[i]:
+                below_sma_streak += 1
+            else:
+                below_sma_streak = 0
+                
+            if below_sma_streak >= 3:
+                row_regime = "CALM"
+            else:
+                row_regime = "NORMAL"
+        
+        regime_series.append(row_regime)
+        
+    df["regime"] = regime_series
+    
+    # SHIFT BY 1: 
+    # The regime calculated from Day T's Close takes effect on Day T+1
+    df["effective_regime"] = df["regime"].shift(1)
+    
+    regime_map = {}
+    for idx, row in df.iterrows():
+        if pd.notna(row["effective_regime"]):
+            # idx is Timestamp
+            regime_map[idx.date()] = row["effective_regime"]
+            
+    return regime_map
 
 
 def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) -> int:
@@ -325,7 +408,7 @@ def simulate_spreads_for_symbol(
     sym: str,
     opts: dict,
     daily_sma: Optional[float] = None,
-    daily_vix_map: Optional[dict] = None,
+    daily_regime_map: Optional[dict] = None,
     verbose: bool = False,
 ) -> list:
     """
@@ -354,25 +437,29 @@ def simulate_spreads_for_symbol(
         # Default Params
         current_slope_threshold = float(opts.get("slope_threshold") or -0.08)  # Match live bot CALM regime
         current_use_dkf = opts.get("dead_knife_filter", False)
+        current_use_bearish_filter = False  # Default: disabled
         
-        # Check VIXY if map provided
-        if daily_vix_map and date_obj:
-            # We use 'date_obj' which is today's date.
-            # Ideally we want Yesterday's Close known at Open.
-            # The map passed in should be constructed such that key=Today -> value=YesterdayClose
-            # (Note: In main, we will shift it)
-            vix_val = daily_vix_map.get(date_obj, float('nan'))
+
+        # Check Regime if map provided
+        current_regime = "NORMAL" # Default
+        if daily_regime_map and date_obj:
+            current_regime = daily_regime_map.get(date_obj, "NORMAL")
             
-            if not pd.isna(vix_val):
-                if vix_val < 35.0:
-                    current_slope_threshold = -0.08 # CALM
-                    current_use_dkf = False
-                elif vix_val > 55.0:
-                    current_slope_threshold = -0.20 # PANIC
-                    current_use_dkf = True
-                else:
-                    current_slope_threshold = -0.12 # NORMAL
-                    current_use_dkf = False
+        # Apply Regime Configs
+        if current_regime == "CALM":
+            current_slope_threshold = -0.08 
+            current_use_dkf = False
+            current_use_bearish_filter = False
+        elif current_regime == "PANIC":
+            current_slope_threshold = -0.20
+            current_use_dkf = True
+            current_use_bearish_filter = True
+        else:
+            # NORMAL
+            current_slope_threshold = -0.12
+            current_use_dkf = False
+            # Enable bearish filter in Normal (volatility rising)
+            current_use_bearish_filter = True
                     
         # ----------------------------
 
@@ -435,6 +522,22 @@ def simulate_spreads_for_symbol(
                 # We relax the TSLA-only debug constraint for general verbose runs
                 print(f"  [SKIP] {reason} at {cur.name}")
             continue
+
+        # Bearish Bar Filter Check
+        # -------------------------
+        # Skip if the signal bar is bearish (close < open) and filter is enabled
+        # Can be enabled via CLI (--bearish-filter) or via regime (VIXY >= 35)
+        use_bearish_filter = opts.get("bearish_bar_filter", False)
+        if opts.get("bearish_regime_only", False):
+            # Use regime-based activation instead of CLI flag
+            use_bearish_filter = current_use_bearish_filter
+            
+        if use_bearish_filter:
+            signal_bar = df.iloc[i-1]  # prev is the signal bar
+            if float(signal_bar.get("close", 0)) < float(signal_bar.get("open", 0)):
+                if verbose:
+                    print(f"  [SKIP] Bearish bar filter: Close < Open")
+                continue
 
         # Check 2: 10-bar slope (sustained crash, 2.5h) - Normalized
         # (check_slope_filter only handles 3-bar primary slope for now. 
@@ -546,6 +649,8 @@ def main():
     ap.add_argument("--slope-threshold-10", type=float, default=None, help="Require 10-bar slope to be steeper than this (e.g. -0.15) to enter (Values > thresh are skipped)")
     ap.add_argument("--sl-pct", type=float, default=0.80, help="Stop loss percentage (0.8 = 80%% loss). Default 0.80.")
     ap.add_argument("--dead-knife-filter", action="store_true", help="Enable Dead Knife Filter (skip re-entry if RSI<20 and Loss Today)")
+    ap.add_argument("--bearish-filter", action="store_true", help="Enable Bearish Bar Filter (skip entry on red bars)")
+    ap.add_argument("--bearish-regime-only", action="store_true", help="Enable Bearish Filter only in volatile regimes (VIXY >= 35)")
     ap.add_argument("--quiet", action="store_true")
     ap.add_argument("--start-date", type=str, help="Start date for backtest (YYYY-MM-DD)")
     ap.add_argument("--end-date", type=str, help="End date for backtest (YYYY-MM-DD)")
@@ -587,6 +692,8 @@ def main():
         "slope_threshold_10": slope_threshold_10,
         "sl_pct": args.sl_pct,
         "dead_knife_filter": args.dead_knife_filter,
+        "bearish_bar_filter": args.bearish_filter,
+        "bearish_regime_only": args.bearish_regime_only,
     }
     
     # Fetch 15-minute data
@@ -646,21 +753,23 @@ def main():
         daily_bars_map = {}  # Initialize empty if trend filter disabled
         
     # --- FETCH VIXY FOR REGIME ---
+    # --- FETCH VIXY FOR REGIME ---
     print(f"Fetching VIXY daily bars for Regime Detection...")
+    # Ensure we fetch enough history for VIXY indicators (Fetch Days + 50 days buffer)
+    vixy_days = max(100, fetch_days + 50)
     vix_map, _ = fetch_latest_bars(
-        symbols=["VIXY"], timeframe="1Day", history_days=100, feed=feed, verbose=False
+        symbols=["VIXY"], timeframe="1Day", history_days=vixy_days, feed=feed, verbose=False
     )
-    daily_vix_map = {}
+    daily_regime_map = {}
     vix_df = vix_map.get("VIXY")
+    
     if vix_df is not None and not vix_df.empty:
-        # Shift VIXY by 1 day so Today's lookup returns Yesterday's Close
-        vix_df["vixy_prev_close"] = vix_df["close"].shift(1)
-        # Create map: Date -> Prev Close
-        daily_vix_map = vix_df["vixy_prev_close"].dropna().to_dict()
-        # Convert keys to date objects if needed (index is usually datetime)
-        # .to_dict() on Series with DatetimeIndex returns Timestamp keys
-        daily_vix_map = {k.date(): v for k, v in daily_vix_map.items()}
-        print(f"  Loaded {len(daily_vix_map)} VIXY data points.")
+        daily_regime_map = calculate_regime_history(vix_df)
+        print(f"  Calculated Regimes for {len(daily_regime_map)} days.")
+        # DEBUG: Print last 5 days regimes
+        sorted_dates = sorted(list(daily_regime_map.keys()))[-5:]
+        for d in sorted_dates:
+             print(f"    {d}: {daily_regime_map[d]}")
     else:
         print("  WARNING: Could not fetch VIXY data. Dynamic Regime disabled.")
     
@@ -699,7 +808,7 @@ def main():
         # Get daily SMA for this symbol (None if not available)
         daily_sma = daily_sma_map.get(sym)
         
-        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma, daily_vix_map=daily_vix_map, verbose=args.verbose)
+        trades = simulate_spreads_for_symbol(df, cfg, sym, opts, daily_sma=daily_sma, daily_regime_map=daily_regime_map, verbose=args.verbose)
         all_trades.extend(trades)
         
         for t in trades:
