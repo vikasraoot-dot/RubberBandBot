@@ -211,7 +211,7 @@ DEFAULT_SPREAD_CONFIG = {
     "max_debit": 3.00,
     "contracts": 1,
     "tp_max_profit_pct": 80.0,
-    "sl_pct": -80.0,               # Optimized Stop Loss (was -50%)
+    "sl_pct": -30.0,               # Tightened Stop Loss to -30% per user request (was -80%)
     "bars_stop": 14,               # Time Stop: 14 bars (~3.5 hours)
     "hold_overnight": True,
 }
@@ -391,12 +391,11 @@ def get_long_signals(
                 continue
             
             # Bearish Bar Filter (Jan 2026)
-            # UPDATE (Jan 16 2026): Disabled for Options Bot (High Vol tickers need to catch falling knife)
-            # Original rationale: 100% of losses on bearish bars in Stock Bot backtest.
-            # However, Options Bot targets volatile tickers where signals inherently occur on Red bars.
+            # NOTE: Disabled pending regime-based activation strategy (VIXY delta)
+            # Data from Jan 27-30 shows losses on red bars, but needs backtesting
+            # across all market regimes before enabling as default
             # should_skip_bar, bar_reason = check_bearish_bar_filter(df_closed, cfg)
             # if should_skip_bar:
-            #     logger.info(f"SKIP_BEARISH_BAR: {sym} - {bar_reason}")
             #     continue
             
             # Check 10-bar Slope
@@ -408,6 +407,12 @@ def get_long_signals(
                          continue
 
             if bool(last.get("long_signal", False)):
+                # Price Confirmation Filter: Skip if bar is bearish (catching falling knife)
+                bar_open = float(last.get("open", 0))
+                if close < bar_open:
+                    # RED bar - signal on a falling candle, skip to avoid falling knife
+                    continue
+                
                 rsi_val = last.get("rsi")
                 atr_val = last.get("atr")
                 rsi = float(rsi_val) if rsi_val is not None else 0.0
