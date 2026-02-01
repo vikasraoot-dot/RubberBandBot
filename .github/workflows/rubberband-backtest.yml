@@ -6,6 +6,10 @@ on:
         description: 'Backtest Days (e.g. 30, 60, 120)'
         required: true
         default: '30'
+      symbols:
+        description: 'Comma separated symbols (e.g. TSLA,AAPL). Overrides tickers.txt'
+        required: false
+        default: ''
       slope_threshold:
         description: 'Slope Threshold 3-bar (e.g. -0.20). Leave empty to use config.'
         required: false
@@ -76,6 +80,11 @@ jobs:
           if ("${{ inputs.slope_threshold }}" -ne "") {
             $args += "--slope-threshold"
             $args += "${{ inputs.slope_threshold }}"
+          }
+
+          if ("${{ inputs.symbols }}" -ne "") {
+            $args += "--symbols"
+            $args += "${{ inputs.symbols }}"
           }
           
           if ("${{ inputs.slope_threshold_10 }}" -ne "") {
