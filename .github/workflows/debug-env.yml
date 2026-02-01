@@ -1,0 +1,37 @@
+name: "[DEBUG] Repo Inspection"
+on: workflow_dispatch
+
+jobs:
+  debug:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install deps
+        run: |
+          pip install pandas pyyaml pytz
+
+      - name: List Files
+        run: |
+          ls -R
+
+      - name: Inspect Tickers File (PowerShell)
+        run: |
+          Get-Content RubberBand/tickers.txt | Select-Object -First 10
+          Write-Host "--- END HEAD ---"
+
+      - name: Inspect Tickers File (Python Raw)
+        shell: cmd
+        run: |
+          python -c "print(open('RubberBand/tickers.txt', 'rb').read(100))"
+
+      - name: Test read_tickers
+        shell: powershell
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          python -c "import os; from RubberBand.src.utils import read_tickers; print(f'CWD: {os.getcwd()}'); list = read_tickers('RubberBand/tickers.txt'); print(f'Count: {len(list)}'); print(list[:5])"
