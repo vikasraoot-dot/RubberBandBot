@@ -19,8 +19,9 @@ if _REPO_ROOT not in sys.path:
 
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
-from RubberBand.strategy import attach_verifiers
 from RubberBand.src.ticker_health import TickerHealthManager
+from RubberBand.src.regime_manager import RegimeManager, calculate_regime_map
+from RubberBand.strategy import attach_verifiers, check_bearish_bar_filter
 
 # ------------------------------------------------------------------
 # Data loading helper
@@ -134,17 +135,23 @@ def load_bars_for_symbol(symbol: str, cfg: dict, days: int,
         vixy_df = vix_map.get("VIXY", pd.DataFrame())
         
         if not vixy_df.empty:
-            # Shift VIXY by 1 day to simulate "Yesterday's Close" known at Open
-            vixy_df["vixy_close"] = vixy_df["close"].shift(1)
-            vixy_df["date_only"] = vixy_df.index.date
-            
-            # Create Mapping
-            vix_map_dict = vixy_df.set_index("date_only")["vixy_close"].to_dict()
+            # Calculate Regime
+            regime_map = calculate_regime_map(vixy_df)
             
             if "date_only" not in df.columns:
                  df["date_only"] = df.index.date
             
+            # Map Regime (calculate_regime_map returns shifted/effective regime)
+            df["regime"] = df["date_only"].map(regime_map)
+            
+            # Also map VIXY close if needed for debug (shift by 1 to match effective)
+            if "date_only" not in vixy_df.columns:
+                 vixy_df["date_only"] = vixy_df.index.date
+                 
+            vixy_df["vixy_shifted"] = vixy_df["close"].shift(1)
+            vix_map_dict = vixy_df.set_index("date_only")["vixy_shifted"].to_dict()
             df["vixy_close"] = df["date_only"].map(vix_map_dict)
+            
             df.drop(columns=["date_only"], inplace=True)
             
         else:
@@ -217,6 +224,9 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
     losses = 0
     gross = 0.0
     detailed_trades = []
+    
+    # Instantiate RegimeManager for config lookup
+    rm = RegimeManager(verbose=False)
 
     for i in range(1, len(df)):
         prev = df.iloc[i - 1]
@@ -237,25 +247,14 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             
             # Dynamic Regime Logic
             # --------------------
-            slope_threshold = float(cfg.get("slope_threshold", -0.12))
-            use_dkf = cfg.get("dead_knife_filter", False)
+            regime_name = cur.get("regime", "NORMAL")
             
-            vixy_val = cur.get("vixy_close", float('nan'))
-            regime_name = "DEFAULT"
+            # Lookup Configs from Manager
+            rm.current_regime = regime_name
+            regime_cfg = rm.get_config_overrides()
             
-            if not pd.isna(vixy_val):
-                if vixy_val < 35.0:
-                    slope_threshold = -0.08  # CALM
-                    use_dkf = False
-                    regime_name = "CALM"
-                elif vixy_val > 55.0:
-                    slope_threshold = -0.20  # PANIC
-                    use_dkf = True
-                    regime_name = "PANIC"
-                else:
-                    slope_threshold = -0.12  # NORMAL
-                    use_dkf = False 
-                    regime_name = "NORMAL"
+            slope_threshold = regime_cfg.get("slope_threshold_pct", -0.12)
+            use_dkf = regime_cfg.get("dead_knife_filter", False)
             
 
 
@@ -306,15 +305,14 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             # LONG Entry Signal (Only in Bull Trend)
             if is_bull_trend and prev.get("long_signal", False):
                 
-                # --- Bearish Bar Filter (New) ---
-                # Skip if current bar is bearish (close < open)
-                if cfg.get("bearish_bar_filter", False):
-                    if cur["close"] < cur["open"]:
-                        FILTER_REJECTS["BearishBar"] += 1
-                        if verbose:
-                            close_pct = ((cur["close"] - cur["low"]) / max(cur["high"] - cur["low"], 0.01)) * 100
-                            print(f"[{sym} {cur.name}] BEARISH BAR SKIP: Close < Open (Close%={close_pct:.1f})")
-                        continue
+                # --- Bearish Bar Filter (Shared Logic) ---
+                # Checks if current bar is bearish AND filter is enabled in current regime
+                should_skip_bar, bar_reason = check_bearish_bar_filter(df.iloc[:i+1], regime_cfg)
+                if should_skip_bar:
+                     FILTER_REJECTS["BearishBar"] += 1
+                     if verbose:
+                         print(f"[{sym} {cur.name}] SKIP: {bar_reason}")
+                     continue
                 # -------------------------
                 
                 # --- Dead Knife Filter ---

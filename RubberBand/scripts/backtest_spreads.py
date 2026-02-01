@@ -34,7 +34,7 @@ if _REPO_ROOT not in sys.path:
 from RubberBand.src.utils import load_config, read_tickers
 from RubberBand.src.data import fetch_latest_bars
 from RubberBand.strategy import attach_verifiers, check_slope_filter, check_bearish_bar_filter
-from RubberBand.src.regime_manager import RegimeManager
+from RubberBand.src.regime_manager import RegimeManager, calculate_regime_map
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Spread Simulation Parameters
@@ -53,85 +53,7 @@ DEFAULT_OPTS = {
 }
 
 
-def calculate_regime_history(df: pd.DataFrame) -> dict:
-    """
-    Calculate regime based on VIXY history using production logic (Hybrid Dynamic).
-    Returns a map of Date -> Regime Name (Effective for that trade date).
-    Logic aligns with src/regime_manager.py (Jan 2026 refactor).
-    """
-    if df is None or df.empty or len(df) < 20:
-        return {}
-    
-    # Copy to avoid modifying original
-    df = df.copy()
-    
-    # Calculate Indicators
-    df["sma_20"] = df["close"].rolling(window=20).mean()
-    df["std_20"] = df["close"].rolling(window=20).std()
-    df["vol_sma_20"] = df["volume"].rolling(window=20).mean()
-    df["upper_band"] = df["sma_20"] + (2.0 * df["std_20"])
-    
-    df["prev_close"] = df["close"].shift(1)
-    df["delta_pct"] = ((df["close"] - df["prev_close"]) / df["prev_close"]) * 100.0
-    
-    # Iterate to determine regime based on EACH DAY'S close
-    regime_series = []
-    below_sma_streak = 0
-    
-    # Pre-calculate conditions to speed up loop
-    is_panic_price = (df["close"] > df["upper_band"]) | (df["delta_pct"] > 8.0)
-    is_high_vol = (df["volume"] > 1.5 * df["vol_sma_20"])
-    closes = df["close"].values
-    smas = df["sma_20"].values
-    
-    for i in range(len(df)):
-        # Skip if indicators not ready (first 20 bars)
-        if pd.isna(smas[i]):
-            regime_series.append("NORMAL")
-            continue
-            
-        panic = is_panic_price.iloc[i]
-        vol = is_high_vol.iloc[i]
-        
-        row_regime = "NORMAL"
-        
-        if panic and vol:
-            row_regime = "PANIC"
-            below_sma_streak = 0
-        elif panic and not vol:
-            # Fakeout -> Normal
-            row_regime = "NORMAL"
-            if closes[i] < smas[i]:
-                 below_sma_streak += 1
-            else:
-                 below_sma_streak = 0
-        else:
-            # Check CALM
-            if closes[i] < smas[i]:
-                below_sma_streak += 1
-            else:
-                below_sma_streak = 0
-                
-            if below_sma_streak >= 3:
-                row_regime = "CALM"
-            else:
-                row_regime = "NORMAL"
-        
-        regime_series.append(row_regime)
-        
-    df["regime"] = regime_series
-    
-    # SHIFT BY 1: 
-    # The regime calculated from Day T's Close takes effect on Day T+1
-    df["effective_regime"] = df["regime"].shift(1)
-    
-    regime_map = {}
-    for idx, row in df.iterrows():
-        if pd.notna(row["effective_regime"]):
-            # idx is Timestamp
-            regime_map[idx.date()] = row["effective_regime"]
-            
-    return regime_map
+# calculate_regime_history moved to src/regime_manager.py as calculate_regime_map
 
 
 def calculate_actual_dte(entry_date: datetime, target_dte: int, min_dte: int) -> int:
@@ -764,7 +686,7 @@ def main():
     vix_df = vix_map.get("VIXY")
     
     if vix_df is not None and not vix_df.empty:
-        daily_regime_map = calculate_regime_history(vix_df)
+        daily_regime_map = calculate_regime_map(vix_df)
         print(f"  Calculated Regimes for {len(daily_regime_map)} days.")
         # DEBUG: Print last 5 days regimes
         sorted_dates = sorted(list(daily_regime_map.keys()))[-5:]
@@ -803,7 +725,7 @@ def main():
         
         # DEBUG: Print data info for TSLA
         if sym == "TSLA":
-            print(f"  [DEBUG] TSLA: {len(df)} bars, daily_sma={daily_sma_map.get(sym)}, vixy_pts={len(daily_vix_map)}")
+            print(f"  [DEBUG] TSLA: {len(df)} bars, daily_sma={daily_sma_map.get(sym)}, vixy_pts={len(daily_regime_map)}")
         
         # Get daily SMA for this symbol (None if not available)
         daily_sma = daily_sma_map.get(sym)

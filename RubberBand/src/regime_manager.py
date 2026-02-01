@@ -183,6 +183,96 @@ class RegimeManager:
         """Returns the configuration overrides for the current regime."""
         return self.regime_configs.get(self.current_regime, self.regime_configs["NORMAL"])
 
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Shared Backtest Logic (Refactored from script)
+# ──────────────────────────────────────────────────────────────────────────────
+def calculate_regime_map(df: pd.DataFrame) -> Dict[Any, str]:
+    """
+    Calculate regime based on VIXY history using production logic (Hybrid Dynamic).
+    Returns a map of Date -> Regime Name (Effective for that trade date).
+    """
+    if df is None or df.empty or len(df) < 20:
+        return {}
+    
+    # Copy to avoid modifying original
+    df = df.copy()
+    
+    # Calculate Indicators
+    df["sma_20"] = df["close"].rolling(window=20).mean()
+    df["std_20"] = df["close"].rolling(window=20).std()
+    df["vol_sma_20"] = df["volume"].rolling(window=20).mean()
+    df["upper_band"] = df["sma_20"] + (2.0 * df["std_20"])
+    
+    df["prev_close"] = df["close"].shift(1)
+    df["delta_pct"] = ((df["close"] - df["prev_close"]) / df["prev_close"]) * 100.0
+    
+    # Iterate to determine regime based on EACH DAY'S close
+    regime_map = {}
+    below_sma_streak = 0
+    
+    # Pre-calculate conditions to speed up loop
+    is_panic_price = (df["close"] > df["upper_band"]) | (df["delta_pct"] > 8.0)
+    is_high_vol = (df["volume"] > 1.5 * df["vol_sma_20"])
+    closes = df["close"].values
+    smas = df["sma_20"].values
+    
+    # Extract dates carefully
+    if hasattr(df.index, 'date'):        dates = df.index.date
+    else:                               dates = [pd.to_datetime(d).date() for d in df.index]
+
+    for i in range(len(df)):
+        # Skip if indicators not ready (first 20 bars)
+        if pd.isna(smas[i]):
+            regime_map[dates[i]] = "NORMAL"
+            continue
+            
+        panic = is_panic_price.iloc[i]
+        vol = is_high_vol.iloc[i]
+        
+        row_regime = "NORMAL"
+        
+        if panic and vol:
+            row_regime = "PANIC"
+            below_sma_streak = 0
+        elif panic and not vol:
+            # Fakeout -> Normal
+            row_regime = "NORMAL"
+            if closes[i] < smas[i]:
+                 below_sma_streak += 1
+            else:
+                 below_sma_streak = 0
+        else:
+            # Check CALM
+            if closes[i] < smas[i]:
+                below_sma_streak += 1
+            else:
+                below_sma_streak = 0
+            
+            if below_sma_streak >= 3:
+                row_regime = "CALM"
+                
+        regime_map[dates[i]] = row_regime
+        
+    # shift regime map by 1 day
+    # We want: Map[Date T] = Regime based on Date T-1
+    # Current Map[Date T] = Regime based on Date T
+    # Convert keys to sorted list
+    sorted_dates = sorted(list(regime_map.keys()))
+    shifted_map = {}
+    
+    # Init first day as NORMAL (no prior day)
+    if sorted_dates:
+        shifted_map[sorted_dates[0]] = "NORMAL"
+        
+    for i in range(1, len(sorted_dates)):
+        curr_date = sorted_dates[i]
+        prev_date = sorted_dates[i-1]
+        # Regime for Curr Date is determined by Prev Date's close
+        shifted_map[curr_date] = regime_map[prev_date]
+        
+    return shifted_map
+
 if __name__ == "__main__":
     # Test Run
     rm = RegimeManager()
