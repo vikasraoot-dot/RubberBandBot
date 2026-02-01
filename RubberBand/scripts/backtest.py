@@ -664,8 +664,10 @@ def main():
 
     if args.symbols.strip():
         symbols = [s.strip().upper() for s in args.symbols.split(",") if s.strip()]
+        print(f"DEBUG: Using symbols from CLI args: {symbols}")
     else:
         symbols = read_tickers(args.tickers)
+        print(f"DEBUG: Symbols loaded from file ({args.tickers}): {len(symbols)}")
 
     # Parse days list
     try:

@@ -8,10 +8,23 @@ def load_config(path: str) -> dict:
 
 def read_tickers(path: str) -> list[str]:
     """Read tickers from file, filtering comments and deduping."""
+    print(f"Reading tickers from: {os.path.abspath(path)}")
     seen = set()
     tickers = []
-    with open(path, "r", encoding="utf-8") as f:
-        for ln in f:
+    
+    if not os.path.exists(path):
+        print(f"ERROR: Tickers file not found at {path}")
+        return []
+
+    try:
+        # Use utf-8-sig to handle BOM if present on Windows
+        with open(path, "r", encoding="utf-8-sig") as f:
+            content = f.read()
+            
+        # Handle universal newlines explicitly if needed (Python usually handles it)
+        lines = content.splitlines()
+        
+        for ln in lines:
             ticker = ln.strip().upper()
             # Skip empty lines, comments, and triple-quote markers
             if not ticker or ticker.startswith("#") or ticker.startswith("'''") or ticker.startswith('"""'):
@@ -20,6 +33,12 @@ def read_tickers(path: str) -> list[str]:
             if ticker not in seen:
                 seen.add(ticker)
                 tickers.append(ticker)
+                
+        print(f"Loaded {len(tickers)} tickers from file (Lines read: {len(lines)}). First: {tickers[:3] if tickers else 'None'}")
+        
+    except Exception as e:
+        print(f"ERROR reading tickers file: {e}")
+        
     return tickers
 
 def new_york_now() -> dt.datetime:
