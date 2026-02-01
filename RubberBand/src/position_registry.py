@@ -17,7 +17,7 @@ import json
 import os
 import time
 from datetime import datetime
-from typing import Dict, List, Any, Optional, Set
+from typing import Dict, List, Any, Optional, Set, Tuple
 from zoneinfo import ZoneInfo
 
 ET = ZoneInfo("US/Eastern")
@@ -283,16 +283,22 @@ class PositionRegistry:
     
     def sync_with_alpaca(self, alpaca_positions: List[Dict[str, Any]]):
         """
+        DEPRECATED: Use reconcile_or_halt() instead.
+
         Sync registry with current Alpaca positions.
-        
+
         Removes positions from registry that no longer exist in Alpaca
         (closed by other means, expired, etc.)
+
+        WARNING: This method silently removes orphaned positions which can
+        mask position tracking bugs. Use reconcile_or_halt() for safer behavior.
         """
+        print(f"[registry] WARNING: sync_with_alpaca() is deprecated. Use reconcile_or_halt() instead.")
         alpaca_symbols = {pos.get("symbol", "") for pos in alpaca_positions}
-        
+
         # Find positions in registry but not in Alpaca
         orphaned = [sym for sym in self.positions if sym not in alpaca_symbols]
-        
+
         for sym in orphaned:
             print(f"[registry] Removing orphaned position: {sym}")
             pos = self.positions.pop(sym)
@@ -302,9 +308,76 @@ class PositionRegistry:
                 "status": "closed",
             })
             self.closed_positions.append(pos)
-        
+
         if orphaned:
             self.save()
+
+    def reconcile_or_halt(
+        self,
+        alpaca_positions: List[Dict[str, Any]],
+        auto_clean: bool = False,
+    ) -> Tuple[bool, List[str], List[str]]:
+        """
+        Reconcile registry with broker positions WITHOUT silent cleanup.
+
+        This method compares local registry state with broker-reported positions
+        and returns discrepancies for the caller to handle. By default, it does
+        NOT auto-clean orphaned positions - the caller must decide whether to
+        halt, alert, or clean.
+
+        Args:
+            alpaca_positions: List of position dicts from Alpaca API
+            auto_clean: If True, remove orphans from registry (with logging).
+                        If False (default), only report orphans without modifying.
+
+        Returns:
+            Tuple of (is_clean, registry_orphans, broker_untracked):
+            - is_clean: True if registry matches broker exactly
+            - registry_orphans: Symbols in registry but NOT in broker (stale entries)
+            - broker_untracked: Symbols in broker but NOT in registry (unattributed)
+
+        Example:
+            is_clean, orphans, untracked = registry.reconcile_or_halt(broker_positions)
+            if not is_clean:
+                logger.critical("Position mismatch", orphans=orphans)
+                raise PositionMismatchError(f"Registry orphans: {orphans}")
+        """
+        alpaca_symbols = {pos.get("symbol", "") for pos in alpaca_positions}
+        registry_symbols = set(self.positions.keys())
+
+        # Find discrepancies
+        registry_orphans = [sym for sym in registry_symbols if sym not in alpaca_symbols]
+        broker_untracked = [sym for sym in alpaca_symbols if sym and sym not in registry_symbols]
+
+        is_clean = len(registry_orphans) == 0
+
+        # Log findings
+        if registry_orphans:
+            print(f"[registry] CRITICAL: Found {len(registry_orphans)} orphaned positions in registry:")
+            for sym in registry_orphans:
+                pos = self.positions.get(sym, {})
+                print(f"[registry]   - {sym} (entry: {pos.get('entry_date', 'unknown')})")
+
+        if broker_untracked:
+            print(f"[registry] INFO: Found {len(broker_untracked)} broker positions not in this registry:")
+            for sym in broker_untracked:
+                print(f"[registry]   - {sym} (may belong to another bot)")
+
+        # Only clean if explicitly requested
+        if auto_clean and registry_orphans:
+            print(f"[registry] Auto-cleaning {len(registry_orphans)} orphaned positions...")
+            for sym in registry_orphans:
+                pos = self.positions.pop(sym)
+                pos.update({
+                    "exit_date": datetime.now(ET).isoformat(),
+                    "exit_reason": "orphaned_reconcile_auto_clean",
+                    "status": "closed",
+                })
+                self.closed_positions.append(pos)
+            self.save()
+            print(f"[registry] Auto-clean complete. Registry saved.")
+
+        return is_clean, registry_orphans, broker_untracked
     
     def get_summary(self) -> Dict[str, Any]:
         """Get summary stats for this bot's positions."""
