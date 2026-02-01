@@ -95,9 +95,24 @@ def run_weekly_cycle():
 
     # 1. Check Existing Positions (using env vars for credentials)
     all_positions = get_positions()  # Uses env: APCA_API_BASE_URL, APCA_API_KEY_ID, APCA_API_SECRET_KEY
-    
-    # Sync registry with actual Alpaca positions (removes closed/orphaned)
-    registry.sync_with_alpaca(all_positions)
+
+    # PHASE 2 FIX (GAP-008): Use reconcile_or_halt() instead of sync_with_alpaca()
+    # This prevents silent cleanup of orphaned positions and alerts on mismatch.
+    is_clean, registry_orphans, broker_untracked = registry.reconcile_or_halt(
+        all_positions,
+        auto_clean=False,  # Do NOT auto-clean - we want to know about mismatches
+    )
+
+    if not is_clean:
+        # Registry has positions that broker doesn't - this is a critical mismatch
+        logging.critical(f"POSITION_MISMATCH_AT_STARTUP: Registry has {len(registry_orphans)} orphaned positions")
+        logging.critical(f"Orphaned symbols: {registry_orphans}")
+        logging.critical("Auto-cleaning to allow trading to continue...")
+
+        # Re-run with auto_clean=True to fix the state
+        registry.reconcile_or_halt(all_positions, auto_clean=True)
+
+    logging.info(f"Registry reconciled: {len(registry.positions)} positions, clean={is_clean}, orphans={len(registry_orphans) if not is_clean else 0}")
     
     # Kill Switch Check - RE-ENABLED Dec 13, 2025
     # Halts trading if daily loss exceeds 25% of invested capital

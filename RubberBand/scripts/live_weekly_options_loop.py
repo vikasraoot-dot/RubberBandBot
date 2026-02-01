@@ -551,9 +551,27 @@ def main() -> int:
     
     # 2. Get ALL option positions, then filter to only THIS BOT'S positions
     all_option_positions = get_option_positions()
-    
-    # Sync registry with Alpaca - remove positions that no longer exist
-    registry.sync_with_alpaca(all_option_positions)
+
+    # PHASE 2 FIX (GAP-008): Use reconcile_or_halt() instead of sync_with_alpaca()
+    # This prevents silent cleanup of orphaned positions and alerts on mismatch.
+    is_clean, registry_orphans, broker_untracked = registry.reconcile_or_halt(
+        all_option_positions,
+        auto_clean=False,  # Do NOT auto-clean - we want to know about mismatches
+    )
+
+    if not is_clean:
+        # Registry has positions that broker doesn't - this is a critical mismatch
+        logger.error(
+            error=f"POSITION_MISMATCH: Registry has {len(registry_orphans)} orphaned positions",
+            context="startup_reconciliation",
+        )
+        _log("CRITICAL: Registry orphans detected", {
+            "orphaned_symbols": registry_orphans,
+            "action": "auto_clean_and_alert",
+        })
+
+        # Re-run with auto_clean=True to fix the state
+        registry.reconcile_or_halt(all_option_positions, auto_clean=True)
     # Get only MY positions (those tracked in my registry)
     my_positions = registry.filter_positions(all_option_positions)
     my_underlyings = registry.get_my_underlyings()
