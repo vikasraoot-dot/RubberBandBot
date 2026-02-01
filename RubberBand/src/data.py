@@ -95,6 +95,17 @@ def close_all_positions(base_url: Optional[str], key: Optional[str], secret: Opt
         r.raise_for_status()
     return {"ok": True}
 
+def get_account_info_compat(base_url: Optional[str], key: Optional[str], secret: Optional[str]) -> Optional[Dict[str, Any]]:
+    """Helper to fetch account info (equity, buying power)."""
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.get(f"{base}/v2/account", headers=_alpaca_headers(key, secret), timeout=10)
+        r.raise_for_status()
+        return r.json()
+    except Exception as e:
+        print(f"[warn] Failed to get account info: {e}")
+        return None
+
 def close_position(base_url: Optional[str], key: Optional[str], secret: Optional[str], symbol: str) -> Dict[str, Any]:
     """Close a single position by symbol."""
     base = _base_url_from_env(base_url)
