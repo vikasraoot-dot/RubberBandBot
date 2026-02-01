@@ -421,6 +421,7 @@ def main() -> int:
         "vixy_price": rm.last_vixy_price,
         "slope_threshold_pct": regime_cfg.get("slope_threshold_pct"),
         "dkf_enabled": use_dkf,
+        "bearish_filter": regime_cfg.get("bearish_bar_filter"),
         "ts": now_iso
     }), flush=True)
 
@@ -535,7 +536,7 @@ def main() -> int:
         # -------------------------------------
         # Skip entries if current bar is bearish (close < open)
         # Backtest showed +$3,000 improvement and +15% win rate
-        should_skip_bar, bar_reason = check_bearish_bar_filter(df, cfg)
+        should_skip_bar, bar_reason = check_bearish_bar_filter(df, regime_cfg)
         if should_skip_bar:
             print(json.dumps({
                 "type": "SKIP_BEARISH_BAR",
