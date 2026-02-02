@@ -220,3 +220,18 @@
 {"type": "SPREAD_SKIP", "underlying": "NVO", "skip_reason": "BearishBar_Filter(Close=58.09 < Open=58.21, ClosePct=63.9%)", "ts": "2026-02-02T15:11:42Z", "ts_et": "2026-02-02 10:11:42 ET", "bot_tag": "15M_OPT"}
 {"type": "SPREAD_SKIP", "underlying": "AMAT", "skip_reason": "BearishBar_Filter(Close=322.94 < Open=324.97, ClosePct=0.0%)", "ts": "2026-02-02T15:11:48Z", "ts_et": "2026-02-02 10:11:48 ET", "bot_tag": "15M_OPT"}
 {"type": "SPREAD_SKIP", "underlying": "NVDA", "skip_reason": "BearishBar_Filter(Close=186.65 < Open=187.14, ClosePct=9.6%)", "ts": "2026-02-02T15:11:54Z", "ts_et": "2026-02-02 10:11:54 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 5, "type": "HEARTBEAT", "ts": "2026-02-02T15:12:03Z", "ts_et": "2026-02-02 10:12:03 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 23, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-02T15:12:03Z", "ts_et": "2026-02-02 10:12:03 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:13:05", "sleep_sec": 58, "type": "HEARTBEAT", "ts": "2026-02-02T15:12:07Z", "ts_et": "2026-02-02 10:12:07 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-02T15:13:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-29T15:13:06Z", "end": "2026-02-02T15:13:06Z", "when": "2026-02-02T15:13:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-02T15:13:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 24, "time": "10:13", "regime": "NORMAL", "vixy": 25.64, "slope_thresh": -0.12, "bearish_filter": true, "type": "HEARTBEAT", "ts": "2026-02-02T15:13:07Z", "ts_et": "2026-02-02 10:13:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:13", "type": "HEARTBEAT", "ts": "2026-02-02T15:13:07Z", "ts_et": "2026-02-02 10:13:07 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "VRT", "skip_reason": "BearishBar_Filter(Close=184.02 < Open=185.34, ClosePct=0.0%)", "ts": "2026-02-02T15:13:27Z", "ts_et": "2026-02-02 10:13:27 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "NVO", "skip_reason": "BearishBar_Filter(Close=58.09 < Open=58.21, ClosePct=63.9%)", "ts": "2026-02-02T15:13:41Z", "ts_et": "2026-02-02 10:13:41 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "AMAT", "skip_reason": "BearishBar_Filter(Close=322.94 < Open=324.97, ClosePct=0.0%)", "ts": "2026-02-02T15:13:46Z", "ts_et": "2026-02-02 10:13:46 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "NVDA", "skip_reason": "BearishBar_Filter(Close=186.65 < Open=187.14, ClosePct=9.6%)", "ts": "2026-02-02T15:13:52Z", "ts_et": "2026-02-02 10:13:52 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 0, "forming": 0, "new_entries": 0, "total_positions": 5, "type": "HEARTBEAT", "ts": "2026-02-02T15:14:00Z", "ts_et": "2026-02-02 10:14:00 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 24, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-02T15:14:00Z", "ts_et": "2026-02-02 10:14:00 ET", "bot_tag": "15M_OPT"}
