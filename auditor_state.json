@@ -106,24 +106,8 @@
       "sl_price": 299.33145,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 302.5,
-      "unrealized_pnl": 14.499999999998181
-    },
-    "SHADOW_15M_STK_LMT_20260129T153039401093+0000": {
-      "id": "SHADOW_15M_STK_LMT_20260129T153039401093+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "LMT",
-      "entry_price": 632.5,
-      "entry_time": "2026-01-29T15:30:39.401093+00:00",
-      "reason": "Slope3_Too_Flat(0.5260% > -0.12%)",
-      "qty": 100,
-      "tp_price": 638.825,
-      "sl_price": 626.175,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 632.5,
-      "unrealized_pnl": 0.0
+      "current_price": 300.99,
+      "unrealized_pnl": -136.5000000000009
     },
     "SHADOW_15M_OPT_VRT_20260202T150128Z": {
       "id": "SHADOW_15M_OPT_VRT_20260202T150128Z",
@@ -138,8 +122,8 @@
       "qty": 1,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_val": 1.8600000000000003,
-      "unrealized_pnl": -129.0
+      "current_val": 2.13,
+      "unrealized_pnl": -102.00000000000004
     },
     "SHADOW_15M_OPT_NVDA_20260202T150153Z": {
       "id": "SHADOW_15M_OPT_NVDA_20260202T150153Z",
@@ -154,8 +138,8 @@
       "qty": 1,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_val": 1.9899999999999998,
-      "unrealized_pnl": -10.000000000000009
+      "current_val": 1.98,
+      "unrealized_pnl": -10.999999999999988
     }
   },
   "closed_positions": [
@@ -14442,6 +14426,26 @@
       "exit_time": "2026-02-02T15:48:49.884042+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -112.00000000000003
+    },
+    {
+      "id": "SHADOW_15M_STK_LMT_20260129T153039401093+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "LMT",
+      "entry_price": 632.5,
+      "entry_time": "2026-01-29T15:30:39.401093+00:00",
+      "reason": "Slope3_Too_Flat(0.5260% > -0.12%)",
+      "qty": 100,
+      "tp_price": 638.825,
+      "sl_price": 626.175,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 651.54,
+      "unrealized_pnl": 1903.9999999999964,
+      "exit_price": 651.54,
+      "exit_time": "2026-02-02T16:56:05.878462+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 1903.9999999999964
     }
   ],
   "processed_lines": {
