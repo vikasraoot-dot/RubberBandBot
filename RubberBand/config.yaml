@@ -30,7 +30,7 @@ run:
 # INDICATORS
 # ──────────────────────────────────────────────────────────────────────────────
 keltner_length: 20
-keltner_mult: 2.0
+keltner_mult: 1.5
 atr_length: 14
 atr_length: 14
 rsi_length: 14
@@ -71,8 +71,8 @@ max_open_trades_per_ticker: 1
 # ──────────────────────────────────────────────────────────────────────────────
 brackets:
   enabled: true
-  atr_mult_sl: 2.5          # Stop Loss = 2.5 ATR
-  stop_loss_pct: -0.80      # Loosened to -80% to avoid premature stops in 3DTE vol
+  atr_mult_sl: 2.0          # Stop Loss = 2.0 ATR (Tightened from 2.5 for Stock Bot R:R)
+  stop_loss_pct: -0.30      # Tightened to -30% (Validated: Higher Profit than -80%)
   take_profit_pct: 0.50
 
 # Breakeven (Optional)
@@ -86,7 +86,7 @@ breakeven:
 # FILTERS / GATES
 # ──────────────────────────────────────────────────────────────────────────────
 filters:
-  rsi_oversold: 25           # Buy when RSI < 25 (Option 2: Consistency)
+  rsi_oversold: 30           # Buy when RSI < 30 (Golden Mean for Options Volume)
   rsi_overbought: 70         # (Future use for shorts)
   min_price: 5.0
   min_dollar_vol: 1000000    # Adjusted for IEX feed volume
@@ -94,12 +94,12 @@ filters:
   # Filter overrides to allow mean reversion (RSI < 25)
   rsi_min: 15
   rsi_max: 100
-  adx_threshold: 80          # Optimized safety cutoff (was 0)
+  # adx_threshold: 80        # REMOVED (Dead code)
   slope_threshold: -0.12     # Optimized Panic Entry (was -0.001) - 3-bar slope
   # slope_threshold_10: -0.05 # Optional: 10-bar sustained slope (disabled by default)
   require_fast_above_slow: false # Allow deep dips where fast EMA crosses slow
-  dead_knife_filter: true    # Enable Dead Knife Filter (Skip RSI<20 after loss)
-  bearish_bar_filter: true   # Skip entries on bearish bars (close < open) - Backtest: +$3K, +15% WR
+  dead_knife_filter: false    # DISABLED for Normal Regime (Re-enabled automatically in PANIC)
+  bearish_bar_filter: false   # DISABLED (Restores volume for Options Bot)
 
 # ──────────────────────────────────────────────────────────────────────────────
 # EXIT STRATEGY

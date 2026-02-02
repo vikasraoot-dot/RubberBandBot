@@ -251,7 +251,11 @@ def simulate_mean_reversion(df: pd.DataFrame, cfg: dict, health_mgr: TickerHealt
             
             # Lookup Configs from Manager
             rm.current_regime = regime_name
-            regime_cfg = rm.get_config_overrides()
+            regime_cfg = rm.get_config_overrides().copy()
+            
+            # Global Override: If disabled globally (CLI), disable in regime too
+            if not cfg.get("bearish_bar_filter", True):
+                regime_cfg["bearish_bar_filter"] = False
             
             slope_threshold = regime_cfg.get("slope_threshold_pct", -0.12)
             use_dkf = regime_cfg.get("dead_knife_filter", False)
@@ -585,6 +589,7 @@ def main():
     ap.add_argument("--sma-period", type=int, help="SMA Period for Trend Filter (e.g. 100)")
     ap.add_argument("--trend-filter", action="store_true", help="Enable SMA Trend Filter")
     ap.add_argument("--bearish-bar-filter", action="store_true", help="Skip entries if current bar is bearish (close < open)")
+    ap.add_argument("--no-bearish-bar-filter", action="store_true", help="Disable Bearish Bar Filter")
     
     ap.set_defaults(rth_only=True, flatten_eod=True)
     args = ap.parse_args()
@@ -647,11 +652,16 @@ def main():
         print(f"OVERRIDE: Dead Knife Filter = ENABLED")
     
     # Inject Bearish Bar Filter flag
-    # Logic: Respect config.yaml (True) OR allow CLI override (True)
-    # This prevents CLI default (False) from disabling the config setting.
-    cfg["bearish_bar_filter"] = cfg.get("bearish_bar_filter", False) or getattr(args, 'bearish_bar_filter', False)
-    if cfg["bearish_bar_filter"]:
+    # Logic: Respect config.yaml, but allow CLI overrides (enable OR disable)
+    if args.bearish_bar_filter:
+        cfg["bearish_bar_filter"] = True
+    if args.no_bearish_bar_filter:
+        cfg["bearish_bar_filter"] = False
+        
+    if cfg.get("bearish_bar_filter", False):
         print(f"OVERRIDE: Bearish Bar Filter = ENABLED")
+    else:
+        print(f"OVERRIDE: Bearish Bar Filter = DISABLED")
 
     # Inject Bracket overrides
     if "brackets" not in cfg: cfg["brackets"] = {}

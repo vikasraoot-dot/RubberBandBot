@@ -1,43 +1,50 @@
+import json
+import glob
 
-import os
-import pandas as pd
-
-def main():
-    fpath = "auditor_results_temp/auditor-state-20761271726/auditor_log.csv"
-    print(f"Analyzing {fpath}")
+# Aggregate EOD summaries for both bots
+def analyze_bot(pattern, name):
+    files = glob.glob(pattern)
+    daily_stats = {}
+    all_trades = []
     
-    try:
-        df = pd.read_csv(fpath)
-        print("Columns found:", df.columns.tolist())
-        print("First row:", df.iloc[0].to_dict())
+    for f in files:
+        with open(f, 'r', encoding='utf-8') as fp:
+            for line in fp:
+                try:
+                    d = json.loads(line.strip())
+                    if d.get('type') == 'EOD_SUMMARY':
+                        date = d.get('date', 'unknown')
+                        # Only keep latest EOD for each date
+                        daily_stats[date] = d
+                    elif d.get('type') == 'ENTRY_ACK':
+                        all_trades.append(d)
+                except:
+                    pass
+    
+    print(f'\n=== {name} ===')
+    print(f'Trading Days: {len(daily_stats)}')
+    print(f'Total Entries: {len(all_trades)}')
+    
+    if daily_stats:
+        total_pnl = sum(d.get('total_pnl', 0) for d in daily_stats.values())
+        total_closed = sum(d.get('closed_trades', 0) for d in daily_stats.values())
+        total_wins = sum(d.get('win_count', 0) for d in daily_stats.values())
+        total_losses = sum(d.get('loss_count', 0) for d in daily_stats.values())
         
-        # Check if 'pnl' exists or if it's named differently (e.g. 'realized_pnl')
-        # auditor_bot.py uses "pnl" key for exit.
+        print(f'Closed Trades: {total_closed}')
+        print(f'Wins: {total_wins}, Losses: {total_losses}')
+        if total_closed > 0:
+            print(f'Win Rate: {total_wins/total_closed*100:.1f}%')
+        print(f'Total PnL: ${total_pnl:.2f}')
+        
+        # Show daily breakdown
+        print('\nDaily PnL:')
+        for date in sorted(daily_stats.keys())[-10:]:
+            d = daily_stats[date]
+            pnl = d.get('total_pnl', 0)
+            entries = d.get('total_trades', 0)
+            closed = d.get('closed_trades', 0)
+            print(f"  {date}: PnL=${pnl:.2f}, Entries={entries}, Closed={closed}")
 
-            
-        if 'pnl' in df.columns: 
-             exits = df[df['event'] == 'SHADOW_EXIT']
-             print(f"Shadow Exits: {len(exits)}")
-             if not exits.empty:
-                 total_pnl = exits['pnl'].sum()
-                 print(f"Total Shadow PnL: ${total_pnl:.2f}")
-                 print(exits[['symbol', 'bot_tag', 'pnl', 'reason']].to_string())
-        else:
-             exits = df[df['event'] == 'SHADOW_EXIT']
-             print(f"Shadow Exits: {len(exits)} (No PnL column found - implies no exits ever logged)")
-        # Filter SHADOW_ENTRY (Skipped by Bot, Taken by Auditor)
-        entries = df[df['event'] == 'SHADOW_ENTRY']
-        # Filter for today if needed (checking timestamp string)
-        if 'ts' in entries.columns:
-             entries_today = entries[entries['ts'].astype(str).str.contains('2026-01-06')]
-             print(f"Shadow Entries Today (Skipped by Bot): {len(entries_today)}")
-             if not entries_today.empty:
-                 print(entries_today[['symbol', 'bot_tag', 'reason', 'ts']].head(10).to_string())
-        else:
-             print("Entries found (no ts filter):", len(entries))
-
-    except Exception as e:
-        print(f"Error: {e}")
-
-if __name__ == "__main__":
-    main()
+analyze_bot('auditor_logs/15M_STK_*.jsonl', '15M STOCK BOT')
+analyze_bot('auditor_logs/15M_OPT_*.jsonl', '15M OPTIONS BOT')

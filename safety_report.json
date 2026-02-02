@@ -1,7 +1,7 @@
 {
-  "timestamp": "2026-01-06T20:38:16.375710",
-  "mode": "dry_run",
-  "positions_checked": 33,
+  "timestamp": "2026-01-07T15:16:06.296415",
+  "mode": "live",
+  "positions_checked": 34,
   "covered": [],
   "naked": [
     {
@@ -45,9 +45,14 @@
       "entry": 35.386577
     },
     {
-      "symbol": "HOOD",
-      "qty": 148,
-      "entry": 117.480405
+      "symbol": "FSLR",
+      "qty": 2,
+      "entry": 243.46
+    },
+    {
+      "symbol": "JPM",
+      "qty": 6,
+      "entry": 326.13
     },
     {
       "symbol": "META",
@@ -55,9 +60,14 @@
       "entry": 648.063333
     },
     {
-      "symbol": "ORCL",
-      "qty": 70,
-      "entry": 187.978429
+      "symbol": "MS",
+      "qty": 10,
+      "entry": 184.75
+    },
+    {
+      "symbol": "MSTR",
+      "qty": 12,
+      "entry": 163.798333
     },
     {
       "symbol": "PRAX",
@@ -96,10 +106,6 @@
     {
       "symbol": "DASH260220C00220000",
       "qty": 1
-    },
-    {
-      "symbol": "DELL260220C00125000",
-      "qty": 3
     },
     {
       "symbol": "DKNG260220C00032500",
@@ -154,5 +160,91 @@
       "qty": -1
     }
   ],
-  "orders_placed": []
+  "orders_placed": [
+    {
+      "symbol": "AMD",
+      "tp": 219.19,
+      "sl": 208.72
+    },
+    {
+      "symbol": "ANET",
+      "tp": 131.41,
+      "sl": 124.89
+    },
+    {
+      "symbol": "C",
+      "tp": 120.56,
+      "sl": 114.48
+    },
+    {
+      "symbol": "CEG",
+      "tp": 361.54,
+      "sl": 344.5
+    },
+    {
+      "symbol": "COIN",
+      "tp": 257.62,
+      "sl": 245.34
+    },
+    {
+      "symbol": "CTRA",
+      "tp": 25.81,
+      "sl": 24.54
+    },
+    {
+      "symbol": "DASH",
+      "tp": 233.81,
+      "sl": 222.28
+    },
+    {
+      "symbol": "DKNG",
+      "tp": 36.43,
+      "sl": 34.69
+    },
+    {
+      "symbol": "FSLR",
+      "tp": 250.68,
+      "sl": 238.65
+    },
+    {
+      "symbol": "JPM",
+      "tp": 335.92,
+      "sl": 319.6
+    },
+    {
+      "symbol": "META",
+      "tp": 667.53,
+      "sl": 635.09
+    },
+    {
+      "symbol": "MS",
+      "tp": 190.3,
+      "sl": 181.05
+    },
+    {
+      "symbol": "MSTR",
+      "tp": 168.66,
+      "sl": 160.56
+    },
+    {
+      "symbol": "PRAX",
+      "tp": 283.48,
+      "sl": 268.84
+    },
+    {
+      "symbol": "RCL",
+      "tp": 287.66,
+      "sl": 272.51
+    },
+    {
+      "symbol": "SMCI",
+      "tp": 31.19,
+      "sl": 29.69
+    },
+    {
+      "symbol": "TXN",
+      "tp": 183.16,
+      "sl": 173.89
+    }
+  ]
 }

@@ -1,22 +1,35 @@
+import os
 import requests
 
-# Test the API
-resp = requests.get("http://localhost:5000/api/pnl?date=2026-01-06&bot=all")
-data = resp.json()
+# Test direct API call
+key = os.environ.get('APCA_API_KEY_ID') or os.environ.get('ALPACA_KEY_ID')
+secret = os.environ.get('APCA_API_SECRET_KEY') or os.environ.get('ALPACA_SECRET_KEY')
 
-print("=== PnL API Response ===")
-print(f"Date: {data.get('date')}")
-print(f"Bot Filter: {data.get('bot_filter')}")
-print()
-print("Bots data:")
-for bot, info in data['bots'].items():
-    print(f"  {bot}:")
-    print(f"    entries={info.get('entries', 0)}")
-    print(f"    trades={info.get('trades', 0)}")
-    print(f"    winners={info.get('winners', 0)}")
-    print(f"    losers={info.get('losers', 0)}")
-    print(f"    realized_pnl=${info.get('realized_pnl', 0):.2f}")
-    if 'open_count' in info:
-        print(f"    open_count={info.get('open_count', 0)}")
-        print(f"    unrealized_pnl=${info.get('unrealized_pnl', 0):.2f}")
-    print()
+if key and secret:
+    print(f'API Key found: {key[:8]}...')
+    headers = {'APCA-API-KEY-ID': key, 'APCA-API-SECRET-KEY': secret}
+    
+    # Test account endpoint
+    r = requests.get('https://paper-api.alpaca.markets/v2/account', headers=headers, timeout=10)
+    print(f'Account API: {r.status_code}')
+    if r.status_code == 200:
+        acct = r.json()
+        print(f"  Buying Power: {acct.get('buying_power')}")
+        
+    # Test data endpoint
+    r2 = requests.get('https://data.alpaca.markets/v2/stocks/AAPL/bars', 
+                      headers=headers,
+                      params={'timeframe': '1Day', 'start': '2026-01-20', 'limit': 5},
+                      timeout=10)
+    print(f'Data API: {r2.status_code}')
+    if r2.status_code == 200:
+        data = r2.json()
+        bars = data.get('bars', [])
+        print(f'  Bars returned: {len(bars)}')
+        if bars:
+            for b in bars[:3]:
+                print(f"    {b.get('t')}: O={b.get('o')} H={b.get('h')} L={b.get('l')} C={b.get('c')}")
+    else:
+        print(f'  Error: {r2.text[:200]}')
+else:
+    print('No API keys found in environment')

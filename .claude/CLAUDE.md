@@ -1127,38 +1127,3 @@ Refer to it for all coding decisions. When in doubt, choose the safer option.
 
 *Document Version: 1.0*
 *For questions or updates, consult the human developer.*
-
-
----
-
-# RUBBERBAND BOT SPECIFIC ADDENDUM
-
-## Bot Files Reference
-| BOT_TAG | File | Strategy | Timeframe |
-|---------|------|----------|-----------|
-| 15M_STK | RubberBand/scripts/live_paper_loop.py | Mean Reversion Stocks | 15-min |
-| 15M_OPT | RubberBand/scripts/live_spreads_loop.py | Bull Call Spreads | 15-min |
-| WK_STK | RubberBand/scripts/live_weekly_loop.py | Weekly Stock Reversion | Weekly |
-| WK_OPT | RubberBand/scripts/live_weekly_options_loop.py | 45-DTE ITM Calls | Weekly |
-
-## Key Shared Modules
-- Position Registry: RubberBand/src/position_registry.py
-- Regime Manager: RubberBand/src/regime_manager.py
-- Trade Logger: RubberBand/src/trade_logger.py
-- Options Logger: RubberBand/src/options_trade_logger.py
-- Data Module: RubberBand/src/data.py
-- Options Execution: RubberBand/src/options_execution.py
-
-## Current Kill Switch Configuration
-- All bots: 25% daily loss triggers halt
-- Implemented via check_kill_switch() in data.py
-
-## Known Gaps (See RUBBERBAND_GAP_ANALYSIS.md)
-- Uses float instead of Decimal for money calculations
-- Missing drawdown circuit breaker
-- Missing connection loss monitoring
-- Risk management not separated as vetoing layer
-
----
-
-*Addendum added: January 31, 2026*

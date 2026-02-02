@@ -1,9 +1,23 @@
 [
   {
-    "symbol": "PLTR",
-    "days": 1,
+    "symbol": "COIN",
+    "days": 60,
     "trades": 0,
     "net": 0.0,
     "win_rate": 0.0
+  },
+  {
+    "symbol": "NVDA",
+    "days": 60,
+    "trades": 9,
+    "net": -28.02,
+    "win_rate": 55.6
+  },
+  {
+    "symbol": "TSLA",
+    "days": 60,
+    "trades": 22,
+    "net": -80.69,
+    "win_rate": 54.5
   }
 ]

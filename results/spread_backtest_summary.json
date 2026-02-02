@@ -1,13 +1,13 @@
 {
-  "days": 10,
-  "symbols": 1,
-  "total_trades": 1,
-  "total_cost": 89.51,
-  "total_pnl": 239.5,
-  "roi_pct": 267.57,
-  "win_rate": 100.0,
-  "avg_win": 239.5,
-  "avg_loss": 0.0,
+  "days": 30,
+  "symbols": 37,
+  "total_trades": 99,
+  "total_cost": 4713.96,
+  "total_pnl": 3826.71,
+  "roi_pct": 81.18,
+  "win_rate": 39.4,
+  "avg_win": 122.34,
+  "avg_loss": -15.74,
   "opts": {
     "dte": 6,
     "min_dte": 3,
@@ -22,7 +22,9 @@
     "bars_stop": 10,
     "slope_threshold": -0.2,
     "slope_threshold_10": null,
-    "sl_pct": 0.8,
-    "dead_knife_filter": false
+    "sl_pct": 0.3,
+    "dead_knife_filter": false,
+    "bearish_bar_filter": false,
+    "bearish_regime_only": false
   }
 }
