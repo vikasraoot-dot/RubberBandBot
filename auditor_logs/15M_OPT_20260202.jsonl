@@ -8,3 +8,11 @@
 {"event": "scan_cycle_start", "cycle": 1, "time": "09:36", "regime": "NORMAL", "vixy": 25.85, "slope_thresh": -0.12, "bearish_filter": true, "type": "HEARTBEAT", "ts": "2026-02-02T14:36:51Z", "ts_et": "2026-02-02 09:36:51 ET", "bot_tag": "15M_OPT"}
 {"event": "outside_entry_window", "current_time": "09:36", "type": "HEARTBEAT", "ts": "2026-02-02T14:36:51Z", "ts_et": "2026-02-02 09:36:51 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 1, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-02T14:36:52Z", "ts_et": "2026-02-02 09:36:52 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "06:37:05", "sleep_sec": 10, "type": "HEARTBEAT", "ts": "2026-02-02T14:36:55Z", "ts_et": "2026-02-02 09:36:55 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-02T14:37:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-29T14:37:06Z", "end": "2026-02-02T14:37:06Z", "when": "2026-02-02T14:37:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-02T14:37:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 2, "time": "09:37", "regime": "NORMAL", "vixy": 25.85, "slope_thresh": -0.12, "bearish_filter": true, "type": "HEARTBEAT", "ts": "2026-02-02T14:37:07Z", "ts_et": "2026-02-02 09:37:07 ET", "bot_tag": "15M_OPT"}
+{"event": "outside_entry_window", "current_time": "09:37", "type": "HEARTBEAT", "ts": "2026-02-02T14:37:07Z", "ts_et": "2026-02-02 09:37:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 2, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-02T14:37:08Z", "ts_et": "2026-02-02 09:37:08 ET", "bot_tag": "15M_OPT"}
