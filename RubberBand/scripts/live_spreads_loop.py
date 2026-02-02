@@ -214,11 +214,11 @@ DEFAULT_SPREAD_CONFIG = {
     "dte": 6,                      # Optimized for robust mean reversion (was 3)
     "min_dte": 3,
     "spread_width_atr": 1.5,
-    "max_debit": 3.00,
+    "max_debit": 1.00,             # Reduced to 1.00 to match Backtest (Avoid High IV)
     "contracts": 1,
     "tp_max_profit_pct": 80.0,
     "sl_pct": -30.0,               # Tightened Stop Loss to -30% per user request (was -80%)
-    "bars_stop": 14,               # Time Stop: 14 bars (~3.5 hours)
+    "bars_stop": 10,               # Time Stop: 10 bars (~2.5 hours) - Match Backtest
     "hold_overnight": True,
 }
 

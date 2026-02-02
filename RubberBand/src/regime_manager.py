@@ -44,7 +44,7 @@ class RegimeManager:
         self.regime_configs = {
             "CALM": {
                 "description": "Low Volatility (Trend Down). Aggressive Entry.",
-                "slope_threshold_pct": -0.08,
+                "slope_threshold_pct": -0.20,
                 "dead_knife_filter": False,
                 "bearish_bar_filter": False,
                 "weekly_rsi_oversold": 50,
@@ -52,9 +52,9 @@ class RegimeManager:
             },
             "NORMAL": {
                 "description": "Normal Volatility. Baseline.",
-                "slope_threshold_pct": -0.12,
+                "slope_threshold_pct": -0.20,
                 "dead_knife_filter": False,
-                "bearish_bar_filter": True,
+                "bearish_bar_filter": False,
                 "weekly_rsi_oversold": 45,
                 "weekly_mean_dev_pct": -5.0
             },
@@ -62,7 +62,7 @@ class RegimeManager:
                 "description": "High Volatility (Breakout/Spike). Defensive.",
                 "slope_threshold_pct": -0.20,
                 "dead_knife_filter": True,
-                "bearish_bar_filter": True,
+                "bearish_bar_filter": False,
                 "weekly_rsi_oversold": 30,
                 "weekly_mean_dev_pct": -10.0
             }
