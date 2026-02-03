@@ -762,3 +762,15 @@
 {"type": "SPREAD_SKIP", "underlying": "EXPE", "skip_reason": "Debit_too_high(5.52>3.00)", "ts": "2026-02-03T16:37:54Z", "ts_et": "2026-02-03 11:37:54 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 4, "type": "HEARTBEAT", "ts": "2026-02-03T16:37:54Z", "ts_et": "2026-02-03 11:37:54 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 57, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-03T16:37:54Z", "ts_et": "2026-02-03 11:37:54 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "08:38:05", "sleep_sec": 8, "type": "HEARTBEAT", "ts": "2026-02-03T16:37:57Z", "ts_et": "2026-02-03 11:37:57 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-03T16:38:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-30T16:38:06Z", "end": "2026-02-03T16:38:06Z", "when": "2026-02-03T16:38:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-03T16:38:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 58, "time": "11:38", "regime": "NORMAL", "vixy": 26.05, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-03T16:38:07Z", "ts_et": "2026-02-03 11:38:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:38", "type": "HEARTBEAT", "ts": "2026-02-03T16:38:07Z", "ts_et": "2026-02-03 11:38:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["EXPE"], "type": "HEARTBEAT", "ts": "2026-02-03T16:39:44Z", "ts_et": "2026-02-03 11:39:44 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "EXPE", "signal_reason": "RSI_oversold(18.0)", "entry_price": 254.96, "rsi": 17.96, "atr": 2.6492, "ts": "2026-02-03T16:39:44Z", "ts_et": "2026-02-03 11:39:44 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "EXPE", "skip_reason": "Debit_too_high(5.35>3.00)", "ts": "2026-02-03T16:39:52Z", "ts_et": "2026-02-03 11:39:52 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 4, "type": "HEARTBEAT", "ts": "2026-02-03T16:39:52Z", "ts_et": "2026-02-03 11:39:52 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 58, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-03T16:39:52Z", "ts_et": "2026-02-03 11:39:52 ET", "bot_tag": "15M_OPT"}
