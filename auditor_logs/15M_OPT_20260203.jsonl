@@ -142,3 +142,12 @@
 {"event": "audit_signal_confirmed", "symbol": "IBM", "note": "Signal persisted at close -> TRADED", "type": "HEARTBEAT", "ts": "2026-02-03T15:02:59Z", "ts_et": "2026-02-03 10:02:59 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 1, "total_positions": 6, "type": "HEARTBEAT", "ts": "2026-02-03T15:02:59Z", "ts_et": "2026-02-03 10:02:59 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 16, "new_entries": 1, "type": "HEARTBEAT", "ts": "2026-02-03T15:02:59Z", "ts_et": "2026-02-03 10:02:59 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:04:05", "sleep_sec": 63, "type": "HEARTBEAT", "ts": "2026-02-03T15:03:02Z", "ts_et": "2026-02-03 10:03:02 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-03T15:04:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-30T15:04:07Z", "end": "2026-02-03T15:04:07Z", "when": "2026-02-03T15:04:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-03T15:04:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 17, "time": "10:04", "regime": "NORMAL", "vixy": 25.97, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-03T15:04:08Z", "ts_et": "2026-02-03 10:04:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:04", "type": "HEARTBEAT", "ts": "2026-02-03T15:04:08Z", "ts_et": "2026-02-03 10:04:08 ET", "bot_tag": "15M_OPT"}
+{"event": "registry_orphans_detected", "orphan_count": 1, "orphan_symbols": ["IBM260213C00302500"], "action": "cleaning_stale_entries", "type": "HEARTBEAT", "ts": "2026-02-03T15:04:09Z", "ts_et": "2026-02-03 10:04:09 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["IBM"], "type": "HEARTBEAT", "ts": "2026-02-03T15:05:42Z", "ts_et": "2026-02-03 10:05:42 ET", "bot_tag": "15M_OPT"}
