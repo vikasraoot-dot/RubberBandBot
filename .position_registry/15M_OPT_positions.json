@@ -1,7 +1,30 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-03T10:04:09.413856-05:00",
-  "positions": {},
+  "updated_at": "2026-02-03T10:18:42.158788-05:00",
+  "positions": {
+    "ABNB260213C00129000": {
+      "symbol": "ABNB260213C00129000",
+      "underlying": "ABNB",
+      "client_order_id": "15M_OPT_ABNB260213C00129000_1770131901",
+      "order_id": "fc33fd41-3ab4-405f-ae43-211fd6c9c405",
+      "qty": 1,
+      "entry_price": 1.14,
+      "entry_date": "2026-02-03T10:18:26.496904-05:00",
+      "status": "open",
+      "short_symbol": "ABNB260213C00130000"
+    },
+    "BABA260213C00165000": {
+      "symbol": "BABA260213C00165000",
+      "underlying": "BABA",
+      "client_order_id": "15M_OPT_BABA260213C00165000_1770131916",
+      "order_id": "20d9ee5e-e4eb-43af-a841-d3dd388da4d7",
+      "qty": 1,
+      "entry_price": 1.4,
+      "entry_date": "2026-02-03T10:18:42.158274-05:00",
+      "status": "open",
+      "short_symbol": "BABA260213C00167500"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
