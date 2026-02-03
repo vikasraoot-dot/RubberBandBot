@@ -200,3 +200,15 @@
 {"event": "scan_cycle_start", "cycle": 21, "time": "10:12", "regime": "NORMAL", "vixy": 25.79, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-03T15:12:08Z", "ts_et": "2026-02-03 10:12:08 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_start", "current_time": "10:12", "type": "HEARTBEAT", "ts": "2026-02-03T15:12:08Z", "ts_et": "2026-02-03 10:12:08 ET", "bot_tag": "15M_OPT"}
 {"event": "signals_found", "count": 1, "symbols": ["IBM"], "type": "HEARTBEAT", "ts": "2026-02-03T15:13:42Z", "ts_et": "2026-02-03 10:13:42 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "IBM", "signal_reason": "RSI_oversold(19.2)", "entry_price": 298.26, "rsi": 19.25, "atr": 2.1133, "ts": "2026-02-03T15:13:42Z", "ts_et": "2026-02-03 10:13:42 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "IBM", "skip_reason": "Daily_cooldown(IBM_already_traded_today)", "ts": "2026-02-03T15:13:42Z", "ts_et": "2026-02-03 10:13:42 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 5, "type": "HEARTBEAT", "ts": "2026-02-03T15:13:42Z", "ts_et": "2026-02-03 10:13:42 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 21, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-03T15:13:42Z", "ts_et": "2026-02-03 10:13:42 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:14:05", "sleep_sec": 20, "type": "HEARTBEAT", "ts": "2026-02-03T15:13:45Z", "ts_et": "2026-02-03 10:13:45 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-03T15:14:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-30T15:14:07Z", "end": "2026-02-03T15:14:07Z", "when": "2026-02-03T15:14:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-03T15:14:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 22, "time": "10:14", "regime": "NORMAL", "vixy": 25.91, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-03T15:14:08Z", "ts_et": "2026-02-03 10:14:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:14", "type": "HEARTBEAT", "ts": "2026-02-03T15:14:08Z", "ts_et": "2026-02-03 10:14:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["IBM"], "type": "HEARTBEAT", "ts": "2026-02-03T15:15:41Z", "ts_et": "2026-02-03 10:15:41 ET", "bot_tag": "15M_OPT"}
