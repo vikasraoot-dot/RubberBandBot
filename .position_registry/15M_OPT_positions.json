@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-03T10:19:12.053415-05:00",
-  "positions": {},
+  "updated_at": "2026-02-03T10:33:11.120454-05:00",
+  "positions": {
+    "SMH260213C00397500": {
+      "symbol": "SMH260213C00397500",
+      "underlying": "SMH",
+      "client_order_id": "15M_OPT_SMH260213C00397500_1770132785",
+      "order_id": "8b641597-9f7a-4ec8-80ae-b6e00d3c3aa0",
+      "qty": 1,
+      "entry_price": 1.85,
+      "entry_date": "2026-02-03T10:33:11.120081-05:00",
+      "status": "open",
+      "short_symbol": "SMH260213C00400000"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
