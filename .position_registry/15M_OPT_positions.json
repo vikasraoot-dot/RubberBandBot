@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-03T10:47:02.066575-05:00",
-  "positions": {
-    "ON260213C00060000": {
-      "symbol": "ON260213C00060000",
-      "underlying": "ON",
-      "client_order_id": "15M_OPT_ON260213C00060000_1770133616",
-      "order_id": "5694bfae-b111-4ad9-b9ab-10a889d1f521",
-      "qty": 1,
-      "entry_price": 1.54,
-      "entry_date": "2026-02-03T10:47:02.066285-05:00",
-      "status": "open",
-      "short_symbol": "ON260213C00061000"
-    }
-  },
+  "updated_at": "2026-02-03T10:48:13.252407-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -74,6 +62,21 @@
       "exit_date": "2026-02-03T10:34:12.040987-05:00",
       "exit_reason": "SL_hit(-51.4%<=-30.0%)",
       "pnl": -90.00000000000003
+    },
+    {
+      "symbol": "ON260213C00060000",
+      "underlying": "ON",
+      "client_order_id": "15M_OPT_ON260213C00060000_1770133616",
+      "order_id": "5694bfae-b111-4ad9-b9ab-10a889d1f521",
+      "qty": 1,
+      "entry_price": 1.54,
+      "entry_date": "2026-02-03T10:47:02.066285-05:00",
+      "status": "closed",
+      "short_symbol": "ON260213C00061000",
+      "exit_price": -0.3999999999999999,
+      "exit_date": "2026-02-03T10:48:13.252082-05:00",
+      "exit_reason": "SL_hit(-126.5%<=-30.0%)",
+      "pnl": -191.0
     }
   ]
 }
