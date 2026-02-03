@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-03T13:33:03.330744-05:00",
-  "positions": {
-    "AMAT260213C00315000": {
-      "symbol": "AMAT260213C00315000",
-      "underlying": "AMAT",
-      "client_order_id": "15M_OPT_AMAT260213C00315000_1770143577",
-      "order_id": "4df5ab46-16e4-4ad2-a99f-e7bf43872c79",
-      "qty": 1,
-      "entry_price": 2.77,
-      "entry_date": "2026-02-03T13:33:03.330513-05:00",
-      "status": "open",
-      "short_symbol": "AMAT260213C00317500"
-    }
-  },
+  "updated_at": "2026-02-03T13:34:12.381646-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -89,6 +77,21 @@
       "exit_date": "2026-02-03T10:48:13.252082-05:00",
       "exit_reason": "SL_hit(-126.5%<=-30.0%)",
       "pnl": -191.0
+    },
+    {
+      "symbol": "AMAT260213C00315000",
+      "underlying": "AMAT",
+      "client_order_id": "15M_OPT_AMAT260213C00315000_1770143577",
+      "order_id": "4df5ab46-16e4-4ad2-a99f-e7bf43872c79",
+      "qty": 1,
+      "entry_price": 2.77,
+      "entry_date": "2026-02-03T13:33:03.330513-05:00",
+      "status": "closed",
+      "short_symbol": "AMAT260213C00317500",
+      "exit_price": -0.25,
+      "exit_date": "2026-02-03T13:34:12.381186-05:00",
+      "exit_reason": "SL_hit(-108.8%<=-30.0%)",
+      "pnl": -310.0
     }
   ]
 }
