@@ -61,22 +61,6 @@
       "status": "OPEN",
       "pnl": 0.0
     },
-    "SHADOW_15M_STK_GS_20260115T144500348016+0000": {
-      "id": "SHADOW_15M_STK_GS_20260115T144500348016+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "GS",
-      "entry_price": 937.7850000000001,
-      "entry_time": "2026-01-15T14:45:00.348016+00:00",
-      "reason": "Slope3_Too_Flat(0.0573% > -0.08%)",
-      "qty": 100,
-      "tp_price": 947.16285,
-      "sl_price": 928.4071500000001,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 928.74,
-      "unrealized_pnl": -904.5000000000073
-    },
     "SHADOW_15M_STK_LOW_20260115T144500348016+0000": {
       "id": "SHADOW_15M_STK_LOW_20260115T144500348016+0000",
       "type": "STOCK",
@@ -92,38 +76,6 @@
       "pnl": 0.0,
       "current_price": 269.84000000000003,
       "unrealized_pnl": 168.5000000000059
-    },
-    "SHADOW_15M_OPT_VRT_20260202T150128Z": {
-      "id": "SHADOW_15M_OPT_VRT_20260202T150128Z",
-      "type": "SPREAD",
-      "bot_tag": "15M_OPT",
-      "symbol": "VRT",
-      "long_symbol": "VRT260206C00187500",
-      "short_symbol": "VRT260206C00192500",
-      "entry_debit": 3.1500000000000004,
-      "entry_time": "2026-02-02T15:01:28Z",
-      "reason": "BearishBar_Filter(Close=184.02 < Open=185.34, ClosePct=0.0%)",
-      "qty": 1,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_val": 1.63,
-      "unrealized_pnl": -152.00000000000006
-    },
-    "SHADOW_15M_OPT_NVDA_20260202T150153Z": {
-      "id": "SHADOW_15M_OPT_NVDA_20260202T150153Z",
-      "type": "SPREAD",
-      "bot_tag": "15M_OPT",
-      "symbol": "NVDA",
-      "long_symbol": "NVDA260209C00190000",
-      "short_symbol": "NVDA260209C00195000",
-      "entry_debit": 2.09,
-      "entry_time": "2026-02-02T15:01:53Z",
-      "reason": "BearishBar_Filter(Close=186.65 < Open=187.14, ClosePct=9.6%)",
-      "qty": 1,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_val": 1.3800000000000001,
-      "unrealized_pnl": -70.99999999999997
     }
   },
   "closed_positions": [
@@ -14450,6 +14402,66 @@
       "exit_time": "2026-02-02T17:51:01.062058+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 684.499999999997
+    },
+    {
+      "id": "SHADOW_15M_STK_GS_20260115T144500348016+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "GS",
+      "entry_price": 937.7850000000001,
+      "entry_time": "2026-01-15T14:45:00.348016+00:00",
+      "reason": "Slope3_Too_Flat(0.0573% > -0.08%)",
+      "qty": 100,
+      "tp_price": 947.16285,
+      "sl_price": 928.4071500000001,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 857.55,
+      "unrealized_pnl": -8023.500000000013,
+      "exit_price": 857.55,
+      "exit_time": "2026-02-03T14:56:29.935192+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -8023.500000000013
+    },
+    {
+      "id": "SHADOW_15M_OPT_VRT_20260202T150128Z",
+      "type": "SPREAD",
+      "bot_tag": "15M_OPT",
+      "symbol": "VRT",
+      "long_symbol": "VRT260206C00187500",
+      "short_symbol": "VRT260206C00192500",
+      "entry_debit": 3.1500000000000004,
+      "entry_time": "2026-02-02T15:01:28Z",
+      "reason": "BearishBar_Filter(Close=184.02 < Open=185.34, ClosePct=0.0%)",
+      "qty": 1,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_val": 1.1600000000000001,
+      "unrealized_pnl": -199.00000000000003,
+      "exit_price": 1.1600000000000001,
+      "exit_time": "2026-02-03T14:56:33.971097+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -199.00000000000003
+    },
+    {
+      "id": "SHADOW_15M_OPT_NVDA_20260202T150153Z",
+      "type": "SPREAD",
+      "bot_tag": "15M_OPT",
+      "symbol": "NVDA",
+      "long_symbol": "NVDA260209C00190000",
+      "short_symbol": "NVDA260209C00195000",
+      "entry_debit": 2.09,
+      "entry_time": "2026-02-02T15:01:53Z",
+      "reason": "BearishBar_Filter(Close=186.65 < Open=187.14, ClosePct=9.6%)",
+      "qty": 1,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_val": 0.78,
+      "unrealized_pnl": -130.99999999999997,
+      "exit_price": 0.78,
+      "exit_time": "2026-02-03T14:56:36.835754+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -130.99999999999997
     }
   ],
   "processed_lines": {
@@ -14471,6 +14483,7 @@
     "auditor_logs\\15M_STK_20260129.jsonl": 508,
     "auditor_logs\\15M_OPT_20260129.jsonl": 1912,
     "auditor_logs\\15M_STK_20260202.jsonl": 9,
-    "auditor_logs\\15M_OPT_20260202.jsonl": 318
+    "auditor_logs\\15M_OPT_20260202.jsonl": 318,
+    "auditor_logs\\15M_STK_20260203.jsonl": 3
   }
 }
