@@ -16,9 +16,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY }}
-  APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET }}
-  APCA_API_BASE_URL: ${{ secrets.ALPACA_BASE_URL }}
+  APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+  APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+  APCA_API_BASE_URL: https://paper-api.alpaca.markets
 
 jobs:
   safety-check:
