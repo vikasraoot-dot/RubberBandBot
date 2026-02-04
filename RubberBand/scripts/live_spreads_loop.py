@@ -544,7 +544,25 @@ def try_spread_entry(
         return False
     
     spread_width = spread["spread_width"]
-    
+
+    # CRITICAL: Validate debit vs spread width (prevents guaranteed-loss trades)
+    # Example bug: AMAT paid $2.88 for $2.50 spread = guaranteed $0.38 loss
+    if net_debit >= spread_width:
+        logger.spread_skip(
+            underlying=sym,
+            skip_reason=f"Debit_exceeds_width({net_debit:.2f}>={spread_width:.2f})_GUARANTEED_LOSS"
+        )
+        return False
+
+    # Stricter check: Ensure sufficient edge after commissions/slippage (15% minimum)
+    max_debit_for_edge = spread_width * 0.85
+    if net_debit > max_debit_for_edge:
+        logger.spread_skip(
+            underlying=sym,
+            skip_reason=f"Insufficient_edge({net_debit:.2f}>{max_debit_for_edge:.2f}=85%_of_{spread_width:.2f})"
+        )
+        return False
+
     # Calculate DTE from expiration
     actual_expiration = spread.get("expiration", "")
     dte_at_entry = 0
