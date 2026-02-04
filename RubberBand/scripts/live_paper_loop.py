@@ -494,18 +494,42 @@ def main() -> int:
         "ts": now_iso
     }), flush=True)
 
+    # --- Filter Diagnostics Counters ---
+    diag = {
+        "total_scanned": 0,
+        "no_data": 0,
+        "insufficient_bars": 0,
+        "paused_health": 0,
+        "forming_bar_dropped": 0,
+        "trend_filter_no_data": 0,
+        "trend_filter_bear": 0,
+        "slope_filter": 0,
+        "bearish_bar_filter": 0,
+        "dkf_filter": 0,
+        "no_signal": 0,
+        "already_in_position": 0,
+        "traded_today": 0,
+        "bad_tp_sl": 0,
+        "qty_zero": 0,
+        "signals_generated": 0,
+        "orders_submitted": 0,
+    }
+
     # Iterate symbols
     for sym in symbols:
+        diag["total_scanned"] += 1
         df = bars_map.get(sym)
-        if df is None or df.empty or len(df) < 20: # Need enough data for Keltner(20)
+        if df is None or df.empty:
+            diag["no_data"] += 1
+            continue
+        if len(df) < 20:  # Need enough data for Keltner(20)
+            diag["insufficient_bars"] += 1
             continue
 
         # Resilience Check
         is_paused, reason = health_mgr.is_paused(sym, now=now_utc)
         if is_paused:
-            # Log only once per session or if verbose?
-            # For now, just skip silently or with a minimal print if debug needed
-            # print(f"[skip] {sym} is PAUSED: {reason}", flush=True)
+            diag["paused_health"] += 1
             continue
 
         df = attach_verifiers(df, cfg)
@@ -528,7 +552,9 @@ def main() -> int:
         if age_sec < 15 * 60:
             # Drop the forming bar
             df = df.iloc[:-1]
+            diag["forming_bar_dropped"] += 1
             if df.empty:
+                diag["no_data"] += 1
                 continue
 
         last = df.iloc[-1]
@@ -579,6 +605,7 @@ def main() -> int:
                 # Fallback if no daily data but filter enabled?
                 # For safety, maybe skip? Or default to Bull?
                 # Backtest logic: skip if filter enabled and no SMA
+                diag["trend_filter_no_data"] += 1
                 continue
         else:
             # Filter disabled -> assume Bull (allow Longs)
@@ -593,13 +620,9 @@ def main() -> int:
         
         should_skip, reason = check_slope_filter(df, regime_cfg)
         if should_skip:
-             print(json.dumps({
-                "type": "SKIP_SLOPE3",
-                "symbol": sym,
-                "reason": reason,
-                "ts": now_iso,
-            }), flush=True)
-             continue
+            diag["slope_filter"] += 1
+            # Only log verbose slope skips if few (avoid log spam)
+            continue
         
         # Bearish Bar Filter (New - Jan 2026)
         # -------------------------------------
@@ -607,12 +630,7 @@ def main() -> int:
         # Backtest showed +$3,000 improvement and +15% win rate
         should_skip_bar, bar_reason = check_bearish_bar_filter(df, regime_cfg)
         if should_skip_bar:
-            print(json.dumps({
-                "type": "SKIP_BEARISH_BAR",
-                "symbol": sym,
-                "reason": bar_reason,
-                "ts": now_iso,
-            }), flush=True)
+            diag["bearish_bar_filter"] += 1
             continue
         
         # Check 2: 10-bar slope (Secondary/Sustained)
@@ -644,6 +662,7 @@ def main() -> int:
 
         # Filter Long Signal by Trend
         if long_signal and not is_bull_trend:
+            diag["trend_filter_bear"] += 1
             long_signal = False
 
         # --- Dead Knife Filter (Live) ---
@@ -653,16 +672,10 @@ def main() -> int:
         # Skip re-entry if we had a loss today and RSI is still < 20 (Deep Oversold)
         # This prevents "doubling down" on a falling knife that just stopped us out.
         if long_signal and use_dkf and sym in has_loss_today:
-            # We use current RSI vs 20. Backtest uses last_loss_rsi < 20 check too, 
+            # We use current RSI vs 20. Backtest uses last_loss_rsi < 20 check too,
             # but here "has_loss_today" implies we tried and failed.
             if rsi is not None and rsi < 20:
-                print(json.dumps({
-                    "type": "DKF_SKIP",
-                    "symbol": sym,
-                    "reason": "Loss_today_and_RSI<20",
-                    "rsi": rsi,
-                    "ts": now_iso
-                }), flush=True)
+                diag["dkf_filter"] += 1
                 continue
         # --------------------------------
 
@@ -705,6 +718,7 @@ def main() -> int:
         
         # Gating: Check if already in position
         if sym in positions:
+            diag["already_in_position"] += 1
             try:
                 log.gate(
                     symbol=sym, session=session, cid=sig_row["cid"],
@@ -716,6 +730,7 @@ def main() -> int:
 
         # Gating: Daily Cooldown - prevent re-entry on tickers traded today
         if sym in traded_today:
+            diag["traded_today"] += 1
             try:
                 log.gate(
                     symbol=sym, session=session, cid=sig_row["cid"],
@@ -727,13 +742,14 @@ def main() -> int:
 
         # Gating: Check Signal
         if not long_signal and not short_signal:
-            # Optional: Log heartbeat for no signal? No, too verbose.
+            diag["no_signal"] += 1
             continue
 
         # Determine Side
         side = "buy" if long_signal else "sell" # Alpaca 'sell' = short open if no position
 
         # Log Signal Event
+        diag["signals_generated"] += 1
         try:
             log.signal(**sig_row)
         except Exception:
@@ -748,14 +764,14 @@ def main() -> int:
             stop_price = safe_float(money_sub(entry, money_mul(atr_val, sl_mult)))
             take_profit = safe_float(money_add(entry, money_mul(atr_val, tp_r)))
             if not (stop_price < entry < take_profit):
-                 print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
-                 continue
-        else: # Short
+                diag["bad_tp_sl"] += 1
+                continue
+        else:  # Short
             stop_price = safe_float(money_add(entry, money_mul(atr_val, sl_mult)))
             take_profit = safe_float(money_sub(entry, money_mul(atr_val, tp_r)))
             if not (take_profit < entry < stop_price):
-                 print(f"[order] skip {sym}: bad TP/SL (entry={entry}, sl={stop_price}, tp={take_profit})", flush=True)
-                 continue
+                diag["bad_tp_sl"] += 1
+                continue
 
         # Size
         base_qty = int(cfg.get("qty", 1))
@@ -771,7 +787,7 @@ def main() -> int:
         
         qty = _cap_qty_by_notional(qty, entry, effective_notional)
         if qty < 1:
-            print(f"[order] skip {sym}: qty<1 after notional cap", flush=True)
+            diag["qty_zero"] += 1
             continue
 
         # Log the planned order
@@ -859,6 +875,7 @@ def main() -> int:
                     continue
                 
                 print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
+                diag["orders_submitted"] += 1
                 
                 # Record in registry on successful fill
                 if resp.get("status") == "filled":
@@ -894,6 +911,36 @@ def main() -> int:
                     )
                 except Exception:
                     pass
+
+    # --- Filter Diagnostics Summary ---
+    # Calculate pass-through rate
+    passed_filters = diag["signals_generated"]
+    total = diag["total_scanned"]
+    pass_rate = (passed_filters / total * 100) if total > 0 else 0
+
+    print(json.dumps({
+        "type": "FILTER_DIAGNOSTICS",
+        "total_scanned": total,
+        "passed_to_signal": passed_filters,
+        "pass_rate_pct": round(pass_rate, 1),
+        "orders_submitted": diag["orders_submitted"],
+        "filters": {
+            "no_data": diag["no_data"],
+            "insufficient_bars": diag["insufficient_bars"],
+            "paused_health": diag["paused_health"],
+            "trend_no_daily": diag["trend_filter_no_data"],
+            "trend_bear": diag["trend_filter_bear"],
+            "slope": diag["slope_filter"],
+            "bearish_bar": diag["bearish_bar_filter"],
+            "dkf": diag["dkf_filter"],
+            "no_signal_rsi": diag["no_signal"],
+            "already_in_position": diag["already_in_position"],
+            "traded_today": diag["traded_today"],
+            "bad_tp_sl": diag["bad_tp_sl"],
+            "qty_zero": diag["qty_zero"],
+        },
+        "ts": now_iso,
+    }), flush=True)
 
     # --- Session Summary ---
     print("\n=== Session Summary ===", flush=True)
