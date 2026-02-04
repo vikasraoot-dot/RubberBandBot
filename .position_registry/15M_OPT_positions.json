@@ -1,7 +1,30 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-04T10:42:12.270498-05:00",
-  "positions": {},
+  "updated_at": "2026-02-04T11:49:12.566849-05:00",
+  "positions": {
+    "TSM260213C00325000": {
+      "symbol": "TSM260213C00325000",
+      "underlying": "TSM",
+      "client_order_id": "15M_OPT_TSM260213C00325000_1770223735",
+      "order_id": "3e1cf305-62c5-4e88-8fd5-dbcb52fa1078",
+      "qty": 1,
+      "entry_price": 2.75,
+      "entry_date": "2026-02-04T11:49:00.741827-05:00",
+      "status": "open",
+      "short_symbol": "TSM260213C00330000"
+    },
+    "RTX260213C00200000": {
+      "symbol": "RTX260213C00200000",
+      "underlying": "RTX",
+      "client_order_id": "15M_OPT_RTX260213C00200000_1770223748",
+      "order_id": "5c60215f-7c78-45c7-a3e5-218ed83fc5ad",
+      "qty": 1,
+      "entry_price": 1.06,
+      "entry_date": "2026-02-04T11:49:12.566668-05:00",
+      "status": "open",
+      "short_symbol": "RTX260213C00202500"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
