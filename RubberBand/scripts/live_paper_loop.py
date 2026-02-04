@@ -881,15 +881,6 @@ def main() -> int:
                         broker_resp=resp,
                         dry_run=False,
                     )
-                    # Record in registry for position attribution
-                    if oid:
-                        registry.record_entry(
-                            symbol=sym,
-                            client_order_id=coid,
-                            qty=qty,
-                            entry_price=entry,
-                            order_id=oid,
-                        )
                 except Exception:
                     pass
             except Exception as e:

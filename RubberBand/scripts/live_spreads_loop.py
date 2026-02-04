@@ -805,25 +805,31 @@ def calculate_spread_pnl(
 def check_spread_exit_conditions(
     pnl_pct: float,
     spread_cfg: dict,
+    holding_minutes: int = 0,
 ) -> Tuple[bool, str]:
-    """Check if spread should be exited based on P&L percentage."""
+    """Check if spread should be exited based on P&L percentage or time stop."""
     tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 80.0)
     sl_pct = spread_cfg.get("sl_pct", -50.0)
     hold_overnight = spread_cfg.get("hold_overnight", True)
     dte = spread_cfg.get("dte", 3)
-    
+    bars_stop = spread_cfg.get("bars_stop", 0)
+
     if pnl_pct >= tp_max_profit_pct:
         return True, f"TP_hit({pnl_pct:.1f}%>={tp_max_profit_pct}%)"
-    
+
     if pnl_pct <= sl_pct:
         return True, f"SL_hit({pnl_pct:.1f}%<={sl_pct}%)"
-    
+
+    # Time stop: exit if held for too many bars (each bar = 15 minutes)
+    if bars_stop > 0 and holding_minutes >= bars_stop * 15:
+        return True, f"TIME_STOP({holding_minutes}min >= {bars_stop}bars)"
+
     if not hold_overnight or dte == 0:
         now_et = _now_et()
         cutoff = now_et.replace(hour=15, minute=0, second=0, microsecond=0)
         if now_et >= cutoff:
             return True, "EOD_time_exit(3:00PM_cutoff)"
-    
+
     return False, ""
 
 
@@ -1005,11 +1011,8 @@ def manage_positions(
         
         # Calculate spread P&L
         pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)
-        
-        # Check exit conditions
-        should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg)
 
-        # Calculate holding_minutes from registry entry_date (P1 fix: pass to spread_exit)
+        # Calculate holding_minutes from registry entry_date (P1 fix: pass to check_spread_exit_conditions)
         holding_minutes = 0
         registry_key = registry.find_by_symbol(long_symbol) if registry else None
         if registry and registry_key and registry_key in registry.positions:
@@ -1024,6 +1027,9 @@ def manage_positions(
                     holding_minutes = int((now_dt - entry_dt).total_seconds() / 60)
                 except (ValueError, TypeError):
                     holding_minutes = 0
+
+        # Check exit conditions (including time stop based on holding_minutes)
+        should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg, holding_minutes)
 
         if should_exit:
             # Calculate current spread value for logging (handle None values)
