@@ -331,7 +331,10 @@ def main() -> int:
         flush=True,
     )
 
-    res = None
+    # GAP-006: Connectivity Guard (moved here - must be initialized before use)
+    from RubberBand.src.circuit_breaker import ConnectivityGuard
+    conn_guard = ConnectivityGuard(max_errors=5)
+
     res = None
     try:
         res = fetch_latest_bars(symbols, timeframe, history_days, feed)
@@ -463,10 +466,6 @@ def main() -> int:
     except Exception as e:
         print(f"[Guard] Warning: Failed to check portfolio guard: {e}", flush=True)
     # -----------------------------------------------------
-
-    # GAP-006: Connectivity Guard
-    from RubberBand.src.circuit_breaker import ConnectivityGuard
-    conn_guard = ConnectivityGuard(max_errors=5)
 
     try:
         max_notional = float(max_notional) if max_notional is not None else None

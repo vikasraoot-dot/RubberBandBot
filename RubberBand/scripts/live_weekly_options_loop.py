@@ -599,9 +599,21 @@ def main() -> int:
         return 0
     
     # Check max positions limit
-    if len(my_underlyings) >= opts_cfg.get("max_positions", 5):
-        logger.heartbeat(event="max_positions_reached", positions=len(my_underlyings))
-        _log("Max positions reached, no new entries")
+    max_positions_limit = opts_cfg.get("max_positions", 5)
+    if len(my_underlyings) >= max_positions_limit:
+        # P1 FIX: Verbose logging for max_positions blocking
+        logger.heartbeat(
+            event="max_positions_reached",
+            positions=len(my_underlyings),
+            max_positions=max_positions_limit,
+            current_underlyings=list(my_underlyings),
+            reason=f"Holding {len(my_underlyings)}/{max_positions_limit} positions - blocking new entries",
+        )
+        _log("Max positions reached, no new entries", {
+            "current_positions": len(my_underlyings),
+            "max_positions": max_positions_limit,
+            "holding_underlyings": list(my_underlyings),
+        })
         logger.close()
         registry.save()
         return 0

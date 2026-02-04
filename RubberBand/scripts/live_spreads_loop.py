@@ -990,7 +990,23 @@ def manage_positions(
         
         # Check exit conditions
         should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg)
-        
+
+        # Calculate holding_minutes from registry entry_date (P1 fix: pass to spread_exit)
+        holding_minutes = 0
+        registry_key = registry.find_by_symbol(long_symbol) if registry else None
+        if registry and registry_key and registry_key in registry.positions:
+            entry_data = registry.positions[registry_key]
+            entry_date_str = entry_data.get("entry_date")
+            if entry_date_str:
+                try:
+                    from datetime import datetime
+                    # Parse ISO format with timezone (e.g., "2026-02-03T10:15:00-05:00")
+                    entry_dt = datetime.fromisoformat(entry_date_str)
+                    now_dt = datetime.now(entry_dt.tzinfo) if entry_dt.tzinfo else datetime.now()
+                    holding_minutes = int((now_dt - entry_dt).total_seconds() / 60)
+                except (ValueError, TypeError):
+                    holding_minutes = 0
+
         if should_exit:
             # Calculate current spread value for logging (handle None values)
             lp = long_pos.get("current_price")
@@ -1008,6 +1024,7 @@ def manage_positions(
                     exit_reason=f"[DRY-RUN] {exit_reason}",
                     pnl=pnl,
                     pnl_pct=pnl_pct,
+                    holding_minutes=holding_minutes,
                 )
                 already_closed.add(underlying)
             else:
@@ -1037,6 +1054,7 @@ def manage_positions(
                     exit_reason=exit_reason,
                     pnl=pnl,
                     pnl_pct=pnl_pct,
+                    holding_minutes=holding_minutes,
                 )
                 
                 # Update registry to remove closed position
