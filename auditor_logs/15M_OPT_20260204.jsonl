@@ -431,3 +431,21 @@
 {"type": "SPREAD_SIGNAL", "underlying": "WMB", "signal_reason": "RSI_oversold(27.8)", "entry_price": 66.04, "rsi": 27.82, "atr": 0.4414, "ts": "2026-02-04T15:52:10Z", "ts_et": "2026-02-04 10:52:10 ET", "bot_tag": "15M_OPT"}
 {"type": "SPREAD_SKIP", "underlying": "WMB", "skip_reason": "Daily_cooldown(WMB_already_traded_today)", "ts": "2026-02-04T15:52:10Z", "ts_et": "2026-02-04 10:52:10 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 4, "forming": 0, "new_entries": 0, "total_positions": 0, "type": "HEARTBEAT", "ts": "2026-02-04T15:52:10Z", "ts_et": "2026-02-04 10:52:10 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 38, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-04T15:52:10Z", "ts_et": "2026-02-04 10:52:10 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:53:05", "sleep_sec": 51, "type": "HEARTBEAT", "ts": "2026-02-04T15:52:14Z", "ts_et": "2026-02-04 10:52:14 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-04T15:53:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-31T15:53:06Z", "end": "2026-02-04T15:53:06Z", "when": "2026-02-04T15:53:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-04T15:53:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 39, "time": "10:53", "regime": "NORMAL", "vixy": 26.705, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-04T15:53:07Z", "ts_et": "2026-02-04 10:53:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:53", "type": "HEARTBEAT", "ts": "2026-02-04T15:53:07Z", "ts_et": "2026-02-04 10:53:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 4, "symbols": ["MU", "LRCX", "AMAT", "WMB"], "type": "HEARTBEAT", "ts": "2026-02-04T15:54:43Z", "ts_et": "2026-02-04 10:54:43 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "MU", "signal_reason": "RSI_oversold(25.1)", "entry_price": 391.435, "rsi": 25.08, "atr": 5.8198, "ts": "2026-02-04T15:54:43Z", "ts_et": "2026-02-04 10:54:43 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "MU", "skip_reason": "Debit_too_high(5.58>3.00)", "ts": "2026-02-04T15:54:50Z", "ts_et": "2026-02-04 10:54:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "LRCX", "signal_reason": "RSI_oversold(20.9)", "entry_price": 218.58, "rsi": 20.87, "atr": 2.3443, "ts": "2026-02-04T15:54:50Z", "ts_et": "2026-02-04 10:54:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "LRCX", "skip_reason": "Daily_cooldown(LRCX_already_traded_today)", "ts": "2026-02-04T15:54:50Z", "ts_et": "2026-02-04 10:54:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "AMAT", "signal_reason": "RSI_oversold(25.2)", "entry_price": 305.17, "rsi": 25.19, "atr": 2.9435, "ts": "2026-02-04T15:54:50Z", "ts_et": "2026-02-04 10:54:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "AMAT", "skip_reason": "Debit_too_high(5.45>3.00)", "ts": "2026-02-04T15:54:56Z", "ts_et": "2026-02-04 10:54:56 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "WMB", "signal_reason": "RSI_oversold(27.8)", "entry_price": 66.04, "rsi": 27.82, "atr": 0.4414, "ts": "2026-02-04T15:54:56Z", "ts_et": "2026-02-04 10:54:56 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "WMB", "skip_reason": "Daily_cooldown(WMB_already_traded_today)", "ts": "2026-02-04T15:54:56Z", "ts_et": "2026-02-04 10:54:56 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 4, "forming": 0, "new_entries": 0, "total_positions": 0, "type": "HEARTBEAT", "ts": "2026-02-04T15:54:56Z", "ts_et": "2026-02-04 10:54:56 ET", "bot_tag": "15M_OPT"}
