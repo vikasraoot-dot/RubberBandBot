@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-04T10:36:13.870124-05:00",
-  "positions": {},
+  "updated_at": "2026-02-04T10:41:16.675973-05:00",
+  "positions": {
+    "LRCX260213C00220000": {
+      "symbol": "LRCX260213C00220000",
+      "underlying": "LRCX",
+      "client_order_id": "15M_OPT_LRCX260213C00220000_1770219669",
+      "order_id": "58d830e4-ba0e-493e-938f-cc33f61623a7",
+      "qty": 1,
+      "entry_price": 1.93,
+      "entry_date": "2026-02-04T10:41:16.675382-05:00",
+      "status": "open",
+      "short_symbol": "LRCX260213C00222500"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
