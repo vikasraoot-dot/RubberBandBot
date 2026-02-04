@@ -1,17 +1,17 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-04T10:32:35.866149-05:00",
+  "updated_at": "2026-02-04T10:35:11.306123-05:00",
   "positions": {
-    "WMB260213C00066000": {
-      "symbol": "WMB260213C00066000",
-      "underlying": "WMB",
-      "client_order_id": "15M_OPT_WMB260213C00066000_1770219150",
-      "order_id": "11217302-2530-4b6e-9303-f39c08d81895",
+    "SATS260213C00113000": {
+      "symbol": "SATS260213C00113000",
+      "underlying": "SATS",
+      "client_order_id": "15M_OPT_SATS260213C00113000_1770219304",
+      "order_id": "c8b7ba1b-051b-47f4-a564-9f1b4f91f5e2",
       "qty": 1,
-      "entry_price": 0.79,
-      "entry_date": "2026-02-04T10:32:35.865746-05:00",
+      "entry_price": 1.26,
+      "entry_date": "2026-02-04T10:35:11.305769-05:00",
       "status": "open",
-      "short_symbol": "WMB260213C00067000"
+      "short_symbol": "SATS260213C00115000"
     }
   },
   "closed_positions": [
@@ -119,6 +119,21 @@
       "exit_date": "2026-02-03T14:03:12.583283-05:00",
       "exit_reason": "SL_hit(-122.2%<=-30.0%)",
       "pnl": -165.00000000000003
+    },
+    {
+      "symbol": "WMB260213C00066000",
+      "underlying": "WMB",
+      "client_order_id": "15M_OPT_WMB260213C00066000_1770219150",
+      "order_id": "11217302-2530-4b6e-9303-f39c08d81895",
+      "qty": 1,
+      "entry_price": 0.79,
+      "entry_date": "2026-02-04T10:32:35.865746-05:00",
+      "status": "closed",
+      "short_symbol": "WMB260213C00067000",
+      "exit_price": 0.10000000000000009,
+      "exit_date": "2026-02-04T10:33:12.377630-05:00",
+      "exit_reason": "SL_hit(-86.7%<=-30.0%)",
+      "pnl": -64.99999999999999
     }
   ]
 }
