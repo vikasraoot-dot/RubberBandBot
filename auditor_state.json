@@ -63,22 +63,6 @@
       "current_val": 0.53,
       "unrealized_pnl": -42.000000000000014
     },
-    "SHADOW_15M_OPT_SMH_20260203T153557Z": {
-      "id": "SHADOW_15M_OPT_SMH_20260203T153557Z",
-      "type": "SPREAD",
-      "bot_tag": "15M_OPT",
-      "symbol": "SMH",
-      "long_symbol": "SMH260213C00395000",
-      "short_symbol": "SMH260213C00402500",
-      "entry_debit": 4.25,
-      "entry_time": "2026-02-03T15:35:57Z",
-      "reason": "Daily_cooldown(SMH_already_traded_today)",
-      "qty": 1,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_val": 3.119999999999999,
-      "unrealized_pnl": -113.00000000000009
-    },
     "SHADOW_15M_STK_MU_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_MU_20260204T144959926129+0000",
       "type": "STOCK",
@@ -123,7 +107,9 @@
       "tp_price": 185.79455,
       "sl_price": 182.11544999999998,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 183.95499999999998,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_HOOD_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_HOOD_20260204T144959926129+0000",
@@ -185,7 +171,9 @@
       "tp_price": 395.5362,
       "sl_price": 387.7038,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 391.62,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_MRVL_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_MRVL_20260204T144959926129+0000",
@@ -311,7 +299,9 @@
       "tp_price": 147.7529,
       "sl_price": 144.82710000000003,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 146.29000000000002,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_NKE_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_NKE_20260204T144959926129+0000",
@@ -533,7 +523,9 @@
       "tp_price": 134.8047,
       "sl_price": 132.1353,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 133.47,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_PDD_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_PDD_20260204T144959926129+0000",
@@ -627,7 +619,9 @@
       "tp_price": 423.0486,
       "sl_price": 414.6714,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 418.86,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_CRWD_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_CRWD_20260204T144959926129+0000",
@@ -721,7 +715,9 @@
       "tp_price": 245.65219999999997,
       "sl_price": 240.78779999999998,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 243.21999999999997,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_CAT_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_CAT_20260204T144959926129+0000",
@@ -735,7 +731,9 @@
       "tp_price": 723.4529,
       "sl_price": 709.1270999999999,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 716.29,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_ETN_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_ETN_20260204T144959926129+0000",
@@ -781,7 +779,9 @@
       "tp_price": 224.23514999999998,
       "sl_price": 219.79485,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 222.015,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_ADBE_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_ADBE_20260204T144959926129+0000",
@@ -795,7 +795,9 @@
       "tp_price": 280.99210000000005,
       "sl_price": 275.4279,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 278.21000000000004,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_INTU_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_INTU_20260204T144959926129+0000",
@@ -953,7 +955,9 @@
       "tp_price": 236.5016,
       "sl_price": 231.8184,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 234.16,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_QCOM_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_QCOM_20260204T144959926129+0000",
@@ -1047,7 +1051,9 @@
       "tp_price": 49.0355,
       "sl_price": 48.064499999999995,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 48.55,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_HCA_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_HCA_20260204T144959926129+0000",
@@ -1093,7 +1099,9 @@
       "tp_price": 124.99255,
       "sl_price": 122.51745,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 123.755,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_REGN_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_REGN_20260204T144959926129+0000",
@@ -1123,7 +1131,9 @@
       "tp_price": 179.8305,
       "sl_price": 176.26950000000002,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 178.05,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_BX_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_BX_20260204T144959926129+0000",
@@ -1729,7 +1739,9 @@
       "tp_price": 48.5608,
       "sl_price": 47.599199999999996,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 48.08,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_AXP_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_AXP_20260204T144959926129+0000",
@@ -2015,7 +2027,9 @@
       "tp_price": 342.794,
       "sl_price": 336.006,
       "status": "OPEN",
-      "pnl": 0.0
+      "pnl": 0.0,
+      "current_price": 339.4,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_NOW_20260204T145459799783+0000": {
       "id": "SHADOW_15M_STK_NOW_20260204T145459799783+0000",
@@ -16666,6 +16680,26 @@
       "exit_time": "2026-02-03T20:50:54.383644+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -587.0000000000001
+    },
+    {
+      "id": "SHADOW_15M_OPT_SMH_20260203T153557Z",
+      "type": "SPREAD",
+      "bot_tag": "15M_OPT",
+      "symbol": "SMH",
+      "long_symbol": "SMH260213C00395000",
+      "short_symbol": "SMH260213C00402500",
+      "entry_debit": 4.25,
+      "entry_time": "2026-02-03T15:35:57Z",
+      "reason": "Daily_cooldown(SMH_already_traded_today)",
+      "qty": 1,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_val": 1.3400000000000003,
+      "unrealized_pnl": -290.99999999999994,
+      "exit_price": 1.3400000000000003,
+      "exit_time": "2026-02-04T22:05:14.986935+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -290.99999999999994
     }
   ],
   "processed_lines": {
