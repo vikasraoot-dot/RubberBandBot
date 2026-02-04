@@ -1,0 +1,11 @@
+{"event": "startup", "dry_run": false, "dte": 6, "max_debit": 3.0, "contracts": 1, "tp_pct": 80.0, "sl_pct": -30.0, "scan_interval_min": 1, "type": "HEARTBEAT", "ts": "2026-02-04T14:37:08Z", "ts_et": "2026-02-04 09:37:08 ET", "bot_tag": "15M_OPT"}
+{"event": "symbols_loaded", "count": 65, "sample": ["WDC", "CIEN", "MU", "STX", "VRT"], "type": "HEARTBEAT", "ts": "2026-02-04T14:37:08Z", "ts_et": "2026-02-04 09:37:08 ET", "bot_tag": "15M_OPT"}
+{"event": "registry_loaded", "bot_tag": "15M_OPT", "my_positions": 0, "broker_positions": 1, "registry_clean": true, "orphans_found": 0, "type": "HEARTBEAT", "ts": "2026-02-04T14:37:09Z", "ts_et": "2026-02-04 09:37:09 ET"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-04T14:37:13Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-31T14:37:13Z", "end": "2026-02-04T14:37:13Z", "when": "2026-02-04T14:37:13Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-04T14:37:14Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 1, "time": "09:37", "regime": "NORMAL", "vixy": 26.38, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-04T14:37:14Z", "ts_et": "2026-02-04 09:37:14 ET", "bot_tag": "15M_OPT"}
+{"event": "outside_entry_window", "current_time": "09:37", "type": "HEARTBEAT", "ts": "2026-02-04T14:37:14Z", "ts_et": "2026-02-04 09:37:14 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_EXIT", "underlying": "AMD", "long_symbol": "AMD260206C00242500", "short_symbol": "", "exit_value": 0.23, "exit_reason": "SL_hit(-97.9%<=-30.0%)", "pnl": -1097.0, "pnl_pct": -97.9, "holding_minutes": 0, "ts": "2026-02-04T14:37:16Z", "ts_et": "2026-02-04 09:37:16 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 1, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-04T14:37:16Z", "ts_et": "2026-02-04 09:37:16 ET", "bot_tag": "15M_OPT"}
