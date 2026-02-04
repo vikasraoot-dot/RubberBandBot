@@ -552,3 +552,25 @@
 {"type": "SPREAD_SKIP", "underlying": "WMB", "skip_reason": "Daily_cooldown(WMB_already_traded_today)", "ts": "2026-02-04T16:09:45Z", "ts_et": "2026-02-04 11:09:45 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 6, "forming": 0, "new_entries": 0, "total_positions": 0, "type": "HEARTBEAT", "ts": "2026-02-04T16:09:45Z", "ts_et": "2026-02-04 11:09:45 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 44, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-04T16:09:45Z", "ts_et": "2026-02-04 11:09:45 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "08:10:05", "sleep_sec": 17, "type": "HEARTBEAT", "ts": "2026-02-04T16:09:48Z", "ts_et": "2026-02-04 11:09:48 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-04T16:10:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2025-12-31T16:10:06Z", "end": "2026-02-04T16:10:06Z", "when": "2026-02-04T16:10:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-04T16:10:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 45, "time": "11:10", "regime": "NORMAL", "vixy": 26.92, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-04T16:10:07Z", "ts_et": "2026-02-04 11:10:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:10", "type": "HEARTBEAT", "ts": "2026-02-04T16:10:07Z", "ts_et": "2026-02-04 11:10:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 6, "symbols": ["WDC", "MU", "SATS", "LRCX", "AMAT", "WMB"], "type": "HEARTBEAT", "ts": "2026-02-04T16:11:39Z", "ts_et": "2026-02-04 11:11:39 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "WDC", "signal_reason": "RSI_oversold(29.0)", "entry_price": 262.025, "rsi": 28.95, "atr": 5.8519, "ts": "2026-02-04T16:11:39Z", "ts_et": "2026-02-04 11:11:39 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "WDC", "skip_reason": "Debit_too_high(19.17>3.00)", "ts": "2026-02-04T16:11:44Z", "ts_et": "2026-02-04 11:11:44 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "MU", "signal_reason": "RSI_oversold(21.9)", "entry_price": 385.0, "rsi": 21.85, "atr": 5.8809, "ts": "2026-02-04T16:11:44Z", "ts_et": "2026-02-04 11:11:44 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "MU", "skip_reason": "Debit_too_high(5.66>3.00)", "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "SATS", "signal_reason": "RSI_oversold(24.3)", "entry_price": 109.04, "rsi": 24.34, "atr": 1.2367, "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "SATS", "skip_reason": "Daily_cooldown(SATS_already_traded_today)", "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "LRCX", "signal_reason": "RSI_oversold(17.5)", "entry_price": 215.3, "rsi": 17.54, "atr": 2.414, "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "LRCX", "skip_reason": "Daily_cooldown(LRCX_already_traded_today)", "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "AMAT", "signal_reason": "RSI_oversold(22.4)", "entry_price": 302.34, "rsi": 22.37, "atr": 2.9611, "ts": "2026-02-04T16:11:50Z", "ts_et": "2026-02-04 11:11:50 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "AMAT", "skip_reason": "Debit_too_high(5.26>3.00)", "ts": "2026-02-04T16:11:56Z", "ts_et": "2026-02-04 11:11:56 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "WMB", "signal_reason": "RSI_oversold(24.9)", "entry_price": 65.66, "rsi": 24.91, "atr": 0.4371, "ts": "2026-02-04T16:11:56Z", "ts_et": "2026-02-04 11:11:56 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "WMB", "skip_reason": "Daily_cooldown(WMB_already_traded_today)", "ts": "2026-02-04T16:11:56Z", "ts_et": "2026-02-04 11:11:56 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 6, "forming": 0, "new_entries": 0, "total_positions": 0, "type": "HEARTBEAT", "ts": "2026-02-04T16:11:56Z", "ts_et": "2026-02-04 11:11:56 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 45, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-04T16:11:56Z", "ts_et": "2026-02-04 11:11:56 ET", "bot_tag": "15M_OPT"}
