@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:59:11.182706-05:00",
+  "updated_at": "2026-02-05T11:11:21.207872-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -23,6 +23,17 @@
       "entry_date": "2026-02-05T10:16:05.854050-05:00",
       "status": "open",
       "short_symbol": "GOOGL260213C00327500"
+    },
+    "AMD260213C00195000": {
+      "symbol": "AMD260213C00195000",
+      "underlying": "AMD",
+      "client_order_id": "15M_OPT_AMD260213C00195000_1770307876",
+      "order_id": "11218b97-eb46-4c31-a8c5-842a7e6b9818",
+      "qty": 1,
+      "entry_price": 2.18,
+      "entry_date": "2026-02-05T11:11:21.207517-05:00",
+      "status": "open",
+      "short_symbol": "AMD260213C00200000"
     }
   },
   "closed_positions": [
