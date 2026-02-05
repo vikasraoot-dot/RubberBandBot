@@ -265,3 +265,16 @@
 {"type": "SPREAD_SIGNAL", "underlying": "FCX", "signal_reason": "RSI_oversold(28.4)", "entry_price": 59.825, "rsi": 28.38, "atr": 0.7507, "ts": "2026-02-05T15:12:14Z", "ts_et": "2026-02-05 10:12:14 ET", "bot_tag": "15M_OPT"}
 {"type": "SPREAD_SKIP", "underlying": "FCX", "skip_reason": "No_contracts_available", "ts": "2026-02-05T15:12:14Z", "ts_et": "2026-02-05 10:12:14 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 3, "type": "HEARTBEAT", "ts": "2026-02-05T15:12:14Z", "ts_et": "2026-02-05 10:12:14 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 27, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T15:12:14Z", "ts_et": "2026-02-05 10:12:14 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:13:05", "sleep_sec": 48, "type": "HEARTBEAT", "ts": "2026-02-05T15:12:17Z", "ts_et": "2026-02-05 10:12:17 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-05T15:13:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-01T15:13:06Z", "end": "2026-02-05T15:13:06Z", "when": "2026-02-05T15:13:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-05T15:13:07Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 28, "time": "10:13", "regime": "NORMAL", "vixy": 28.42, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-05T15:13:07Z", "ts_et": "2026-02-05 10:13:07 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:13", "type": "HEARTBEAT", "ts": "2026-02-05T15:13:07Z", "ts_et": "2026-02-05 10:13:07 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["AMD"], "type": "HEARTBEAT", "ts": "2026-02-05T15:13:48Z", "ts_et": "2026-02-05 10:13:48 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "AMD", "signal_reason": "RSI_oversold(27.9)", "entry_price": 198.52, "rsi": 27.89, "atr": 2.9835, "ts": "2026-02-05T15:13:48Z", "ts_et": "2026-02-05 10:13:48 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "AMD", "skip_reason": "Cannot_get_quotes", "ts": "2026-02-05T15:13:51Z", "ts_et": "2026-02-05 10:13:51 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 3, "type": "HEARTBEAT", "ts": "2026-02-05T15:13:51Z", "ts_et": "2026-02-05 10:13:51 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 28, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T15:13:51Z", "ts_et": "2026-02-05 10:13:51 ET", "bot_tag": "15M_OPT"}
