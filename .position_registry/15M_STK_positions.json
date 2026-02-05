@@ -1,18 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-05T11:35:01.199512-05:00",
-  "positions": {
-    "FCX": {
-      "symbol": "FCX",
-      "underlying": "FCX",
-      "client_order_id": "15M_STK_FCX_1770308169",
-      "order_id": "240d95ff-9c41-4d18-9ceb-222d827219ef",
-      "qty": 11,
-      "entry_price": 58.503636,
-      "entry_date": "2026-02-05T11:16:15.623395-05:00",
-      "status": "open"
-    }
-  },
+  "updated_at": "2026-02-05T15:50:01.916764-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "UBER",
@@ -36,6 +25,18 @@
       "status": "closed",
       "exit_date": "2026-02-05T11:35:01.199262-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "FCX",
+      "underlying": "FCX",
+      "client_order_id": "15M_STK_FCX_1770308169",
+      "order_id": "240d95ff-9c41-4d18-9ceb-222d827219ef",
+      "qty": 11,
+      "entry_price": 58.503636,
+      "entry_date": "2026-02-05T11:16:15.623395-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-05T15:50:01.916410-05:00",
+      "exit_reason": "orphaned_sync"
     }
   ]
 }
