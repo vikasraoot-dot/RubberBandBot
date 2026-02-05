@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T11:11:21.207872-05:00",
+  "updated_at": "2026-02-05T11:16:40.380173-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -34,6 +34,17 @@
       "entry_date": "2026-02-05T11:11:21.207517-05:00",
       "status": "open",
       "short_symbol": "AMD260213C00200000"
+    },
+    "COP260213C00103000": {
+      "symbol": "COP260213C00103000",
+      "underlying": "COP",
+      "client_order_id": "15M_OPT_COP260213C00103000_1770308195",
+      "order_id": "face9f8d-52ef-45c0-b1d8-d87d212d1825",
+      "qty": 1,
+      "entry_price": 0.71,
+      "entry_date": "2026-02-05T11:16:40.379912-05:00",
+      "status": "open",
+      "short_symbol": "COP260213C00104000"
     }
   },
   "closed_positions": [
