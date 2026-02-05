@@ -96,12 +96,10 @@ jobs:
             }
           }
 
-      - name: Download Position Registry
-        uses: actions/download-artifact@v4
-        with:
-          name: position-registry-15M_OPT
-          path: .position_registry/
-        continue-on-error: true  # First run won't have artifact
+      # Position registry is persisted via git commits (GAP-008 fix)
+      # The bot commits registry changes during trading to auditor_logs/
+      # checkout@v4 above retrieves the latest registry from git automatically
+      # Artifact-based download was removed as it only works within same workflow run
 
       # Run options spreads loop every 15 minutes
       - name: Run options spreads loop (paper trading)
@@ -136,7 +134,8 @@ jobs:
           $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg $slope10Arg *>&1 | Tee-Object -FilePath console.log"
           Invoke-Expression $cmd
       
-      - name: Upload Position Registry
+      # Backup: Upload registry as artifact (primary persistence is via git commits)
+      - name: Upload Position Registry (backup)
         uses: actions/upload-artifact@v4
         if: always()
         with:

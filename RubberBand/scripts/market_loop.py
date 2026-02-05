@@ -161,9 +161,12 @@ def commit_auditor_log(bot_tag: str = "15M_STK"):
             # Update processed line count
             with open(processed_file, "w") as f:
                 f.write(str(len(all_lines)))
-            
+
+            # Add registry file to commit list (Fix for GAP-008 Persistence)
+            registry_file = f".position_registry/{bot_tag}_positions.json"
+
             # Commit (stage local changes first)
-            subprocess.run(["git", "add", log_file, processed_file], check=False, capture_output=True)
+            subprocess.run(["git", "add", log_file, processed_file, registry_file], check=False, capture_output=True)
             result = subprocess.run(
                 ["git", "commit", "-m", f"[AUTO] {bot_tag} log update {datetime.now().strftime('%H:%M')}"],
                 check=False, capture_output=True

@@ -49,12 +49,10 @@ jobs:
           & "$env:PYTHON_EXE" -m pip install --upgrade pip
           & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt
 
-      - name: Download Position Registry
-        uses: actions/download-artifact@v4
-        continue-on-error: true
-        with:
-          name: position-registry-15M_STK
-          path: .position_registry/
+      # Position registry is persisted via git commits (GAP-008 fix)
+      # The bot commits registry changes during trading to auditor_logs/
+      # checkout@v4 above retrieves the latest registry from git automatically
+      # Artifact-based download was removed as it only works within same workflow run
 
       # Wait guard so the loop begins right at the bell, even if cron is early/late
       - name: Wait until market open (guard)
@@ -120,7 +118,8 @@ jobs:
           # Any new env vars (like SLOPE_THRESHOLD_10) MUST be passed explicitly in market_loop.py's run_once()!
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py *>&1 | Tee-Object -FilePath "console.log"
 
-      - name: Upload Position Registry
+      # Backup: Upload registry as artifact (primary persistence is via git commits)
+      - name: Upload Position Registry (backup)
         if: always()
         uses: actions/upload-artifact@v4
         with:
