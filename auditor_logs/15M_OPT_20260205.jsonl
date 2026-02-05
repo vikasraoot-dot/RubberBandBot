@@ -1420,3 +1420,15 @@
 {"type": "SPREAD_SKIP", "underlying": "COP", "skip_reason": "Daily_cooldown(COP_already_traded_today)", "ts": "2026-02-05T16:55:44Z", "ts_et": "2026-02-05 11:55:44 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 8, "type": "HEARTBEAT", "ts": "2026-02-05T16:55:44Z", "ts_et": "2026-02-05 11:55:44 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 94, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T16:55:44Z", "ts_et": "2026-02-05 11:55:44 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "08:56:05", "sleep_sec": 17, "type": "HEARTBEAT", "ts": "2026-02-05T16:55:48Z", "ts_et": "2026-02-05 11:55:48 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-05T16:56:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-01T16:56:06Z", "end": "2026-02-05T16:56:06Z", "when": "2026-02-05T16:56:06Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-05T16:56:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 95, "time": "11:56", "regime": "NORMAL", "vixy": 27.325, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-05T16:56:08Z", "ts_et": "2026-02-05 11:56:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:56", "type": "HEARTBEAT", "ts": "2026-02-05T16:56:08Z", "ts_et": "2026-02-05 11:56:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["COP"], "type": "HEARTBEAT", "ts": "2026-02-05T16:57:40Z", "ts_et": "2026-02-05 11:57:40 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "COP", "signal_reason": "RSI_oversold(27.8)", "entry_price": 103.52, "rsi": 27.78, "atr": 0.7213, "ts": "2026-02-05T16:57:40Z", "ts_et": "2026-02-05 11:57:40 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "COP", "skip_reason": "Daily_cooldown(COP_already_traded_today)", "ts": "2026-02-05T16:57:40Z", "ts_et": "2026-02-05 11:57:40 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 1, "forming": 0, "new_entries": 0, "total_positions": 8, "type": "HEARTBEAT", "ts": "2026-02-05T16:57:40Z", "ts_et": "2026-02-05 11:57:40 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 95, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T16:57:40Z", "ts_et": "2026-02-05 11:57:40 ET", "bot_tag": "15M_OPT"}
