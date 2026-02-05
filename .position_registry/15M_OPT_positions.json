@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T12:46:15.813852-05:00",
-  "positions": {
-    "AMD260213C00195000": {
-      "symbol": "AMD260213C00195000",
-      "underlying": "AMD",
-      "client_order_id": "15M_OPT_AMD260213C00195000_1770307876",
-      "order_id": "11218b97-eb46-4c31-a8c5-842a7e6b9818",
-      "qty": 1,
-      "entry_price": 2.18,
-      "entry_date": "2026-02-05T11:11:21.207517-05:00",
-      "status": "open",
-      "short_symbol": "AMD260213C00200000"
-    }
-  },
+  "updated_at": "2026-02-05T13:42:11.316363-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -344,6 +332,21 @@
       "exit_date": "2026-02-05T12:46:15.813636-05:00",
       "exit_reason": "TIME_STOP(150min >= 10bars)",
       "pnl": 45.00000000000004
+    },
+    {
+      "symbol": "AMD260213C00195000",
+      "underlying": "AMD",
+      "client_order_id": "15M_OPT_AMD260213C00195000_1770307876",
+      "order_id": "11218b97-eb46-4c31-a8c5-842a7e6b9818",
+      "qty": 1,
+      "entry_price": 2.18,
+      "entry_date": "2026-02-05T11:11:21.207517-05:00",
+      "status": "closed",
+      "short_symbol": "AMD260213C00200000",
+      "exit_price": 1.9000000000000004,
+      "exit_date": "2026-02-05T13:42:11.316111-05:00",
+      "exit_reason": "TIME_STOP(150min >= 10bars)",
+      "pnl": -24.999999999999957
     }
   ]
 }
