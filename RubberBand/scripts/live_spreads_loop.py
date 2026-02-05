@@ -979,8 +979,46 @@ def manage_positions(
         
         # Parse symbols
         long_symbol = long_pos.get("symbol", "")
-        short_symbol = short_pos.get("symbol", "") if short_pos else ""
-        
+        short_symbol_from_broker = short_pos.get("symbol", "") if short_pos else ""
+
+        # CRITICAL FIX: Check registry for stored short_symbol
+        # The broker may not return the short leg if it was assigned/expired/closed separately
+        # We must use the registry as the source of truth for spread structure
+        registry_entry = None
+        registry_short_symbol = ""
+        if registry:
+            registry_key = registry.find_by_symbol(long_symbol)
+            if registry_key and registry_key in registry.positions:
+                registry_entry = registry.positions[registry_key]
+                registry_short_symbol = registry_entry.get("short_symbol", "")
+
+        # Determine short_symbol: prefer broker if available, fallback to registry
+        if short_symbol_from_broker:
+            short_symbol = short_symbol_from_broker
+        elif registry_short_symbol:
+            # CRITICAL: We have a registry short_symbol but broker doesn't have the position
+            # This means the short leg was closed/assigned separately - DO NOT EXIT AS NAKED LONG
+            print(f"[positions] CRITICAL: Short leg mismatch for {underlying}!")
+            print(f"[positions]   Registry short_symbol: {registry_short_symbol}")
+            print(f"[positions]   Broker short_pos: None (missing)")
+            print(f"[positions]   This spread may have been partially closed/assigned.")
+            print(f"[positions]   HALTING exit to prevent unlimited loss on naked long.")
+
+            logger.error(
+                error=f"Short leg missing from broker but exists in registry",
+                context=f"spread_mismatch_{underlying}",
+                details={
+                    "long_symbol": long_symbol,
+                    "registry_short": registry_short_symbol,
+                    "broker_short": "MISSING",
+                    "action": "HALTED - manual review required",
+                }
+            )
+            # Skip this position - requires manual intervention
+            continue
+        else:
+            short_symbol = ""
+
         # Get entry debit from active_spreads if available
         entry_debit = 1.0  # Default
         if active_spreads and underlying in active_spreads:
@@ -1013,11 +1051,10 @@ def manage_positions(
         pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)
 
         # Calculate holding_minutes from registry entry_date (P1 fix: pass to check_spread_exit_conditions)
+        # Reuse registry_entry from earlier lookup if available
         holding_minutes = 0
-        registry_key = registry.find_by_symbol(long_symbol) if registry else None
-        if registry and registry_key and registry_key in registry.positions:
-            entry_data = registry.positions[registry_key]
-            entry_date_str = entry_data.get("entry_date")
+        if registry_entry:
+            entry_date_str = registry_entry.get("entry_date")
             if entry_date_str:
                 try:
                     from datetime import datetime
