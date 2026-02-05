@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:58:44.917645-05:00",
+  "updated_at": "2026-02-05T10:59:11.182706-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -23,28 +23,6 @@
       "entry_date": "2026-02-05T10:16:05.854050-05:00",
       "status": "open",
       "short_symbol": "GOOGL260213C00327500"
-    },
-    "NEM260213C00114000": {
-      "symbol": "NEM260213C00114000",
-      "underlying": "NEM",
-      "client_order_id": "15M_OPT_NEM260213C00114000_1770307104",
-      "order_id": "267f7242-f217-4d5f-9ea6-fd5e392c904f",
-      "qty": 1,
-      "entry_price": 1.38,
-      "entry_date": "2026-02-05T10:58:28.469324-05:00",
-      "status": "open",
-      "short_symbol": "NEM260213C00116000"
-    },
-    "MS260213C00175000": {
-      "symbol": "MS260213C00175000",
-      "underlying": "MS",
-      "client_order_id": "15M_OPT_MS260213C00175000_1770307120",
-      "order_id": "d95f42a4-ca66-4de1-a61b-6edec71cb9ed",
-      "qty": 1,
-      "entry_price": 1.71,
-      "entry_date": "2026-02-05T10:58:44.917275-05:00",
-      "status": "open",
-      "short_symbol": "MS260213C00177500"
     }
   },
   "closed_positions": [
@@ -302,6 +280,36 @@
       "exit_date": "2026-02-05T10:53:11.544226-05:00",
       "exit_reason": "SL_hit(-79.5%<=-30.0%)",
       "pnl": -58.00000000000001
+    },
+    {
+      "symbol": "NEM260213C00114000",
+      "underlying": "NEM",
+      "client_order_id": "15M_OPT_NEM260213C00114000_1770307104",
+      "order_id": "267f7242-f217-4d5f-9ea6-fd5e392c904f",
+      "qty": 1,
+      "entry_price": 1.38,
+      "entry_date": "2026-02-05T10:58:28.469324-05:00",
+      "status": "closed",
+      "short_symbol": "NEM260213C00116000",
+      "exit_price": 0.0,
+      "exit_date": "2026-02-05T10:59:08.173882-05:00",
+      "exit_reason": "BROKER_MISSING_orphan_cleanup",
+      "pnl": 0.0
+    },
+    {
+      "symbol": "MS260213C00175000",
+      "underlying": "MS",
+      "client_order_id": "15M_OPT_MS260213C00175000_1770307120",
+      "order_id": "d95f42a4-ca66-4de1-a61b-6edec71cb9ed",
+      "qty": 1,
+      "entry_price": 1.71,
+      "entry_date": "2026-02-05T10:58:44.917275-05:00",
+      "status": "closed",
+      "short_symbol": "MS260213C00177500",
+      "exit_price": 0.5499999999999998,
+      "exit_date": "2026-02-05T10:59:11.182401-05:00",
+      "exit_reason": "SL_hit(-64.7%<=-30.0%)",
+      "pnl": -101.00000000000003
     }
   ]
 }
