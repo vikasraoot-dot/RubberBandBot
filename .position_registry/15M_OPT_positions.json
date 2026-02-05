@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:30:08.135857-05:00",
+  "updated_at": "2026-02-05T10:52:24.501365-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -23,6 +23,17 @@
       "entry_date": "2026-02-05T10:16:05.854050-05:00",
       "status": "open",
       "short_symbol": "GOOGL260213C00327500"
+    },
+    "FCX260213C00059000": {
+      "symbol": "FCX260213C00059000",
+      "underlying": "FCX",
+      "client_order_id": "15M_OPT_FCX260213C00059000_1770306740",
+      "order_id": "e9205aa2-8537-4a6e-86fe-938040803714",
+      "qty": 1,
+      "entry_price": 0.73,
+      "entry_date": "2026-02-05T10:52:24.500987-05:00",
+      "status": "open",
+      "short_symbol": "FCX260213C00060000"
     }
   },
   "closed_positions": [
