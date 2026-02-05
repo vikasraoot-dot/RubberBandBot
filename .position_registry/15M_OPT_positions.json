@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:29:13.750635-05:00",
+  "updated_at": "2026-02-05T10:30:08.135857-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -23,17 +23,6 @@
       "entry_date": "2026-02-05T10:16:05.854050-05:00",
       "status": "open",
       "short_symbol": "GOOGL260213C00327500"
-    },
-    "AA260213C00057000": {
-      "symbol": "AA260213C00057000",
-      "underlying": "AA",
-      "client_order_id": "15M_OPT_AA260213C00057000_1770305349",
-      "order_id": "28d962c4-8217-4842-b156-6683ebcc9b27",
-      "qty": 1,
-      "entry_price": 0.81,
-      "entry_date": "2026-02-05T10:29:13.750300-05:00",
-      "status": "open",
-      "short_symbol": "AA260213C00058000"
     }
   },
   "closed_positions": [
@@ -259,6 +248,21 @@
       "short_symbol": "C260213C00117000",
       "exit_price": 0.0,
       "exit_date": "2026-02-05T10:25:08.259370-05:00",
+      "exit_reason": "BROKER_MISSING_orphan_cleanup",
+      "pnl": 0.0
+    },
+    {
+      "symbol": "AA260213C00057000",
+      "underlying": "AA",
+      "client_order_id": "15M_OPT_AA260213C00057000_1770305349",
+      "order_id": "28d962c4-8217-4842-b156-6683ebcc9b27",
+      "qty": 1,
+      "entry_price": 0.81,
+      "entry_date": "2026-02-05T10:29:13.750300-05:00",
+      "status": "closed",
+      "short_symbol": "AA260213C00058000",
+      "exit_price": 0.0,
+      "exit_date": "2026-02-05T10:30:08.135477-05:00",
       "exit_reason": "BROKER_MISSING_orphan_cleanup",
       "pnl": 0.0
     }
