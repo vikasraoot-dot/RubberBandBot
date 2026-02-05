@@ -1,29 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T11:20:11.424301-05:00",
+  "updated_at": "2026-02-05T12:46:15.813852-05:00",
   "positions": {
-    "GOOG260213C00320000": {
-      "symbol": "GOOG260213C00320000",
-      "underlying": "GOOG",
-      "client_order_id": "15M_OPT_GOOG260213C00320000_1770304553",
-      "order_id": "6c9b51c9-ba99-47fe-954a-489fade11e66",
-      "qty": 1,
-      "entry_price": 2.22,
-      "entry_date": "2026-02-05T10:15:57.491801-05:00",
-      "status": "open",
-      "short_symbol": "GOOG260213C00325000"
-    },
-    "GOOGL260213C00322500": {
-      "symbol": "GOOGL260213C00322500",
-      "underlying": "GOOGL",
-      "client_order_id": "15M_OPT_GOOGL260213C00322500_1770304562",
-      "order_id": "23a64d34-14b0-403d-967a-eb6dcb0cff21",
-      "qty": 1,
-      "entry_price": 1.9,
-      "entry_date": "2026-02-05T10:16:05.854050-05:00",
-      "status": "open",
-      "short_symbol": "GOOGL260213C00327500"
-    },
     "AMD260213C00195000": {
       "symbol": "AMD260213C00195000",
       "underlying": "AMD",
@@ -336,6 +314,36 @@
       "exit_date": "2026-02-05T11:20:11.424038-05:00",
       "exit_reason": "SL_hit(-70.4%<=-30.0%)",
       "pnl": -50.0
+    },
+    {
+      "symbol": "GOOG260213C00320000",
+      "underlying": "GOOG",
+      "client_order_id": "15M_OPT_GOOG260213C00320000_1770304553",
+      "order_id": "6c9b51c9-ba99-47fe-954a-489fade11e66",
+      "qty": 1,
+      "entry_price": 2.22,
+      "entry_date": "2026-02-05T10:15:57.491801-05:00",
+      "status": "closed",
+      "short_symbol": "GOOG260213C00325000",
+      "exit_price": 2.799999999999999,
+      "exit_date": "2026-02-05T12:46:12.415255-05:00",
+      "exit_reason": "TIME_STOP(150min >= 10bars)",
+      "pnl": 59.99999999999987
+    },
+    {
+      "symbol": "GOOGL260213C00322500",
+      "underlying": "GOOGL",
+      "client_order_id": "15M_OPT_GOOGL260213C00322500_1770304562",
+      "order_id": "23a64d34-14b0-403d-967a-eb6dcb0cff21",
+      "qty": 1,
+      "entry_price": 1.9,
+      "entry_date": "2026-02-05T10:16:05.854050-05:00",
+      "status": "closed",
+      "short_symbol": "GOOGL260213C00327500",
+      "exit_price": 2.4000000000000004,
+      "exit_date": "2026-02-05T12:46:15.813636-05:00",
+      "exit_reason": "TIME_STOP(150min >= 10bars)",
+      "pnl": 45.00000000000004
     }
   ]
 }
