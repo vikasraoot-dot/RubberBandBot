@@ -1095,3 +1095,21 @@
 {"type": "SPREAD_SKIP", "underlying": "ALB", "skip_reason": "Debit_too_high(3.40>3.00)", "ts": "2026-02-05T16:16:44Z", "ts_et": "2026-02-05 11:16:44 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 7, "forming": 0, "new_entries": 1, "total_positions": 10, "type": "HEARTBEAT", "ts": "2026-02-05T16:16:44Z", "ts_et": "2026-02-05 11:16:44 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 73, "new_entries": 1, "type": "HEARTBEAT", "ts": "2026-02-05T16:16:44Z", "ts_et": "2026-02-05 11:16:44 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "08:17:05", "sleep_sec": 17, "type": "HEARTBEAT", "ts": "2026-02-05T16:16:48Z", "ts_et": "2026-02-05 11:16:48 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-05T16:17:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-01T16:17:07Z", "end": "2026-02-05T16:17:07Z", "when": "2026-02-05T16:17:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-05T16:17:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 74, "time": "11:17", "regime": "NORMAL", "vixy": 28.44, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-05T16:17:08Z", "ts_et": "2026-02-05 11:17:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "11:17", "type": "HEARTBEAT", "ts": "2026-02-05T16:17:08Z", "ts_et": "2026-02-05 11:17:08 ET", "bot_tag": "15M_OPT"}
+{"error": "Spread close failed: Cannot get quotes for spread legs", "context": "close_COP", "type": "ERROR", "ts": "2026-02-05T16:17:10Z", "ts_et": "2026-02-05 11:17:10 ET", "bot_tag": "15M_OPT"}
+{"error": "Spread close failed: Cannot get quotes for spread legs", "context": "close_NEM", "type": "ERROR", "ts": "2026-02-05T16:17:12Z", "ts_et": "2026-02-05 11:17:12 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 5, "symbols": ["NEM", "FCX", "COP", "ALB", "MS"], "type": "HEARTBEAT", "ts": "2026-02-05T16:18:10Z", "ts_et": "2026-02-05 11:18:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "FCX", "signal_reason": "RSI_oversold(23.2)", "entry_price": 58.27, "rsi": 23.23, "atr": 0.7516, "ts": "2026-02-05T16:18:10Z", "ts_et": "2026-02-05 11:18:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "FCX", "skip_reason": "Daily_cooldown(FCX_already_traded_today)", "ts": "2026-02-05T16:18:10Z", "ts_et": "2026-02-05 11:18:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "ALB", "signal_reason": "RSI_oversold(24.5)", "entry_price": 156.505, "rsi": 24.46, "atr": 1.9461, "ts": "2026-02-05T16:18:10Z", "ts_et": "2026-02-05 11:18:10 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "ALB", "skip_reason": "Debit_too_high(3.78>3.00)", "ts": "2026-02-05T16:18:13Z", "ts_et": "2026-02-05 11:18:13 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "MS", "signal_reason": "RSI_oversold(28.0)", "entry_price": 174.47, "rsi": 28.04, "atr": 1.1113, "ts": "2026-02-05T16:18:13Z", "ts_et": "2026-02-05 11:18:13 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "MS", "skip_reason": "Daily_cooldown(MS_already_traded_today)", "ts": "2026-02-05T16:18:13Z", "ts_et": "2026-02-05 11:18:13 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_complete", "signals": 5, "forming": 0, "new_entries": 0, "total_positions": 13, "type": "HEARTBEAT", "ts": "2026-02-05T16:18:13Z", "ts_et": "2026-02-05 11:18:13 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_end", "cycle": 74, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T16:18:13Z", "ts_et": "2026-02-05 11:18:13 ET", "bot_tag": "15M_OPT"}
