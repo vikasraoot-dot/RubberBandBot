@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:09:48.700804-05:00",
-  "positions": {
-    "AMZN260213C00222500": {
-      "symbol": "AMZN260213C00222500",
-      "underlying": "AMZN",
-      "client_order_id": "15M_OPT_AMZN260213C00222500_1770304184",
-      "order_id": "c94e4df8-8787-4ca9-8f96-855a8a53e6bb",
-      "qty": 1,
-      "entry_price": 1.43,
-      "entry_date": "2026-02-05T10:09:48.700561-05:00",
-      "status": "open",
-      "short_symbol": "AMZN260213C00225000"
-    }
-  },
+  "updated_at": "2026-02-05T10:14:10.204869-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -194,6 +182,21 @@
       "exit_date": "2026-02-04T11:50:09.314644-05:00",
       "exit_reason": "BROKER_MISSING_orphan_cleanup",
       "pnl": 0.0
+    },
+    {
+      "symbol": "AMZN260213C00222500",
+      "underlying": "AMZN",
+      "client_order_id": "15M_OPT_AMZN260213C00222500_1770304184",
+      "order_id": "c94e4df8-8787-4ca9-8f96-855a8a53e6bb",
+      "qty": 1,
+      "entry_price": 1.43,
+      "entry_date": "2026-02-05T10:09:48.700561-05:00",
+      "status": "closed",
+      "short_symbol": "AMZN260213C00225000",
+      "exit_price": 0.9499999999999993,
+      "exit_date": "2026-02-05T10:14:10.204483-05:00",
+      "exit_reason": "SL_hit(-32.1%<=-30.0%)",
+      "pnl": -45.000000000000064
     }
   ]
 }
