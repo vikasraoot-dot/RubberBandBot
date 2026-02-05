@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-05T10:16:05.854265-05:00",
+  "updated_at": "2026-02-05T10:19:53.126491-05:00",
   "positions": {
     "GOOG260213C00320000": {
       "symbol": "GOOG260213C00320000",
@@ -23,6 +23,17 @@
       "entry_date": "2026-02-05T10:16:05.854050-05:00",
       "status": "open",
       "short_symbol": "GOOGL260213C00327500"
+    },
+    "TSLA260213C00392500": {
+      "symbol": "TSLA260213C00392500",
+      "underlying": "TSLA",
+      "client_order_id": "15M_OPT_TSLA260213C00392500_1770304789",
+      "order_id": "40cc6033-5ba3-49c1-b1f6-ab2c7192f0ad",
+      "qty": 1,
+      "entry_price": 2.7,
+      "entry_date": "2026-02-05T10:19:53.126076-05:00",
+      "status": "open",
+      "short_symbol": "TSLA260213C00397500"
     }
   },
   "closed_positions": [
