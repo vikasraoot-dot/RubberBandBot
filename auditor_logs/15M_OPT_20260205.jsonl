@@ -185,3 +185,13 @@
 {"type": "SPREAD_SKIP", "underlying": "SOXX", "skip_reason": "Cannot_get_quotes", "ts": "2026-02-05T15:01:12Z", "ts_et": "2026-02-05 10:01:12 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_complete", "signals": 2, "forming": 0, "new_entries": 0, "total_positions": 0, "type": "HEARTBEAT", "ts": "2026-02-05T15:01:12Z", "ts_et": "2026-02-05 10:01:12 ET", "bot_tag": "15M_OPT"}
 {"event": "scan_cycle_end", "cycle": 20, "new_entries": 0, "type": "HEARTBEAT", "ts": "2026-02-05T15:01:12Z", "ts_et": "2026-02-05 10:01:12 ET", "bot_tag": "15M_OPT"}
+{"event": "waiting_for_next_scan", "next_scan_at": "07:02:05", "sleep_sec": 49, "type": "HEARTBEAT", "ts": "2026-02-05T15:01:16Z", "ts_et": "2026-02-05 10:01:16 ET", "bot_tag": "15M_OPT"}
+{"type": "UNIVERSE", "loaded": 1, "sample": ["VIXY"], "when": "2026-02-05T15:02:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_START", "requested": 1, "chunks": 1, "timeframe": "1Day", "feed": "iex", "start": "2026-01-01T15:02:07Z", "end": "2026-02-05T15:02:07Z", "when": "2026-02-05T15:02:07Z", "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_CHUNK_COLLECTED", "chunk_index": 1, "symbols_in_chunk": 1, "pages": 1, "source_shape": "dict", "collected_symbols": 1, "bot_tag": "15M_OPT"}
+{"type": "BARS_FETCH_SUMMARY", "requested": 1, "with_data": 1, "empty": 0, "stale": 0, "sample_with_data": ["VIXY"], "sample_empty": [], "when": "2026-02-05T15:02:08Z", "bot_tag": "15M_OPT"}
+{"event": "scan_cycle_start", "cycle": 21, "time": "10:02", "regime": "NORMAL", "vixy": 28.0, "slope_thresh": -0.2, "bearish_filter": false, "type": "HEARTBEAT", "ts": "2026-02-05T15:02:08Z", "ts_et": "2026-02-05 10:02:08 ET", "bot_tag": "15M_OPT"}
+{"event": "scan_start", "current_time": "10:02", "type": "HEARTBEAT", "ts": "2026-02-05T15:02:08Z", "ts_et": "2026-02-05 10:02:08 ET", "bot_tag": "15M_OPT"}
+{"event": "signals_found", "count": 1, "symbols": ["FCX"], "type": "HEARTBEAT", "ts": "2026-02-05T15:02:29Z", "ts_et": "2026-02-05 10:02:29 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SIGNAL", "underlying": "FCX", "signal_reason": "RSI_oversold(28.4)", "entry_price": 59.825, "rsi": 28.38, "atr": 0.7507, "ts": "2026-02-05T15:02:29Z", "ts_et": "2026-02-05 10:02:29 ET", "bot_tag": "15M_OPT"}
+{"type": "SPREAD_SKIP", "underlying": "FCX", "skip_reason": "No_contracts_available", "ts": "2026-02-05T15:02:30Z", "ts_et": "2026-02-05 10:02:30 ET", "bot_tag": "15M_OPT"}
