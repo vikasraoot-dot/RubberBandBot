@@ -1,0 +1,171 @@
+# =============================================================================
+# RubberBand Trading Bot .gitignore
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Python
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.pyo
+*.pyd
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.ENV/
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# -----------------------------------------------------------------------------
+# Position Registry (state files - should not be committed)
+# -----------------------------------------------------------------------------
+.position_registry/
+**/.position_registry/
+
+# -----------------------------------------------------------------------------
+# Logs and Outputs
+# -----------------------------------------------------------------------------
+latest runs/
+auditor_logs/
+logs/
+data/cache/
+results/
+backtest_*/
+backtest_results_*/
+downloaded_options_logs/
+logs_*/
+scanner_artifacts/
+
+# -----------------------------------------------------------------------------
+# Generated Data Files
+# -----------------------------------------------------------------------------
+*.csv
+*.jsonl
+*.log
+
+# Note: *.json is NOT ignored because config files use JSON format
+# If you have generated JSON files, add them explicitly below
+
+# -----------------------------------------------------------------------------
+# Temporary Files
+# -----------------------------------------------------------------------------
+*.tmp
+temp_*
+debug_env.log
+.~lock*
+*~
+*.swp
+*.swo
+*.bak
+
+# -----------------------------------------------------------------------------
+# IDE and Editor
+# -----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.project
+.pydevproject
+.settings/
+*.code-workspace
+
+# -----------------------------------------------------------------------------
+# Binaries and Installers
+# -----------------------------------------------------------------------------
+*.exe
+*.msi
+*.dll
+*.dylib
+
+# -----------------------------------------------------------------------------
+# Secrets and Credentials (CRITICAL - never commit these)
+# -----------------------------------------------------------------------------
+.env
+.env.local
+.env.*.local
+credentials.json
+secrets.json
+*_credentials.json
+*_secrets.json
+*.pem
+*.key
+
+# -----------------------------------------------------------------------------
+# OS Generated Files
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# -----------------------------------------------------------------------------
+# Jupyter Notebooks
+# -----------------------------------------------------------------------------
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# -----------------------------------------------------------------------------
+# Project-Specific Ignores
+# -----------------------------------------------------------------------------
+# One-off analysis scripts (typically not part of core bot)
+analyze_*.py
+check_*.py
+debug_*.py
+fetch_*.py
+sell_*.py
+vsa_*.py
+smart_money_*.py
+
+# Temporary text files
+*.txt
+!requirements.txt
+!tickers*.txt
+
+# ODT files (LibreOffice documents)
+*.odt
+
+# Dashboard runtime files
+dashboard/.nssm/
+dashboard/__pycache__/
+dashboard/logs/

@@ -11,25 +11,21 @@ from datetime import datetime
 from typing import Dict, List, Any, Optional, Tuple
 from zoneinfo import ZoneInfo
 
+from RubberBand.src.alpaca_creds import resolve_credentials, get_headers
+
 ET = ZoneInfo("US/Eastern")
 
-# ──────────────────────────────────────────────────────────────────────────────
-# Credentials
-# ──────────────────────────────────────────────────────────────────────────────
+
+# Alias for backward compatibility within this module
 def _resolve_creds() -> Tuple[str, str, str]:
     """Resolve Alpaca credentials from environment."""
-    key = os.getenv("APCA_API_KEY_ID") or os.getenv("ALPACA_KEY_ID") or ""
-    secret = os.getenv("APCA_API_SECRET_KEY") or os.getenv("ALPACA_SECRET_KEY") or ""
-    base = os.getenv("APCA_API_BASE_URL") or "https://paper-api.alpaca.markets"
-    return base.rstrip("/"), key.strip(), secret.strip()
+    key, secret, base = resolve_credentials()
+    return base, key, secret
 
 
 def _headers(key: str, secret: str) -> Dict[str, str]:
-    return {
-        "APCA-API-KEY-ID": key,
-        "APCA-API-SECRET-KEY": secret,
-        "Content-Type": "application/json",
-    }
+    """Build Alpaca API headers."""
+    return get_headers(key, secret)
 
 
 # ──────────────────────────────────────────────────────────────────────────────
