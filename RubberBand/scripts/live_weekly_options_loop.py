@@ -498,11 +498,18 @@ def main() -> int:
     args = _parse_args()
     cfg = _load_config(args.config)
     
-    # --- Dynamic Regime Detection ---
+    # --- Dynamic Regime Detection (Daily + Intraday) ---
     rm = RegimeManager(verbose=True)
-    current_regime = rm.update()
+    daily_regime = rm.update()  # Sets reference values from daily bars
+    current_regime = rm.get_effective_regime()  # Checks for intraday VIXY spikes
     regime_cfg = rm.get_config_overrides()
-    _log(f"Regime: {current_regime} (VIXY={rm.last_vixy_price:.2f})")
+
+    # If intraday panic triggered, use PANIC config
+    if current_regime == "PANIC" and daily_regime != "PANIC":
+        regime_cfg = rm.regime_configs["PANIC"]
+        _log(f"INTRADAY PANIC DETECTED - using defensive config")
+
+    _log(f"Regime: {current_regime} (Daily: {daily_regime}, VIXY={rm.last_vixy_price:.2f})")
     # --------------------------------
     
     # Options config
@@ -647,6 +654,18 @@ def main() -> int:
     })
     
     # 4. Enter new positions
+    # Re-check intraday regime before entries (VIXY may have spiked during scan)
+    current_regime = rm.get_effective_regime()
+    if current_regime == "PANIC":
+        _log("PANIC regime active - blocking new entries", {
+            "vixy": rm.last_vixy_price,
+            "reason": "Intraday volatility spike detected"
+        })
+        logger.heartbeat(event="panic_block_entries", regime=current_regime)
+        logger.close()
+        registry.save()
+        return 0
+
     entries = 0
     for signal in signals:
         if signal["symbol"] in my_underlyings:

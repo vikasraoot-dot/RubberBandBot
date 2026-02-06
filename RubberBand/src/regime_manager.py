@@ -33,6 +33,12 @@ class RegimeManager:
         self.last_vixy_price = 0.0
         self.last_vixy_vol = 0
         self.last_update = None
+
+        # Intraday monitoring reference values (set by daily update())
+        self._reference_close = None  # Yesterday's close for intraday delta calc
+        self._upper_band = None       # Upper Bollinger Band for breakout detection
+        self._sma_20 = None           # SMA for reference
+        self._intraday_panic = False  # Track if we triggered intraday panic
         
         # Hysteresis Tracking
         # We need to track how many consecutive days conditions are met.
@@ -106,6 +112,12 @@ class RegimeManager:
             upper_band = latest["upper_band"]
             avg_vol = latest["vol_sma_20"]
             delta = latest["delta_pct"]
+
+            # Store reference values for intraday monitoring
+            self._reference_close = latest["close"]
+            self._upper_band = upper_band
+            self._sma_20 = sma_20
+            self._intraday_panic = False  # Reset on daily update
             
             # --- LOGIC EVALUATION ---
             
@@ -182,6 +194,94 @@ class RegimeManager:
     def get_config_overrides(self) -> Dict[str, Any]:
         """Returns the configuration overrides for the current regime."""
         return self.regime_configs.get(self.current_regime, self.regime_configs["NORMAL"])
+
+    def check_intraday(self) -> str:
+        """
+        Check for intraday volatility spikes that should trigger PANIC.
+
+        This method fetches the current VIXY price and compares it to the
+        reference close from the daily update(). If VIXY spikes > 8% intraday
+        OR breaks above the upper Bollinger band, we return PANIC.
+
+        Returns:
+            Current effective regime (may be PANIC even if daily regime is NORMAL/CALM)
+
+        Note:
+            - Must call update() at least once before this method works
+            - Does NOT require volume confirmation for intraday (speed matters)
+            - Once intraday PANIC triggers, it persists until next daily update()
+        """
+        # If we already triggered intraday panic, stay in panic
+        if self._intraday_panic:
+            return "PANIC"
+
+        # If no reference values yet, return current regime
+        if self._reference_close is None or self._upper_band is None:
+            if self.verbose:
+                print("[RegimeManager] No reference values - call update() first")
+            return self.current_regime
+
+        try:
+            # Fetch latest VIXY price (1 bar of 5-minute data for speed)
+            bars_map, _ = fetch_latest_bars(
+                ["VIXY"], "5Min", 1, feed="iex", verbose=False
+            )
+            df = bars_map.get("VIXY")
+
+            if df is None or df.empty:
+                # Can't get data, return current regime
+                return self.current_regime
+
+            current_price = df.iloc[-1]["close"]
+
+            # Calculate intraday delta vs reference (yesterday's close)
+            intraday_delta = ((current_price - self._reference_close) / self._reference_close) * 100.0
+
+            # Check PANIC conditions (no volume confirmation for speed)
+            is_spike = intraday_delta > 8.0
+            is_breakout = current_price > self._upper_band
+
+            if is_spike or is_breakout:
+                self._intraday_panic = True
+                reason = []
+                if is_spike:
+                    reason.append(f"Intraday spike +{intraday_delta:.1f}%")
+                if is_breakout:
+                    reason.append(f"Breakout ${current_price:.2f} > ${self._upper_band:.2f}")
+
+                if self.verbose:
+                    print("\n" + "!" * 60)
+                    print(" [RegimeManager] INTRADAY PANIC TRIGGERED!")
+                    print("!" * 60)
+                    print(f"  • VIXY Current    : ${current_price:.2f}")
+                    print(f"  • Reference Close : ${self._reference_close:.2f}")
+                    print(f"  • Intraday Delta  : {intraday_delta:+.2f}%")
+                    print(f"  • Upper Band      : ${self._upper_band:.2f}")
+                    print(f"  • Trigger         : {', '.join(reason)}")
+                    print("!" * 60 + "\n")
+
+                return "PANIC"
+
+            # No intraday panic, return daily regime
+            return self.current_regime
+
+        except Exception as e:
+            if self.verbose:
+                print(f"[RegimeManager] Error in intraday check: {e}")
+            # On error, return current regime (fail-safe)
+            return self.current_regime
+
+    def get_effective_regime(self) -> str:
+        """
+        Get the effective regime considering both daily and intraday conditions.
+
+        This is the recommended method for live trading loops to call.
+        It returns PANIC if intraday conditions triggered, otherwise daily regime.
+
+        Returns:
+            Effective regime name (CALM, NORMAL, or PANIC)
+        """
+        return self.check_intraday()
 
 
 # ──────────────────────────────────────────────────────────────────────────────

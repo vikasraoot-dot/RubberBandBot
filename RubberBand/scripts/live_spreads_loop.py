@@ -1410,9 +1410,14 @@ def main() -> int:
         # Run scan cycle
         scan_count += 1
         
-        # Update Regime
-        current_regime = rm.update()
+        # Update Regime (daily baseline + intraday spike detection)
+        daily_regime = rm.update()  # Sets reference values from daily bars
+        current_regime = rm.get_effective_regime()  # Checks for intraday VIXY spikes
         regime_cfg = rm.get_config_overrides()
+
+        # If intraday panic triggered, use PANIC config
+        if current_regime == "PANIC" and daily_regime != "PANIC":
+            regime_cfg = rm.regime_configs["PANIC"]
         
         logger.heartbeat(
             event="scan_cycle_start", 
