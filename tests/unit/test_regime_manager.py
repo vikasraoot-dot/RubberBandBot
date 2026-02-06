@@ -135,3 +135,96 @@ def test_intraday_panic_persists(regime_manager, mock_vixy_normal):
         mock_fetch.return_value = ({"VIXY": mock_vixy_normal}, [])
         regime_manager.update()
         assert regime_manager._intraday_panic is False  # Reset
+
+
+def test_intraday_panic_breakout_only(regime_manager, mock_vixy_normal):
+    """Test that price > upper_band triggers PANIC even without 8% spike"""
+    import pandas as pd
+    from datetime import datetime, timedelta
+
+    with patch("RubberBand.src.regime_manager.fetch_latest_bars") as mock_fetch:
+        # Daily update returns NORMAL regime
+        # mock_vixy_normal has closes around 40, so upper_band ~44
+        mock_fetch.return_value = ({"VIXY": mock_vixy_normal}, [])
+
+        daily_regime = regime_manager.update()
+        assert daily_regime == "NORMAL"
+
+        # Capture the upper band that was set
+        upper_band = regime_manager._upper_band
+        assert upper_band is not None
+
+        # Intraday check with price ABOVE upper band but small delta (+5%)
+        # This tests the breakout condition separately from the spike condition
+        breakout_price = upper_band + 1.0  # Above upper band
+        delta_pct = ((breakout_price - 40.0) / 40.0) * 100.0
+        assert delta_pct < 8.0, f"Delta should be < 8% for this test, got {delta_pct}%"
+
+        intraday_df = pd.DataFrame({
+            "open": [breakout_price - 0.5],
+            "high": [breakout_price + 0.5],
+            "low": [breakout_price - 1.0],
+            "close": [breakout_price],
+            "volume": [100000],
+        }, index=[datetime.now() - timedelta(minutes=5)])
+
+        mock_fetch.return_value = ({"VIXY": intraday_df}, [])
+
+        effective_regime = regime_manager.get_effective_regime()
+
+        # Should trigger PANIC due to breakout (price > upper_band)
+        assert effective_regime == "PANIC"
+        assert regime_manager._intraday_panic is True
+
+
+def test_intraday_check_api_failure_returns_current_regime(regime_manager, mock_vixy_normal):
+    """Test that API failure in check_intraday() returns current regime (fail-safe)"""
+    with patch("RubberBand.src.regime_manager.fetch_latest_bars") as mock_fetch:
+        # Daily update succeeds, sets NORMAL regime
+        mock_fetch.return_value = ({"VIXY": mock_vixy_normal}, [])
+
+        daily_regime = regime_manager.update()
+        assert daily_regime == "NORMAL"
+        assert regime_manager._intraday_panic is False
+
+        # Intraday check fails (API error)
+        mock_fetch.side_effect = Exception("API connection failed")
+
+        effective_regime = regime_manager.get_effective_regime()
+
+        # Should return current regime (NORMAL) on error, not crash
+        assert effective_regime == "NORMAL"
+        # Should NOT set intraday panic on error
+        assert regime_manager._intraday_panic is False
+
+
+def test_intraday_check_empty_data_returns_current_regime(regime_manager, mock_vixy_normal):
+    """Test that empty data from API returns current regime (fail-safe)"""
+    import pandas as pd
+
+    with patch("RubberBand.src.regime_manager.fetch_latest_bars") as mock_fetch:
+        # Daily update succeeds
+        mock_fetch.return_value = ({"VIXY": mock_vixy_normal}, [])
+
+        daily_regime = regime_manager.update()
+        assert daily_regime == "NORMAL"
+
+        # Intraday check returns empty DataFrame
+        mock_fetch.return_value = ({"VIXY": pd.DataFrame()}, [])
+
+        effective_regime = regime_manager.get_effective_regime()
+
+        # Should return current regime on empty data
+        assert effective_regime == "NORMAL"
+
+
+def test_intraday_check_before_daily_update(regime_manager):
+    """Test that check_intraday() works safely when called before update()"""
+    # Call get_effective_regime() before update() was ever called
+    # Should return current_regime (NORMAL default) without crashing
+
+    effective_regime = regime_manager.get_effective_regime()
+
+    # Should return default regime (NORMAL) when no reference values set
+    assert effective_regime == "NORMAL"
+    assert regime_manager._intraday_panic is False

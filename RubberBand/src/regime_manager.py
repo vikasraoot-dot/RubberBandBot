@@ -1,9 +1,12 @@
 
+import logging
 import pandas as pd
 from datetime import datetime, timedelta
 from typing import Dict, Any, Optional
 import os
 import sys
+
+logger = logging.getLogger(__name__)
 
 # Ensure we can import from src
 _REPO_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -185,10 +188,10 @@ class RegimeManager:
                 print("="*60 + "\n")
                 
         except Exception as e:
-            print(f"[RegimeManager] Error updating regime: {e}")
-            import traceback
-            traceback.print_exc()
-            
+            logger.error(f"[RegimeManager] Error updating regime: {e}", exc_info=True)
+            if self.verbose:
+                print(f"[RegimeManager] Error updating regime: {e}")
+
         return self.current_regime
 
     def get_config_overrides(self) -> Dict[str, Any]:
@@ -266,6 +269,8 @@ class RegimeManager:
             return self.current_regime
 
         except Exception as e:
+            # Always log errors (per CLAUDE.md Section 2.3 - never swallow silently)
+            logger.error(f"[RegimeManager] Error in intraday check: {e}", exc_info=True)
             if self.verbose:
                 print(f"[RegimeManager] Error in intraday check: {e}")
             # On error, return current regime (fail-safe)

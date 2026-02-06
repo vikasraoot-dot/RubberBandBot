@@ -1310,6 +1310,15 @@ def main() -> int:
 
     # --- Dynamic Regime Detection ---
     rm = RegimeManager(verbose=True)
+    # Do initial daily update ONCE at startup (sets reference values for intraday checks)
+    daily_regime = rm.update()
+    regime_cfg = rm.get_config_overrides()
+    logger.heartbeat(
+        event="regime_initialized",
+        daily_regime=daily_regime,
+        vixy_reference=rm._reference_close,
+        upper_band=rm._upper_band,
+    )
     # --------------------------------
 
     if args.slope_threshold is not None:
@@ -1410,12 +1419,10 @@ def main() -> int:
         # Run scan cycle
         scan_count += 1
         
-        # Update Regime (daily baseline + intraday spike detection)
-        daily_regime = rm.update()  # Sets reference values from daily bars
-        current_regime = rm.get_effective_regime()  # Checks for intraday VIXY spikes
-        regime_cfg = rm.get_config_overrides()
+        # Check for intraday VIXY spikes (daily update was done once at startup)
+        current_regime = rm.get_effective_regime()
 
-        # If intraday panic triggered, use PANIC config
+        # If intraday panic triggered, use PANIC config instead of daily config
         if current_regime == "PANIC" and daily_regime != "PANIC":
             regime_cfg = rm.regime_configs["PANIC"]
         
