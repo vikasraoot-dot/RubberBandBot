@@ -1,18 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-06T10:16:51.252182-05:00",
-  "positions": {
-    "MCHP": {
-      "symbol": "MCHP",
-      "underlying": "MCHP",
-      "client_order_id": "15M_STK_MCHP_1770391005",
-      "order_id": "db2276b2-83a2-476d-8fea-8706ce3187d5",
-      "qty": 8,
-      "entry_price": 74.02,
-      "entry_date": "2026-02-06T10:16:51.251982-05:00",
-      "status": "open"
-    }
-  },
+  "updated_at": "2026-02-06T12:50:02.311228-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "UBER",
@@ -48,6 +37,18 @@
       "status": "closed",
       "exit_date": "2026-02-05T15:50:01.916410-05:00",
       "exit_reason": "orphaned_sync"
+    },
+    {
+      "symbol": "MCHP",
+      "underlying": "MCHP",
+      "client_order_id": "15M_STK_MCHP_1770391005",
+      "order_id": "db2276b2-83a2-476d-8fea-8706ce3187d5",
+      "qty": 8,
+      "entry_price": 74.02,
+      "entry_date": "2026-02-06T10:16:51.251982-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-06T12:50:02.310982-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
