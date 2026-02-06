@@ -337,12 +337,18 @@ def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
 # Utility
 # ──────────────────────────────────────────────────────────────────────────────
 def is_options_trading_allowed() -> bool:
-    """Check if we're within options trading hours (before 3:00 PM ET cutoff)."""
+    """
+    Check if we're within options trading hours.
+
+    Cutoff at 2:30 PM ET to avoid late-day illiquidity where bid-ask spreads
+    widen significantly and market makers pull quotes. Trading after 2:30 PM
+    has shown massive slippage losses (60%+ in seconds).
+    """
     now_et = datetime.now(ET)
-    cutoff = now_et.replace(hour=15, minute=45, second=0, microsecond=0)
+    cutoff = now_et.replace(hour=14, minute=30, second=0, microsecond=0)
     market_open = now_et.replace(hour=9, minute=30, second=0, microsecond=0)
-    
-    # Must be after market open and before 3:45 PM
+
+    # Must be after market open and before 2:30 PM ET
     return market_open <= now_et < cutoff
 
 

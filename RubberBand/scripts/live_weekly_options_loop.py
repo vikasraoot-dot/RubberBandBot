@@ -119,6 +119,7 @@ WEEKLY_OPTIONS_CONFIG = {
     "tp_pct": 100.0,              # Take profit at +100% (double)
     "sl_pct": -50.0,              # Stop loss at -50%
     "max_weeks_held": 9,          # Time stop after 9 weeks (via expiration)
+    "max_spread_pct": 15.0,       # Max bid-ask spread % (avoid illiquid options)
 }
 
 
@@ -288,10 +289,31 @@ def try_weekly_option_entry(
     if not quote:
         _log(f"No quote for {option_symbol}")
         return False
-    
-    ask_price = quote.get("ask", 0)
+
+    bid_price = float(quote.get("bid", 0) or 0)
+    ask_price = float(quote.get("ask", 0) or 0)
+
+    # CRITICAL: Check bid-ask spread to avoid illiquidity traps
+    # Wide spreads (>20%) indicate poor liquidity - will lose money immediately
+    if ask_price > 0 and bid_price > 0:
+        mid_price = (bid_price + ask_price) / 2
+        spread_pct = (ask_price - bid_price) / mid_price * 100 if mid_price > 0 else 100
+        max_spread_pct = opts_cfg.get("max_spread_pct", 20.0)
+
+        if spread_pct > max_spread_pct:
+            _log(f"Bid-ask spread too wide for {option_symbol}", {
+                "bid": bid_price,
+                "ask": ask_price,
+                "spread_pct": f"{spread_pct:.1f}%",
+                "max_allowed": f"{max_spread_pct}%",
+            })
+            return False
+    elif bid_price <= 0:
+        _log(f"No bid for {option_symbol} - illiquid, skipping")
+        return False
+
     premium_cost = ask_price * 100 * max_contracts
-    
+
     # Check max premium
     if premium_cost > max_premium:
         _log(f"Premium too high for {option_symbol}", {

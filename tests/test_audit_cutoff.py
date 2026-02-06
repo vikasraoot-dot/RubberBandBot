@@ -36,20 +36,26 @@ def test_time_cutoff():
         mock_dt.now.return_value = mock_time(9, 30)
         assert is_options_trading_allowed() == True, "9:30 should be open"
 
-    # Test 15:44 (Before Cutoff) -> True
+    # Test 14:29 (Before Cutoff) -> True
     with patch('RubberBand.src.options_data.datetime') as mock_dt:
-        mock_dt.now.return_value = mock_time(15, 44)
-        assert is_options_trading_allowed() == True, "15:44 should be open"
+        mock_dt.now.return_value = mock_time(14, 29)
+        assert is_options_trading_allowed() == True, "14:29 should be open"
 
-    # Test 15:45 (Cutoff Exact) -> False
+    # Test 14:30 (Cutoff Exact) -> False
+    # Cutoff moved from 3:45 PM to 2:30 PM to avoid late-day illiquidity
+    with patch('RubberBand.src.options_data.datetime') as mock_dt:
+        mock_dt.now.return_value = mock_time(14, 30)
+        assert is_options_trading_allowed() == False, "14:30 should be closed"
+
+    # Test 14:31 (After Cutoff) -> False
+    with patch('RubberBand.src.options_data.datetime') as mock_dt:
+        mock_dt.now.return_value = mock_time(14, 31)
+        assert is_options_trading_allowed() == False, "14:31 should be closed"
+
+    # Test 15:45 (Well After Cutoff) -> False
     with patch('RubberBand.src.options_data.datetime') as mock_dt:
         mock_dt.now.return_value = mock_time(15, 45)
         assert is_options_trading_allowed() == False, "15:45 should be closed"
-        
-    # Test 15:50 (After Cutoff) -> False
-    with patch('RubberBand.src.options_data.datetime') as mock_dt:
-        mock_dt.now.return_value = mock_time(15, 50)
-        assert is_options_trading_allowed() == False, "15:50 should be closed"
 
 # -------------------------------------------------------------------------
 # Test 2: Intra-bar Logic (get_long_signals)
