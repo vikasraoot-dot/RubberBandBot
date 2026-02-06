@@ -133,19 +133,23 @@ class BrokerClient:
     # MARKET STATUS
     # =========================================================================
 
-    def is_market_open(self) -> bool:
+    def is_market_open(self) -> Optional[bool]:
         """
         Check if the market is currently open.
 
         Returns:
-            True if market is open, False otherwise
+            True if market is open, False if closed, None if status unknown (API error)
+
+        Note:
+            Callers should handle None case appropriately - do not assume
+            market is closed when status is unknown.
         """
         try:
             clock = self._http.get("/v2/clock")
             return clock.get("is_open", False)
         except AlpacaHttpError as e:
             logger.error(f"Failed to check market status: {e}")
-            return False
+            return None  # Unknown status - caller must handle
 
     def get_clock(self) -> Dict[str, Any]:
         """
@@ -352,7 +356,24 @@ class BrokerClient:
 
         Returns:
             Order dict with order details
+
+        Raises:
+            BrokerError: If input validation fails
         """
+        # Input validation
+        if not symbol or not symbol.strip():
+            raise BrokerError("Symbol is required", operation="submit_order")
+        if qty <= 0:
+            raise BrokerError(f"Quantity must be positive, got {qty}", operation="submit_order")
+        if side not in ("buy", "sell"):
+            raise BrokerError(f"Invalid side: {side}. Must be 'buy' or 'sell'", operation="submit_order")
+        if order_type not in ("market", "limit", "stop", "stop_limit"):
+            raise BrokerError(f"Invalid order_type: {order_type}", operation="submit_order")
+        if order_type in ("limit", "stop_limit") and limit_price is None:
+            raise BrokerError("limit_price required for limit/stop_limit orders", operation="submit_order")
+        if order_type in ("stop", "stop_limit") and stop_price is None:
+            raise BrokerError("stop_price required for stop/stop_limit orders", operation="submit_order")
+
         payload: Dict[str, Any] = {
             "symbol": symbol,
             "qty": str(qty),
@@ -571,7 +592,8 @@ class BrokerClient:
                 params={"feed": "iex"},
             )
             return response.get("quote")
-        except AlpacaHttpError:
+        except AlpacaHttpError as e:
+            logger.warning(f"Failed to get quote for {symbol}: {e}")
             return None
         finally:
             data_http.close()
@@ -645,7 +667,8 @@ class BrokerClient:
             )
             quotes = response.get("quotes", {})
             return quotes.get(option_symbol)
-        except AlpacaHttpError:
+        except AlpacaHttpError as e:
+            logger.warning(f"Failed to get option quote for {option_symbol}: {e}")
             return None
         finally:
             data_http.close()
@@ -678,7 +701,8 @@ class BrokerClient:
                 params={"symbols": ",".join(option_symbols), "feed": "indicative"},
             )
             return response.get("snapshots", {})
-        except AlpacaHttpError:
+        except AlpacaHttpError as e:
+            logger.warning(f"Failed to get option snapshots for {len(option_symbols)} symbols: {e}")
             return {}
         finally:
             data_http.close()
@@ -711,7 +735,20 @@ class BrokerClient:
 
         Returns:
             Order dict
+
+        Raises:
+            BrokerError: If input validation fails
         """
+        # Input validation
+        if not symbol or not symbol.strip():
+            raise BrokerError("Symbol is required", operation="submit_option_order")
+        if qty <= 0:
+            raise BrokerError(f"Quantity must be positive, got {qty}", operation="submit_option_order")
+        if side not in ("buy", "sell"):
+            raise BrokerError(f"Invalid side: {side}. Must be 'buy' or 'sell'", operation="submit_option_order")
+        if order_type == "limit" and limit_price is None:
+            raise BrokerError("limit_price required for limit orders", operation="submit_option_order")
+
         payload: Dict[str, Any] = {
             "symbol": symbol,
             "qty": str(qty),
@@ -749,20 +786,56 @@ class BrokerClient:
 
         Returns:
             Order dict
+
+        Raises:
+            BrokerError: If input validation fails
         """
+        # Input validation
+        if not long_symbol or not long_symbol.strip():
+            raise BrokerError("long_symbol is required", operation="submit_spread_order")
+        if not short_symbol or not short_symbol.strip():
+            raise BrokerError("short_symbol is required", operation="submit_spread_order")
+        if qty <= 0:
+            raise BrokerError(f"Quantity must be positive, got {qty}", operation="submit_spread_order")
+        if limit_price <= 0:
+            raise BrokerError(f"limit_price must be positive, got {limit_price}", operation="submit_spread_order")
+
         payload: Dict[str, Any] = {
-            "order_class": "mleg",
-            "time_in_force": time_in_force,
+            "qty": str(qty),
+            "side": "buy",  # Net debit spread
             "type": "limit",
+            "time_in_force": time_in_force,
             "limit_price": str(limit_price),
+            "order_class": "mleg",
             "legs": [
-                {"symbol": long_symbol, "qty": str(qty), "side": "buy"},
-                {"symbol": short_symbol, "qty": str(qty), "side": "sell"},
+                {
+                    "symbol": long_symbol,
+                    "side": "buy",
+                    "ratio_qty": "1",
+                    "position_intent": "buy_to_open",
+                },
+                {
+                    "symbol": short_symbol,
+                    "side": "sell",
+                    "ratio_qty": "1",
+                    "position_intent": "sell_to_open",
+                },
             ],
         }
 
         if client_order_id:
             payload["client_order_id"] = client_order_id
+
+        logger.info(
+            "Submitting spread order",
+            extra={
+                "long_symbol": long_symbol,
+                "short_symbol": short_symbol,
+                "qty": qty,
+                "limit_price": str(limit_price),
+                "client_order_id": client_order_id,
+            },
+        )
 
         return self._http.post("/v2/orders", json=payload)
 
@@ -786,17 +859,39 @@ class BrokerClient:
             Order dict
         """
         payload: Dict[str, Any] = {
-            "order_class": "mleg",
-            "time_in_force": "day",
+            "qty": str(qty),
+            "side": "sell",  # Net credit spread (closing)
             "type": "limit" if limit_price else "market",
+            "time_in_force": "day",
+            "order_class": "mleg",
             "legs": [
-                {"symbol": long_symbol, "qty": str(qty), "side": "sell"},
-                {"symbol": short_symbol, "qty": str(qty), "side": "buy"},
+                {
+                    "symbol": long_symbol,
+                    "side": "sell",
+                    "ratio_qty": "1",
+                    "position_intent": "sell_to_close",
+                },
+                {
+                    "symbol": short_symbol,
+                    "side": "buy",
+                    "ratio_qty": "1",
+                    "position_intent": "buy_to_close",
+                },
             ],
         }
 
         if limit_price is not None:
             payload["limit_price"] = str(limit_price)
+
+        logger.info(
+            "Closing spread",
+            extra={
+                "long_symbol": long_symbol,
+                "short_symbol": short_symbol,
+                "qty": qty,
+                "limit_price": str(limit_price) if limit_price else "market",
+            },
+        )
 
         return self._http.post("/v2/orders", json=payload)
 
@@ -893,7 +988,7 @@ def create_broker_from_env(
     """
     from RubberBand.src.alpaca_creds import resolve_credentials
 
-    base_url, api_key, api_secret = resolve_credentials()
+    api_key, api_secret, base_url = resolve_credentials()
 
     return BrokerClient(
         base_url=base_url,
