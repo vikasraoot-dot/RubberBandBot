@@ -63,12 +63,18 @@ def run_weekly_cycle():
     cfg = load_config()
     tickers = load_tickers()
     
-    # --- Dynamic Regime Detection ---
+    # --- Dynamic Regime Detection (Daily + Intraday) ---
     rm = RegimeManager(verbose=True)
-    current_regime = rm.update()
+    daily_regime = rm.update()  # Sets reference values for intraday checks
+    current_regime = rm.get_effective_regime()  # Checks for intraday VIXY spikes
     regime_cfg = rm.get_config_overrides()
-    
-    logging.info(f"Regime: {current_regime} (VIXY={rm.last_vixy_price:.2f})")
+
+    # If intraday panic triggered, use PANIC config
+    if current_regime == "PANIC" and daily_regime != "PANIC":
+        regime_cfg = rm.regime_configs["PANIC"]
+        logging.warning(f"INTRADAY PANIC DETECTED - Daily: {daily_regime}, Effective: {current_regime}")
+
+    logging.info(f"Regime: {current_regime} (Daily: {daily_regime}, VIXY={rm.last_vixy_price:.2f})")
     # --------------------------------
     
     logging.info("="*60)

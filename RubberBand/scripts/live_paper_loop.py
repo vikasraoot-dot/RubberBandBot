@@ -474,19 +474,33 @@ def main() -> int:
     except (ValueError, TypeError):
         max_notional = None
 
-    # --- Dynamic Regime Detection ---
+    # --- Dynamic Regime Detection (Daily + Intraday) ---
     rm = RegimeManager(verbose=True)
-    current_regime = rm.update()
+    daily_regime = rm.update()  # Sets reference values for intraday checks
+    current_regime = rm.get_effective_regime()  # Checks for intraday VIXY spikes
     regime_cfg = rm.get_config_overrides()
-    
+
+    # If intraday panic triggered, use PANIC config
+    if current_regime == "PANIC" and daily_regime != "PANIC":
+        regime_cfg = rm.regime_configs["PANIC"]
+        print(json.dumps({
+            "type": "INTRADAY_PANIC_DETECTED",
+            "daily_regime": daily_regime,
+            "effective_regime": current_regime,
+            "vixy_reference": rm._reference_close,
+            "upper_band": rm._upper_band,
+            "ts": now_iso
+        }), flush=True)
+
     # Allow CLI override to disable DKF if needed, but default to Regime
     use_dkf = regime_cfg.get("dead_knife_filter", False)
     if cfg.get("dead_knife_filter") is True: # Manual config override
          use_dkf = True
-         
+
     print(json.dumps({
         "type": "REGIME_UPDATE",
-        "regime": current_regime,
+        "daily_regime": daily_regime,
+        "effective_regime": current_regime,
         "vixy_price": rm.last_vixy_price,
         "slope_threshold_pct": regime_cfg.get("slope_threshold_pct"),
         "dkf_enabled": use_dkf,
