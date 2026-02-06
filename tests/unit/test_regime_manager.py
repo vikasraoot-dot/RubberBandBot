@@ -12,7 +12,7 @@ def test_regime_calm(regime_manager, mock_vixy_calm):
         
         assert regime == "CALM"
         cfg = regime_manager.get_config_overrides()
-        assert cfg["slope_threshold_pct"] == -0.08
+        assert cfg["slope_threshold_pct"] == -0.20  # Golden Config: unified threshold
         assert cfg["dead_knife_filter"] is False
 
 def test_regime_normal(regime_manager, mock_vixy_normal):
@@ -24,7 +24,7 @@ def test_regime_normal(regime_manager, mock_vixy_normal):
         
         assert regime == "NORMAL"
         cfg = regime_manager.get_config_overrides()
-        assert cfg["slope_threshold_pct"] == -0.12
+        assert cfg["slope_threshold_pct"] == -0.20  # Golden Config: unified threshold
         assert cfg["dead_knife_filter"] is False
 
 def test_regime_panic(regime_manager, mock_vixy_panic):
