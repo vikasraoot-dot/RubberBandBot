@@ -47,22 +47,6 @@
       "current_price": 330.945,
       "unrealized_pnl": 0.0
     },
-    "SHADOW_15M_STK_TXN_20260204T144959926129+0000": {
-      "id": "SHADOW_15M_STK_TXN_20260204T144959926129+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "TXN",
-      "entry_price": 222.015,
-      "entry_time": "2026-02-04T14:49:59.926129+00:00",
-      "reason": "Slope3_Too_Flat(0.0407% > -0.2%)",
-      "qty": 100,
-      "tp_price": 224.23514999999998,
-      "sl_price": 219.79485,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 221.51999999999998,
-      "unrealized_pnl": -49.500000000000455
-    },
     "SHADOW_15M_STK_LOW_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_LOW_20260204T144959926129+0000",
       "type": "STOCK",
@@ -76,8 +60,8 @@
       "sl_price": 273.1311,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 274.89,
-      "unrealized_pnl": -100.0
+      "current_price": 278.40999999999997,
+      "unrealized_pnl": 251.99999999999818
     },
     "SHADOW_15M_STK_VRTX_20260204T144959926129+0000": {
       "id": "SHADOW_15M_STK_VRTX_20260204T144959926129+0000",
@@ -108,24 +92,8 @@
       "sl_price": 64.5975,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 65.39500000000001,
-      "unrealized_pnl": 14.500000000001023
-    },
-    "SHADOW_15M_STK_NOC_20260204T144959926129+0000": {
-      "id": "SHADOW_15M_STK_NOC_20260204T144959926129+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "NOC",
-      "entry_price": 691.29,
-      "entry_time": "2026-02-04T14:49:59.926129+00:00",
-      "reason": "Slope3_Too_Flat(0.0650% > -0.2%)",
-      "qty": 100,
-      "tp_price": 698.2029,
-      "sl_price": 684.3770999999999,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 691.29,
-      "unrealized_pnl": 0.0
+      "current_price": 65.38,
+      "unrealized_pnl": 12.999999999999545
     },
     "SHADOW_15M_STK_NFLX_20260205T202638Z": {
       "id": "SHADOW_15M_STK_NFLX_20260205T202638Z",
@@ -140,8 +108,8 @@
       "sl_price": 80.77905,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 81.36500000000001,
-      "unrealized_pnl": -22.999999999998977
+      "current_price": 81.83,
+      "unrealized_pnl": 23.499999999999943
     },
     "SHADOW_15M_OPT_C_20260205T151548Z": {
       "id": "SHADOW_15M_OPT_C_20260205T151548Z",
@@ -156,8 +124,8 @@
       "qty": 1,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_val": 1.33,
-      "unrealized_pnl": 20.900000000000006
+      "current_val": 1.37,
+      "unrealized_pnl": 24.900000000000013
     }
   },
   "closed_positions": [
@@ -17384,6 +17352,46 @@
       "exit_time": "2026-02-06T19:03:47.287992+00:00",
       "exit_reason": "TP_HIT",
       "realized_pnl": 59.499999999999886
+    },
+    {
+      "id": "SHADOW_15M_STK_TXN_20260204T144959926129+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "TXN",
+      "entry_price": 222.015,
+      "entry_time": "2026-02-04T14:49:59.926129+00:00",
+      "reason": "Slope3_Too_Flat(0.0407% > -0.2%)",
+      "qty": 100,
+      "tp_price": 224.23514999999998,
+      "sl_price": 219.79485,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 227.655,
+      "unrealized_pnl": 564.0000000000015,
+      "exit_price": 227.655,
+      "exit_time": "2026-02-06T20:46:32.433131+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 564.0000000000015
+    },
+    {
+      "id": "SHADOW_15M_STK_NOC_20260204T144959926129+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "NOC",
+      "entry_price": 691.29,
+      "entry_time": "2026-02-04T14:49:59.926129+00:00",
+      "reason": "Slope3_Too_Flat(0.0650% > -0.2%)",
+      "qty": 100,
+      "tp_price": 698.2029,
+      "sl_price": 684.3770999999999,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 710.905,
+      "unrealized_pnl": 1961.500000000001,
+      "exit_price": 710.905,
+      "exit_time": "2026-02-06T20:46:36.923523+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 1961.500000000001
     }
   ],
   "processed_lines": {
