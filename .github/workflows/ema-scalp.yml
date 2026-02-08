@@ -45,42 +45,70 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-          cache: 'pip'
-          cache-dependency-path: |
-            ScalpingBots/requirements.txt
-            RubberBand/requirements.txt
+      - name: Find Python
+        id: find-python
+        run: |
+          # Find a working Python 3 on this self-hosted runner
+          $pythonPaths = @(
+            "python",
+            "python3",
+            "C:\Python313\python.exe",
+            "C:\Python311\python.exe",
+            "C:\Python310\python.exe"
+          )
+          $found = $false
+          foreach ($p in $pythonPaths) {
+            try {
+              $ver = & $p --version 2>&1
+              if ($ver -match "Python 3") {
+                Write-Host "Found Python: $p ($ver)"
+                echo "PYTHON_CMD=$p" >> $env:GITHUB_OUTPUT
+                $found = $true
+                break
+              }
+            } catch { }
+          }
+          if (-not $found) {
+            Write-Host "ERROR: No Python 3 found on this runner"
+            exit 1
+          }
 
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip
-          pip install -r ScalpingBots/requirements.txt
+          $py = "${{ steps.find-python.outputs.PYTHON_CMD }}"
+          if (-not $py) { $py = "python" }
+          & $py -m pip install --upgrade pip
+          & $py -m pip install -r ScalpingBots/requirements.txt
 
       - name: Verify API connectivity
-        run: python ScalpingBots/scripts/verify_api.py
+        run: |
+          $py = "${{ steps.find-python.outputs.PYTHON_CMD }}"
+          if (-not $py) { $py = "python" }
+          & $py ScalpingBots/scripts/verify_api.py
 
       - name: Run EMA Scalp Bot
         run: |
+          $py = "${{ steps.find-python.outputs.PYTHON_CMD }}"
+          if (-not $py) { $py = "python" }
+
           Write-Host "Starting EMA Momentum Scalper..."
           $DryRun = "${{ github.event.inputs.dry_run || 'false' }}"
           $MaxPos = "${{ github.event.inputs.max_positions || '8' }}"
           $MaxLoss = "${{ github.event.inputs.max_daily_loss || '150' }}"
 
+          Write-Host "Python: $py"
           Write-Host "Dry Run: $DryRun"
           Write-Host "Max Positions: $MaxPos"
           Write-Host "Max Daily Loss: $MaxLoss"
           Write-Host "---"
 
-          $args = @("--max-positions", $MaxPos, "--max-daily-loss", $MaxLoss)
+          $botArgs = @("-m", "ScalpingBots.scripts.live_ema_scalp", "--max-positions", $MaxPos, "--max-daily-loss", $MaxLoss)
 
           if ($DryRun -eq "true") {
-            $args += "--dry-run"
+            $botArgs += "--dry-run"
           }
 
-          python -m ScalpingBots.scripts.live_ema_scalp @args
+          & $py @botArgs
 
       - name: Upload logs
         if: always()
