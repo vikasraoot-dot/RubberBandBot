@@ -35,6 +35,9 @@ jobs:
     name: EMA Scalp Bot
     runs-on: self-hosted
     timeout-minutes: 420  # 7 hours (full trading day + buffer)
+    defaults:
+      run:
+        shell: bash
 
     env:
       APCA_API_KEY_ID: ${{ secrets.APCA_API_KEY_ID }}
@@ -52,7 +55,7 @@ jobs:
           cache: 'pip'
           cache-dependency-path: |
             ScalpingBots/requirements.txt
-            RubberBand_v2/requirements.txt
+            RubberBand/requirements.txt
 
       - name: Install dependencies
         run: |
@@ -60,42 +63,23 @@ jobs:
           pip install -r ScalpingBots/requirements.txt
 
       - name: Verify API connectivity
-        run: |
-          python -c "
-          import os, requests
-          key = os.getenv('APCA_API_KEY_ID', '')
-          secret = os.getenv('APCA_API_SECRET_KEY', '')
-          if not key or not secret:
-              raise SystemExit('ERROR: Alpaca API keys not set in GitHub Secrets')
-          headers = {'APCA-API-KEY-ID': key, 'APCA-API-SECRET-KEY': secret}
-          r = requests.get('https://paper-api.alpaca.markets/v2/account', headers=headers, timeout=10)
-          r.raise_for_status()
-          acct = r.json()
-          print(f'Account: {acct[\"status\"]} | Equity: \${float(acct[\"equity\"]):,.2f}')
-          "
-
-      - name: Determine run mode
-        id: mode
-        shell: bash
-        run: |
-          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
-          MAX_POS="${{ github.event.inputs.max_positions || '8' }}"
-          MAX_LOSS="${{ github.event.inputs.max_daily_loss || '150' }}"
-          echo "dry_run=$DRY_RUN" >> $GITHUB_OUTPUT
-          echo "max_positions=$MAX_POS" >> $GITHUB_OUTPUT
-          echo "max_daily_loss=$MAX_LOSS" >> $GITHUB_OUTPUT
+        run: python ScalpingBots/scripts/verify_api.py
 
       - name: Run EMA Scalp Bot
         run: |
           echo "Starting EMA Momentum Scalper..."
-          echo "Dry Run: ${{ steps.mode.outputs.dry_run }}"
-          echo "Max Positions: ${{ steps.mode.outputs.max_positions }}"
-          echo "Max Daily Loss: ${{ steps.mode.outputs.max_daily_loss }}"
+          DRY_RUN="${{ github.event.inputs.dry_run || 'false' }}"
+          MAX_POS="${{ github.event.inputs.max_positions || '8' }}"
+          MAX_LOSS="${{ github.event.inputs.max_daily_loss || '150' }}"
+
+          echo "Dry Run: $DRY_RUN"
+          echo "Max Positions: $MAX_POS"
+          echo "Max Daily Loss: $MAX_LOSS"
           echo "---"
 
-          ARGS="--max-positions ${{ steps.mode.outputs.max_positions }} --max-daily-loss ${{ steps.mode.outputs.max_daily_loss }}"
+          ARGS="--max-positions $MAX_POS --max-daily-loss $MAX_LOSS"
 
-          if [ "${{ steps.mode.outputs.dry_run }}" = "true" ]; then
+          if [ "$DRY_RUN" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
 
