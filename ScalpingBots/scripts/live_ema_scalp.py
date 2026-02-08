@@ -46,8 +46,8 @@ from ScalpingBots.strategies.ema_momentum import (
     EMAMomentumConfig, calculate_momentum_score,
 )
 
-# Reuse RubberBand infrastructure
-from RubberBand_v2.src.data import (
+# Alpaca broker helpers (self-contained, no RubberBand dependency)
+from ScalpingBots.src.broker import (
     alpaca_market_open, get_positions, get_account,
     get_daily_fills, calculate_realized_pnl,
     get_latest_quote, _alpaca_headers, _base_url_from_env,
