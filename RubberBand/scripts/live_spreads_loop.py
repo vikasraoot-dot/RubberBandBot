@@ -778,28 +778,75 @@ def calculate_spread_pnl(
     entry_debit: float,
 ) -> Tuple[float, float]:
     """
-    Calculate P&L for a spread.
-    
-    Spread value = long_value - short_value
+    Calculate P&L for a spread using FRESH quotes (not stale position prices).
+
+    Spread value = long_mid - short_mid  (clamped to >= 0)
     P&L = current_spread_value - entry_debit
+
+    CRITICAL FIX: Uses get_option_quote() for accurate mid-market prices instead of
+    Alpaca position current_price which can be stale and cause spread inversions
+    (long_value < short_value), triggering false stop-losses.
+
+    Physical constraint: A bull call spread can NEVER be worth less than $0.
     """
-    # Get current values (handle None explicitly)
-    long_price = long_pos.get("current_price")
-    long_value = float(long_price) if long_price is not None else 0.0
-    
+    long_symbol = long_pos.get("symbol", "")
+    short_symbol = short_pos.get("symbol", "") if short_pos else ""
+
+    # Try fresh quotes first (more accurate than stale position prices)
+    long_value = 0.0
     short_value = 0.0
-    if short_pos:
-        short_price = short_pos.get("current_price")
-        short_value = float(short_price) if short_price is not None else 0.0
-    
-    # Current spread value (what we'd receive if we closed now)
-    current_spread_value = long_value - short_value
-    
+    quote_source = "position"
+
+    if long_symbol and short_symbol:
+        long_quote = get_option_quote(long_symbol)
+        short_quote = get_option_quote(short_symbol)
+
+        if long_quote and short_quote:
+            long_value = long_quote.get("mid", 0.0)
+            short_value = short_quote.get("mid", 0.0)
+            quote_source = "fresh_quote"
+        else:
+            # Fall back to position current_price
+            long_price = long_pos.get("current_price")
+            long_value = float(long_price) if long_price is not None else 0.0
+            if short_pos:
+                short_price = short_pos.get("current_price")
+                short_value = float(short_price) if short_price is not None else 0.0
+            quote_source = "position_fallback"
+    else:
+        # No symbols available, use position prices
+        long_price = long_pos.get("current_price")
+        long_value = float(long_price) if long_price is not None else 0.0
+        if short_pos:
+            short_price = short_pos.get("current_price")
+            short_value = float(short_price) if short_price is not None else 0.0
+
+    # Raw spread value
+    raw_spread_value = long_value - short_value
+
+    # SPREAD INVERSION DETECTION: A bull call spread can NEVER be worth less than $0.
+    # Negative values indicate stale/bad quotes. Clamp to 0 and log warning.
+    if raw_spread_value < 0:
+        underlying = long_symbol[:6].rstrip("0123456789") if long_symbol else "???"
+        print(f"[positions] WARNING: Spread inversion detected for {underlying}!", flush=True)
+        print(f"[positions]   Long({long_symbol}): ${long_value:.4f}", flush=True)
+        print(f"[positions]   Short({short_symbol}): ${short_value:.4f}", flush=True)
+        print(f"[positions]   Raw spread value: ${raw_spread_value:.4f} (clamped to $0.00)", flush=True)
+        print(f"[positions]   Quote source: {quote_source}", flush=True)
+
+    current_spread_value = max(0.0, raw_spread_value)
+
     # P&L vs entry
     pnl = (current_spread_value - entry_debit) * 100  # Per contract
     pnl_pct = ((current_spread_value / entry_debit) - 1) * 100 if entry_debit > 0 else 0
-    
+
     return pnl, pnl_pct
+
+
+# SL confirmation: track consecutive SL readings per underlying to prevent
+# single-cycle quote glitches from triggering irreversible exits.
+_sl_consecutive: Dict[str, int] = {}
+_SL_CONFIRM_REQUIRED = 2  # Must see SL condition N consecutive cycles before exiting
 
 
 def check_spread_exit_conditions(
@@ -934,7 +981,17 @@ def manage_positions(
         
         if underlying in already_closed:
             continue
-        
+
+        if long_pos and registry:
+            # POSITION OWNERSHIP FILTER: Only manage positions belonging to this bot.
+            # Prevents cross-bot interference (e.g., 15M_OPT closing WK_OPT's positions).
+            long_sym = long_pos.get("symbol", "")
+            in_registry = registry.find_by_symbol(long_sym) is not None
+            in_active = underlying in (active_spreads or {})
+            if not in_registry and not in_active:
+                # Position exists at broker but not tracked by this bot - skip
+                continue
+
         if not long_pos:
             # Orphaned short leg - close it individually
             # This can happen if the long leg was closed but short wasn't
@@ -1068,14 +1125,39 @@ def manage_positions(
         # Check exit conditions (including time stop based on holding_minutes)
         should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg, holding_minutes)
 
+        # SL CONFIRMATION: Require N consecutive SL readings before exiting.
+        # Prevents single-cycle quote glitches from triggering irreversible exits.
+        # Only applies to SL exits - TP, EOD exits are immediate.
+        if should_exit and "SL_hit" in exit_reason:
+            _sl_consecutive[underlying] = _sl_consecutive.get(underlying, 0) + 1
+            if _sl_consecutive[underlying] < _SL_CONFIRM_REQUIRED:
+                print(f"[positions] SL WARNING #{_sl_consecutive[underlying]}/{_SL_CONFIRM_REQUIRED} for "
+                      f"{underlying}: pnl={pnl_pct:.1f}% (confirming next cycle)", flush=True)
+                should_exit = False  # Wait for confirmation
+            else:
+                exit_reason = f"{exit_reason}_CONFIRMED(x{_sl_consecutive[underlying]})"
+        elif not should_exit:
+            # Position is not in SL territory - reset counter
+            _sl_consecutive.pop(underlying, None)
+
         if should_exit:
-            # Calculate current spread value for logging (handle None values)
-            lp = long_pos.get("current_price")
-            long_value = float(lp) if lp is not None else 0.0
-            sp = short_pos.get("current_price") if short_pos else None
-            short_value = float(sp) if sp is not None else 0.0
-            exit_value = long_value - short_value
-            
+            # Clean up SL counter on confirmed exit
+            _sl_consecutive.pop(underlying, None)
+            # Calculate current spread value for logging using FRESH quotes
+            long_quote = get_option_quote(long_symbol)
+            short_quote = get_option_quote(short_symbol) if short_symbol else None
+            if long_quote:
+                long_value = long_quote.get("mid", 0.0)
+            else:
+                lp = long_pos.get("current_price")
+                long_value = float(lp) if lp is not None else 0.0
+            if short_quote:
+                short_value = short_quote.get("mid", 0.0)
+            else:
+                sp = short_pos.get("current_price") if short_pos else None
+                short_value = float(sp) if sp is not None else 0.0
+            exit_value = max(0.0, long_value - short_value)  # Clamp: spread can't be negative
+
             if dry_run:
                 logger.spread_exit(
                     underlying=underlying,

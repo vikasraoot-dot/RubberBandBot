@@ -283,25 +283,33 @@ def close_spread(
     # For closing: sell long at bid, buy short at ask
     long_bid = long_quote.get("bid", 0)
     short_ask = short_quote.get("ask", 0)
-    net_credit = long_bid - short_ask  # Credit received (positive = we receive money)
-    
-    # Use absolute value as limit price (negative = credit to receive)
-    limit_price = round(abs(net_credit), 2)
-    
+    net_credit = long_bid - short_ask  # Positive = we receive credit, Negative = we pay debit
+
+    # Determine order side based on whether closing produces credit or debit
+    if net_credit >= 0:
+        # Profitable close: we receive credit
+        order_side = "sell"
+        limit_price = round(net_credit, 2)
+    else:
+        # Losing close: we pay debit to close
+        order_side = "buy"
+        limit_price = round(abs(net_credit), 2)
+
     # Log the spread close attempt with full details
-    print(f"[options] Attempting spread close:")
+    close_type = "credit" if net_credit >= 0 else "debit"
+    print(f"[options] Attempting spread close ({close_type}):")
     print(f"[options]   Long: {long_symbol} @ bid={long_bid}")
     print(f"[options]   Short: {short_symbol} @ ask={short_ask}")
-    print(f"[options]   Net credit: ${net_credit:.2f}, limit_price: ${limit_price:.2f}")
-    
+    print(f"[options]   Net: ${net_credit:.2f}, side={order_side}, limit_price: ${limit_price:.2f}")
+
     # Build multi-leg close order
     # Note: mleg orders do NOT use top-level "symbol" field
     order_payload = {
         "qty": str(qty),
-        "side": "sell",  # Overall direction for closing a debit spread
+        "side": order_side,
         "type": "limit",
         "time_in_force": "day",
-        "limit_price": str(limit_price),  # Credit to receive
+        "limit_price": str(limit_price),
         "order_class": "mleg",
         "legs": [
             {
@@ -344,7 +352,56 @@ def close_spread(
             }
         
         order_id = result.get("id", "")
-        print(f"[options] Spread close order submitted: {order_id}")
+        order_status = result.get("status", "")
+        print(f"[options] Spread close order submitted: {order_id} (status={order_status})")
+
+        # Brief fill verification: poll up to 3 times (1s apart) to confirm fill
+        _TERMINAL_STATUSES = ("canceled", "expired", "rejected", "suspended")
+        if order_id and order_status not in ("filled", "partially_filled"):
+            for poll in range(3):
+                time.sleep(1)
+                order_check = _get_order_by_id(base, key, secret, order_id)
+                if order_check.get("error"):
+                    continue
+                order_status = order_check.get("status", "")
+                if order_status in ("filled", "partially_filled"):
+                    print(f"[options] Spread close FILLED (poll #{poll + 1})")
+                    break
+                if order_status in _TERMINAL_STATUSES:
+                    print(f"[options] Spread close order TERMINAL: {order_status}")
+                    break
+            else:
+                # Not filled after 3 seconds - cancel the pending order to prevent
+                # duplicate closes when the next cycle submits a new order
+                print(f"[options] WARNING: Close order {order_id} not filled after 3s (status={order_status})")
+                try:
+                    cancel_resp = requests.delete(
+                        f"{base}/v2/orders/{order_id}",
+                        headers=_headers(key, secret),
+                        timeout=5,
+                    )
+                    if cancel_resp.status_code < 300:
+                        print(f"[options] Canceled pending close order {order_id}")
+                    else:
+                        print(f"[options] Cancel attempt returned {cancel_resp.status_code} (may have filled)")
+                except Exception as cancel_err:
+                    print(f"[options] Cancel attempt failed: {cancel_err}")
+                return {
+                    "error": True,
+                    "message": f"Order submitted but not filled (status={order_status})",
+                    "order_id": order_id,
+                    "retry": True,
+                }
+
+            # Handle terminal statuses (order died without filling)
+            if order_status in _TERMINAL_STATUSES:
+                return {
+                    "error": True,
+                    "message": f"Close order {order_status}",
+                    "order_id": order_id,
+                    "retry": True,
+                }
+
         return {
             "error": False,
             "order_id": order_id,
@@ -352,7 +409,7 @@ def close_spread(
             "short_symbol": short_symbol,
             "qty": qty,
             "credit": limit_price,
-            "status": result.get("status", ""),
+            "status": order_status,
         }
     except Exception as e:
         print(f"[options] Spread close exception: {e}")

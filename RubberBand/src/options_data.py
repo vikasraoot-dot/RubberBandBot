@@ -253,35 +253,85 @@ def select_itm_contract(
     return best
 
 
+_quote_cache: Dict[str, Tuple[float, Optional[Dict[str, float]]]] = {}
+_QUOTE_CACHE_TTL = 5.0  # seconds - deduplicates rapid repeated calls for same symbol
+
+
 def get_option_quote(option_symbol: str) -> Optional[Dict[str, float]]:
     """
     Get real-time quote for an option contract.
-    
+
+    Features:
+    - Retry with exponential backoff on transient errors (429, 5xx)
+    - Short TTL cache (5s) to deduplicate rapid repeated calls
+
     Returns:
         {"bid": float, "ask": float, "mid": float} or None
     """
+    import time as _time
+
+    # Check cache first (prevents 6 API calls per exit cycle for the same symbol)
+    now = _time.time()
+    if option_symbol in _quote_cache:
+        cached_ts, cached_result = _quote_cache[option_symbol]
+        if now - cached_ts < _QUOTE_CACHE_TTL:
+            return cached_result
+
     base, key, secret = _resolve_creds()
-    
+
     # Use options quotes endpoint
     data_url = f"https://data.alpaca.markets/v1beta1/options/quotes/latest"
     params = {"symbols": option_symbol}
-    
-    try:
-        resp = requests.get(data_url, headers=_headers(key, secret), params=params, timeout=10)
-        resp.raise_for_status()
-        data = resp.json()
-        quotes = data.get("quotes", {})
-        quote = quotes.get(option_symbol, {})
-        
-        bid = float(quote.get("bp", 0))
-        ask = float(quote.get("ap", 0))
-        
-        if bid > 0 and ask > 0:
-            return {"bid": bid, "ask": ask, "mid": (bid + ask) / 2}
-        return None
-    except Exception as e:
-        print(f"[options] Error fetching quote for {option_symbol}: {e}")
-        return None
+
+    max_retries = 3
+    backoff = 0.5
+    result = None
+
+    _RETRYABLE_STATUS = (429, 500, 502, 503, 504)
+
+    for attempt in range(max_retries + 1):
+        try:
+            resp = requests.get(data_url, headers=_headers(key, secret), params=params, timeout=10)
+            if resp.status_code in _RETRYABLE_STATUS and attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            resp.raise_for_status()
+            data = resp.json()
+            quotes = data.get("quotes", {})
+            quote = quotes.get(option_symbol, {})
+
+            bid = float(quote.get("bp", 0))
+            ask = float(quote.get("ap", 0))
+
+            if bid > 0 and ask > 0:
+                result = {"bid": bid, "ask": ask, "mid": (bid + ask) / 2}
+            break
+        except requests.exceptions.HTTPError as e:
+            # Non-retryable HTTP errors (401, 403, 404, etc.) - fail immediately
+            status = getattr(e.response, 'status_code', 0) if e.response is not None else 0
+            if status not in _RETRYABLE_STATUS:
+                print(f"[options] Non-retryable HTTP {status} for {option_symbol}: {e}")
+                break
+            if attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            print(f"[options] Error fetching quote for {option_symbol} after {max_retries + 1} attempts: {e}")
+            break
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+            # Network errors are retryable
+            if attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            print(f"[options] Error fetching quote for {option_symbol} after {max_retries + 1} attempts: {e}")
+            break
+        except Exception as e:
+            # Unknown errors - don't retry
+            print(f"[options] Unexpected error fetching quote for {option_symbol}: {e}")
+            break
+
+    # Cache result (including None to avoid re-fetching known failures within TTL)
+    _quote_cache[option_symbol] = (_time.time(), result)
+    return result
 
 
 def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
