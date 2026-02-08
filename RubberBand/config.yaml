@@ -71,9 +71,8 @@ max_open_trades_per_ticker: 1
 # ──────────────────────────────────────────────────────────────────────────────
 brackets:
   enabled: true
-  atr_mult_sl: 2.0          # Stop Loss = 2.0 ATR (Tightened from 2.5 for Stock Bot R:R)
-  stop_loss_pct: -0.30      # Tightened to -30% (Validated: Higher Profit than -80%)
-  take_profit_pct: 0.50
+  atr_mult_sl: 1.5          # Stop Loss = 1.5 ATR (matches live workflow env var SL_ATR)
+  take_profit_r: 2.0        # Take Profit = 2.0 ATR → R:R = 1.33:1
 
 # Breakeven (Optional)
 breakeven:
