@@ -1,0 +1,90 @@
+# ScalpingBots Configuration
+# ==========================
+
+# Strategy: EMA Momentum Scalper (Primary)
+# Validated: 78-80% WR over 60-90 days, 1000+ trades
+
+strategy:
+  name: "ema_momentum"
+  timeframe: "5m"          # 5-minute bars
+  fast_ema: 9
+  slow_ema: 21
+
+# Entry Filters
+entry:
+  min_rvol: 1.2            # Volume must be 1.2x average
+  rsi_min_long: 40         # RSI range for longs
+  rsi_max_long: 65
+  rsi_min_short: 35        # RSI range for shorts
+  rsi_max_short: 60
+  require_above_vwap: true
+  require_bullish_bar: true
+  min_momentum_score: 0.5  # 0-1 quality score
+  allow_shorts: true
+
+# Exit Rules
+exit:
+  tp_atr_mult: 2.5         # Take profit at 2.5x ATR
+  sl_atr_mult: 2.5         # Stop loss at 2.5x ATR
+  sl_use_swing: true        # Use swing low/high for SL
+  sl_swing_bars: 8          # Look back 8 bars for swing
+  sl_confirm_bars: 2        # CRITICAL: Require 2 consecutive bars at SL before exit
+  trailing_trigger_atr: 0.8 # Start trailing at 0.8 ATR profit
+  trailing_distance_atr: 0.6 # Trail at 0.6 ATR distance
+  exit_on_cross_back: false # DISABLED: Kills profitable trades early
+  max_hold_bars: 20         # Max hold 20 bars (~100 min)
+  flatten_eod: true
+
+# Risk Management
+risk:
+  risk_per_trade_pct: 1.5   # Risk 1.5% of equity per trade
+  max_notional: 3000.0      # Max $3K per position
+  max_daily_loss: 150.0     # Stop trading after -$150 daily
+  max_trades_per_day: 5     # Max 5 entries per day per ticker
+  max_concurrent_positions: 8  # Max 8 open positions total
+  max_capital_deployed: 25000  # Total capital limit across all positions
+
+# Trading Hours (Eastern)
+timing:
+  entry_start: "09:45"     # Skip first 15 min volatility
+  entry_end: "15:30"       # No new entries in last 30 min
+  flatten_time: "15:50"    # Flatten all by 3:50 PM
+
+# Ticker Universe (Validated profitable over 60+ days)
+tickers:
+  core:
+    - GS      # 91.5% WR, best performer
+    - COIN    # 81.2% WR, high volume
+    - NVDA    # 83.0% WR, tech bellwether
+    - PLTR    # 82.8% WR, momentum stock
+    - SOFI    # 81.7% WR, consistent
+    - AVGO    # 79.2% WR, semi leader
+    - BAC     # 79.6% WR, financial
+    - MSFT    # 79.1% WR, mega cap stability
+    - CRWD    # 82.4% WR, cybersecurity
+    - DIS     # 78.8% WR, consumer
+    - GOOGL   # 75.0% WR, tech
+    - BA      # 77.9% WR, industrial
+
+  watchlist:
+    - TSLA    # Profitable in some periods, volatile
+    - ORCL    # Mixed, needs regime filter
+    - CVX     # Energy, decent consistency
+    - AMD     # Tech, regime dependent
+    - AAPL    # Mega cap, lower WR but stable
+
+# Data
+data:
+  feed: "iex"
+  cache_db: "ScalpingBots/data/market_cache.db"
+  history_days: 10          # Need 10 days for indicator warmup
+
+# Broker
+broker:
+  base_url: "https://paper-api.alpaca.markets"
+  # Keys from environment: APCA_API_KEY_ID, APCA_API_SECRET_KEY
+
+# Bot Identity
+bot:
+  tag: "EMA_SCALP"
+  log_dir: "ScalpingBots/logs"
