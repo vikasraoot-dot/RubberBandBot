@@ -60,24 +60,8 @@
       "sl_price": 465.94845,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 475.07000000000005,
-      "unrealized_pnl": 441.50000000000773
-    },
-    "SHADOW_15M_STK_MO_20260204T144959926129+0000": {
-      "id": "SHADOW_15M_STK_MO_20260204T144959926129+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "MO",
-      "entry_price": 65.25,
-      "entry_time": "2026-02-04T14:49:59.926129+00:00",
-      "reason": "Slope3_Too_Flat(0.0546% > -0.2%)",
-      "qty": 100,
-      "tp_price": 65.9025,
-      "sl_price": 64.5975,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 64.705,
-      "unrealized_pnl": -54.50000000000017
+      "current_price": 470.995,
+      "unrealized_pnl": 34.00000000000318
     },
     "SHADOW_15M_OPT_C_20260205T151548Z": {
       "id": "SHADOW_15M_OPT_C_20260205T151548Z",
@@ -92,8 +76,8 @@
       "qty": 1,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_val": 1.2400000000000002,
-      "unrealized_pnl": 11.900000000000022
+      "current_val": 1.4299999999999997,
+      "unrealized_pnl": 30.89999999999997
     }
   },
   "closed_positions": [
@@ -17400,6 +17384,26 @@
       "exit_time": "2026-02-09T15:04:21.922517+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -162.99999999999955
+    },
+    {
+      "id": "SHADOW_15M_STK_MO_20260204T144959926129+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "MO",
+      "entry_price": 65.25,
+      "entry_time": "2026-02-04T14:49:59.926129+00:00",
+      "reason": "Slope3_Too_Flat(0.0546% > -0.2%)",
+      "qty": 100,
+      "tp_price": 65.9025,
+      "sl_price": 64.5975,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 64.33500000000001,
+      "unrealized_pnl": -91.4999999999992,
+      "exit_price": 64.33500000000001,
+      "exit_time": "2026-02-09T17:19:31.809495+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -91.4999999999992
     }
   ],
   "processed_lines": {
