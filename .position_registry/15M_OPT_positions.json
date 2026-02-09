@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-09T10:19:08.902785-05:00",
-  "positions": {
-    "MRK260213C00119000": {
-      "symbol": "MRK260213C00119000",
-      "underlying": "MRK",
-      "client_order_id": "15M_OPT_MRK260213C00119000_1770650282",
-      "order_id": "bb2350a3-573a-4a65-8031-97a8616d0676",
-      "qty": 1,
-      "entry_price": 0.65,
-      "entry_date": "2026-02-09T10:18:08.267665-05:00",
-      "status": "open",
-      "short_symbol": "MRK260213C00120000"
-    }
-  },
+  "updated_at": "2026-02-09T10:21:14.132382-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -374,6 +362,21 @@
       "exit_date": "2026-02-09T10:19:08.902344-05:00",
       "exit_reason": "BROKER_MISSING_orphan_cleanup",
       "pnl": 0.0
+    },
+    {
+      "symbol": "MRK260213C00119000",
+      "underlying": "MRK",
+      "client_order_id": "15M_OPT_MRK260213C00119000_1770650282",
+      "order_id": "bb2350a3-573a-4a65-8031-97a8616d0676",
+      "qty": 1,
+      "entry_price": 0.65,
+      "entry_date": "2026-02-09T10:18:08.267665-05:00",
+      "status": "closed",
+      "short_symbol": "MRK260213C00120000",
+      "exit_price": 0.4099999999999999,
+      "exit_date": "2026-02-09T10:21:14.131744-05:00",
+      "exit_reason": "SL_hit(-36.9%<=-30.0%)_CONFIRMED(x2)",
+      "pnl": -24.00000000000001
     }
   ]
 }
