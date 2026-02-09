@@ -1,7 +1,28 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-06T12:50:02.311228-05:00",
-  "positions": {},
+  "updated_at": "2026-02-09T10:16:51.116321-05:00",
+  "positions": {
+    "MRK": {
+      "symbol": "MRK",
+      "underlying": "MRK",
+      "client_order_id": "15M_STK_MRK_1770650194",
+      "order_id": "3dc5400e-ee31-4454-9229-f4785077096c",
+      "qty": 16,
+      "entry_price": 118.39,
+      "entry_date": "2026-02-09T10:16:42.853825-05:00",
+      "status": "open"
+    },
+    "GM": {
+      "symbol": "GM",
+      "underlying": "GM",
+      "client_order_id": "15M_STK_GM_1770650203",
+      "order_id": "29ebc15b-32ff-4356-b82d-6f3effa9d75d",
+      "qty": 8,
+      "entry_price": 81.15,
+      "entry_date": "2026-02-09T10:16:51.116013-05:00",
+      "status": "open"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "UBER",
