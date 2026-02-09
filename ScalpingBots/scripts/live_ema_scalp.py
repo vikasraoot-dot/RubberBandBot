@@ -57,11 +57,37 @@ from ScalpingBots.src.broker import (
 BOT_TAG = "EMA_SCALP"
 LOG_DIR = os.path.join(_PROJECT, "logs")
 
-# Validated profitable tickers (60-day backtest, all positive P&L)
-CORE_TICKERS = [
+# Default ticker file — same list the live 15M/weekly bots use
+DEFAULT_TICKERS_FILE = os.path.join(_REPO, "RubberBand", "tickers.txt")
+
+# Fallback if ticker file not found
+FALLBACK_TICKERS = [
     "GS", "COIN", "NVDA", "PLTR", "SOFI", "AVGO",
     "BAC", "MSFT", "GOOGL", "ORCL", "BA", "CRWD",
 ]
+
+
+def load_tickers(path: str) -> List[str]:
+    """Load tickers from a text file (one per line, # comments ok)."""
+    if not os.path.exists(path):
+        print(f"  [warn] Ticker file not found: {path}")
+        print(f"  [warn] Using fallback list ({len(FALLBACK_TICKERS)} tickers)")
+        return FALLBACK_TICKERS
+    tickers = []
+    with open(path, "r") as f:
+        for line in f:
+            t = line.strip().split("#")[0].strip().upper()
+            if t:
+                tickers.append(t)
+    # Deduplicate while preserving order
+    seen = set()
+    unique = []
+    for t in tickers:
+        if t not in seen:
+            seen.add(t)
+            unique.append(t)
+    print(f"  Loaded {len(unique)} tickers from {path}")
+    return unique
 
 
 # ─── Position Tracking ───────────────────────────────────────────────
@@ -596,7 +622,10 @@ def recover_positions(
 
 def main():
     ap = argparse.ArgumentParser(description="EMA Momentum Scalper - Live Bot")
-    ap.add_argument("--tickers", nargs="+", default=CORE_TICKERS)
+    ap.add_argument("--tickers-file", default=DEFAULT_TICKERS_FILE,
+                    help="Path to ticker list file (one per line)")
+    ap.add_argument("--tickers", nargs="+", default=None,
+                    help="Override: explicit ticker list (ignores --tickers-file)")
     ap.add_argument("--max-notional", type=float, default=3000.0)
     ap.add_argument("--max-daily-loss", type=float, default=150.0)
     ap.add_argument("--risk-pct", type=float, default=1.5)
@@ -613,7 +642,12 @@ def main():
     cfg.risk_per_trade_pct = args.risk_pct
     cfg.allow_shorts = args.allow_shorts
 
-    tickers = [t.upper() for t in args.tickers]
+    # Load tickers: explicit list takes priority over file
+    if args.tickers:
+        tickers = [t.upper() for t in args.tickers]
+        print(f"  Using {len(tickers)} tickers from CLI args")
+    else:
+        tickers = load_tickers(args.tickers_file)
     log_file = get_log_file()
 
     print(f"  EMA Momentum Scalper ({BOT_TAG})")
