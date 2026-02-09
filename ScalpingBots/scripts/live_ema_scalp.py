@@ -116,10 +116,11 @@ def get_log_file() -> str:
 # ─── Data Preparation ────────────────────────────────────────────────
 
 def prepare_data(symbol: str, days: int = 10, timeframe: str = "5Min",
-                 feed: str = "iex") -> Optional[pd.DataFrame]:
+                 feed: str = "iex", force_refresh: bool = False) -> Optional[pd.DataFrame]:
     """Fetch and prepare data with all required indicators."""
     try:
-        df = get_bars(symbol, timeframe, days, feed, rth_only=True)
+        df = get_bars(symbol, timeframe, days, feed, rth_only=True,
+                      force_refresh=force_refresh)
         if df is None or df.empty or len(df) < 30:
             return None
 
@@ -745,6 +746,7 @@ def main():
                                      (now_et.hour == h_end and now_et.minute > m_end))
 
             signals_found = 0
+            scan_details = []
             if entry_window_open:
                 for symbol in tickers:
                     if num_positions >= args.max_positions:
@@ -752,14 +754,28 @@ def main():
 
                     # Skip if already holding this symbol (local or broker)
                     if symbol in managed or symbol in held_symbols:
+                        scan_details.append(f"{symbol}=HELD")
                         continue
 
-                    df = prepare_data(symbol, days=10, timeframe="5Min", feed=args.feed)
+                    df = prepare_data(symbol, days=10, timeframe="5Min",
+                                      feed=args.feed, force_refresh=True)
                     if df is None:
+                        scan_details.append(f"{symbol}=NO_DATA")
                         continue
 
                     signal = check_entry_signal(df, cfg)
                     if signal is None:
+                        # Log why no signal for this ticker
+                        cur = df.iloc[-1]
+                        prev = df.iloc[-2] if len(df) >= 2 else cur
+                        ema9 = float(cur.get("ema_9", 0))
+                        ema21 = float(cur.get("ema_21", 0))
+                        rsi = float(prev.get("rsi", 0))
+                        rvol = float(cur.get("rvol", 0))
+                        spread_pct = ((ema9 - ema21) / ema21 * 100) if ema21 else 0
+                        scan_details.append(
+                            f"{symbol}(ema={spread_pct:+.2f}% rsi={rsi:.0f} rvol={rvol:.1f})"
+                        )
                         continue
 
                     signals_found += 1
@@ -877,14 +893,15 @@ def main():
                         }, log_file)
                         print(f"  [ERROR] Order for {symbol}: {e}")
 
-            # Status log
-            if signals_found == 0 and scan_count % 6 == 0:
-                parts = [f"No signals",
-                         f"managed={len(managed)}",
-                         f"P&L=${daily_pnl:.2f}"]
-                if managed:
-                    parts.append(f"tracking=[{','.join(managed.keys())}]")
-                print(f"  [{now_et.strftime('%H:%M')}] {' | '.join(parts)}")
+            # Status log - print every scan so user can see the bot is working
+            if signals_found == 0:
+                detail_str = " | ".join(scan_details) if scan_details else "no tickers scanned"
+                print(f"  [{now_et.strftime('%H:%M')}] Scan #{scan_count}: "
+                      f"0 signals | managed={len(managed)} | P&L=${daily_pnl:.2f}")
+                print(f"    {detail_str}")
+            elif signals_found > 0:
+                print(f"  [{now_et.strftime('%H:%M')}] Scan #{scan_count}: "
+                      f"{signals_found} signal(s) | managed={len(managed)} | P&L=${daily_pnl:.2f}")
 
             time.sleep(args.poll_interval)
 
