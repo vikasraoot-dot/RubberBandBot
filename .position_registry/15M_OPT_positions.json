@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-09T10:18:34.025327-05:00",
+  "updated_at": "2026-02-09T10:19:08.902785-05:00",
   "positions": {
     "MRK260213C00119000": {
       "symbol": "MRK260213C00119000",
@@ -12,17 +12,6 @@
       "entry_date": "2026-02-09T10:18:08.267665-05:00",
       "status": "open",
       "short_symbol": "MRK260213C00120000"
-    },
-    "GM260213C00081000": {
-      "symbol": "GM260213C00081000",
-      "underlying": "GM",
-      "client_order_id": "15M_OPT_GM260213C00081000_1770650308",
-      "order_id": "6e272012-0115-48c8-91fb-18ea526df674",
-      "qty": 1,
-      "entry_price": 0.62,
-      "entry_date": "2026-02-09T10:18:34.024901-05:00",
-      "status": "open",
-      "short_symbol": "GM260213C00082000"
     }
   },
   "closed_positions": [
@@ -370,6 +359,21 @@
       "exit_date": "2026-02-05T13:42:11.316111-05:00",
       "exit_reason": "TIME_STOP(150min >= 10bars)",
       "pnl": -24.999999999999957
+    },
+    {
+      "symbol": "GM260213C00081000",
+      "underlying": "GM",
+      "client_order_id": "15M_OPT_GM260213C00081000_1770650308",
+      "order_id": "6e272012-0115-48c8-91fb-18ea526df674",
+      "qty": 1,
+      "entry_price": 0.62,
+      "entry_date": "2026-02-09T10:18:34.024901-05:00",
+      "status": "closed",
+      "short_symbol": "GM260213C00082000",
+      "exit_price": 0.0,
+      "exit_date": "2026-02-09T10:19:08.902344-05:00",
+      "exit_reason": "BROKER_MISSING_orphan_cleanup",
+      "pnl": 0.0
     }
   ]
 }
