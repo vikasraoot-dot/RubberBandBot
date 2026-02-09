@@ -47,11 +47,14 @@ trend_filter:
   secondary_sma_period: 10  # 10-week SMA
 
 # --- Resilience ---
+# Key names must match TickerHealthManager: lookback_trades, max_consecutive_losses,
+# drawdown_threshold_usd, probation_period_days
 resilience:
-  enabled: false            # Disable for backtest simplicity
-  max_daily_losses: 5
-  consecutive_loss_pause: 3
-  pause_duration_days: 7
+  enabled: false
+  lookback_trades: 5
+  max_consecutive_losses: 3
+  drawdown_threshold_usd: -100.0
+  probation_period_days: 7
 
 # --- Trade Management ---
 allow_shorts: false         # Long-only for now

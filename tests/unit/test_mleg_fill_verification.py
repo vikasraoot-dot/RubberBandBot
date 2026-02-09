@@ -65,10 +65,10 @@ class TestVerifyMlegFill:
     @patch("RubberBand.src.options_execution.requests")
     @patch("RubberBand.src.options_execution._get_order_by_id")
     @patch("RubberBand.src.options_execution.time")
-    def test_filled_but_one_leg_missing_returns_partial_fill(self, mock_time, mock_get_order, mock_requests):
+    def test_filled_trusts_broker_when_one_leg_missing(self, mock_time, mock_get_order, mock_requests):
         """
         When order status is 'filled' but only the long leg exists in positions,
-        should return 'partial_fill'.
+        should still return 'filled' (trust broker over positions API latency).
         """
         from RubberBand.src.options_execution import _verify_mleg_fill
 

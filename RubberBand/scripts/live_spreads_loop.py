@@ -856,8 +856,8 @@ def check_spread_exit_conditions(
     holding_minutes: int = 0,
 ) -> Tuple[bool, str]:
     """Check if spread should be exited based on P&L percentage or time stop."""
-    tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 80.0)
-    sl_pct = spread_cfg.get("sl_pct", -50.0)
+    tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 50.0)
+    sl_pct = spread_cfg.get("sl_pct", -25.0)
     hold_overnight = spread_cfg.get("hold_overnight", True)
     dte = spread_cfg.get("dte", 3)
     bars_stop = spread_cfg.get("bars_stop", 0)

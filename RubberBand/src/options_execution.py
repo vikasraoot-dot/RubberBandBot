@@ -38,7 +38,7 @@ def _verify_mleg_fill(
 ) -> str:
     """
     Wait for mleg order to fill and verify both legs are in positions.
-    Returns: 'filled', 'partial_fill', 'pending', or 'failed'.
+    Returns: 'filled', 'pending', or 'failed'.
 
     IMPORTANT: When Alpaca confirms "filled" on an mleg order, BOTH legs are filled.
     The positions API may have settlement latency, so we retry position checks
@@ -417,7 +417,7 @@ def close_spread(
     url = f"{base}/v2/orders"
     
     try:
-        print(f"[options] Closing spread: {long_symbol} (sell) / {short_symbol} (buy) @ ${limit_price} credit")
+        print(f"[options] Closing spread: {long_symbol} (sell) / {short_symbol} (buy) @ ${limit_price} {close_type}")
         resp = requests.post(
             url,
             headers=_headers(key, secret),
@@ -495,7 +495,7 @@ def close_spread(
             "long_symbol": long_symbol,
             "short_symbol": short_symbol,
             "qty": qty,
-            "credit": limit_price,
+            "net_credit": net_credit,  # Positive = credit received, negative = debit paid
             "status": order_status,
         }
     except Exception as e:
@@ -704,19 +704,19 @@ def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry", 
         long_symbol = pos_data.get("symbol", symbol)
         short_symbol = pos_data.get("short_symbol")
         qty = int(pos_data.get("qty", 1))
-        
+
         # Parse expiry and calculate DTE
         expiry = parse_expiry_from_occ(long_symbol)
         dte = (expiry - today).days
-        
+
         print(f"[flatten] {long_symbol}: Expiry={expiry}, DTE={dte}")
-        
+
         # Only close if DTE <= max_dte_to_close
         if dte > max_dte_to_close:
             print(f"[flatten] Keeping {long_symbol} (DTE={dte} > {max_dte_to_close})")
             positions_to_keep[symbol] = pos_data
             continue
-        
+
         try:
             if short_symbol:
                 # This is a spread - close both legs together
@@ -726,30 +726,39 @@ def flatten_bot_spreads(bot_tag: str, registry_dir: str = ".position_registry", 
                 # Single option position - close individually
                 print(f"[flatten] Closing single position (DTE={dte}): {long_symbol}")
                 result = close_option_position(long_symbol, qty)
-            
+
+            # Only remove from registry if close SUCCEEDED
+            close_failed = result.get("error", False)
+            if close_failed:
+                print(f"[flatten] Close FAILED for {long_symbol} — keeping in registry for retry")
+                positions_to_keep[symbol] = pos_data
+
             results.append({
                 "symbol": long_symbol,
                 "short_symbol": short_symbol,
                 "qty": qty,
                 "dte": dte,
                 "result": result,
+                "close_failed": close_failed,
             })
         except Exception as e:
             print(f"[flatten] Error closing {long_symbol}: {e}")
+            # Keep position in registry on exception — don't lose track of it
+            positions_to_keep[symbol] = pos_data
             results.append({
                 "symbol": long_symbol,
                 "short_symbol": short_symbol,
                 "error": str(e),
             })
-    
-    # Update registry - keep positions that weren't closed
+
+    # Update registry - keep positions that weren't successfully closed
     try:
         data["positions"] = positions_to_keep
         data["updated_at"] = datetime.now(ET).isoformat()
-        # Track closed positions
+        # Track successfully closed positions
         closed_list = data.get("closed_positions", [])
         for r in results:
-            if not r.get("error"):
+            if not r.get("error") and not r.get("close_failed"):
                 closed_list.append({
                     "symbol": r["symbol"],
                     "short_symbol": r.get("short_symbol"),

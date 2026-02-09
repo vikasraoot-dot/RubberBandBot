@@ -73,13 +73,6 @@ brackets:
   atr_mult_sl: 1.5          # Stop Loss = 1.5 ATR (matches live workflow env var SL_ATR)
   take_profit_r: 2.0        # Take Profit = 2.0 ATR → R:R = 1.33:1
 
-# Breakeven (Optional)
-breakeven:
-  enabled: true
-  trigger_r: 1.0            # Move to BE at 1.0 R
-  bump_ticks: 2
-  tick_size: 0.01
-
 # ──────────────────────────────────────────────────────────────────────────────
 # FILTERS / GATES
 # ──────────────────────────────────────────────────────────────────────────────

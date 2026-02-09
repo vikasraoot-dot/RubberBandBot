@@ -208,6 +208,8 @@ def run_weekly_cycle():
                 if result.get("ok"):
                     logging.info(f"✅ Time stop exit: {sym} closed after {days_held} days")
                     registry.record_exit(sym, exit_reason="TIME_STOP", pnl=p.get("unrealized_pl", 0))
+                    # Update open_symbols so freed slot is available for new entries
+                    open_symbols.discard(sym)
                 else:
                     logging.error(f"❌ Failed to close {sym}: {result}")
         except Exception as e:
@@ -235,7 +237,8 @@ def run_weekly_cycle():
 
             # CROSS-BOT GATE: Skip if ANY other bot already holds this ticker
             # Prevents position stacking (e.g., 15M_STK + WK_STK both holding NFLX)
-            if symbol in all_broker_equity_symbols and symbol not in open_symbols:
+            # Note: own positions are already caught by `open_symbols` check above
+            if symbol in all_broker_equity_symbols:
                 logging.info(f"CROSS-BOT BLOCK: {symbol} already held by another bot — skipping")
                 continue
             

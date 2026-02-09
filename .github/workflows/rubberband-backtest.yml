@@ -74,8 +74,10 @@ jobs:
           # Reset health file to prevent paused tickers from prior runs
           Set-Content -Path "backtest_health.json" -Value "{}" -Force
           
-          # Construct args
-          $btArgs = @("--days", "${{ inputs.days }}")
+          # Construct args (default to 30 days on push trigger when inputs.days is empty)
+          $days = "${{ inputs.days }}"
+          if ($days -eq "") { $days = "30" }
+          $btArgs = @("--days", $days)
           
           if ("${{ inputs.slope_threshold }}" -ne "") {
             $btArgs += "--slope-threshold"
