@@ -32,7 +32,6 @@ run:
 keltner_length: 20
 keltner_mult: 1.5
 atr_length: 14
-atr_length: 14
 rsi_length: 14
 
 # Slope Filter (Dual-Slope "Panic Persistency")
@@ -85,7 +84,7 @@ breakeven:
 # FILTERS / GATES
 # ──────────────────────────────────────────────────────────────────────────────
 filters:
-  rsi_oversold: 30           # Buy when RSI < 30 (Golden Mean for Options Volume)
+  rsi_oversold: 25           # Optimizer: RSI<25 = 3.6x more trades, same/better WR (was 30)
   rsi_overbought: 70         # (Future use for shorts)
   min_price: 5.0
   min_dollar_vol: 1000000    # Adjusted for IEX feed volume

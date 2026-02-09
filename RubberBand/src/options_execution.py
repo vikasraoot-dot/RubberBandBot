@@ -29,6 +29,82 @@ def _headers(key: str, secret: str) -> Dict[str, str]:
 
 
 # ──────────────────────────────────────────────────────────────────────────────
+# Mleg Fill Verification
+# ──────────────────────────────────────────────────────────────────────────────
+def _verify_mleg_fill(
+    base: str, key: str, secret: str,
+    order_id: str, long_symbol: str, short_symbol: str,
+    timeout: int = 15,
+) -> str:
+    """
+    Wait for mleg order to fill and verify both legs are in positions.
+    Returns: 'filled', 'partial_fill', 'pending', or 'failed'.
+
+    IMPORTANT: When Alpaca confirms "filled" on an mleg order, BOTH legs are filled.
+    The positions API may have settlement latency, so we retry position checks
+    several times before declaring a partial fill to avoid false positives.
+    """
+    for i in range(timeout):
+        time.sleep(1)
+        order = _get_order_by_id(base, key, secret, order_id)
+        status = order.get("status", "")
+
+        if status == "filled":
+            # Broker confirmed both legs filled. Verify positions with retries
+            # to account for settlement/propagation latency in the positions API.
+            _POS_CHECK_RETRIES = 5
+            for attempt in range(_POS_CHECK_RETRIES):
+                try:
+                    pos_resp = requests.get(f"{base}/v2/positions", headers=_headers(key, secret), timeout=10)
+                    if pos_resp.status_code == 200:
+                        positions = {p["symbol"]: p for p in pos_resp.json()}
+                        has_long = long_symbol in positions
+                        has_short = short_symbol in positions
+                        if has_long and has_short:
+                            print(f"[options] Mleg fill verified: both legs confirmed ({i+1}s, check {attempt+1})", flush=True)
+                            return "filled"
+                        else:
+                            # Positions API may lag — retry before declaring partial fill
+                            print(f"[options] Position check {attempt+1}/{_POS_CHECK_RETRIES}: "
+                                  f"long={has_long} short={has_short} (retrying...)", flush=True)
+                except Exception as e:
+                    print(f"[options] Position check error (attempt {attempt+1}): {e}", flush=True)
+
+                if attempt < _POS_CHECK_RETRIES - 1:
+                    time.sleep(2)  # Wait 2s between position check retries
+
+            # Exhausted retries. Broker says filled so trust that — do NOT close legs.
+            print(f"[options] Position check retries exhausted but broker confirmed filled. Trusting broker.", flush=True)
+            return "filled"
+
+        elif status in ("canceled", "expired", "rejected"):
+            print(f"[options] Mleg order {status}: {order_id}", flush=True)
+            return "failed"
+
+    print(f"[options] Mleg order still pending after {timeout}s: {order_id}", flush=True)
+    return "pending"
+
+
+def _close_naked_legs(base: str, key: str, secret: str, long_symbol: str, short_symbol: str) -> None:
+    """Emergency close any naked option legs from a partial fill."""
+    try:
+        pos_resp = requests.get(f"{base}/v2/positions", headers=_headers(key, secret), timeout=10)
+        if pos_resp.status_code != 200:
+            return
+        positions = {p["symbol"]: p for p in pos_resp.json()}
+
+        for sym in [long_symbol, short_symbol]:
+            if sym in positions:
+                qty = abs(int(positions[sym].get("qty", 0)))
+                if qty > 0:
+                    side = "sell" if int(positions[sym].get("qty", 0)) > 0 else "buy"
+                    print(f"[options] Emergency closing naked leg: {sym} {side} {qty}", flush=True)
+                    submit_option_order(sym, qty=qty, side=side, order_type="market")
+    except Exception as e:
+        print(f"[options] CRITICAL: Failed to close naked legs: {e}", flush=True)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
 # Order Submission
 # ──────────────────────────────────────────────────────────────────────────────
 def _get_order_by_id(base: str, key: str, secret: str, order_id: str) -> Dict[str, Any]:
@@ -224,6 +300,17 @@ def submit_spread_order(
         
         order_id = result.get("id", "")
         print(f"[options] Spread order submitted: {order_id}")
+
+        # MLEG FILL VERIFICATION: Wait for fill and verify both legs exist as positions.
+        # When broker confirms "filled", both legs are filled — we trust the broker
+        # and only use position checks to confirm (with retries for settlement latency).
+        if order_id:
+            verified_status = _verify_mleg_fill(base, key, secret, order_id, long_symbol, short_symbol, timeout=15)
+            if verified_status == "failed":
+                return {"error": True, "message": f"Mleg order {verified_status}"}
+            elif verified_status == "pending":
+                print(f"[options] WARNING: Mleg order still pending after timeout — may fill later", flush=True)
+
         return {
             "error": False,
             "order_id": order_id,

@@ -144,8 +144,16 @@ def run_weekly_cycle():
     
     positions = validated_positions
     open_symbols = {p.get("symbol") for p in positions if p.get("symbol")}
-    
+
+    # CROSS-BOT AWARENESS: Track ALL broker equity positions (any bot) to prevent
+    # position stacking when multiple bots (15M_STK, WK_STK) target the same ticker.
+    all_broker_equity_symbols = {
+        p.get("symbol") for p in all_positions
+        if p.get("symbol") and p.get("asset_class", "us_equity") == "us_equity"
+    }
+
     logging.info(f"Open Positions ({BOT_TAG}): {len(open_symbols)}")
+    logging.info(f"All Broker Equity Positions: {len(all_broker_equity_symbols)} ({all_broker_equity_symbols})")
 
     if positions:
         logging.info("--- Current Holdings ---")
@@ -221,8 +229,14 @@ def run_weekly_cycle():
     entries_made = 0
     for symbol in tickers:
         try:
-            # Skip if already in position
+            # Skip if already in position (own registry)
             if symbol in open_symbols:
+                continue
+
+            # CROSS-BOT GATE: Skip if ANY other bot already holds this ticker
+            # Prevents position stacking (e.g., 15M_STK + WK_STK both holding NFLX)
+            if symbol in all_broker_equity_symbols and symbol not in open_symbols:
+                logging.info(f"CROSS-BOT BLOCK: {symbol} already held by another bot — skipping")
                 continue
             
             # Check position limit
