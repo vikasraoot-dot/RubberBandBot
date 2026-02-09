@@ -216,8 +216,8 @@ DEFAULT_SPREAD_CONFIG = {
     "spread_width_atr": 1.5,
     "max_debit": 1.00,             # Reduced to 1.00 to match Backtest (Avoid High IV)
     "contracts": 1,
-    "tp_max_profit_pct": 80.0,
-    "sl_pct": -30.0,               # Tightened Stop Loss to -30% per user request (was -80%)
+    "tp_max_profit_pct": 50.0,     # Realistic TP for spreads (was 80% — rarely hit)
+    "sl_pct": -25.0,               # Tighter SL (was -30%) + no confirmation delay = faster exits
     "bars_stop": 10,               # Time Stop: 10 bars (~2.5 hours) - Match Backtest
     "hold_overnight": True,
 }
@@ -825,14 +825,15 @@ def calculate_spread_pnl(
     raw_spread_value = long_value - short_value
 
     # SPREAD INVERSION DETECTION: A bull call spread can NEVER be worth less than $0.
-    # Negative values indicate stale/bad quotes. Clamp to 0 and log warning.
+    # Negative values indicate stale/bad quotes. Return None to signal caller to skip exit logic.
     if raw_spread_value < 0:
         underlying = long_symbol[:6].rstrip("0123456789") if long_symbol else "???"
         print(f"[positions] WARNING: Spread inversion detected for {underlying}!", flush=True)
         print(f"[positions]   Long({long_symbol}): ${long_value:.4f}", flush=True)
         print(f"[positions]   Short({short_symbol}): ${short_value:.4f}", flush=True)
-        print(f"[positions]   Raw spread value: ${raw_spread_value:.4f} (clamped to $0.00)", flush=True)
+        print(f"[positions]   Raw spread value: ${raw_spread_value:.4f} (BAD QUOTE — skipping exit check)", flush=True)
         print(f"[positions]   Quote source: {quote_source}", flush=True)
+        return None, None  # Signal bad data — caller must skip exit decision
 
     current_spread_value = max(0.0, raw_spread_value)
 
@@ -846,7 +847,7 @@ def calculate_spread_pnl(
 # SL confirmation: track consecutive SL readings per underlying to prevent
 # single-cycle quote glitches from triggering irreversible exits.
 _sl_consecutive: Dict[str, int] = {}
-_SL_CONFIRM_REQUIRED = 2  # Must see SL condition N consecutive cycles before exiting
+_SL_CONFIRM_REQUIRED = 1  # Immediate SL exit for options (was 2 — caused 63% MRK loss from 2-min delay)
 
 
 def check_spread_exit_conditions(
@@ -1107,6 +1108,11 @@ def manage_positions(
         # Calculate spread P&L
         pnl, pnl_pct = calculate_spread_pnl(long_pos, short_pos, entry_debit)
 
+        # BAD QUOTE GUARD: If P&L returned None, quotes are inverted/stale — skip exit logic this cycle
+        if pnl is None or pnl_pct is None:
+            print(f"[positions] Skipping exit check for {underlying}: bad quote data (will retry next cycle)", flush=True)
+            continue
+
         # Calculate holding_minutes from registry entry_date (P1 fix: pass to check_spread_exit_conditions)
         # Reuse registry_entry from earlier lookup if available
         holding_minutes = 0
@@ -1328,7 +1334,7 @@ def run_scan_cycle(
 # ──────────────────────────────────────────────────────────────────────────────
 # Main Loop
 # ──────────────────────────────────────────────────────────────────────────────
-SCAN_INTERVAL_SECONDS = 60  # 1 minute scan (for intra-bar auditing)
+SCAN_INTERVAL_SECONDS = 30  # 30-second scan for faster options reaction (was 60s)
 
 
 def main() -> int:
@@ -1387,7 +1393,7 @@ def main() -> int:
         contracts=spread_cfg["contracts"],
         tp_pct=spread_cfg["tp_max_profit_pct"],
         sl_pct=spread_cfg["sl_pct"],
-        scan_interval_min=SCAN_INTERVAL_SECONDS // 60,
+        scan_interval_sec=SCAN_INTERVAL_SECONDS,
     )
 
     # --- Dynamic Regime Detection ---

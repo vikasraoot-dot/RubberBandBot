@@ -75,48 +75,49 @@ jobs:
           Set-Content -Path "backtest_health.json" -Value "{}" -Force
           
           # Construct args
-          $args = @("--days", "${{ inputs.days }}")
+          $btArgs = @("--days", "${{ inputs.days }}")
           
           if ("${{ inputs.slope_threshold }}" -ne "") {
-            $args += "--slope-threshold"
-            $args += "${{ inputs.slope_threshold }}"
+            $btArgs += "--slope-threshold"
+            $btArgs += "${{ inputs.slope_threshold }}"
           }
 
           if ("${{ inputs.symbols }}" -ne "") {
-            $args += "--symbols"
-            $args += "${{ inputs.symbols }}"
+            $btArgs += "--symbols"
+            $btArgs += "${{ inputs.symbols }}"
           }
           
           if ("${{ inputs.slope_threshold_10 }}" -ne "") {
-            $args += "--slope-threshold-10"
-            $args += "${{ inputs.slope_threshold_10 }}"
+            $btArgs += "--slope-threshold-10"
+            $btArgs += "${{ inputs.slope_threshold_10 }}"
           }
           
           if ("${{ inputs.adx_max }}" -ne "0" -and "${{ inputs.adx_max }}" -ne "") {
-            $args += "--adx-max"
-            $args += "${{ inputs.adx_max }}"
+            $btArgs += "--adx-max"
+            $btArgs += "${{ inputs.adx_max }}"
           }
 
           if ("${{ inputs.rsi_entry }}" -ne "") {
-            $args += "--rsi-entry"
-            $args += "${{ inputs.rsi_entry }}"
+            $btArgs += "--rsi-entry"
+            $btArgs += "${{ inputs.rsi_entry }}"
           }
 
           if ("${{ inputs.tp_r }}" -ne "") {
-            $args += "--tp-r"
-            $args += "${{ inputs.tp_r }}"
+            $btArgs += "--tp-r"
+            $btArgs += "${{ inputs.tp_r }}"
           }
 
           if ("${{ inputs.sl_atr }}" -ne "") {
-            $args += "--sl-atr"
-            $args += "${{ inputs.sl_atr }}"
+            $btArgs += "--sl-atr"
+            $btArgs += "${{ inputs.sl_atr }}"
           }
 
           if ("${{ inputs.dead_knife_filter }}" -eq "true") {
-            $args += "--dead-knife-filter"
+            $btArgs += "--dead-knife-filter"
           }
           
-          python -X utf8 -u RubberBand/scripts/backtest.py @args *>&1 | Tee-Object -FilePath "console.log"
+          $cmd = "python -X utf8 -u RubberBand/scripts/backtest.py $($btArgs -join ' ')"
+          Invoke-Expression "$cmd *>&1 | Tee-Object -FilePath 'console.log'"
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4

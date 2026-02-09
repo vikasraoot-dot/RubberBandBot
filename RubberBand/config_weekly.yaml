@@ -25,8 +25,8 @@ indicators:
 
 # --- Entry Filters (Weekly-Calibrated) ---
 filters:
-  # Weekly RSI rarely drops below 30, so we use 45-50
-  rsi_oversold: 45          # Buy when RSI < 45
+  # Weekly RSI rarely drops below 30, so we use 40
+  rsi_oversold: 40          # Buy when RSI < 40 (tightened from 45 to reduce low-conviction entries)
   rsi_overbought: 55        # Short when RSI > 55 (not used)
   
   # Mean Deviation: How far below 20-week SMA to trigger (the "stretch")
@@ -37,8 +37,8 @@ filters:
 
 # --- Brackets (Weekly-Calibrated) ---
 brackets:
-  atr_mult_sl: 2.0          # Stop loss at 2x ATR (wider for weekly)
-  take_profit_r: 2.5        # Risk:Reward 1:2.5
+  atr_mult_sl: 1.5          # Stop loss at 1.5x ATR (was 2.0 → produced 18-25% SL, now 12-15%)
+  take_profit_r: 1.5        # R:R 1:1.5 → effective TP = 2.25x ATR (was 5.0x → 40-60% targets)
   
 # --- Trend Filter ---
 trend_filter:

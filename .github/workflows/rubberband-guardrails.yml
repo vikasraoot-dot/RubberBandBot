@@ -19,8 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set Python path
-        run: echo "PYTHON_EXE=C:\Program Files\Python313\python.exe" >> $env:GITHUB_ENV
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = "C:\Python313\python.exe"
+          if (-not (Test-Path $python)) {
+            $python = (Get-Command python.exe -ErrorAction SilentlyContinue).Source
+            if (-not $python) { throw "Python not found!" }
+          }
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
 
       - name: Install deps
         run: |
