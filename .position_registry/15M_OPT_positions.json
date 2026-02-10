@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-10T12:00:16.776343-05:00",
-  "positions": {},
+  "updated_at": "2026-02-10T13:33:08.315628-05:00",
+  "positions": {
+    "WFC260220C00090000": {
+      "symbol": "WFC260220C00090000",
+      "underlying": "WFC",
+      "client_order_id": "15M_OPT_WFC260220C00090000_1770748378",
+      "order_id": "a67685de-6d7c-46af-8d31-c4e549bd5a79",
+      "qty": 1,
+      "entry_price": 0.74,
+      "entry_date": "2026-02-10T13:33:08.315381-05:00",
+      "status": "open",
+      "short_symbol": "WFC260220C00091000"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
