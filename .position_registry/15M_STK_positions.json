@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T11:46:47.457728-05:00",
+  "updated_at": "2026-02-10T12:55:00.763818-05:00",
   "positions": {
     "MS": {
       "symbol": "MS",
@@ -10,16 +10,6 @@
       "qty": 3,
       "entry_price": 175.0,
       "entry_date": "2026-02-10T11:31:51.741233-05:00",
-      "status": "open"
-    },
-    "SCHW": {
-      "symbol": "SCHW",
-      "underlying": "SCHW",
-      "client_order_id": "15M_STK_SCHW_1770741999",
-      "order_id": "b96e652a-556a-4ab8-b437-0b1fdf3c5775",
-      "qty": 6,
-      "entry_price": 100.36,
-      "entry_date": "2026-02-10T11:46:47.457496-05:00",
       "status": "open"
     }
   },
@@ -117,6 +107,18 @@
       "entry_date": "2026-02-10T10:36:47.570260-05:00",
       "status": "closed",
       "exit_date": "2026-02-10T11:20:01.078439-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "SCHW",
+      "underlying": "SCHW",
+      "client_order_id": "15M_STK_SCHW_1770741999",
+      "order_id": "b96e652a-556a-4ab8-b437-0b1fdf3c5775",
+      "qty": 6,
+      "entry_price": 100.36,
+      "entry_date": "2026-02-10T11:46:47.457496-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-10T12:55:00.763429-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
