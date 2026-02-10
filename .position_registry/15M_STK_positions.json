@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T14:16:58.230733-05:00",
+  "updated_at": "2026-02-10T15:05:00.846144-05:00",
   "positions": {
     "MS": {
       "symbol": "MS",
@@ -20,16 +20,6 @@
       "qty": 1,
       "entry_price": 394.75,
       "entry_date": "2026-02-10T14:16:45.657987-05:00",
-      "status": "open"
-    },
-    "BAC": {
-      "symbol": "BAC",
-      "underlying": "BAC",
-      "client_order_id": "15M_STK_BAC_1770751010",
-      "order_id": "70dfdef8-8f56-42f0-a48a-7b43d0f368eb",
-      "qty": 36,
-      "entry_price": 54.6,
-      "entry_date": "2026-02-10T14:16:58.230251-05:00",
       "status": "open"
     }
   },
@@ -151,6 +141,18 @@
       "entry_date": "2026-02-10T13:36:43.792565-05:00",
       "status": "closed",
       "exit_date": "2026-02-10T13:50:00.606315-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "BAC",
+      "underlying": "BAC",
+      "client_order_id": "15M_STK_BAC_1770751010",
+      "order_id": "70dfdef8-8f56-42f0-a48a-7b43d0f368eb",
+      "qty": 36,
+      "entry_price": 54.6,
+      "entry_date": "2026-02-10T14:16:58.230251-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-10T15:05:00.845762-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
