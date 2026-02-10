@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T12:55:00.763818-05:00",
+  "updated_at": "2026-02-10T13:36:43.792914-05:00",
   "positions": {
     "MS": {
       "symbol": "MS",
@@ -10,6 +10,16 @@
       "qty": 3,
       "entry_price": 175.0,
       "entry_date": "2026-02-10T11:31:51.741233-05:00",
+      "status": "open"
+    },
+    "WFC": {
+      "symbol": "WFC",
+      "underlying": "WFC",
+      "client_order_id": "15M_STK_WFC_1770748597",
+      "order_id": "8f4315b5-6f70-4e14-9d15-06e7133a6a33",
+      "qty": 7,
+      "entry_price": 90.34,
+      "entry_date": "2026-02-10T13:36:43.792565-05:00",
       "status": "open"
     }
   },
