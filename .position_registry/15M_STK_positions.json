@@ -1,7 +1,18 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T11:20:01.078666-05:00",
-  "positions": {},
+  "updated_at": "2026-02-10T11:31:51.741488-05:00",
+  "positions": {
+    "MS": {
+      "symbol": "MS",
+      "underlying": "MS",
+      "client_order_id": "15M_STK_MS_1770741105",
+      "order_id": "6dd44595-a648-403f-91a9-81f16fab158a",
+      "qty": 3,
+      "entry_price": 175.0,
+      "entry_date": "2026-02-10T11:31:51.741233-05:00",
+      "status": "open"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "UBER",
