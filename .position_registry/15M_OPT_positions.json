@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-10T11:33:08.198948-05:00",
-  "positions": {},
+  "updated_at": "2026-02-10T11:59:35.620896-05:00",
+  "positions": {
+    "SCHW260220C00101000": {
+      "symbol": "SCHW260220C00101000",
+      "underlying": "SCHW",
+      "client_order_id": "15M_OPT_SCHW260220C00101000_1770742765",
+      "order_id": "d22d3d3e-fd0e-4edc-9db6-1a0652618fdd",
+      "qty": 1,
+      "entry_price": 0.76,
+      "entry_date": "2026-02-10T11:59:35.620592-05:00",
+      "status": "open",
+      "short_symbol": "SCHW260220C00102000"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
