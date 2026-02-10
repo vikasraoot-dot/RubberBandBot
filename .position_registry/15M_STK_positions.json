@@ -1,28 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T15:05:00.846144-05:00",
-  "positions": {
-    "MS": {
-      "symbol": "MS",
-      "underlying": "MS",
-      "client_order_id": "15M_STK_MS_1770741105",
-      "order_id": "6dd44595-a648-403f-91a9-81f16fab158a",
-      "qty": 3,
-      "entry_price": 175.0,
-      "entry_date": "2026-02-10T11:31:51.741233-05:00",
-      "status": "open"
-    },
-    "CVNA": {
-      "symbol": "CVNA",
-      "underlying": "CVNA",
-      "client_order_id": "15M_STK_CVNA_1770750998",
-      "order_id": "f95b36ea-150b-4213-afb7-80e3f55ba09b",
-      "qty": 1,
-      "entry_price": 394.75,
-      "entry_date": "2026-02-10T14:16:45.657987-05:00",
-      "status": "open"
-    }
-  },
+  "updated_at": "2026-02-10T15:50:02.625410-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "UBER",
@@ -154,6 +133,30 @@
       "status": "closed",
       "exit_date": "2026-02-10T15:05:00.845762-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "MS",
+      "underlying": "MS",
+      "client_order_id": "15M_STK_MS_1770741105",
+      "order_id": "6dd44595-a648-403f-91a9-81f16fab158a",
+      "qty": 3,
+      "entry_price": 175.0,
+      "entry_date": "2026-02-10T11:31:51.741233-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-10T15:50:02.625043-05:00",
+      "exit_reason": "orphaned_sync"
+    },
+    {
+      "symbol": "CVNA",
+      "underlying": "CVNA",
+      "client_order_id": "15M_STK_CVNA_1770750998",
+      "order_id": "f95b36ea-150b-4213-afb7-80e3f55ba09b",
+      "qty": 1,
+      "entry_price": 394.75,
+      "entry_date": "2026-02-10T14:16:45.657987-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-10T15:50:02.625076-05:00",
+      "exit_reason": "orphaned_sync"
     }
   ]
 }
