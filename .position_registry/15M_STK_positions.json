@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T10:31:57.959710-05:00",
+  "updated_at": "2026-02-10T10:36:47.570560-05:00",
   "positions": {
     "NOC": {
       "symbol": "NOC",
@@ -10,6 +10,16 @@
       "qty": 2,
       "entry_price": 687.36,
       "entry_date": "2026-02-10T10:31:57.959450-05:00",
+      "status": "open"
+    },
+    "HAL": {
+      "symbol": "HAL",
+      "underlying": "HAL",
+      "client_order_id": "15M_STK_HAL_1770737799",
+      "order_id": "ae05bc33-ec1d-4d80-a99e-f12f5e46bde3",
+      "qty": 58,
+      "entry_price": 34.04,
+      "entry_date": "2026-02-10T10:36:47.570260-05:00",
       "status": "open"
     }
   },
