@@ -1,17 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T10:36:47.570560-05:00",
+  "updated_at": "2026-02-10T10:40:00.887690-05:00",
   "positions": {
-    "NOC": {
-      "symbol": "NOC",
-      "underlying": "NOC",
-      "client_order_id": "15M_STK_NOC_1770737510",
-      "order_id": "d6fd1c7e-64b0-4e0e-853d-4a8bca3d9072",
-      "qty": 2,
-      "entry_price": 687.36,
-      "entry_date": "2026-02-10T10:31:57.959450-05:00",
-      "status": "open"
-    },
     "HAL": {
       "symbol": "HAL",
       "underlying": "HAL",
@@ -93,6 +83,18 @@
       "entry_date": "2026-02-09T10:16:51.116013-05:00",
       "status": "closed",
       "exit_date": "2026-02-10T09:54:56.720342-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "NOC",
+      "underlying": "NOC",
+      "client_order_id": "15M_STK_NOC_1770737510",
+      "order_id": "d6fd1c7e-64b0-4e0e-853d-4a8bca3d9072",
+      "qty": 2,
+      "entry_price": 687.36,
+      "entry_date": "2026-02-10T10:31:57.959450-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-10T10:40:00.887369-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
