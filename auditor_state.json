@@ -46,22 +46,6 @@
       "pnl": 0.0,
       "current_price": 330.945,
       "unrealized_pnl": 0.0
-    },
-    "SHADOW_15M_STK_VRTX_20260204T144959926129+0000": {
-      "id": "SHADOW_15M_STK_VRTX_20260204T144959926129+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "VRTX",
-      "entry_price": 470.655,
-      "entry_time": "2026-02-04T14:49:59.926129+00:00",
-      "reason": "Slope3_Too_Flat(0.0352% > -0.2%)",
-      "qty": 100,
-      "tp_price": 475.36154999999997,
-      "sl_price": 465.94845,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 467.11,
-      "unrealized_pnl": -354.4999999999959
     }
   },
   "closed_positions": [
@@ -17408,6 +17392,26 @@
       "exit_time": "2026-02-09T21:04:38.179086+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -84.09999999999998
+    },
+    {
+      "id": "SHADOW_15M_STK_VRTX_20260204T144959926129+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "VRTX",
+      "entry_price": 470.655,
+      "entry_time": "2026-02-04T14:49:59.926129+00:00",
+      "reason": "Slope3_Too_Flat(0.0352% > -0.2%)",
+      "qty": 100,
+      "tp_price": 475.36154999999997,
+      "sl_price": 465.94845,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 463.11,
+      "unrealized_pnl": -754.4999999999959,
+      "exit_price": 463.11,
+      "exit_time": "2026-02-10T20:57:11.808073+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -754.4999999999959
     }
   ],
   "processed_lines": {
