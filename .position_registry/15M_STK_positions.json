@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T13:35:00.393143-05:00",
+  "updated_at": "2026-02-11T14:05:00.133377-05:00",
   "positions": {
     "BIDU": {
       "symbol": "BIDU",
@@ -20,16 +20,6 @@
       "qty": 4,
       "entry_price": 140.16,
       "entry_date": "2026-02-11T10:52:13.491004-05:00",
-      "status": "open"
-    },
-    "CMG": {
-      "symbol": "CMG",
-      "underlying": "CMG",
-      "client_order_id": "15M_STK_CMG_1770825133",
-      "order_id": "6ba9f03d-fcc7-43b5-820e-8a1849fd06ca",
-      "qty": 17,
-      "entry_price": 37.31,
-      "entry_date": "2026-02-11T10:52:23.347966-05:00",
       "status": "open"
     }
   },
@@ -223,6 +213,18 @@
       "entry_date": "2026-02-11T13:02:02.447086-05:00",
       "status": "closed",
       "exit_date": "2026-02-11T13:35:00.392826-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "CMG",
+      "underlying": "CMG",
+      "client_order_id": "15M_STK_CMG_1770825133",
+      "order_id": "6ba9f03d-fcc7-43b5-820e-8a1849fd06ca",
+      "qty": 17,
+      "entry_price": 37.31,
+      "entry_date": "2026-02-11T10:52:23.347966-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-11T14:05:00.132645-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
