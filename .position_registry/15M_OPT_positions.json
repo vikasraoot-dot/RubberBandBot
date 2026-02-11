@@ -1,19 +1,7 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-11T13:05:46.790470-05:00",
-  "positions": {
-    "DAL260220C00072000": {
-      "symbol": "DAL260220C00072000",
-      "underlying": "DAL",
-      "client_order_id": "15M_OPT_DAL260220C00072000_1770833105",
-      "order_id": "d4d169bb-9eb0-4111-9ee2-26f743da08c1",
-      "qty": 1,
-      "entry_price": 0.34,
-      "entry_date": "2026-02-11T13:05:46.790087-05:00",
-      "status": "open",
-      "short_symbol": "DAL260220C00072500"
-    }
-  },
+  "updated_at": "2026-02-11T13:09:14.806052-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
@@ -434,6 +422,21 @@
       "exit_date": "2026-02-10T13:34:14.285598-05:00",
       "exit_reason": "SL_hit(-34.0%<=-25.0%)_CONFIRMED(x1)",
       "pnl": -26.500000000000014
+    },
+    {
+      "symbol": "DAL260220C00072000",
+      "underlying": "DAL",
+      "client_order_id": "15M_OPT_DAL260220C00072000_1770833105",
+      "order_id": "d4d169bb-9eb0-4111-9ee2-26f743da08c1",
+      "qty": 1,
+      "entry_price": 0.34,
+      "entry_date": "2026-02-11T13:05:46.790087-05:00",
+      "status": "closed",
+      "short_symbol": "DAL260220C00072500",
+      "exit_price": 0.22999999999999976,
+      "exit_date": "2026-02-11T13:09:14.805744-05:00",
+      "exit_reason": "SL_hit(-32.4%<=-25.0%)_CONFIRMED(x1)",
+      "pnl": -11.000000000000027
     }
   ]
 }
