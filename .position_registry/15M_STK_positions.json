@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T13:02:02.447438-05:00",
+  "updated_at": "2026-02-11T13:35:00.393143-05:00",
   "positions": {
     "BIDU": {
       "symbol": "BIDU",
@@ -30,16 +30,6 @@
       "qty": 17,
       "entry_price": 37.31,
       "entry_date": "2026-02-11T10:52:23.347966-05:00",
-      "status": "open"
-    },
-    "DAL": {
-      "symbol": "DAL",
-      "underlying": "DAL",
-      "client_order_id": "15M_STK_DAL_1770832913",
-      "order_id": "acd06088-33dc-45e6-8a42-252b43206dd8",
-      "qty": 27,
-      "entry_price": 71.94963,
-      "entry_date": "2026-02-11T13:02:02.447086-05:00",
       "status": "open"
     }
   },
@@ -221,6 +211,18 @@
       "entry_date": "2026-02-11T10:36:48.301908-05:00",
       "status": "closed",
       "exit_date": "2026-02-11T11:35:00.166432-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "DAL",
+      "underlying": "DAL",
+      "client_order_id": "15M_STK_DAL_1770832913",
+      "order_id": "acd06088-33dc-45e6-8a42-252b43206dd8",
+      "qty": 27,
+      "entry_price": 71.94963,
+      "entry_date": "2026-02-11T13:02:02.447086-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-11T13:35:00.392826-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
