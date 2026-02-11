@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T10:22:06.413472-05:00",
+  "updated_at": "2026-02-11T10:36:48.302323-05:00",
   "positions": {
     "ICE": {
       "symbol": "ICE",
@@ -10,6 +10,16 @@
       "qty": 4,
       "entry_price": 161.11,
       "entry_date": "2026-02-11T10:22:06.413048-05:00",
+      "status": "open"
+    },
+    "SATS": {
+      "symbol": "SATS",
+      "underlying": "SATS",
+      "client_order_id": "15M_STK_SATS_1770824201",
+      "order_id": "9311d026-98f8-4048-9e3b-4618f421a2ba",
+      "qty": 5,
+      "entry_price": 110.45,
+      "entry_date": "2026-02-11T10:36:48.301908-05:00",
       "status": "open"
     }
   },
