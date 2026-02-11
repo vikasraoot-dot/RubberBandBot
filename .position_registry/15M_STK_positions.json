@@ -1,7 +1,18 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-10T15:50:02.625410-05:00",
-  "positions": {},
+  "updated_at": "2026-02-11T10:22:06.413472-05:00",
+  "positions": {
+    "ICE": {
+      "symbol": "ICE",
+      "underlying": "ICE",
+      "client_order_id": "15M_STK_ICE_1770823318",
+      "order_id": "88cb228e-2105-4e39-b7ec-d03cfe92f619",
+      "qty": 4,
+      "entry_price": 161.11,
+      "entry_date": "2026-02-11T10:22:06.413048-05:00",
+      "status": "open"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "UBER",
