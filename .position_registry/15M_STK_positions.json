@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T10:36:48.302323-05:00",
+  "updated_at": "2026-02-11T10:47:06.108234-05:00",
   "positions": {
     "ICE": {
       "symbol": "ICE",
@@ -20,6 +20,16 @@
       "qty": 5,
       "entry_price": 110.45,
       "entry_date": "2026-02-11T10:36:48.301908-05:00",
+      "status": "open"
+    },
+    "BIDU": {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770824817",
+      "order_id": "2c8b90e5-042c-4314-8bf2-a2b15ae50886",
+      "qty": 4,
+      "entry_price": 143.71,
+      "entry_date": "2026-02-11T10:47:06.107827-05:00",
       "status": "open"
     }
   },
