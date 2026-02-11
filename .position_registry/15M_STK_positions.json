@@ -1,17 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T10:47:06.108234-05:00",
+  "updated_at": "2026-02-11T10:52:23.348342-05:00",
   "positions": {
-    "ICE": {
-      "symbol": "ICE",
-      "underlying": "ICE",
-      "client_order_id": "15M_STK_ICE_1770823318",
-      "order_id": "88cb228e-2105-4e39-b7ec-d03cfe92f619",
-      "qty": 4,
-      "entry_price": 161.11,
-      "entry_date": "2026-02-11T10:22:06.413048-05:00",
-      "status": "open"
-    },
     "SATS": {
       "symbol": "SATS",
       "underlying": "SATS",
@@ -30,6 +20,26 @@
       "qty": 4,
       "entry_price": 143.71,
       "entry_date": "2026-02-11T10:47:06.107827-05:00",
+      "status": "open"
+    },
+    "APH": {
+      "symbol": "APH",
+      "underlying": "APH",
+      "client_order_id": "15M_STK_APH_1770825123",
+      "order_id": "7e710c72-544e-4825-a4fb-67b645230b3e",
+      "qty": 4,
+      "entry_price": 140.16,
+      "entry_date": "2026-02-11T10:52:13.491004-05:00",
+      "status": "open"
+    },
+    "CMG": {
+      "symbol": "CMG",
+      "underlying": "CMG",
+      "client_order_id": "15M_STK_CMG_1770825133",
+      "order_id": "6ba9f03d-fcc7-43b5-820e-8a1849fd06ca",
+      "qty": 17,
+      "entry_price": 37.31,
+      "entry_date": "2026-02-11T10:52:23.347966-05:00",
       "status": "open"
     }
   },
@@ -188,6 +198,18 @@
       "status": "closed",
       "exit_date": "2026-02-10T15:50:02.625076-05:00",
       "exit_reason": "orphaned_sync"
+    },
+    {
+      "symbol": "ICE",
+      "underlying": "ICE",
+      "client_order_id": "15M_STK_ICE_1770823318",
+      "order_id": "88cb228e-2105-4e39-b7ec-d03cfe92f619",
+      "qty": 4,
+      "entry_price": 161.11,
+      "entry_date": "2026-02-11T10:22:06.413048-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-11T10:50:00.503474-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
