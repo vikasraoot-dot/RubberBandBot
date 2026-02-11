@@ -1,17 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T14:05:00.133377-05:00",
+  "updated_at": "2026-02-11T15:25:00.982256-05:00",
   "positions": {
-    "BIDU": {
-      "symbol": "BIDU",
-      "underlying": "BIDU",
-      "client_order_id": "15M_STK_BIDU_1770824817",
-      "order_id": "2c8b90e5-042c-4314-8bf2-a2b15ae50886",
-      "qty": 4,
-      "entry_price": 143.71,
-      "entry_date": "2026-02-11T10:47:06.107827-05:00",
-      "status": "open"
-    },
     "APH": {
       "symbol": "APH",
       "underlying": "APH",
@@ -225,6 +215,18 @@
       "entry_date": "2026-02-11T10:52:23.347966-05:00",
       "status": "closed",
       "exit_date": "2026-02-11T14:05:00.132645-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770824817",
+      "order_id": "2c8b90e5-042c-4314-8bf2-a2b15ae50886",
+      "qty": 4,
+      "entry_price": 143.71,
+      "entry_date": "2026-02-11T10:47:06.107827-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-11T15:25:00.981956-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
