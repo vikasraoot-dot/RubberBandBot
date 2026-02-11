@@ -1,20 +1,5 @@
 {
   "positions": {
-    "SHADOW_15M_STK_WDC_1767371812": {
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "WDC",
-      "entry_price": 69.77000000000001,
-      "entry_time": "2026-01-02T16:13:43.407481+00:00",
-      "reason": "Slope3_Too_Flat(0.4565% > -0.08%)",
-      "qty": 100,
-      "tp_price": 70.46770000000001,
-      "sl_price": 69.07230000000001,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 69.77000000000001,
-      "unrealized_pnl": 0.0
-    },
     "SHADOW_15M_STK_B_20260107T144501367764+0000": {
       "id": "SHADOW_15M_STK_B_20260107T144501367764+0000",
       "type": "STOCK",
@@ -17412,6 +17397,25 @@
       "exit_time": "2026-02-10T20:57:11.808073+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -754.4999999999959
+    },
+    {
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "WDC",
+      "entry_price": 69.77000000000001,
+      "entry_time": "2026-01-02T16:13:43.407481+00:00",
+      "reason": "Slope3_Too_Flat(0.4565% > -0.08%)",
+      "qty": 100,
+      "tp_price": 70.46770000000001,
+      "sl_price": 69.07230000000001,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 273.0,
+      "unrealized_pnl": 20323.0,
+      "exit_price": 273.0,
+      "exit_time": "2026-02-11T15:06:13.632952+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 20323.0
     }
   ],
   "processed_lines": {
