@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T11:45:01.214778-05:00",
+  "updated_at": "2026-02-12T12:00:00.530647-05:00",
   "positions": {
     "FCX": {
       "symbol": "FCX",
@@ -10,16 +10,6 @@
       "qty": 32,
       "entry_price": 61.91,
       "entry_date": "2026-02-12T11:38:07.434156-05:00",
-      "status": "open"
-    },
-    "DAL": {
-      "symbol": "DAL",
-      "underlying": "DAL",
-      "client_order_id": "15M_STK_DAL_1770914288",
-      "order_id": "de5c7f10-2d13-4d56-a533-c8403ebdff69",
-      "qty": 9,
-      "entry_price": 69.83,
-      "entry_date": "2026-02-12T11:38:15.940014-05:00",
       "status": "open"
     },
     "CFG": {
@@ -317,6 +307,18 @@
       "entry_date": "2026-02-12T11:24:30.962512-05:00",
       "status": "closed",
       "exit_date": "2026-02-12T11:45:01.214544-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "DAL",
+      "underlying": "DAL",
+      "client_order_id": "15M_STK_DAL_1770914288",
+      "order_id": "de5c7f10-2d13-4d56-a533-c8403ebdff69",
+      "qty": 9,
+      "entry_price": 69.83,
+      "entry_date": "2026-02-12T11:38:15.940014-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T12:00:00.530380-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
