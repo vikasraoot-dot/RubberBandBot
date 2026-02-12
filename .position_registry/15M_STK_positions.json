@@ -1,7 +1,18 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T11:15:01.464476-05:00",
-  "positions": {},
+  "updated_at": "2026-02-12T11:24:30.962905-05:00",
+  "positions": {
+    "AAPL": {
+      "symbol": "AAPL",
+      "underlying": "AAPL",
+      "client_order_id": "15M_STK_AAPL_1770913462",
+      "order_id": "711223dc-76e8-4b14-88ff-bfa588a74f24",
+      "qty": 7,
+      "entry_price": 267.125714,
+      "entry_date": "2026-02-12T11:24:30.962512-05:00",
+      "status": "open"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "UBER",
