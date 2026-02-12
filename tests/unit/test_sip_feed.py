@@ -134,6 +134,29 @@ class TestSipDelayCap:
                 f"Start ({start_sent}) must be before end ({end_sent})"
             )
 
+    def test_bars_use_split_adjustment(self):
+        """Bars must request split-adjusted data to handle stock splits correctly.
+
+        Without adjustment='split', raw bars mix pre-split and post-split prices,
+        causing corrupted indicators (e.g. RSI=6.7 on a 5:1 split) and invalid
+        bracket orders (negative stop-loss prices).
+        """
+        from RubberBand.src.data import fetch_latest_bars
+
+        with _patch_now(FAKE_NOW), _patch_http_ok() as mock_get:
+            fetch_latest_bars(
+                ["AAPL"], "1Week", history_days=90,
+                feed="sip", verbose=False,
+                key="fake", secret="fake",
+            )
+            call_args = mock_get.call_args
+            params = call_args.kwargs.get("params") or call_args[1].get("params", {})
+            adjustment = params.get("adjustment")
+            assert adjustment == "split", (
+                f"Bars must use adjustment='split' for stock split safety, "
+                f"got adjustment='{adjustment}'"
+            )
+
 
 # ---------------------------------------------------------------------------
 # Config Validation Tests

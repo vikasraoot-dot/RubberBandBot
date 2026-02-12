@@ -746,7 +746,7 @@ def _build_params(symbols: List[str], timeframe: str, start_iso: str, end_iso: s
         "end": end_iso,
         "limit": int(limit),
         "feed": feed,
-        # "adjustment": "raw",
+        "adjustment": "split",
     }
     if page_token:
         p["page_token"] = page_token
