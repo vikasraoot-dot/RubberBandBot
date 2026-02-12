@@ -1,17 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T13:40:00.478191-05:00",
+  "updated_at": "2026-02-12T14:50:00.706650-05:00",
   "positions": {
-    "FCX": {
-      "symbol": "FCX",
-      "underlying": "FCX",
-      "client_order_id": "15M_STK_FCX_1770914279",
-      "order_id": "91358d92-235e-45e2-9863-ee0e83f25d9b",
-      "qty": 32,
-      "entry_price": 61.91,
-      "entry_date": "2026-02-12T11:38:07.434156-05:00",
-      "status": "open"
-    },
     "CSCO": {
       "symbol": "CSCO",
       "underlying": "CSCO",
@@ -345,6 +335,18 @@
       "entry_date": "2026-02-12T13:07:28.251486-05:00",
       "status": "closed",
       "exit_date": "2026-02-12T13:40:00.477808-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "FCX",
+      "underlying": "FCX",
+      "client_order_id": "15M_STK_FCX_1770914279",
+      "order_id": "91358d92-235e-45e2-9863-ee0e83f25d9b",
+      "qty": 32,
+      "entry_price": 61.91,
+      "entry_date": "2026-02-12T11:38:07.434156-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T14:50:00.706312-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
