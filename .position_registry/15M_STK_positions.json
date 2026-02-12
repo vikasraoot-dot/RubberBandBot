@@ -1,38 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T11:07:39.537716-05:00",
-  "positions": {
-    "BIDU": {
-      "symbol": "BIDU",
-      "underlying": "BIDU",
-      "client_order_id": "15M_STK_BIDU_1770911248",
-      "order_id": "1a2d2d38-6434-4ca5-b4df-22e86ac51f5c",
-      "qty": 4,
-      "entry_price": 140.28,
-      "entry_date": "2026-02-12T10:47:36.772406-05:00",
-      "status": "open"
-    },
-    "C": {
-      "symbol": "C",
-      "underlying": "C",
-      "client_order_id": "15M_STK_C_1770912438",
-      "order_id": "84f38e8e-1d28-4184-8ca9-109db7973a5d",
-      "qty": 5,
-      "entry_price": 113.408,
-      "entry_date": "2026-02-12T11:07:29.628885-05:00",
-      "status": "open"
-    },
-    "CRH": {
-      "symbol": "CRH",
-      "underlying": "CRH",
-      "client_order_id": "15M_STK_CRH_1770912450",
-      "order_id": "d8167f03-f291-49a3-afaa-484fd645d674",
-      "qty": 5,
-      "entry_price": 122.68,
-      "entry_date": "2026-02-12T11:07:39.537370-05:00",
-      "status": "open"
-    }
-  },
+  "updated_at": "2026-02-12T11:15:01.464476-05:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "UBER",
@@ -260,6 +229,42 @@
       "status": "closed",
       "exit_date": "2026-02-11T15:50:01.303048-05:00",
       "exit_reason": "orphaned_sync"
+    },
+    {
+      "symbol": "CRH",
+      "underlying": "CRH",
+      "client_order_id": "15M_STK_CRH_1770912450",
+      "order_id": "d8167f03-f291-49a3-afaa-484fd645d674",
+      "qty": 5,
+      "entry_price": 122.68,
+      "entry_date": "2026-02-12T11:07:39.537370-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T11:15:01.464165-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "C",
+      "underlying": "C",
+      "client_order_id": "15M_STK_C_1770912438",
+      "order_id": "84f38e8e-1d28-4184-8ca9-109db7973a5d",
+      "qty": 5,
+      "entry_price": 113.408,
+      "entry_date": "2026-02-12T11:07:29.628885-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T11:15:01.464202-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770911248",
+      "order_id": "1a2d2d38-6434-4ca5-b4df-22e86ac51f5c",
+      "qty": 4,
+      "entry_price": 140.28,
+      "entry_date": "2026-02-12T10:47:36.772406-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T11:15:01.464207-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
