@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T13:07:37.529652-05:00",
+  "updated_at": "2026-02-12T13:40:00.478191-05:00",
   "positions": {
     "FCX": {
       "symbol": "FCX",
@@ -10,16 +10,6 @@
       "qty": 32,
       "entry_price": 61.91,
       "entry_date": "2026-02-12T11:38:07.434156-05:00",
-      "status": "open"
-    },
-    "LUV": {
-      "symbol": "LUV",
-      "underlying": "LUV",
-      "client_order_id": "15M_STK_LUV_1770919640",
-      "order_id": "7ca3f3ba-fb64-42a1-b1b0-ceb9403daa5c",
-      "qty": 40,
-      "entry_price": 49.96,
-      "entry_date": "2026-02-12T13:07:28.251486-05:00",
       "status": "open"
     },
     "CSCO": {
@@ -343,6 +333,18 @@
       "entry_date": "2026-02-12T11:38:26.640107-05:00",
       "status": "closed",
       "exit_date": "2026-02-12T12:20:01.568724-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "LUV",
+      "underlying": "LUV",
+      "client_order_id": "15M_STK_LUV_1770919640",
+      "order_id": "7ca3f3ba-fb64-42a1-b1b0-ceb9403daa5c",
+      "qty": 40,
+      "entry_price": 49.96,
+      "entry_date": "2026-02-12T13:07:28.251486-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T13:40:00.477808-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
