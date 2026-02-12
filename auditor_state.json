@@ -32,22 +32,6 @@
       "current_price": 330.945,
       "unrealized_pnl": 0.0
     },
-    "SHADOW_15M_STK_MU_20260121T145000216212+0000": {
-      "id": "SHADOW_15M_STK_MU_20260121T145000216212+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "MU",
-      "entry_price": 419.775,
-      "entry_time": "2026-01-21T14:50:00.216212+00:00",
-      "reason": "Slope3_Too_Flat(0.1267% > -0.08%)",
-      "qty": 100,
-      "tp_price": 423.97274999999996,
-      "sl_price": 415.57725,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 417.24,
-      "unrealized_pnl": -253.49999999999682
-    },
     "SHADOW_15M_STK_HOOD_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_HOOD_20260121T145000216212+0000",
       "type": "STOCK",
@@ -61,8 +45,8 @@
       "sl_price": 70.04745,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 70.975,
-      "unrealized_pnl": 21.999999999999886
+      "current_price": 70.77000000000001,
+      "unrealized_pnl": 1.500000000001478
     },
     "SHADOW_15M_STK_SMCI_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_SMCI_20260121T145000216212+0000",
@@ -77,8 +61,8 @@
       "sl_price": 30.4722,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 30.715,
-      "unrealized_pnl": -6.500000000000128
+      "current_price": 30.65,
+      "unrealized_pnl": -13.000000000000256
     },
     "SHADOW_15M_STK_INTC_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_INTC_20260121T145000216212+0000",
@@ -109,8 +93,8 @@
       "sl_price": 204.46965,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 208.25,
-      "unrealized_pnl": 171.50000000000034
+      "current_price": 207.2,
+      "unrealized_pnl": 66.4999999999992
     },
     "SHADOW_15M_STK_CCL_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_CCL_20260121T145000216212+0000",
@@ -125,8 +109,8 @@
       "sl_price": 32.0661,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 32.575,
-      "unrealized_pnl": 18.500000000000227
+      "current_price": 32.705,
+      "unrealized_pnl": 31.499999999999773
     },
     "SHADOW_15M_STK_CMCSA_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_CMCSA_20260121T145000216212+0000",
@@ -141,8 +125,8 @@
       "sl_price": 31.77405,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 31.975,
-      "unrealized_pnl": -11.999999999999744
+      "current_price": 32.095,
+      "unrealized_pnl": 0.0
     },
     "SHADOW_15M_STK_SNOW_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_SNOW_20260121T145000216212+0000",
@@ -176,22 +160,6 @@
       "current_price": 50.629999999999995,
       "unrealized_pnl": 18.499999999999517
     },
-    "SHADOW_15M_STK_TSM_20260121T145000216212+0000": {
-      "id": "SHADOW_15M_STK_TSM_20260121T145000216212+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "TSM",
-      "entry_price": 369.21500000000003,
-      "entry_time": "2026-01-21T14:50:00.216212+00:00",
-      "reason": "Slope3_Too_Flat(-0.0753% > -0.08%)",
-      "qty": 100,
-      "tp_price": 372.90715000000006,
-      "sl_price": 365.52285,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 371.15,
-      "unrealized_pnl": 193.49999999999454
-    },
     "SHADOW_15M_STK_EQT_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_EQT_20260121T145000216212+0000",
       "type": "STOCK",
@@ -205,8 +173,8 @@
       "sl_price": 56.28645,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 57.21,
-      "unrealized_pnl": 35.49999999999969
+      "current_price": 56.650000000000006,
+      "unrealized_pnl": -20.49999999999983
     },
     "SHADOW_15M_STK_URI_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_URI_20260121T145000216212+0000",
@@ -299,8 +267,8 @@
       "sl_price": 27.59625,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 27.985,
-      "unrealized_pnl": 10.999999999999943
+      "current_price": 28.134999999999998,
+      "unrealized_pnl": 25.9999999999998
     },
     "SHADOW_15M_STK_CVX_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_CVX_20260121T145000216212+0000",
@@ -315,8 +283,8 @@
       "sl_price": 180.53145,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 182.94,
-      "unrealized_pnl": 58.499999999997954
+      "current_price": 182.375,
+      "unrealized_pnl": 1.999999999998181
     },
     "SHADOW_15M_STK_GOOG_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_GOOG_20260121T145000216212+0000",
@@ -331,8 +299,8 @@
       "sl_price": 308.42955,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 312.83,
-      "unrealized_pnl": 128.49999999999682
+      "current_price": 312.34000000000003,
+      "unrealized_pnl": 79.50000000000159
     },
     "SHADOW_15M_STK_AMZN_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_AMZN_20260121T145000216212+0000",
@@ -395,8 +363,8 @@
       "sl_price": 48.1932,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 48.605000000000004,
-      "unrealized_pnl": -7.499999999999574
+      "current_price": 48.974999999999994,
+      "unrealized_pnl": 29.49999999999946
     },
     "SHADOW_15M_STK_PFE_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_PFE_20260121T145000216212+0000",
@@ -427,8 +395,8 @@
       "sl_price": 79.07130000000001,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 79.705,
-      "unrealized_pnl": -16.500000000000625
+      "current_price": 80.045,
+      "unrealized_pnl": 17.499999999999716
     },
     "SHADOW_15M_STK_BMY_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_BMY_20260121T145000216212+0000",
@@ -475,8 +443,8 @@
       "sl_price": 77.715,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 77.91,
-      "unrealized_pnl": -59.00000000000034
+      "current_price": 78.07499999999999,
+      "unrealized_pnl": -42.50000000000114
     },
     "SHADOW_15M_STK_DE_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_DE_20260121T145000216212+0000",
@@ -491,8 +459,8 @@
       "sl_price": 596.7967500000001,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 598.985,
-      "unrealized_pnl": -384.0000000000032
+      "current_price": 598.75,
+      "unrealized_pnl": -407.50000000000455
     },
     "SHADOW_15M_STK_ISRG_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_ISRG_20260121T145000216212+0000",
@@ -539,8 +507,8 @@
       "sl_price": 302.35589999999996,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 305.40999999999997,
-      "unrealized_pnl": 0.0
+      "current_price": 303.14,
+      "unrealized_pnl": -226.99999999999818
     },
     "SHADOW_15M_STK_SOFI_20260121T150000009276+0000": {
       "id": "SHADOW_15M_STK_SOFI_20260121T150000009276+0000",
@@ -555,8 +523,8 @@
       "sl_price": 18.98325,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 19.244999999999997,
-      "unrealized_pnl": 6.999999999999673
+      "current_price": 19.185000000000002,
+      "unrealized_pnl": 1.0000000000001563
     },
     "SHADOW_15M_STK_TSLA_20260121T150000009276+0000": {
       "id": "SHADOW_15M_STK_TSLA_20260121T150000009276+0000",
@@ -587,8 +555,8 @@
       "sl_price": 17.13195,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 17.134999999999998,
-      "unrealized_pnl": -17.00000000000017
+      "current_price": 17.174999999999997,
+      "unrealized_pnl": -13.000000000000256
     },
     "SHADOW_15M_STK_AVGO_20260121T153000262117+0000": {
       "id": "SHADOW_15M_STK_AVGO_20260121T153000262117+0000",
@@ -603,8 +571,8 @@
       "sl_price": 330.32834999999994,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 331.23,
-      "unrealized_pnl": -243.49999999999454
+      "current_price": 333.69,
+      "unrealized_pnl": 2.5000000000034106
     },
     "SHADOW_15M_STK_COF_20260121T153000262117+0000": {
       "id": "SHADOW_15M_STK_COF_20260121T153000262117+0000",
@@ -667,8 +635,8 @@
       "sl_price": 458.29079999999993,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 466.67,
-      "unrealized_pnl": 375.0000000000057
+      "current_price": 465.25,
+      "unrealized_pnl": 233.0000000000041
     },
     "SHADOW_15M_STK_NFLX_20260121T192000200637+0000": {
       "id": "SHADOW_15M_STK_NFLX_20260121T192000200637+0000",
@@ -683,8 +651,8 @@
       "sl_price": 75.6459,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 75.78999999999999,
-      "unrealized_pnl": -62.000000000000455
+      "current_price": 75.98,
+      "unrealized_pnl": -42.99999999999926
     }
   },
   "closed_positions": [
@@ -20090,6 +20058,46 @@
       "exit_time": "2026-02-12T20:49:58.971062+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -120.99999999999937
+    },
+    {
+      "id": "SHADOW_15M_STK_MU_20260121T145000216212+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "MU",
+      "entry_price": 419.775,
+      "entry_time": "2026-01-21T14:50:00.216212+00:00",
+      "reason": "Slope3_Too_Flat(0.1267% > -0.08%)",
+      "qty": 100,
+      "tp_price": 423.97274999999996,
+      "sl_price": 415.57725,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 415.20000000000005,
+      "unrealized_pnl": -457.4999999999932,
+      "exit_price": 415.20000000000005,
+      "exit_time": "2026-02-12T21:44:48.419617+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -457.4999999999932
+    },
+    {
+      "id": "SHADOW_15M_STK_TSM_20260121T145000216212+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "TSM",
+      "entry_price": 369.21500000000003,
+      "entry_time": "2026-01-21T14:50:00.216212+00:00",
+      "reason": "Slope3_Too_Flat(-0.0753% > -0.08%)",
+      "qty": 100,
+      "tp_price": 372.90715000000006,
+      "sl_price": 365.52285,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 384.745,
+      "unrealized_pnl": 1552.9999999999973,
+      "exit_price": 384.745,
+      "exit_time": "2026-02-12T21:44:57.185664+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 1552.9999999999973
     }
   ],
   "processed_lines": {
