@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T12:20:01.569230-05:00",
+  "updated_at": "2026-02-12T13:07:37.529652-05:00",
   "positions": {
     "FCX": {
       "symbol": "FCX",
@@ -10,6 +10,26 @@
       "qty": 32,
       "entry_price": 61.91,
       "entry_date": "2026-02-12T11:38:07.434156-05:00",
+      "status": "open"
+    },
+    "LUV": {
+      "symbol": "LUV",
+      "underlying": "LUV",
+      "client_order_id": "15M_STK_LUV_1770919640",
+      "order_id": "7ca3f3ba-fb64-42a1-b1b0-ceb9403daa5c",
+      "qty": 40,
+      "entry_price": 49.96,
+      "entry_date": "2026-02-12T13:07:28.251486-05:00",
+      "status": "open"
+    },
+    "CSCO": {
+      "symbol": "CSCO",
+      "underlying": "CSCO",
+      "client_order_id": "15M_STK_CSCO_1770919650",
+      "order_id": "7215d204-f43e-475f-92da-7bd1576072ef",
+      "qty": 8,
+      "entry_price": 75.78,
+      "entry_date": "2026-02-12T13:07:37.529432-05:00",
       "status": "open"
     }
   },
