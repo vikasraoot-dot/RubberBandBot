@@ -215,6 +215,16 @@ def run_weekly_cycle():
         except Exception as e:
             logging.error(f"Error checking time stop for {sym}: {e}")
 
+    # Watchdog pause check (fail-open if file missing)
+    try:
+        from RubberBand.src.watchdog.pause_check import check_bot_paused
+        _wd_paused, _wd_reason = check_bot_paused(BOT_TAG)
+        if _wd_paused:
+            logging.warning(f"[WATCHDOG] {BOT_TAG} paused: {_wd_reason}")
+            return
+    except Exception as e:
+        logging.debug("[WATCHDOG] non-fatal: %s", e)
+
     max_capital_per_trade = float(cfg.get("max_notional_per_trade", 2000.0))
     limit_pos = int(cfg.get("max_concurrent_positions", 5))
     

@@ -1,0 +1,180 @@
+name: "[WATCHDOG] End-of-Day Analysis"
+
+on:
+  schedule:
+    # 4:30 PM ET = 21:30 UTC, weekdays only
+    - cron: "30 21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: 'Date to analyse (YYYY-MM-DD, defaults to today)'
+        required: false
+        default: ''
+
+concurrency:
+  group: watchdog-eod
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  eod-analysis:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Latest Commits
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          git config --global --add safe.directory $env:GITHUB_WORKSPACE
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot-Watchdog"
+          git reset --hard HEAD 2>&1
+          git clean -fd 2>&1
+          git fetch origin main 2>&1
+          git reset --hard origin/main 2>&1
+          Write-Host "Workspace synced to origin/main"
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = "C:\Python313\python.exe"
+          if (-not (Test-Path $python)) {
+            $python = (Get-Command python.exe -ErrorAction SilentlyContinue).Source
+            if (-not $python) { throw "Python not found!" }
+          }
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip --quiet
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt --quiet
+          & "$env:PYTHON_EXE" -m pip install pyyaml --quiet
+
+      - name: Run Post-Day Analyzer
+        shell: powershell
+        env:
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $dateArg = "${{ github.event.inputs.date }}"
+          $dateArgs = @()
+          if ($dateArg) { $dateArgs = @("--date", $dateArg) }
+
+          Write-Host "=== Post-Day Analyzer Starting ==="
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/watchdog/run_post_day_analysis.py @dateArgs
+          Write-Host "=== Post-Day Analyzer Complete ==="
+
+      - name: Run Rolling Tracker
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          Write-Host "=== Rolling Tracker Starting ==="
+          & "$env:PYTHON_EXE" -u -c "
+          from RubberBand.src.watchdog.rolling_tracker import RollingTracker
+          tracker = RollingTracker()
+          stats = tracker.compute()
+          bots = list(stats.get('bots', {}).keys())
+          print(f'Rolling stats computed for: {bots}')
+          "
+          Write-Host "=== Rolling Tracker Complete ==="
+
+      - name: Apply Approved Changes
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          if (Test-Path "results/watchdog/approved_changes.yaml") {
+            Write-Host "=== Applying Approved Changes ==="
+            & "$env:PYTHON_EXE" -u RubberBand/scripts/watchdog/apply_approved_changes.py
+          } else {
+            Write-Host "No approved_changes.yaml found, skipping."
+          }
+
+      - name: Commit EOD Results
+        if: '!cancelled()'
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+
+          # Add all watchdog output files
+          $patterns = @(
+            "results/watchdog/daily_analysis/*.json",
+            "results/watchdog/rolling_stats.json",
+            "results/watchdog/performance.jsonl",
+            "results/watchdog/alerts.jsonl",
+            "results/watchdog/approved_changes.yaml"
+          )
+
+          $hasChanges = $false
+          foreach ($p in $patterns) {
+            $files = Get-ChildItem -Path $p -ErrorAction SilentlyContinue
+            foreach ($f in $files) {
+              git add $f.FullName
+              $hasChanges = $true
+            }
+          }
+
+          # Also add config.yaml if it was modified by approved changes
+          $configStatus = git diff --name-only config.yaml 2>$null
+          if ($configStatus) {
+            git add config.yaml
+            $hasChanges = $true
+          }
+
+          if (-not $hasChanges) {
+            Write-Host "No EOD files to commit."
+            exit 0
+          }
+
+          $status = git status --porcelain
+          if (-not $status) {
+            Write-Host "No changes to commit."
+            exit 0
+          }
+
+          git commit -m "[WATCHDOG] EOD Analysis $timestamp" 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Commit failed (maybe empty?)"
+            exit 0
+          }
+
+          # Retry push loop
+          $maxRetries = 3
+          $retryCount = 0
+          $success = $false
+
+          while (-not $success -and $retryCount -lt $maxRetries) {
+            if ($retryCount -gt 0) {
+              Write-Host "Retrying push ($retryCount/$maxRetries)..."
+              Start-Sleep -Seconds 5
+              git pull origin main --rebase 2>&1
+            }
+            git push 2>&1
+            if ($LASTEXITCODE -eq 0) {
+              $success = $true
+              Write-Host "Push successful."
+            }
+            $retryCount++
+          }
+
+          if (-not $success) {
+            Write-Host "WARNING: Push failed after $maxRetries attempts."
+          }
+          exit 0

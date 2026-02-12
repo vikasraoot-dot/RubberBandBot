@@ -1,0 +1,12 @@
+# All dollar thresholds are per-bot unless noted
+thresholds:
+  warn_loss: -50              # Log warning
+  pause_loss: -100            # Pause new entries
+  emergency_loss: -200        # Tighten SL on losers + pause
+  account_pause_pct: -3.0     # Pause ALL bots (account-level)
+  profit_lock_activation: 20  # Activate lock at +$20 daily P&L
+  profit_lock_pct: 0.50       # Lock 50% of peak gains
+
+degradation_flags:
+  min_win_rate_7d: 35         # Below this -> DEGRADED
+  max_cumulative_loss_7d: -300 # Below this -> LOSING

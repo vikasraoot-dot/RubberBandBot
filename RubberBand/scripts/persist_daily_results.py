@@ -290,7 +290,17 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
     for bot, data in bot_results.items():
         print(f"  {bot}: ${data['total_pnl']:,.2f} ({len(data['trades'])} trades)")
     print("=" * 60 + "\n")
-    
+
+    # 6. Feed watchdog performance database (non-fatal if watchdog not set up)
+    try:
+        from RubberBand.src.watchdog.performance_db import PerformanceDB
+        perf_db = PerformanceDB()
+        watchdog_rows = perf_db.ingest_daily(target_date, results_dir=DAILY_RESULTS_DIR.rsplit("/", 1)[0])
+        if watchdog_rows:
+            _log(f"Watchdog ingested {len(watchdog_rows)} bot(s) for {target_date}")
+    except Exception as e:
+        _log(f"Watchdog ingest skipped (non-fatal): {e}")
+
     return report
 
 

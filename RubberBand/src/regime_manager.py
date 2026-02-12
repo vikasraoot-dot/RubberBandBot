@@ -288,6 +288,36 @@ class RegimeManager:
         """
         return self.check_intraday()
 
+    def classify_market_condition(self) -> Dict[str, Any]:
+        """
+        Classify current market condition into finer-grained categories
+        (CHOPPY, TRENDING_UP, TRENDING_DOWN, RANGE, BREAKOUT) using SPY data.
+
+        This is additive to the existing PANIC/NORMAL/CALM regime logic.
+        Delegates to MarketConditionClassifier.
+
+        Returns:
+            Dict with market_condition, overrides, reason, updated_at.
+            Returns neutral RANGE result on import or classification errors.
+        """
+        try:
+            from RubberBand.src.watchdog.market_classifier import MarketConditionClassifier
+            classifier = MarketConditionClassifier(verbose=self.verbose)
+            return classifier.classify()
+        except Exception as e:
+            logger.error("[RegimeManager] classify_market_condition failed: %s", e, exc_info=True)
+            if self.verbose:
+                print(f"[RegimeManager] classify_market_condition error: {e}")
+            return {
+                "market_condition": "RANGE",
+                "overrides": {
+                    "position_size_multiplier": 1.0,
+                    "tp_r_multiple_adjustment": 0.0,
+                    "breakeven_trigger_r_adjustment": 0.0,
+                },
+                "reason": f"Error: {e}",
+            }
+
 
 # ──────────────────────────────────────────────────────────────────────────────
 # Shared Backtest Logic (Refactored from script)
@@ -377,6 +407,7 @@ def calculate_regime_map(df: pd.DataFrame) -> Dict[Any, str]:
         shifted_map[curr_date] = regime_map[prev_date]
         
     return shifted_map
+
 
 if __name__ == "__main__":
     # Test Run

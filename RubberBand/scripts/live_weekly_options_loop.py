@@ -616,6 +616,19 @@ def main() -> int:
         "bot_tag": BOT_TAG,
     })
     
+    # Watchdog pause check (fail-open if file missing)
+    try:
+        from RubberBand.src.watchdog.pause_check import check_bot_paused
+        _wd_paused, _wd_reason = check_bot_paused(BOT_TAG)
+        if _wd_paused:
+            logger.heartbeat(event="watchdog_paused", reason=_wd_reason)
+            _log(f"Watchdog paused {BOT_TAG}: {_wd_reason}")
+            logger.close()
+            registry.save()
+            return 0
+    except Exception as e:
+        _log(f"[WATCHDOG] non-fatal: {e}")
+
     # If monitor-only mode, skip signal scanning and new entries
     if args.monitor_only:
         logger.heartbeat(event="monitor_only_complete", positions=len(my_underlyings))

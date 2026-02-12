@@ -1,0 +1,148 @@
+name: "[WATCHDOG] Weekly Performance Report"
+
+on:
+  schedule:
+    # Saturday 9:00 AM ET = 14:00 UTC
+    - cron: "0 14 * * 6"
+  workflow_dispatch:
+    inputs:
+      week:
+        description: 'ISO week label (e.g., 2026-W07, defaults to current week)'
+        required: false
+        default: ''
+
+concurrency:
+  group: watchdog-weekly
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  weekly-report:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Latest Commits
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          git config --global --add safe.directory $env:GITHUB_WORKSPACE
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot-Watchdog"
+          git reset --hard HEAD 2>&1
+          git clean -fd 2>&1
+          git fetch origin main 2>&1
+          git reset --hard origin/main 2>&1
+          Write-Host "Workspace synced to origin/main"
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = "C:\Python313\python.exe"
+          if (-not (Test-Path $python)) {
+            $python = (Get-Command python.exe -ErrorAction SilentlyContinue).Source
+            if (-not $python) { throw "Python not found!" }
+          }
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip --quiet
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt --quiet
+          & "$env:PYTHON_EXE" -m pip install pyyaml xgboost scikit-learn --quiet
+
+      - name: Retrain ML Model
+        continue-on-error: true
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          Write-Host "=== ML Model Retraining Starting ==="
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/watchdog/retrain_model.py --days 90
+          Write-Host "=== ML Model Retraining Complete ==="
+
+      - name: Generate Weekly Report
+        shell: powershell
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $weekArg = "${{ github.event.inputs.week }}"
+          $weekArgs = @()
+          if ($weekArg) { $weekArgs = @("--week", $weekArg) }
+
+          Write-Host "=== Weekly Report Starting ==="
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/watchdog/generate_weekly_report.py @weekArgs
+          Write-Host "=== Weekly Report Complete ==="
+
+      - name: Commit Weekly Report
+        if: '!cancelled()'
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+
+          # Add weekly report files
+          $files = Get-ChildItem -Path "results/watchdog/weekly_reports/*.md" -ErrorAction SilentlyContinue
+          $hasChanges = $false
+          foreach ($f in $files) {
+            git add $f.FullName
+            $hasChanges = $true
+          }
+
+          # Also add rolling stats if updated
+          if (Test-Path "results/watchdog/rolling_stats.json") {
+            git add "results/watchdog/rolling_stats.json"
+            $hasChanges = $true
+          }
+
+          if (-not $hasChanges) {
+            Write-Host "No report files to commit."
+            exit 0
+          }
+
+          $status = git status --porcelain
+          if (-not $status) {
+            Write-Host "No changes to commit."
+            exit 0
+          }
+
+          git commit -m "[WATCHDOG] Weekly Report $timestamp" 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Commit failed (maybe empty?)"
+            exit 0
+          }
+
+          # Retry push loop
+          $maxRetries = 3
+          $retryCount = 0
+          $success = $false
+
+          while (-not $success -and $retryCount -lt $maxRetries) {
+            if ($retryCount -gt 0) {
+              Write-Host "Retrying push ($retryCount/$maxRetries)..."
+              Start-Sleep -Seconds 5
+              git pull origin main --rebase 2>&1
+            }
+            git push 2>&1
+            if ($LASTEXITCODE -eq 0) {
+              $success = $true
+              Write-Host "Push successful."
+            }
+            $retryCount++
+          }
+
+          if (-not $success) {
+            Write-Host "WARNING: Push failed after $maxRetries attempts."
+          }
+          exit 0

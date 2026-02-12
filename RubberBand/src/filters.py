@@ -77,6 +77,7 @@ def attach_verifiers(df: pd.DataFrame, cfg: Dict[str, Any]) -> pd.DataFrame:
     """
     Adds columns the gate uses:
       ema_fast, ema_slow, ema_slope_pct, rsi, +di, -di, adx, fresh_cross_up, fresh_cross_down.
+    Also adds ML gate features: rsi_5, macd_hist, dist_lower, sma50_slope, atr_pct, vol_rel, hour.
     Leaves existing cols untouched; returns a new DataFrame (same index).
     """
     df = df.copy()
@@ -125,8 +126,47 @@ def attach_verifiers(df: pd.DataFrame, cfg: Dict[str, Any]) -> pd.DataFrame:
     now_lt  = (df["ema_fast"] < df["ema_slow"])
     df["fresh_cross_down"] = (~prev_lt) & (now_lt)
 
-    # Optional: keep handy rolling dollar volume if already present upstream
-    # (no change to your current pipeline)
+    # --- ML gate features (used by watchdog/ml_gate.py) ---
+
+    # RSI-5 (short-term momentum)
+    df["rsi_5"] = _rsi(df["close"], 5)
+
+    # MACD histogram (12/26/9)
+    ema_12 = _ema(df["close"], 12)
+    ema_26 = _ema(df["close"], 26)
+    macd_line = ema_12 - ema_26
+    macd_signal = _ema(macd_line, 9)
+    df["macd_hist"] = (macd_line - macd_signal).fillna(0.0)
+
+    # dist_lower: distance from close to Keltner Channel lower band
+    kc_len = int(cfg.get("keltner_length", 20))
+    kc_mult = float(cfg.get("keltner_mult", 2.0))
+    kc_atr_len = int(cfg.get("keltner_atr_length", 10))
+    kc_middle = _ema(df["close"], kc_len)
+    kc_tr = pd.concat([
+        (df["high"] - df["low"]),
+        (df["high"] - df["close"].shift(1)).abs(),
+        (df["low"] - df["close"].shift(1)).abs(),
+    ], axis=1).max(axis=1)
+    kc_atr = kc_tr.ewm(alpha=1.0/kc_atr_len, adjust=False, min_periods=kc_atr_len).mean()
+    kc_lower = kc_middle - (kc_atr * kc_mult)
+    df["dist_lower"] = (df["close"] - kc_lower).fillna(0.0)
+
+    # SMA-50 slope (% change per bar)
+    sma_50 = df["close"].rolling(window=50, min_periods=50).mean()
+    df["sma50_slope"] = _ema_slope_pct(sma_50).fillna(0.0)
+
+    # ATR as percentage of close (for ML feature normalization)
+    df["atr_pct"] = (df["atr"] / df["close"].replace(0, np.nan)).fillna(0.0)
+
+    # vol_rel alias (same as rvol, named to match ML feature set)
+    df["vol_rel"] = df["rvol"]
+
+    # hour (extract from index if datetime)
+    if hasattr(df.index, "hour"):
+        df["hour"] = df.index.hour
+    else:
+        df["hour"] = 12  # safe default
 
     return df
 

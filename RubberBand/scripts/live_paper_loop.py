@@ -297,18 +297,29 @@ def main() -> int:
         }), flush=True)
         raise KillSwitchTriggered(f"{BOT_TAG} exceeded 25% daily loss")
 
+    # Watchdog pause check (fail-open if file missing)
+    _wd_paused = False
+    try:
+        from RubberBand.src.watchdog.pause_check import check_bot_paused
+        _wd_paused, _wd_reason = check_bot_paused(BOT_TAG)
+        if _wd_paused:
+            print(json.dumps({"type": "WATCHDOG_PAUSED", "bot_tag": BOT_TAG, "reason": _wd_reason, "ts": now_iso}), flush=True)
+            # Skip signal scanning but still run session summary for position management
+    except Exception as e:
+        print(f"[WATCHDOG] non-fatal: {e}", flush=True)
+
     # Universe
     symbols = load_symbols_from_file(args.tickers)
     print(json.dumps({"type": "UNIVERSE", "loaded": len(symbols), "sample": symbols[:10], "when": now_iso}), flush=True)
 
     # Entry windows?
     windows = cfg.get("entry_windows", [])
-    if not _in_entry_window(now_et, windows):
+    if not _wd_paused and not _in_entry_window(now_et, windows):
         print(json.dumps({"type": "HEARTBEAT", "session": session, "market_open": True, "ts": now_iso}))
         return 0
 
-    # Market open check (paper)
-    if not _alpaca_market_open_compat(base_url, key, secret):
+    # Market open check (paper) — skip when paused to let session summary run
+    if not _wd_paused and not _alpaca_market_open_compat(base_url, key, secret):
         print(json.dumps({"type": "HEARTBEAT", "session": session, "market_open": False, "ts": now_iso}))
         return 0
     print(json.dumps({"type": "HEARTBEAT", "session": session, "market_open": True, "ts": now_iso}))
@@ -335,20 +346,23 @@ def main() -> int:
     from RubberBand.src.circuit_breaker import ConnectivityGuard
     conn_guard = ConnectivityGuard(max_errors=5)
 
+    bars_map = {}
+    bars_meta = {}
     res = None
-    try:
-        res = fetch_latest_bars(symbols, timeframe, history_days, feed)
-        conn_guard.record_success()
-    except Exception as e:
-        conn_guard.record_error(e)
-        print(json.dumps({"type": "BARS_FETCH_ERROR", "reason": "exception", "message": str(e)}), flush=True)
-        return 1
+    if not _wd_paused:
+        try:
+            res = fetch_latest_bars(symbols, timeframe, history_days, feed)
+            conn_guard.record_success()
+        except Exception as e:
+            conn_guard.record_error(e)
+            print(json.dumps({"type": "BARS_FETCH_ERROR", "reason": "exception", "message": str(e)}), flush=True)
+            return 1
 
-    if not isinstance(res, tuple) or len(res) != 2:
-        print(json.dumps({"type": "BARS_FETCH_ERROR", "reason": "no_result"}), flush=True)
-        return 1
+        if not isinstance(res, tuple) or len(res) != 2:
+            print(json.dumps({"type": "BARS_FETCH_ERROR", "reason": "no_result"}), flush=True)
+            return 1
 
-    bars_map, bars_meta = res
+        bars_map, bars_meta = res
 
     # Fetch Daily Bars for Trend Filter (SMA 20)
     trend_cfg = cfg.get("trend_filter", {})
@@ -434,6 +448,45 @@ def main() -> int:
     sl_mult = to_decimal(brackets.get("atr_mult_sl", 2.5))
     tp_r = to_decimal(brackets.get("take_profit_r", 1.5))
     allow_shorts = cfg.get("allow_shorts", False)
+
+    # --- Phase 4A/4B: Dynamic TP & Breakeven from market condition overrides ---
+    # Read dynamic overrides written by MarketConditionClassifier (fail-open)
+    try:
+        from RubberBand.src.watchdog.market_classifier import read_dynamic_overrides
+        _dyn = read_dynamic_overrides()
+        _dyn_overrides = _dyn.get("overrides", {})
+        _dyn_condition = _dyn.get("market_condition", "RANGE")
+
+        # Adjust TP R-multiple: base + adjustment
+        _tp_adj = to_decimal(str(_dyn_overrides.get("tp_r_multiple_adjustment", "0")))
+        if _tp_adj != 0:
+            tp_r = tp_r + _tp_adj
+            # Safety floor: TP must be at least 0.5R
+            if tp_r < to_decimal("0.5"):
+                tp_r = to_decimal("0.5")
+
+        # Adjust position size multiplier (applied later at sizing)
+        _size_mult = to_decimal(str(_dyn_overrides.get("position_size_multiplier", "1")))
+
+        # Breakeven trigger adjustment (stored for future breakeven integration)
+        _be_adj = to_decimal(str(_dyn_overrides.get("breakeven_trigger_r_adjustment", "0")))
+        _be_trigger_r = to_decimal(str(cfg.get("breakeven", {}).get("trigger_r", "1"))) + _be_adj
+        if _be_trigger_r < to_decimal("0.3"):
+            _be_trigger_r = to_decimal("0.3")  # Safety floor
+
+        print(json.dumps({
+            "type": "DYNAMIC_OVERRIDES",
+            "market_condition": _dyn_condition,
+            "tp_r_adjusted": safe_float(tp_r),
+            "tp_adjustment": safe_float(_tp_adj),
+            "size_multiplier": safe_float(_size_mult),
+            "breakeven_trigger_r": safe_float(_be_trigger_r),
+            "ts": now_iso,
+        }), flush=True)
+    except Exception as e:
+        print(f"[WATCHDOG] non-fatal: {e}", flush=True)
+        _size_mult = to_decimal("1")
+        _dyn_condition = "RANGE"
 
     # Size guard
     base_qty = int(cfg.get("qty", 1))
@@ -529,8 +582,9 @@ def main() -> int:
         "orders_submitted": 0,
     }
 
-    # Iterate symbols
-    for sym in symbols:
+    # Iterate symbols (skip scanning when watchdog-paused; session summary still runs below)
+    _scan_symbols = [] if _wd_paused else symbols
+    for sym in _scan_symbols:
         diag["total_scanned"] += 1
         df = bars_map.get(sym)
         if df is None or df.empty:
@@ -800,6 +854,11 @@ def main() -> int:
              effective_notional = max_notional / 3.0
         
         qty = _cap_qty_by_notional(qty, entry, effective_notional)
+
+        # Phase 4A: Apply dynamic size multiplier from market condition
+        if _size_mult < to_decimal("1"):
+            qty = max(1, int(qty * safe_float(_size_mult)))
+
         if qty < 1:
             diag["qty_zero"] += 1
             continue

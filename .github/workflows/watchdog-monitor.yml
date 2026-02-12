@@ -1,0 +1,141 @@
+name: "[WATCHDOG] Intraday Health Monitor"
+
+on:
+  schedule:
+    # Every 10 minutes during market hours (UTC 14:00-21:00 = ~9:00 AM - 4:00 PM ET)
+    - cron: "*/10 14-21 * * 1-5"
+  workflow_dispatch:
+    inputs:
+      reset:
+        description: 'Reset daily flags (1=reset, 0=normal cycle)'
+        required: false
+        default: '0'
+
+concurrency:
+  group: watchdog-intraday
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  monitor:
+    runs-on: [self-hosted, windows]
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pull Latest Commits
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          git config --global --add safe.directory $env:GITHUB_WORKSPACE
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot-Watchdog"
+          git reset --hard HEAD 2>&1
+          git clean -fd 2>&1
+          git fetch origin main 2>&1
+          git reset --hard origin/main 2>&1
+          Write-Host "Workspace synced to origin/main"
+
+      - name: Ensure Python path
+        shell: powershell
+        run: |
+          $python = "C:\Python313\python.exe"
+          if (-not (Test-Path $python)) {
+            $python = (Get-Command python.exe -ErrorAction SilentlyContinue).Source
+            if (-not $python) { throw "Python not found!" }
+          }
+          echo "PYTHON_EXE=$python" >> $env:GITHUB_ENV
+
+      - name: Install deps
+        shell: powershell
+        run: |
+          & "$env:PYTHON_EXE" -m pip install --upgrade pip --quiet
+          & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt --quiet
+          & "$env:PYTHON_EXE" -m pip install pyyaml --quiet
+
+      - name: Run Watchdog Monitor
+        shell: powershell
+        env:
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $resetArgs = @()
+          if ("${{ github.event.inputs.reset }}" -eq "1") { $resetArgs = @("--reset") }
+
+          Write-Host "=== Watchdog Monitor Starting ==="
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/watchdog/run_intraday_monitor.py @resetArgs
+          Write-Host "=== Watchdog Monitor Complete ==="
+
+      - name: Commit Watchdog State
+        if: '!cancelled()'
+        shell: powershell
+        run: |
+          $ErrorActionPreference = "Continue"
+          $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
+
+          # Add watchdog state files
+          $files = @(
+            "results/watchdog/intraday_health.json",
+            "results/watchdog/bot_pause_flags.json",
+            "results/watchdog/profit_locks.json",
+            "results/watchdog/alerts.jsonl"
+          )
+
+          $hasChanges = $false
+          foreach ($f in $files) {
+            if (Test-Path $f) {
+              git add $f
+              $hasChanges = $true
+            }
+          }
+
+          if (-not $hasChanges) {
+            Write-Host "No watchdog state files to commit."
+            exit 0
+          }
+
+          $status = git status --porcelain
+          if (-not $status) {
+            Write-Host "No changes to commit."
+            exit 0
+          }
+
+          git commit -m "[WATCHDOG] Health update $timestamp" 2>$null
+          if ($LASTEXITCODE -ne 0) {
+            Write-Host "Commit failed (maybe empty?)"
+            exit 0
+          }
+
+          # Retry push loop
+          $maxRetries = 3
+          $retryCount = 0
+          $success = $false
+
+          while (-not $success -and $retryCount -lt $maxRetries) {
+            if ($retryCount -gt 0) {
+              Write-Host "Retrying push ($retryCount/$maxRetries)..."
+              Start-Sleep -Seconds 5
+              git pull origin main --rebase 2>&1
+            }
+            git push 2>&1
+            if ($LASTEXITCODE -eq 0) {
+              $success = $true
+              Write-Host "Push successful."
+            }
+            $retryCount++
+          }
+
+          if (-not $success) {
+            Write-Host "WARNING: Push failed after $maxRetries attempts."
+          }
+          exit 0

@@ -854,16 +854,44 @@ def check_spread_exit_conditions(
     pnl_pct: float,
     spread_cfg: dict,
     holding_minutes: int = 0,
+    dte_remaining: int = -1,
+    dte_at_entry: int = -1,
 ) -> Tuple[bool, str]:
-    """Check if spread should be exited based on P&L percentage or time stop."""
+    """
+    Check if spread should be exited based on P&L percentage, time stop,
+    or time-decay conditions.
+
+    Args:
+        pnl_pct: Current spread P&L as a percentage.
+        spread_cfg: Spread configuration dict.
+        holding_minutes: Minutes since position was opened.
+        dte_remaining: Days to expiration remaining (-1 if unknown).
+        dte_at_entry: DTE when the position was opened (-1 if unknown).
+
+    Returns:
+        Tuple of (should_exit, exit_reason).
+    """
     tp_max_profit_pct = spread_cfg.get("tp_max_profit_pct", 50.0)
     sl_pct = spread_cfg.get("sl_pct", -25.0)
     hold_overnight = spread_cfg.get("hold_overnight", True)
     dte = spread_cfg.get("dte", 3)
     bars_stop = spread_cfg.get("bars_stop", 0)
 
+    # Phase 4A: Apply dynamic TP adjustment from market condition overrides
+    try:
+        from RubberBand.src.watchdog.market_classifier import read_dynamic_overrides
+        _dyn = read_dynamic_overrides()
+        _tp_adj = float(_dyn.get("overrides", {}).get("tp_r_multiple_adjustment", 0.0))
+        # 1 R-multiple adjustment maps to 20% TP shift
+        # Example: TRENDING_DOWN (-1.0R) -> -20% TP, CHOPPY (-0.5R) -> -10% TP
+        _TP_R_TO_PCT_SCALE = 20.0
+        tp_pct_shift = _tp_adj * _TP_R_TO_PCT_SCALE
+        tp_max_profit_pct = max(30.0, tp_max_profit_pct + tp_pct_shift)
+    except Exception as e:
+        print(f"[WATCHDOG] dynamic TP non-fatal: {e}", flush=True)
+
     if pnl_pct >= tp_max_profit_pct:
-        return True, f"TP_hit({pnl_pct:.1f}%>={tp_max_profit_pct}%)"
+        return True, f"TP_hit({pnl_pct:.1f}%>={tp_max_profit_pct:.0f}%)"
 
     if pnl_pct <= sl_pct:
         return True, f"SL_hit({pnl_pct:.1f}%<={sl_pct}%)"
@@ -871,6 +899,19 @@ def check_spread_exit_conditions(
     # Time stop: exit if held for too many bars (each bar = 15 minutes)
     if bars_stop > 0 and holding_minutes >= bars_stop * 15:
         return True, f"TIME_STOP({holding_minutes}min >= {bars_stop}bars)"
+
+    # Phase 4D: Time-decay exit for spreads
+    # Theta decay accelerates near expiration; take profits early or avoid gamma risk
+    if dte_at_entry > 0 and dte_remaining >= 0:
+        dte_elapsed_pct = 1.0 - (dte_remaining / dte_at_entry) if dte_at_entry > 0 else 0.0
+
+        # If held > 80% of DTE regardless of P&L: exit (avoid gamma risk)
+        if dte_elapsed_pct >= 0.80:
+            return True, f"TIME_DECAY_EXIT(DTE_elapsed={dte_elapsed_pct:.0%},remaining={dte_remaining}d)"
+
+        # If held > 60% of DTE and profitable: exit (take what you have)
+        if dte_elapsed_pct >= 0.60 and pnl_pct > 0:
+            return True, f"TIME_DECAY_PROFIT_LOCK(DTE_elapsed={dte_elapsed_pct:.0%},pnl={pnl_pct:.1f}%)"
 
     if not hold_overnight or dte == 0:
         now_et = _now_et()
@@ -1128,8 +1169,70 @@ def manage_positions(
                 except (ValueError, TypeError):
                     holding_minutes = 0
 
-        # Check exit conditions (including time stop based on holding_minutes)
-        should_exit, exit_reason = check_spread_exit_conditions(pnl_pct, spread_cfg, holding_minutes)
+        # Phase 4D: Compute DTE remaining and DTE at entry for time-decay exit
+        dte_remaining = -1
+        dte_at_entry = -1
+        expiration_str = spread["expiration"]
+        if expiration_str:
+            try:
+                from datetime import datetime as _dt_cls
+                exp_date = _dt_cls.strptime(expiration_str, "%Y-%m-%d").date()
+                today = _now_et().date()
+                dte_remaining = max(0, (exp_date - today).days)
+            except (ValueError, TypeError):
+                pass
+        if registry_entry:
+            dte_at_entry = registry_entry.get("dte_at_entry", -1)
+            if dte_at_entry == -1 and expiration_str:
+                # Derive from entry_date and expiration
+                entry_date_str = registry_entry.get("entry_date", "")
+                if entry_date_str:
+                    try:
+                        from datetime import datetime as _dt_cls2
+                        entry_d = _dt_cls2.fromisoformat(entry_date_str).date()
+                        exp_d = _dt_cls2.strptime(expiration_str, "%Y-%m-%d").date()
+                        dte_at_entry = max(1, (exp_d - entry_d).days)
+                    except (ValueError, TypeError):
+                        pass
+
+        # Phase 4C: Options Trailing Stop
+        # Track peak PnL % in registry; if spread was up > +40% and drops 20%
+        # from peak, trigger exit to prevent common pattern of +60% -> -10%.
+        _trailing_exit = False
+        _trailing_reason = ""
+        if registry_entry and pnl_pct > 0:
+            peak_pnl_pct = registry_entry.get("peak_pnl_pct", 0.0)
+            if pnl_pct > peak_pnl_pct:
+                old_peak = peak_pnl_pct
+                # Update peak (backward-compatible new field)
+                registry_entry["peak_pnl_pct"] = pnl_pct
+                # Only save on significant changes (5% point increments)
+                if registry and (pnl_pct - old_peak) >= 5.0:
+                    registry.save()
+            # Check trailing stop: activate at +40%, trail distance = 20%
+            if peak_pnl_pct >= 40.0:
+                trail_floor = peak_pnl_pct - 20.0
+                if pnl_pct <= trail_floor:
+                    _trailing_exit = True
+                    _trailing_reason = (
+                        f"TRAILING_STOP(peak={peak_pnl_pct:.1f}%,floor={trail_floor:.1f}%,"
+                        f"current={pnl_pct:.1f}%)"
+                    )
+        elif registry_entry and pnl_pct <= 0:
+            # Not profitable — keep tracking peak but don't trigger trailing
+            pass
+
+        # Check exit conditions (including time stop, time-decay)
+        should_exit, exit_reason = check_spread_exit_conditions(
+            pnl_pct, spread_cfg, holding_minutes,
+            dte_remaining=dte_remaining,
+            dte_at_entry=dte_at_entry,
+        )
+
+        # Phase 4C: Trailing stop overrides if not already exiting
+        if not should_exit and _trailing_exit:
+            should_exit = True
+            exit_reason = _trailing_reason
 
         # SL CONFIRMATION: Require N consecutive SL readings before exiting.
         # Prevents single-cycle quote glitches from triggering irreversible exits.
@@ -1524,6 +1627,17 @@ def main() -> int:
             bearish_filter=regime_cfg.get("bearish_bar_filter")
         )
         
+        # Watchdog pause check (fail-open if file missing)
+        try:
+            from RubberBand.src.watchdog.pause_check import check_bot_paused
+            _wd_paused, _wd_reason = check_bot_paused(BOT_TAG)
+            if _wd_paused:
+                logger.heartbeat(event="watchdog_paused", reason=_wd_reason)
+                manage_positions(spread_cfg, logger, dry_run, registry=registry)
+                continue
+        except Exception as e:
+            logger.heartbeat(event="watchdog_check_error", error=str(e))
+
         try:
             entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, registry, dry_run, regime_cfg=regime_cfg)
             conn_guard.record_success()

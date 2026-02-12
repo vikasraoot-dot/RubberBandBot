@@ -1089,6 +1089,59 @@ Generated at: {datetime.now(ET).isoformat()}
 
 
 # ==============================================================================
+# Watchdog Endpoints
+# ==============================================================================
+
+WATCHDOG_DIR = Path(__file__).parent.parent / "results" / "watchdog"
+
+
+def _load_watchdog_json(filename: str) -> dict:
+    """Load a watchdog JSON state file (fail-safe)."""
+    path = WATCHDOG_DIR / filename
+    if path.exists():
+        try:
+            with open(path, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"[ERROR] Failed to load {filename}: {e}")
+    return {}
+
+
+@app.route("/api/watchdog/status")
+def api_watchdog_status():
+    """Return combined watchdog status: pause flags, profit locks, intraday health."""
+    return jsonify({
+        "intraday_health": _load_watchdog_json("intraday_health.json"),
+        "pause_flags": _load_watchdog_json("bot_pause_flags.json"),
+        "profit_locks": _load_watchdog_json("profit_locks.json"),
+    })
+
+
+@app.route("/api/watchdog/alerts")
+def api_watchdog_alerts():
+    """Return recent alerts from alerts.jsonl (newest first, max 200)."""
+    alerts_path = WATCHDOG_DIR / "alerts.jsonl"
+    alerts = []
+    if alerts_path.exists():
+        try:
+            with open(alerts_path, "r") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        try:
+                            alerts.append(json.loads(line))
+                        except json.JSONDecodeError:
+                            continue
+        except Exception as e:
+            print(f"[ERROR] Failed to read alerts.jsonl: {e}")
+
+    # Newest first, limit to 200
+    alerts.reverse()
+    limit = int(request.args.get("limit", 200))
+    return jsonify(alerts[:limit])
+
+
+# ==============================================================================
 # Entry Point
 # ==============================================================================
 
