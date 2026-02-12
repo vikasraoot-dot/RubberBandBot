@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T11:24:30.962905-05:00",
+  "updated_at": "2026-02-12T11:38:34.197206-05:00",
   "positions": {
     "AAPL": {
       "symbol": "AAPL",
@@ -10,6 +10,46 @@
       "qty": 7,
       "entry_price": 267.125714,
       "entry_date": "2026-02-12T11:24:30.962512-05:00",
+      "status": "open"
+    },
+    "FCX": {
+      "symbol": "FCX",
+      "underlying": "FCX",
+      "client_order_id": "15M_STK_FCX_1770914279",
+      "order_id": "91358d92-235e-45e2-9863-ee0e83f25d9b",
+      "qty": 32,
+      "entry_price": 61.91,
+      "entry_date": "2026-02-12T11:38:07.434156-05:00",
+      "status": "open"
+    },
+    "DAL": {
+      "symbol": "DAL",
+      "underlying": "DAL",
+      "client_order_id": "15M_STK_DAL_1770914288",
+      "order_id": "de5c7f10-2d13-4d56-a533-c8403ebdff69",
+      "qty": 9,
+      "entry_price": 69.83,
+      "entry_date": "2026-02-12T11:38:15.940014-05:00",
+      "status": "open"
+    },
+    "CFG": {
+      "symbol": "CFG",
+      "underlying": "CFG",
+      "client_order_id": "15M_STK_CFG_1770914298",
+      "order_id": "971d0cc9-ccdc-4201-b74b-9329c4b320cf",
+      "qty": 31,
+      "entry_price": 64.8,
+      "entry_date": "2026-02-12T11:38:26.640107-05:00",
+      "status": "open"
+    },
+    "TFC": {
+      "symbol": "TFC",
+      "underlying": "TFC",
+      "client_order_id": "15M_STK_TFC_1770914307",
+      "order_id": "fc8df3fc-7a24-4ae2-97f2-445820b553df",
+      "qty": 38,
+      "entry_price": 52.62,
+      "entry_date": "2026-02-12T11:38:34.196833-05:00",
       "status": "open"
     }
   },
