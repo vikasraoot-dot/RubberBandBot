@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-12T11:04:15.774599-05:00",
-  "positions": {},
+  "updated_at": "2026-02-12T13:05:00.693051-05:00",
+  "positions": {
+    "DAL260220C00068000": {
+      "symbol": "DAL260220C00068000",
+      "underlying": "DAL",
+      "client_order_id": "15M_OPT_DAL260220C00068000_1770919465",
+      "order_id": "36124beb-073e-410a-bf11-c2c1bd8a6b6e",
+      "qty": 1,
+      "entry_price": 0.84,
+      "entry_date": "2026-02-12T13:05:00.692845-05:00",
+      "status": "open",
+      "short_symbol": "DAL260220C00069000"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
