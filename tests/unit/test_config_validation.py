@@ -230,7 +230,7 @@ class TestWeeklyConfig:
 class TestConfigConsistency:
     """Cross-config consistency checks."""
 
-    def test_both_configs_use_iex_feed(self):
+    def test_both_configs_use_same_feed(self):
         """Both configs should use the same data feed."""
         main_cfg = _load_yaml('config.yaml')
         weekly_cfg = _load_yaml('config_weekly.yaml')

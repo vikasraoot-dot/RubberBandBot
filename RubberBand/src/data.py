@@ -807,7 +807,7 @@ def fetch_latest_bars(
     symbols: List[str],
     timeframe: str = "15Min",
     history_days: int = 30,
-    feed: str = "iex",
+    feed: str = "sip",
     rth_only: bool = True,
     tz_name: str = "US/Eastern",
     rth_start: str = "09:30",
@@ -856,17 +856,18 @@ def fetch_latest_bars(
         })
         # still continue; requests will 401, but we won’t crash
 
+    # Normalize feed to lowercase (Alpaca API expects lowercase)
+    feed = (feed or "sip").lower()
+
     if end is None:
         end_dt = _now_utc().replace(microsecond=0)
         # SIP feed on free plans requires end to be >=15 min in the past.
         # Cap automatically so callers don't need to worry about it.
-        if feed.lower() == "sip":
-            sip_cutoff = end_dt - dt.timedelta(minutes=16)
-            if end_dt > sip_cutoff:
-                end_dt = sip_cutoff
-                if verbose:
-                    print(f"[bars] SIP feed: capping end to {end_dt.strftime(ISO_UTC)} "
-                          "(free-tier 15-min delay)")
+        if feed == "sip":
+            end_dt = end_dt - dt.timedelta(minutes=16)
+            if verbose:
+                print(f"[bars] SIP feed: capping end to {end_dt.strftime(ISO_UTC)} "
+                      "(free-tier 15-min delay)")
     else:
         # Normalize end to utc datetime
         if isinstance(end, str):

@@ -227,7 +227,7 @@ class RegimeManager:
         try:
             # Fetch latest VIXY price (1 bar of 5-minute data for speed)
             bars_map, _ = fetch_latest_bars(
-                ["VIXY"], "5Min", 1, feed="sip", verbose=False
+                ["VIXY"], "5Min", 1, feed="iex", verbose=False  # IEX for real-time intraday panic detection (SIP has 15-min delay)
             )
             df = bars_map.get("VIXY")
 
