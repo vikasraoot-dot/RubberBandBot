@@ -1,7 +1,18 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-11T15:50:01.303543-05:00",
-  "positions": {},
+  "updated_at": "2026-02-12T10:47:36.772667-05:00",
+  "positions": {
+    "BIDU": {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770911248",
+      "order_id": "1a2d2d38-6434-4ca5-b4df-22e86ac51f5c",
+      "qty": 4,
+      "entry_price": 140.28,
+      "entry_date": "2026-02-12T10:47:36.772406-05:00",
+      "status": "open"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "UBER",
