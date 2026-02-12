@@ -448,44 +448,29 @@ def run_weekly_cycle():
     logging.info("=== End Summary ===")
 
 if __name__ == "__main__":
-    # Load registry once at startup for persistence across cycles
+    # Single-cycle execution: run one trading cycle and exit.
+    # The GitHub Actions cron schedule handles hourly recurrence.
+    # This avoids the 6-hour job time limit that killed the old while-True loop.
     registry = PositionRegistry(bot_tag=BOT_TAG)
-    
-    while True:
-        # Simple loop: Run once every hour around market times or just sleep
-        now = datetime.now()
-        
-        try:
-            # Check if market is still open before running cycle
-            if not alpaca_market_open():
-                logging.info("Market is closed. Saving registry and exporting logs.")
-                # EOD: Export trades to CSV and summary
-                try:
-                    logger.eod_summary()
-                    csv_date = datetime.now(ET).strftime("%Y%m%d")
-                    logger.export_trades_csv(f"results/{BOT_TAG}_trades_{csv_date}.csv")
-                    logger.close()
-                except Exception as e:
-                    logging.error(f"Error exporting trade logs: {e}")
-                registry.save()
-                break
-            
-            # Run logic
+
+    try:
+        if not alpaca_market_open():
+            logging.info("Market is closed. Exporting logs and exiting.")
+            try:
+                logger.eod_summary()
+                csv_date = datetime.now(ET).strftime("%Y%m%d")
+                logger.export_trades_csv(f"results/{BOT_TAG}_trades_{csv_date}.csv")
+                logger.close()
+            except Exception as e:
+                logging.error(f"Error exporting trade logs: {e}")
+        else:
             run_weekly_cycle()
-            
-            # Sleep 1 hour
-            logging.info("Cycle complete. Sleeping 60 mins...")
-            time.sleep(3600)
-            
-        except KeyboardInterrupt:
-            logging.info("Keyboard interrupt. Saving registry and exiting.")
-            registry.save()
-            break
-        except KillSwitchTriggered as e:
-            logging.critical(f"Kill switch triggered: {e}. Saving registry and exiting.")
-            registry.save()
-            break
-        except Exception as e:
-            logging.error(f"Main loop error: {e}")
-            time.sleep(60)
+            logging.info("Cycle complete. Exiting (next run via cron).")
+    except KillSwitchTriggered as e:
+        logging.critical(f"Kill switch triggered: {e}. Saving registry and exiting.")
+    except Exception as e:
+        logging.error(f"Main error: {e}")
+        traceback.print_exc()
+    finally:
+        registry.save()
 
