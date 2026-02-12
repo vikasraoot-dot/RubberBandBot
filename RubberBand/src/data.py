@@ -88,6 +88,111 @@ def cancel_all_orders(base_url: Optional[str], key: Optional[str], secret: Optio
         r.raise_for_status()
     return {"ok": True}
 
+
+def cancel_orders_for_bots(
+    base_url: Optional[str],
+    key: Optional[str],
+    secret: Optional[str],
+    bot_prefixes: List[str],
+) -> Dict[str, Any]:
+    """Cancel only orders belonging to specified bot tags, preserving all others.
+
+    Uses nested order queries to trace bracket/OCO legs back to their parent
+    order's client_order_id for accurate bot attribution.  This prevents the
+    EOD flatten from destroying weekly-hold bracket legs or safety-check OCOs.
+
+    Args:
+        base_url: Alpaca API base URL (or None to use env).
+        key: API key (or None to use env).
+        secret: API secret (or None to use env).
+        bot_prefixes: Bot tag prefixes whose orders should be cancelled
+                      (e.g. ``["15M_STK", "15M_OPT"]``).
+
+    Returns:
+        Dict with ``cancelled``, ``preserved`` counts and ``errors`` list.
+    """
+    base = _base_url_from_env(base_url)
+    H = _alpaca_headers(key, secret)
+
+    # --- Step 1: map bracket/OCO leg IDs to intraday parents ---------------
+    # Query recent orders (last 3 days) with nested=true so legs appear under
+    # their parent.  This lets us attribute UUID-based leg IDs to the bot that
+    # placed the parent order.  3-day window keeps us well under the 500 limit
+    # while covering any intraday bracket that could still have open legs.
+    lookback = (_now_utc() - dt.timedelta(days=3)).strftime("%Y-%m-%dT00:00:00Z")
+    try:
+        r = requests.get(
+            f"{base}/v2/orders", headers=H,
+            params={"status": "all", "limit": 500, "nested": "true", "after": lookback},
+            timeout=30,
+        )
+        r.raise_for_status()
+        all_orders_nested = r.json() or []
+    except Exception as e:
+        print(f"[eod] Failed to fetch nested orders for leg mapping: {e}")
+        return {"cancelled": 0, "preserved": 0, "errors": [str(e)]}
+
+    if len(all_orders_nested) >= 500:
+        print(f"[eod] WARNING: nested order query hit 500-order limit — "
+              "some leg mappings may be incomplete (unmapped legs are preserved)")
+
+    intraday_order_ids: set = set()
+    for order in all_orders_nested:
+        coid = order.get("client_order_id", "")
+        if any(coid.startswith(f"{p}_") for p in bot_prefixes):
+            intraday_order_ids.add(order.get("id"))
+            for leg in order.get("legs", []):
+                intraday_order_ids.add(leg.get("id"))
+
+    # --- Step 2: fetch open orders (flat) ----------------------------------
+    try:
+        r = requests.get(
+            f"{base}/v2/orders", headers=H,
+            params={"status": "open", "limit": 500},
+            timeout=15,
+        )
+        r.raise_for_status()
+        open_orders = r.json() or []
+    except Exception as e:
+        print(f"[eod] Failed to fetch open orders: {e}")
+        return {"cancelled": 0, "preserved": 0, "errors": [str(e)]}
+
+    # --- Step 3: cancel only intraday orders --------------------------------
+    cancelled = 0
+    preserved_orders: List[Dict[str, str]] = []
+    errors: List[str] = []
+
+    for order in open_orders:
+        oid = order.get("id", "")
+        coid = order.get("client_order_id", "")
+        symbol = order.get("symbol", "")
+
+        by_id = oid in intraday_order_ids
+        by_prefix = any(coid.startswith(f"{p}_") for p in bot_prefixes)
+
+        if by_id or by_prefix:
+            result = cancel_order_by_id(base_url, key, secret, oid)
+            if result.get("error"):
+                # Single retry for transient failures
+                time.sleep(0.3)
+                result = cancel_order_by_id(base_url, key, secret, oid)
+            if result.get("error"):
+                errors.append(f"{symbol} ({oid}): {result['error']}")
+                print(f"[eod] FAILED to cancel: {symbol} (coid={coid[:40]})")
+            else:
+                cancelled += 1
+                print(f"[eod] Cancelled: {symbol} (coid={coid[:40]})")
+        else:
+            preserved_orders.append({"symbol": symbol, "client_order_id": coid})
+            print(f"[eod] Preserved: {symbol} (coid={coid[:40]})")
+
+    return {
+        "cancelled": cancelled,
+        "preserved": len(preserved_orders),
+        "preserved_orders": preserved_orders,
+        "errors": errors,
+    }
+
 def close_all_positions(base_url: Optional[str], key: Optional[str], secret: Optional[str]) -> Dict[str, Any]:
     base = _base_url_from_env(base_url)
     r = requests.delete(f"{base}/v2/positions", headers=_alpaca_headers(key, secret), timeout=20)

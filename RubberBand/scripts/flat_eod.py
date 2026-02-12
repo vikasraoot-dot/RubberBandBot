@@ -5,7 +5,7 @@ import os, sys
 # Add project root to path if running as script
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
 
-from RubberBand.src.data import cancel_all_orders, close_all_positions
+from RubberBand.src.data import cancel_orders_for_bots
 
 def _env(name: str, default: str = "") -> str:
     v = os.environ.get(name)
@@ -66,10 +66,16 @@ def main():
     except Exception as e:
         print(f"[EOD] Error in WK_OPT flatten: {e}", flush=True)
     
-    # 2. Cancel all open orders
+    # 2. Cancel ONLY intraday bot orders — preserve WK_STK/WK_OPT bracket legs
+    #    and safety-check OCOs so weekly-hold positions stay protected overnight.
+    INTRADAY_BOTS = ["15M_STK", "15M_OPT"]
     try:
-        cancel_all_orders(base, key, sec)
-        print("[EOD] canceled all open orders", flush=True)
+        result = cancel_orders_for_bots(base, key, sec, bot_prefixes=INTRADAY_BOTS)
+        print(f"[EOD] Cancelled {result['cancelled']} intraday orders, "
+              f"preserved {result['preserved']} other orders", flush=True)
+        if result.get("errors"):
+            for err in result["errors"]:
+                print(f"[EOD] Cancel error: {err}", flush=True)
     except Exception as e:
         print(f"[EOD] cancel orders error: {e}", flush=True)
     
