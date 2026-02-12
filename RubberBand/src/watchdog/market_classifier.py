@@ -155,7 +155,7 @@ class MarketConditionClassifier:
             ["SPY"],
             timeframe="1Day",
             history_days=40,
-            feed="iex",
+            feed="sip",
             rth_only=False,
             verbose=self.verbose,
         )
@@ -256,7 +256,7 @@ class MarketConditionClassifier:
                     batch,
                     timeframe="1Day",
                     history_days=_BREADTH_HISTORY_DAYS,
-                    feed="iex",
+                    feed="sip",
                     rth_only=False,
                     verbose=False,
                 )

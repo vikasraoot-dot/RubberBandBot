@@ -84,8 +84,8 @@ class RegimeManager:
         """
         try:
             # Fetch 30 days to establish 20-day SMA/Bollinger Baseline + buffer
-            # Use 'iex' feed as 'sip' requires subscription/permissions often missing in paper envs
-            bars_map, _ = fetch_latest_bars(["VIXY"], "1Day", 35, feed="iex", verbose=self.verbose)
+            # SIP = consolidated tape from all exchanges (free-tier: 15-min delay, handled by fetch_latest_bars)
+            bars_map, _ = fetch_latest_bars(["VIXY"], "1Day", 35, feed="sip", verbose=self.verbose)
             df = bars_map.get("VIXY")
             
             if df is None or df.empty or len(df) < 20:
@@ -227,7 +227,7 @@ class RegimeManager:
         try:
             # Fetch latest VIXY price (1 bar of 5-minute data for speed)
             bars_map, _ = fetch_latest_bars(
-                ["VIXY"], "5Min", 1, feed="iex", verbose=False
+                ["VIXY"], "5Min", 1, feed="sip", verbose=False
             )
             df = bars_map.get("VIXY")
 

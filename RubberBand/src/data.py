@@ -858,6 +858,15 @@ def fetch_latest_bars(
 
     if end is None:
         end_dt = _now_utc().replace(microsecond=0)
+        # SIP feed on free plans requires end to be >=15 min in the past.
+        # Cap automatically so callers don't need to worry about it.
+        if feed.lower() == "sip":
+            sip_cutoff = end_dt - dt.timedelta(minutes=16)
+            if end_dt > sip_cutoff:
+                end_dt = sip_cutoff
+                if verbose:
+                    print(f"[bars] SIP feed: capping end to {end_dt.strftime(ISO_UTC)} "
+                          "(free-tier 15-min delay)")
     else:
         # Normalize end to utc datetime
         if isinstance(end, str):

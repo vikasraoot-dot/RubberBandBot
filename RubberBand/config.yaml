@@ -21,7 +21,7 @@ entry_windows:
     end: "15:45"
 
 bar_limit: 10000
-feed: "iex"
+feed: "sip"
 
 run:
   force_run: 0
@@ -80,7 +80,7 @@ filters:
   rsi_oversold: 25           # Optimizer: RSI<25 = 3.6x more trades, same/better WR (was 30)
   rsi_overbought: 70         # (Future use for shorts)
   min_price: 5.0
-  min_dollar_vol: 1000000    # Adjusted for IEX feed volume
+  min_dollar_vol: 1000000    # SIP consolidated volume (was IEX-only)
   trend_filter_sma: 0        # Disabled (Too restrictive)
   # Filter overrides to allow mean reversion (RSI < 25)
   rsi_min: 15

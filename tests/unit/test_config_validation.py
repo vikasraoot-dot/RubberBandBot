@@ -83,11 +83,11 @@ class TestMainConfig:
         assert slope is not None, "slope_threshold should exist"
         assert slope < 0, f"slope_threshold should be negative, got {slope}"
 
-    def test_feed_is_iex(self):
-        """Data feed should be 'iex' (free tier)."""
+    def test_feed_is_sip(self):
+        """Data feed should be 'sip' (consolidated tape, free-tier 15-min delay)."""
         cfg = _load_yaml('config.yaml')
         feed = cfg.get("feed")
-        assert feed == "iex", f"feed should be 'iex', got {feed}"
+        assert feed == "sip", f"feed should be 'sip', got {feed}"
 
     def test_trend_filter_sma_period(self):
         """Trend filter SMA period should be 100 (All-Weather optimization)."""
