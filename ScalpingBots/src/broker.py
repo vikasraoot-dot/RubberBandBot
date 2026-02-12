@@ -106,6 +106,12 @@ def close_position(
     secret: Optional[str] = None,
     symbol: str = "",
 ) -> Dict[str, Any]:
+    """Close a position via Alpaca DELETE /v2/positions/{symbol}.
+
+    Returns:
+        Dict with 'ok' bool, plus 'order_id' and other order fields
+        when the broker returns a closing order in the response body.
+    """
     base = _base_url_from_env(base_url)
     r = requests.delete(
         f"{base}/v2/positions/{symbol}",
@@ -116,7 +122,25 @@ def close_position(
         return {"ok": True, "message": "Position not found"}
     if r.status_code not in (200, 204):
         r.raise_for_status()
-    return {"ok": True}
+
+    # Parse response body — Alpaca returns the closing order object on 200
+    result: Dict[str, Any] = {"ok": True}
+    if r.content:
+        try:
+            body = r.json()
+            if isinstance(body, dict):
+                order_id = body.get("id", "")
+                if order_id:
+                    result["order_id"] = order_id
+                result["status"] = body.get("status", "")
+                filled_price = body.get("filled_avg_price")
+                if filled_price is not None:
+                    result["filled_avg_price"] = filled_price
+                result["filled_qty"] = body.get("filled_qty")
+                result["symbol"] = body.get("symbol", symbol)
+        except (ValueError, KeyError) as e:
+            print(f"[warn] close_position: failed to parse response body for {symbol}: {e}")
+    return result
 
 
 # ── Quotes ───────────────────────────────────────────────────────────────────
@@ -126,13 +150,19 @@ def get_latest_quote(
     key: Optional[str] = None,
     secret: Optional[str] = None,
     symbol: str = "",
+    feed: str = "iex",
 ) -> Dict[str, Any]:
-    """Get latest bid/ask quote for a stock symbol."""
+    """Get latest bid/ask quote for a stock symbol.
+
+    Args:
+        feed: Data feed — "iex" (free, potentially stale) or "sip" (paid, real-time).
+    """
     data_url = "https://data.alpaca.markets"
     try:
         r = requests.get(
             f"{data_url}/v2/stocks/{symbol}/quotes/latest",
             headers=_alpaca_headers(key, secret),
+            params={"feed": feed},
             timeout=10,
         )
         r.raise_for_status()

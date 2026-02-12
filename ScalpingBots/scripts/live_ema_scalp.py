@@ -57,6 +57,79 @@ from ScalpingBots.src.broker import (
 BOT_TAG = "EMA_SCALP"
 LOG_DIR = os.path.join(_PROJECT, "logs")
 
+
+def _poll_fill_price(
+    base_url: str, key: str, secret: str,
+    order_id: str, fallback_price: float,
+    timeout: float = 5.0,
+) -> float:
+    """Poll Alpaca order endpoint for actual fill price.
+
+    Args:
+        order_id: Alpaca order ID returned by close_position.
+        fallback_price: Price to return if polling fails or times out.
+        timeout: Max seconds to poll (polls every 0.5s).
+
+    Returns:
+        The filled_avg_price from the broker, or fallback_price on timeout/error.
+    """
+    base = _base_url_from_env(base_url)
+    H = _alpaca_headers(key, secret)
+    interval = 0.5
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
+        try:
+            r = requests.get(
+                f"{base}/v2/orders/{order_id}",
+                headers=H,
+                timeout=10,
+            )
+            if r.status_code == 200:
+                order = r.json()
+                if order.get("status") == "filled":
+                    avg_price = order.get("filled_avg_price")
+                    if avg_price is not None:
+                        return float(avg_price)
+                # Order terminal but not filled — use fallback
+                if order.get("status") in ("canceled", "expired", "rejected"):
+                    print(f"  [warn] _poll_fill_price: order {order_id} status={order['status']}, using fallback")
+                    return fallback_price
+        except Exception as e:
+            print(f"  [warn] _poll_fill_price error: {e}")
+        time.sleep(interval)
+    print(f"  [warn] _poll_fill_price: timeout after {timeout}s for order {order_id}, using fallback ${fallback_price:.2f}")
+    return fallback_price
+
+
+def _get_position_price(
+    base_url: str, key: str, secret: str,
+    symbol: str,
+) -> Optional[float]:
+    """Get current_price from Alpaca position API for a single symbol.
+
+    Returns:
+        The current_price float, or None if the position is not found or API fails.
+    """
+    base = _base_url_from_env(base_url)
+    H = _alpaca_headers(key, secret)
+    try:
+        r = requests.get(
+            f"{base}/v2/positions/{symbol}",
+            headers=H,
+            timeout=10,
+        )
+        if r.status_code == 200:
+            data = r.json()
+            cp = data.get("current_price")
+            if cp is not None:
+                price = float(cp)
+                if price > 0:
+                    return price
+        return None
+    except Exception as e:
+        print(f"  [warn] _get_position_price({symbol}) error: {e}")
+        return None
+
 # Default ticker file — same list the live 15M/weekly bots use
 DEFAULT_TICKERS_FILE = os.path.join(_REPO, "RubberBand", "tickers.txt")
 
@@ -346,8 +419,8 @@ def verify_order_filled(base_url: str, key: str, secret: str,
                     return order
                 if status in ("canceled", "expired", "rejected"):
                     return order
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"  [warn] verify_order_filled poll error for {order_id}: {e}")
     return {"status": "timeout", "id": order_id}
 
 
@@ -384,7 +457,7 @@ def manage_exits(
               (now_et.hour == h_flat and now_et.minute >= m_flat))
 
     for symbol, pos in managed.items():
-        # Get current price
+        # Get current price from IEX quote
         quote = get_latest_quote(base_url, key, secret, symbol)
         bid = quote.get("bid", 0)
         ask = quote.get("ask", 0)
@@ -395,6 +468,30 @@ def manage_exits(
         # Use bid for long exits (selling), ask for short exits (buying to cover)
         current_price = bid if is_long else ask
         mid_price = (bid + ask) / 2.0
+
+        # ── Fix 4: Stale quote detection ──
+        # If the IEX quote implies a suspiciously large adverse move,
+        # cross-validate against the Alpaca position API current_price.
+        if pos.atr > 0:
+            if is_long:
+                implied_loss_pct = (pos.entry_price - current_price) / pos.entry_price
+            else:
+                implied_loss_pct = (current_price - pos.entry_price) / pos.entry_price
+            if implied_loss_pct > 0.03:  # > 3% adverse move
+                position_price = _get_position_price(base_url, key, secret, symbol)
+                if position_price is not None:
+                    discrepancy = abs(current_price - position_price)
+                    if discrepancy > pos.atr:
+                        log_event("STALE_QUOTE_DETECTED", {
+                            "symbol": symbol,
+                            "iex_price": round(current_price, 4),
+                            "position_api_price": round(position_price, 4),
+                            "discrepancy": round(discrepancy, 4),
+                            "atr": round(pos.atr, 4),
+                        }, log_file)
+                        print(f"  [STALE QUOTE] {symbol}: IEX=${current_price:.2f} vs "
+                              f"Position API=${position_price:.2f} (disc=${discrepancy:.2f} > ATR={pos.atr:.2f})")
+                        current_price = position_price
 
         # Update peak price (for trailing stop)
         if is_long:
@@ -487,24 +584,44 @@ def manage_exits(
 
             try:
                 result = close_position(base_url, key, secret, symbol)
+
+                # ── Fix 2: Use broker fill price for P&L ──
+                exit_fill_price = current_price  # fallback to quote
+                order_id = result.get("order_id", "")
+                if order_id:
+                    exit_fill_price = _poll_fill_price(
+                        base_url, key, secret,
+                        order_id, fallback_price=current_price,
+                        timeout=5.0,
+                    )
+
+                # Recalculate P&L with actual fill price
+                if is_long:
+                    actual_pnl = (exit_fill_price - pos.entry_price) * pos.qty
+                else:
+                    actual_pnl = (pos.entry_price - exit_fill_price) * pos.qty
+
                 log_event("EXIT", {
                     "symbol": symbol,
                     "reason": exit_reason,
                     "entry_price": pos.entry_price,
-                    "exit_price": round(current_price, 2),
+                    "exit_price": round(exit_fill_price, 4),
+                    "quote_price": round(current_price, 4),
                     "qty": pos.qty,
-                    "pnl": round(unrealized, 2),
+                    "pnl": round(actual_pnl, 2),
+                    "pnl_from_quote": round(unrealized, 2),
                     "bars_held": pos.bars_held,
                     "trail_active": pos.trail_active,
                     "trail_price": round(pos.trail_price, 2) if pos.trail_active else None,
                     "peak_price": round(pos.peak_price, 2),
                     "sl_confirms": pos.sl_confirm_count,
+                    "order_id": order_id,
                 }, log_file)
                 print(f"  EXIT: {symbol} {exit_reason} | "
-                      f"P&L=${unrealized:+.2f} | bars={pos.bars_held} | "
-                      f"entry=${pos.entry_price:.2f} exit=${current_price:.2f}")
+                      f"P&L=${actual_pnl:+.2f} (fill=${exit_fill_price:.2f}) | bars={pos.bars_held} | "
+                      f"entry=${pos.entry_price:.2f} quote=${current_price:.2f}")
                 to_remove.append(symbol)
-                cycle_pnl += unrealized
+                cycle_pnl += actual_pnl
             except Exception as e:
                 log_event("EXIT_ERROR", {
                     "symbol": symbol,
@@ -553,7 +670,8 @@ def recover_positions(
             "status": "filled", "limit": 200, "after": f"{today}T00:00:00Z",
         }, timeout=15)
         orders = r.json() if r.status_code == 200 else []
-    except Exception:
+    except Exception as e:
+        print(f"  [warn] recover_positions: failed to fetch today's orders: {e}")
         orders = []
 
     # Build set of symbols entered by this bot today
@@ -739,12 +857,20 @@ def main():
                            if p.get("asset_class") == "us_equity"}
             num_positions = len(managed)
 
-            # Check daily P&L from fills
+            # ── Fix 3: Reconcile P&L — broker fills are ground truth ──
             fills = get_daily_fills(base_url, key, secret, BOT_TAG)
             broker_pnl = calculate_realized_pnl(fills)
-            # Use the larger magnitude (more conservative)
-            if abs(broker_pnl) > abs(daily_pnl):
-                daily_pnl = broker_pnl
+            pnl_divergence = abs(broker_pnl - daily_pnl)
+            if pnl_divergence > 5.0:
+                log_event("PNL_DIVERGENCE", {
+                    "internal_pnl": round(daily_pnl, 2),
+                    "broker_pnl": round(broker_pnl, 2),
+                    "divergence": round(pnl_divergence, 2),
+                }, log_file)
+                print(f"  [WARN] P&L divergence: internal=${daily_pnl:.2f} vs "
+                      f"broker=${broker_pnl:.2f} (diff=${pnl_divergence:.2f})")
+            # Broker fills are ground truth — always adopt broker P&L
+            daily_pnl = broker_pnl
 
             log_event("HEARTBEAT", {
                 "scan": scan_count,
