@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-12T12:05:01.033740-05:00",
+  "updated_at": "2026-02-12T12:20:01.569230-05:00",
   "positions": {
     "FCX": {
       "symbol": "FCX",
@@ -10,16 +10,6 @@
       "qty": 32,
       "entry_price": 61.91,
       "entry_date": "2026-02-12T11:38:07.434156-05:00",
-      "status": "open"
-    },
-    "CFG": {
-      "symbol": "CFG",
-      "underlying": "CFG",
-      "client_order_id": "15M_STK_CFG_1770914298",
-      "order_id": "971d0cc9-ccdc-4201-b74b-9329c4b320cf",
-      "qty": 31,
-      "entry_price": 64.8,
-      "entry_date": "2026-02-12T11:38:26.640107-05:00",
       "status": "open"
     }
   },
@@ -321,6 +311,18 @@
       "entry_date": "2026-02-12T11:38:34.196833-05:00",
       "status": "closed",
       "exit_date": "2026-02-12T12:05:01.033496-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "CFG",
+      "underlying": "CFG",
+      "client_order_id": "15M_STK_CFG_1770914298",
+      "order_id": "971d0cc9-ccdc-4201-b74b-9329c4b320cf",
+      "qty": 31,
+      "entry_price": 64.8,
+      "entry_date": "2026-02-12T11:38:26.640107-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-12T12:20:01.568724-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
