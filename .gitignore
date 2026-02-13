@@ -78,6 +78,7 @@ scanner_artifacts/
 # Generated Data Files
 # -----------------------------------------------------------------------------
 *.csv
+!auditor_log.csv
 *.jsonl
 !results/watchdog/*.jsonl
 !results/watchdog/**/*.jsonl

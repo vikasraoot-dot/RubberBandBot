@@ -92,17 +92,25 @@ jobs:
           $ErrorActionPreference = "Continue"
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 
-          # Add weekly report files
-          $files = Get-ChildItem -Path "results/watchdog/weekly_reports/*.md" -ErrorAction SilentlyContinue
+          # Add weekly report files + ML artifacts
+          $patterns = @(
+            "results/watchdog/weekly_reports/*.md",
+            "results/watchdog/rolling_stats.json",
+            "results/watchdog/retrain_log.jsonl"
+          )
+
           $hasChanges = $false
-          foreach ($f in $files) {
-            git add $f.FullName
-            $hasChanges = $true
+          foreach ($p in $patterns) {
+            $files = Get-ChildItem -Path $p -ErrorAction SilentlyContinue
+            foreach ($f in $files) {
+              git add -f $f.FullName
+              $hasChanges = $true
+            }
           }
 
-          # Also add rolling stats if updated
-          if (Test-Path "results/watchdog/rolling_stats.json") {
-            git add "results/watchdog/rolling_stats.json"
+          # Add ML model if retrained
+          if (Test-Path "rubberband_xgb.json") {
+            git add -f "rubberband_xgb.json"
             $hasChanges = $true
           }
 

@@ -18,6 +18,7 @@ import json
 import os
 import sys
 from datetime import datetime, timedelta
+from decimal import Decimal
 from typing import Dict, List, Any, Optional
 from zoneinfo import ZoneInfo
 
@@ -97,9 +98,9 @@ def calculate_bot_pnl(
     result = {
         "bot_tag": bot_tag,
         "date": target_date,
-        "realized_pnl": 0.0,
-        "unrealized_pnl": 0.0,
-        "total_pnl": 0.0,
+        "realized_pnl": Decimal("0"),
+        "unrealized_pnl": Decimal("0"),
+        "total_pnl": Decimal("0"),
         "trades": [],
         "open_positions": [],
     }
@@ -145,24 +146,27 @@ def calculate_bot_pnl(
     for order in bot_orders:
         sym = order.get("symbol", "")
         side = order.get("side", "")
-        qty = float(order.get("filled_qty", 0))
-        price = float(order.get("filled_avg_price", 0))
+        qty = Decimal(str(order.get("filled_qty", 0)))
+        price = Decimal(str(order.get("filled_avg_price", 0)))
         
         if sym not in symbol_trades:
-            symbol_trades[sym] = {"buy_qty": 0, "buy_value": 0, "sell_qty": 0, "sell_value": 0}
-        
+            symbol_trades[sym] = {
+                "buy_qty": Decimal("0"), "buy_value": Decimal("0"),
+                "sell_qty": Decimal("0"), "sell_value": Decimal("0"),
+            }
+
         if side == "buy":
             symbol_trades[sym]["buy_qty"] += qty
             symbol_trades[sym]["buy_value"] += qty * price
         elif side == "sell":
             symbol_trades[sym]["sell_qty"] += qty
             symbol_trades[sym]["sell_value"] += qty * price
-        
+
         result["trades"].append({
             "symbol": sym,
             "side": side,
-            "qty": qty,
-            "price": price,
+            "qty": str(qty),
+            "price": str(price),
             "filled_at": order.get("filled_at"),
         })
     
@@ -183,18 +187,20 @@ def calculate_bot_pnl(
             open_qty = symbol_trades[sym]["buy_qty"] - symbol_trades[sym]["sell_qty"]
             if open_qty > 0:
                 entry_price = symbol_trades[sym]["buy_value"] / symbol_trades[sym]["buy_qty"]
-                current_price = float(pos.get("current_price", 0))
+                current_price = Decimal(str(pos.get("current_price", 0)))
                 unrealized = (current_price - entry_price) * open_qty
                 result["unrealized_pnl"] += unrealized
                 result["open_positions"].append({
                     "symbol": sym,
-                    "qty": open_qty,
-                    "entry_price": entry_price,
-                    "current_price": current_price,
-                    "unrealized_pnl": unrealized,
+                    "qty": str(open_qty),
+                    "entry_price": str(entry_price),
+                    "current_price": str(current_price),
+                    "unrealized_pnl": str(unrealized),
                 })
     
-    result["total_pnl"] = result["realized_pnl"] + result["unrealized_pnl"]
+    result["realized_pnl"] = str(result["realized_pnl"])
+    result["unrealized_pnl"] = str(result["unrealized_pnl"])
+    result["total_pnl"] = str(Decimal(result["realized_pnl"]) + Decimal(result["unrealized_pnl"]))
     return result
 
 
@@ -234,24 +240,24 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
         bot_pnl = calculate_bot_pnl(orders, positions, bot_tag, target_date)
         if bot_pnl["trades"] or bot_pnl["open_positions"]:
             bot_results[bot_tag] = bot_pnl
-            _log(f"  {bot_tag}: Realized ${bot_pnl['realized_pnl']:.2f}, Unrealized ${bot_pnl['unrealized_pnl']:.2f}")
-    
+            _log(f"  {bot_tag}: Realized ${bot_pnl['realized_pnl']}, Unrealized ${bot_pnl['unrealized_pnl']}")
+
     # 4. Build consolidated report
-    total_realized = sum(r["realized_pnl"] for r in bot_results.values())
-    total_unrealized = sum(r["unrealized_pnl"] for r in bot_results.values())
-    
+    total_realized = sum((Decimal(r["realized_pnl"]) for r in bot_results.values()), Decimal("0"))
+    total_unrealized = sum((Decimal(r["unrealized_pnl"]) for r in bot_results.values()), Decimal("0"))
+
     report = {
         "date": target_date,
         "generated_at": _now_et().isoformat(),
         "account": {
-            "equity": float(account.get("equity", 0)),
-            "cash": float(account.get("cash", 0)),
-            "buying_power": float(account.get("buying_power", 0)),
+            "equity": str(Decimal(str(account.get("equity", 0)))),
+            "cash": str(Decimal(str(account.get("cash", 0)))),
+            "buying_power": str(Decimal(str(account.get("buying_power", 0)))),
         },
         "summary": {
-            "total_realized_pnl": total_realized,
-            "total_unrealized_pnl": total_unrealized,
-            "total_pnl": total_realized + total_unrealized,
+            "total_realized_pnl": str(total_realized),
+            "total_unrealized_pnl": str(total_unrealized),
+            "total_pnl": str(total_realized + total_unrealized),
             "bots_active": list(bot_results.keys()),
         },
         "bots": bot_results,
@@ -288,7 +294,7 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
     print(f"Total Day P&L:        ${total_realized + total_unrealized:,.2f}")
     print("-" * 60)
     for bot, data in bot_results.items():
-        print(f"  {bot}: ${data['total_pnl']:,.2f} ({len(data['trades'])} trades)")
+        print(f"  {bot}: ${Decimal(data['total_pnl']):,.2f} ({len(data['trades'])} trades)")
     print("=" * 60 + "\n")
 
     # 6. Feed watchdog performance database (non-fatal if watchdog not set up)

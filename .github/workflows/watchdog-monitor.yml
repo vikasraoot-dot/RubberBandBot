@@ -89,7 +89,9 @@ jobs:
             "results/watchdog/intraday_health.json",
             "results/watchdog/bot_pause_flags.json",
             "results/watchdog/profit_locks.json",
-            "results/watchdog/alerts.jsonl"
+            "results/watchdog/alerts.jsonl",
+            "results/watchdog/news_pause.json",
+            "results/watchdog/earnings_pause.json"
           )
 
           $hasChanges = $false
