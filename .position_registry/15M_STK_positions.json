@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-13T09:52:25.008729-05:00",
+  "updated_at": "2026-02-13T10:03:00.023189-05:00",
   "positions": {
     "GLW": {
       "symbol": "GLW",
@@ -10,6 +10,66 @@
       "qty": 15,
       "entry_price": 125.624666,
       "entry_date": "2026-02-13T09:52:25.008508-05:00",
+      "status": "open"
+    },
+    "CMCSA": {
+      "symbol": "CMCSA",
+      "underlying": "CMCSA",
+      "client_order_id": "15M_STK_CMCSA_1770994938",
+      "order_id": "14c3256c-7b84-4c0a-9756-778b6e8fcad8",
+      "qty": 63,
+      "entry_price": 31.33,
+      "entry_date": "2026-02-13T10:02:24.433534-05:00",
+      "status": "open"
+    },
+    "SBUX": {
+      "symbol": "SBUX",
+      "underlying": "SBUX",
+      "client_order_id": "15M_STK_SBUX_1770994944",
+      "order_id": "d06e8c16-3420-4a31-8a24-acff0c738fab",
+      "qty": 7,
+      "entry_price": 94.84,
+      "entry_date": "2026-02-13T10:02:30.725489-05:00",
+      "status": "open"
+    },
+    "C": {
+      "symbol": "C",
+      "underlying": "C",
+      "client_order_id": "15M_STK_C_1770994950",
+      "order_id": "c5de727f-b8f4-4ff9-8bbf-4799f25e6dd6",
+      "qty": 6,
+      "entry_price": 110.86,
+      "entry_date": "2026-02-13T10:02:36.584537-05:00",
+      "status": "open"
+    },
+    "TFC": {
+      "symbol": "TFC",
+      "underlying": "TFC",
+      "client_order_id": "15M_STK_TFC_1770994958",
+      "order_id": "f69b93cd-0f20-403a-9c96-73ec48d76dff",
+      "qty": 12,
+      "entry_price": 51.48,
+      "entry_date": "2026-02-13T10:02:43.739425-05:00",
+      "status": "open"
+    },
+    "FAST": {
+      "symbol": "FAST",
+      "underlying": "FAST",
+      "client_order_id": "15M_STK_FAST_1770994968",
+      "order_id": "e3d600f4-250a-40b1-b8a8-56d8ab5ab857",
+      "qty": 44,
+      "entry_price": 45.29,
+      "entry_date": "2026-02-13T10:02:54.091677-05:00",
+      "status": "open"
+    },
+    "BIDU": {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770994974",
+      "order_id": "6cea534c-9d94-4e94-851e-72a39796e650",
+      "qty": 4,
+      "entry_price": 135.89,
+      "entry_date": "2026-02-13T10:03:00.022864-05:00",
       "status": "open"
     }
   },
