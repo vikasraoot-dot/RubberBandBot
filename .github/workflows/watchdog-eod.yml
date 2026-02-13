@@ -60,6 +60,39 @@ jobs:
           & "$env:PYTHON_EXE" -m pip install -r RubberBand/requirements.txt --quiet
           & "$env:PYTHON_EXE" -m pip install pyyaml --quiet
 
+      - name: Persist Daily Results (Alpaca API → results/daily/)
+        shell: powershell
+        env:
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $dateArg = "${{ github.event.inputs.date }}"
+          $dateArgs = @()
+          if ($dateArg) { $dateArgs = @("--date", $dateArg) }
+
+          Write-Host "=== Persist Daily Results Starting ==="
+          & "$env:PYTHON_EXE" -u RubberBand/scripts/persist_daily_results.py @dateArgs
+          Write-Host "=== Persist Daily Results Complete ==="
+
+      - name: Run Market Classifier (dynamic overrides)
+        continue-on-error: true
+        shell: powershell
+        env:
+          APCA_API_BASE_URL: https://paper-api.alpaca.markets
+          APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
+          APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
+          PYTHONUNBUFFERED: "1"
+        run: |
+          $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
+          $tickersFile = Join-Path $env:GITHUB_WORKSPACE "RubberBand" "tickers.txt"
+
+          Write-Host "=== Market Classifier Starting ==="
+          & "$env:PYTHON_EXE" -u -m RubberBand.src.watchdog.market_classifier --tickers $tickersFile
+          Write-Host "=== Market Classifier Complete ==="
+
       - name: Run Post-Day Analyzer
         shell: powershell
         env:
@@ -113,12 +146,15 @@ jobs:
           $ErrorActionPreference = "Continue"
           $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm"
 
-          # Add all watchdog output files
+          # Add all watchdog output files + daily results
           $patterns = @(
+            "results/daily/*.json",
             "results/watchdog/daily_analysis/*.json",
             "results/watchdog/rolling_stats.json",
             "results/watchdog/performance.jsonl",
             "results/watchdog/alerts.jsonl",
+            "results/watchdog/dynamic_overrides.json",
+            "results/watchdog/market_breadth.json",
             "results/watchdog/approved_changes.yaml"
           )
 
@@ -126,7 +162,7 @@ jobs:
           foreach ($p in $patterns) {
             $files = Get-ChildItem -Path $p -ErrorAction SilentlyContinue
             foreach ($f in $files) {
-              git add $f.FullName
+              git add -f $f.FullName
               $hasChanges = $true
             }
           }

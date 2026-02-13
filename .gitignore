@@ -65,7 +65,9 @@ latest runs/
 auditor_logs/
 logs/
 data/cache/
-results/
+results/*
+!results/watchdog/
+!results/daily/
 backtest_*/
 backtest_results_*/
 downloaded_options_logs/
@@ -77,6 +79,8 @@ scanner_artifacts/
 # -----------------------------------------------------------------------------
 *.csv
 *.jsonl
+!results/watchdog/*.jsonl
+!results/watchdog/**/*.jsonl
 *.log
 
 # Note: *.json is NOT ignored because config files use JSON format
