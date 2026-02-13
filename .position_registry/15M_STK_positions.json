@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-13T10:17:33.851059-05:00",
+  "updated_at": "2026-02-13T11:05:00.819567-05:00",
   "positions": {
     "SBUX": {
       "symbol": "SBUX",
@@ -30,26 +30,6 @@
       "qty": 12,
       "entry_price": 51.48,
       "entry_date": "2026-02-13T10:02:43.739425-05:00",
-      "status": "open"
-    },
-    "FAST": {
-      "symbol": "FAST",
-      "underlying": "FAST",
-      "client_order_id": "15M_STK_FAST_1770994968",
-      "order_id": "e3d600f4-250a-40b1-b8a8-56d8ab5ab857",
-      "qty": 44,
-      "entry_price": 45.29,
-      "entry_date": "2026-02-13T10:02:54.091677-05:00",
-      "status": "open"
-    },
-    "BIDU": {
-      "symbol": "BIDU",
-      "underlying": "BIDU",
-      "client_order_id": "15M_STK_BIDU_1770994974",
-      "order_id": "6cea534c-9d94-4e94-851e-72a39796e650",
-      "qty": 4,
-      "entry_price": 135.89,
-      "entry_date": "2026-02-13T10:03:00.022864-05:00",
       "status": "open"
     },
     "STZ": {
@@ -433,6 +413,30 @@
       "entry_date": "2026-02-13T09:52:25.008508-05:00",
       "status": "closed",
       "exit_date": "2026-02-13T10:15:00.394072-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "BIDU",
+      "underlying": "BIDU",
+      "client_order_id": "15M_STK_BIDU_1770994974",
+      "order_id": "6cea534c-9d94-4e94-851e-72a39796e650",
+      "qty": 4,
+      "entry_price": 135.89,
+      "entry_date": "2026-02-13T10:03:00.022864-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-13T11:05:00.819204-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "FAST",
+      "underlying": "FAST",
+      "client_order_id": "15M_STK_FAST_1770994968",
+      "order_id": "e3d600f4-250a-40b1-b8a8-56d8ab5ab857",
+      "qty": 44,
+      "entry_price": 45.29,
+      "entry_date": "2026-02-13T10:02:54.091677-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-13T11:05:00.819229-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
