@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-13T10:03:00.023189-05:00",
+  "updated_at": "2026-02-13T10:05:01.344548-05:00",
   "positions": {
     "GLW": {
       "symbol": "GLW",
@@ -10,16 +10,6 @@
       "qty": 15,
       "entry_price": 125.624666,
       "entry_date": "2026-02-13T09:52:25.008508-05:00",
-      "status": "open"
-    },
-    "CMCSA": {
-      "symbol": "CMCSA",
-      "underlying": "CMCSA",
-      "client_order_id": "15M_STK_CMCSA_1770994938",
-      "order_id": "14c3256c-7b84-4c0a-9756-778b6e8fcad8",
-      "qty": 63,
-      "entry_price": 31.33,
-      "entry_date": "2026-02-13T10:02:24.433534-05:00",
       "status": "open"
     },
     "SBUX": {
@@ -419,6 +409,18 @@
       "entry_date": "2026-02-12T13:07:37.529432-05:00",
       "status": "closed",
       "exit_date": "2026-02-12T15:25:00.852258-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "CMCSA",
+      "underlying": "CMCSA",
+      "client_order_id": "15M_STK_CMCSA_1770994938",
+      "order_id": "14c3256c-7b84-4c0a-9756-778b6e8fcad8",
+      "qty": 63,
+      "entry_price": 31.33,
+      "entry_date": "2026-02-13T10:02:24.433534-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-13T10:05:01.344291-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
