@@ -1,6 +1,6 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-13T11:05:00.819567-05:00",
+  "updated_at": "2026-02-13T12:05:01.241881-05:00",
   "positions": {
     "SBUX": {
       "symbol": "SBUX",
@@ -20,16 +20,6 @@
       "qty": 6,
       "entry_price": 110.86,
       "entry_date": "2026-02-13T10:02:36.584537-05:00",
-      "status": "open"
-    },
-    "TFC": {
-      "symbol": "TFC",
-      "underlying": "TFC",
-      "client_order_id": "15M_STK_TFC_1770994958",
-      "order_id": "f69b93cd-0f20-403a-9c96-73ec48d76dff",
-      "qty": 12,
-      "entry_price": 51.48,
-      "entry_date": "2026-02-13T10:02:43.739425-05:00",
       "status": "open"
     },
     "STZ": {
@@ -437,6 +427,18 @@
       "entry_date": "2026-02-13T10:02:54.091677-05:00",
       "status": "closed",
       "exit_date": "2026-02-13T11:05:00.819229-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "TFC",
+      "underlying": "TFC",
+      "client_order_id": "15M_STK_TFC_1770994958",
+      "order_id": "f69b93cd-0f20-403a-9c96-73ec48d76dff",
+      "qty": 12,
+      "entry_price": 51.48,
+      "entry_date": "2026-02-13T10:02:43.739425-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-13T12:05:01.241204-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
