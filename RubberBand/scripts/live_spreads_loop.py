@@ -82,6 +82,7 @@ from RubberBand.src.position_registry import PositionRegistry
 from RubberBand.src.regime_manager import RegimeManager
 from RubberBand.src.circuit_breaker import PortfolioGuard, CircuitBreakerExc
 from RubberBand.src.finance import to_decimal, money_sub, safe_float
+from RubberBand.src.watchdog.intraday_monitor import emit_order_rejection_alert
 
 print("[STARTUP] All imports complete!", flush=True)
 
@@ -320,7 +321,7 @@ def get_long_signals(
     
     timeframe = "15Min"
     history_days = 10
-    feed = cfg.get("feed", "iex")
+    feed = cfg.get("feed", "sip")
     
     # Get trend filter settings
     trend_cfg = cfg.get("trend_filter", {})
@@ -676,10 +677,25 @@ def try_spread_entry(
             client_order_id=client_order_id,
         )
         if result.get("error"):
-            logger.spread_skip(
+            error_msg = result.get("message", "Unknown")
+            error_code = str(result.get("code", ""))
+            logger.spread_reject(
                 underlying=sym,
-                skip_reason=f"Order_failed: {result.get('message', 'Unknown')}"
+                reject_reason=f"API_rejection: {error_msg}",
+                error_code=error_code,
+                long_symbol=long_symbol,
+                short_symbol=short_symbol,
+                qty=contracts,
+                max_debit=str(max_debit),
+                client_order_id=client_order_id,
             )
+            try:
+                emit_order_rejection_alert(
+                    bot_tag=BOT_TAG, symbol=sym, side="buy",
+                    qty=contracts, reason=error_msg, error_code=error_code,
+                )
+            except Exception:
+                pass
             return False
         
         # Record in registry for position attribution

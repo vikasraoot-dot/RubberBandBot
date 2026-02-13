@@ -6,6 +6,7 @@ thresholds:
   account_pause_pct: -3.0     # Pause ALL bots (account-level)
   profit_lock_activation: 20  # Activate lock at +$20 daily P&L
   profit_lock_pct: 0.50       # Lock 50% of peak gains
+  max_rejections_per_bot: 3  # Warn if >3 API rejections per bot per day
 
 degradation_flags:
   min_win_rate_7d: 35         # Below this -> DEGRADED

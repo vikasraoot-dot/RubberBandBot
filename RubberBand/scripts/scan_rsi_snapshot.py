@@ -29,7 +29,7 @@ def get_rsi_snapshot(symbols: list, timeframe: str = "15Min", rsi_period: int = 
         symbols=symbols,
         timeframe=timeframe,
         history_days=10,  # Need enough data for RSI calculation
-        feed="iex",
+        feed="sip",
         verbose=False
     )
     

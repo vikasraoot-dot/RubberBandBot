@@ -101,6 +101,20 @@ class OptionsTradeLogger:
             "skip_reason": skip_reason,
             **kw
         })
+
+    def spread_reject(
+        self,
+        underlying: str,
+        reject_reason: str,
+        **kw
+    ):
+        """Log when a spread order is rejected by the broker API."""
+        self._write({
+            "type": "SPREAD_REJECT",
+            "underlying": underlying,
+            "reject_reason": reject_reason,
+            **kw
+        })
     
     # ──────────────────────────────────────────────────────────────────────────
     # Entry Events

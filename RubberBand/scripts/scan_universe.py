@@ -125,7 +125,7 @@ def main():
     
     # First, fetch benchmark
     print(f"Fetching benchmark {args.benchmark}...")
-    bench_res = fetch_latest_bars([args.benchmark], "1Day", args.days, cfg.get("feed", "iex"), rth_only=False)
+    bench_res = fetch_latest_bars([args.benchmark], "1Day", args.days, cfg.get("feed", "sip"), rth_only=False)
     if not bench_res or not bench_res[0] or args.benchmark not in bench_res[0]:
         print(f"Failed to fetch benchmark data. Result: {bench_res}")
         return
@@ -139,7 +139,7 @@ def main():
         print(f"Processing chunk {i} to {i+len(chunk)}...")
         
         try:
-            data_tuple = fetch_latest_bars(chunk, "1Day", args.days, cfg.get("feed", "iex"), rth_only=False)
+            data_tuple = fetch_latest_bars(chunk, "1Day", args.days, cfg.get("feed", "sip"), rth_only=False)
             if not data_tuple:
                 continue
             bars_map, _ = data_tuple

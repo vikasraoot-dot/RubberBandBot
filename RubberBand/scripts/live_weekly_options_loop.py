@@ -185,7 +185,7 @@ def get_weekly_signals(symbols: List[str], cfg: dict, regime_cfg: Dict[str, Any]
                 symbols=[sym],
                 timeframe="1Day",
                 history_days=400,  # Ensure >52 weeks of data
-                feed=cfg.get("feed", "iex"),
+                feed=cfg.get("feed", "sip"),
                 verbose=False,
             )
             

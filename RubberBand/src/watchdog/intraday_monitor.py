@@ -107,6 +107,44 @@ def _append_alert(alert: Dict[str, Any], path: str = _ALERTS_PATH) -> None:
         logger.error("Failed to append alert: %s", exc)
 
 
+def emit_order_rejection_alert(
+    bot_tag: str,
+    symbol: str,
+    side: str,
+    qty: int,
+    reason: str,
+    error_code: str = "",
+    alerts_path: str = _ALERTS_PATH,
+) -> None:
+    """Emit an ORDER_REJECTED alert to the watchdog alerts JSONL.
+
+    Called by live bots when an order is rejected by the broker API.
+    This makes the rejection visible to the intraday monitor.
+
+    Args:
+        bot_tag: Bot identifier (15M_STK, 15M_OPT, WK_STK, etc.).
+        symbol: Ticker symbol.
+        side: Order side (buy, sell).
+        qty: Order quantity.
+        reason: Rejection reason from the broker.
+        error_code: Alpaca error code if available.
+        alerts_path: Path to alerts JSONL file.
+    """
+    _append_alert(
+        {
+            "bot_tag": bot_tag,
+            "level": "WARNING",
+            "event": "ORDER_REJECTED",
+            "symbol": symbol,
+            "side": side,
+            "qty": qty,
+            "reason": reason,
+            "error_code": error_code,
+        },
+        alerts_path,
+    )
+
+
 class IntraDayMonitor:
     """Real-time per-bot P&L monitor with graduated response thresholds.
 
@@ -235,6 +273,20 @@ class IntraDayMonitor:
                 now=now,
             )
             health["bots"][bot_tag] = bot_health
+
+        # Count order rejections and warn if threshold exceeded
+        rejection_threshold = thresholds.get("max_rejections_per_bot", 3)
+        rejection_counts = self._count_rejections_today(today)
+        for bot_tag, count in rejection_counts.items():
+            if bot_tag in health["bots"]:
+                health["bots"][bot_tag]["rejections_today"] = count
+            if count > rejection_threshold:
+                self._emit_alert(
+                    bot_tag,
+                    "WARNING",
+                    f"Order rejection count ({count}) exceeds threshold "
+                    f"({rejection_threshold}) today",
+                )
 
         # Persist state
         _save_json(self._health_path, health)
@@ -542,6 +594,39 @@ class IntraDayMonitor:
                 bot_pnl[bot] = pnl
 
         return bot_pnl
+
+    def _count_rejections_today(self, today: str) -> Dict[str, int]:
+        """Count ORDER_REJECTED alerts per bot for the current day.
+
+        Args:
+            today: Date string YYYY-MM-DD.
+
+        Returns:
+            Dict mapping bot_tag -> rejection count.
+        """
+        counts: Dict[str, int] = {}
+        if not os.path.exists(self._alerts_path):
+            return counts
+        try:
+            with open(self._alerts_path, "r", encoding="utf-8") as fh:
+                for line in fh:
+                    line = line.strip()
+                    if not line:
+                        continue
+                    try:
+                        alert = json.loads(line)
+                    except json.JSONDecodeError:
+                        continue
+                    if alert.get("event") != "ORDER_REJECTED":
+                        continue
+                    ts = alert.get("ts", "")
+                    if not ts.startswith(today):
+                        continue
+                    bot = alert.get("bot_tag", "unknown")
+                    counts[bot] = counts.get(bot, 0) + 1
+        except OSError as exc:
+            logger.warning("Failed to read alerts for rejection count: %s", exc)
+        return counts
 
     # ------------------------------------------------------------------
     # Config & alerts

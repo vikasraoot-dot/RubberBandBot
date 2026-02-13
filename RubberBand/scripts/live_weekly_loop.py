@@ -28,6 +28,7 @@ from RubberBand.src.trade_logger import TradeLogger
 from RubberBand.scripts.backtest_weekly import attach_indicators
 from RubberBand.src.position_registry import PositionRegistry
 from RubberBand.src.regime_manager import RegimeManager
+from RubberBand.src.watchdog.intraday_monitor import emit_order_rejection_alert
 
 # Bot tag for position attribution
 BOT_TAG = "WK_STK"
@@ -265,7 +266,7 @@ def run_weekly_cycle():
                 symbols=[symbol], 
                 timeframe="1Day", 
                 history_days=400, # Fetch enough days for >52 weeks
-                feed=cfg.get("feed", "iex"),
+                feed=cfg.get("feed", "sip"),
                 rth_only=False # Daily bars have 00:00 timestamp, so RTH filter would kill them
             )
             
@@ -386,8 +387,24 @@ def run_weekly_cycle():
                     )
                     entries_made += 1
                 else:
+                    error_msg = str(result.get("message", result))
+                    error_code = str(result.get("code", ""))
                     logging.error(f"Order failed: {result}")
-                    
+                    try:
+                        logger.entry_reject(
+                            symbol=symbol, side="buy", qty=qty,
+                            reason=f"API_rejection: {error_msg}",
+                            error_code=error_code, broker_resp=result,
+                        )
+                    except Exception:
+                        pass
+                    try:
+                        emit_order_rejection_alert(
+                            bot_tag=BOT_TAG, symbol=symbol, side="buy",
+                            qty=qty, reason=error_msg, error_code=error_code,
+                        )
+                    except Exception:
+                        pass
             else:
                 logging.debug(f"{symbol}: No signal (RSI={rsi:.1f}, Dev={mean_dev_pct*100:.1f}%)")
 

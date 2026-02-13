@@ -231,7 +231,7 @@ def scan_for_bot(
                 symbols=batch,
                 timeframe="1Day",
                 history_days=history_days,
-                feed="iex",
+                feed="sip",
                 rth_only=False,
                 verbose=False,
             )

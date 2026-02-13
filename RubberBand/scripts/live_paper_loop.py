@@ -42,6 +42,7 @@ from RubberBand.src.position_registry import PositionRegistry
 from RubberBand.src.regime_manager import RegimeManager
 from RubberBand.src.circuit_breaker import PortfolioGuard, CircuitBreakerExc
 from RubberBand.src.finance import to_decimal, money_sub, money_mul, money_add, safe_float
+from RubberBand.src.watchdog.intraday_monitor import emit_order_rejection_alert
 
 # Bot tag for position attribution
 BOT_TAG = "15M_STK"
@@ -325,7 +326,7 @@ def main() -> int:
     print(json.dumps({"type": "HEARTBEAT", "session": session, "market_open": True, "ts": now_iso}))
 
     # Fetch bars (Intraday)
-    feed = cfg.get("feed", "iex")
+    feed = cfg.get("feed", "sip")
     print(
         json.dumps(
             {
@@ -944,7 +945,25 @@ def main() -> int:
                 
                 # Check for order issues
                 if resp.get("error"):
-                    print(f"[order] ERROR {sym}: {resp.get('error')}", flush=True)
+                    error_msg = str(resp.get("error", ""))
+                    error_code = str(resp.get("code", ""))
+                    print(f"[order] ERROR {sym}: {error_msg}", flush=True)
+                    try:
+                        log.entry_reject(
+                            symbol=sym, session=session, cid=sig_row["cid"],
+                            side=side, qty=qty,
+                            reason=f"API_rejection: {error_msg}",
+                            error_code=error_code, broker_resp=resp,
+                        )
+                    except Exception:
+                        pass
+                    try:
+                        emit_order_rejection_alert(
+                            bot_tag=BOT_TAG, symbol=sym, side=side,
+                            qty=qty, reason=error_msg, error_code=error_code,
+                        )
+                    except Exception:
+                        pass
                     continue
                 
                 print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
@@ -981,6 +1000,13 @@ def main() -> int:
                         session=session,
                         cid=sig_row["cid"],
                         reason=str(e),
+                    )
+                except Exception:
+                    pass
+                try:
+                    emit_order_rejection_alert(
+                        bot_tag=BOT_TAG, symbol=sym, side=side,
+                        qty=qty, reason=str(e), error_code="exception",
                     )
                 except Exception:
                     pass
