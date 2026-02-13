@@ -1,0 +1,82 @@
+{
+  "date": "2026-02-13",
+  "updated_at": "2026-02-13T09:37:53.691504-05:00",
+  "account": {
+    "equity": 66344.14,
+    "last_equity": 66304.86,
+    "daily_pnl_pct": 0.06,
+    "account_paused": false
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
+      "profit_lock": {
+        "peak_pnl_today": 0.0,
+        "lock_floor": 0.0,
+        "lock_active": false,
+        "lock_triggered": false,
+        "lock_triggered_at": null
+      }
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
+      "profit_lock": {
+        "peak_pnl_today": 0.0,
+        "lock_floor": 0.0,
+        "lock_active": false,
+        "lock_triggered": false,
+        "lock_triggered_at": null
+      }
+    },
+    "SL_ETF": {
+      "bot_tag": "SL_ETF",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
+      "profit_lock": {
+        "peak_pnl_today": 0.0,
+        "lock_floor": 0.0,
+        "lock_active": false,
+        "lock_triggered": false,
+        "lock_triggered_at": null
+      }
+    },
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
+      "profit_lock": {
+        "peak_pnl_today": 0.0,
+        "lock_floor": 0.0,
+        "lock_active": false,
+        "lock_triggered": false,
+        "lock_triggered_at": null
+      }
+    },
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
+      "profit_lock": {
+        "peak_pnl_today": 0.0,
+        "lock_floor": 0.0,
+        "lock_active": false,
+        "lock_triggered": false,
+        "lock_triggered_at": null
+      }
+    }
+  }
+}
