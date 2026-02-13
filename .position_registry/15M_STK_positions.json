@@ -1,17 +1,7 @@
 {
   "bot_tag": "15M_STK",
-  "updated_at": "2026-02-13T12:05:01.241881-05:00",
+  "updated_at": "2026-02-13T15:00:01.093675-05:00",
   "positions": {
-    "SBUX": {
-      "symbol": "SBUX",
-      "underlying": "SBUX",
-      "client_order_id": "15M_STK_SBUX_1770994944",
-      "order_id": "d06e8c16-3420-4a31-8a24-acff0c738fab",
-      "qty": 7,
-      "entry_price": 94.84,
-      "entry_date": "2026-02-13T10:02:30.725489-05:00",
-      "status": "open"
-    },
     "C": {
       "symbol": "C",
       "underlying": "C",
@@ -439,6 +429,18 @@
       "entry_date": "2026-02-13T10:02:43.739425-05:00",
       "status": "closed",
       "exit_date": "2026-02-13T12:05:01.241204-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "SBUX",
+      "underlying": "SBUX",
+      "client_order_id": "15M_STK_SBUX_1770994944",
+      "order_id": "d06e8c16-3420-4a31-8a24-acff0c738fab",
+      "qty": 7,
+      "entry_price": 94.84,
+      "entry_date": "2026-02-13T10:02:30.725489-05:00",
+      "status": "closed",
+      "exit_date": "2026-02-13T15:00:01.093476-05:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
