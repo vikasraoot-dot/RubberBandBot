@@ -1,7 +1,19 @@
 {
   "bot_tag": "15M_OPT",
-  "updated_at": "2026-02-12T13:06:09.361009-05:00",
-  "positions": {},
+  "updated_at": "2026-02-13T09:50:11.437042-05:00",
+  "positions": {
+    "GLW260220C00128000": {
+      "symbol": "GLW260220C00128000",
+      "underlying": "GLW",
+      "client_order_id": "15M_OPT_GLW260220C00128000_1770994201",
+      "order_id": "ecf5aa8a-0e57-46e3-8d90-a88630023e70",
+      "qty": 1,
+      "entry_price": 1.68,
+      "entry_date": "2026-02-13T09:50:11.436744-05:00",
+      "status": "open",
+      "short_symbol": "GLW260220C00130000"
+    }
+  },
   "closed_positions": [
     {
       "symbol": "IBM260213C00302500",
