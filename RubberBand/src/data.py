@@ -1122,8 +1122,16 @@ def submit_bracket_order(
     payload["take_profit"] = {"limit_price": tp}
     payload["stop_loss"] = {"stop_price": sl}
 
-    try:
+    # Submit order with retry logic for transient failures (429, timeout).
+    # Uses api_call_with_retry for exponential backoff on rate limits.
+    # Non-retryable errors (4xx rejections, validation) propagate immediately.
+    def _do_submit():
         r = requests.post(f"{base}/v2/orders", headers=H, json=payload, timeout=20)
+        r.raise_for_status()  # Convert 4xx/5xx to HTTPError so retry wrapper can catch 429
+        return r
+
+    try:
+        r = api_call_with_retry(_do_submit, max_retries=3, base_wait=2.0)
         result = r.json() if r.content else {}
         # Extract bracket child leg order IDs for tracking
         legs = result.get("legs", [])
@@ -1135,15 +1143,20 @@ def submit_bracket_order(
                 elif leg_type == "stop":  # Stop loss leg
                     result["_sl_order_id"] = leg.get("id", "")
     except requests.Timeout:
-        # Timeout - order may have been received
-        print(f"[order] {symbol}: Timeout submitting order - checking status...")
+        # All retries exhausted on timeout - order may have been received
+        print(f"[order] {symbol}: Timeout after retries - checking status...")
         if client_order_id:
             # Try to find order by client_order_id
             if order_exists_today(base_url, key, secret, client_order_id):
                 return {"id": None, "status": "timeout_but_may_exist", "client_order_id": client_order_id}
         return {"error": "timeout", "needs_verification": True}
+    except requests.HTTPError as e:
+        # Non-retryable HTTP error (4xx validation/rejection)
+        status_code = e.response.status_code if hasattr(e, 'response') and e.response is not None else 'unknown'
+        print(f"[order] {symbol}: HTTP {status_code} submitting order: {e}")
+        return {"error": str(e), "status_code": status_code}
     except Exception as e:
-        print(f"[order] {symbol}: Error submitting order: {e}")
+        print(f"[order] {symbol}: Error submitting order: {type(e).__name__}: {e}")
         return {"error": str(e)}
     
     # Check for API error
