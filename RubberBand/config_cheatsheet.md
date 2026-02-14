@@ -1,6 +1,6 @@
-# 🤖 RubberBandBot Configuration Quick Reference
+# RubberBandBot Configuration Quick Reference
 
-## 📈 15-Minute Stock Bot (15M_STK)
+## 15-Minute Stock Bot (15M_STK)
 
 | Parameter | Value | Source |
 |:----------|:------|:-------|
@@ -12,16 +12,18 @@
 | **RSI Length** | 14 | config.yaml |
 | **RSI Oversold** | < 25 | config.yaml |
 | **RSI Min** | 15 | config.yaml |
-| **Slope Threshold** | -0.20 | CLI/YAML |
-| **Stop Loss** | 2.5 × ATR | config.yaml |
-| **Take Profit** | 1.5 × ATR | config.yaml |
-| **Max Notional** | $2,000 | config.yaml |
+| **Slope Threshold** | -0.20 (all regimes) | RegimeManager |
+| **Stop Loss** | 1.5 x ATR | config.yaml (brackets.atr_mult_sl) |
+| **Take Profit** | 2.0 x ATR | config.yaml (brackets.take_profit_r) |
+| **R:R Ratio** | 1.33:1 | Derived (TP/SL) |
+| **Max Notional** | $2,000 (full) / $667 (weak bull) | config.yaml + Dual-SMA sizing |
 | **Entry Window** | 09:45 - 15:45 ET | config.yaml |
 | **Kill Switch** | 25% daily loss | Hardcoded |
+| **Bearish Bar Filter** | Disabled | RegimeManager (all regimes) |
 
 ---
 
-## 📊 15-Minute Options Bot (15M_OPT)
+## 15-Minute Options Bot (15M_OPT)
 
 | Parameter | Value | Source |
 |:----------|:------|:-------|
@@ -33,12 +35,12 @@
 | **Max Debit** | $3.00/share | CLI (--max-debit) |
 | **Take Profit** | +50% | Hardcoded |
 | **Stop Loss** | -50% | Hardcoded |
-| **Slope Threshold** | -0.20 | CLI/Workflow |
+| **Slope Threshold** | -0.20 (all regimes) | RegimeManager |
 | **Scan Interval** | 15 minutes | Hardcoded |
 
 ---
 
-## 📅 Weekly Stock Bot (WK_STK)
+## Weekly Stock Bot (WK_STK)
 
 | Parameter | Value | Source |
 |:----------|:------|:-------|
@@ -49,15 +51,15 @@
 | **RSI Period** | 14 | config_weekly.yaml |
 | **RSI Oversold** | < 45 | config_weekly.yaml |
 | **Mean Deviation** | -5% | config_weekly.yaml |
-| **Stop Loss** | 2.0 × ATR | config_weekly.yaml |
-| **Take Profit** | 2.5 × Risk | config_weekly.yaml |
+| **Stop Loss** | 2.0 x ATR | config_weekly.yaml |
+| **Take Profit** | 2.5 x Risk | config_weekly.yaml |
 | **Max Notional** | $2,000 | config_weekly.yaml |
 | **Max Positions** | 5 | config_weekly.yaml |
-| **Time Stop** | 20 weeks | Hardcoded |
+| **Time Stop** | 12 weeks | config_weekly.yaml (time_stop_weeks) |
 
 ---
 
-## 📆 Weekly Options Bot (WK_OPT)
+## Weekly Options Bot (WK_OPT)
 
 | Parameter | Value | Source |
 |:----------|:------|:-------|
@@ -68,7 +70,15 @@
 
 ---
 
-## 🔑 Environment Variables (All Bots)
+## Key Architecture Notes
+
+- **Slope thresholds** in config.yaml are LEGACY values. RegimeManager overrides them (all regimes use -0.20 since Dec 2025).
+- **Dual-SMA sizing**: When trend_filter_sma is disabled (set to 0), positions use full notional. When enabled, is_strong_bull determines full ($2,000) vs reduced ($667) sizing.
+- **RegimeManager** classifies market as PANIC/NORMAL/CALM using VIXY Bollinger Bands with volume confirmation and 90-minute cooldown.
+
+---
+
+## Environment Variables (All Bots)
 
 | Variable | Purpose |
 |:---------|:--------|
@@ -78,4 +88,4 @@
 
 ---
 
-*Last Updated: December 2025*
+*Last Updated: February 2026*

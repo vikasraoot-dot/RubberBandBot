@@ -38,7 +38,7 @@ rsi_length: 14
 # Logic: We SKIP trades that are NOT crashing fast enough.
 # Slope_3 checks immediate crash (45m lookback). Slope_10 checks sustained crash (2.5h).
 # Values > threshold = SKIP (too flat/slow bleed).
-slope_threshold: -0.20      # 3-bar slope: Must be <= -0.20 (steep crash)
+slope_threshold: -0.20      # LEGACY: Overridden by RegimeManager (all regimes use -0.20 since Dec 2025)
 # slope_threshold_10: -0.15   # DISABLED: Was blocking valid entries. Live bot doesn't use this.
 # ──────────────────────────────────────────────────────────────────────────────
 # RISK CONTROLS
@@ -86,7 +86,7 @@ filters:
   rsi_min: 15
   rsi_max: 100
   # adx_threshold: 80        # REMOVED (Dead code)
-  slope_threshold: -0.12     # Optimized Panic Entry (was -0.001) - 3-bar slope
+  slope_threshold: -0.12     # LEGACY: Overridden by RegimeManager (all regimes use -0.20 since Dec 2025)
   # slope_threshold_10: -0.05 # Optional: 10-bar sustained slope (disabled by default)
   require_fast_above_slow: false # Allow deep dips where fast EMA crosses slow
   dead_knife_filter: false    # DISABLED for Normal Regime (Re-enabled automatically in PANIC)

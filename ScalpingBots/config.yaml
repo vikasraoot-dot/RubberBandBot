@@ -28,7 +28,7 @@ exit:
   sl_atr_mult: 2.5         # Stop loss at 2.5x ATR
   sl_use_swing: true        # Use swing low/high for SL
   sl_swing_bars: 8          # Look back 8 bars for swing
-  sl_confirm_bars: 2        # CRITICAL: Require 2 consecutive bars at SL before exit
+  sl_confirm_bars: 1        # Immediate SL exit (was 2 — reduced after RubberBand MRK -63% lesson, commit c0425bf)
   trailing_trigger_atr: 0.8 # Start trailing at 0.8 ATR profit
   trailing_distance_atr: 0.6 # Trail at 0.6 ATR distance
   exit_on_cross_back: false # DISABLED: Kills profitable trades early

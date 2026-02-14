@@ -63,7 +63,7 @@ class EMAMomentumConfig:
     sl_atr_mult: float = 2.5       # Wider SL (was 2.0) - reduce false stops
     sl_use_swing: bool = True       # Use swing low instead of fixed ATR
     sl_swing_bars: int = 8          # Look back 8 bars (was 5) - wider swing
-    sl_confirm_bars: int = 2        # CRITICAL: Require 2 consecutive bars below SL
+    sl_confirm_bars: int = 1        # Immediate SL exit (was 2 — 10-min delay caused outsized losses)
     trailing_trigger_atr: float = 0.8  # Start trailing earlier (was 1.0)
     trailing_distance_atr: float = 0.6  # Tighter trail (was 0.8) - lock in more profit
     exit_on_cross_back: bool = False   # DISABLED: Was killing +$549 in profits

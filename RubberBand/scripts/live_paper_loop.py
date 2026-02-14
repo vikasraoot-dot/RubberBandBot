@@ -856,8 +856,8 @@ def main() -> int:
                     symbol=sym, session=session, cid=sig_row["cid"],
                     decision="BLOCK", reasons=["already in position"]
                 )
-            except Exception:
-                pass
+            except Exception as _log_err:
+                print(f"[log] gate log failed for {sym}: {_log_err}", flush=True)
             continue
 
         # Gating: Daily Cooldown - prevent re-entry on tickers traded today
@@ -868,8 +868,8 @@ def main() -> int:
                     symbol=sym, session=session, cid=sig_row["cid"],
                     decision="BLOCK", reasons=["traded_today"]
                 )
-            except Exception:
-                pass
+            except Exception as _log_err:
+                print(f"[log] gate log failed for {sym}: {_log_err}", flush=True)
             continue
 
         # Gating: Check Signal
@@ -884,8 +884,8 @@ def main() -> int:
         diag["signals_generated"] += 1
         try:
             log.signal(**sig_row)
-        except Exception:
-            pass
+        except Exception as _log_err:
+            print(f"[log] signal log failed for {sym}: {_log_err}", flush=True)
 
         # ATR Calculation (Use pre-calculated from attach_verifiers)
         # Safely handle None values (get returns None if key exists but value is None)
@@ -945,8 +945,8 @@ def main() -> int:
                 entry_reason=entry_reason,
                 rsi=rsi,
             )
-        except Exception:
-            pass
+        except Exception as _log_err:
+            print(f"[log] entry_submit log failed for {sym}: {_log_err}", flush=True)
 
         if args.dry_run:
             print(
@@ -964,8 +964,8 @@ def main() -> int:
                     broker_resp=None,
                     dry_run=True,
                 )
-            except Exception:
-                pass
+            except Exception as _log_err:
+                print(f"[log] dry-run ack log failed for {sym}: {_log_err}", flush=True)
         else:
             try:
                 # Generate client_order_id for position attribution
@@ -1018,15 +1018,15 @@ def main() -> int:
                             reason=f"API_rejection: {error_msg}",
                             error_code=error_code, broker_resp=resp,
                         )
-                    except Exception:
-                        pass
+                    except Exception as _log_err:
+                        print(f"[log] entry_reject log failed for {sym}: {_log_err}", flush=True)
                     try:
                         emit_order_rejection_alert(
                             bot_tag=BOT_TAG, symbol=sym, side=side,
                             qty=qty, reason=error_msg, error_code=error_code,
                         )
-                    except Exception:
-                        pass
+                    except Exception as _alert_err:
+                        print(f"[log] rejection alert failed for {sym}: {_alert_err}", flush=True)
                     continue
                 
                 print(f"[order] BRACKET submitted for {sym}: {json.dumps(resp)[:300]}", flush=True)
@@ -1057,8 +1057,8 @@ def main() -> int:
                         broker_resp=resp,
                         dry_run=False,
                     )
-                except Exception:
-                    pass
+                except Exception as _log_err:
+                    print(f"[log] entry_ack log failed for {sym}: {_log_err}", flush=True)
             except Exception as e:
                 print(f"[order] ERROR submitting bracket for {sym}: {e}", flush=True)
                 try:
@@ -1068,15 +1068,15 @@ def main() -> int:
                         cid=sig_row["cid"],
                         reason=str(e),
                     )
-                except Exception:
-                    pass
+                except Exception as _log_err:
+                    print(f"[log] entry_reject log failed for {sym}: {_log_err}", flush=True)
                 try:
                     emit_order_rejection_alert(
                         bot_tag=BOT_TAG, symbol=sym, side=side,
                         qty=qty, reason=str(e), error_code="exception",
                     )
-                except Exception:
-                    pass
+                except Exception as _alert_err:
+                    print(f"[log] rejection alert failed for {sym}: {_alert_err}", flush=True)
 
     # --- Filter Diagnostics Summary ---
     # Calculate pass-through rate
@@ -1193,16 +1193,16 @@ def main() -> int:
                 csv_date = datetime.now(ET).strftime("%Y%m%d")
                 csv_path = f"results/{BOT_TAG}_trades_{csv_date}.csv"
                 log.export_trades_csv(csv_path)
-            except Exception:
-                pass
+            except Exception as _log_err:
+                print(f"[log] eod_summary/export failed: {_log_err}", flush=True)
 
     except Exception as e:
         print(f"[warn] Failed to generate summary: {e}", flush=True)
 
     try:
         log.close()
-    except Exception:
-        pass
+    except Exception as _log_err:
+        print(f"[log] log.close() failed: {_log_err}", flush=True)
     return 0
 
 
