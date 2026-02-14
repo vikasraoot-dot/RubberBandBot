@@ -41,7 +41,9 @@ class RegimeManager:
         self._reference_close = None  # Yesterday's close for intraday delta calc
         self._upper_band = None       # Upper Bollinger Band for breakout detection
         self._sma_20 = None           # SMA for reference
+        self._avg_volume = None       # 20-day avg volume for intraday volume confirmation
         self._intraday_panic = False  # Track if we triggered intraday panic
+        self._panic_triggered_at: Optional[datetime] = None  # Cooldown timer for intraday PANIC
         
         # Hysteresis Tracking
         # We need to track how many consecutive days conditions are met.
@@ -120,7 +122,9 @@ class RegimeManager:
             self._reference_close = latest["close"]
             self._upper_band = upper_band
             self._sma_20 = sma_20
+            self._avg_volume = avg_vol if not pd.isna(avg_vol) else None
             self._intraday_panic = False  # Reset on daily update
+            self._panic_triggered_at = None  # Reset cooldown on daily update
             
             # --- LOGIC EVALUATION ---
             
@@ -203,21 +207,22 @@ class RegimeManager:
         Check for intraday volatility spikes that should trigger PANIC.
 
         This method fetches the current VIXY price and compares it to the
-        reference close from the daily update(). If VIXY spikes > 8% intraday
-        OR breaks above the upper Bollinger band, we return PANIC.
+        reference close from the daily update(). Trigger conditions:
+        - Spike > 8% intraday (no volume confirmation needed)
+        - Bollinger breakout WITH volume confirmation (5-min vol > daily_avg/78)
+        - Significant breakout > upper_band * 1.05 (no volume needed)
+        - Bollinger breakout when volume data unavailable (price-only fallback)
+
+        Cooldown: Once PANIC triggers, it holds for 90 minutes. After cooldown,
+        VIXY is re-evaluated: if < upper_band * 0.95, downgrade (min NORMAL);
+        otherwise stay PANIC and reset cooldown.
 
         Returns:
             Current effective regime (may be PANIC even if daily regime is NORMAL/CALM)
 
         Note:
             - Must call update() at least once before this method works
-            - Does NOT require volume confirmation for intraday (speed matters)
-            - Once intraday PANIC triggers, it persists until next daily update()
         """
-        # If we already triggered intraday panic, stay in panic
-        if self._intraday_panic:
-            return "PANIC"
-
         # If no reference values yet, return current regime
         if self._reference_close is None or self._upper_band is None:
             if self.verbose:
@@ -232,25 +237,85 @@ class RegimeManager:
             df = bars_map.get("VIXY")
 
             if df is None or df.empty:
-                # Can't get data, return current regime
+                # Can't get data — if in cooldown, honor existing panic
+                if self._intraday_panic and self._panic_triggered_at is not None:
+                    elapsed = (datetime.now() - self._panic_triggered_at).total_seconds() / 60.0
+                    if elapsed < 90:
+                        return "PANIC"
                 return self.current_regime
 
             current_price = df.iloc[-1]["close"]
+            bar_volume = df.iloc[-1].get("volume", 0) if "volume" in df.columns else 0
 
+            # --- Cooldown logic: if already in intraday panic, check cooldown ---
+            if self._intraday_panic and self._panic_triggered_at is not None:
+                elapsed = (datetime.now() - self._panic_triggered_at).total_seconds() / 60.0
+                if elapsed < 90:
+                    # Still in cooldown — stay in PANIC
+                    return "PANIC"
+                else:
+                    # Cooldown expired — re-evaluate
+                    print(f"[regime] PANIC cooldown expired (90min). Re-evaluating: VIXY={current_price:.2f}", flush=True)
+                    threshold = self._upper_band * 0.95
+                    if current_price < threshold:
+                        # VIXY has calmed down — downgrade from PANIC
+                        # Never downgrade below NORMAL from an intraday PANIC event
+                        new_regime = self.current_regime if self.current_regime != "CALM" else "NORMAL"
+                        print(f"[regime] Downgrading from PANIC to {new_regime}: VIXY={current_price:.2f} < {threshold:.2f}", flush=True)
+                        self._intraday_panic = False
+                        self._panic_triggered_at = None
+                        return new_regime
+                    else:
+                        # VIXY still elevated — stay in PANIC, reset cooldown timer
+                        self._panic_triggered_at = datetime.now()
+                        return "PANIC"
+
+            # --- Fresh evaluation: check for new intraday PANIC ---
             # Calculate intraday delta vs reference (yesterday's close)
             intraday_delta = ((current_price - self._reference_close) / self._reference_close) * 100.0
 
-            # Check PANIC conditions (no volume confirmation for speed)
+            # Check PANIC conditions with volume confirmation for breakout
             is_spike = intraday_delta > 8.0
             is_breakout = current_price > self._upper_band
 
-            if is_spike or is_breakout:
+            # Volume confirmation for breakout:
+            # A 5-min bar with volume > daily_avg / 78 means ~1.5x normal 5-min period
+            # (6.5hr trading day = 78 five-minute bars)
+            has_volume_confirmation = False
+            if self._avg_volume is not None and self._avg_volume > 0 and bar_volume > 0:
+                five_min_avg = self._avg_volume / 78.0
+                has_volume_confirmation = bar_volume > five_min_avg
+
+            # Significant breakout: price > upper_band * 1.05 (doesn't need volume)
+            is_significant_breakout = current_price > self._upper_band * 1.05
+
+            # Trigger conditions:
+            # 1. Extreme spike (>8%) — no volume needed
+            # 2. Bollinger breakout WITH volume confirmation
+            # 3. Significant breakout (>5% above upper band) — no volume needed
+            # 4. Bollinger breakout when volume data unavailable — price-only fallback
+            should_panic = False
+            if is_spike:
+                should_panic = True
+            elif is_breakout:
+                if has_volume_confirmation or is_significant_breakout:
+                    should_panic = True
+                elif self._avg_volume is None:
+                    # No volume data available — fall back to price-only
+                    should_panic = True
+
+            if should_panic:
                 self._intraday_panic = True
+                self._panic_triggered_at = datetime.now()
                 reason = []
                 if is_spike:
                     reason.append(f"Intraday spike +{intraday_delta:.1f}%")
                 if is_breakout:
                     reason.append(f"Breakout ${current_price:.2f} > ${self._upper_band:.2f}")
+                if has_volume_confirmation:
+                    reason.append(f"Vol confirmed ({int(bar_volume):,})")
+
+                print(f"[regime] INTRADAY PANIC triggered: VIXY={current_price:.2f}, upper_band={self._upper_band:.2f}", flush=True)
 
                 if self.verbose:
                     print("\n" + "!" * 60)

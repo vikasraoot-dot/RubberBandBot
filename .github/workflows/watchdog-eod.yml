@@ -87,7 +87,7 @@ jobs:
           PYTHONUNBUFFERED: "1"
         run: |
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
-          $tickersFile = Join-Path $env:GITHUB_WORKSPACE "RubberBand" "tickers.txt"
+          $tickersFile = Join-Path (Join-Path $env:GITHUB_WORKSPACE "RubberBand") "tickers.txt"
 
           Write-Host "=== Market Classifier Starting ==="
           & "$env:PYTHON_EXE" -u -m RubberBand.src.watchdog.market_classifier --tickers $tickersFile

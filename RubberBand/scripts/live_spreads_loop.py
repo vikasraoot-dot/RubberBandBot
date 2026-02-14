@@ -23,8 +23,10 @@ print(f"[STARTUP] Python: {sys.version}", flush=True)
 print("=" * 60, flush=True)
 
 import argparse
+import gc
 import json
 import os
+import tracemalloc
 from datetime import datetime, timedelta, time as dt_time
 from typing import List, Dict, Any, Optional, Tuple
 
@@ -1475,13 +1477,12 @@ def main() -> int:
         # Use shared state file (consistent with 15M_STK)
         guard_state_file = os.path.join(os.path.dirname(__file__), "portfolio_guard_state.json")
         guard = PortfolioGuard(guard_state_file, max_drawdown_pct=max_dd_pct)
-        # Note: Actual equity check happens inside broker logic?
-        # For simplicity, we assume broker creds loaded here or inside helpers.
-        # But `live_spreads` doesn't load creds in `main`, it relies on `alpaca_market_open` or `data` module.
-        # We need to explicitly check equity.
-        # But `live_spreads_loop.py` imports `alpaca_market_open` from `data.py`.
-        # We might need to call `get_account_info_compat` if we want to check equity.
-        # Let's import it.
+        # GAP: guard.update(current_equity) is NOT called here.
+        # Unlike live_paper_loop.py (line 511), this script does not have broker
+        # credentials (base_url, key, secret) readily available in main().
+        # To fix: either load creds from env and call get_account_info_compat(),
+        # or refactor PortfolioGuard to fetch equity internally.
+        # Until then, the PortfolioGuard drawdown check is inactive for 15M_OPT.
     except Exception as e:
         print(f"[Guard] Warning: Failed to init guard: {e}")
     # -----------------------------------------------------
@@ -1608,7 +1609,8 @@ def main() -> int:
     # ──────────────────────────────────────────────────────────────────────────
     market_close_hour = 16  # 4:00 PM ET
     scan_count = 0
-    
+    tracemalloc.start()
+
     while True:
         now_et = _now_et()
         
@@ -1633,14 +1635,17 @@ def main() -> int:
         if current_regime == "PANIC" and daily_regime != "PANIC":
             regime_cfg = rm.regime_configs["PANIC"]
         
+        current_mem, peak_mem = tracemalloc.get_traced_memory()
         logger.heartbeat(
-            event="scan_cycle_start", 
-            cycle=scan_count, 
+            event="scan_cycle_start",
+            cycle=scan_count,
             time=now_et.strftime("%H:%M"),
             regime=current_regime,
             vixy=rm.last_vixy_price,
             slope_thresh=regime_cfg.get("slope_threshold_pct"),
-            bearish_filter=regime_cfg.get("bearish_bar_filter")
+            bearish_filter=regime_cfg.get("bearish_bar_filter"),
+            memory_mb=round(current_mem / 1024 / 1024, 1),
+            peak_memory_mb=round(peak_mem / 1024 / 1024, 1),
         )
         
         # Watchdog pause check (fail-open if file missing)
@@ -1660,8 +1665,14 @@ def main() -> int:
             logger.heartbeat(event="scan_cycle_end", cycle=scan_count, new_entries=entries)
             # Commit auditor logs after each cycle for real-time auditing
             commit_auditor_log()
+            gc.collect()
         except Exception as e:
-            conn_guard.record_error(e)
+            try:
+                conn_guard.record_error(e)
+            except CircuitBreakerExc as cbe:
+                logger.error(error=str(cbe), context="circuit_breaker_halt")
+                print(f"[HALT] Circuit breaker triggered: {cbe}", flush=True)
+                break  # Exit while loop, proceed to EOD cleanup
             logger.error(error=str(e), context="scan_cycle")
             # If we lost connection, we should sleep longer?
             import time
@@ -1724,5 +1735,18 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    try:
+        raise SystemExit(main())
+    except KeyboardInterrupt:
+        print("[SHUTDOWN] KeyboardInterrupt received. Exiting.", flush=True)
+        raise SystemExit(130)
+    except SystemExit:
+        raise  # Allow normal SystemExit to propagate unchanged
+    except BaseException as e:
+        import traceback
+        print(f"[FATAL] Unhandled {type(e).__name__}: {e}", flush=True)
+        traceback.print_exc()
+        sys.stdout.flush()
+        sys.stderr.flush()
+        raise SystemExit(1)
 

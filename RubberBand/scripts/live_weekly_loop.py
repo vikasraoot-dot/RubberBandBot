@@ -33,8 +33,8 @@ from RubberBand.src.watchdog.intraday_monitor import emit_order_rejection_alert
 # Bot tag for position attribution
 BOT_TAG = "WK_STK"
 
-# Time stop: Close positions held longer than this (matches backtest behavior)
-TIME_STOP_WEEKS = 20  # 20 weeks = ~5 months max hold
+# Time stop: loaded from config_weekly.yaml (fallback: 12 weeks)
+TIME_STOP_WEEKS = None  # Set in run_weekly_cycle() from config
 
 # Setup Logging
 logging.basicConfig(
@@ -174,11 +174,12 @@ def run_weekly_cycle():
         logging.info("-" * len(header))
     
     # --- Time Stop Check ---
-    # Close positions held longer than TIME_STOP_WEEKS
+    # Close positions held longer than configured time_stop_weeks
     from datetime import timedelta
     from dateutil import parser as dateparser
-    
-    time_stop_days = TIME_STOP_WEEKS * 7
+
+    time_stop_weeks = int(cfg.get("time_stop_weeks", 12))
+    time_stop_days = time_stop_weeks * 7
     now = datetime.now()
     
     for p in positions:
@@ -468,8 +469,6 @@ if __name__ == "__main__":
     # Single-cycle execution: run one trading cycle and exit.
     # The GitHub Actions cron schedule handles hourly recurrence.
     # This avoids the 6-hour job time limit that killed the old while-True loop.
-    registry = PositionRegistry(bot_tag=BOT_TAG)
-
     try:
         if not alpaca_market_open():
             logging.info("Market is closed. Exporting logs and exiting.")
@@ -484,10 +483,8 @@ if __name__ == "__main__":
             run_weekly_cycle()
             logging.info("Cycle complete. Exiting (next run via cron).")
     except KillSwitchTriggered as e:
-        logging.critical(f"Kill switch triggered: {e}. Saving registry and exiting.")
+        logging.critical(f"Kill switch triggered: {e}. Exiting.")
     except Exception as e:
         logging.error(f"Main error: {e}")
         traceback.print_exc()
-    finally:
-        registry.save()
 

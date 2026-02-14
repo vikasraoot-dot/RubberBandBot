@@ -31,6 +31,7 @@ from RubberBand.src.data import (
     check_kill_switch,
     check_capital_limit,
     order_exists_today,
+    get_order_nested,
     KillSwitchTriggered,
     CapitalLimitExceeded,
     get_account_info_compat,
@@ -164,6 +165,54 @@ def _get_positions_compat(base_url: str, key: str, secret: str):
         return get_positions()
 
 
+def check_bracket_exits(
+    registry: PositionRegistry,
+    base_url: str,
+    key: str,
+    secret: str,
+) -> list:
+    """Poll bracket child orders for fills. Returns list of exits detected."""
+    exits = []
+    for sym, pos in list(registry.positions.items()):
+        parent_oid = pos.get("order_id", "")
+        if not parent_oid:
+            continue
+        # Skip positions without bracket metadata (legacy entries)
+        if not pos.get("tp_order_id") and not pos.get("sl_order_id"):
+            continue
+
+        order = get_order_nested(base_url, key, secret, parent_oid)
+        if order.get("error"):
+            continue
+
+        legs = order.get("legs", [])
+        for leg in legs:
+            if leg.get("status") == "filled":
+                fill_price = float(leg.get("filled_avg_price", 0))
+                leg_type = leg.get("type", "")
+                exit_reason = "take_profit" if leg_type == "limit" else "stop_loss"
+                entry_price = pos.get("entry_price", 0)
+                qty = pos.get("qty", 0)
+                pnl = round((fill_price - entry_price) * qty, 2)
+
+                registry.record_exit(
+                    symbol=sym,
+                    exit_price=fill_price,
+                    exit_reason=exit_reason,
+                    pnl=pnl,
+                )
+                print(f"[bracket] {sym}: {exit_reason} detected @ ${fill_price:.2f} "
+                      f"(entry ${entry_price:.2f}, PnL ${pnl:.2f})", flush=True)
+                exits.append({
+                    "symbol": sym,
+                    "exit_reason": exit_reason,
+                    "exit_price": fill_price,
+                    "pnl": pnl,
+                })
+                break  # OCO: only one child fills
+    return exits
+
+
 # -------- main --------
 def main() -> int:
     args = _parse_args()
@@ -286,6 +335,16 @@ def main() -> int:
         }), flush=True)
     except Exception as e:
         print(json.dumps({"type": "REGISTRY_RECONCILE_ERROR", "error": str(e), "ts": now_iso}), flush=True)
+
+    # Check bracket orders for fills (captures exact exit data)
+    try:
+        bracket_exits = check_bracket_exits(registry, base_url, key, secret)
+        if bracket_exits:
+            for ex in bracket_exits:
+                print(f"[bracket] Exit detected: {ex['symbol']} via {ex['exit_reason']} "
+                      f"@ ${ex['exit_price']:.2f}, PnL: ${ex['pnl']:.2f}", flush=True)
+    except Exception as e:
+        print(f"[bracket] non-fatal check error: {e}", flush=True)
 
     # Kill Switch Check - RE-ENABLED Dec 13, 2025
     # Halts trading if daily loss exceeds 25% of invested capital
@@ -677,8 +736,12 @@ def main() -> int:
                 diag["trend_filter_no_data"] += 1
                 continue
         else:
-            # Filter disabled -> assume Bull (allow Longs)
+            # Filter disabled -> assume Strong Bull (allow Longs at full notional)
+            # FIX: Must also set is_strong_bull=True, otherwise Dual-SMA sizing
+            # defaults to 1/3 notional ($667 instead of $2000). Bug existed since
+            # Dec 3 2025 (commit aa82a7d6) — is_strong_bull was never set here.
             is_bull_trend = True
+            is_strong_bull = True
 
         # Slope Filter (Normalized Percentage Logic)
         # ------------------------------------------
@@ -977,6 +1040,10 @@ def main() -> int:
                         qty=qty,
                         entry_price=float(resp.get("filled_avg_price", entry)),
                         order_id=resp.get("id", ""),
+                        tp_order_id=resp.get("_tp_order_id", ""),
+                        sl_order_id=resp.get("_sl_order_id", ""),
+                        tp_price=take_profit,
+                        sl_price=stop_price,
                     )
                 
                 try:

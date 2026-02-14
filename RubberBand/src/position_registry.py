@@ -172,11 +172,15 @@ class PositionRegistry:
         entry_price: float = 0.0,
         underlying: str = "",
         order_id: str = "",
+        tp_order_id: str = "",
+        sl_order_id: str = "",
+        tp_price: float = 0.0,
+        sl_price: float = 0.0,
         **extra
     ):
         """
         Record a new position entry.
-        
+
         Args:
             symbol: Trading symbol (stock or option symbol)
             client_order_id: The client_order_id used for the order
@@ -184,6 +188,10 @@ class PositionRegistry:
             entry_price: Entry price per share/contract
             underlying: For options, the underlying stock symbol
             order_id: Alpaca order ID
+            tp_order_id: Take profit child order ID (bracket tracking)
+            sl_order_id: Stop loss child order ID (bracket tracking)
+            tp_price: Take profit price level
+            sl_price: Stop loss price level
             extra: Additional metadata
         """
         self.positions[symbol] = {
@@ -195,6 +203,10 @@ class PositionRegistry:
             "entry_price": entry_price,
             "entry_date": datetime.now(ET).isoformat(),
             "status": "open",
+            "tp_order_id": tp_order_id,
+            "sl_order_id": sl_order_id,
+            "tp_price": tp_price,
+            "sl_price": sl_price,
             **extra,
         }
         self.save()

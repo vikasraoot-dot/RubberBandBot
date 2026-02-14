@@ -59,3 +59,4 @@ resilience:
 # --- Trade Management ---
 allow_shorts: false         # Long-only for now
 max_concurrent_positions: 5
+time_stop_weeks: 12         # Close positions held longer than this many weeks

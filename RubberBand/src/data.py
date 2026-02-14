@@ -329,6 +329,28 @@ def get_order_by_id(
         print(f"[warn] Failed to get order {order_id}: {e}")
         return {"error": str(e)}
 
+def get_order_nested(
+    base_url: Optional[str] = None,
+    key: Optional[str] = None,
+    secret: Optional[str] = None,
+    order_id: str = ""
+) -> Dict[str, Any]:
+    """Get order details with nested child legs (for bracket orders)."""
+    base = _base_url_from_env(base_url)
+    try:
+        r = requests.get(
+            f"{base}/v2/orders/{order_id}?nested=true",
+            headers=_alpaca_headers(key, secret),
+            timeout=10
+        )
+        if r.status_code == 404:
+            return {"error": "not_found"}
+        r.raise_for_status()
+        return r.json() or {}
+    except Exception as e:
+        print(f"[warn] Failed to get nested order {order_id}: {e}")
+        return {"error": str(e)}
+
 def cancel_order_by_id(
     base_url: Optional[str] = None,
     key: Optional[str] = None,
@@ -1103,6 +1125,15 @@ def submit_bracket_order(
     try:
         r = requests.post(f"{base}/v2/orders", headers=H, json=payload, timeout=20)
         result = r.json() if r.content else {}
+        # Extract bracket child leg order IDs for tracking
+        legs = result.get("legs", [])
+        if legs:
+            for leg in legs:
+                leg_type = leg.get("type", "")
+                if leg_type == "limit":  # Take profit leg
+                    result["_tp_order_id"] = leg.get("id", "")
+                elif leg_type == "stop":  # Stop loss leg
+                    result["_sl_order_id"] = leg.get("id", "")
     except requests.Timeout:
         # Timeout - order may have been received
         print(f"[order] {symbol}: Timeout submitting order - checking status...")
