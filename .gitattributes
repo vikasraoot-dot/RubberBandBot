@@ -1,0 +1,21 @@
+# Normalize line endings to LF in the repo, auto-convert on checkout
+* text=auto eol=lf
+
+# Ensure these always stay LF (prevent Windows tools from injecting CRLF)
+*.py text eol=lf
+*.yaml text eol=lf
+*.yml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+*.sh text eol=lf
+
+# Binary files - no conversion
+*.pyc binary
+*.pkl binary
+*.zip binary
+*.png binary
+*.jpg binary
+*.ico binary
+*.docx binary

@@ -281,3 +281,74 @@ class TestProductionOptionsExecution:
         assert "position_intent" in source, "close_spread missing position_intent"
         assert "sell_to_close" in source, "close_spread missing sell_to_close"
         assert "buy_to_close" in source, "close_spread missing buy_to_close"
+
+
+class TestDualSmaSizing:
+    """
+    Regression tests for the Dual-SMA sizing bug (Issue #2).
+
+    Bug: When trend_filter.enabled=False, is_strong_bull was never set True,
+    so all positions defaulted to 1/3 notional ($667 instead of $2000).
+    Existed since commit aa82a7d6 (Dec 3 2025), fixed Feb 2026.
+    """
+
+    def test_cap_qty_by_notional_full_size(self):
+        """Strong bull -> full notional -> correct qty."""
+        from RubberBand.scripts.live_paper_loop import _cap_qty_by_notional
+
+        # $150 stock, $2000 notional -> max 13 shares
+        qty = _cap_qty_by_notional(10000, 150.0, 2000.0)
+        assert qty == 13
+
+    def test_cap_qty_by_notional_one_third(self):
+        """Weak bull -> 1/3 notional -> reduced qty."""
+        from RubberBand.scripts.live_paper_loop import _cap_qty_by_notional
+
+        # $150 stock, $667 notional (2000/3) -> max 4 shares
+        qty = _cap_qty_by_notional(10000, 150.0, 2000.0 / 3.0)
+        assert qty == 4
+
+    def test_trend_filter_disabled_sets_strong_bull(self):
+        """
+        REGRESSION GUARD: When trend filter is disabled, the else branch
+        MUST set is_strong_bull=True so Dual-SMA sizing uses full notional.
+
+        Without this, positions silently drop to 1/3 size.
+        """
+        import ast
+
+        source_path = "RubberBand/scripts/live_paper_loop.py"
+        with open(source_path, "r", encoding="utf-8") as f:
+            tree = ast.parse(f.read(), filename=source_path)
+
+        # Walk the AST to find: if trend_cfg.get("enabled", ...): ... else: ...
+        found_fix = False
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.If):
+                continue
+            # Look for the pattern: trend_cfg.get("enabled", ...)
+            test = node.test
+            if not isinstance(test, ast.Call):
+                continue
+            func = test.func
+            if not (isinstance(func, ast.Attribute) and func.attr == "get"):
+                continue
+            if not test.args or not isinstance(test.args[0], ast.Constant):
+                continue
+            if test.args[0].value != "enabled":
+                continue
+
+            # Found the trend filter if-block. Check the else branch.
+            if not node.orelse:
+                continue
+
+            # Scan else body for: is_strong_bull = True
+            else_source = ast.dump(ast.Module(body=node.orelse, type_ignores=[]))
+            if "is_strong_bull" in else_source and "True" in else_source:
+                found_fix = True
+                break
+
+        assert found_fix, (
+            "REGRESSION: trend filter disabled branch must set is_strong_bull=True. "
+            "Without this, Dual-SMA sizing reduces all positions to 1/3 notional."
+        )
