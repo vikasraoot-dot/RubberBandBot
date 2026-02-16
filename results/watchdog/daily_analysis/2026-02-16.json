@@ -1,0 +1,84 @@
+{
+  "date": "2026-02-16",
+  "generated_at": "2026-02-16T16:53:53.939149-05:00",
+  "bots_analysed": [],
+  "filter_effectiveness": {
+    "_summary": {
+      "total_blocks": 0,
+      "total_value_saved": 0.0,
+      "total_profits_missed": 0.0,
+      "net_filter_value": 0.0
+    }
+  },
+  "time_of_day": {
+    "morning": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "midday": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "afternoon": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "other": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    }
+  },
+  "ticker_analysis": {
+    "per_ticker": {},
+    "flagged_losers": []
+  },
+  "regime_correlation": {},
+  "giveback": {
+    "15M_STK": {
+      "peak_pnl": 86.63,
+      "close_pnl": 0.0,
+      "giveback": 86.63,
+      "giveback_pct": 100.0
+    },
+    "WK_STK": {
+      "peak_pnl": 11.91,
+      "close_pnl": 0.0,
+      "giveback": 11.91,
+      "giveback_pct": 100.0
+    }
+  },
+  "auditor_vs_bot": {
+    "15M_STK": {
+      "real_pnl": 0.0,
+      "shadow_pnl": -13116.0,
+      "shadow_trades": 979,
+      "shadow_winners": 486,
+      "shadow_open_positions": 9,
+      "difference": 13116.0,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $13116.0 \u2014 filters are protecting from losses"
+    },
+    "15M_OPT": {
+      "real_pnl": 0.0,
+      "shadow_pnl": -8085.2,
+      "shadow_trades": 29,
+      "shadow_winners": 0,
+      "shadow_open_positions": 0,
+      "difference": 8085.2,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $8085.2 \u2014 filters are protecting from losses"
+    }
+  }
+}

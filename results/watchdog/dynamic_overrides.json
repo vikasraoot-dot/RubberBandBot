@@ -1,0 +1,30 @@
+{
+  "market_condition": "RANGE",
+  "overrides": {
+    "position_size_multiplier": 1.0,
+    "tp_r_multiple_adjustment": 0.0,
+    "breakeven_trigger_r_adjustment": 0.0
+  },
+  "reason": "No strong condition detected. ADX=nan, ATR ratio=0.22.",
+  "diagnostics": {
+    "spy_close": 681.75,
+    "sma_20": 689.15,
+    "adx": NaN,
+    "pdi": 357.5,
+    "mdi": 80.4,
+    "atr_5": 8.82,
+    "atr_20": 39.58,
+    "atr_ratio": 0.223,
+    "reversal_count_20": 9
+  },
+  "updated_at": "2026-02-16T21:53:36.845125+00:00",
+  "breadth": {
+    "pct_above_sma100": 50.0,
+    "above_count": 0,
+    "total_valid": 0,
+    "total_universe": 202,
+    "failed_count": 202,
+    "regime": "CAUTIOUS",
+    "updated_at": "2026-02-16T21:53:53.246697+00:00"
+  }
+}
