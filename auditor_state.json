@@ -45,24 +45,8 @@
       "sl_price": 197.33669999999998,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 200.125,
-      "unrealized_pnl": 79.50000000000159
-    },
-    "SHADOW_15M_STK_PFE_20260121T145000216212+0000": {
-      "id": "SHADOW_15M_STK_PFE_20260121T145000216212+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "PFE",
-      "entry_price": 27.605,
-      "entry_time": "2026-01-21T14:50:00.216212+00:00",
-      "reason": "Slope3_Too_Flat(-0.0087% > -0.08%)",
-      "qty": 100,
-      "tp_price": 27.881050000000002,
-      "sl_price": 27.32895,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 27.375,
-      "unrealized_pnl": -23.000000000000043
+      "current_price": 199.115,
+      "unrealized_pnl": -21.4999999999975
     },
     "SHADOW_15M_STK_DE_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_DE_20260121T145000216212+0000",
@@ -77,8 +61,8 @@
       "sl_price": 596.7967500000001,
       "status": "OPEN",
       "pnl": 0.0,
-      "current_price": 599.025,
-      "unrealized_pnl": -380.0000000000068
+      "current_price": 598.78,
+      "unrealized_pnl": -404.5000000000073
     }
   },
   "closed_positions": [
@@ -20244,6 +20228,26 @@
       "exit_time": "2026-02-17T16:02:28.021445+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -64.00000000000006
+    },
+    {
+      "id": "SHADOW_15M_STK_PFE_20260121T145000216212+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "PFE",
+      "entry_price": 27.605,
+      "entry_time": "2026-01-21T14:50:00.216212+00:00",
+      "reason": "Slope3_Too_Flat(-0.0087% > -0.08%)",
+      "qty": 100,
+      "tp_price": 27.881050000000002,
+      "sl_price": 27.32895,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 27.265,
+      "unrealized_pnl": -33.999999999999986,
+      "exit_price": 27.265,
+      "exit_time": "2026-02-17T18:11:01.382079+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -33.999999999999986
     }
   ],
   "processed_lines": {
