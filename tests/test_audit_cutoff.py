@@ -72,7 +72,7 @@ def test_audit_logic_forming_bar(mock_dt_script, mock_bearish_filter, mock_check
 
     # Setup Mocks
     mock_logger = MagicMock()
-    mock_check_slope.return_value = (False, "")  # Don't skip due to slope
+    mock_check_slope.return_value = (False, "", 0.0)  # Don't skip due to slope
     mock_bearish_filter.return_value = (False, "")  # Don't skip due to bearish bar
 
     # CASE A: Forming Bar (< 15 mins old)
@@ -130,7 +130,7 @@ def test_audit_logic_closed_bar(mock_dt_script, mock_get_sma, mock_bearish_filte
 
     # Setup Mocks
     mock_logger = MagicMock()
-    mock_check_slope.return_value = (False, "")  # Don't skip due to slope
+    mock_check_slope.return_value = (False, "", 0.0)  # Don't skip due to slope
     mock_bearish_filter.return_value = (False, "")  # Don't skip due to bearish bar
     mock_get_sma.return_value = None  # Disable trend filter logic
 

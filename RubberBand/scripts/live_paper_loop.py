@@ -17,6 +17,7 @@ from zoneinfo import ZoneInfo
 
 ET = ZoneInfo("US/Eastern")
 
+import math
 import numpy as np
 import pandas as pd
 
@@ -111,6 +112,82 @@ def _pretty_timeframe(tf: str) -> str:
     if tf.endswith("m"):
         return f"{tf[:-1]}Min"
     return tf
+
+
+def _safe_float_ctx(v, decimals: int = 4):
+    """Convert to native Python float, replacing NaN/Inf/numpy with None."""
+    if v is None:
+        return None
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    if math.isnan(f) or math.isinf(f):
+        return None
+    return round(f, decimals)
+
+
+# Outcome codes for SCAN_CONTEXT events (controlled vocabulary)
+SCAN_OUTCOME_NO_DATA = "NO_DATA"
+SCAN_OUTCOME_INSUFFICIENT_BARS = "INSUFFICIENT_BARS"
+SCAN_OUTCOME_PAUSED_HEALTH = "PAUSED_HEALTH"
+SCAN_OUTCOME_FORMING_DROPPED = "FORMING_BAR_DROPPED"
+SCAN_OUTCOME_TREND_NO_DATA = "TREND_NO_DATA"
+SCAN_OUTCOME_TREND_BEAR = "TREND_BEAR"
+SCAN_OUTCOME_SKIP_SLOPE = "SKIP_SLOPE"
+SCAN_OUTCOME_SKIP_BEARISH = "SKIP_BEARISH_BAR"
+SCAN_OUTCOME_DKF_SKIP = "DKF_SKIP"
+SCAN_OUTCOME_NO_SIGNAL = "NO_SIGNAL"
+SCAN_OUTCOME_ALREADY_IN = "ALREADY_IN_POSITION"
+SCAN_OUTCOME_TRADED_TODAY = "TRADED_TODAY"
+SCAN_OUTCOME_BAD_TP_SL = "BAD_TP_SL"
+SCAN_OUTCOME_QTY_ZERO = "QTY_ZERO"
+SCAN_OUTCOME_SIGNAL = "SIGNAL"
+
+
+def build_symbol_context(
+    ticker: str,
+    outcome: str,
+    close: float = None,
+    open_price: float = None,
+    rsi: float = None,
+    atr: float = None,
+    kc_lower: float = None,
+    kc_middle: float = None,
+    kc_upper: float = None,
+    slope_pct: float = None,
+    is_bull_trend: bool = None,
+    is_strong_bull: bool = None,
+    dollar_vol: float = None,
+    rvol: float = None,
+    gap_pct: float = None,
+    bars_count: int = None,
+    filters: dict = None,
+) -> dict:
+    """Build a per-symbol context snapshot for SCAN_CONTEXT events.
+
+    Only includes fields that are not None, keeping early-exit
+    snapshots minimal.
+    """
+    ctx = {"ticker": ticker, "outcome": outcome}
+    if filters:
+        ctx["filters"] = filters
+    for key, val in [
+        ("close", close), ("open", open_price), ("rsi", rsi), ("atr", atr),
+        ("kc_lower", kc_lower), ("kc_middle", kc_middle),
+        ("kc_upper", kc_upper), ("slope_pct", slope_pct),
+        ("dollar_vol", dollar_vol), ("rvol", rvol), ("gap_pct", gap_pct),
+    ]:
+        safe = _safe_float_ctx(val)
+        if safe is not None:
+            ctx[key] = safe
+    if bars_count is not None:
+        ctx["bars_count"] = bars_count
+    if is_bull_trend is not None:
+        ctx["is_bull_trend"] = is_bull_trend
+    if is_strong_bull is not None:
+        ctx["is_strong_bull"] = is_strong_bull
+    return ctx
 
 
 def _broker_creds(cfg: dict) -> tuple[str, str, str]:
@@ -621,6 +698,24 @@ def main() -> int:
         "ts": now_iso
     }), flush=True)
 
+    # --- SCAN_CONTEXT: per-symbol diagnostics ---
+    scan_ctx_symbols = []
+    # Compute market-wide context for SCAN_CONTEXT event
+    _spy_change_pct = None
+    _spy_df = bars_map.get("SPY")
+    if _spy_df is not None and not _spy_df.empty and len(_spy_df) >= 2:
+        _spy_open_today = None
+        # Find today's first bar
+        for _idx in range(len(_spy_df)):
+            _bar_dt = _spy_df.index[_idx]
+            if hasattr(_bar_dt, 'date'):
+                if _bar_dt.tz_convert(ET).date() == now_et.date():
+                    _spy_open_today = float(_spy_df.iloc[_idx]["open"])
+                    break
+        if _spy_open_today and _spy_open_today > 0:
+            _spy_close_now = float(_spy_df.iloc[-1]["close"])
+            _spy_change_pct = round((_spy_close_now - _spy_open_today) / _spy_open_today * 100, 4)
+
     # --- Filter Diagnostics Counters ---
     diag = {
         "total_scanned": 0,
@@ -649,15 +744,18 @@ def main() -> int:
         df = bars_map.get(sym)
         if df is None or df.empty:
             diag["no_data"] += 1
+            scan_ctx_symbols.append(build_symbol_context(sym, SCAN_OUTCOME_NO_DATA, filters={"data_ok": False}))
             continue
         if len(df) < 20:  # Need enough data for Keltner(20)
             diag["insufficient_bars"] += 1
+            scan_ctx_symbols.append(build_symbol_context(sym, SCAN_OUTCOME_INSUFFICIENT_BARS, bars_count=len(df), filters={"data_ok": True, "bars_ok": False}))
             continue
 
         # Resilience Check
         is_paused, reason = health_mgr.is_paused(sym, now=now_utc)
         if is_paused:
             diag["paused_health"] += 1
+            scan_ctx_symbols.append(build_symbol_context(sym, SCAN_OUTCOME_PAUSED_HEALTH, filters={"data_ok": True, "bars_ok": True, "health_ok": False}))
             continue
 
         df = attach_verifiers(df, cfg)
@@ -683,10 +781,37 @@ def main() -> int:
             diag["forming_bar_dropped"] += 1
             if df.empty:
                 diag["no_data"] += 1
+                scan_ctx_symbols.append(build_symbol_context(sym, SCAN_OUTCOME_FORMING_DROPPED, filters={"data_ok": True, "bars_ok": False}))
                 continue
 
         last = df.iloc[-1]
         close = float(last["close"])
+
+        # --- Compute per-symbol context fields for SCAN_CONTEXT ---
+        _sym_rsi = _safe_float_ctx(last.get("rsi"))
+        _sym_atr = _safe_float_ctx(last.get("atr"))
+        _sym_kc_lower = _safe_float_ctx(last.get("kc_lower"))
+        _sym_kc_middle = _safe_float_ctx(last.get("kc_middle"))
+        _sym_kc_upper = _safe_float_ctx(last.get("kc_upper"))
+        _sym_open = _safe_float_ctx(last.get("open"))
+        _sym_dollar_vol = _safe_float_ctx(last.get("dollar_vol"))
+        # Relative volume (current bar vs 20-bar avg)
+        _sym_rvol = None
+        if "volume" in df.columns and len(df) >= 20:
+            _avg_vol_20 = df["volume"].iloc[-20:].mean()
+            if _avg_vol_20 and _avg_vol_20 > 0:
+                _sym_rvol = _safe_float_ctx(float(last["volume"]) / _avg_vol_20, decimals=2)
+        # Gap % (today's open vs yesterday's close)
+        _sym_gap_pct = None
+        _sym_daily = daily_map.get(sym, pd.DataFrame()) if daily_map else pd.DataFrame()
+        if not _sym_daily.empty and len(_sym_daily) >= 2:
+            _prev_close = float(_sym_daily.iloc[-2]["close"]) if len(_sym_daily) >= 2 else None
+            _today_open = float(_sym_daily.iloc[-1]["open"]) if "open" in _sym_daily.columns else None
+            if _prev_close and _prev_close > 0 and _today_open:
+                _sym_gap_pct = _safe_float_ctx((_today_open - _prev_close) / _prev_close * 100)
+        _sym_bars_count = len(df)
+        # Accumulated filter state for this symbol
+        _sym_filters = {"data_ok": True, "bars_ok": True, "health_ok": True}
 
         # Trend Filter Check
         is_bull_trend = False
@@ -734,6 +859,14 @@ def main() -> int:
                 # For safety, maybe skip? Or default to Bull?
                 # Backtest logic: skip if filter enabled and no SMA
                 diag["trend_filter_no_data"] += 1
+                _sym_filters.update({"trend_ok": False, "reason": "no_daily_data"})
+                scan_ctx_symbols.append(build_symbol_context(
+                    sym, SCAN_OUTCOME_TREND_NO_DATA, close=close, open_price=_sym_open,
+                    rsi=_sym_rsi, atr=_sym_atr, kc_lower=_sym_kc_lower,
+                    kc_middle=_sym_kc_middle, kc_upper=_sym_kc_upper,
+                    dollar_vol=_sym_dollar_vol, rvol=_sym_rvol, gap_pct=_sym_gap_pct,
+                    bars_count=_sym_bars_count, filters=_sym_filters,
+                ))
                 continue
         else:
             # Filter disabled -> assume Strong Bull (allow Longs at full notional)
@@ -750,19 +883,42 @@ def main() -> int:
         
         # This ensures consistent behavior across tickers of different prices.
         
-        should_skip, reason = check_slope_filter(df, regime_cfg)
-        if should_skip:
+        slope_result = check_slope_filter(df, regime_cfg)
+        _sym_slope_pct = slope_result.slope_pct
+        _sym_filters["trend_ok"] = True
+        _sym_filters["slope_ok"] = not slope_result.should_skip
+        if slope_result.should_skip:
             diag["slope_filter"] += 1
-            # Only log verbose slope skips if few (avoid log spam)
+            _sym_filters["reason"] = slope_result.reason
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_SKIP_SLOPE, close=close, open_price=_sym_open,
+                rsi=_sym_rsi, atr=_sym_atr, kc_lower=_sym_kc_lower,
+                kc_middle=_sym_kc_middle, kc_upper=_sym_kc_upper,
+                slope_pct=_sym_slope_pct, is_bull_trend=is_bull_trend,
+                is_strong_bull=is_strong_bull, dollar_vol=_sym_dollar_vol,
+                rvol=_sym_rvol, gap_pct=_sym_gap_pct, bars_count=_sym_bars_count,
+                filters=_sym_filters,
+            ))
             continue
-        
+
         # Bearish Bar Filter (New - Jan 2026)
         # -------------------------------------
         # Skip entries if current bar is bearish (close < open)
         # Backtest showed +$3,000 improvement and +15% win rate
         should_skip_bar, bar_reason = check_bearish_bar_filter(df, regime_cfg)
+        _sym_filters["bearish_bar_ok"] = not should_skip_bar
         if should_skip_bar:
             diag["bearish_bar_filter"] += 1
+            _sym_filters["reason"] = bar_reason
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_SKIP_BEARISH, close=close, open_price=_sym_open,
+                rsi=_sym_rsi, atr=_sym_atr, kc_lower=_sym_kc_lower,
+                kc_middle=_sym_kc_middle, kc_upper=_sym_kc_upper,
+                slope_pct=_sym_slope_pct, is_bull_trend=is_bull_trend,
+                is_strong_bull=is_strong_bull, dollar_vol=_sym_dollar_vol,
+                rvol=_sym_rvol, gap_pct=_sym_gap_pct, bars_count=_sym_bars_count,
+                filters=_sym_filters,
+            ))
             continue
         
         # Check 2: 10-bar slope (Secondary/Sustained)
@@ -803,11 +959,23 @@ def main() -> int:
         # --- Dead Knife Filter (Live) ---
         # Skip re-entry if we had a loss today and RSI is still < 20 (Deep Oversold)
         # This prevents "doubling down" on a falling knife that just stopped us out.
+        _sym_filters["dkf_ok"] = True
         if long_signal and use_dkf and sym in has_loss_today:
             # We use current RSI vs 20. Backtest uses last_loss_rsi < 20 check too,
             # but here "has_loss_today" implies we tried and failed.
             if rsi is not None and rsi < 20:
                 diag["dkf_filter"] += 1
+                _sym_filters["dkf_ok"] = False
+                _sym_filters["reason"] = f"DKF(RSI={rsi:.1f}<20, lost_today)"
+                scan_ctx_symbols.append(build_symbol_context(
+                    sym, SCAN_OUTCOME_DKF_SKIP, close=close, open_price=_sym_open,
+                    rsi=_sym_rsi, atr=_sym_atr, kc_lower=_sym_kc_lower,
+                    kc_middle=_sym_kc_middle, kc_upper=_sym_kc_upper,
+                    slope_pct=_sym_slope_pct, is_bull_trend=is_bull_trend,
+                    is_strong_bull=is_strong_bull, dollar_vol=_sym_dollar_vol,
+                    rvol=_sym_rvol, gap_pct=_sym_gap_pct, bars_count=_sym_bars_count,
+                    filters=_sym_filters,
+                ))
                 continue
         # --------------------------------
 
@@ -848,9 +1016,21 @@ def main() -> int:
             "entry_reason": entry_reason,
         }
         
+        # Build common context args for remaining gates
+        _full_ctx_args = dict(
+            close=close, open_price=_sym_open, rsi=_sym_rsi, atr=_sym_atr,
+            kc_lower=_sym_kc_lower, kc_middle=_sym_kc_middle, kc_upper=_sym_kc_upper,
+            slope_pct=_sym_slope_pct, is_bull_trend=is_bull_trend,
+            is_strong_bull=is_strong_bull, dollar_vol=_sym_dollar_vol,
+            rvol=_sym_rvol, gap_pct=_sym_gap_pct, bars_count=_sym_bars_count,
+        )
+
         # Gating: Check if already in position
         if sym in positions:
             diag["already_in_position"] += 1
+            _sym_filters["signal"] = bool(long_signal or short_signal)
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_ALREADY_IN, filters=_sym_filters, **_full_ctx_args))
             try:
                 log.gate(
                     symbol=sym, session=session, cid=sig_row["cid"],
@@ -863,6 +1043,9 @@ def main() -> int:
         # Gating: Daily Cooldown - prevent re-entry on tickers traded today
         if sym in traded_today:
             diag["traded_today"] += 1
+            _sym_filters["signal"] = bool(long_signal or short_signal)
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_TRADED_TODAY, filters=_sym_filters, **_full_ctx_args))
             try:
                 log.gate(
                     symbol=sym, session=session, cid=sig_row["cid"],
@@ -875,6 +1058,11 @@ def main() -> int:
         # Gating: Check Signal
         if not long_signal and not short_signal:
             diag["no_signal"] += 1
+            _sym_filters["rsi_ok"] = _sym_rsi is not None and _sym_rsi < float(cfg.get("filters", {}).get("rsi_oversold", 25))
+            _sym_filters["below_kc"] = _sym_kc_lower is not None and close < _sym_kc_lower
+            _sym_filters["signal"] = False
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_NO_SIGNAL, filters=_sym_filters, **_full_ctx_args))
             continue
 
         # Determine Side
@@ -892,17 +1080,22 @@ def main() -> int:
         atr_raw = last.get("atr")
         atr_val = float(atr_raw) if atr_raw is not None else 0.0
         
+        _sym_filters["signal"] = True
         if side == "buy":
             stop_price = safe_float(money_sub(entry, money_mul(atr_val, sl_mult)))
             take_profit = safe_float(money_add(entry, money_mul(atr_val, tp_r)))
             if not (stop_price < entry < take_profit):
                 diag["bad_tp_sl"] += 1
+                scan_ctx_symbols.append(build_symbol_context(
+                    sym, SCAN_OUTCOME_BAD_TP_SL, filters=_sym_filters, **_full_ctx_args))
                 continue
         else:  # Short
             stop_price = safe_float(money_add(entry, money_mul(atr_val, sl_mult)))
             take_profit = safe_float(money_sub(entry, money_mul(atr_val, tp_r)))
             if not (take_profit < entry < stop_price):
                 diag["bad_tp_sl"] += 1
+                scan_ctx_symbols.append(build_symbol_context(
+                    sym, SCAN_OUTCOME_BAD_TP_SL, filters=_sym_filters, **_full_ctx_args))
                 continue
 
         # Size
@@ -925,7 +1118,13 @@ def main() -> int:
 
         if qty < 1:
             diag["qty_zero"] += 1
+            scan_ctx_symbols.append(build_symbol_context(
+                sym, SCAN_OUTCOME_QTY_ZERO, filters=_sym_filters, **_full_ctx_args))
             continue
+
+        # SIGNAL passed all filters — capture full context
+        scan_ctx_symbols.append(build_symbol_context(
+            sym, SCAN_OUTCOME_SIGNAL, filters=_sym_filters, **_full_ctx_args))
 
         # Log the planned order
         try:
@@ -1078,6 +1277,40 @@ def main() -> int:
                 except Exception as _alert_err:
                     print(f"[log] rejection alert failed for {sym}: {_alert_err}", flush=True)
 
+    # --- Emit SCAN_CONTEXT batch event ---
+    # Compute regime duration
+    _regime_duration_min = None
+    if rm._panic_triggered_at is not None:
+        _regime_duration_min = round((datetime.now() - rm._panic_triggered_at).total_seconds() / 60.0, 1)
+
+    try:
+        log.scan_context(
+            schema_v=1,
+            regime=current_regime,
+            regime_detail={
+                "vixy_price": _safe_float_ctx(rm.last_vixy_price),
+                "vixy_bb_upper": _safe_float_ctx(rm._upper_band),
+                "regime_duration_min": _regime_duration_min,
+            },
+            market_context={
+                "spy_change_pct": _spy_change_pct,
+                "market_condition": _dyn_condition,
+                "tp_r_effective": _safe_float_ctx(safe_float(tp_r)),
+                "size_multiplier": _safe_float_ctx(safe_float(_size_mult)),
+            },
+            portfolio_context={
+                "open_positions_count": len(positions),
+                "capital_deployed": _safe_float_ctx(sum(
+                    abs(float(p.get("market_value", 0))) for p in positions.values()
+                )),
+            },
+            symbols_scanned=len(scan_ctx_symbols),
+            symbols_passed=diag["signals_generated"],
+            symbols=scan_ctx_symbols,
+        )
+    except Exception as _scan_err:
+        print(f"[log] scan_context failed: {_scan_err}", flush=True)
+
     # --- Filter Diagnostics Summary ---
     # Calculate pass-through rate
     passed_filters = diag["signals_generated"]
@@ -1164,8 +1397,6 @@ def main() -> int:
                 
                 total_pnl += realized_pnl
                 total_vol += (b_val + s_val)
-
-                pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
 
                 pnl_str = f"{realized_pnl:,.2f}" if matched_qty > 0 else "-"
 

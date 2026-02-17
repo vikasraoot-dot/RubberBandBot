@@ -72,6 +72,20 @@ class TradeLogger:
     def signal(self, **kw): kw.setdefault("type","SIGNAL"); self._write(kw)
     def gate(self, **kw): kw.setdefault("type","GATE"); self._write(kw)
 
+    def scan_context(self, **kw):
+        """Emit SCAN_CONTEXT batch event (per-symbol diagnostics per cycle)."""
+        kw.setdefault("type", "SCAN_CONTEXT")
+        # Suppress stdout mirror for large batch events to avoid CI log noise
+        obj = dict(kw)
+        obj.setdefault("ts", _ts())
+        obj.setdefault("ts_et", _ts_et())
+        line = json.dumps(obj, separators=(",", ":"), ensure_ascii=False, default=str)
+        with self._lock:
+            try:
+                self._fp.write(line + "\n")
+            except Exception:
+                pass
+
     def entry_submit(self, **kw):
         kw.setdefault("type", "ENTRY_SUBMIT")
         # Track trade for EOD summary

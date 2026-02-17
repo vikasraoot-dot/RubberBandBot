@@ -326,6 +326,15 @@ class PerformanceDB:
             self._count_signals_and_filters(trade_entries)
         )
 
+        # Enrich from SCAN_CONTEXT events when available
+        scan_regime, scan_config, scan_filters = self._extract_scan_context(
+            trade_entries
+        )
+        regime = scan_regime or ""
+        config_snapshot = scan_config or {}
+        if scan_filters:
+            filters_breakdown = scan_filters
+
         # Auditor shadow data
         shadow_pnl, shadow_trades, shadow_win_rate = self._extract_auditor_shadow(
             auditor_data, bot_tag
@@ -343,10 +352,10 @@ class PerformanceDB:
             "avg_loss": _to_float(avg_loss),
             "max_drawdown_intraday": _to_float(max_dd),
             "peak_pnl_before_giveback": _to_float(peak_pnl),
-            "regime": "",
+            "regime": regime,
             "signals_generated": signals_generated,
             "signals_filtered": signals_filtered,
-            "config_snapshot": {},
+            "config_snapshot": config_snapshot,
             "filters_breakdown": filters_breakdown,
             "auditor_shadow_pnl": _to_float(shadow_pnl),
             "auditor_shadow_trades": shadow_trades,
@@ -487,6 +496,51 @@ class PerformanceDB:
                 breakdown[etype] = breakdown.get(etype, 0) + 1
 
         return signals_generated, signals_filtered, breakdown
+
+    def _extract_scan_context(
+        self, entries: List[Dict[str, Any]]
+    ) -> tuple[str, Dict[str, Any], Dict[str, int]]:
+        """Extract regime, config snapshot, and filters breakdown from SCAN_CONTEXT events.
+
+        Uses the *last* SCAN_CONTEXT event for config/regime (most representative
+        of end-of-day state) and aggregates per-symbol outcome counts across all
+        SCAN_CONTEXT cycles for the filters breakdown.
+
+        Args:
+            entries: JSONL log entries for a single bot.
+
+        Returns:
+            Tuple of (regime, config_snapshot, filters_breakdown).
+            All three are empty/falsy when no SCAN_CONTEXT events exist,
+            allowing the caller to fall back to existing behaviour.
+        """
+        scan_events = [e for e in entries if e.get("type") == "SCAN_CONTEXT"]
+        if not scan_events:
+            return "", {}, {}
+
+        # --- config_snapshot from the last SCAN_CONTEXT event ---
+        last_event = scan_events[-1]
+        regime = last_event.get("regime", "") or ""
+
+        market_ctx = last_event.get("market_context") or {}
+        config_snapshot: Dict[str, Any] = {"regime": regime}
+        for _cfg_key in ("market_condition", "tp_r_effective", "size_multiplier"):
+            _cfg_val = market_ctx.get(_cfg_key)
+            if _cfg_val is not None:
+                config_snapshot[_cfg_key] = _cfg_val
+
+        # --- filters_breakdown from outcome counts across all cycles ---
+        outcome_counts: Dict[str, int] = {}
+        for event in scan_events:
+            symbols = event.get("symbols")
+            if not isinstance(symbols, list):
+                continue
+            for sym_record in symbols:
+                outcome = sym_record.get("outcome", "")
+                if outcome:
+                    outcome_counts[outcome] = outcome_counts.get(outcome, 0) + 1
+
+        return regime, config_snapshot, outcome_counts
 
     def _extract_auditor_shadow(
         self,

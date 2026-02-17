@@ -437,7 +437,7 @@ def simulate_spreads_for_symbol(
         # Slice: df.iloc[:i+1] (contains row i as last element)
         # check_slope_filter uses df['kc_middle'] and df['close']
         
-        should_skip, reason = check_slope_filter(df.iloc[:i+1], regime_cfg)
+        should_skip, reason, _slope_pct = check_slope_filter(df.iloc[:i+1], regime_cfg)
         
         if should_skip:
             if verbose:

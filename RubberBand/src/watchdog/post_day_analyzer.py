@@ -102,6 +102,13 @@ class PostDayAnalyzer:
             "auditor_vs_bot": self._compare_auditor_vs_bot(bot_pnl, auditor_data),
         }
 
+        # Signal context analysis (new SCAN_CONTEXT events)
+        try:
+            analysis["signal_context"] = self._analyze_signal_context(bot_logs)
+        except Exception as exc:
+            logger.error("Signal context analysis failed: %s", exc, exc_info=True)
+            analysis["signal_context"] = {"available": False, "error": str(exc)}
+
         # Persist
         output_path = os.path.join(self._output_dir, f"{date}.json")
         try:
@@ -577,6 +584,320 @@ class PostDayAnalyzer:
             }
 
         return result
+
+    # ------------------------------------------------------------------
+    # 7. Signal context analysis (SCAN_CONTEXT events)
+    # ------------------------------------------------------------------
+
+    def _analyze_signal_context(
+        self, bot_logs: Dict[str, List[Dict[str, Any]]]
+    ) -> Dict[str, Any]:
+        """Analyse SCAN_CONTEXT events from trade logs.
+
+        Produces filter effectiveness from the scanner's perspective,
+        near-miss detection, indicator distributions, regime breakdowns,
+        and per-cycle time distribution.
+
+        Args:
+            bot_logs: Trade log entries grouped by bot_tag.
+
+        Returns:
+            Dict with analysis sections, or ``{"available": False}``
+            if no SCAN_CONTEXT events are found.
+        """
+        # 1. Extract all SCAN_CONTEXT events
+        scan_events: List[Dict[str, Any]] = []
+        for _bot_tag, entries in bot_logs.items():
+            for entry in entries:
+                if entry.get("type") == "SCAN_CONTEXT":
+                    scan_events.append(entry)
+
+        if not scan_events:
+            return {"available": False}
+
+        # Flatten all symbol records across all cycles
+        all_symbols: List[Dict[str, Any]] = []
+        for event in scan_events:
+            symbols = event.get("symbols", [])
+            if isinstance(symbols, list):
+                for sym in symbols:
+                    # Attach cycle-level context to each symbol record
+                    sym_record = dict(sym)
+                    sym_record["_regime"] = event.get("regime", "UNKNOWN") or "UNKNOWN"
+                    sym_record["_ts_et"] = event.get("ts_et", "")
+                    all_symbols.append(sym_record)
+
+        return {
+            "available": True,
+            "total_cycles": len(scan_events),
+            "total_symbol_records": len(all_symbols),
+            "filter_effectiveness": self._sc_filter_effectiveness(all_symbols),
+            "near_misses": self._sc_near_misses(all_symbols),
+            "indicator_summary": self._sc_indicator_summary(all_symbols),
+            "regime_breakdown": self._sc_regime_breakdown(all_symbols),
+            "time_distribution": self._sc_time_distribution(scan_events),
+        }
+
+    # -- signal context sub-analyses -----------------------------------
+
+    def _sc_filter_effectiveness(
+        self, all_symbols: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """Count how many symbols each filter blocked / passed.
+
+        Uses the ``filters`` dict inside each symbol record.  A filter
+        is considered to have *blocked* a symbol when its value is
+        ``False``.
+
+        Args:
+            all_symbols: Flat list of per-symbol scan records.
+
+        Returns:
+            Dict keyed by filter name with blocked/passed/total counts.
+        """
+        filter_blocked: Dict[str, int] = {}
+        filter_passed: Dict[str, int] = {}
+        filter_total: Dict[str, int] = {}
+
+        for sym in all_symbols:
+            filters = sym.get("filters")
+            if not isinstance(filters, dict):
+                continue
+            for fname, fval in filters.items():
+                # Skip the aggregate "signal" key — it is the composite
+                if fname == "signal":
+                    continue
+                filter_total[fname] = filter_total.get(fname, 0) + 1
+                if fval is True:
+                    filter_passed[fname] = filter_passed.get(fname, 0) + 1
+                elif fval is False:
+                    filter_blocked[fname] = filter_blocked.get(fname, 0) + 1
+
+        result: Dict[str, Any] = {}
+        for fname in sorted(filter_total.keys()):
+            result[fname] = {
+                "blocked": filter_blocked.get(fname, 0),
+                "passed": filter_passed.get(fname, 0),
+                "total": filter_total[fname],
+            }
+        return result
+
+    def _sc_near_misses(
+        self, all_symbols: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Find symbols that passed all filters except exactly one.
+
+        For each near miss, record the ticker, outcome, and the
+        indicator value most likely responsible for the miss.
+
+        Args:
+            all_symbols: Flat list of per-symbol scan records.
+
+        Returns:
+            List of near-miss dicts sorted by ticker.
+        """
+        # Map outcome strings to a likely indicator field for diagnostics.
+        # Early-exit outcomes (NO_DATA, INSUFFICIENT_BARS, PAUSED_HEALTH,
+        # FORMING_BAR_DROPPED) rarely produce near-misses because they fail
+        # before multiple filter booleans are computed, but we include them
+        # for completeness.
+        _outcome_to_indicator: Dict[str, str] = {
+            "SKIP_SLOPE": "slope_pct",
+            "SKIP_BEARISH_BAR": "close",
+            "DKF_SKIP": "close",
+            "TREND_BEAR": "is_bull_trend",
+            "TREND_NO_DATA": "is_bull_trend",
+            "NO_DATA": "ticker",
+            "INSUFFICIENT_BARS": "bars_count",
+            "PAUSED_HEALTH": "ticker",
+            "FORMING_BAR_DROPPED": "ticker",
+            "NO_SIGNAL": "rsi",
+            "ALREADY_IN_POSITION": "ticker",
+            "TRADED_TODAY": "ticker",
+            "BAD_TP_SL": "close",
+            "QTY_ZERO": "close",
+        }
+
+        # Early-exit outcomes that don't produce full filter dicts —
+        # skip these since they can't be meaningful near-misses.
+        _early_exit_outcomes = {
+            "NO_DATA", "INSUFFICIENT_BARS", "PAUSED_HEALTH",
+            "FORMING_BAR_DROPPED",
+        }
+
+        near_misses: List[Dict[str, Any]] = []
+        for sym in all_symbols:
+            if sym.get("outcome", "") in _early_exit_outcomes:
+                continue
+
+            filters = sym.get("filters")
+            if not isinstance(filters, dict):
+                continue
+
+            # Exclude the composite "signal" key and "reason" text field
+            individual = {
+                k: v for k, v in filters.items()
+                if k not in ("signal", "reason") and isinstance(v, bool)
+            }
+            if not individual:
+                continue
+
+            failed_filters = [k for k, v in individual.items() if v is False]
+            if len(failed_filters) != 1:
+                continue
+
+            # This symbol missed by exactly one filter
+            blocking_filter = failed_filters[0]
+            outcome = sym.get("outcome", "")
+            ticker = sym.get("ticker", "unknown")
+
+            # Find the most relevant indicator value for the blocking filter
+            indicator_key = _outcome_to_indicator.get(outcome, blocking_filter)
+            indicator_value = sym.get(indicator_key)
+
+            entry: Dict[str, Any] = {
+                "ticker": ticker,
+                "outcome": outcome,
+                "blocking_filter": blocking_filter,
+                "indicator_key": indicator_key,
+            }
+            if indicator_value is not None:
+                entry["indicator_value"] = indicator_value
+            # Include regime and cycle timestamp for context
+            entry["regime"] = sym.get("_regime", "")
+            entry["ts_et"] = sym.get("_ts_et", "")
+
+            near_misses.append(entry)
+
+        near_misses.sort(key=lambda x: x.get("ticker", ""))
+        return near_misses
+
+    def _sc_indicator_summary(
+        self, all_symbols: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """Compute summary stats for RSI, slope_pct, ATR.
+
+        Splits symbols into ``entered`` (outcome=SIGNAL) and ``skipped``
+        groups.  Only includes symbols that reached indicator computation
+        (excludes NO_DATA, INSUFFICIENT_BARS, PAUSED_HEALTH outcomes).
+
+        Args:
+            all_symbols: Flat list of per-symbol scan records.
+
+        Returns:
+            Dict with ``entered`` and ``skipped`` sub-dicts each
+            containing mean / p25 / p75 for each indicator.
+        """
+        _excluded_outcomes = {"NO_DATA", "INSUFFICIENT_BARS", "PAUSED_HEALTH"}
+        _indicator_keys = ("rsi", "slope_pct", "atr")
+
+        entered_vals: Dict[str, List[Decimal]] = {k: [] for k in _indicator_keys}
+        skipped_vals: Dict[str, List[Decimal]] = {k: [] for k in _indicator_keys}
+
+        for sym in all_symbols:
+            outcome = sym.get("outcome", "")
+            if outcome in _excluded_outcomes:
+                continue
+
+            target = entered_vals if outcome == "SIGNAL" else skipped_vals
+            for key in _indicator_keys:
+                raw = sym.get(key)
+                if raw is not None:
+                    val = _dec(raw)
+                    # Only include non-zero / meaningful values
+                    target[key].append(val)
+
+        def _stats(values: List[Decimal]) -> Dict[str, Any]:
+            """Compute mean, p25, p75 for a list of Decimals."""
+            if not values:
+                return {"mean": None, "p25": None, "p75": None, "count": 0}
+            sorted_v = sorted(values)
+            n = len(sorted_v)
+            total = sum(sorted_v, Decimal("0"))
+            mean = total / Decimal(str(n))
+            p25_idx = max(0, int(n * 25 / 100) - 1)
+            p75_idx = max(0, min(int(n * 75 / 100) - 1, n - 1))
+            return {
+                "mean": _to_float(mean),
+                "p25": _to_float(sorted_v[p25_idx]),
+                "p75": _to_float(sorted_v[p75_idx]),
+                "count": n,
+            }
+
+        result: Dict[str, Any] = {"entered": {}, "skipped": {}}
+        for key in _indicator_keys:
+            result["entered"][key] = _stats(entered_vals[key])
+            result["skipped"][key] = _stats(skipped_vals[key])
+
+        return result
+
+    def _sc_regime_breakdown(
+        self, all_symbols: List[Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """Group filter effectiveness counts by regime.
+
+        Args:
+            all_symbols: Flat list of per-symbol scan records.
+
+        Returns:
+            Dict keyed by regime name, each containing per-filter
+            blocked/passed/total counts.
+        """
+        regime_groups: Dict[str, List[Dict[str, Any]]] = {}
+        for sym in all_symbols:
+            regime = sym.get("_regime", "UNKNOWN") or "UNKNOWN"
+            regime_groups.setdefault(regime, []).append(sym)
+
+        result: Dict[str, Any] = {}
+        for regime, symbols in sorted(regime_groups.items()):
+            result[regime] = self._sc_filter_effectiveness(symbols)
+
+        return result
+
+    def _sc_time_distribution(
+        self, scan_events: List[Dict[str, Any]]
+    ) -> List[Dict[str, Any]]:
+        """Count signals and skips per scan cycle.
+
+        Uses the ``ts_et`` timestamp from each SCAN_CONTEXT event
+        and the ``symbols_scanned`` / ``symbols_passed`` fields.
+
+        Args:
+            scan_events: List of raw SCAN_CONTEXT event dicts.
+
+        Returns:
+            List of per-cycle dicts with ts_et, signals, skips,
+            scanned, and regime, sorted chronologically.
+        """
+        rows: List[Dict[str, Any]] = []
+        for event in scan_events:
+            ts_et = event.get("ts_et", "")
+            scanned = event.get("symbols_scanned", 0) or 0
+            passed = event.get("symbols_passed", 0) or 0
+
+            # Also count from the symbols array for accuracy
+            symbols = event.get("symbols", [])
+            signal_count = 0
+            skip_count = 0
+            if isinstance(symbols, list):
+                for sym in symbols:
+                    if sym.get("outcome") == "SIGNAL":
+                        signal_count += 1
+                    else:
+                        skip_count += 1
+
+            rows.append({
+                "ts_et": ts_et,
+                "regime": event.get("regime", "UNKNOWN") or "UNKNOWN",
+                "symbols_scanned": scanned,
+                "symbols_passed": passed,
+                "signals": signal_count,
+                "skips": skip_count,
+            })
+
+        # Sort chronologically by timestamp
+        rows.sort(key=lambda x: x.get("ts_et", ""))
+        return rows
 
     # ------------------------------------------------------------------
     # Data loading helpers

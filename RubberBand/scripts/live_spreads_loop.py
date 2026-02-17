@@ -394,7 +394,7 @@ def get_long_signals(
                     continue # Silent skip to reduce log noise? Or log debug?
             
             # Check Slope Threshold
-            should_skip, reason = check_slope_filter(df_closed, regime_cfg)
+            should_skip, reason, _slope_pct = check_slope_filter(df_closed, regime_cfg)
             if should_skip:
                 # logger.spread_skip(underlying=sym, skip_reason=reason) # Too noisy for 1m loop?
                 continue

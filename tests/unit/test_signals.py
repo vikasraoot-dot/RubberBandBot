@@ -40,16 +40,16 @@ def test_slope_calm_mode(mock_df_flat, mock_df_crash, mock_df_dip):
     regime_cfg = {"slope_threshold_pct": -0.08, "dead_knife_filter": False}
     
     # Flat
-    skip, reason = check_slope_filter(mock_df_flat, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_flat, regime_cfg)
     assert skip is True
     assert "Too_Flat" in reason
     
     # Dip (-0.15 < -0.08) -> IS STEEP ENOUGH -> Trade
-    skip, reason = check_slope_filter(mock_df_dip, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_dip, regime_cfg)
     assert skip is False
     
     # Crash (-0.25 < -0.08) -> IS STEEP ENOUGH -> Trade
-    skip, reason = check_slope_filter(mock_df_crash, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_crash, regime_cfg)
     assert skip is False
 
 def test_slope_panic_mode(mock_df_flat, mock_df_crash, mock_df_dip):
@@ -65,15 +65,15 @@ def test_slope_panic_mode(mock_df_flat, mock_df_crash, mock_df_dip):
     regime_cfg = {"slope_threshold_pct": -0.20, "dead_knife_filter": True}
     
     # Flat (-0.00 > -0.20) -> SAFE
-    skip, reason = check_slope_filter(mock_df_flat, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_flat, regime_cfg)
     assert skip is False
     
     # Dip (-0.15 > -0.20) -> SAFE
-    skip, reason = check_slope_filter(mock_df_dip, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_dip, regime_cfg)
     assert skip is False
     
     # Crash (-0.25 < -0.20) -> UNSAFE -> SKIP
-    skip, reason = check_slope_filter(mock_df_crash, regime_cfg)
+    skip, reason, _slope_pct = check_slope_filter(mock_df_crash, regime_cfg)
     assert skip is True
     assert "Safety_Knife_Filter" in reason
 
