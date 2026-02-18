@@ -14,11 +14,14 @@ Bot Tags:
 from __future__ import annotations
 
 import json
+import logging
 import os
 import time
 from datetime import datetime
 from typing import Dict, List, Any, Optional, Set, Tuple
 from zoneinfo import ZoneInfo
+
+logger = logging.getLogger(__name__)
 
 ET = ZoneInfo("US/Eastern")
 
@@ -86,6 +89,50 @@ def parse_client_order_id(client_order_id: str) -> Dict[str, str]:
         "symbol": rest[:last_underscore],
         "timestamp": rest[last_underscore + 1:],
     }
+
+
+def ensure_all_registries_exist(registry_dir: str = DEFAULT_REGISTRY_DIR) -> List[str]:
+    """
+    Create empty registry files for any bots that don't have one yet.
+
+    Called on startup / before reconciliation to guarantee that every bot
+    has a writable registry file.  Without this, the reconciler sees an
+    empty in-memory registry and flags every broker position as UNTRACKED.
+
+    Uses exclusive-create mode (``"x"``) to eliminate TOCTOU races — if
+    two processes call this concurrently, only one will create each file.
+
+    Args:
+        registry_dir: Directory that holds per-bot JSON files.
+
+    Returns:
+        List of bot tags whose files were newly created.
+    """
+    os.makedirs(registry_dir, exist_ok=True)
+    created: List[str] = []
+    for tag in sorted(BOT_TAGS):
+        path = os.path.join(registry_dir, f"{tag}_positions.json")
+        initial = {
+            "bot_tag": tag,
+            "updated_at": datetime.now(ET).isoformat(),
+            "positions": {},
+            "closed_positions": [],
+        }
+        try:
+            # "x" mode: exclusive create — raises FileExistsError if file
+            # already exists, preventing both TOCTOU and accidental overwrite.
+            with open(path, "x", encoding="utf-8") as fh:
+                json.dump(initial, fh, indent=2, default=str)
+            created.append(tag)
+            logger.info("Created empty registry: %s", path)
+        except FileExistsError:
+            continue  # Already exists — safe, nothing to do
+        except IOError as exc:
+            logger.warning(
+                "Failed to create registry %s — reconciler may flag "
+                "positions as UNTRACKED: %s", path, exc,
+            )
+    return created
 
 
 class PositionRegistry:

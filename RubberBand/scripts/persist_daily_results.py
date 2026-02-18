@@ -15,12 +15,15 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
 import sys
 from datetime import datetime, timedelta
 from decimal import Decimal
 from typing import Dict, List, Any, Optional
 from zoneinfo import ZoneInfo
+
+logger = logging.getLogger(__name__)
 
 # Ensure repo root is on path
 _THIS = os.path.abspath(os.path.dirname(__file__))
@@ -29,7 +32,11 @@ if _REPO_ROOT not in sys.path:
     sys.path.insert(0, _REPO_ROOT)
 
 from RubberBand.src.data import get_positions, get_daily_fills
-from RubberBand.src.position_registry import BOT_TAGS, parse_client_order_id
+from RubberBand.src.position_registry import (
+    BOT_TAGS,
+    parse_client_order_id,
+    ensure_all_registries_exist,
+)
 from RubberBand.scripts.reconcile_broker import (
     reconcile_positions,
     get_orders_for_week,
@@ -52,6 +59,58 @@ def _log(msg: str):
     print(f"[{ts}] {msg}", flush=True)
 
 
+def _extract_order_symbol_side(order: Dict[str, Any]) -> tuple[str, str, bool]:
+    """
+    Extract symbol and side from an order, handling multi-leg (mleg) orders.
+
+    For standard (stock/single-option) orders, returns the top-level fields.
+    For mleg orders (spreads), the top-level ``symbol`` and ``side`` are
+    empty/null — the real data lives in ``order["legs"]``.
+
+    Strategy for mleg:
+    - Use the **buy** leg's symbol as primary (the ATM long contract).
+    - If no buy leg, fall back to the first filled leg.
+    - Multi-leg spreads are mapped to ``side="buy"`` for P&L accounting
+      (spreads are net-debit buy-to-open), with ``is_spread=True`` as
+      separate metadata.
+
+    Note:
+        For mleg orders, the top-level ``filled_qty`` and ``filled_avg_price``
+        may represent the net debit/credit rather than individual leg values.
+        Callers needing per-leg detail should inspect ``order["legs"]``.
+
+    Returns:
+        (symbol, side, is_spread) tuple.  ``is_spread`` is True when the
+        order has multiple filled legs.  Both strings are empty when nothing
+        is extractable.
+    """
+    symbol = (order.get("symbol") or "").strip()
+    side = (order.get("side") or "").strip()
+
+    if symbol and side:
+        return symbol, side, False
+
+    # Multi-leg order: extract from legs array
+    legs = order.get("legs") or []
+    if not legs:
+        return "", "", False
+
+    filled = [lg for lg in legs if lg.get("status") == "filled"]
+    if not filled:
+        filled = legs  # fall back to all legs if none marked filled
+
+    # Prefer the buy leg (long contract)
+    buy_legs = [lg for lg in filled if lg.get("side") == "buy"]
+    primary = buy_legs[0] if buy_legs else filled[0]
+
+    symbol = (primary.get("symbol") or "").strip()
+    is_spread = len(filled) > 1
+    # Map spreads to "buy" for P&L accounting; downstream uses is_spread
+    # to distinguish from single-leg buys.
+    side = "buy" if is_spread else (primary.get("side") or "")
+    return symbol, side, is_spread
+
+
 def get_account_info(
     base_url: Optional[str] = None,
     key: Optional[str] = None,
@@ -69,7 +128,7 @@ def get_account_info(
         resp.raise_for_status()
         return resp.json()
     except Exception as e:
-        _log(f"Error fetching account: {e}")
+        logger.error("Error fetching account: %s", e, exc_info=True)
         return {}
 
 
@@ -108,47 +167,52 @@ def calculate_bot_pnl(
     # Step 1: Find all BUY orders that belong to this bot on target date
     bot_buy_symbols = set()
     bot_orders = []
-    
+
     for order in orders:
         filled_at = order.get("filled_at", "")
         if not filled_at.startswith(target_date):
             continue
-        
+
         order_bot = extract_bot_tag_from_order(order)
-        side = order.get("side", "")
-        sym = order.get("symbol", "")
-        
+        sym, side, _is_spread = _extract_order_symbol_side(order)
+        if not sym:
+            logger.warning(
+                "Skipping order with empty symbol: id=%s filled_at=%s",
+                order.get("id", "?"), order.get("filled_at", "?"),
+            )
+            continue
+
         if order_bot == bot_tag:
             bot_orders.append(order)
             if side == "buy":
                 bot_buy_symbols.add(sym)
-    
+
     # Step 2: Find SELL orders that match our buy symbols (even if untagged)
     # This catches stop-loss/take-profit orders from bracket orders
     for order in orders:
         filled_at = order.get("filled_at", "")
         if not filled_at.startswith(target_date):
             continue
-        
+
         order_bot = extract_bot_tag_from_order(order)
-        side = order.get("side", "")
-        sym = order.get("symbol", "")
-        
+        sym, side, _is_spread = _extract_order_symbol_side(order)
+        if not sym:
+            continue
+
         # Include untagged sells for symbols we bought today
         if side == "sell" and order_bot is None and sym in bot_buy_symbols:
             # Check if we already have this order
             order_id = order.get("id")
             if not any(o.get("id") == order_id for o in bot_orders):
                 bot_orders.append(order)
-    
+
     # Step 3: Group by symbol to calculate realized P&L
     symbol_trades: Dict[str, Dict[str, Any]] = {}
     for order in bot_orders:
-        sym = order.get("symbol", "")
-        side = order.get("side", "")
+        sym, side, is_spread = _extract_order_symbol_side(order)
         qty = Decimal(str(order.get("filled_qty", 0)))
         price = Decimal(str(order.get("filled_avg_price", 0)))
-        
+
         if sym not in symbol_trades:
             symbol_trades[sym] = {
                 "buy_qty": Decimal("0"), "buy_value": Decimal("0"),
@@ -165,6 +229,7 @@ def calculate_bot_pnl(
         result["trades"].append({
             "symbol": sym,
             "side": side,
+            "is_spread": is_spread,
             "qty": str(qty),
             "price": str(price),
             "filled_at": order.get("filled_at"),
@@ -219,8 +284,11 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
     
     _log(f"Persisting daily results for {target_date}")
     
-    # 1. First reconcile registries with broker
-    _log("Step 1: Running broker reconciliation...")
+    # 1. Ensure registry files exist, then reconcile with broker
+    _log("Step 1: Ensuring registries exist + broker reconciliation...")
+    created = ensure_all_registries_exist()
+    if created:
+        _log(f"  Created missing registries: {created}")
     reconciliation = reconcile_positions(fix=True, verbose=False)
     
     # 2. Fetch broker data
@@ -230,7 +298,7 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
         orders = get_orders_for_week()
         account = get_account_info()
     except Exception as e:
-        _log(f"Error fetching broker data: {e}")
+        logger.error("Error fetching broker data: %s", e, exc_info=True)
         return {"error": str(e)}
     
     # 3. Calculate PnL for each bot
@@ -305,7 +373,7 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
         if watchdog_rows:
             _log(f"Watchdog ingested {len(watchdog_rows)} bot(s) for {target_date}")
     except Exception as e:
-        _log(f"Watchdog ingest skipped (non-fatal): {e}")
+        logger.warning("Watchdog ingest skipped (non-fatal): %s", e, exc_info=True)
 
     return report
 
