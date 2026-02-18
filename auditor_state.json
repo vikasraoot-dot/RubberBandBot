@@ -32,22 +32,6 @@
       "current_price": 330.945,
       "unrealized_pnl": 0.0
     },
-    "SHADOW_15M_STK_AMZN_20260121T145000216212+0000": {
-      "id": "SHADOW_15M_STK_AMZN_20260121T145000216212+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "AMZN",
-      "entry_price": 199.32999999999998,
-      "entry_time": "2026-01-21T14:50:00.216212+00:00",
-      "reason": "Slope3_Too_Flat(-0.0678% > -0.08%)",
-      "qty": 100,
-      "tp_price": 201.3233,
-      "sl_price": 197.33669999999998,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 201.015,
-      "unrealized_pnl": 168.50000000000023
-    },
     "SHADOW_15M_STK_DE_20260121T145000216212+0000": {
       "id": "SHADOW_15M_STK_DE_20260121T145000216212+0000",
       "type": "STOCK",
@@ -20248,6 +20232,26 @@
       "exit_time": "2026-02-17T18:11:01.382079+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -33.999999999999986
+    },
+    {
+      "id": "SHADOW_15M_STK_AMZN_20260121T145000216212+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "AMZN",
+      "entry_price": 199.32999999999998,
+      "entry_time": "2026-01-21T14:50:00.216212+00:00",
+      "reason": "Slope3_Too_Flat(-0.0678% > -0.08%)",
+      "qty": 100,
+      "tp_price": 201.3233,
+      "sl_price": 197.33669999999998,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 205.255,
+      "unrealized_pnl": 592.5000000000011,
+      "exit_price": 205.255,
+      "exit_time": "2026-02-18T14:57:57.627630+00:00",
+      "exit_reason": "TP_HIT",
+      "realized_pnl": 592.5000000000011
     }
   ],
   "processed_lines": {
