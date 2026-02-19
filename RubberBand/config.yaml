@@ -106,6 +106,22 @@ exit_at_upper: false
 results_dir: "results"
 
 # ──────────────────────────────────────────────────────────────────────────────
+# PROBABILITY FILTER (Bull Call Spread pre-filter using BSM probabilities)
+# ──────────────────────────────────────────────────────────────────────────────
+probability_filter:
+  enabled: true                     # Master switch — shadow mode active
+  mode: "shadow"                    # "shadow" = log only, "filter" = reject trades
+  dte_candidates: [4, 5, 6, 8, 10] # DTEs to evaluate (max_dte caps this)
+  min_breakeven_prob: 0.50          # Minimum P(S_T > breakeven) to accept
+  min_risk_reward: 0.30             # Minimum max_profit / max_loss ratio
+  min_expected_value: -5.0          # Minimum EV per share (dollars)
+  max_iv_rank: 90                   # Skip if IV rank > 90th percentile
+  max_bid_ask_spread_pct: 20.0      # Reject leg if bid-ask > 20% of mid
+  risk_free_rate: 0.045             # Negligible for 3-10 DTE
+  fallback_to_legacy: true          # Use old DTE flow if no candidates pass
+  max_dte: 10                       # Hard cap (exit logic tuned for short-term)
+
+# ──────────────────────────────────────────────────────────────────────────────
 # BROKER
 # ──────────────────────────────────────────────────────────────────────────────
 broker:

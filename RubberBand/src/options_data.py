@@ -383,6 +383,101 @@ def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
         return None
 
 
+def get_option_snapshots_batch(
+    symbols: List[str],
+) -> Dict[str, Dict[str, Any]]:
+    """
+    Get snapshots (quote + greeks) for multiple option contracts in one API call.
+
+    Uses the same ``/v1beta1/options/snapshots`` endpoint as
+    :func:`get_option_snapshot` but passes a comma-separated list of
+    symbols, avoiding N individual round-trips.
+
+    Features:
+    - Retry with exponential backoff on transient errors (429, 5xx)
+    - Returns partial results if some symbols are missing from the response
+
+    Args:
+        symbols: List of OCC option symbols (e.g. ``["AAPL260220C00230000", ...]``).
+
+    Returns:
+        Dict mapping each symbol to its snapshot dict
+        ``{bid, ask, mid, iv, delta, theta, gamma, vega}``.
+        Symbols not found in the response are omitted from the result.
+        Returns empty dict on total failure.
+    """
+    import time as _time
+
+    if not symbols:
+        return {}
+
+    base, key, secret = _resolve_creds()
+    data_url = "https://data.alpaca.markets/v1beta1/options/snapshots"
+    params = {"symbols": ",".join(symbols)}
+
+    max_retries = 3
+    backoff = 0.5
+    _RETRYABLE_STATUS = (429, 500, 502, 503, 504)
+
+    for attempt in range(max_retries + 1):
+        try:
+            resp = requests.get(
+                data_url, headers=_headers(key, secret),
+                params=params, timeout=15,
+            )
+            if resp.status_code in _RETRYABLE_STATUS and attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            resp.raise_for_status()
+            data = resp.json()
+
+            snapshots_raw = data.get("snapshots", {})
+            result: Dict[str, Dict[str, Any]] = {}
+
+            for sym, snapshot in snapshots_raw.items():
+                if not snapshot:
+                    continue
+                quote = snapshot.get("latestQuote", {})
+                bid = float(quote.get("bp", 0))
+                ask = float(quote.get("ap", 0))
+                greeks = snapshot.get("greeks", {})
+
+                result[sym] = {
+                    "bid": bid,
+                    "ask": ask,
+                    "mid": (bid + ask) / 2 if bid > 0 and ask > 0 else 0,
+                    "iv": float(greeks.get("implied_volatility", 0)),
+                    "delta": float(greeks.get("delta", 0)),
+                    "theta": float(greeks.get("theta", 0)),
+                    "gamma": float(greeks.get("gamma", 0)),
+                    "vega": float(greeks.get("vega", 0)),
+                }
+
+            return result
+
+        except requests.exceptions.HTTPError as e:
+            status = getattr(e.response, "status_code", 0) if e.response is not None else 0
+            if status not in _RETRYABLE_STATUS:
+                print(f"[options] Non-retryable HTTP {status} in batch snapshot: {e}")
+                return {}
+            if attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            print(f"[options] Batch snapshot failed after {max_retries + 1} attempts: {e}")
+            return {}
+        except (requests.exceptions.ConnectionError, requests.exceptions.Timeout) as e:
+            if attempt < max_retries:
+                _time.sleep(backoff * (2 ** attempt))
+                continue
+            print(f"[options] Batch snapshot failed after {max_retries + 1} attempts: {e}")
+            return {}
+        except Exception as e:
+            print(f"[options] Unexpected error in batch snapshot: {e}")
+            return {}
+
+    return {}
+
+
 # ──────────────────────────────────────────────────────────────────────────────
 # Utility
 # ──────────────────────────────────────────────────────────────────────────────
@@ -434,22 +529,26 @@ def select_spread_contracts(
     spread_width_atr: float = 1.5,
     atr: float = None,
     min_dte: Optional[int] = None,
+    underlying_price: Optional[float] = None,
 ) -> Optional[Dict[str, Any]]:
     """
     Select contracts for a bull call spread.
-    
+
     Args:
         underlying: Stock symbol
         dte: Target days to expiration (1-3 recommended)
         spread_width_atr: OTM strike = ATM + this * ATR (default 1.5)
         atr: Average True Range for volatility-based spread width
         min_dte: Minimum DTE required (skips expirations below this)
-    
+        underlying_price: Pre-fetched underlying price.  When provided,
+            skips the ``get_underlying_price()`` API call (saves latency
+            when scanning multiple DTEs for the same symbol).
+
     Returns:
         Dict with 'long' (ATM) and 'short' (OTM) contracts, or None
     """
-    # Get current price first
-    price = get_underlying_price(underlying)
+    # Use pre-fetched price if available, otherwise fetch
+    price = underlying_price if underlying_price is not None else get_underlying_price(underlying)
     if price is None:
         print(f"[spreads] Cannot get price for {underlying}")
         return None

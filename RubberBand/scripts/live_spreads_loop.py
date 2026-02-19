@@ -485,15 +485,103 @@ def try_spread_entry(
     
     # Get ATR from signal for volatility-adaptive spread width
     signal_atr = signal.get("atr", 0)
-    
-    # Select spread contracts (may fallback to different DTE, respecting min_dte)
-    spread = select_spread_contracts(
-        sym, 
-        dte=dte, 
-        spread_width_atr=spread_width_atr, 
-        atr=signal_atr,
-        min_dte=min_dte
-    )
+
+    # ── PROBABILITY FILTER (feature-flagged) ─────────────────────────────
+    # Evaluates multiple DTE candidates via BSM probability metrics and
+    # selects the best one.  Disabled by default (enabled: false in config).
+    _prob_filter_metrics = {}  # Populated if filter runs, logged below
+    _prob_filter_used = False
+
+    if cfg:
+        from RubberBand.src.probability_filter import (
+            load_probability_filter_config,
+            evaluate_dte_candidates,
+        )
+        pf_config = load_probability_filter_config(cfg)
+
+        if pf_config.enabled:
+            try:
+                best_candidate, all_candidates = evaluate_dte_candidates(
+                    underlying=sym,
+                    signal_atr=signal_atr,
+                    config=pf_config,
+                    spread_cfg=spread_cfg,
+                )
+
+                if best_candidate is not None:
+                    _prob_filter_metrics = best_candidate.to_log_dict()
+                    _prob_filter_metrics["pf_candidates_evaluated"] = len(all_candidates)
+                    _prob_filter_metrics["pf_mode"] = pf_config.mode
+
+                    if pf_config.mode == "filter":
+                        # USE the probability filter's selected spread
+                        _prob_filter_used = True
+                        spread = {
+                            "underlying": best_candidate.underlying,
+                            "expiration": best_candidate.expiration,
+                            "dte": best_candidate.dte,
+                            "underlying_price": best_candidate.underlying_price,
+                            "long": best_candidate.long_contract,
+                            "short": best_candidate.short_contract,
+                            "atm_strike": best_candidate.atm_strike,
+                            "otm_strike": best_candidate.otm_strike,
+                            "spread_width": best_candidate.spread_width,
+                        }
+                        # Override net_debit from batch quotes
+                        net_debit = best_candidate.net_debit
+                        logger.heartbeat(
+                            f"[prob_filter] {sym}: SELECTED DTE={best_candidate.dte} "
+                            f"P_BE={best_candidate.breakeven_prob:.2f} "
+                            f"RR={best_candidate.risk_reward_ratio:.2f} "
+                            f"score={best_candidate.composite_score:.3f}"
+                        )
+                    else:
+                        # Shadow mode: log metrics, continue with legacy flow
+                        logger.heartbeat(
+                            f"[prob_filter] {sym}: SHADOW DTE={best_candidate.dte} "
+                            f"P_BE={best_candidate.breakeven_prob:.2f} "
+                            f"RR={best_candidate.risk_reward_ratio:.2f} "
+                            f"score={best_candidate.composite_score:.3f}"
+                        )
+                else:
+                    # No candidate passed thresholds
+                    _prob_filter_metrics = {
+                        "pf_mode": pf_config.mode,
+                        "pf_candidates_evaluated": len(all_candidates),
+                        "pf_result": "no_candidates",
+                    }
+                    if pf_config.mode == "filter" and not pf_config.fallback_to_legacy:
+                        logger.spread_skip(
+                            underlying=sym,
+                            skip_reason="Probability_filter_no_candidates",
+                            **_prob_filter_metrics,
+                        )
+                        return False
+                    elif pf_config.mode == "filter":
+                        logger.heartbeat(
+                            f"[prob_filter] {sym}: No candidates, "
+                            f"falling back to legacy DTE={dte} "
+                            f"(fallback_to_legacy=true)"
+                        )
+
+            except Exception as e:
+                # Fail-open: probability filter crash → continue with legacy flow
+                logger.heartbeat(
+                    f"[prob_filter] ERROR for {sym}: {e}, "
+                    f"falling back to legacy flow"
+                )
+                _prob_filter_metrics = {"pf_error": str(e)}
+    # ── END PROBABILITY FILTER ───────────────────────────────────────────
+
+    if not _prob_filter_used:
+        # Legacy flow: select spread contracts with fixed DTE
+        spread = select_spread_contracts(
+            sym,
+            dte=dte,
+            spread_width_atr=spread_width_atr,
+            atr=signal_atr,
+            min_dte=min_dte
+        )
     if not spread:
         logger.spread_skip(underlying=sym, skip_reason="No_contracts_available")
         return False
@@ -519,19 +607,25 @@ def try_spread_entry(
     short_contract = spread["short"]
     long_symbol = long_contract.get("symbol", "")
     short_symbol = short_contract.get("symbol", "")
-    
-    # Get quotes
-    long_quote = get_option_quote(long_symbol)
-    short_quote = get_option_quote(short_symbol)
-    
-    if not long_quote or not short_quote:
-        logger.spread_skip(underlying=sym, skip_reason="Cannot_get_quotes")
-        return False
-    
-    long_ask = long_quote.get("ask", 0)
-    short_bid = short_quote.get("bid", 0)
-    net_debit_dec = money_sub(long_ask, short_bid)
-    net_debit = safe_float(net_debit_dec)
+
+    if _prob_filter_used:
+        # Pricing already computed from batch snapshots
+        long_ask = best_candidate.long_ask
+        short_bid = best_candidate.short_bid
+        # net_debit already set above from best_candidate.net_debit
+    else:
+        # Get quotes (legacy flow)
+        long_quote = get_option_quote(long_symbol)
+        short_quote = get_option_quote(short_symbol)
+
+        if not long_quote or not short_quote:
+            logger.spread_skip(underlying=sym, skip_reason="Cannot_get_quotes")
+            return False
+
+        long_ask = long_quote.get("ask", 0)
+        short_bid = short_quote.get("bid", 0)
+        net_debit_dec = money_sub(long_ask, short_bid)
+        net_debit = safe_float(net_debit_dec)
     
     if net_debit <= 0:
         logger.spread_skip(
@@ -579,16 +673,25 @@ def try_spread_entry(
         except ValueError:
             pass
     
-    # Fetch greeks for enhanced logging (optional, fallback to 0 if unavailable)
-    long_snapshot = get_option_snapshot(long_symbol)
-    short_snapshot = get_option_snapshot(short_symbol)
-    
-    long_iv = long_snapshot.get("iv", 0) if long_snapshot else 0
-    long_theta = long_snapshot.get("theta", 0) if long_snapshot else 0
-    long_delta = long_snapshot.get("delta", 0) if long_snapshot else 0
-    short_iv = short_snapshot.get("iv", 0) if short_snapshot else 0
-    short_theta = short_snapshot.get("theta", 0) if short_snapshot else 0
-    short_delta = short_snapshot.get("delta", 0) if short_snapshot else 0
+    # Fetch greeks for enhanced logging
+    if _prob_filter_used:
+        # Reuse greeks from batch snapshot (avoids 2 redundant API calls)
+        long_iv = best_candidate.long_iv
+        long_theta = best_candidate.long_theta
+        long_delta = best_candidate.long_delta
+        short_iv = best_candidate.short_iv
+        short_theta = best_candidate.short_theta
+        short_delta = best_candidate.short_delta
+    else:
+        # Legacy flow: individual snapshot calls
+        long_snapshot = get_option_snapshot(long_symbol)
+        short_snapshot = get_option_snapshot(short_symbol)
+        long_iv = long_snapshot.get("iv", 0) if long_snapshot else 0
+        long_theta = long_snapshot.get("theta", 0) if long_snapshot else 0
+        long_delta = long_snapshot.get("delta", 0) if long_snapshot else 0
+        short_iv = short_snapshot.get("iv", 0) if short_snapshot else 0
+        short_theta = short_snapshot.get("theta", 0) if short_snapshot else 0
+        short_delta = short_snapshot.get("delta", 0) if short_snapshot else 0
     
     # Calculate time value for analysis (Premium - Intrinsic)
     stock_price = signal.get("price", 0) or spread.get("underlying_price", 0)
@@ -649,6 +752,9 @@ def try_spread_entry(
             short_time_value=round(short_time_value, 2),
             long_tv_pct=round(long_tv_pct, 1),
             short_tv_pct=round(short_tv_pct, 1),
+            # Probability filter metrics (empty dict if filter disabled)
+            prob_filter_used=_prob_filter_used,
+            **_prob_filter_metrics,
         )
     else:
         # Generate client_order_id for position attribution
@@ -672,11 +778,17 @@ def try_spread_entry(
             logger.spread_skip(underlying=sym, skip_reason=f"Capital_limit: {e}")
             return False
         
+        # When probability filter pre-validated the debit, cap the broker
+        # limit price at the validated amount to prevent price movement
+        # from exceeding the safety checks (85% edge, debit < width).
+        effective_max_debit = (
+            min(max_debit, net_debit) if _prob_filter_used else max_debit
+        )
         result = submit_spread_order(
             long_symbol=long_symbol,
             short_symbol=short_symbol,
             qty=contracts,
-            max_debit=max_debit,
+            max_debit=effective_max_debit,
             client_order_id=client_order_id,
         )
         if result.get("error"):
@@ -742,8 +854,11 @@ def try_spread_entry(
             short_time_value=round(short_time_value, 2),
             long_tv_pct=round(long_tv_pct, 1),
             short_tv_pct=round(short_tv_pct, 1),
+            # Probability filter metrics (empty dict if filter disabled)
+            prob_filter_used=_prob_filter_used,
+            **_prob_filter_metrics,
         )
-    
+
     return True
 
 
