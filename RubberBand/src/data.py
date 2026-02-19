@@ -911,6 +911,7 @@ def _yf_fetch_bars(
                     period=period_str,
                     interval=yf_interval,
                     group_by="ticker",
+                    auto_adjust=False,  # keep raw OHLC to match Alpaca SIP prices
                     progress=False,
                     threads=False,  # single-threaded inside yf to avoid nested thread issues
                 )
