@@ -825,6 +825,181 @@ def drop_unclosed_last_bar(df: pd.DataFrame, timeframe: str) -> pd.DataFrame:
         return df.iloc[:-1].copy()
     return df
 
+# ──────────────────────────────────────────────────────────────────────────────
+# yfinance fallback for when Alpaca SIP returns empty bars
+# ──────────────────────────────────────────────────────────────────────────────
+_YF_TF_MAP = {
+    "1min": "1m",
+    "5min": "5m",
+    "15min": "15m",
+    "30min": "30m",
+    "1h": "1h",
+    "1hour": "1h",
+    "60min": "1h",
+    "1day": "1d",
+    "1d": "1d",
+    "day": "1d",
+    "1week": "1wk",
+    "1w": "1wk",
+    "week": "1wk",
+}
+
+def _yf_fetch_bars(
+    symbols: List[str],
+    timeframe: str = "15Min",
+    history_days: int = 30,
+    verbose: bool = True,
+) -> Dict[str, pd.DataFrame]:
+    """Fetch bars from yfinance as fallback when Alpaca SIP returns empty.
+
+    Uses lazy import so yfinance is only needed when the fallback fires.
+    Returns a dict mapping symbol -> DataFrame with lowercase columns
+    (open, high, low, close, volume) and a UTC DatetimeIndex.
+
+    Per-symbol errors are non-fatal and silently skipped so one bad ticker
+    doesn't block the rest of the universe.
+
+    Args:
+        symbols: List of ticker symbols.
+        timeframe: Alpaca-style timeframe string (e.g. "15Min", "1Day").
+        history_days: Number of days of history to request.
+        verbose: If True, print structured diagnostics.
+
+    Returns:
+        Dict mapping symbol -> DataFrame (may be empty for failed symbols).
+    """
+    try:
+        import yfinance as yf  # noqa: F811 — lazy import (optional dep)
+    except ImportError:
+        if verbose:
+            print(json.dumps({
+                "type": "YF_FALLBACK_SKIPPED",
+                "reason": "yfinance not installed",
+                "when": _iso_utc(),
+            }, separators=(",", ":"), ensure_ascii=False), flush=True)
+        return {}
+
+    yf_interval = _YF_TF_MAP.get(timeframe.lower())
+    if yf_interval is None:
+        if verbose:
+            print(json.dumps({
+                "type": "YF_FALLBACK_SKIPPED",
+                "reason": f"unsupported timeframe '{timeframe}'",
+                "when": _iso_utc(),
+            }, separators=(",", ":"), ensure_ascii=False), flush=True)
+        return {}
+
+    # yfinance intraday max history: 15m/30m => 60 days, 1m => 7 days, 5m => 60 days
+    # Cap period for safety (yf.download uses "period" or "start/end")
+    # yfinance intraday limit: 60 days for 15m/30m, 7 days for 1m
+    period_days = min(history_days, 60) if "m" in yf_interval or "h" in yf_interval else history_days
+    period_str = f"{period_days}d"
+
+    result: Dict[str, pd.DataFrame] = {}
+    chunks = list(_chunked(symbols, 25))
+
+    for chunk_idx, chunk in enumerate(chunks, start=1):
+        tickers_str = " ".join(chunk)
+        try:
+            # Wrap yf.download in a thread with timeout to prevent indefinite hangs
+            # (CLAUDE.md Section 2.3: all external API calls MUST have timeout limits)
+            from concurrent.futures import ThreadPoolExecutor, TimeoutError as FuturesTimeout
+            with ThreadPoolExecutor(max_workers=1) as pool:
+                future = pool.submit(
+                    yf.download,
+                    tickers_str,
+                    period=period_str,
+                    interval=yf_interval,
+                    group_by="ticker",
+                    progress=False,
+                    threads=False,  # single-threaded inside yf to avoid nested thread issues
+                )
+                raw = future.result(timeout=90)  # 90s hard cap per chunk
+        except FuturesTimeout:
+            if verbose:
+                print(json.dumps({
+                    "type": "YF_FALLBACK_CHUNK_TIMEOUT",
+                    "chunk": chunk_idx,
+                    "symbols_count": len(chunk),
+                    "timeout_sec": 90,
+                    "when": _iso_utc(),
+                }, separators=(",", ":"), ensure_ascii=False), flush=True)
+            continue
+        except Exception as exc:
+            if verbose:
+                print(json.dumps({
+                    "type": "YF_FALLBACK_CHUNK_ERROR",
+                    "chunk": chunk_idx,
+                    "error": str(exc),
+                    "when": _iso_utc(),
+                }, separators=(",", ":"), ensure_ascii=False), flush=True)
+            continue
+
+        if raw is None or raw.empty:
+            continue
+
+        for sym in chunk:
+            try:
+                # Multi-ticker download: columns are MultiIndex (ticker, field)
+                if isinstance(raw.columns, pd.MultiIndex):
+                    if sym not in raw.columns.get_level_values(0):
+                        continue
+                    df = raw[sym].copy()
+                else:
+                    # Single ticker: columns are just field names
+                    if len(chunk) == 1:
+                        df = raw.copy()
+                    else:
+                        continue
+
+                # Normalize column names to lowercase
+                df.columns = [c.lower() for c in df.columns]
+
+                # Must have OHLCV columns
+                required_cols = {"open", "high", "low", "close", "volume"}
+                if not required_cols.issubset(set(df.columns)):
+                    continue
+
+                # Keep only OHLCV
+                df = df[["open", "high", "low", "close", "volume"]].copy()
+
+                # Drop rows with NaN close (yf sometimes returns padding rows)
+                df = df.dropna(subset=["close"])
+                if df.empty:
+                    continue
+
+                # Ensure UTC DatetimeIndex
+                if df.index.tz is None:
+                    df.index = df.index.tz_localize("UTC")
+                else:
+                    df.index = df.index.tz_convert("UTC")
+
+                result[sym] = df
+
+            except Exception as exc:
+                # Per-symbol errors are non-fatal but must be logged
+                if verbose:
+                    print(json.dumps({
+                        "type": "YF_FALLBACK_SYMBOL_ERROR",
+                        "symbol": sym,
+                        "error": f"{type(exc).__name__}: {exc}",
+                        "when": _iso_utc(),
+                    }, separators=(",", ":"), ensure_ascii=False), flush=True)
+                continue
+
+    if verbose:
+        print(json.dumps({
+            "type": "YF_FALLBACK_BATCH_DONE",
+            "requested": len(symbols),
+            "recovered": len(result),
+            "sample": list(result.keys())[:5],
+            "interval": yf_interval,
+            "when": _iso_utc(),
+        }, separators=(",", ":"), ensure_ascii=False), flush=True)
+
+    return result
+
+
 def fetch_latest_bars(
     symbols: List[str],
     timeframe: str = "15Min",
@@ -843,6 +1018,7 @@ def fetch_latest_bars(
     verbose: bool = True,
     end: Optional[Any] = None,  # Accepts datetime, date, or ISO string
     incomplete: bool = False, # If True, enables returning the incomplete (forming) last bar
+    yf_fallback: bool = False,  # If True, use yfinance when Alpaca returns empty
 ) -> Tuple[Dict[str, pd.DataFrame], Dict[str, Any]]:
     """
     Robust multi-symbol fetch with pagination & dual-shape handling. Emits rich diagnostics.
@@ -1009,6 +1185,60 @@ def fetch_latest_bars(
 
             bars_map[s] = df
             syms_with_data.append(s)
+
+    # ── yfinance fallback for empty symbols ──────────────────────────────
+    # If Alpaca returned zero data for some symbols but there were no HTTP
+    # auth errors (401/403), try yfinance as a backup data source.
+    yf_recovered: List[str] = []
+    # Only block yfinance fallback on auth errors (401/403) — transient HTTP
+    # errors should not prevent recovery for symbols in other chunks.
+    auth_errors = [e for e in http_errors if e.get("code") in (401, 403)]
+    if yf_fallback and syms_empty and not auth_errors:
+        if verbose:
+            print(json.dumps({
+                "type": "YF_FALLBACK_TRIGGERED",
+                "empty_count": len(syms_empty),
+                "when": _iso_utc(),
+            }, separators=(",", ":"), ensure_ascii=False), flush=True)
+
+        yf_bars = _yf_fetch_bars(syms_empty, timeframe, history_days, verbose)
+
+        is_daily_or_longer = timeframe.lower() in ("1day", "1d", "day", "1week", "1w", "week")
+        for sym, df in yf_bars.items():
+            # Apply same post-processing pipeline as Alpaca bars
+            if rth_only and not is_daily_or_longer:
+                df = filter_rth(df, tz_name=tz_name, start_hm=rth_start, end_hm=rth_end)
+            if not incomplete:
+                df = drop_unclosed_last_bar(df, timeframe)
+            if df.empty:
+                continue
+
+            dv = (df["close"] * df["volume"]).rolling(
+                window=int(dollar_vol_window),
+                min_periods=int(dollar_vol_min_periods),
+            ).mean()
+            df["dollar_vol_avg"] = dv.ffill().fillna(0.0)
+
+            last_ts = df.index[-1]
+            if (end_dt - last_ts) > dt.timedelta(days=7):
+                stale_syms.append(sym)
+
+            bars_map[sym] = df
+            syms_with_data.append(sym)
+            yf_recovered.append(sym)
+
+        # Remove recovered symbols from the empty list
+        recovered_set = set(yf_recovered)
+        syms_empty = [s for s in syms_empty if s not in recovered_set]
+
+        if verbose:
+            print(json.dumps({
+                "type": "YF_FALLBACK_RECOVERED",
+                "recovered": len(yf_recovered),
+                "still_empty": len(syms_empty),
+                "sample_recovered": yf_recovered[:5],
+                "when": _iso_utc(),
+            }, separators=(",", ":"), ensure_ascii=False), flush=True)
 
     if verbose:
         print(json.dumps({

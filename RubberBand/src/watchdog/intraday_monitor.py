@@ -180,6 +180,11 @@ class IntraDayMonitor:
         self._pause_flags = _load_json(self._pause_flags_path)
         self._profit_locks = _load_json(self._profit_locks_path)
 
+        # Track last-seen date for automatic daily reset detection.
+        # Loaded from the persisted health snapshot so we survive restarts.
+        existing_health = _load_json(self._health_path)
+        self._last_cycle_date: Optional[str] = existing_health.get("date")
+
     # ------------------------------------------------------------------
     # Public API
     # ------------------------------------------------------------------
@@ -199,6 +204,27 @@ class IntraDayMonitor:
 
         now = _now_et()
         today = now.strftime("%Y-%m-%d")
+
+        # Auto-reset on day change: detect new trading day and clear stale
+        # pause flags / profit locks.  This fixes the bug where
+        # `resume_tomorrow: true` was never honoured automatically.
+        if self._last_cycle_date is not None and self._last_cycle_date != today:
+            prev_date = self._last_cycle_date  # save before reset_daily updates it
+            logger.info(
+                "Day change detected (%s -> %s) — running automatic daily reset",
+                prev_date, today,
+            )
+            self.reset_daily()  # also updates self._last_cycle_date
+            _append_alert(
+                {
+                    "level": "INFO",
+                    "event": "AUTO_DAILY_RESET",
+                    "prev_date": prev_date,
+                    "new_date": today,
+                },
+                self._alerts_path,
+            )
+        self._last_cycle_date = today
 
         # Fetch live data
         account = get_account()
@@ -384,6 +410,11 @@ class IntraDayMonitor:
 
         # --- Update pause flags ---
         self._set_pause_flag(bot_tag, paused, pause_reason, now)
+
+        # EMERGENCY and ACCOUNT_PAUSED require manual intervention to resume
+        # (CLAUDE.md Section 3.3: Circuit Breakers must "require manual reset")
+        if status in ("EMERGENCY", "ACCOUNT_PAUSED"):
+            self._pause_flags[bot_tag]["resume_tomorrow"] = False
 
         return {
             "bot_tag": bot_tag,
@@ -673,8 +704,10 @@ class IntraDayMonitor:
     def reset_daily(self) -> None:
         """Reset pause flags and profit locks for a new trading day.
 
-        Called at market open.  Only resets flags marked with
-        ``resume_tomorrow: true``.
+        Called at market open or automatically on day-change detection.
+        Only resets flags marked with ``resume_tomorrow: true``.
+        Also updates the persisted health date so that subsequent
+        ``run_cycle()`` calls do not spuriously re-trigger the reset.
         """
         for bot_tag, flag in self._pause_flags.items():
             if flag.get("resume_tomorrow", True):
@@ -686,4 +719,13 @@ class IntraDayMonitor:
 
         _save_json(self._pause_flags_path, self._pause_flags)
         _save_json(self._profit_locks_path, self._profit_locks)
+
+        # Update health date so auto-reset doesn't re-trigger on next cycle
+        # (fixes: --reset CLI followed by normal cycle producing spurious alert)
+        today = _now_et().strftime("%Y-%m-%d")
+        existing_health = _load_json(self._health_path)
+        existing_health["date"] = today
+        _save_json(self._health_path, existing_health)
+        self._last_cycle_date = today
+
         logger.info("Daily reset complete — all pause flags and profit locks cleared")

@@ -337,6 +337,7 @@ def get_long_signals(
             history_days=history_days,
             feed=feed,
             verbose=False,
+            yf_fallback=True,
         )
     except Exception as e:
         logger.error(error=str(e), context="fetch_bars")

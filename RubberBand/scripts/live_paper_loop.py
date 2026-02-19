@@ -488,7 +488,7 @@ def main() -> int:
     res = None
     if not _wd_paused:
         try:
-            res = fetch_latest_bars(symbols, timeframe, history_days, feed)
+            res = fetch_latest_bars(symbols, timeframe, history_days, feed, yf_fallback=True)
             conn_guard.record_success()
         except Exception as e:
             conn_guard.record_error(e)

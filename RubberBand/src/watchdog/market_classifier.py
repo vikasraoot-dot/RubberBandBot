@@ -158,6 +158,7 @@ class MarketConditionClassifier:
             feed="sip",
             rth_only=False,
             verbose=self.verbose,
+            yf_fallback=True,
         )
         df = bars_map.get("SPY")
         if df is None or df.empty or len(df) < 25:
@@ -259,6 +260,7 @@ class MarketConditionClassifier:
                     feed="sip",
                     rth_only=False,
                     verbose=False,
+                    yf_fallback=True,
                 )
             except Exception as exc:
                 logger.warning("Breadth fetch failed for batch %d: %s", i, exc)
