@@ -21,6 +21,7 @@ from RubberBand.src.bsm import (
     compute_historical_volatility,
     iv_rank,
     evaluate_spread,
+    evaluate_single_call,
 )
 
 
@@ -832,3 +833,233 @@ class TestIVRankEdgeCases:
         assert math.isfinite(rank)
         # 0.30 > 0.20 but < 0.40 → 1/2 * 100 = 50
         assert rank == pytest.approx(50.0)
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# evaluate_single_call (composite single-call evaluator)
+# ──────────────────────────────────────────────────────────────────────────────
+
+class TestEvaluateSingleCall:
+    """Tests for the composite single-call evaluator."""
+
+    def test_valid_call_returns_all_fields(self):
+        """All expected keys present and valid=True."""
+        result = evaluate_single_call(
+            S=230, K=223, premium=12.0, T=45 / 365, iv=0.30,
+        )
+        assert result["valid"] is True
+        required_keys = [
+            "breakeven_price", "breakeven_prob", "itm_prob",
+            "intrinsic_value", "intrinsic_ratio", "time_value",
+            "bsm_fair_value", "edge", "expected_value", "sigma_used",
+        ]
+        for key in required_keys:
+            assert key in result, f"Missing key: {key}"
+
+    def test_breakeven_price_correct(self):
+        """breakeven = K + premium."""
+        result = evaluate_single_call(
+            S=100, K=97, premium=5.0, T=45 / 365, iv=0.25,
+        )
+        assert result["breakeven_price"] == pytest.approx(102.0, abs=0.01)
+
+    def test_intrinsic_value_itm(self):
+        """ITM call: intrinsic = S - K."""
+        result = evaluate_single_call(
+            S=105, K=100, premium=8.0, T=45 / 365, iv=0.25,
+        )
+        assert result["intrinsic_value"] == pytest.approx(5.0, abs=0.01)
+
+    def test_intrinsic_value_atm(self):
+        """ATM call: intrinsic = 0."""
+        result = evaluate_single_call(
+            S=100, K=100, premium=4.0, T=45 / 365, iv=0.25,
+        )
+        assert result["intrinsic_value"] == pytest.approx(0.0, abs=0.01)
+
+    def test_intrinsic_ratio_itm(self):
+        """Intrinsic ratio for ITM call."""
+        result = evaluate_single_call(
+            S=105, K=100, premium=8.0, T=45 / 365, iv=0.25,
+        )
+        # intrinsic = 5, premium = 8, ratio = 5/8 = 0.625
+        assert result["intrinsic_ratio"] == pytest.approx(0.625, abs=0.01)
+
+    def test_intrinsic_ratio_atm_is_zero(self):
+        """ATM call: intrinsic ratio = 0."""
+        result = evaluate_single_call(
+            S=100, K=100, premium=4.0, T=45 / 365, iv=0.25,
+        )
+        assert result["intrinsic_ratio"] == pytest.approx(0.0, abs=0.01)
+
+    def test_deep_itm_high_intrinsic_ratio(self):
+        """Deep ITM: most of premium is intrinsic."""
+        result = evaluate_single_call(
+            S=120, K=100, premium=22.0, T=45 / 365, iv=0.25,
+        )
+        # intrinsic = 20, premium = 22, ratio = 20/22 ≈ 0.909
+        assert result["intrinsic_ratio"] > 0.85
+
+    def test_time_value_positive(self):
+        """Reasonably priced option has positive time value."""
+        result = evaluate_single_call(
+            S=105, K=100, premium=8.0, T=45 / 365, iv=0.25,
+        )
+        # time_value = premium - intrinsic = 8 - 5 = 3
+        assert result["time_value"] == pytest.approx(3.0, abs=0.01)
+
+    def test_itm_prob_greater_than_breakeven_prob(self):
+        """P(S_T > K) > P(S_T > K + premium) always."""
+        result = evaluate_single_call(
+            S=105, K=100, premium=8.0, T=45 / 365, iv=0.25,
+        )
+        assert result["itm_prob"] > result["breakeven_prob"]
+
+    def test_probabilities_in_range(self):
+        """Both probabilities in [0, 1]."""
+        result = evaluate_single_call(
+            S=230, K=223, premium=12.0, T=45 / 365, iv=0.30,
+        )
+        assert 0.0 <= result["breakeven_prob"] <= 1.0
+        assert 0.0 <= result["itm_prob"] <= 1.0
+
+    def test_bsm_fair_value_near_market(self):
+        """BSM fair value should be close to premium for reasonable IV."""
+        # Use mid price as premium (fair value ≈ mid)
+        S, K, T, iv = 100, 97, 45 / 365, 0.25
+        fair = bsm_call_price(S, K, T, 0.045, iv)
+        result = evaluate_single_call(S, K, premium=fair, T=T, iv=iv)
+        # Edge should be near zero when paying fair value
+        assert abs(result["edge"]) < 0.01
+
+    def test_edge_negative_buying_at_ask(self):
+        """Edge typically negative when buying above fair value."""
+        S, K, T, iv = 100, 97, 45 / 365, 0.25
+        fair = bsm_call_price(S, K, T, 0.045, iv)
+        # Premium above fair value (simulating ask > mid)
+        result = evaluate_single_call(S, K, premium=fair + 0.30, T=T, iv=iv)
+        assert result["edge"] < 0
+
+    def test_expected_value_is_finite(self):
+        """EV should be a finite number."""
+        result = evaluate_single_call(
+            S=230, K=223, premium=12.0, T=45 / 365, iv=0.30,
+        )
+        assert math.isfinite(result["expected_value"])
+
+    def test_sigma_used_matches_input(self):
+        """sigma_used should match input IV."""
+        result = evaluate_single_call(
+            S=100, K=97, premium=5.0, T=45 / 365, iv=0.32,
+        )
+        assert result["sigma_used"] == pytest.approx(0.32, abs=0.001)
+
+    def test_realistic_45dte_scenario(self):
+        """Realistic weekly options scenario: S=230, K=223, 45 DTE, IV=30%."""
+        result = evaluate_single_call(
+            S=230, K=223, premium=12.0, T=45 / 365, iv=0.30,
+        )
+        assert result["valid"] is True
+        # ITM by $7, premium $12
+        assert result["intrinsic_value"] == pytest.approx(7.0, abs=0.01)
+        assert result["intrinsic_ratio"] == pytest.approx(7.0 / 12.0, abs=0.01)
+        assert result["time_value"] == pytest.approx(5.0, abs=0.01)
+        # Should have reasonable breakeven prob for 45 DTE ITM call
+        assert 0.20 < result["breakeven_prob"] < 0.80
+
+    # ── Invalid input tests ────────────────────────────────────────────
+
+    def test_invalid_zero_premium(self):
+        result = evaluate_single_call(S=100, K=97, premium=0.0, T=45 / 365, iv=0.25)
+        assert result["valid"] is False
+
+    def test_invalid_negative_premium(self):
+        result = evaluate_single_call(S=100, K=97, premium=-5.0, T=45 / 365, iv=0.25)
+        assert result["valid"] is False
+
+    def test_invalid_nan_S(self):
+        result = evaluate_single_call(
+            S=float("nan"), K=97, premium=5.0, T=45 / 365, iv=0.25,
+        )
+        assert result["valid"] is False
+
+    def test_invalid_nan_premium(self):
+        result = evaluate_single_call(
+            S=100, K=97, premium=float("nan"), T=45 / 365, iv=0.25,
+        )
+        assert result["valid"] is False
+
+    def test_invalid_nan_iv(self):
+        result = evaluate_single_call(
+            S=100, K=97, premium=5.0, T=45 / 365, iv=float("nan"),
+        )
+        assert result["valid"] is False
+
+    def test_invalid_zero_T(self):
+        result = evaluate_single_call(S=100, K=97, premium=5.0, T=0, iv=0.25)
+        assert result["valid"] is False
+
+    def test_invalid_zero_S(self):
+        result = evaluate_single_call(S=0, K=97, premium=5.0, T=45 / 365, iv=0.25)
+        assert result["valid"] is False
+
+    def test_invalid_zero_K(self):
+        result = evaluate_single_call(S=100, K=0, premium=5.0, T=45 / 365, iv=0.25)
+        assert result["valid"] is False
+
+    def test_invalid_iv_too_low(self):
+        """IV below _IV_MIN (0.01) → invalid."""
+        result = evaluate_single_call(
+            S=100, K=97, premium=5.0, T=45 / 365, iv=0.005,
+        )
+        assert result["valid"] is False
+
+    def test_invalid_iv_too_high(self):
+        """IV above _IV_MAX (5.0) → invalid."""
+        result = evaluate_single_call(
+            S=100, K=97, premium=5.0, T=45 / 365, iv=5.5,
+        )
+        assert result["valid"] is False
+
+    def test_iv_at_exact_boundaries(self):
+        """IV exactly at _IV_MIN (0.01) and _IV_MAX (5.0) → valid."""
+        r1 = evaluate_single_call(S=100, K=97, premium=5.0, T=45 / 365, iv=0.01)
+        assert r1["valid"] is True
+        r2 = evaluate_single_call(S=100, K=97, premium=5.0, T=45 / 365, iv=5.0)
+        assert r2["valid"] is True
+
+    def test_higher_iv_changes_probabilities(self):
+        """Higher IV should increase breakeven probability."""
+        r1 = evaluate_single_call(S=100, K=97, premium=5.0, T=45 / 365, iv=0.15)
+        r2 = evaluate_single_call(S=100, K=97, premium=5.0, T=45 / 365, iv=0.50)
+        assert r2["breakeven_prob"] > r1["breakeven_prob"]
+
+    def test_otm_call_zero_intrinsic(self):
+        """OTM call (K > S): intrinsic=0, ratio=0, time_value=premium."""
+        result = evaluate_single_call(
+            S=100, K=110, premium=3.0, T=45 / 365, iv=0.30,
+        )
+        assert result["valid"] is True
+        assert result["intrinsic_value"] == pytest.approx(0.0)
+        assert result["intrinsic_ratio"] == pytest.approx(0.0)
+        assert result["time_value"] == pytest.approx(3.0, abs=0.01)
+
+    def test_sub_intrinsic_premium_clamped(self):
+        """premium < intrinsic: time_value clamped to 0, ratio capped at 1."""
+        result = evaluate_single_call(
+            S=110, K=100, premium=4.0, T=45 / 365, iv=0.25,
+        )
+        assert result["valid"] is True
+        assert result["intrinsic_value"] == pytest.approx(10.0)
+        assert result["time_value"] == pytest.approx(0.0)
+        assert result["intrinsic_ratio"] == pytest.approx(1.0)  # capped
+
+    def test_deep_itm_large_premium(self):
+        """Deep ITM with large premium."""
+        result = evaluate_single_call(
+            S=100, K=80, premium=25.0, T=45 / 365, iv=0.30,
+        )
+        assert result["valid"] is True
+        assert result["intrinsic_value"] == pytest.approx(20.0)
+        assert result["intrinsic_ratio"] == pytest.approx(0.80, abs=0.01)
+        assert math.isfinite(result["expected_value"])

@@ -260,6 +260,7 @@ def try_weekly_option_entry(
     tracker: OptionsTradeTracker,
     registry: PositionRegistry,
     dry_run: bool = True,
+    cfg: Optional[dict] = None,
 ) -> bool:
     """
     Enter ITM call option for weekly signal.
@@ -312,6 +313,78 @@ def try_weekly_option_entry(
         _log(f"No bid for {option_symbol} - illiquid, skipping")
         return False
 
+    # ── WEEKLY PROBABILITY FILTER (feature-flagged) ──────────────────
+    _wpf_metrics: Dict[str, Any] = {}
+    if cfg:
+        try:
+            from RubberBand.src.weekly_probability_filter import (
+                load_weekly_probability_filter_config,
+                evaluate_call_quality,
+            )
+            from RubberBand.src.options_data import get_option_snapshot
+
+            wpf_config = load_weekly_probability_filter_config(cfg)
+
+            if wpf_config.enabled:
+                # Fetch snapshot for IV + Greeks
+                snapshot = get_option_snapshot(option_symbol)
+                iv = 0.0
+                if snapshot:
+                    iv = float(snapshot.get("iv", 0) or 0)
+
+                # Compute actual DTE from expiration
+                try:
+                    exp_date = datetime.strptime(expiration, "%Y-%m-%d").date()
+                    actual_dte = (exp_date - _now_et().date()).days
+                except (ValueError, TypeError):
+                    actual_dte = 45
+
+                result = evaluate_call_quality(
+                    underlying=sym,
+                    option_symbol=option_symbol,
+                    strike=strike,
+                    premium=ask_price,
+                    underlying_price=entry_price,
+                    expiration=expiration,
+                    dte=actual_dte,
+                    iv=iv,
+                    config=wpf_config,
+                    snapshot=snapshot,
+                )
+
+                _wpf_metrics = result.to_log_dict()
+                _wpf_metrics["wpf_mode"] = wpf_config.mode
+
+                if wpf_config.mode == "filter" and result.rejected:
+                    if not wpf_config.fallback_to_legacy:
+                        _log(
+                            f"[wpf] {sym}: REJECTED {result.reject_reasons}",
+                            _wpf_metrics,
+                        )
+                        return False
+                    else:
+                        _log(
+                            f"[wpf] {sym}: REJECTED {result.reject_reasons} "
+                            f"(fallback_to_legacy=true, continuing)",
+                            _wpf_metrics,
+                        )
+                elif wpf_config.mode == "shadow":
+                    _log(
+                        f"[wpf] {sym}: SHADOW score={result.composite_score:.3f}",
+                        _wpf_metrics,
+                    )
+                else:
+                    _log(
+                        f"[wpf] {sym}: PASSED score={result.composite_score:.3f}",
+                        _wpf_metrics,
+                    )
+
+        except Exception as e:
+            # Fail-open: exception → continue with legacy entry flow
+            _wpf_metrics = {"wpf_error": str(e)}
+            _log(f"[wpf] ERROR for {sym}: {e}, continuing with legacy flow")
+    # ── END WEEKLY PROBABILITY FILTER ─────────────────────────────────
+
     premium_cost = ask_price * 100 * max_contracts
 
     # Check max premium
@@ -332,6 +405,7 @@ def try_weekly_option_entry(
             "strike": strike,
             "expiration": expiration,
             "signal": signal,
+            **_wpf_metrics,
         })
     else:
         # Generate client_order_id for position attribution
@@ -378,6 +452,7 @@ def try_weekly_option_entry(
                 "qty": max_contracts,
                 "limit_price": ask_price,
                 "status": order_status,
+                **_wpf_metrics,
             })
             
             # Record in registry for position attribution
@@ -685,7 +760,7 @@ def main() -> int:
             _log(f"Already have position in {signal['symbol']}, skipping")
             continue
         
-        if try_weekly_option_entry(signal, opts_cfg, tracker, registry, dry_run):
+        if try_weekly_option_entry(signal, opts_cfg, tracker, registry, dry_run, cfg=cfg):
             entries += 1
             my_underlyings.add(signal["symbol"])
         

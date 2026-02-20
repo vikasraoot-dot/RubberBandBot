@@ -60,3 +60,21 @@ resilience:
 allow_shorts: false         # Long-only for now
 max_concurrent_positions: 5
 time_stop_weeks: 12         # Close positions held longer than this many weeks
+
+# ──────────────────────────────────────────────────────────────────────────────
+# WEEKLY PROBABILITY FILTER (BSM-based quality check for ITM calls)
+# ──────────────────────────────────────────────────────────────────────────────
+weekly_probability_filter:
+  enabled: true                     # Master switch — shadow mode active
+  mode: "shadow"                    # "shadow" = log only, "filter" = reject trades
+  min_breakeven_prob: 0.45          # P(S_T > strike + premium) minimum
+  min_intrinsic_ratio: 0.20        # At least 20% of premium should be intrinsic
+  min_expected_value: -2.0         # Per share, dollars (scenario-based EV)
+  max_iv_rank: 90.0                # Skip if IV rank > 90th percentile
+  risk_free_rate: 0.045
+  fallback_to_legacy: true         # If filter rejects in filter mode, still enter
+  # Scoring weights (sum to 1.0)
+  w_breakeven: 0.40
+  w_intrinsic: 0.25
+  w_expected_value: 0.25
+  w_iv_rank: 0.10

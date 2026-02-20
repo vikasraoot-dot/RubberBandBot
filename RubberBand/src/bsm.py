@@ -569,3 +569,120 @@ def evaluate_spread(
         "sigma_used": round(sigma, 4),
         "valid": True,
     }
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# Composite single-call evaluator
+# ──────────────────────────────────────────────────────────────────────────────
+
+def evaluate_single_call(
+    S: float,
+    K: float,
+    premium: float,
+    T: float,
+    iv: float,
+    r: float = 0.045,
+) -> Dict[str, Any]:
+    """
+    Evaluate a single long call option using BSM probability metrics.
+
+    Computes breakeven probability, ITM probability, intrinsic ratio,
+    BSM fair-value edge, and scenario-based expected value.
+
+    Args:
+        S:       Current underlying price (must be > 0).
+        K:       Strike price (must be > 0).
+        premium: Premium paid per share — typically the ask price (must be > 0).
+        T:       Time to expiration in years (DTE / 365, must be > 0).
+        iv:      Annualized implied volatility (must be in [IV_MIN, IV_MAX]).
+        r:       Risk-free rate (annualized, default 0.045).
+
+    Returns:
+        Dict with keys:
+            breakeven_price, breakeven_prob, itm_prob,
+            intrinsic_value, intrinsic_ratio, time_value,
+            bsm_fair_value, edge, expected_value,
+            sigma_used, valid
+    """
+    _invalid = {
+        "breakeven_price": float("nan"),
+        "breakeven_prob": float("nan"),
+        "itm_prob": float("nan"),
+        "intrinsic_value": float("nan"),
+        "intrinsic_ratio": float("nan"),
+        "time_value": float("nan"),
+        "bsm_fair_value": float("nan"),
+        "edge": float("nan"),
+        "expected_value": float("nan"),
+        "sigma_used": iv if isinstance(iv, (int, float)) else float("nan"),
+        "valid": False,
+    }
+
+    # Guard against NaN / non-finite inputs
+    if (
+        not math.isfinite(S) or not math.isfinite(K)
+        or not math.isfinite(premium) or not math.isfinite(T)
+        or not math.isfinite(iv)
+        or S <= 0 or K <= 0 or premium <= 0 or T <= _T_MIN
+    ):
+        return _invalid
+
+    # Reject clearly invalid IV
+    if iv < _IV_MIN or iv > _IV_MAX:
+        return _invalid
+
+    # ── Derived values ────────────────────────────────────────────────
+    breakeven_price = K + premium
+    intrinsic_value = max(S - K, 0.0)
+    time_value = max(premium - intrinsic_value, 0.0)  # Clamp ≥ 0 (stale data guard)
+    intrinsic_ratio = min(intrinsic_value / premium, 1.0)  # Cap at 1.0
+
+    # ── BSM fair value and edge ───────────────────────────────────────
+    bsm_fair = bsm_call_price(S, K, T, r, iv)
+    edge = bsm_fair - premium  # negative = overpaying (typical when buying at ask)
+
+    # ── Probabilities ─────────────────────────────────────────────────
+    p_breakeven = breakeven_probability(S, breakeven_price, T, iv, r)
+    p_itm = breakeven_probability(S, K, T, iv, r)
+
+    # ── Scenario-based Expected Value (3-zone model) ──────────────────
+    #
+    #  Zone 1: S_T < K (total loss)
+    #    payoff = -premium,  prob = 1 - p_itm
+    #
+    #  Zone 2: K < S_T < breakeven (partial loss — ITM but below breakeven)
+    #    avg payoff ≈ -time_value / 2,  prob = p_itm - p_breakeven
+    #
+    #  Zone 3: S_T > breakeven (profit)
+    #    For bounded EV with unlimited upside, cap at 1-sigma expected move.
+    #    expected_move = S * iv * sqrt(T)
+    #    profit_at_1sigma = max(S + expected_move - K, 0) - premium
+    #    avg profit ≈ profit_at_1sigma / 2,  prob = p_breakeven
+    #
+    sqrt_T = math.sqrt(T)
+    expected_move = S * iv * sqrt_T
+    profit_at_1sigma = max(S + expected_move - K, 0.0) - premium
+    avg_profit = max(profit_at_1sigma / 2.0, 0.0)
+
+    p_total_loss = max(1.0 - p_itm, 0.0)
+    p_partial = max(p_itm - p_breakeven, 0.0)
+
+    expected_value = (
+        p_total_loss * (-premium)
+        + p_partial * (-time_value / 2.0)
+        + p_breakeven * avg_profit
+    )
+
+    return {
+        "breakeven_price": round(breakeven_price, 4),
+        "breakeven_prob": round(p_breakeven, 4),
+        "itm_prob": round(p_itm, 4),
+        "intrinsic_value": round(intrinsic_value, 4),
+        "intrinsic_ratio": round(intrinsic_ratio, 4),
+        "time_value": round(time_value, 4),
+        "bsm_fair_value": round(bsm_fair, 4),
+        "edge": round(edge, 4),
+        "expected_value": round(expected_value, 4),
+        "sigma_used": round(iv, 4),
+        "valid": True,
+    }
