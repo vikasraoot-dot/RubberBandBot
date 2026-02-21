@@ -367,12 +367,17 @@ def get_option_snapshot(option_symbol: str) -> Optional[Dict[str, Any]]:
         
         # Extract greeks
         greeks = snapshot.get("greeks", {})
-        
+
+        # IV is a top-level field on the snapshot, NOT inside greeks.
+        # Handle both camelCase (REST wire format) and snake_case (SDK format).
+        raw_iv = snapshot.get("impliedVolatility",
+                             snapshot.get("implied_volatility", 0))
+
         return {
             "bid": bid,
             "ask": ask,
             "mid": (bid + ask) / 2 if bid > 0 and ask > 0 else 0,
-            "iv": float(greeks.get("implied_volatility", 0)),
+            "iv": max(float(raw_iv), 0.0) if raw_iv else 0.0,
             "delta": float(greeks.get("delta", 0)),
             "theta": float(greeks.get("theta", 0)),
             "gamma": float(greeks.get("gamma", 0)),
@@ -442,11 +447,15 @@ def get_option_snapshots_batch(
                 ask = float(quote.get("ap", 0))
                 greeks = snapshot.get("greeks", {})
 
+                # IV is a top-level field on the snapshot, NOT inside greeks.
+                raw_iv = snapshot.get("impliedVolatility",
+                                     snapshot.get("implied_volatility", 0))
+
                 result[sym] = {
                     "bid": bid,
                     "ask": ask,
                     "mid": (bid + ask) / 2 if bid > 0 and ask > 0 else 0,
-                    "iv": float(greeks.get("implied_volatility", 0)),
+                    "iv": max(float(raw_iv), 0.0) if raw_iv else 0.0,
                     "delta": float(greeks.get("delta", 0)),
                     "theta": float(greeks.get("theta", 0)),
                     "gamma": float(greeks.get("gamma", 0)),
