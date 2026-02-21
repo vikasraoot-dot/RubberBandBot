@@ -101,6 +101,9 @@ These override all other considerations. Violating any of these is a critical fa
 - NEVER increase position limits without explicit user approval.
 - NEVER disable logging or the audit trail (`trade_logger.py`).
 - Ask the user before any change that touches live trading logic or risk parameters.
+- When using multi-agent teams, subagents may gather data in parallel, but all final trading decisions must be made by a single agent to prevent contradictions.
+- When referencing positions, P&L, or account state, always verify against live broker data rather than relying on earlier conversation context that may be stale.
+- Market data discussed earlier in the session may be hours old. Re-fetch before making trading decisions.
 
 # CONVENTIONS
 
