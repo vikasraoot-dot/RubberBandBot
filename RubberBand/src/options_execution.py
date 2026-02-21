@@ -85,6 +85,37 @@ def _verify_mleg_fill(
     return "pending"
 
 
+def _cancel_pending_order(base: str, key: str, secret: str, order_id: str) -> str:
+    """
+    Cancel a pending mleg order to prevent untracked fills.
+
+    Returns:
+        "cancelled"        — order successfully cancelled, no position exists
+        "may_have_filled"  — cancel returned 422; order likely filled in the
+                             race window between timeout and cancel request
+        "error"            — cancel call failed (network/unknown error)
+    """
+    try:
+        resp = requests.delete(
+            f"{base}/v2/orders/{order_id}",
+            headers=_headers(key, secret),
+            timeout=5,
+        )
+        if resp.status_code < 300:
+            print(f"[options] Cancelled pending mleg order {order_id}", flush=True)
+            return "cancelled"
+        elif resp.status_code == 422:
+            # Order filled between timeout and cancel — a real position exists
+            print(f"[options] WARNING: Cancel returned 422 — order {order_id} filled after timeout", flush=True)
+            return "may_have_filled"
+        else:
+            print(f"[options] Cancel attempt returned HTTP {resp.status_code} for {order_id}", flush=True)
+            return "error"
+    except Exception as e:
+        print(f"[options] Cancel attempt failed for {order_id}: {e}", flush=True)
+        return "error"
+
+
 def _close_naked_legs(base: str, key: str, secret: str, long_symbol: str, short_symbol: str) -> None:
     """Emergency close any naked option legs from a partial fill."""
     try:
@@ -309,7 +340,18 @@ def submit_spread_order(
             if verified_status == "failed":
                 return {"error": True, "message": f"Mleg order {verified_status}"}
             elif verified_status == "pending":
-                print(f"[options] WARNING: Mleg order still pending after timeout — may fill later", flush=True)
+                # Order never filled within timeout. Cancel it to prevent an
+                # untracked position if it fills later, and return error so
+                # the caller does NOT record a phantom registry entry.
+                print(f"[options] Mleg order still pending — cancelling to prevent phantom entry", flush=True)
+                cancel_result = _cancel_pending_order(base, key, secret, order_id)
+                if cancel_result == "may_have_filled":
+                    # Race condition: order filled between timeout and cancel.
+                    # A real position exists at the broker — return success so
+                    # the caller records a registry entry and manages it.
+                    print(f"[options] Order filled during cancel — treating as successful fill", flush=True)
+                else:
+                    return {"error": True, "message": "Mleg order not filled within 15s — cancelled"}
 
         return {
             "error": False,

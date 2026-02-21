@@ -307,6 +307,91 @@ class TestMlegFillIntegration:
         assert result.get("short_symbol") == "AAPL260213C00205000"
 
 
+    @patch("RubberBand.src.options_execution._cancel_pending_order")
+    @patch("RubberBand.src.options_execution._verify_mleg_fill")
+    @patch("RubberBand.src.options_execution.requests")
+    @patch("RubberBand.src.options_execution._resolve_creds")
+    @patch("RubberBand.src.options_data.get_option_quote")
+    def test_pending_mleg_cancels_and_returns_error(
+        self, mock_get_quote, mock_creds, mock_requests, mock_verify, mock_cancel
+    ):
+        """
+        REGRESSION: When _verify_mleg_fill returns 'pending' (order never filled
+        within timeout), submit_spread_order MUST cancel the order and return
+        error so the caller does NOT record a phantom registry entry.
+
+        Before this fix, 'pending' fell through to the success return, causing
+        44% of all entries to be phantoms (8 out of 18 over Feb 9-20).
+        """
+        from RubberBand.src.options_execution import submit_spread_order
+
+        mock_creds.return_value = ("https://paper-api.alpaca.markets", "key", "secret")
+        mock_get_quote.side_effect = [
+            {"ask": 2.00, "bid": 1.90, "mid": 1.95},  # long
+            {"bid": 0.50, "ask": 0.60, "mid": 0.55},   # short
+        ]
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {"id": "order-789", "status": "new"}
+        mock_requests.post.return_value = mock_response
+
+        mock_verify.return_value = "pending"
+        mock_cancel.return_value = "cancelled"
+
+        result = submit_spread_order(
+            long_symbol="AAPL260213C00200000",
+            short_symbol="AAPL260213C00205000",
+            qty=1, max_debit=3.00,
+        )
+
+        assert result.get("error") is True, \
+            "REGRESSION: pending mleg must return error to prevent phantom registry entry"
+        assert "cancel" in result.get("message", "").lower()
+        mock_cancel.assert_called_once_with(
+            "https://paper-api.alpaca.markets", "key", "secret", "order-789"
+        )
+
+    @patch("RubberBand.src.options_execution._cancel_pending_order")
+    @patch("RubberBand.src.options_execution._verify_mleg_fill")
+    @patch("RubberBand.src.options_execution.requests")
+    @patch("RubberBand.src.options_execution._resolve_creds")
+    @patch("RubberBand.src.options_data.get_option_quote")
+    def test_pending_mleg_422_race_returns_success(
+        self, mock_get_quote, mock_creds, mock_requests, mock_verify, mock_cancel
+    ):
+        """
+        RACE CONDITION: If order fills between timeout and cancel (HTTP 422),
+        submit_spread_order MUST return success so the caller records a
+        registry entry — otherwise we get an unmanaged position at the broker.
+        """
+        from RubberBand.src.options_execution import submit_spread_order
+
+        mock_creds.return_value = ("https://paper-api.alpaca.markets", "key", "secret")
+        mock_get_quote.side_effect = [
+            {"ask": 2.00, "bid": 1.90, "mid": 1.95},
+            {"bid": 0.50, "ask": 0.60, "mid": 0.55},
+        ]
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {"id": "order-999", "status": "new"}
+        mock_requests.post.return_value = mock_response
+
+        mock_verify.return_value = "pending"
+        mock_cancel.return_value = "may_have_filled"  # 422 race condition
+
+        result = submit_spread_order(
+            long_symbol="AAPL260213C00200000",
+            short_symbol="AAPL260213C00205000",
+            qty=1, max_debit=3.00,
+        )
+
+        assert result.get("error") is False, \
+            "422 race: order filled during cancel — must return success for registry entry"
+        assert result.get("order_id") == "order-999"
+
+
 class TestSLConfirmationIntegration:
     """
     Integration test: Verify that with _SL_CONFIRM_REQUIRED == 1,
