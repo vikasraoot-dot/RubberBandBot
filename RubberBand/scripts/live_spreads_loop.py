@@ -1598,19 +1598,23 @@ def main() -> int:
         cfg["slope_threshold_10"] = args.slope_threshold_10
 
     # --- CIRCUIT BREAKER: PORTFOLIO DRAWDOWN (GAP-005) ---
+    guard = None
     try:
         max_dd_pct = float(cfg.get("max_drawdown_pct", 0.10))
-        # Use shared state file (consistent with 15M_STK)
         guard_state_file = os.path.join(os.path.dirname(__file__), "portfolio_guard_state.json")
         guard = PortfolioGuard(guard_state_file, max_drawdown_pct=max_dd_pct)
-        # GAP: guard.update(current_equity) is NOT called here.
-        # Unlike live_paper_loop.py (line 511), this script does not have broker
-        # credentials (base_url, key, secret) readily available in main().
-        # To fix: either load creds from env and call get_account_info_compat(),
-        # or refactor PortfolioGuard to fetch equity internally.
-        # Until then, the PortfolioGuard drawdown check is inactive for 15M_OPT.
+
+        # Fetch current equity (creds resolved from env vars)
+        acct = get_account_info_compat(None, None, None)
+        if acct:
+            current_equity = float(acct.get("equity", 0))
+            guard.update(current_equity)
+
+    except CircuitBreakerExc as cbe:
+        print(f"[HALT] Portfolio drawdown circuit breaker: {cbe}", flush=True)
+        return 1
     except Exception as e:
-        print(f"[Guard] Warning: Failed to init guard: {e}")
+        print(f"[Guard] Warning: Failed to check portfolio guard: {e}", flush=True)
     # -----------------------------------------------------
 
     # GAP-006: Connectivity Guard
@@ -1788,10 +1792,22 @@ def main() -> int:
         try:
             entries = run_scan_cycle(symbols, cfg, spread_cfg, logger, registry, dry_run, regime_cfg=regime_cfg)
             conn_guard.record_success()
+
+            # Update portfolio guard with current equity each cycle
+            if guard is not None:
+                acct = get_account_info_compat(None, None, None)
+                if acct:
+                    current_equity = float(acct.get("equity", 0))
+                    guard.update(current_equity)
+
             logger.heartbeat(event="scan_cycle_end", cycle=scan_count, new_entries=entries)
             # Commit auditor logs after each cycle for real-time auditing
             commit_auditor_log()
             gc.collect()
+        except CircuitBreakerExc as cbe:
+            logger.error(error=str(cbe), context="circuit_breaker_halt")
+            print(f"[HALT] Circuit breaker triggered: {cbe}", flush=True)
+            break  # Exit while loop, proceed to EOD cleanup
         except Exception as e:
             try:
                 conn_guard.record_error(e)
@@ -1800,7 +1816,6 @@ def main() -> int:
                 print(f"[HALT] Circuit breaker triggered: {cbe}", flush=True)
                 break  # Exit while loop, proceed to EOD cleanup
             logger.error(error=str(e), context="scan_cycle")
-            # If we lost connection, we should sleep longer?
             import time
             time.sleep(10)
             continue
