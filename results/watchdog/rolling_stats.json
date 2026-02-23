@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-02-20T16:50:10.702828-05:00",
+  "generated_at": "2026-02-23T17:08:26.235932-05:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -19,7 +19,7 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 4,
+        "entries_found": 5,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -34,7 +34,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 4,
+        "entries_found": 5,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -59,45 +59,45 @@
       "7d": {
         "window_days": 7,
         "entries_found": 2,
-        "total_trades": 9,
-        "total_winners": 5,
-        "total_losers": 4,
-        "win_rate": 55.56,
-        "avg_pnl_per_day": 38.89,
+        "total_trades": 16,
+        "total_winners": 7,
+        "total_losers": 9,
+        "win_rate": 43.75,
+        "avg_pnl_per_day": 14.94,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 77.78,
-        "sharpe": 1.33,
+        "total_pnl": 29.87,
+        "sharpe": 3.18,
         "max_drawdown": 0.0,
         "trend": "FLAT"
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 2,
-        "total_trades": 9,
-        "total_winners": 5,
-        "total_losers": 4,
-        "win_rate": 55.56,
-        "avg_pnl_per_day": 38.89,
+        "entries_found": 3,
+        "total_trades": 24,
+        "total_winners": 11,
+        "total_losers": 13,
+        "win_rate": 45.83,
+        "avg_pnl_per_day": 29.8,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 77.78,
-        "sharpe": 1.33,
+        "total_pnl": 89.39,
+        "sharpe": 1.15,
         "max_drawdown": 0.0,
         "trend": "FLAT"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 2,
-        "total_trades": 9,
-        "total_winners": 5,
-        "total_losers": 4,
-        "win_rate": 55.56,
-        "avg_pnl_per_day": 38.89,
+        "entries_found": 3,
+        "total_trades": 24,
+        "total_winners": 11,
+        "total_losers": 13,
+        "win_rate": 45.83,
+        "avg_pnl_per_day": 29.8,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 77.78,
-        "sharpe": 1.33,
+        "total_pnl": 89.39,
+        "sharpe": 1.15,
         "max_drawdown": 0.0,
         "trend": "FLAT"
       },
@@ -105,7 +105,7 @@
         {
           "flag": "FILTERS_ADDING_VALUE",
           "severity": "INFO",
-          "detail": "Bot P&L $77.78 > Shadow P&L $-28720.0 over 7 days"
+          "detail": "Bot P&L $29.87 > Shadow P&L $-31208.0 over 7 days"
         }
       ]
     },
@@ -127,7 +127,7 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 1,
+        "entries_found": 2,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -142,7 +142,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 1,
+        "entries_found": 2,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
