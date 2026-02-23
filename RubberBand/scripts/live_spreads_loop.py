@@ -436,6 +436,12 @@ def get_long_signals(
                 
                 entry_reason = " + ".join(entry_reasons) if entry_reasons else "RubberBand_long_signal"
                 
+                # Confirmation audit fields
+                was_confirmed = bool(last.get("long_signal_confirmed", False))
+                raw_prev = False
+                if len(df_closed) >= 2:
+                    raw_prev = bool(df_closed.iloc[-2].get("long_signal_raw", False))
+
                 # Check duplication happens in MAIN loop now (idempotency)
                 confirmed_signals.append({
                     "symbol": sym,
@@ -444,6 +450,8 @@ def get_long_signals(
                     "atr": atr,
                     "entry_reason": entry_reason,
                     "signal_time": last.name, # Timestamp of the closed bar
+                    "was_confirmation": was_confirmed,
+                    "raw_signal_prev_bar": raw_prev,
                 })
                 
         except Exception as e:
@@ -1544,7 +1552,9 @@ def run_scan_cycle(
             signal_reason=signal["entry_reason"],
             entry_price=signal["entry_price"],
             rsi=signal["rsi"],
-            atr=signal["atr"]
+            atr=signal["atr"],
+            was_confirmation=signal.get("was_confirmation", False),
+            raw_signal_prev_bar=signal.get("raw_signal_prev_bar", False),
         )
         
         if try_spread_entry(signal, spread_cfg, logger, registry, dry_run, cfg):

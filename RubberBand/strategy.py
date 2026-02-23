@@ -83,7 +83,33 @@ def attach_verifiers(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     
     # Combined Signal
     df["long_signal"] = df["below_lower_band"] & df["rsi_oversold"] & df["trend_ok"] & df["time_ok"]
-    
+
+    # Bounce confirmation: delay entry by 1 bar for reversal evidence.
+    # Prevents catching falling knives by requiring the bar AFTER the
+    # initial signal to show a bullish close (close > open) and/or
+    # rising RSI (momentum shifting up) before entering.
+    confirm_cfg = cfg.get("confirmation", {})
+    confirm_enabled = bool(confirm_cfg.get("enabled", False))
+    require_bounce = bool(confirm_cfg.get("require_bounce_bar", True))
+    require_rsi_up = bool(confirm_cfg.get("require_rsi_uptick", True))
+
+    df["long_signal_raw"] = df["long_signal"]
+
+    bounce_bar = df["close"] > df["open"]
+    rsi_uptick = df["rsi"] > df["rsi"].shift(1)
+
+    confirmation = pd.Series(True, index=df.index)
+    if require_bounce:
+        confirmation = confirmation & bounce_bar
+    if require_rsi_up:
+        confirmation = confirmation & rsi_uptick
+
+    prev_signal = df["long_signal"].astype(bool).shift(1, fill_value=False)
+    df["long_signal_confirmed"] = prev_signal & confirmation
+
+    if confirm_enabled:
+        df["long_signal"] = df["long_signal_confirmed"]
+
     return df
 
 def check_slope_filter(df: pd.DataFrame, regime_cfg: dict) -> SlopeFilterResult:

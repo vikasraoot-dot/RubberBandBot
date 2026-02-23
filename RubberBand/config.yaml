@@ -122,6 +122,16 @@ probability_filter:
   max_dte: 10                       # Hard cap (exit logic tuned for short-term)
 
 # ──────────────────────────────────────────────────────────────────────────────
+# CONFIRMATION (Bounce confirmation for mean-reversion entries)
+# ──────────────────────────────────────────────────────────────────────────────
+# Delays entry by 1 bar (15 min) to confirm reversal has started.
+# Prevents catching falling knives (0-for-9 on raw signals Feb 9-20).
+confirmation:
+  enabled: false                   # Shadow mode: log only, don't gate entries
+  require_bounce_bar: true         # Next bar must be bullish (close > open)
+  require_rsi_uptick: true         # RSI must be rising (RSI > prev RSI)
+
+# ──────────────────────────────────────────────────────────────────────────────
 # BROKER
 # ──────────────────────────────────────────────────────────────────────────────
 broker:
