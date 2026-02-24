@@ -10,10 +10,23 @@ from __future__ import annotations
 
 import argparse
 import json
+import logging
 import os
+import sys
 from datetime import datetime, timedelta, timezone
 from typing import List
 from zoneinfo import ZoneInfo
+
+# ── Configure root logger EARLY so every module's logging.getLogger(__name__)
+# writes to stdout, NOT stderr.  Python's default lastResort handler sends
+# WARNING+ to stderr, which crashes PowerShell-based GitHub Actions runners
+# via NativeCommandError.  This MUST happen before any library import that
+# calls logging.getLogger().
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+)
 
 ET = ZoneInfo("US/Eastern")
 

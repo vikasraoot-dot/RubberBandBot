@@ -25,10 +25,22 @@ print("=" * 60, flush=True)
 import argparse
 import gc
 import json
+import logging
 import os
 import tracemalloc
 from datetime import datetime, timedelta, time as dt_time
 from typing import List, Dict, Any, Optional, Tuple
+
+# ── Configure root logger EARLY so every module's logging.getLogger(__name__)
+# writes to stdout, NOT stderr.  Python's default lastResort handler sends
+# WARNING+ to stderr, which crashes PowerShell-based GitHub Actions runners
+# via NativeCommandError.  This MUST happen before any library import that
+# calls logging.getLogger().
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(message)s",
+    handlers=[logging.StreamHandler(sys.stdout)],
+)
 
 print("[STARTUP] Core imports complete", flush=True)
 

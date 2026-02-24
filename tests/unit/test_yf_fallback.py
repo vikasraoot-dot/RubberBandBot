@@ -70,6 +70,7 @@ class TestYfFetchBars:
 
     def test_yf_fallback_recovers_empty_symbols(self):
         """yfinance should return data for requested symbols."""
+        pytest.importorskip("yfinance")
         syms = ["AAPL", "MSFT", "GOOG"]
         mock_df = _make_multi_yf_df(syms)
 
@@ -114,6 +115,7 @@ class TestYfFetchBars:
 
     def test_yf_column_and_tz_normalization(self):
         """Columns should be lowercase, index should be UTC."""
+        pytest.importorskip("yfinance")
         mock_df = _make_multi_yf_df(["SPY"])
 
         with patch("yfinance.download", return_value=mock_df):
@@ -128,6 +130,7 @@ class TestYfFetchBars:
 
     def test_yf_partial_batch_failure(self):
         """One symbol failing should not block others."""
+        pytest.importorskip("yfinance")
         # Build df for AAPL only, BADTICKER missing from MultiIndex
         mock_df = _make_multi_yf_df(["AAPL"])
 

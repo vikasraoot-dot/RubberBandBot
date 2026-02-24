@@ -112,11 +112,15 @@ jobs:
           ALPACA_SECRET: ${{ secrets.ALPACA_SECRET_KEY }}
           PYTHONUNBUFFERED: "1"
         run: |
+          # Prevent PowerShell from treating stderr output as a fatal error.
+          # Python libraries may write warnings to stderr; this must NOT crash the bot.
+          $ErrorActionPreference = "Continue"
+
           git config user.email "bot@rubberband.local"
           git config user.name "RubberBandBot"
           chcp 65001 > $null
           $env:PYTHONPATH = "$env:GITHUB_WORKSPACE"
-          
+
           # Get inputs with defaults
           $dryRun = if ("${{ github.event.inputs.dry_run }}" -ne "") { "${{ github.event.inputs.dry_run }}" } else { "0" }
           $dte = if ("${{ github.event.inputs.dte }}" -ne "") { "${{ github.event.inputs.dte }}" } else { "6" }
@@ -124,15 +128,22 @@ jobs:
           $slope10Input = "${{ github.event.inputs.slope_threshold_10 }}"
           $slopeArg = if ($slopeInput -ne "") { "--slope-threshold $slopeInput" } else { "" }
           $slope10Arg = if ($slope10Input -ne "") { "--slope-threshold-10 $slope10Input" } else { "" }
-          
+
           Write-Host "Starting Options Spreads Loop (dry_run=$dryRun, dte=$dte, slope=$slopeInput)"
-          
+
           # Run the spreads loop
-          # We use Invoke-Expression or just simplistic string splicing if simple enough.
-          # Ideally just pass args.
-          
+          # *>&1 merges all PowerShell streams into stdout.
+          # The Python script itself routes logging to stdout via logging.basicConfig.
+
           $cmd = "& `"$env:PYTHON_EXE`" -X utf8 -u RubberBand/scripts/live_spreads_loop.py --config RubberBand/config.yaml --tickers RubberBand/tickers_options.txt --dry-run $dryRun --dte $dte --max-debit 3.00 $slopeArg $slope10Arg *>&1 | Tee-Object -FilePath console.log"
           Invoke-Expression $cmd
+
+          # Capture Python's actual exit code (not PowerShell's error state)
+          $pyExit = $LASTEXITCODE
+          if ($pyExit -ne 0) {
+            Write-Host "Python exited with code $pyExit"
+            exit $pyExit
+          }
       
       # Backup: Upload registry as artifact (primary persistence is via git commits)
       - name: Upload Position Registry (backup)

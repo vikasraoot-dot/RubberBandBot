@@ -19,12 +19,24 @@ from __future__ import annotations
 
 import logging
 import math
+import sys
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 from zoneinfo import ZoneInfo
 
 logger = logging.getLogger(__name__)
+
+# Ensure this module's logger never writes to stderr (which crashes
+# PowerShell-based GitHub Actions runners via NativeCommandError).
+# If no handler has been configured by the host script we attach a
+# stdout handler so that WARNING+ messages go to stdout instead of
+# Python's default stderr lastResort handler.
+if not logging.root.handlers and not logger.handlers:
+    _handler = logging.StreamHandler(sys.stdout)
+    _handler.setFormatter(logging.Formatter("%(message)s"))
+    logger.addHandler(_handler)
+    logger.propagate = False
 
 ET = ZoneInfo("US/Eastern")
 

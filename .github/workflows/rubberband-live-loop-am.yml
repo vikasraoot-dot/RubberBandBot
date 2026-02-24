@@ -110,6 +110,10 @@ jobs:
           SL_ATR: "1.5"
           PYTHONUNBUFFERED: "1"
         run: |
+          # Prevent PowerShell from treating stderr output as a fatal error.
+          # Python libraries may write warnings to stderr; this must NOT crash the bot.
+          $ErrorActionPreference = "Continue"
+
           git config user.email "bot@rubberband.local"
           git config user.name "RubberBandBot"
           chcp 65001 > $null
@@ -117,6 +121,13 @@ jobs:
           # NOTE: We run market_loop.py (wrapper) which calls live_paper_loop.py (logic).
           # Any new env vars (like SLOPE_THRESHOLD_10) MUST be passed explicitly in market_loop.py's run_once()!
           & "$env:PYTHON_EXE" -X utf8 -u RubberBand/scripts/market_loop.py *>&1 | Tee-Object -FilePath "console.log"
+
+          # Capture Python's actual exit code (not PowerShell's error state)
+          $pyExit = $LASTEXITCODE
+          if ($pyExit -ne 0) {
+            Write-Host "Python exited with code $pyExit"
+            exit $pyExit
+          }
 
       # Backup: Upload registry as artifact (primary persistence is via git commits)
       - name: Upload Position Registry (backup)
