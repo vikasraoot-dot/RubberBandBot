@@ -20,6 +20,9 @@ on:
         default: '0'
         type: string
 
+permissions:
+  contents: write
+
 concurrency:
   group: weekly-stock-trading
   cancel-in-progress: true
@@ -31,7 +34,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -44,12 +47,9 @@ jobs:
           if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
           pip install pandas requests pyyaml numpy alpaca-trade-api
 
-      - name: Download Position Registry
-        uses: actions/download-artifact@v4
-        with:
-          name: position-registry-WK_STK
-          path: .position_registry/
-        continue-on-error: true  # First run won't have artifact
+      # Position registry is persisted via git commits (GAP-008 fix)
+      # checkout@v4 above retrieves the latest registry from git automatically
+      # Artifact-based download was removed as it only works within same workflow run
 
       - name: Run Weekly Stock Trading
         env:
@@ -59,6 +59,10 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}
           PYTHONUNBUFFERED: "1"
         run: |
+          # Configure git for registry persistence (GAP-008)
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot"
+
           DRY_RUN=${{ github.event.inputs.dry_run || '0' }}
 
           # Determine day of week (Monday = 1)
@@ -80,6 +84,17 @@ jobs:
           set -o pipefail
           python RubberBand/scripts/live_weekly_loop.py 2>&1 | tee console.log
 
+      - name: Commit Position Registry to Git
+        if: always()
+        run: |
+          if [ -f .position_registry/WK_STK_positions.json ]; then
+            git add .position_registry/WK_STK_positions.json
+            git diff --cached --quiet && echo "No registry changes to commit" && exit 0
+            git commit -m "[AUTO] WK_STK registry update $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
+            git pull origin main --rebase --autostash || true
+            git push || echo "WARNING: git push failed, registry saved locally only"
+          fi
+
       - name: Upload Trade Logs
         uses: actions/upload-artifact@v4
         with:
@@ -87,7 +102,7 @@ jobs:
           path: logs/weekly_live_*.jsonl
           if-no-files-found: warn
 
-      - name: Upload Position Registry
+      - name: Upload Position Registry (backup)
         uses: actions/upload-artifact@v4
         if: always()
         with:

@@ -27,13 +27,16 @@ on:
         default: 'full'
         type: string
 
+permissions:
+  contents: write
+
 jobs:
   trade:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -46,19 +49,20 @@ jobs:
           if [ -f RubberBand/requirements.txt ]; then pip install -r RubberBand/requirements.txt; fi
           pip install pandas requests pyyaml numpy alpaca-trade-api
       
-      - name: Download Position Registry
-        uses: actions/download-artifact@v4
-        with:
-          name: position-registry-WK_OPT
-          path: .position_registry/
-        continue-on-error: true  # First run won't have artifact
-      
+      # Position registry is persisted via git commits (GAP-008 fix)
+      # checkout@v4 above retrieves the latest registry from git automatically
+      # Artifact-based download was removed as it only works within same workflow run
+
       - name: Run Weekly Options Trading V3
         env:
           APCA_API_KEY_ID: ${{ secrets.ALPACA_KEY_ID }}
           APCA_API_SECRET_KEY: ${{ secrets.ALPACA_SECRET_KEY }}
           APCA_API_BASE_URL: https://paper-api.alpaca.markets
         run: |
+          # Configure git for registry persistence (GAP-008)
+          git config user.email "bot@rubberband.local"
+          git config user.name "RubberBandBot"
+
           # Scheduled runs = LIVE, Manual runs = whatever is specified (default simulation)
           set -o pipefail
           if [ "${{ github.event_name }}" = "schedule" ]; then
@@ -102,6 +106,17 @@ jobs:
               --max-premium $MAX_PREMIUM 2>&1 | tee console.log
           fi
       
+      - name: Commit Position Registry to Git
+        if: always()
+        run: |
+          if [ -f .position_registry/WK_OPT_positions.json ]; then
+            git add .position_registry/WK_OPT_positions.json
+            git diff --cached --quiet && echo "No registry changes to commit" && exit 0
+            git commit -m "[AUTO] WK_OPT registry update $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
+            git pull origin main --rebase --autostash || true
+            git push || echo "WARNING: git push failed, registry saved locally only"
+          fi
+
       - name: Upload Trade Logs
         uses: actions/upload-artifact@v4
         with:
@@ -109,7 +124,7 @@ jobs:
           path: results/weekly_options_trades_*.json
           if-no-files-found: warn
       
-      - name: Upload Position Registry
+      - name: Upload Position Registry (backup)
         uses: actions/upload-artifact@v4
         if: always()
         with:
