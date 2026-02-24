@@ -30,6 +30,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: weekly-options-trading
+  cancel-in-progress: true
+
 jobs:
   trade:
     runs-on: ubuntu-latest
@@ -109,13 +113,27 @@ jobs:
       - name: Commit Position Registry to Git
         if: always()
         run: |
-          if [ -f .position_registry/WK_OPT_positions.json ]; then
-            git add .position_registry/WK_OPT_positions.json
-            git diff --cached --quiet && echo "No registry changes to commit" && exit 0
-            git commit -m "[AUTO] WK_OPT registry update $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
-            git pull origin main --rebase --autostash || true
-            git push || echo "WARNING: git push failed, registry saved locally only"
+          if [ ! -f .position_registry/WK_OPT_positions.json ]; then
+            echo "No registry file found, skipping commit"
+            exit 0
           fi
+
+          # Force-add bypasses .gitignore (registry dir is gitignored for local dev)
+          git add -f .position_registry/WK_OPT_positions.json
+          git diff --cached --quiet && echo "No registry changes to commit" && exit 0
+          git commit -m "[AUTO] WK_OPT registry update $(TZ=America/New_York date '+%Y-%m-%d %H:%M')"
+
+          # Push with retries (other bots may be pushing concurrently)
+          for attempt in 1 2 3 4 5; do
+            git pull origin main --rebase --autostash || true
+            if git push; then
+              echo "Registry committed and pushed successfully"
+              exit 0
+            fi
+            echo "Push attempt $attempt failed, retrying in ${attempt}s..."
+            sleep "$attempt"
+          done
+          echo "WARNING: All 5 push attempts failed. Registry saved locally only."
 
       - name: Upload Trade Logs
         uses: actions/upload-artifact@v4
