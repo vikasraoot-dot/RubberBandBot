@@ -1,0 +1,97 @@
+{
+  "date": "2026-02-25",
+  "generated_at": "2026-02-25T16:57:30.066920-05:00",
+  "bots_analysed": [],
+  "filter_effectiveness": {
+    "_summary": {
+      "total_blocks": 0,
+      "total_value_saved": 0.0,
+      "total_profits_missed": 0.0,
+      "net_filter_value": 0.0
+    }
+  },
+  "time_of_day": {
+    "morning": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "midday": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "afternoon": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "other": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    }
+  },
+  "ticker_analysis": {
+    "per_ticker": {},
+    "flagged_losers": []
+  },
+  "regime_correlation": {},
+  "giveback": {
+    "15M_STK": {
+      "peak_pnl": 7.77,
+      "close_pnl": 4.64,
+      "giveback": 3.13,
+      "giveback_pct": 40.28
+    },
+    "WK_STK": {
+      "peak_pnl": 5.32,
+      "close_pnl": 0.14,
+      "giveback": 5.18,
+      "giveback_pct": 97.37
+    }
+  },
+  "auditor_vs_bot": {
+    "15M_STK": {
+      "real_pnl": 4.64,
+      "shadow_pnl": -15604.0,
+      "shadow_trades": 986,
+      "shadow_winners": 487,
+      "shadow_open_positions": 2,
+      "difference": 15608.64,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $15608.64 \u2014 filters are protecting from losses"
+    },
+    "WK_STK": {
+      "real_pnl": 0.14,
+      "shadow_pnl": 0.0,
+      "shadow_trades": 0,
+      "shadow_winners": 0,
+      "shadow_open_positions": 0,
+      "difference": 0.14,
+      "verdict": "NEUTRAL",
+      "explanation": "No meaningful difference or insufficient shadow data"
+    },
+    "15M_OPT": {
+      "real_pnl": 0.0,
+      "shadow_pnl": -8085.2,
+      "shadow_trades": 29,
+      "shadow_winners": 0,
+      "shadow_open_positions": 0,
+      "difference": 8085.2,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $8085.2 \u2014 filters are protecting from losses"
+    }
+  },
+  "signal_context": {
+    "available": false
+  }
+}
