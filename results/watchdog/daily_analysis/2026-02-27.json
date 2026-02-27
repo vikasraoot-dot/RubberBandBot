@@ -1,0 +1,97 @@
+{
+  "date": "2026-02-27",
+  "generated_at": "2026-02-27T16:51:52.042945-05:00",
+  "bots_analysed": [],
+  "filter_effectiveness": {
+    "_summary": {
+      "total_blocks": 0,
+      "total_value_saved": 0.0,
+      "total_profits_missed": 0.0,
+      "net_filter_value": 0.0
+    }
+  },
+  "time_of_day": {
+    "morning": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "midday": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "afternoon": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    },
+    "other": {
+      "trades": 0,
+      "winners": 0,
+      "losers": 0,
+      "total_pnl": 0.0,
+      "win_rate": 0.0
+    }
+  },
+  "ticker_analysis": {
+    "per_ticker": {},
+    "flagged_losers": []
+  },
+  "regime_correlation": {},
+  "giveback": {
+    "15M_STK": {
+      "peak_pnl": 0.0,
+      "close_pnl": -144.13,
+      "giveback": 144.13,
+      "giveback_pct": 0.0
+    },
+    "WK_STK": {
+      "peak_pnl": 7.02,
+      "close_pnl": -1.37,
+      "giveback": 8.39,
+      "giveback_pct": 119.44
+    }
+  },
+  "auditor_vs_bot": {
+    "15M_OPT": {
+      "real_pnl": 0.0,
+      "shadow_pnl": -8085.2,
+      "shadow_trades": 29,
+      "shadow_winners": 0,
+      "shadow_open_positions": 0,
+      "difference": 8085.2,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $8085.2 \u2014 filters are protecting from losses"
+    },
+    "15M_STK": {
+      "real_pnl": -144.13,
+      "shadow_pnl": -15604.0,
+      "shadow_trades": 986,
+      "shadow_winners": 487,
+      "shadow_open_positions": 2,
+      "difference": 15459.87,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $15459.87 \u2014 filters are protecting from losses"
+    },
+    "WK_STK": {
+      "real_pnl": -1.37,
+      "shadow_pnl": 0.0,
+      "shadow_trades": 0,
+      "shadow_winners": 0,
+      "shadow_open_positions": 0,
+      "difference": -1.37,
+      "verdict": "NEUTRAL",
+      "explanation": "No meaningful difference or insufficient shadow data"
+    }
+  },
+  "signal_context": {
+    "available": false
+  }
+}
