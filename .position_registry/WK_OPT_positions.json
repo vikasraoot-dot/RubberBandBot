@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-02-26T10:13:23.265714-05:00",
+  "updated_at": "2026-02-27T10:07:39.214287-05:00",
   "positions": {
     "PLTR260417C00120000": {
       "symbol": "PLTR260417C00120000",
@@ -24,20 +24,6 @@
       "qty": 1,
       "entry_price": 19.69,
       "entry_date": "2026-02-24T10:32:11.206409-05:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "NFLX260417C00075000": {
-      "symbol": "NFLX260417C00075000",
-      "underlying": "NFLX",
-      "client_order_id": "WK_OPT_NFLX260417C00075000_1771947131",
-      "order_id": "bbceaca5-f5b3-4e91-ac4c-2a25c273a338",
-      "qty": 1,
-      "entry_price": 6.59,
-      "entry_date": "2026-02-24T10:32:13.083423-05:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -71,7 +57,40 @@
       "sl_order_id": "",
       "tp_price": 0.0,
       "sl_price": 0.0
+    },
+    "NFLX260417C00088000": {
+      "symbol": "NFLX260417C00088000",
+      "underlying": "NFLX",
+      "client_order_id": "WK_OPT_NFLX260417C00088000_1772204852",
+      "order_id": "212d7121-d7e7-4084-a633-dd517e93868e",
+      "qty": 1,
+      "entry_price": 7.47,
+      "entry_date": "2026-02-27T10:07:39.213673-05:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
     }
   },
-  "closed_positions": []
+  "closed_positions": [
+    {
+      "symbol": "NFLX260417C00075000",
+      "underlying": "NFLX",
+      "client_order_id": "WK_OPT_NFLX260417C00075000_1771947131",
+      "order_id": "bbceaca5-f5b3-4e91-ac4c-2a25c273a338",
+      "qty": 1,
+      "entry_price": 6.59,
+      "entry_date": "2026-02-24T10:32:13.083423-05:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 17.1,
+      "exit_date": "2026-02-27T10:07:18.089931-05:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1060.0
+    }
+  ]
 }
