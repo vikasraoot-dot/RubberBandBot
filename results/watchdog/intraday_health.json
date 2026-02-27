@@ -1,10 +1,10 @@
 {
   "date": "2026-02-27",
-  "updated_at": "2026-02-27T14:20:32.547288-05:00",
+  "updated_at": "2026-02-27T14:52:27.736810-05:00",
   "account": {
-    "equity": 66550.87,
+    "equity": 66484.97,
     "last_equity": 67557.74,
-    "daily_pnl_pct": -1.49,
+    "daily_pnl_pct": -1.59,
     "account_paused": false
   },
   "bots": {
@@ -24,10 +24,10 @@
     },
     "15M_STK": {
       "bot_tag": "15M_STK",
-      "daily_pnl": -142.03,
+      "daily_pnl": -150.36,
       "status": "PAUSED",
       "paused": true,
-      "pause_reason": "Daily loss $-142.03 exceeded $-100.0 threshold",
+      "pause_reason": "Daily loss $-150.36 exceeded $-100.0 threshold",
       "profit_lock": {
         "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
@@ -66,7 +66,7 @@
     },
     "WK_STK": {
       "bot_tag": "WK_STK",
-      "daily_pnl": -4.53,
+      "daily_pnl": -6.24,
       "status": "OK",
       "paused": false,
       "pause_reason": "",
