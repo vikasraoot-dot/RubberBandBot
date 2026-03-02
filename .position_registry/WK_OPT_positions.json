@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-02-27T10:07:39.214287-05:00",
+  "updated_at": "2026-03-02T10:06:36.098413-05:00",
   "positions": {
     "PLTR260417C00120000": {
       "symbol": "PLTR260417C00120000",
@@ -58,14 +58,14 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "NFLX260417C00088000": {
-      "symbol": "NFLX260417C00088000",
-      "underlying": "NFLX",
-      "client_order_id": "WK_OPT_NFLX260417C00088000_1772204852",
-      "order_id": "212d7121-d7e7-4084-a633-dd517e93868e",
+    "NVO260417C00035000": {
+      "symbol": "NVO260417C00035000",
+      "underlying": "NVO",
+      "client_order_id": "WK_OPT_NVO260417C00035000_1772463994",
+      "order_id": "cac520a5-01c2-45e4-b851-849159514a0c",
       "qty": 1,
-      "entry_price": 7.47,
-      "entry_date": "2026-02-27T10:07:39.213673-05:00",
+      "entry_price": 3.3,
+      "entry_date": "2026-03-02T10:06:36.097716-05:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -91,6 +91,22 @@
       "exit_date": "2026-02-27T10:07:18.089931-05:00",
       "exit_reason": "TakeProfit",
       "pnl": 1060.0
+    },
+    {
+      "symbol": "NFLX260417C00088000",
+      "underlying": "NFLX",
+      "client_order_id": "WK_OPT_NFLX260417C00088000_1772204852",
+      "order_id": "212d7121-d7e7-4084-a633-dd517e93868e",
+      "qty": 1,
+      "entry_price": 7.47,
+      "entry_date": "2026-02-27T10:07:39.213673-05:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-03-02T10:06:24.922475-05:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
