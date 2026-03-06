@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-03-05T10:26:11.224916-05:00",
+  "updated_at": "2026-03-06T10:04:46.071957-05:00",
   "positions": {
     "CRM260417C00180000": {
       "symbol": "CRM260417C00180000",
@@ -24,20 +24,6 @@
       "qty": 1,
       "entry_price": 7.52,
       "entry_date": "2026-02-24T10:32:15.438615-05:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "QCOM260417C00140000": {
-      "symbol": "QCOM260417C00140000",
-      "underlying": "QCOM",
-      "client_order_id": "WK_OPT_QCOM260417C00140000_1771947136",
-      "order_id": "16b62906-24ab-40f1-955b-566ebe264cec",
-      "qty": 1,
-      "entry_price": 10.58,
-      "entry_date": "2026-02-24T10:32:22.137071-05:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -111,6 +97,24 @@
       "exit_date": "2026-03-04T10:05:39.312571-05:00",
       "exit_reason": "TakeProfit",
       "pnl": 1670.0
+    },
+    {
+      "symbol": "QCOM260417C00140000",
+      "underlying": "QCOM",
+      "client_order_id": "WK_OPT_QCOM260417C00140000_1771947136",
+      "order_id": "16b62906-24ab-40f1-955b-566ebe264cec",
+      "qty": 1,
+      "entry_price": 10.58,
+      "entry_date": "2026-02-24T10:32:22.137071-05:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 4.55,
+      "exit_date": "2026-03-06T10:04:37.162498-05:00",
+      "exit_reason": "StopLoss",
+      "pnl": -595.0
     }
   ]
 }
