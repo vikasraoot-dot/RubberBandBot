@@ -1,10 +1,10 @@
 {
   "date": "2026-03-12",
-  "updated_at": "2026-03-12T05:28:33.236981-04:00",
+  "updated_at": "2026-03-12T10:43:34.768480-04:00",
   "account": {
-    "equity": 66575.35,
+    "equity": 67184.41,
     "last_equity": 66935.78,
-    "daily_pnl_pct": -0.54,
+    "daily_pnl_pct": 0.37,
     "account_paused": false
   },
   "bots": {
@@ -24,8 +24,8 @@
     },
     "15M_STK": {
       "bot_tag": "15M_STK",
-      "daily_pnl": 0.0,
-      "status": "OK",
+      "daily_pnl": -66.69,
+      "status": "WARNING",
       "paused": false,
       "pause_reason": "",
       "profit_lock": {
