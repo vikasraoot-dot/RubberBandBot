@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-03-12T15:58:37.457995-04:00",
+  "updated_at": "2026-03-13T11:25:25.511252-04:00",
   "positions": {
     "IBM": {
       "symbol": "IBM",
@@ -52,6 +52,20 @@
       "qty": 10,
       "entry_price": 187.68,
       "entry_date": "2026-03-06T11:04:16.259286-05:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "GM": {
+      "symbol": "GM",
+      "underlying": "GM",
+      "client_order_id": "WK_STK_GM_1773415525",
+      "order_id": "1fb11103-43ec-4829-b731-1a09665e1b0f",
+      "qty": 27,
+      "entry_price": 72.9,
+      "entry_date": "2026-03-13T11:25:25.393335-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
