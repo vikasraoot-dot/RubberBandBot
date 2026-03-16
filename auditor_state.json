@@ -1,38 +1,5 @@
 {
-  "positions": {
-    "SHADOW_15M_STK_B_20260107T144501367764+0000": {
-      "id": "SHADOW_15M_STK_B_20260107T144501367764+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "B",
-      "entry_price": 47.489999999999995,
-      "entry_time": "2026-01-07T14:45:01.367764+00:00",
-      "reason": "Slope3_Too_Flat(-0.0170% > -0.08%)",
-      "qty": 100,
-      "tp_price": 47.96489999999999,
-      "sl_price": 47.0151,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 47.489999999999995,
-      "unrealized_pnl": 0.0
-    },
-    "SHADOW_15M_STK_PANW_20260107T144501367764+0000": {
-      "id": "SHADOW_15M_STK_PANW_20260107T144501367764+0000",
-      "type": "STOCK",
-      "bot_tag": "15M_STK",
-      "symbol": "PANW",
-      "entry_price": 330.945,
-      "entry_time": "2026-01-07T14:45:01.367764+00:00",
-      "reason": "Slope3_Too_Flat(0.0814% > -0.08%)",
-      "qty": 100,
-      "tp_price": 334.25445,
-      "sl_price": 327.63554999999997,
-      "status": "OPEN",
-      "pnl": 0.0,
-      "current_price": 330.945,
-      "unrealized_pnl": 0.0
-    }
-  },
+  "positions": {},
   "closed_positions": [
     {
       "type": "STOCK",
@@ -20256,6 +20223,46 @@
       "exit_time": "2026-02-18T16:01:54.944512+00:00",
       "exit_reason": "SL_HIT",
       "realized_pnl": -954.0000000000077
+    },
+    {
+      "id": "SHADOW_15M_STK_B_20260107T144501367764+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "B",
+      "entry_price": 47.489999999999995,
+      "entry_time": "2026-01-07T14:45:01.367764+00:00",
+      "reason": "Slope3_Too_Flat(-0.0170% > -0.08%)",
+      "qty": 100,
+      "tp_price": 47.96489999999999,
+      "sl_price": 47.0151,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 42.72,
+      "unrealized_pnl": -476.9999999999996,
+      "exit_price": 42.72,
+      "exit_time": "2026-03-16T15:12:53.724205+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -476.9999999999996
+    },
+    {
+      "id": "SHADOW_15M_STK_PANW_20260107T144501367764+0000",
+      "type": "STOCK",
+      "bot_tag": "15M_STK",
+      "symbol": "PANW",
+      "entry_price": 330.945,
+      "entry_time": "2026-01-07T14:45:01.367764+00:00",
+      "reason": "Slope3_Too_Flat(0.0814% > -0.08%)",
+      "qty": 100,
+      "tp_price": 334.25445,
+      "sl_price": 327.63554999999997,
+      "status": "CLOSED",
+      "pnl": 0.0,
+      "current_price": 168.075,
+      "unrealized_pnl": -16287.0,
+      "exit_price": 168.075,
+      "exit_time": "2026-03-16T15:12:54.449109+00:00",
+      "exit_reason": "SL_HIT",
+      "realized_pnl": -16287.0
     }
   ],
   "processed_lines": {
