@@ -1,19 +1,19 @@
 {
-  "date": "2026-03-13",
-  "updated_at": "2026-03-13T17:04:16.101116-04:00",
+  "date": "2026-03-16",
+  "updated_at": "2026-03-16T10:55:19.379811-04:00",
   "account": {
-    "equity": 64074.17,
-    "last_equity": 66102.16,
-    "daily_pnl_pct": -3.07,
-    "account_paused": true
+    "equity": 64851.24,
+    "last_equity": 64554.31,
+    "daily_pnl_pct": 0.46,
+    "account_paused": false
   },
   "bots": {
     "15M_OPT": {
       "bot_tag": "15M_OPT",
       "daily_pnl": 0.0,
-      "status": "ACCOUNT_PAUSED",
-      "paused": true,
-      "pause_reason": "Account-level daily loss threshold exceeded",
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
       "profit_lock": {
         "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
@@ -24,10 +24,10 @@
     },
     "15M_STK": {
       "bot_tag": "15M_STK",
-      "daily_pnl": -7.62,
-      "status": "ACCOUNT_PAUSED",
-      "paused": true,
-      "pause_reason": "Account-level daily loss threshold exceeded",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
       "profit_lock": {
         "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
@@ -39,9 +39,9 @@
     "SL_ETF": {
       "bot_tag": "SL_ETF",
       "daily_pnl": 0.0,
-      "status": "ACCOUNT_PAUSED",
-      "paused": true,
-      "pause_reason": "Account-level daily loss threshold exceeded",
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
       "profit_lock": {
         "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
@@ -52,10 +52,10 @@
     },
     "WK_OPT": {
       "bot_tag": "WK_OPT",
-      "daily_pnl": -6.95,
-      "status": "ACCOUNT_PAUSED",
-      "paused": true,
-      "pause_reason": "Account-level daily loss threshold exceeded",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
       "profit_lock": {
         "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
@@ -66,12 +66,12 @@
     },
     "WK_STK": {
       "bot_tag": "WK_STK",
-      "daily_pnl": -14.04,
-      "status": "ACCOUNT_PAUSED",
-      "paused": true,
-      "pause_reason": "Account-level daily loss threshold exceeded",
+      "daily_pnl": 0.0,
+      "status": "OK",
+      "paused": false,
+      "pause_reason": "",
       "profit_lock": {
-        "peak_pnl_today": 1.06,
+        "peak_pnl_today": 0.0,
         "lock_floor": 0.0,
         "lock_active": false,
         "lock_triggered": false,
