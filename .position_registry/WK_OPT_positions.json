@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-03-13T11:10:12.465893-04:00",
+  "updated_at": "2026-03-16T11:39:53.763145-04:00",
   "positions": {
     "CRM260417C00180000": {
       "symbol": "CRM260417C00180000",
@@ -52,6 +52,20 @@
       "qty": 1,
       "entry_price": 16.8,
       "entry_date": "2026-03-13T11:10:10.038644-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "PLTR260501C00150000": {
+      "symbol": "PLTR260501C00150000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260501C00150000_1773675586",
+      "order_id": "349fdb29-8918-486f-8b65-20086b2846de",
+      "qty": 1,
+      "entry_price": 13.45,
+      "entry_date": "2026-03-16T11:39:53.762142-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
