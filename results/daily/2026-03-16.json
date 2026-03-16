@@ -1,0 +1,213 @@
+{
+  "date": "2026-03-16",
+  "generated_at": "2026-03-16T18:01:52.467047-04:00",
+  "account": {
+    "equity": "65249.77",
+    "cash": "18440.04",
+    "buying_power": "199015.46"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-1.2",
+    "total_pnl": "-1.2",
+    "bots_active": [
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-03-16",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-1.2",
+      "total_pnl": "-1.2",
+      "trades": [
+        {
+          "symbol": "PLTR260501C00150000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "13.4",
+          "filled_at": "2026-03-16T16:23:20.760555Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "PLTR260501C00150000",
+          "qty": "1",
+          "entry_price": "13.4",
+          "current_price": "12.2",
+          "unrealized_pnl": "-1.2"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 17,
+    "fixes_applied": 2
+  },
+  "positions": [
+    {
+      "symbol": "ABT",
+      "qty": "17",
+      "market_value": "1861.5",
+      "unrealized_pl": "-53.72"
+    },
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1993.1",
+      "unrealized_pl": "59.2"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1767.15",
+      "unrealized_pl": "-7.77"
+    },
+    {
+      "symbol": "ADI",
+      "qty": "2",
+      "market_value": "621.22",
+      "unrealized_pl": "11.22"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "6",
+      "market_value": "1947.24",
+      "unrealized_pl": "-22.38"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "13",
+      "market_value": "1782.82",
+      "unrealized_pl": "-89.57"
+    },
+    {
+      "symbol": "BSX",
+      "qty": "26",
+      "market_value": "1799.2",
+      "unrealized_pl": "-140.4"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1810",
+      "unrealized_pl": "-68.4"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2181.63",
+      "unrealized_pl": "185.35"
+    },
+    {
+      "symbol": "CRM260417C00180000",
+      "qty": "1",
+      "market_value": "2105",
+      "unrealized_pl": "140"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "2013.96",
+      "unrealized_pl": "17.28"
+    },
+    {
+      "symbol": "DASH260501C00160000",
+      "qty": "1",
+      "market_value": "1655",
+      "unrealized_pl": "-25"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "1969.65",
+      "unrealized_pl": "1.08"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "2035.8",
+      "unrealized_pl": "49.95"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1994.96",
+      "unrealized_pl": "112.84"
+    },
+    {
+      "symbol": "MRVL",
+      "qty": "25",
+      "market_value": "2279.5975",
+      "unrealized_pl": "315.3475"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "2185.19",
+      "unrealized_pl": "241.367298"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "1887.48",
+      "unrealized_pl": "-81.83"
+    },
+    {
+      "symbol": "NVO260417C00035000",
+      "qty": "1",
+      "market_value": "355",
+      "unrealized_pl": "30"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1975.43",
+      "unrealized_pl": "58.14"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2287.5",
+      "unrealized_pl": "379.05"
+    },
+    {
+      "symbol": "PLTR260501C00150000",
+      "qty": "1",
+      "market_value": "1220",
+      "unrealized_pl": "-120"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "14",
+      "market_value": "1808.38",
+      "unrealized_pl": "-160.58"
+    },
+    {
+      "symbol": "QCOM260501C00125000",
+      "qty": "1",
+      "market_value": "940",
+      "unrealized_pl": "-385"
+    },
+    {
+      "symbol": "SNOW",
+      "qty": "11",
+      "market_value": "1921.7693",
+      "unrealized_pl": "45.7193"
+    },
+    {
+      "symbol": "TSM",
+      "qty": "1",
+      "market_value": "339.6",
+      "unrealized_pl": "-0.1"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "2071.5561",
+      "unrealized_pl": "131.996088"
+    }
+  ]
+}
