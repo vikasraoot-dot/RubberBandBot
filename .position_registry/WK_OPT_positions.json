@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-03-24T11:42:06.084139-04:00",
+  "updated_at": "2026-03-25T11:45:44.314427-04:00",
   "positions": {
-    "CRM260417C00180000": {
-      "symbol": "CRM260417C00180000",
-      "underlying": "CRM",
-      "client_order_id": "WK_OPT_CRM260417C00180000_1771947125",
-      "order_id": "d5e8a0aa-12a3-431a-b6ee-ed82e8f5fd08",
-      "qty": 1,
-      "entry_price": 19.69,
-      "entry_date": "2026-02-24T10:32:11.206409-05:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "NVO260417C00035000": {
       "symbol": "NVO260417C00035000",
       "underlying": "NVO",
@@ -44,20 +30,6 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "DASH260501C00160000": {
-      "symbol": "DASH260501C00160000",
-      "underlying": "DASH",
-      "client_order_id": "WK_OPT_DASH260501C00160000_1773414603",
-      "order_id": "98ae791c-2553-4b64-bd1a-8ef6a897a2ef",
-      "qty": 1,
-      "entry_price": 16.8,
-      "entry_date": "2026-03-13T11:10:10.038644-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "PLTR260501C00150000": {
       "symbol": "PLTR260501C00150000",
       "underlying": "PLTR",
@@ -66,6 +38,34 @@
       "qty": 1,
       "entry_price": 13.45,
       "entry_date": "2026-03-16T11:39:53.762142-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "CRM260515C00170000": {
+      "symbol": "CRM260515C00170000",
+      "underlying": "CRM",
+      "client_order_id": "WK_OPT_CRM260515C00170000_1774453532",
+      "order_id": "69040c2b-25c5-4486-820b-0932344f188d",
+      "qty": 1,
+      "entry_price": 18.27,
+      "entry_date": "2026-03-25T11:45:38.400107-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "ADBE260515C00230000": {
+      "symbol": "ADBE260515C00230000",
+      "underlying": "ADBE",
+      "client_order_id": "WK_OPT_ADBE260515C00230000_1774453538",
+      "order_id": "64f04830-65bb-409e-b554-46a94836543c",
+      "qty": 1,
+      "entry_price": 18.27,
+      "entry_date": "2026-03-25T11:45:44.313545-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -195,6 +195,42 @@
       "exit_date": "2026-03-12T11:30:14.075515-04:00",
       "exit_reason": "StopLoss",
       "pnl": -640.0
+    },
+    {
+      "symbol": "CRM260417C00180000",
+      "underlying": "CRM",
+      "client_order_id": "WK_OPT_CRM260417C00180000_1771947125",
+      "order_id": "d5e8a0aa-12a3-431a-b6ee-ed82e8f5fd08",
+      "qty": 1,
+      "entry_price": 19.69,
+      "entry_date": "2026-02-24T10:32:11.206409-05:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 7.7,
+      "exit_date": "2026-03-25T11:45:26.587948-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -1195.0
+    },
+    {
+      "symbol": "DASH260501C00160000",
+      "underlying": "DASH",
+      "client_order_id": "WK_OPT_DASH260501C00160000_1773414603",
+      "order_id": "98ae791c-2553-4b64-bd1a-8ef6a897a2ef",
+      "qty": 1,
+      "entry_price": 16.8,
+      "entry_date": "2026-03-13T11:10:10.038644-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 6.75,
+      "exit_date": "2026-03-25T11:45:26.680706-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -1005.0
     }
   ]
 }
