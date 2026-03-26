@@ -1,0 +1,497 @@
+{
+  "date": "2026-03-26",
+  "generated_at": "2026-03-26T17:53:01.789005-04:00",
+  "account": {
+    "equity": "60180.47",
+    "cash": "19268.32",
+    "buying_power": "193939.2"
+  },
+  "summary": {
+    "total_realized_pnl": "-130.8500000000000000000000000",
+    "total_unrealized_pnl": "8.88",
+    "total_pnl": "-121.9700000000000000000000000",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK",
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-03-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "SATS260402C00113000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.6",
+          "filled_at": "2026-03-26T15:36:22.177149Z"
+        },
+        {
+          "symbol": "VRT260402C00265000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.4",
+          "filled_at": "2026-03-26T15:35:33.470073Z"
+        },
+        {
+          "symbol": "MU260402C00370000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.55",
+          "filled_at": "2026-03-26T15:29:33.595543Z"
+        },
+        {
+          "symbol": "LRCX260402C00222500",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.2",
+          "filled_at": "2026-03-26T15:24:24.800176Z"
+        },
+        {
+          "symbol": "TSM260402C00335000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.9",
+          "filled_at": "2026-03-26T15:18:00.159274Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-03-26",
+      "realized_pnl": "-130.8500000000000000000000000",
+      "unrealized_pnl": "9.18",
+      "total_pnl": "-121.6700000000000000000000000",
+      "trades": [
+        {
+          "symbol": "ETN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "358.59",
+          "filled_at": "2026-03-26T16:52:57.295072Z"
+        },
+        {
+          "symbol": "SATS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "110.85",
+          "filled_at": "2026-03-26T15:37:56.880538Z"
+        },
+        {
+          "symbol": "VRT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "258.96",
+          "filled_at": "2026-03-26T15:27:54.155732Z"
+        },
+        {
+          "symbol": "HWM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "230.67",
+          "filled_at": "2026-03-26T16:51:45.097531Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "899.86",
+          "filled_at": "2026-03-26T15:13:29.030594Z"
+        },
+        {
+          "symbol": "HWM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "230.67",
+          "filled_at": "2026-03-26T16:51:45.751715Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "348.67",
+          "filled_at": "2026-03-26T15:12:59.475877Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "334.14",
+          "filled_at": "2026-03-26T15:09:09.940379Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "891.66",
+          "filled_at": "2026-03-26T16:42:26.125428Z"
+        },
+        {
+          "symbol": "HWM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "230.67",
+          "filled_at": "2026-03-26T16:51:44.836378Z"
+        },
+        {
+          "symbol": "GLW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "137.4175",
+          "filled_at": "2026-03-26T15:08:16.961353Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "363.93",
+          "filled_at": "2026-03-26T15:08:00.7767Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "891.325",
+          "filled_at": "2026-03-26T16:42:24.351488Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "303.88",
+          "filled_at": "2026-03-26T15:03:38.415386Z"
+        },
+        {
+          "symbol": "TSM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "335",
+          "filled_at": "2026-03-26T15:03:25.15473Z"
+        },
+        {
+          "symbol": "LRCX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "216.27",
+          "filled_at": "2026-03-26T15:03:11.486592Z"
+        },
+        {
+          "symbol": "SATS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "111.11",
+          "filled_at": "2026-03-26T19:50:17.417979Z"
+        },
+        {
+          "symbol": "GLW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "135.53",
+          "filled_at": "2026-03-26T19:50:10.548442Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "357.79",
+          "filled_at": "2026-03-26T19:50:09.187417Z"
+        },
+        {
+          "symbol": "LRCX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "211.59",
+          "filled_at": "2026-03-26T18:28:38.952664Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "342.06",
+          "filled_at": "2026-03-26T17:54:19.979462Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "331.16",
+          "filled_at": "2026-03-26T17:51:32.94302Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "356.58",
+          "filled_at": "2026-03-26T17:46:57.31386Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "299.495",
+          "filled_at": "2026-03-26T16:49:20.888641Z"
+        },
+        {
+          "symbol": "TSM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "330.93",
+          "filled_at": "2026-03-26T16:49:04.088976Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "882.25",
+          "filled_at": "2026-03-26T16:48:18.980692Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "882.25",
+          "filled_at": "2026-03-26T16:48:19.12549Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "882.675",
+          "filled_at": "2026-03-26T16:48:17.252674Z"
+        },
+        {
+          "symbol": "VRT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "254.51",
+          "filled_at": "2026-03-26T16:39:52.570891Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "HWM",
+          "qty": "6",
+          "entry_price": "230.67",
+          "current_price": "232.2",
+          "unrealized_pnl": "9.18"
+        }
+      ]
+    },
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-03-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-0.30",
+      "total_pnl": "-0.30",
+      "trades": [
+        {
+          "symbol": "BABA260515C00120000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "11.05",
+          "filled_at": "2026-03-26T15:58:51.656186Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "BABA260515C00120000",
+          "qty": "1",
+          "entry_price": "11.05",
+          "current_price": "10.75",
+          "unrealized_pnl": "-0.30"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 14,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1963.741",
+      "unrealized_pl": "29.841"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1684.2",
+      "unrealized_pl": "-90.72"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "6",
+      "market_value": "1863.18",
+      "unrealized_pl": "-106.44"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2009.6",
+      "unrealized_pl": "19.36"
+    },
+    {
+      "symbol": "BABA260515C00120000",
+      "qty": "1",
+      "market_value": "1075",
+      "unrealized_pl": "-30"
+    },
+    {
+      "symbol": "BSX",
+      "qty": "26",
+      "market_value": "1825.2",
+      "unrealized_pl": "-114.4"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1809.837",
+      "unrealized_pl": "-68.563"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2044.1146",
+      "unrealized_pl": "47.8346"
+    },
+    {
+      "symbol": "CRM260515C00170000",
+      "qty": "1",
+      "market_value": "2020",
+      "unrealized_pl": "200"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "1825.2",
+      "unrealized_pl": "-171.48"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2049.03",
+      "unrealized_pl": "80.46"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "1903.23",
+      "unrealized_pl": "-82.62"
+    },
+    {
+      "symbol": "HWM",
+      "qty": "6",
+      "market_value": "1393.2",
+      "unrealized_pl": "9.18"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1936",
+      "unrealized_pl": "53.88"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1974.347",
+      "unrealized_pl": "30.524298"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "1792.91",
+      "unrealized_pl": "-176.4"
+    },
+    {
+      "symbol": "NVO260417C00035000",
+      "qty": "1",
+      "market_value": "196",
+      "unrealized_pl": "-129"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1913.3",
+      "unrealized_pl": "-3.99"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2217.489",
+      "unrealized_pl": "309.039"
+    },
+    {
+      "symbol": "PLTR260501C00150000",
+      "qty": "1",
+      "market_value": "865",
+      "unrealized_pl": "-475"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "14",
+      "market_value": "1834",
+      "unrealized_pl": "-134.96"
+    },
+    {
+      "symbol": "QCOM260501C00125000",
+      "qty": "1",
+      "market_value": "1010",
+      "unrealized_pl": "-315"
+    },
+    {
+      "symbol": "SNOW",
+      "qty": "11",
+      "market_value": "1793",
+      "unrealized_pl": "-83.05"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "1914.57",
+      "unrealized_pl": "-24.990012"
+    }
+  ]
+}

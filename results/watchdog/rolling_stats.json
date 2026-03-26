@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-03-25T18:01:56.432442-04:00",
+  "generated_at": "2026-03-26T17:53:21.036490-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -34,7 +34,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 18,
+        "entries_found": 19,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -59,65 +59,65 @@
       "7d": {
         "window_days": 7,
         "entries_found": 5,
-        "total_trades": 9,
-        "total_winners": 2,
-        "total_losers": 7,
-        "win_rate": 22.22,
-        "avg_pnl_per_day": -5.79,
+        "total_trades": 16,
+        "total_winners": 3,
+        "total_losers": 13,
+        "win_rate": 18.75,
+        "avg_pnl_per_day": -28.97,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -28.93,
-        "sharpe": -0.59,
-        "max_drawdown": -28.93,
-        "trend": "FLAT"
+        "total_pnl": -144.87,
+        "sharpe": -0.5,
+        "max_drawdown": -151.29,
+        "trend": "DEGRADING"
       },
       "30d": {
         "window_days": 30,
         "entries_found": 17,
-        "total_trades": 113,
-        "total_winners": 44,
-        "total_losers": 69,
-        "win_rate": 38.94,
-        "avg_pnl_per_day": -10.72,
+        "total_trades": 109,
+        "total_winners": 39,
+        "total_losers": 70,
+        "win_rate": 35.78,
+        "avg_pnl_per_day": -19.1,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -182.2,
-        "sharpe": -0.3,
-        "max_drawdown": -198.93,
-        "trend": "IMPROVING"
+        "total_pnl": -324.66,
+        "sharpe": -0.42,
+        "max_drawdown": -329.78,
+        "trend": "DEGRADING"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 19,
-        "total_trades": 122,
-        "total_winners": 49,
-        "total_losers": 73,
-        "win_rate": 40.16,
-        "avg_pnl_per_day": -5.5,
+        "entries_found": 20,
+        "total_trades": 133,
+        "total_winners": 50,
+        "total_losers": 83,
+        "win_rate": 37.59,
+        "avg_pnl_per_day": -11.76,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -104.42,
-        "sharpe": -0.14,
-        "max_drawdown": -198.93,
-        "trend": "FLAT"
+        "total_pnl": -235.27,
+        "sharpe": -0.25,
+        "max_drawdown": -329.78,
+        "trend": "DEGRADING"
       },
       "flags": [
         {
           "flag": "DEGRADED",
           "severity": "WARNING",
-          "detail": "7-day win rate 22.22% < 35.0% threshold"
+          "detail": "7-day win rate 18.75% < 35.0% threshold"
         },
         {
           "flag": "FILTERS_ADDING_VALUE",
           "severity": "INFO",
-          "detail": "Bot P&L $-28.93 > Shadow P&L $-161840.0 over 7 days"
+          "detail": "Bot P&L $-144.87 > Shadow P&L $-161840.0 over 7 days"
         }
       ]
     },
     "WK_OPT": {
       "7d": {
         "window_days": 7,
-        "entries_found": 1,
+        "entries_found": 2,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -132,7 +132,7 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 5,
+        "entries_found": 6,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -147,7 +147,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 5,
+        "entries_found": 6,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -180,16 +180,16 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 7,
+        "entries_found": 6,
         "total_trades": 3,
         "total_winners": 0,
         "total_losers": 3,
         "win_rate": 0.0,
-        "avg_pnl_per_day": -7.76,
+        "avg_pnl_per_day": -9.05,
         "avg_win": 0.0,
         "avg_loss": 0.0,
         "total_pnl": -54.32,
-        "sharpe": -0.53,
+        "sharpe": -0.58,
         "max_drawdown": -56.4,
         "trend": "DEGRADING"
       },
