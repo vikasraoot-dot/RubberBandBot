@@ -76,3 +76,5 @@
 {"level":"CRITICAL","event":"ACCOUNT_PAUSE","account_pnl_pct":-3.78,"threshold":-3.0,"ts":"2026-03-24T17:24:12.115471-04:00"}
 {"level":"INFO","event":"AUTO_DAILY_RESET","prev_date":"2026-03-24","new_date":"2026-03-25","ts":"2026-03-25T10:53:57.206047-04:00"}
 {"level":"INFO","event":"AUTO_DAILY_RESET","prev_date":"2026-03-25","new_date":"2026-03-26","ts":"2026-03-26T10:58:10.965562-04:00"}
+{"bot_tag":"15M_STK","level":"WARNING","message":"Daily P&L $-99.91 below $-50.0 warn level","ts":"2026-03-26T13:19:39.630562-04:00"}
+{"bot_tag":"15M_STK","level":"PROFIT_LOCK","message":"P&L $-99.91 dropped below lock floor $24.01","ts":"2026-03-26T13:19:39.633242-04:00"}
