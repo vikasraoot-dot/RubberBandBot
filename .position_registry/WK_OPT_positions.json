@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-03-25T11:45:44.314427-04:00",
+  "updated_at": "2026-03-26T11:51:17.642807-04:00",
   "positions": {
     "NVO260417C00035000": {
       "symbol": "NVO260417C00035000",
@@ -58,14 +58,14 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "ADBE260515C00230000": {
-      "symbol": "ADBE260515C00230000",
-      "underlying": "ADBE",
-      "client_order_id": "WK_OPT_ADBE260515C00230000_1774453538",
-      "order_id": "64f04830-65bb-409e-b554-46a94836543c",
+    "BABA260515C00120000": {
+      "symbol": "BABA260515C00120000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA260515C00120000_1774540271",
+      "order_id": "e295065a-2f71-423a-9856-154f708e9ff3",
       "qty": 1,
-      "entry_price": 18.27,
-      "entry_date": "2026-03-25T11:45:44.313545-04:00",
+      "entry_price": 11.06,
+      "entry_date": "2026-03-26T11:51:17.641959-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -231,6 +231,22 @@
       "exit_date": "2026-03-25T11:45:26.680706-04:00",
       "exit_reason": "StopLoss",
       "pnl": -1005.0
+    },
+    {
+      "symbol": "ADBE260515C00230000",
+      "underlying": "ADBE",
+      "client_order_id": "WK_OPT_ADBE260515C00230000_1774453538",
+      "order_id": "64f04830-65bb-409e-b554-46a94836543c",
+      "qty": 1,
+      "entry_price": 18.27,
+      "entry_date": "2026-03-25T11:45:44.313545-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-03-26T11:51:05.805298-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
