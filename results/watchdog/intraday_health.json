@@ -1,10 +1,10 @@
 {
   "date": "2026-03-27",
-  "updated_at": "2026-03-27T14:32:04.646813-04:00",
+  "updated_at": "2026-03-27T15:26:01.522254-04:00",
   "account": {
-    "equity": 58240.1,
+    "equity": 58175.43,
     "last_equity": 60131.35,
-    "daily_pnl_pct": -3.15,
+    "daily_pnl_pct": -3.25,
     "account_paused": true
   },
   "bots": {
@@ -24,7 +24,7 @@
     },
     "15M_STK": {
       "bot_tag": "15M_STK",
-      "daily_pnl": 9.74,
+      "daily_pnl": -14.82,
       "status": "ACCOUNT_PAUSED",
       "paused": true,
       "pause_reason": "Account-level daily loss threshold exceeded",
