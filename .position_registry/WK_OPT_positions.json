@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-03-27T11:26:05.128998-04:00",
+  "updated_at": "2026-03-30T11:50:33.673402-04:00",
   "positions": {
     "NVO260417C00035000": {
       "symbol": "NVO260417C00035000",
@@ -24,20 +24,6 @@
       "qty": 1,
       "entry_price": 13.5,
       "entry_date": "2026-03-13T11:09:57.444333-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "PLTR260501C00150000": {
-      "symbol": "PLTR260501C00150000",
-      "underlying": "PLTR",
-      "client_order_id": "WK_OPT_PLTR260501C00150000_1773675586",
-      "order_id": "349fdb29-8918-486f-8b65-20086b2846de",
-      "qty": 1,
-      "entry_price": 13.45,
-      "entry_date": "2026-03-16T11:39:53.762142-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -247,6 +233,24 @@
       "sl_price": 0.0,
       "exit_date": "2026-03-26T11:51:05.805298-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "PLTR260501C00150000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260501C00150000_1773675586",
+      "order_id": "349fdb29-8918-486f-8b65-20086b2846de",
+      "qty": 1,
+      "entry_price": 13.45,
+      "entry_date": "2026-03-16T11:39:53.762142-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 5.75,
+      "exit_date": "2026-03-30T11:50:33.618308-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -765.0
     }
   ]
 }
