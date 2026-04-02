@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-04-01T11:53:08.700566-04:00",
+  "updated_at": "2026-04-02T11:35:50.305810-04:00",
   "positions": {
     "NVO260417C00035000": {
       "symbol": "NVO260417C00035000",
@@ -52,6 +52,20 @@
       "qty": 1,
       "entry_price": 11.06,
       "entry_date": "2026-03-26T11:51:17.641959-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "NVDA260522C00170000": {
+      "symbol": "NVDA260522C00170000",
+      "underlying": "NVDA",
+      "client_order_id": "WK_OPT_NVDA260522C00170000_1775144148",
+      "order_id": "d0396a01-6993-4c70-ba50-7039ce06c73f",
+      "qty": 1,
+      "entry_price": 16.17,
+      "entry_date": "2026-04-02T11:35:50.304728-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
