@@ -1,0 +1,187 @@
+{
+  "date": "2026-04-07",
+  "generated_at": "2026-04-07T18:03:30.437522-04:00",
+  "account": {
+    "equity": "58399.06",
+    "cash": "23383.7",
+    "buying_power": "193459.4"
+  },
+  "summary": {
+    "total_realized_pnl": "64.88",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "64.88",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-04-07",
+      "realized_pnl": "64.88",
+      "unrealized_pnl": "0",
+      "total_pnl": "64.88",
+      "trades": [
+        {
+          "symbol": "PFE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "24",
+          "price": "27.03",
+          "filled_at": "2026-04-07T15:05:45.063714Z"
+        },
+        {
+          "symbol": "ARM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "138.11",
+          "filled_at": "2026-04-07T15:05:34.19706Z"
+        },
+        {
+          "symbol": "ARM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "143.07",
+          "filled_at": "2026-04-07T19:50:10.509248Z"
+        },
+        {
+          "symbol": "PFE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "24",
+          "price": "26.84",
+          "filled_at": "2026-04-07T15:21:58.9934Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 11,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1980",
+      "unrealized_pl": "46.1"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1687",
+      "unrealized_pl": "-87.92"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "6",
+      "market_value": "2020.5",
+      "unrealized_pl": "50.88"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "1933.92",
+      "unrealized_pl": "-56.32"
+    },
+    {
+      "symbol": "BABA260515C00120000",
+      "qty": "1",
+      "market_value": "670",
+      "unrealized_pl": "-435"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1822.057",
+      "unrealized_pl": "-56.343"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2024.11",
+      "unrealized_pl": "27.83"
+    },
+    {
+      "symbol": "CRM260515C00170000",
+      "qty": "1",
+      "market_value": "1800",
+      "unrealized_pl": "-20"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "1892.88",
+      "unrealized_pl": "-103.8"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "1971",
+      "unrealized_pl": "2.43"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "1915.7823",
+      "unrealized_pl": "-70.0677"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1974.96",
+      "unrealized_pl": "92.84"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1926.79",
+      "unrealized_pl": "-17.032702"
+    },
+    {
+      "symbol": "NVDA260522C00170000",
+      "qty": "1",
+      "market_value": "1555",
+      "unrealized_pl": "-45"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "1819.8502",
+      "unrealized_pl": "-149.4598"
+    },
+    {
+      "symbol": "NVO260417C00035000",
+      "qty": "1",
+      "market_value": "234",
+      "unrealized_pl": "-91"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1898.1",
+      "unrealized_pl": "-19.19"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2273.9895",
+      "unrealized_pl": "365.5395"
+    },
+    {
+      "symbol": "SNOW",
+      "qty": "11",
+      "market_value": "1660.78",
+      "unrealized_pl": "-215.27"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "1954.8",
+      "unrealized_pl": "15.239988"
+    }
+  ]
+}
