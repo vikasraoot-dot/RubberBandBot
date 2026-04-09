@@ -1,0 +1,130 @@
+{
+  "date": "2026-04-09",
+  "generated_at": "2026-04-09T18:05:19.485789-04:00",
+  "account": {
+    "equity": "57527.28",
+    "cash": "25791.58",
+    "buying_power": "192480.3"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 10,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1862.5",
+      "unrealized_pl": "-71.4"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1607.9007",
+      "unrealized_pl": "-167.0193"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "6",
+      "market_value": "2129.94",
+      "unrealized_pl": "160.32"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2041.6",
+      "unrealized_pl": "51.36"
+    },
+    {
+      "symbol": "BABA260515C00120000",
+      "qty": "1",
+      "market_value": "1060",
+      "unrealized_pl": "-45"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1947.3",
+      "unrealized_pl": "68.9"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1878.03",
+      "unrealized_pl": "-118.25"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "1853.5812",
+      "unrealized_pl": "-143.0988"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2071.71",
+      "unrealized_pl": "103.14"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "1895.4",
+      "unrealized_pl": "-90.45"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1893.04",
+      "unrealized_pl": "10.92"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1708.1",
+      "unrealized_pl": "-235.722702"
+    },
+    {
+      "symbol": "NVDA260522C00170000",
+      "qty": "1",
+      "market_value": "1895",
+      "unrealized_pl": "295"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "1831.13",
+      "unrealized_pl": "-138.18"
+    },
+    {
+      "symbol": "NVO260417C00035000",
+      "qty": "1",
+      "market_value": "257",
+      "unrealized_pl": "-68"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1912.92",
+      "unrealized_pl": "-4.37"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1956",
+      "unrealized_pl": "47.55"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "1934.55",
+      "unrealized_pl": "-5.010012"
+    }
+  ]
+}
