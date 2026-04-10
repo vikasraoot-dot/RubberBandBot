@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-04-09T12:02:28.270892-04:00",
+  "updated_at": "2026-04-10T11:27:24.224306-04:00",
   "positions": {
     "NVO260417C00035000": {
       "symbol": "NVO260417C00035000",
@@ -38,6 +38,34 @@
       "qty": 1,
       "entry_price": 16.17,
       "entry_date": "2026-04-02T11:35:50.304728-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "PLTR260529C00125000": {
+      "symbol": "PLTR260529C00125000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260529C00125000_1775834826",
+      "order_id": "9e17cb3e-35e4-46e1-a2ec-a39417d31927",
+      "qty": 1,
+      "entry_price": 14.21,
+      "entry_date": "2026-04-10T11:27:12.543861-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "QCOM260529C00125000": {
+      "symbol": "QCOM260529C00125000",
+      "underlying": "QCOM",
+      "client_order_id": "WK_OPT_QCOM260529C00125000_1775834837",
+      "order_id": "af27d2bc-3e45-4660-9270-42a6a31265c2",
+      "qty": 1,
+      "entry_price": 10.9,
+      "entry_date": "2026-04-10T11:27:24.223271-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
