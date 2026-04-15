@@ -1,0 +1,277 @@
+{
+  "date": "2026-04-15",
+  "generated_at": "2026-04-15T18:09:30.228566-04:00",
+  "account": {
+    "equity": "62550.94",
+    "cash": "26434.84",
+    "buying_power": "205835.34"
+  },
+  "summary": {
+    "total_realized_pnl": "3.9900060000000000000000001",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "3.9900060000000000000000001",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-04-15",
+      "realized_pnl": "3.9900060000000000000000001",
+      "unrealized_pnl": "0",
+      "total_pnl": "3.9900060000000000000000001",
+      "trades": [
+        {
+          "symbol": "CAT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "757.28",
+          "filled_at": "2026-04-15T16:53:06.326726Z"
+        },
+        {
+          "symbol": "JCI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "136.2",
+          "filled_at": "2026-04-15T16:22:51.766795Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "575.07",
+          "filled_at": "2026-04-15T16:03:11.339317Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "575.08",
+          "filled_at": "2026-04-15T16:03:10.864941Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "575.07",
+          "filled_at": "2026-04-15T16:03:11.314291Z"
+        },
+        {
+          "symbol": "NEM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "17",
+          "price": "113.7",
+          "filled_at": "2026-04-15T15:38:00.624612Z"
+        },
+        {
+          "symbol": "CARR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "32",
+          "price": "60.92",
+          "filled_at": "2026-04-15T15:23:00.636107Z"
+        },
+        {
+          "symbol": "CMI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "593.91",
+          "filled_at": "2026-04-15T15:06:10.043425Z"
+        },
+        {
+          "symbol": "NEM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "17",
+          "price": "113.524118",
+          "filled_at": "2026-04-15T19:50:15.759103Z"
+        },
+        {
+          "symbol": "JCI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "137.53",
+          "filled_at": "2026-04-15T19:50:11.42202Z"
+        },
+        {
+          "symbol": "CAT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "769.07",
+          "filled_at": "2026-04-15T19:50:10.095623Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "574",
+          "filled_at": "2026-04-15T16:17:42.53415Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "574",
+          "filled_at": "2026-04-15T16:17:42.354717Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "574",
+          "filled_at": "2026-04-15T16:17:42.441241Z"
+        },
+        {
+          "symbol": "CMI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "590.03",
+          "filled_at": "2026-04-15T16:12:16.859275Z"
+        },
+        {
+          "symbol": "CARR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "32",
+          "price": "60.28375",
+          "filled_at": "2026-04-15T15:39:19.605833Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 10,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1942.4",
+      "unrealized_pl": "8.5"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1715.07",
+      "unrealized_pl": "-59.85"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "6",
+      "market_value": "2369.4",
+      "unrealized_pl": "399.78"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2138.72",
+      "unrealized_pl": "148.48"
+    },
+    {
+      "symbol": "BABA260515C00120000",
+      "qty": "1",
+      "market_value": "1520",
+      "unrealized_pl": "415"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "2036.3",
+      "unrealized_pl": "157.9"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1958.143",
+      "unrealized_pl": "-38.137"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "2156.406",
+      "unrealized_pl": "159.726"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2101.8258",
+      "unrealized_pl": "133.2558"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "2415.96",
+      "unrealized_pl": "430.11"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1960.8",
+      "unrealized_pl": "78.68"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1801.01",
+      "unrealized_pl": "-142.812702"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "2004.59",
+      "unrealized_pl": "35.28"
+    },
+    {
+      "symbol": "NVO260417C00035000",
+      "qty": "1",
+      "market_value": "565",
+      "unrealized_pl": "240"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1940.85",
+      "unrealized_pl": "23.56"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2132.1",
+      "unrealized_pl": "223.65"
+    },
+    {
+      "symbol": "PLTR260529C00125000",
+      "qty": "1",
+      "market_value": "2110",
+      "unrealized_pl": "710"
+    },
+    {
+      "symbol": "QCOM260529C00125000",
+      "qty": "1",
+      "market_value": "1155",
+      "unrealized_pl": "65"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "2091.42",
+      "unrealized_pl": "151.859988"
+    }
+  ]
+}
