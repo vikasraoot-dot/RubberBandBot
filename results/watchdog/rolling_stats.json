@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-21T18:07:55.331390-04:00",
+  "generated_at": "2026-04-23T18:08:06.640616-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -59,15 +59,15 @@
       "7d": {
         "window_days": 7,
         "entries_found": 4,
-        "total_trades": 20,
-        "total_winners": 13,
-        "total_losers": 7,
-        "win_rate": 65.0,
-        "avg_pnl_per_day": 21.21,
+        "total_trades": 15,
+        "total_winners": 12,
+        "total_losers": 3,
+        "win_rate": 80.0,
+        "avg_pnl_per_day": 21.54,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 84.83,
-        "sharpe": 0.65,
+        "total_pnl": 86.17,
+        "sharpe": 0.67,
         "max_drawdown": -9.57,
         "trend": "DEGRADING"
       },
@@ -78,25 +78,25 @@
         "total_winners": 20,
         "total_losers": 25,
         "win_rate": 44.44,
-        "avg_pnl_per_day": -0.37,
+        "avg_pnl_per_day": -0.11,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -4.83,
-        "sharpe": -0.01,
+        "total_pnl": -1.37,
+        "sharpe": -0.0,
         "max_drawdown": -177.33,
         "trend": "IMPROVING"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 30,
-        "total_trades": 164,
-        "total_winners": 68,
+        "entries_found": 31,
+        "total_trades": 165,
+        "total_winners": 69,
         "total_losers": 96,
-        "win_rate": 41.46,
-        "avg_pnl_per_day": -3.2,
+        "win_rate": 41.82,
+        "avg_pnl_per_day": -2.92,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -95.89,
+        "total_pnl": -90.56,
         "sharpe": -0.07,
         "max_drawdown": -361.03,
         "trend": "IMPROVING"
@@ -105,7 +105,7 @@
         {
           "flag": "FILTERS_ADDING_VALUE",
           "severity": "INFO",
-          "detail": "Bot P&L $84.83 > Shadow P&L $-129472.0 over 7 days"
+          "detail": "Bot P&L $86.17 > Shadow P&L $-129472.0 over 7 days"
         }
       ]
     },
