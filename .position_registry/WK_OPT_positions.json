@@ -1,22 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-04-23T12:17:55.997747-04:00",
-  "positions": {
-    "QCOM260529C00125000": {
-      "symbol": "QCOM260529C00125000",
-      "underlying": "QCOM",
-      "client_order_id": "WK_OPT_QCOM260529C00125000_1775834837",
-      "order_id": "af27d2bc-3e45-4660-9270-42a6a31265c2",
-      "qty": 1,
-      "entry_price": 10.9,
-      "entry_date": "2026-04-10T11:27:24.223271-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    }
-  },
+  "updated_at": "2026-04-24T11:47:56.777468-04:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "NFLX260417C00075000",
@@ -315,6 +300,24 @@
       "exit_date": "2026-04-22T11:51:10.552345-04:00",
       "exit_reason": "TakeProfit",
       "pnl": 1455.0
+    },
+    {
+      "symbol": "QCOM260529C00125000",
+      "underlying": "QCOM",
+      "client_order_id": "WK_OPT_QCOM260529C00125000_1775834837",
+      "order_id": "af27d2bc-3e45-4660-9270-42a6a31265c2",
+      "qty": 1,
+      "entry_price": 10.9,
+      "entry_date": "2026-04-10T11:27:24.223271-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 22.05,
+      "exit_date": "2026-04-24T11:47:35.798519-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1115.0
     }
   ]
 }
