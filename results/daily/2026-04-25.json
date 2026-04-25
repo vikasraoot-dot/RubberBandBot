@@ -1,0 +1,106 @@
+{
+  "date": "2026-04-25",
+  "generated_at": "2026-04-25T00:40:32.268592-04:00",
+  "account": {
+    "equity": "63937.17",
+    "cash": "36262.23",
+    "buying_power": "218309.26"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 9,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1783.6",
+      "unrealized_pl": "-150.3"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1718.08",
+      "unrealized_pl": "-56.84"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2173.12",
+      "unrealized_pl": "182.88"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1913.9",
+      "unrealized_pl": "35.5"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1959.76",
+      "unrealized_pl": "-36.52"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "2121.36",
+      "unrealized_pl": "124.68"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2107.35",
+      "unrealized_pl": "138.78"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "2287.17",
+      "unrealized_pl": "301.32"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1855.84",
+      "unrealized_pl": "-26.28"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1713.23",
+      "unrealized_pl": "-230.592702"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "2017.33",
+      "unrealized_pl": "48.02"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1862.57",
+      "unrealized_pl": "-54.72"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2146.35",
+      "unrealized_pl": "237.9"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "2015.28",
+      "unrealized_pl": "75.719988"
+    }
+  ]
+}
