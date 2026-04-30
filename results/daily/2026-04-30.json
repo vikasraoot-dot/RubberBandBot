@@ -1,0 +1,160 @@
+{
+  "date": "2026-04-30",
+  "generated_at": "2026-04-30T18:27:45.403212-04:00",
+  "account": {
+    "equity": "63566.44",
+    "cash": "35591.09",
+    "buying_power": "219610.72"
+  },
+  "summary": {
+    "total_realized_pnl": "-1.53",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-1.53",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-04-30",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "NVDA260508C00200000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.3",
+          "filled_at": "2026-04-30T15:46:27.145162Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-04-30",
+      "realized_pnl": "-1.53",
+      "unrealized_pnl": "0",
+      "total_pnl": "-1.53",
+      "trades": [
+        {
+          "symbol": "NVDA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "200.59",
+          "filled_at": "2026-04-30T15:48:53.32762Z"
+        },
+        {
+          "symbol": "NVDA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "200.42",
+          "filled_at": "2026-04-30T19:50:05.784423Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 10,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1790.6",
+      "unrealized_pl": "-143.3"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1750",
+      "unrealized_pl": "-24.92"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2113.28",
+      "unrealized_pl": "123.04"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1913.8",
+      "unrealized_pl": "35.4"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1988.6075",
+      "unrealized_pl": "-7.6725"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "2037.7704",
+      "unrealized_pl": "41.0904"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2084.4",
+      "unrealized_pl": "115.83"
+    },
+    {
+      "symbol": "HLT",
+      "qty": "2",
+      "market_value": "648",
+      "unrealized_pl": "24.06"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "1973.6487",
+      "unrealized_pl": "-12.2013"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1850",
+      "unrealized_pl": "-32.12"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1721.4",
+      "unrealized_pl": "-222.422702"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "2075.64",
+      "unrealized_pl": "106.33"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1895.25",
+      "unrealized_pl": "-22.04"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2118.75",
+      "unrealized_pl": "210.3"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "2014.2",
+      "unrealized_pl": "74.639988"
+    }
+  ]
+}
