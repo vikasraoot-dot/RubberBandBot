@@ -5,19 +5,19 @@
     "tp_r_multiple_adjustment": 0.5,
     "breakeven_trigger_r_adjustment": 0.5
   },
-  "reason": "SPY $718.01 > SMA-20 $701.45, ADX 98.7 > 25, +DI 1256.0 > -DI 17.4",
+  "reason": "SPY $723.77 > SMA-20 $704.68, ADX 98.9 > 25, +DI 1256.8 > -DI 14.9",
   "diagnostics": {
-    "spy_close": 718.01,
-    "sma_20": 701.45,
-    "adx": 98.7,
-    "pdi": 1256.0,
-    "mdi": 17.4,
-    "atr_5": 6.49,
-    "atr_20": 7.43,
-    "atr_ratio": 0.874,
-    "reversal_count_20": 11
+    "spy_close": 723.77,
+    "sma_20": 704.68,
+    "adx": 98.9,
+    "pdi": 1256.8,
+    "mdi": 14.9,
+    "atr_5": 6.71,
+    "atr_20": 7.35,
+    "atr_ratio": 0.913,
+    "reversal_count_20": 12
   },
-  "updated_at": "2026-05-04T22:33:03.642080+00:00",
+  "updated_at": "2026-05-05T22:30:36.506457+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-05-04T22:33:17.378966+00:00"
+    "updated_at": "2026-05-05T22:30:50.407636+00:00"
   }
 }
