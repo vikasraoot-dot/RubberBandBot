@@ -1,0 +1,183 @@
+{
+  "date": "2026-05-06",
+  "generated_at": "2026-05-06T18:13:04.220020-04:00",
+  "account": {
+    "equity": "64321.27",
+    "cash": "36292.46",
+    "buying_power": "221828.32"
+  },
+  "summary": {
+    "total_realized_pnl": "18.489997",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "18.489997",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-05-06",
+      "realized_pnl": "18.489997",
+      "unrealized_pnl": "0",
+      "total_pnl": "18.489997",
+      "trades": [
+        {
+          "symbol": "ANET",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "142.11",
+          "filled_at": "2026-05-06T18:37:28.396967Z"
+        },
+        {
+          "symbol": "CNQ",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "45.79",
+          "filled_at": "2026-05-06T16:06:05.082746Z"
+        },
+        {
+          "symbol": "XOM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "147.58",
+          "filled_at": "2026-05-06T16:05:57.488416Z"
+        },
+        {
+          "symbol": "CVX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "184.03",
+          "filled_at": "2026-05-06T16:05:51.377455Z"
+        },
+        {
+          "symbol": "XOM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "148.51",
+          "filled_at": "2026-05-06T19:50:11.565311Z"
+        },
+        {
+          "symbol": "CVX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "185.206667",
+          "filled_at": "2026-05-06T19:50:11.535354Z"
+        },
+        {
+          "symbol": "CNQ",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "45.580714",
+          "filled_at": "2026-05-06T19:50:10.963428Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "145.6525",
+          "filled_at": "2026-05-06T19:50:08.771516Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 9,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "10",
+      "market_value": "1746.7",
+      "unrealized_pl": "-187.2"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "7",
+      "market_value": "1753.36",
+      "unrealized_pl": "-21.56"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2259.2",
+      "unrealized_pl": "268.96"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1930",
+      "unrealized_pl": "51.6"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1994.3",
+      "unrealized_pl": "-1.98"
+    },
+    {
+      "symbol": "DASH",
+      "qty": "12",
+      "market_value": "2248.8",
+      "unrealized_pl": "252.12"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2124.9",
+      "unrealized_pl": "156.33"
+    },
+    {
+      "symbol": "HOOD",
+      "qty": "27",
+      "market_value": "2116.8",
+      "unrealized_pl": "130.95"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "1807.44",
+      "unrealized_pl": "-74.68"
+    },
+    {
+      "symbol": "NOW",
+      "qty": "19",
+      "market_value": "1691.19",
+      "unrealized_pl": "-252.632702"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "2267.72",
+      "unrealized_pl": "298.41"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "19",
+      "market_value": "1943.9166",
+      "unrealized_pl": "26.6266"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2004.15",
+      "unrealized_pl": "95.7"
+    },
+    {
+      "symbol": "UBER",
+      "qty": "27",
+      "market_value": "2140.3332",
+      "unrealized_pl": "200.773188"
+    }
+  ]
+}
