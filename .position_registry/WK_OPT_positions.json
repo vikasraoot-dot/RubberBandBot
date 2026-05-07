@@ -1,7 +1,22 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-05-06T12:14:19.448668-04:00",
-  "positions": {},
+  "updated_at": "2026-05-07T12:23:16.680103-04:00",
+  "positions": {
+    "DASH260626C00160000": {
+      "symbol": "DASH260626C00160000",
+      "underlying": "DASH",
+      "client_order_id": "WK_OPT_DASH260626C00160000_1778170984",
+      "order_id": "ca567019-657f-4acf-8a81-9a383e6a52c8",
+      "qty": 1,
+      "entry_price": 18.21,
+      "entry_date": "2026-05-07T12:23:11.565378-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    }
+  },
   "closed_positions": [
     {
       "symbol": "NFLX260417C00075000",
