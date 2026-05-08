@@ -1,15 +1,15 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-05-07T12:23:16.680103-04:00",
+  "updated_at": "2026-05-08T11:59:15.149729-04:00",
   "positions": {
-    "DASH260626C00160000": {
-      "symbol": "DASH260626C00160000",
-      "underlying": "DASH",
-      "client_order_id": "WK_OPT_DASH260626C00160000_1778170984",
-      "order_id": "ca567019-657f-4acf-8a81-9a383e6a52c8",
+    "BABA260626C00127000": {
+      "symbol": "BABA260626C00127000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA260626C00127000_1778255938",
+      "order_id": "a0ae2f72-c5ea-4f85-a29a-9b5404835453",
       "qty": 1,
-      "entry_price": 18.21,
-      "entry_date": "2026-05-07T12:23:11.565378-04:00",
+      "entry_price": 18.63,
+      "entry_date": "2026-05-08T11:59:05.407592-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -333,6 +333,22 @@
       "exit_date": "2026-04-24T11:47:35.798519-04:00",
       "exit_reason": "TakeProfit",
       "pnl": 1115.0
+    },
+    {
+      "symbol": "DASH260626C00160000",
+      "underlying": "DASH",
+      "client_order_id": "WK_OPT_DASH260626C00160000_1778170984",
+      "order_id": "ca567019-657f-4acf-8a81-9a383e6a52c8",
+      "qty": 1,
+      "entry_price": 18.21,
+      "entry_date": "2026-05-07T12:23:11.565378-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-05-08T11:58:42.330806-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
