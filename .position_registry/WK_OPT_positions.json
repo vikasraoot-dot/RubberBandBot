@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-05-20T13:39:32.516851-04:00",
+  "updated_at": "2026-05-21T13:14:24.898943-04:00",
   "positions": {
-    "BABA260626C00127000": {
-      "symbol": "BABA260626C00127000",
-      "underlying": "BABA",
-      "client_order_id": "WK_OPT_BABA260626C00127000_1778255938",
-      "order_id": "a0ae2f72-c5ea-4f85-a29a-9b5404835453",
-      "qty": 1,
-      "entry_price": 18.63,
-      "entry_date": "2026-05-08T11:59:05.407592-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "DASH260626C00155000": {
       "symbol": "DASH260626C00155000",
       "underlying": "DASH",
@@ -397,6 +383,24 @@
       "exit_date": "2026-05-13T12:40:29.579832-04:00",
       "exit_reason": "StopLoss",
       "pnl": -880.0
+    },
+    {
+      "symbol": "BABA260626C00127000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA260626C00127000_1778255938",
+      "order_id": "a0ae2f72-c5ea-4f85-a29a-9b5404835453",
+      "qty": 1,
+      "entry_price": 18.63,
+      "entry_date": "2026-05-08T11:59:05.407592-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 7.5,
+      "exit_date": "2026-05-21T13:14:19.545362-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -1105.0
     }
   ]
 }
