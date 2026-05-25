@@ -1,0 +1,70 @@
+{
+  "date": "2026-05-25",
+  "generated_at": "2026-05-25T18:33:45.707265-04:00",
+  "account": {
+    "equity": "60899.13",
+    "cash": "46705.34",
+    "buying_power": "228607.96"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 2,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2150.88",
+      "unrealized_pl": "258.24"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2080",
+      "unrealized_pl": "89.76"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1877.9",
+      "unrealized_pl": "-0.5"
+    },
+    {
+      "symbol": "DASH260626C00155000",
+      "qty": "1",
+      "market_value": "1230",
+      "unrealized_pl": "-305"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2127.33",
+      "unrealized_pl": "158.76"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "2030.72",
+      "unrealized_pl": "148.6"
+    },
+    {
+      "symbol": "NVO",
+      "qty": "49",
+      "market_value": "2203.04",
+      "unrealized_pl": "233.73"
+    },
+    {
+      "symbol": "VLO",
+      "qty": "2",
+      "market_value": "493.92",
+      "unrealized_pl": "6.92"
+    }
+  ]
+}
