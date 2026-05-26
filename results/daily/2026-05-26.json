@@ -1,0 +1,189 @@
+{
+  "date": "2026-05-26",
+  "generated_at": "2026-05-26T18:48:23.406812-04:00",
+  "account": {
+    "equity": "60197.71",
+    "cash": "44577.62",
+    "buying_power": "209299.74"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-15.04",
+    "total_pnl": "-15.04",
+    "bots_active": [
+      "WK_STK",
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-05-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-12.54",
+      "total_pnl": "-12.54",
+      "trades": [
+        {
+          "symbol": "CRM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "180.74",
+          "filled_at": "2026-05-26T17:46:14.810721Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "CRM",
+          "qty": "11",
+          "entry_price": "180.74",
+          "current_price": "179.6",
+          "unrealized_pnl": "-12.54"
+        }
+      ]
+    },
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-05-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-2.50",
+      "total_pnl": "-2.50",
+      "trades": [
+        {
+          "symbol": "HOOD260717C00070000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "8.95",
+          "filled_at": "2026-05-26T17:46:37.55674Z"
+        },
+        {
+          "symbol": "NOW260717C00100000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "9.5",
+          "filled_at": "2026-05-26T18:02:48.38482Z"
+        },
+        {
+          "symbol": "BABA260717C00125000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "10.05",
+          "filled_at": "2026-05-26T17:55:49.147991Z"
+        },
+        {
+          "symbol": "CRM260717C00180000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "14.8",
+          "filled_at": "2026-05-26T17:51:50.008381Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "BABA260717C00125000",
+          "qty": "1",
+          "entry_price": "10.05",
+          "current_price": "9.8",
+          "unrealized_pnl": "-0.25"
+        },
+        {
+          "symbol": "CRM260717C00180000",
+          "qty": "1",
+          "entry_price": "14.8",
+          "current_price": "13.55",
+          "unrealized_pnl": "-1.25"
+        },
+        {
+          "symbol": "HOOD260717C00070000",
+          "qty": "1",
+          "entry_price": "8.95",
+          "current_price": "8.65",
+          "unrealized_pnl": "-0.30"
+        },
+        {
+          "symbol": "NOW260717C00100000",
+          "qty": "1",
+          "entry_price": "9.5",
+          "current_price": "8.8",
+          "unrealized_pnl": "-0.7"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2124",
+      "unrealized_pl": "231.36"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2072.9616",
+      "unrealized_pl": "82.7216"
+    },
+    {
+      "symbol": "BABA260717C00125000",
+      "qty": "1",
+      "market_value": "980",
+      "unrealized_pl": "-25"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1864.2",
+      "unrealized_pl": "-14.2"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1975.6",
+      "unrealized_pl": "-12.54"
+    },
+    {
+      "symbol": "CRM260717C00180000",
+      "qty": "1",
+      "market_value": "1355",
+      "unrealized_pl": "-125"
+    },
+    {
+      "symbol": "DASH260626C00155000",
+      "qty": "1",
+      "market_value": "865",
+      "unrealized_pl": "-670"
+    },
+    {
+      "symbol": "GM",
+      "qty": "27",
+      "market_value": "2154.33",
+      "unrealized_pl": "185.76"
+    },
+    {
+      "symbol": "HOOD260717C00070000",
+      "qty": "1",
+      "market_value": "865",
+      "unrealized_pl": "-30"
+    },
+    {
+      "symbol": "NOW260717C00100000",
+      "qty": "1",
+      "market_value": "880",
+      "unrealized_pl": "-70"
+    },
+    {
+      "symbol": "VLO",
+      "qty": "2",
+      "market_value": "484",
+      "unrealized_pl": "-3"
+    }
+  ]
+}
