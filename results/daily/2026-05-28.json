@@ -1,0 +1,176 @@
+{
+  "date": "2026-05-28",
+  "generated_at": "2026-05-28T18:51:59.872205-04:00",
+  "account": {
+    "equity": "61085.41",
+    "cash": "44869.87",
+    "buying_power": "228856.1"
+  },
+  "summary": {
+    "total_realized_pnl": "5.53",
+    "total_unrealized_pnl": "0.42",
+    "total_pnl": "5.95",
+    "bots_active": [
+      "WK_STK",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-05-28",
+      "realized_pnl": "0",
+      "unrealized_pnl": "1.6",
+      "total_pnl": "1.6",
+      "trades": [
+        {
+          "symbol": "ADBE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "242",
+          "filled_at": "2026-05-28T17:50:41.285489Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ADBE",
+          "qty": "8",
+          "entry_price": "242",
+          "current_price": "242.2",
+          "unrealized_pnl": "1.6"
+        }
+      ]
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-05-28",
+      "realized_pnl": "5.53",
+      "unrealized_pnl": "-1.18",
+      "total_pnl": "4.35",
+      "trades": [
+        {
+          "symbol": "UNP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "267.59",
+          "filled_at": "2026-05-28T14:22:13.374115Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "492.57",
+          "filled_at": "2026-05-28T14:07:08.125979Z"
+        },
+        {
+          "symbol": "SLB",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.91",
+          "filled_at": "2026-05-28T14:07:00.123046Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "491.5",
+          "filled_at": "2026-05-28T14:07:08.430822Z"
+        },
+        {
+          "symbol": "SLB",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "12",
+          "price": "55.46",
+          "filled_at": "2026-05-28T14:42:15.777562Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "UNP",
+          "qty": "2",
+          "entry_price": "267.59",
+          "current_price": "267",
+          "unrealized_pnl": "-1.18"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2140.8",
+      "unrealized_pl": "248.16"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "8",
+      "market_value": "1937.6",
+      "unrealized_pl": "1.6"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2019.5168",
+      "unrealized_pl": "29.2768"
+    },
+    {
+      "symbol": "BABA260717C00125000",
+      "qty": "1",
+      "market_value": "760",
+      "unrealized_pl": "-245"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1870.2",
+      "unrealized_pl": "-8.2"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1938.42",
+      "unrealized_pl": "-49.72"
+    },
+    {
+      "symbol": "CRM260717C00180000",
+      "qty": "1",
+      "market_value": "940",
+      "unrealized_pl": "-540"
+    },
+    {
+      "symbol": "DASH260626C00155000",
+      "qty": "1",
+      "market_value": "940",
+      "unrealized_pl": "-595"
+    },
+    {
+      "symbol": "HOOD260717C00070000",
+      "qty": "1",
+      "market_value": "1715",
+      "unrealized_pl": "820"
+    },
+    {
+      "symbol": "NOW260717C00100000",
+      "qty": "1",
+      "market_value": "1420",
+      "unrealized_pl": "470"
+    },
+    {
+      "symbol": "UNP",
+      "qty": "2",
+      "market_value": "534",
+      "unrealized_pl": "-1.18"
+    }
+  ]
+}
