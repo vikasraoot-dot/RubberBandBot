@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-05-26T13:46:13.082481-04:00",
+  "updated_at": "2026-05-28T13:50:37.767038-04:00",
   "positions": {
     "COF": {
       "symbol": "COF",
@@ -10,20 +10,6 @@
       "qty": 10,
       "entry_price": 187.68,
       "entry_date": "2026-03-06T11:04:16.259286-05:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "GM": {
-      "symbol": "GM",
-      "underlying": "GM",
-      "client_order_id": "WK_STK_GM_1773415525",
-      "order_id": "1fb11103-43ec-4829-b731-1a09665e1b0f",
-      "qty": 27,
-      "entry_price": 72.9,
-      "entry_date": "2026-03-13T11:25:25.393335-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -66,6 +52,20 @@
       "qty": 11,
       "entry_price": 180.72,
       "entry_date": "2026-05-26T13:46:13.032070-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "ADBE": {
+      "symbol": "ADBE",
+      "underlying": "ADBE",
+      "client_order_id": "WK_STK_ADBE_1779990636",
+      "order_id": "5e3dcb99-b3da-4faf-b6be-6b83fc462666",
+      "qty": 8,
+      "entry_price": 241.94,
+      "entry_date": "2026-05-28T13:50:37.561476-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -120,6 +120,22 @@
       "tp_price": 0.0,
       "sl_price": 0.0,
       "exit_date": "2026-05-26T13:46:10.857343-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "GM",
+      "underlying": "GM",
+      "client_order_id": "WK_STK_GM_1773415525",
+      "order_id": "1fb11103-43ec-4829-b731-1a09665e1b0f",
+      "qty": 27,
+      "entry_price": 72.9,
+      "entry_date": "2026-03-13T11:25:25.393335-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-05-28T13:50:33.610580-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
