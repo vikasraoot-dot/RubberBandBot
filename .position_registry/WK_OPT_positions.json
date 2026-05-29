@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-05-28T13:48:57.495540-04:00",
+  "updated_at": "2026-05-29T13:53:51.612870-04:00",
   "positions": {
     "DASH260626C00155000": {
       "symbol": "DASH260626C00155000",
@@ -44,28 +44,28 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "NOW260717C00100000": {
-      "symbol": "NOW260717C00100000",
-      "underlying": "NOW",
-      "client_order_id": "WK_OPT_NOW260717C00100000_1779817410",
-      "order_id": "d44c04c4-c92c-4c4d-ab27-4d75d5f9aec0",
+    "ACN260717C00180000": {
+      "symbol": "ACN260717C00180000",
+      "underlying": "ACN",
+      "client_order_id": "WK_OPT_ACN260717C00180000_1780077222",
+      "order_id": "aa98f9ea-f7e2-47b5-8fb6-8ce62f180672",
       "qty": 1,
-      "entry_price": 9.76,
-      "entry_date": "2026-05-26T13:43:35.988916-04:00",
+      "entry_price": 18.41,
+      "entry_date": "2026-05-29T13:53:48.863721-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "HOOD260717C00070000": {
-      "symbol": "HOOD260717C00070000",
-      "underlying": "HOOD",
-      "client_order_id": "WK_OPT_HOOD260717C00070000_1779817416",
-      "order_id": "4a348496-5ea2-4691-8e27-36286f46e3c6",
+    "NOW260717C00120000": {
+      "symbol": "NOW260717C00120000",
+      "underlying": "NOW",
+      "client_order_id": "WK_OPT_NOW260717C00120000_1780077229",
+      "order_id": "fa49cf95-7bd1-43a8-8b9c-e894fe860b3d",
       "qty": 1,
-      "entry_price": 9.02,
-      "entry_date": "2026-05-26T13:43:41.983617-04:00",
+      "entry_price": 13.83,
+      "entry_date": "2026-05-29T13:53:51.611620-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -457,6 +457,42 @@
       "exit_date": "2026-05-21T13:14:19.545362-04:00",
       "exit_reason": "StopLoss",
       "pnl": -1105.0
+    },
+    {
+      "symbol": "HOOD260717C00070000",
+      "underlying": "HOOD",
+      "client_order_id": "WK_OPT_HOOD260717C00070000_1779817416",
+      "order_id": "4a348496-5ea2-4691-8e27-36286f46e3c6",
+      "qty": 1,
+      "entry_price": 9.02,
+      "entry_date": "2026-05-26T13:43:41.983617-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 23.85,
+      "exit_date": "2026-05-29T13:53:29.589602-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1490.0
+    },
+    {
+      "symbol": "NOW260717C00100000",
+      "underlying": "NOW",
+      "client_order_id": "WK_OPT_NOW260717C00100000_1779817410",
+      "order_id": "d44c04c4-c92c-4c4d-ab27-4d75d5f9aec0",
+      "qty": 1,
+      "entry_price": 9.76,
+      "entry_date": "2026-05-26T13:43:35.988916-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 26.4,
+      "exit_date": "2026-05-29T13:53:29.802778-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1690.0
     }
   ]
 }
