@@ -1,0 +1,126 @@
+{
+  "date": "2026-05-29",
+  "generated_at": "2026-05-29T18:50:17.119491-04:00",
+  "account": {
+    "equity": "64114.41",
+    "cash": "47206.96",
+    "buying_power": "220947.6"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-1.2",
+    "total_pnl": "-1.2",
+    "bots_active": [
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-05-29",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-1.2",
+      "total_pnl": "-1.2",
+      "trades": [
+        {
+          "symbol": "NOW260717C00120000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "13.7",
+          "filled_at": "2026-05-29T17:53:50.479677Z"
+        },
+        {
+          "symbol": "ACN260717C00180000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "18.4",
+          "filled_at": "2026-05-29T17:58:00.830848Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ACN260717C00180000",
+          "qty": "1",
+          "entry_price": "18.4",
+          "current_price": "17",
+          "unrealized_pnl": "-1.4"
+        },
+        {
+          "symbol": "NOW260717C00120000",
+          "qty": "1",
+          "entry_price": "13.7",
+          "current_price": "13.9",
+          "unrealized_pnl": "0.2"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2246.4",
+      "unrealized_pl": "353.76"
+    },
+    {
+      "symbol": "ACN260717C00180000",
+      "qty": "1",
+      "market_value": "1700",
+      "unrealized_pl": "-140"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "8",
+      "market_value": "2090",
+      "unrealized_pl": "154"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "1990.24",
+      "unrealized_pl": "0"
+    },
+    {
+      "symbol": "BABA260717C00125000",
+      "qty": "1",
+      "market_value": "635",
+      "unrealized_pl": "-370"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1879.3",
+      "unrealized_pl": "0.9"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2116.51",
+      "unrealized_pl": "128.37"
+    },
+    {
+      "symbol": "CRM260717C00180000",
+      "qty": "1",
+      "market_value": "1805",
+      "unrealized_pl": "325"
+    },
+    {
+      "symbol": "DASH260626C00155000",
+      "qty": "1",
+      "market_value": "1055",
+      "unrealized_pl": "-480"
+    },
+    {
+      "symbol": "NOW260717C00120000",
+      "qty": "1",
+      "market_value": "1390",
+      "unrealized_pl": "20"
+    }
+  ]
+}
