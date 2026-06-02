@@ -1,0 +1,82 @@
+{
+  "date": "2026-06-02",
+  "generated_at": "2026-06-02T19:15:00.001518-04:00",
+  "account": {
+    "equity": "65369.24",
+    "cash": "47206.83",
+    "buying_power": "257948.28"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2234.64",
+      "unrealized_pl": "342"
+    },
+    {
+      "symbol": "ACN260717C00180000",
+      "qty": "1",
+      "market_value": "1540",
+      "unrealized_pl": "-300"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "8",
+      "market_value": "2091.44",
+      "unrealized_pl": "155.44"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "2097.28",
+      "unrealized_pl": "107.04"
+    },
+    {
+      "symbol": "BABA260717C00125000",
+      "qty": "1",
+      "market_value": "1030",
+      "unrealized_pl": "25"
+    },
+    {
+      "symbol": "COF",
+      "qty": "10",
+      "market_value": "1838.4",
+      "unrealized_pl": "-40"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2190.65",
+      "unrealized_pl": "202.51"
+    },
+    {
+      "symbol": "CRM260717C00180000",
+      "qty": "1",
+      "market_value": "2565",
+      "unrealized_pl": "1085"
+    },
+    {
+      "symbol": "DASH260626C00155000",
+      "qty": "1",
+      "market_value": "975",
+      "unrealized_pl": "-560"
+    },
+    {
+      "symbol": "NOW260717C00120000",
+      "qty": "1",
+      "market_value": "1600",
+      "unrealized_pl": "230"
+    }
+  ]
+}
