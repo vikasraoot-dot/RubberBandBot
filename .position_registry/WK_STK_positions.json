@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-05-28T13:50:37.767038-04:00",
+  "updated_at": "2026-06-05T13:01:10.507622-04:00",
   "positions": {
-    "COF": {
-      "symbol": "COF",
-      "underlying": "COF",
-      "client_order_id": "WK_STK_COF_1772813056",
-      "order_id": "2d7b23cc-774d-4507-9ce4-125acc9817f1",
-      "qty": 10,
-      "entry_price": 187.68,
-      "entry_date": "2026-03-06T11:04:16.259286-05:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "BABA": {
       "symbol": "BABA",
       "underlying": "BABA",
@@ -66,6 +52,20 @@
       "qty": 8,
       "entry_price": 241.94,
       "entry_date": "2026-05-28T13:50:37.561476-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "NFLX": {
+      "symbol": "NFLX",
+      "underlying": "NFLX",
+      "client_order_id": "WK_STK_NFLX_1780678870",
+      "order_id": "1a5128c3-e07a-477e-938e-5fa4e73c36f1",
+      "qty": 24,
+      "entry_price": 81.4601,
+      "entry_date": "2026-06-05T13:01:10.400641-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -136,6 +136,22 @@
       "tp_price": 0.0,
       "sl_price": 0.0,
       "exit_date": "2026-05-28T13:50:33.610580-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "COF",
+      "underlying": "COF",
+      "client_order_id": "WK_STK_COF_1772813056",
+      "order_id": "2d7b23cc-774d-4507-9ce4-125acc9817f1",
+      "qty": 10,
+      "entry_price": 187.68,
+      "entry_date": "2026-03-06T11:04:16.259286-05:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-06-05T13:01:08.405127-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
