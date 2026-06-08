@@ -1,0 +1,132 @@
+{
+  "date": "2026-06-08",
+  "generated_at": "2026-06-08T18:55:36.723527-04:00",
+  "account": {
+    "equity": "60709.51",
+    "cash": "47323.97",
+    "buying_power": "217185.39"
+  },
+  "summary": {
+    "total_realized_pnl": "-10.590",
+    "total_unrealized_pnl": "-0.7",
+    "total_pnl": "-11.290",
+    "bots_active": [
+      "15M_STK",
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-06-08",
+      "realized_pnl": "-10.590",
+      "unrealized_pnl": "0",
+      "total_pnl": "-10.590",
+      "trades": [
+        {
+          "symbol": "AAPL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "303.825",
+          "filled_at": "2026-06-08T18:52:03.660287Z"
+        },
+        {
+          "symbol": "AAPL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "302.06",
+          "filled_at": "2026-06-08T19:50:05.702608Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-06-08",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-0.7",
+      "total_pnl": "-0.7",
+      "trades": [
+        {
+          "symbol": "NFLX260724C00080000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "6.6",
+          "filled_at": "2026-06-08T18:11:31.044204Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "NFLX260724C00080000",
+          "qty": "1",
+          "entry_price": "6.6",
+          "current_price": "5.9",
+          "unrealized_pnl": "-0.7"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2093.16",
+      "unrealized_pl": "200.52"
+    },
+    {
+      "symbol": "ACN260717C00180000",
+      "qty": "1",
+      "market_value": "930",
+      "unrealized_pl": "-910"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "8",
+      "market_value": "1959.76",
+      "unrealized_pl": "23.76"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "1925.28",
+      "unrealized_pl": "-64.96"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "2003.54",
+      "unrealized_pl": "15.4"
+    },
+    {
+      "symbol": "CRM260717C00180000",
+      "qty": "1",
+      "market_value": "1175",
+      "unrealized_pl": "-305"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "24",
+      "market_value": "1978.8",
+      "unrealized_pl": "24"
+    },
+    {
+      "symbol": "NFLX260724C00080000",
+      "qty": "1",
+      "market_value": "590",
+      "unrealized_pl": "-70"
+    },
+    {
+      "symbol": "NOW260717C00120000",
+      "qty": "1",
+      "market_value": "730",
+      "unrealized_pl": "-640"
+    }
+  ]
+}
