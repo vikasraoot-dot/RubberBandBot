@@ -1,0 +1,58 @@
+{
+  "date": "2026-06-10",
+  "generated_at": "2026-06-10T19:07:11.503135-04:00",
+  "account": {
+    "equity": "59283.41",
+    "cash": "49127.02",
+    "buying_power": "223335.96"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "2046",
+      "unrealized_pl": "153.36"
+    },
+    {
+      "symbol": "ADBE",
+      "qty": "8",
+      "market_value": "1861.6008",
+      "unrealized_pl": "-74.3992"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "1840.64",
+      "unrealized_pl": "-149.6"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "11",
+      "market_value": "1872.3452",
+      "unrealized_pl": "-115.7948"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "24",
+      "market_value": "1960.8",
+      "unrealized_pl": "6"
+    },
+    {
+      "symbol": "NFLX260724C00080000",
+      "qty": "1",
+      "market_value": "575",
+      "unrealized_pl": "-85"
+    }
+  ]
+}
