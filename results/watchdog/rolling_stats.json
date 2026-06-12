@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-11T19:06:17.022210-04:00",
+  "generated_at": "2026-06-12T18:56:25.548670-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -34,7 +34,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 13,
+        "entries_found": 12,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -73,32 +73,32 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 5,
-        "total_trades": 12,
-        "total_winners": 7,
+        "entries_found": 4,
+        "total_trades": 10,
+        "total_winners": 5,
         "total_losers": 5,
-        "win_rate": 58.33,
-        "avg_pnl_per_day": 11.67,
+        "win_rate": 50.0,
+        "avg_pnl_per_day": -4.68,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 58.36,
-        "sharpe": 0.31,
+        "total_pnl": -18.71,
+        "sharpe": -0.52,
         "max_drawdown": -18.71,
-        "trend": "DEGRADING"
+        "trend": "FLAT"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 27,
-        "total_trades": 75,
-        "total_winners": 35,
-        "total_losers": 40,
-        "win_rate": 46.67,
-        "avg_pnl_per_day": 3.47,
+        "entries_found": 26,
+        "total_trades": 72,
+        "total_winners": 34,
+        "total_losers": 38,
+        "win_rate": 47.22,
+        "avg_pnl_per_day": 3.89,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 93.64,
-        "sharpe": 0.09,
-        "max_drawdown": -198.65,
+        "total_pnl": 101.26,
+        "sharpe": 0.1,
+        "max_drawdown": -191.03,
         "trend": "IMPROVING"
       },
       "flags": [
@@ -147,7 +147,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 11,
+        "entries_found": 10,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -165,7 +165,7 @@
     "WK_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 1,
+        "entries_found": 2,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -180,16 +180,16 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 4,
+        "entries_found": 5,
         "total_trades": 1,
         "total_winners": 0,
         "total_losers": 1,
         "win_rate": 0.0,
-        "avg_pnl_per_day": 5.83,
+        "avg_pnl_per_day": 4.66,
         "avg_win": 0.0,
         "avg_loss": 0.0,
         "total_pnl": 23.3,
-        "sharpe": 0.5,
+        "sharpe": 0.45,
         "max_drawdown": 0.0,
         "trend": "DEGRADING"
       },
