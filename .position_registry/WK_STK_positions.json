@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-06-12T13:24:55.560482-04:00",
+  "updated_at": "2026-06-17T15:38:08.719838-04:00",
   "positions": {
     "BABA": {
       "symbol": "BABA",
@@ -30,20 +30,6 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "CRM": {
-      "symbol": "CRM",
-      "underlying": "CRM",
-      "client_order_id": "WK_STK_CRM_1779817572",
-      "order_id": "c414bdda-e0a1-4b08-8030-292881553d7d",
-      "qty": 11,
-      "entry_price": 180.72,
-      "entry_date": "2026-05-26T13:46:13.032070-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "NFLX": {
       "symbol": "NFLX",
       "underlying": "NFLX",
@@ -66,6 +52,20 @@
       "qty": 15,
       "entry_price": 128.17,
       "entry_date": "2026-06-12T13:24:55.502614-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "CRM": {
+      "symbol": "CRM",
+      "underlying": "CRM",
+      "client_order_id": "WK_STK_CRM_1781725088",
+      "order_id": "23442b49-870e-4ace-ba0b-e5a151c4a3cc",
+      "qty": 12,
+      "entry_price": 155.03,
+      "entry_date": "2026-06-17T15:38:08.630055-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -168,6 +168,22 @@
       "tp_price": 0.0,
       "sl_price": 0.0,
       "exit_date": "2026-06-12T13:24:54.553269-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "CRM",
+      "underlying": "CRM",
+      "client_order_id": "WK_STK_CRM_1779817572",
+      "order_id": "c414bdda-e0a1-4b08-8030-292881553d7d",
+      "qty": 11,
+      "entry_price": 180.72,
+      "entry_date": "2026-05-26T13:46:13.032070-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-06-17T15:38:07.770212-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
