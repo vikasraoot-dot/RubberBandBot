@@ -1,22 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-06-12T13:22:31.802821-04:00",
-  "positions": {
-    "NFLX260724C00080000": {
-      "symbol": "NFLX260724C00080000",
-      "underlying": "NFLX",
-      "client_order_id": "WK_OPT_NFLX260724C00080000_1780940094",
-      "order_id": "b2eaa740-303b-4e8c-9b45-b9ecd1b119cd",
-      "qty": 1,
-      "entry_price": 6.63,
-      "entry_date": "2026-06-08T13:35:01.089601-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    }
-  },
+  "updated_at": "2026-06-17T13:28:55.167322-04:00",
+  "positions": {},
   "closed_positions": [
     {
       "symbol": "NFLX260417C00075000",
@@ -543,6 +528,24 @@
       "sl_price": 0.0,
       "exit_date": "2026-06-09T13:08:16.901601-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "NFLX260724C00080000",
+      "underlying": "NFLX",
+      "client_order_id": "WK_OPT_NFLX260724C00080000_1780940094",
+      "order_id": "b2eaa740-303b-4e8c-9b45-b9ecd1b119cd",
+      "qty": 1,
+      "entry_price": 6.63,
+      "entry_date": "2026-06-08T13:35:01.089601-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 3.25,
+      "exit_date": "2026-06-17T13:28:50.178548-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -335.0
     }
   ]
 }
