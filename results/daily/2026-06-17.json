@@ -1,0 +1,116 @@
+{
+  "date": "2026-06-17",
+  "generated_at": "2026-06-17T18:57:05.358271-04:00",
+  "account": {
+    "equity": "58321.53",
+    "cash": "48970.43",
+    "buying_power": "222064.81"
+  },
+  "summary": {
+    "total_realized_pnl": "2.469997",
+    "total_unrealized_pnl": "1.29",
+    "total_pnl": "3.759997",
+    "bots_active": [
+      "WK_STK",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-06-17",
+      "realized_pnl": "11.469997",
+      "unrealized_pnl": "1.29",
+      "total_pnl": "12.759997",
+      "trades": [
+        {
+          "symbol": "CRM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "12",
+          "price": "155.03",
+          "filled_at": "2026-06-17T19:38:09.237878Z"
+        },
+        {
+          "symbol": "CRM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "11",
+          "price": "156.072727",
+          "filled_at": "2026-06-17T18:58:41.122659Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "CRM",
+          "qty": "1",
+          "entry_price": "155.03",
+          "current_price": "156.32",
+          "unrealized_pnl": "1.29"
+        }
+      ]
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-06-17",
+      "realized_pnl": "-9.00",
+      "unrealized_pnl": "0",
+      "total_pnl": "-9.00",
+      "trades": [
+        {
+          "symbol": "ARES",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "15",
+          "price": "129.24",
+          "filled_at": "2026-06-17T19:37:00.465364Z"
+        },
+        {
+          "symbol": "ARES",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "15",
+          "price": "128.64",
+          "filled_at": "2026-06-17T19:50:04.744037Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN",
+      "qty": "12",
+      "market_value": "1910.46",
+      "unrealized_pl": "17.82"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "16",
+      "market_value": "1734.4",
+      "unrealized_pl": "-255.84"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1875.84",
+      "unrealized_pl": "15.48"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "24",
+      "market_value": "1852.8024",
+      "unrealized_pl": "-101.9976"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1977.6",
+      "unrealized_pl": "55.600005"
+    }
+  ]
+}

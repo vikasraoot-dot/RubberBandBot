@@ -1,23 +1,23 @@
 {
-  "market_condition": "TRENDING_UP",
+  "market_condition": "RANGE",
   "overrides": {
     "position_size_multiplier": 1.0,
-    "tp_r_multiple_adjustment": 0.5,
-    "breakeven_trigger_r_adjustment": 0.5
+    "tp_r_multiple_adjustment": 0.0,
+    "breakeven_trigger_r_adjustment": 0.0
   },
-  "reason": "SPY $750.33 > SMA-20 $746.44, ADX 98.3 > 25, +DI 1211.7 > -DI 22.5",
+  "reason": "No strong condition detected. ADX=98.2, ATR ratio=1.24.",
   "diagnostics": {
-    "spy_close": 750.33,
-    "sma_20": 746.44,
-    "adx": 98.3,
-    "pdi": 1211.7,
-    "mdi": 22.5,
-    "atr_5": 11.71,
-    "atr_20": 9.13,
-    "atr_ratio": 1.282,
+    "spy_close": 740.96,
+    "sma_20": 746.8,
+    "adx": 98.2,
+    "pdi": 1163.9,
+    "mdi": 28.1,
+    "atr_5": 11.69,
+    "atr_20": 9.42,
+    "atr_ratio": 1.24,
     "reversal_count_20": 10
   },
-  "updated_at": "2026-06-16T23:03:09.098721+00:00",
+  "updated_at": "2026-06-17T22:57:07.088039+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-06-16T23:03:22.870926+00:00"
+    "updated_at": "2026-06-17T22:57:20.821450+00:00"
   }
 }
