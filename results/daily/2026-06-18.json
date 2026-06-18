@@ -1,0 +1,104 @@
+{
+  "date": "2026-06-18",
+  "generated_at": "2026-06-18T19:17:42.704436-04:00",
+  "account": {
+    "equity": "57854.94",
+    "cash": "48366.05",
+    "buying_power": "220033.09"
+  },
+  "summary": {
+    "total_realized_pnl": "-2.88",
+    "total_unrealized_pnl": "0.1922",
+    "total_pnl": "-2.6878",
+    "bots_active": [
+      "WK_STK"
+    ]
+  },
+  "bots": {
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-06-18",
+      "realized_pnl": "-2.88",
+      "unrealized_pnl": "0.1922",
+      "total_pnl": "-2.6878",
+      "trades": [
+        {
+          "symbol": "BABA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "18",
+          "price": "106.12",
+          "filled_at": "2026-06-18T17:45:33.077034Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "10",
+          "price": "195.22",
+          "filled_at": "2026-06-18T17:45:29.870234Z"
+        },
+        {
+          "symbol": "BABA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "16",
+          "price": "105.94",
+          "filled_at": "2026-06-18T16:44:11.982694Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ADBE",
+          "qty": "10",
+          "entry_price": "195.22",
+          "current_price": "195.02",
+          "unrealized_pnl": "-2.00"
+        },
+        {
+          "symbol": "BABA",
+          "qty": "2",
+          "entry_price": "106.12",
+          "current_price": "107.2161",
+          "unrealized_pnl": "2.1922"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "1950.2",
+      "unrealized_pl": "-2"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "1929.8898",
+      "unrealized_pl": "19.7298"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1827.96",
+      "unrealized_pl": "-32.4"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "24",
+      "market_value": "1853.04",
+      "unrealized_pl": "-101.76"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1927.8",
+      "unrealized_pl": "5.800005"
+    }
+  ]
+}
