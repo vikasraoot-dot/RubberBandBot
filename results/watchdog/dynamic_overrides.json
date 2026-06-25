@@ -5,19 +5,19 @@
     "tp_r_multiple_adjustment": 0.0,
     "breakeven_trigger_r_adjustment": 0.0
   },
-  "reason": "No strong condition detected. ADX=98.0, ATR ratio=1.07.",
+  "reason": "No strong condition detected. ADX=nan, ATR ratio=0.99.",
   "diagnostics": {
-    "spy_close": 746.74,
-    "sma_20": 747.08,
-    "adx": 98.0,
-    "pdi": 1098.6,
-    "mdi": 26.5,
-    "atr_5": 10.02,
-    "atr_20": 9.38,
-    "atr_ratio": 1.068,
-    "reversal_count_20": 9
+    "spy_close": 733.24,
+    "sma_20": 745.69,
+    "adx": NaN,
+    "pdi": 1213.5,
+    "mdi": 27.3,
+    "atr_5": 9.69,
+    "atr_20": 9.76,
+    "atr_ratio": 0.992,
+    "reversal_count_20": 7
   },
-  "updated_at": "2026-06-18T23:17:44.501318+00:00",
+  "updated_at": "2026-06-25T12:38:00.285391+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-06-18T23:17:58.668427+00:00"
+    "updated_at": "2026-06-25T12:38:10.840744+00:00"
   }
 }
