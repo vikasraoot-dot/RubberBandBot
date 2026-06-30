@@ -1,0 +1,171 @@
+{
+  "date": "2026-06-30",
+  "generated_at": "2026-06-30T18:50:22.206909-04:00",
+  "account": {
+    "equity": "57187.78",
+    "cash": "42466.56",
+    "buying_power": "196077.65"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-1.00",
+    "total_pnl": "-1.00",
+    "bots_active": [
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-06-30",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-1.00",
+      "total_pnl": "-1.00",
+      "trades": [
+        {
+          "symbol": "BABA260821C00095000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "7.65",
+          "filled_at": "2026-06-30T16:37:04.089318Z"
+        },
+        {
+          "symbol": "ADBE260821C00195000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "17.9",
+          "filled_at": "2026-06-30T16:37:01.094037Z"
+        },
+        {
+          "symbol": "NFLX260821C00071000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "6.15",
+          "filled_at": "2026-06-30T17:23:28.967765Z"
+        },
+        {
+          "symbol": "CRM260821C00155000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "10.8",
+          "filled_at": "2026-06-30T16:37:13.952391Z"
+        },
+        {
+          "symbol": "PLTR260821C00115000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "12.1",
+          "filled_at": "2026-06-30T16:36:42.360058Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ADBE260821C00195000",
+          "qty": "1",
+          "entry_price": "17.9",
+          "current_price": "18.65",
+          "unrealized_pnl": "0.75"
+        },
+        {
+          "symbol": "BABA260821C00095000",
+          "qty": "1",
+          "entry_price": "7.65",
+          "current_price": "7.45",
+          "unrealized_pnl": "-0.20"
+        },
+        {
+          "symbol": "CRM260821C00155000",
+          "qty": "1",
+          "entry_price": "10.8",
+          "current_price": "11.3",
+          "unrealized_pnl": "0.5"
+        },
+        {
+          "symbol": "NFLX260821C00071000",
+          "qty": "1",
+          "entry_price": "6.15",
+          "current_price": "5",
+          "unrealized_pnl": "-1.15"
+        },
+        {
+          "symbol": "PLTR260821C00115000",
+          "qty": "1",
+          "entry_price": "12.1",
+          "current_price": "11.2",
+          "unrealized_pnl": "-0.9"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2048.5",
+      "unrealized_pl": "96.3"
+    },
+    {
+      "symbol": "ADBE260821C00195000",
+      "qty": "1",
+      "market_value": "1865",
+      "unrealized_pl": "75"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "1734.3972",
+      "unrealized_pl": "-175.7628"
+    },
+    {
+      "symbol": "BABA260821C00095000",
+      "qty": "1",
+      "market_value": "745",
+      "unrealized_pl": "-20"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1884",
+      "unrealized_pl": "23.64"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1130",
+      "unrealized_pl": "50"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "27",
+      "market_value": "1934.82",
+      "unrealized_pl": "-43.160013"
+    },
+    {
+      "symbol": "NFLX260821C00071000",
+      "qty": "1",
+      "market_value": "500",
+      "unrealized_pl": "-115"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1759.6185",
+      "unrealized_pl": "-162.381495"
+    },
+    {
+      "symbol": "PLTR260821C00115000",
+      "qty": "1",
+      "market_value": "1120",
+      "unrealized_pl": "-90"
+    }
+  ]
+}
