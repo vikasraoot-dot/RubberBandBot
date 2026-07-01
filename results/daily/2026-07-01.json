@@ -1,0 +1,178 @@
+{
+  "date": "2026-07-01",
+  "generated_at": "2026-07-01T18:46:11.392992-04:00",
+  "account": {
+    "equity": "58989.24",
+    "cash": "42284.08",
+    "buying_power": "196324.77"
+  },
+  "summary": {
+    "total_realized_pnl": "-12.250003",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-12.250003",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-07-01",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "GLW260710C00225000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.75",
+          "filled_at": "2026-07-01T16:44:26.907939Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-01",
+      "realized_pnl": "-12.250003",
+      "unrealized_pnl": "0",
+      "total_pnl": "-12.250003",
+      "trades": [
+        {
+          "symbol": "TER",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "429.5",
+          "filled_at": "2026-07-01T18:07:22.631872Z"
+        },
+        {
+          "symbol": "LRCX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "383.91",
+          "filled_at": "2026-07-01T18:07:09.080367Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "654.4",
+          "filled_at": "2026-07-01T16:52:06.767275Z"
+        },
+        {
+          "symbol": "GLW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "221.25",
+          "filled_at": "2026-07-01T16:25:15.572039Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "432.09",
+          "filled_at": "2026-07-01T19:50:13.313403Z"
+        },
+        {
+          "symbol": "LRCX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "389.87",
+          "filled_at": "2026-07-01T19:50:10.359234Z"
+        },
+        {
+          "symbol": "GLW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "219.433333",
+          "filled_at": "2026-07-01T19:50:18.057589Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "642.38",
+          "filled_at": "2026-07-01T17:43:08.479365Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2105.7",
+      "unrealized_pl": "153.5"
+    },
+    {
+      "symbol": "ADBE260821C00195000",
+      "qty": "1",
+      "market_value": "2255",
+      "unrealized_pl": "465"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "1773.54",
+      "unrealized_pl": "-136.62"
+    },
+    {
+      "symbol": "BABA260821C00095000",
+      "qty": "1",
+      "market_value": "850",
+      "unrealized_pl": "85"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1952.4",
+      "unrealized_pl": "92.04"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1535",
+      "unrealized_pl": "455"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "27",
+      "market_value": "2003.5215",
+      "unrealized_pl": "25.541487"
+    },
+    {
+      "symbol": "NFLX260821C00071000",
+      "qty": "1",
+      "market_value": "635",
+      "unrealized_pl": "20"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1875.15",
+      "unrealized_pl": "-46.849995"
+    },
+    {
+      "symbol": "PLTR260821C00115000",
+      "qty": "1",
+      "market_value": "1720",
+      "unrealized_pl": "510"
+    }
+  ]
+}
