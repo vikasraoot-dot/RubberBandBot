@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-07-06T13:20:42.919483-04:00",
+  "updated_at": "2026-07-07T12:56:11.737904-04:00",
   "positions": {
-    "PLTR260821C00115000": {
-      "symbol": "PLTR260821C00115000",
-      "underlying": "PLTR",
-      "client_order_id": "WK_OPT_PLTR260821C00115000_1782837401",
-      "order_id": "523b8394-d2e9-44c5-a4c9-40e484412044",
-      "qty": 1,
-      "entry_price": 12.27,
-      "entry_date": "2026-06-30T12:36:43.564658-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "CRM260821C00155000": {
       "symbol": "CRM260821C00155000",
       "underlying": "CRM",
@@ -38,20 +24,6 @@
       "qty": 1,
       "entry_price": 6.18,
       "entry_date": "2026-06-30T12:36:59.296968-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "ADBE260821C00195000": {
-      "symbol": "ADBE260821C00195000",
-      "underlying": "ADBE",
-      "client_order_id": "WK_OPT_ADBE260821C00195000_1782837420",
-      "order_id": "e8475060-4948-48db-bc38-86399d9cb878",
-      "qty": 1,
-      "entry_price": 18.16,
-      "entry_date": "2026-06-30T12:37:02.291673-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -617,6 +589,42 @@
       "exit_date": "2026-06-17T13:28:50.178548-04:00",
       "exit_reason": "StopLoss",
       "pnl": -335.0
+    },
+    {
+      "symbol": "ADBE260821C00195000",
+      "underlying": "ADBE",
+      "client_order_id": "WK_OPT_ADBE260821C00195000_1782837420",
+      "order_id": "e8475060-4948-48db-bc38-86399d9cb878",
+      "qty": 1,
+      "entry_price": 18.16,
+      "entry_date": "2026-06-30T12:37:02.291673-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 36.15,
+      "exit_date": "2026-07-07T12:56:06.902322-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1825.0
+    },
+    {
+      "symbol": "PLTR260821C00115000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260821C00115000_1782837401",
+      "order_id": "523b8394-d2e9-44c5-a4c9-40e484412044",
+      "qty": 1,
+      "entry_price": 12.27,
+      "entry_date": "2026-06-30T12:36:43.564658-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 25.9,
+      "exit_date": "2026-07-07T12:56:06.964414-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1380.0
     }
   ]
 }
