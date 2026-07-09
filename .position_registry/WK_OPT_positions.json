@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-07-08T12:14:48.928541-04:00",
+  "updated_at": "2026-07-09T13:01:27.081058-04:00",
   "positions": {
     "CRM260821C00155000": {
       "symbol": "CRM260821C00155000",
@@ -24,6 +24,20 @@
       "qty": 1,
       "entry_price": 6.18,
       "entry_date": "2026-06-30T12:36:59.296968-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "BABA260828C00109000": {
+      "symbol": "BABA260828C00109000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA260828C00109000_1783616483",
+      "order_id": "435d924b-3de6-4bd8-9603-cb6ac8ba1236",
+      "qty": 1,
+      "entry_price": 9.91,
+      "entry_date": "2026-07-09T13:01:25.187446-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
