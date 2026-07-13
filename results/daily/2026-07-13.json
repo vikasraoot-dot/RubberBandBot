@@ -1,0 +1,138 @@
+{
+  "date": "2026-07-13",
+  "generated_at": "2026-07-13T18:26:37.549491-04:00",
+  "account": {
+    "equity": "61899.78",
+    "cash": "47216.48",
+    "buying_power": "217729.16"
+  },
+  "summary": {
+    "total_realized_pnl": "4.23",
+    "total_unrealized_pnl": "-0.7",
+    "total_pnl": "3.53",
+    "bots_active": [
+      "15M_STK",
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-13",
+      "realized_pnl": "4.23",
+      "unrealized_pnl": "0",
+      "total_pnl": "4.23",
+      "trades": [
+        {
+          "symbol": "MRVL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "217.92",
+          "filled_at": "2026-07-13T18:06:56.193967Z"
+        },
+        {
+          "symbol": "MRVL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "219.33",
+          "filled_at": "2026-07-13T19:50:04.520956Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-07-13",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-0.7",
+      "total_pnl": "-0.7",
+      "trades": [
+        {
+          "symbol": "BSX260828C00043000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "4.5",
+          "filled_at": "2026-07-13T16:56:11.676297Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "BSX260828C00043000",
+          "qty": "1",
+          "entry_price": "4.5",
+          "current_price": "3.8",
+          "unrealized_pnl": "-0.7"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2304.3",
+      "unrealized_pl": "352.1"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2015.19",
+      "unrealized_pl": "105.03"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "860",
+      "unrealized_pl": "-125"
+    },
+    {
+      "symbol": "BSX260828C00043000",
+      "qty": "1",
+      "market_value": "380",
+      "unrealized_pl": "-70"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2050.2",
+      "unrealized_pl": "189.84"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1910",
+      "unrealized_pl": "830"
+    },
+    {
+      "symbol": "NEM260828C00092000",
+      "qty": "1",
+      "market_value": "645",
+      "unrealized_pl": "-270"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "27",
+      "market_value": "1997.46",
+      "unrealized_pl": "19.479987"
+    },
+    {
+      "symbol": "NFLX260821C00071000",
+      "qty": "1",
+      "market_value": "580",
+      "unrealized_pl": "-35"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1941.15",
+      "unrealized_pl": "19.150005"
+    }
+  ]
+}

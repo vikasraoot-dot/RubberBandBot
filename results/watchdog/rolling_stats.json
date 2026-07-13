@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T18:32:34.158414-04:00",
+  "generated_at": "2026-07-13T18:26:55.502232-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -52,7 +52,61 @@
     "15M_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 1,
+        "entries_found": 2,
+        "total_trades": 1,
+        "total_winners": 1,
+        "total_losers": 0,
+        "win_rate": 100.0,
+        "avg_pnl_per_day": 2.12,
+        "avg_win": 0.0,
+        "avg_loss": 0.0,
+        "total_pnl": 4.23,
+        "sharpe": 0.71,
+        "max_drawdown": 0.0,
+        "trend": "FLAT"
+      },
+      "30d": {
+        "window_days": 30,
+        "entries_found": 5,
+        "total_trades": 24,
+        "total_winners": 7,
+        "total_losers": 17,
+        "win_rate": 29.17,
+        "avg_pnl_per_day": -36.55,
+        "avg_win": 0.0,
+        "avg_loss": 0.0,
+        "total_pnl": -182.74,
+        "sharpe": -0.5,
+        "max_drawdown": -186.97,
+        "trend": "DEGRADING"
+      },
+      "90d": {
+        "window_days": 90,
+        "entries_found": 19,
+        "total_trades": 65,
+        "total_winners": 33,
+        "total_losers": 32,
+        "win_rate": 50.77,
+        "avg_pnl_per_day": 1.25,
+        "avg_win": 0.0,
+        "avg_loss": 0.0,
+        "total_pnl": 23.75,
+        "sharpe": 0.03,
+        "max_drawdown": -205.68,
+        "trend": "DEGRADING"
+      },
+      "flags": [
+        {
+          "flag": "FILTERS_ADDING_VALUE",
+          "severity": "INFO",
+          "detail": "Bot P&L $4.23 > Shadow P&L $-64736.0 over 7 days"
+        }
+      ]
+    },
+    "WK_OPT": {
+      "7d": {
+        "window_days": 7,
+        "entries_found": 3,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -68,60 +122,6 @@
       "30d": {
         "window_days": 30,
         "entries_found": 4,
-        "total_trades": 23,
-        "total_winners": 6,
-        "total_losers": 17,
-        "win_rate": 26.09,
-        "avg_pnl_per_day": -46.74,
-        "avg_win": 0.0,
-        "avg_loss": 0.0,
-        "total_pnl": -186.97,
-        "sharpe": -0.59,
-        "max_drawdown": -186.97,
-        "trend": "DEGRADING"
-      },
-      "90d": {
-        "window_days": 90,
-        "entries_found": 18,
-        "total_trades": 64,
-        "total_winners": 32,
-        "total_losers": 32,
-        "win_rate": 50.0,
-        "avg_pnl_per_day": 1.08,
-        "avg_win": 0.0,
-        "avg_loss": 0.0,
-        "total_pnl": 19.52,
-        "sharpe": 0.02,
-        "max_drawdown": -205.68,
-        "trend": "DEGRADING"
-      },
-      "flags": [
-        {
-          "flag": "FILTERS_ADDING_VALUE",
-          "severity": "INFO",
-          "detail": "Bot P&L $0.0 > Shadow P&L $-32368.0 over 7 days"
-        }
-      ]
-    },
-    "WK_OPT": {
-      "7d": {
-        "window_days": 7,
-        "entries_found": 2,
-        "total_trades": 0,
-        "total_winners": 0,
-        "total_losers": 0,
-        "win_rate": 0.0,
-        "avg_pnl_per_day": 0.0,
-        "avg_win": 0.0,
-        "avg_loss": 0.0,
-        "total_pnl": 0.0,
-        "sharpe": 0.0,
-        "max_drawdown": 0.0,
-        "trend": "FLAT"
-      },
-      "30d": {
-        "window_days": 30,
-        "entries_found": 3,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -136,7 +136,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 8,
+        "entries_found": 9,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -169,16 +169,16 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 3,
+        "entries_found": 2,
         "total_trades": 2,
         "total_winners": 0,
         "total_losers": 2,
         "win_rate": 0.0,
-        "avg_pnl_per_day": 2.86,
+        "avg_pnl_per_day": 4.3,
         "avg_win": 0.0,
         "avg_loss": 0.0,
         "total_pnl": 8.59,
-        "sharpe": 0.38,
+        "sharpe": 0.42,
         "max_drawdown": -2.88,
         "trend": "FLAT"
       },
