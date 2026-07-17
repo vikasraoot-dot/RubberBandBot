@@ -1,0 +1,156 @@
+{
+  "date": "2026-07-17",
+  "generated_at": "2026-07-17T18:20:24.250045-04:00",
+  "account": {
+    "equity": "61067.35",
+    "cash": "46902.23",
+    "buying_power": "216953.26"
+  },
+  "summary": {
+    "total_realized_pnl": "15.569990",
+    "total_unrealized_pnl": "0.74",
+    "total_pnl": "16.309990",
+    "bots_active": [
+      "WK_STK",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-07-17",
+      "realized_pnl": "-63.090009",
+      "unrealized_pnl": "0.74",
+      "total_pnl": "-62.350009",
+      "trades": [
+        {
+          "symbol": "NFLX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "29",
+          "price": "68.83",
+          "filled_at": "2026-07-17T16:00:39.045348Z"
+        },
+        {
+          "symbol": "NFLX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "27",
+          "price": "66.493333",
+          "filled_at": "2026-07-17T13:35:32.604541Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "NFLX",
+          "qty": "2",
+          "entry_price": "68.83",
+          "current_price": "69.2",
+          "unrealized_pnl": "0.74"
+        }
+      ]
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-17",
+      "realized_pnl": "78.659999",
+      "unrealized_pnl": "0",
+      "total_pnl": "78.659999",
+      "trades": [
+        {
+          "symbol": "META",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "628.41",
+          "filled_at": "2026-07-17T15:12:29.36057Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "89",
+          "price": "22.29",
+          "filled_at": "2026-07-17T15:12:22.150132Z"
+        },
+        {
+          "symbol": "META",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "641.873333",
+          "filled_at": "2026-07-17T16:17:30.690548Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "89",
+          "price": "22.72",
+          "filled_at": "2026-07-17T18:32:40.151437Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2379.24",
+      "unrealized_pl": "427.04"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2071.08",
+      "unrealized_pl": "160.92"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "980",
+      "unrealized_pl": "-5"
+    },
+    {
+      "symbol": "BSX260828C00043000",
+      "qty": "1",
+      "market_value": "330",
+      "unrealized_pl": "-120"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2049",
+      "unrealized_pl": "188.64"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1935",
+      "unrealized_pl": "855"
+    },
+    {
+      "symbol": "NEM260828C00092000",
+      "qty": "1",
+      "market_value": "440",
+      "unrealized_pl": "-475"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2006.8",
+      "unrealized_pl": "10.73"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1974",
+      "unrealized_pl": "52.000005"
+    }
+  ]
+}
