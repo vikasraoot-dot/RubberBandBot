@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-17T18:20:39.359384-04:00",
+  "generated_at": "2026-07-20T18:30:08.318498-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -73,31 +73,31 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 8,
-        "total_trades": 44,
+        "entries_found": 7,
+        "total_trades": 43,
         "total_winners": 17,
-        "total_losers": 27,
-        "win_rate": 38.64,
-        "avg_pnl_per_day": -18.09,
+        "total_losers": 26,
+        "win_rate": 39.53,
+        "avg_pnl_per_day": -19.38,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -144.68,
+        "total_pnl": -135.68,
         "sharpe": -0.27,
-        "max_drawdown": -223.34,
+        "max_drawdown": -214.34,
         "trend": "IMPROVING"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 20,
-        "total_trades": 70,
-        "total_winners": 33,
+        "entries_found": 19,
+        "total_trades": 68,
+        "total_winners": 31,
         "total_losers": 37,
-        "win_rate": 47.14,
-        "avg_pnl_per_day": -0.34,
+        "win_rate": 45.59,
+        "avg_pnl_per_day": -1.72,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -6.88,
-        "sharpe": -0.01,
+        "total_pnl": -32.59,
+        "sharpe": -0.04,
         "max_drawdown": -242.05,
         "trend": "DEGRADING"
       },
@@ -112,7 +112,7 @@
     "WK_OPT": {
       "7d": {
         "window_days": 7,
-        "entries_found": 2,
+        "entries_found": 1,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -175,17 +175,17 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 3,
-        "total_trades": 3,
+        "entries_found": 1,
+        "total_trades": 1,
         "total_winners": 0,
-        "total_losers": 3,
+        "total_losers": 1,
         "win_rate": 0.0,
-        "avg_pnl_per_day": -18.17,
+        "avg_pnl_per_day": -63.09,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -54.5,
-        "sharpe": -0.46,
-        "max_drawdown": -65.97,
+        "total_pnl": -63.09,
+        "sharpe": 0.0,
+        "max_drawdown": -63.09,
         "trend": "FLAT"
       },
       "90d": {
