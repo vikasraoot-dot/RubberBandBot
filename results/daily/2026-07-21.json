@@ -1,0 +1,131 @@
+{
+  "date": "2026-07-21",
+  "generated_at": "2026-07-21T18:26:34.738799-04:00",
+  "account": {
+    "equity": "61018.72",
+    "cash": "47308.56",
+    "buying_power": "218312.68"
+  },
+  "summary": {
+    "total_realized_pnl": "6.450",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "6.450",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-21",
+      "realized_pnl": "6.450",
+      "unrealized_pnl": "0",
+      "total_pnl": "6.450",
+      "trades": [
+        {
+          "symbol": "DDOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "256.72",
+          "filled_at": "2026-07-21T16:07:35.24216Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "337.7",
+          "filled_at": "2026-07-21T15:42:18.511118Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "10",
+          "price": "192.13",
+          "filled_at": "2026-07-21T15:42:09.88215Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "341.9",
+          "filled_at": "2026-07-21T19:50:08.429708Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "255.24",
+          "filled_at": "2026-07-21T19:50:11.143651Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "10",
+          "price": "191.711",
+          "filled_at": "2026-07-21T19:50:10.906817Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2267",
+      "unrealized_pl": "314.8"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2128.7484",
+      "unrealized_pl": "218.5884"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "1215",
+      "unrealized_pl": "230"
+    },
+    {
+      "symbol": "BSX260828C00043000",
+      "qty": "1",
+      "market_value": "280",
+      "unrealized_pl": "-170"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2033.88",
+      "unrealized_pl": "173.52"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1830",
+      "unrealized_pl": "750"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "1976.93",
+      "unrealized_pl": "-19.14"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1977.15",
+      "unrealized_pl": "55.150005"
+    }
+  ]
+}
