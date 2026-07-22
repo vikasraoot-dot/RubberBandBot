@@ -1,0 +1,131 @@
+{
+  "date": "2026-07-22",
+  "generated_at": "2026-07-22T18:32:36.063565-04:00",
+  "account": {
+    "equity": "60016.8",
+    "cash": "47256.04",
+    "buying_power": "217320.27"
+  },
+  "summary": {
+    "total_realized_pnl": "-52.50",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-52.50",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-22",
+      "realized_pnl": "-52.50",
+      "unrealized_pnl": "0",
+      "total_pnl": "-52.50",
+      "trades": [
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "135.54",
+          "filled_at": "2026-07-22T15:33:09.250659Z"
+        },
+        {
+          "symbol": "DASH",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "180.3",
+          "filled_at": "2026-07-22T15:32:59.395939Z"
+        },
+        {
+          "symbol": "SHOP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "118.44",
+          "filled_at": "2026-07-22T15:32:52.622848Z"
+        },
+        {
+          "symbol": "DASH",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "176.79",
+          "filled_at": "2026-07-22T19:34:08.096523Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "133.11",
+          "filled_at": "2026-07-22T17:23:27.61631Z"
+        },
+        {
+          "symbol": "SHOP",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "116.85",
+          "filled_at": "2026-07-22T16:10:08.796211Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2190.2",
+      "unrealized_pl": "238"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2098.08",
+      "unrealized_pl": "187.92"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "1085",
+      "unrealized_pl": "100"
+    },
+    {
+      "symbol": "BSX260828C00043000",
+      "qty": "1",
+      "market_value": "270",
+      "unrealized_pl": "-180"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1956",
+      "unrealized_pl": "95.64"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "1300",
+      "unrealized_pl": "220"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "1990.5252",
+      "unrealized_pl": "-5.5448"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1870.95",
+      "unrealized_pl": "-51.049995"
+    }
+  ]
+}
