@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-07-22T12:00:05.057436-04:00",
+  "updated_at": "2026-07-23T12:07:56.618047-04:00",
   "positions": {
     "CRM260821C00155000": {
       "symbol": "CRM260821C00155000",
@@ -24,20 +24,6 @@
       "qty": 1,
       "entry_price": 9.91,
       "entry_date": "2026-07-09T13:01:25.187446-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "BSX260828C00043000": {
-      "symbol": "BSX260828C00043000",
-      "underlying": "BSX",
-      "client_order_id": "WK_OPT_BSX260828C00043000_1783961771",
-      "order_id": "d037d616-ef3c-423d-aa71-e39d0d60106a",
-      "qty": 1,
-      "entry_price": 4.59,
-      "entry_date": "2026-07-13T12:56:12.637391-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -679,6 +665,24 @@
       "exit_date": "2026-07-20T12:08:17.701624-04:00",
       "exit_reason": "StopLoss",
       "pnl": -515.0
+    },
+    {
+      "symbol": "BSX260828C00043000",
+      "underlying": "BSX",
+      "client_order_id": "WK_OPT_BSX260828C00043000_1783961771",
+      "order_id": "d037d616-ef3c-423d-aa71-e39d0d60106a",
+      "qty": 1,
+      "entry_price": 4.59,
+      "entry_date": "2026-07-13T12:56:12.637391-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 1.7,
+      "exit_date": "2026-07-23T12:07:37.570214-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -280.0
     }
   ]
 }
