@@ -1,0 +1,157 @@
+{
+  "date": "2026-07-23",
+  "generated_at": "2026-07-23T18:30:45.898303-04:00",
+  "account": {
+    "equity": "59060.08",
+    "cash": "47426.3",
+    "buying_power": "47426.3"
+  },
+  "summary": {
+    "total_realized_pnl": "0.279989",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0.279989",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-23",
+      "realized_pnl": "0.279989",
+      "unrealized_pnl": "0",
+      "total_pnl": "0.279989",
+      "trades": [
+        {
+          "symbol": "EXPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "255.77",
+          "filled_at": "2026-07-23T15:55:06.304776Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "30",
+          "price": "21.783667",
+          "filled_at": "2026-07-23T15:54:57.841345Z"
+        },
+        {
+          "symbol": "DASH",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "169.58",
+          "filled_at": "2026-07-23T15:54:50.142588Z"
+        },
+        {
+          "symbol": "SE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "100.51",
+          "filled_at": "2026-07-23T15:54:42.217717Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "100.52",
+          "filled_at": "2026-07-23T15:54:33.286037Z"
+        },
+        {
+          "symbol": "SE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "99.56",
+          "filled_at": "2026-07-23T19:50:10.033114Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "30",
+          "price": "21.85",
+          "filled_at": "2026-07-23T19:50:11.950637Z"
+        },
+        {
+          "symbol": "EXPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "255.18",
+          "filled_at": "2026-07-23T19:50:08.661558Z"
+        },
+        {
+          "symbol": "DASH",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "168.956667",
+          "filled_at": "2026-07-23T19:50:08.673529Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "101.693333",
+          "filled_at": "2026-07-23T16:20:14.736892Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ADBE",
+      "qty": "10",
+      "market_value": "2116.917",
+      "unrealized_pl": "164.717"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2053.08",
+      "unrealized_pl": "142.92"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "840",
+      "unrealized_pl": "-145"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "1883.16",
+      "unrealized_pl": "22.8"
+    },
+    {
+      "symbol": "CRM260821C00155000",
+      "qty": "1",
+      "market_value": "910",
+      "unrealized_pl": "-170"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "1990.27",
+      "unrealized_pl": "-5.8"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1840.35",
+      "unrealized_pl": "-81.649995"
+    }
+  ]
+}
