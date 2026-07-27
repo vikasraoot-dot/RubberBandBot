@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-24T18:34:05.805090-04:00",
+  "generated_at": "2026-07-27T18:33:34.274229-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -52,18 +52,18 @@
     "15M_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 4,
-        "total_trades": 13,
-        "total_winners": 5,
+        "entries_found": 3,
+        "total_trades": 11,
+        "total_winners": 3,
         "total_losers": 8,
-        "win_rate": 38.46,
-        "avg_pnl_per_day": 8.22,
+        "win_rate": 27.27,
+        "avg_pnl_per_day": -15.26,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 32.89,
-        "sharpe": 0.15,
+        "total_pnl": -45.77,
+        "sharpe": -0.47,
         "max_drawdown": -52.5,
-        "trend": "DEGRADING"
+        "trend": "FLAT"
       },
       "30d": {
         "window_days": 30,
@@ -97,9 +97,14 @@
       },
       "flags": [
         {
+          "flag": "DEGRADED",
+          "severity": "WARNING",
+          "detail": "7-day win rate 27.27% < 35.0% threshold"
+        },
+        {
           "flag": "FILTERS_ADDING_VALUE",
           "severity": "INFO",
-          "detail": "Bot P&L $32.89 > Shadow P&L $-129472.0 over 7 days"
+          "detail": "Bot P&L $-45.77 > Shadow P&L $-97104.0 over 7 days"
         }
       ]
     },
@@ -154,17 +159,17 @@
     "WK_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 1,
-        "total_trades": 1,
+        "entries_found": 0,
+        "total_trades": 0,
         "total_winners": 0,
-        "total_losers": 1,
+        "total_losers": 0,
         "win_rate": 0.0,
-        "avg_pnl_per_day": -63.09,
+        "avg_pnl_per_day": 0.0,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -63.09,
+        "total_pnl": 0.0,
         "sharpe": 0.0,
-        "max_drawdown": -63.09,
+        "max_drawdown": 0.0,
         "trend": "FLAT"
       },
       "30d": {
@@ -197,13 +202,7 @@
         "max_drawdown": -65.97,
         "trend": "DEGRADING"
       },
-      "flags": [
-        {
-          "flag": "DEGRADED",
-          "severity": "WARNING",
-          "detail": "7-day win rate 0.0% < 35.0% threshold"
-        }
-      ]
+      "flags": []
     }
   }
 }
