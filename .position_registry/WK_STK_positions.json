@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-07-17T12:00:38.905038-04:00",
+  "updated_at": "2026-07-28T13:04:02.758645-04:00",
   "positions": {
     "PLTR": {
       "symbol": "PLTR",
@@ -30,20 +30,6 @@
       "tp_price": 0.0,
       "sl_price": 0.0
     },
-    "ADBE": {
-      "symbol": "ADBE",
-      "underlying": "ADBE",
-      "client_order_id": "WK_STK_ADBE_1781804728",
-      "order_id": "429152b7-99fa-4515-aab1-a77819a42a0c",
-      "qty": 10,
-      "entry_price": 195.16,
-      "entry_date": "2026-06-18T13:45:29.617738-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "BABA": {
       "symbol": "BABA",
       "underlying": "BABA",
@@ -66,6 +52,20 @@
       "qty": 29,
       "entry_price": 68.875,
       "entry_date": "2026-07-17T12:00:38.695303-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "VRT": {
+      "symbol": "VRT",
+      "underlying": "VRT",
+      "client_order_id": "WK_STK_VRT_1785258242",
+      "order_id": "bd18427b-8179-447d-8f74-5773d454928e",
+      "qty": 7,
+      "entry_price": 268.205,
+      "entry_date": "2026-07-28T13:04:02.721314-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -248,6 +248,22 @@
       "tp_price": 0.0,
       "sl_price": 0.0,
       "exit_date": "2026-07-17T12:00:35.060981-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "ADBE",
+      "underlying": "ADBE",
+      "client_order_id": "WK_STK_ADBE_1781804728",
+      "order_id": "429152b7-99fa-4515-aab1-a77819a42a0c",
+      "qty": 10,
+      "entry_price": 195.16,
+      "entry_date": "2026-06-18T13:45:29.617738-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-07-28T13:04:00.719849-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
