@@ -1,0 +1,103 @@
+{
+  "date": "2026-07-30",
+  "generated_at": "2026-07-30T18:35:12.489695-04:00",
+  "account": {
+    "equity": "60839.29",
+    "cash": "45193.97",
+    "buying_power": "208342.78"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": [
+      "15M_OPT"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-07-30",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "PM260807C00195000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.25",
+          "filled_at": "2026-07-30T15:47:42.680465Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "1550",
+      "unrealized_pl": "-290"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2115",
+      "unrealized_pl": "204.84"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "895",
+      "unrealized_pl": "-90"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2168.52",
+      "unrealized_pl": "308.16"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "1600",
+      "unrealized_pl": "-240"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2099.89",
+      "unrealized_pl": "103.82"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "515",
+      "unrealized_pl": "-5"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1842",
+      "unrealized_pl": "-79.999995"
+    },
+    {
+      "symbol": "PLTR260918C00120000",
+      "qty": "1",
+      "market_value": "1240",
+      "unrealized_pl": "-190"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1620.78",
+      "unrealized_pl": "-257.95"
+    }
+  ]
+}
