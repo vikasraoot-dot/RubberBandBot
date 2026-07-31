@@ -1,0 +1,127 @@
+{
+  "date": "2026-07-31",
+  "generated_at": "2026-07-31T18:32:02.627757-04:00",
+  "account": {
+    "equity": "61794.96",
+    "cash": "45205.93",
+    "buying_power": "208835.02"
+  },
+  "summary": {
+    "total_realized_pnl": "12.04",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "12.04",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-07-31",
+      "realized_pnl": "12.04",
+      "unrealized_pnl": "0",
+      "total_pnl": "12.04",
+      "trades": [
+        {
+          "symbol": "AAPL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "301.36",
+          "filled_at": "2026-07-31T16:22:46.299091Z"
+        },
+        {
+          "symbol": "NVO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "47.13",
+          "filled_at": "2026-07-31T16:02:15.561722Z"
+        },
+        {
+          "symbol": "NVO",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "47.05",
+          "filled_at": "2026-07-31T19:50:05.340578Z"
+        },
+        {
+          "symbol": "AAPL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "307.94",
+          "filled_at": "2026-07-31T19:50:01.213553Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "1700",
+      "unrealized_pl": "-140"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2188.674",
+      "unrealized_pl": "278.514"
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "qty": "1",
+      "market_value": "1415",
+      "unrealized_pl": "430"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2208.24",
+      "unrealized_pl": "347.88"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "1800",
+      "unrealized_pl": "-40"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2076.98",
+      "unrealized_pl": "80.91"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "400",
+      "unrealized_pl": "-120"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "1839.15",
+      "unrealized_pl": "-82.849995"
+    },
+    {
+      "symbol": "PLTR260918C00120000",
+      "qty": "1",
+      "market_value": "1270",
+      "unrealized_pl": "-160"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1690.99",
+      "unrealized_pl": "-187.74"
+    }
+  ]
+}
