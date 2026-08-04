@@ -1,35 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-08-03T12:55:54.491825-04:00",
+  "updated_at": "2026-08-04T12:27:35.419698-04:00",
   "positions": {
-    "BABA260828C00109000": {
-      "symbol": "BABA260828C00109000",
-      "underlying": "BABA",
-      "client_order_id": "WK_OPT_BABA260828C00109000_1783616483",
-      "order_id": "435d924b-3de6-4bd8-9603-cb6ac8ba1236",
-      "qty": 1,
-      "entry_price": 9.91,
-      "entry_date": "2026-07-09T13:01:25.187446-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "PLTR260918C00120000": {
-      "symbol": "PLTR260918C00120000",
-      "underlying": "PLTR",
-      "client_order_id": "WK_OPT_PLTR260918C00120000_1785255494",
-      "order_id": "bf80961c-42b2-40d6-9120-177682d54573",
-      "qty": 1,
-      "entry_price": 14.4,
-      "entry_date": "2026-07-28T12:18:15.234917-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "CRM260918C00175000": {
       "symbol": "CRM260918C00175000",
       "underlying": "CRM",
@@ -743,6 +715,42 @@
       "exit_date": "2026-07-28T12:18:10.642337-04:00",
       "exit_reason": "TakeProfit",
       "pnl": 1750.0
+    },
+    {
+      "symbol": "BABA260828C00109000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA260828C00109000_1783616483",
+      "order_id": "435d924b-3de6-4bd8-9603-cb6ac8ba1236",
+      "qty": 1,
+      "entry_price": 9.91,
+      "entry_date": "2026-07-09T13:01:25.187446-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 20.5,
+      "exit_date": "2026-08-04T12:27:19.164543-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 1065.0
+    },
+    {
+      "symbol": "PLTR260918C00120000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260918C00120000_1785255494",
+      "order_id": "bf80961c-42b2-40d6-9120-177682d54573",
+      "qty": 1,
+      "entry_price": 14.4,
+      "entry_date": "2026-07-28T12:18:15.234917-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 42.2,
+      "exit_date": "2026-08-04T12:27:19.399893-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 2790.0
     }
   ]
 }
