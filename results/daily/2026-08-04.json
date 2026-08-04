@@ -1,0 +1,134 @@
+{
+  "date": "2026-08-04",
+  "generated_at": "2026-08-04T18:35:17.922760-04:00",
+  "account": {
+    "equity": "67480.82",
+    "cash": "51460.71",
+    "buying_power": "236769.15"
+  },
+  "summary": {
+    "total_realized_pnl": "4.940005",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "4.940005",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-08-04",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "NVO260814C00044000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "0.55",
+          "filled_at": "2026-08-04T18:20:17.938939Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-04",
+      "realized_pnl": "4.940005",
+      "unrealized_pnl": "0",
+      "total_pnl": "4.940005",
+      "trades": [
+        {
+          "symbol": "CMG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "19",
+          "price": "34.007895",
+          "filled_at": "2026-08-04T18:52:33.764853Z"
+        },
+        {
+          "symbol": "NVO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "15",
+          "price": "44.13",
+          "filled_at": "2026-08-04T18:22:39.252048Z"
+        },
+        {
+          "symbol": "NVO",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "15",
+          "price": "44.469334",
+          "filled_at": "2026-08-04T19:50:17.936024Z"
+        },
+        {
+          "symbol": "CMG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "19",
+          "price": "34",
+          "filled_at": "2026-08-04T19:50:05.689948Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2150",
+      "unrealized_pl": "310"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2319.84",
+      "unrealized_pl": "409.68"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2291.88",
+      "unrealized_pl": "431.52"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2295",
+      "unrealized_pl": "455"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2139.33",
+      "unrealized_pl": "143.26"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "530",
+      "unrealized_pl": "10"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2395.8",
+      "unrealized_pl": "473.800005"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1898.26",
+      "unrealized_pl": "19.53"
+    }
+  ]
+}
