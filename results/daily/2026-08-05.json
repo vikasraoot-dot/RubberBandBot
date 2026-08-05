@@ -1,0 +1,158 @@
+{
+  "date": "2026-08-05",
+  "generated_at": "2026-08-05T18:34:02.694003-04:00",
+  "account": {
+    "equity": "67032.09",
+    "cash": "51111.28",
+    "buying_power": "235191.39"
+  },
+  "summary": {
+    "total_realized_pnl": "-29.059948",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-29.059948",
+    "bots_active": [
+      "15M_STK",
+      "15M_OPT"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-05",
+      "realized_pnl": "-29.059948",
+      "unrealized_pnl": "0",
+      "total_pnl": "-29.059948",
+      "trades": [
+        {
+          "symbol": "GOOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "361.744",
+          "filled_at": "2026-08-05T16:22:50.294899Z"
+        },
+        {
+          "symbol": "GOOGL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "364.17",
+          "filled_at": "2026-08-05T16:22:43.173396Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "84",
+          "price": "23.5",
+          "filled_at": "2026-08-05T16:01:31.319469Z"
+        },
+        {
+          "symbol": "PINS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "84",
+          "price": "23.380953",
+          "filled_at": "2026-08-05T19:50:21.974829Z"
+        },
+        {
+          "symbol": "GOOGL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "362.204",
+          "filled_at": "2026-08-05T19:50:15.272704Z"
+        },
+        {
+          "symbol": "GOOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "359.898",
+          "filled_at": "2026-08-05T19:50:11.633466Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-08-05",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "GOOG260814C00360000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.85",
+          "filled_at": "2026-08-05T16:24:33.262402Z"
+        },
+        {
+          "symbol": "GOOGL260812C00365000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2.9",
+          "filled_at": "2026-08-05T16:21:22.678538Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2000",
+      "unrealized_pl": "160"
+    },
+    {
+      "symbol": "BABA",
+      "qty": "18",
+      "market_value": "2310.3",
+      "unrealized_pl": "400.14"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2199.96",
+      "unrealized_pl": "339.6"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2390",
+      "unrealized_pl": "550"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2153.25",
+      "unrealized_pl": "157.18"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "550",
+      "unrealized_pl": "30"
+    },
+    {
+      "symbol": "PLTR",
+      "qty": "15",
+      "market_value": "2362.2",
+      "unrealized_pl": "440.200005"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1955.1",
+      "unrealized_pl": "76.37"
+    }
+  ]
+}
