@@ -1,10 +1,10 @@
 {
   "date": "2026-08-07",
-  "updated_at": "2026-08-07T16:01:42.337497-04:00",
+  "updated_at": "2026-08-07T16:52:56.283192-04:00",
   "account": {
-    "equity": 67389.83,
+    "equity": 67400.5,
     "last_equity": 66438.71,
-    "daily_pnl_pct": 1.43,
+    "daily_pnl_pct": 1.45,
     "account_paused": false
   },
   "bots": {
@@ -66,13 +66,13 @@
     },
     "WK_STK": {
       "bot_tag": "WK_STK",
-      "daily_pnl": 29.91,
+      "daily_pnl": 31.77,
       "status": "OK",
       "paused": false,
       "pause_reason": "",
       "profit_lock": {
-        "peak_pnl_today": 29.91,
-        "lock_floor": 14.96,
+        "peak_pnl_today": 31.77,
+        "lock_floor": 15.88,
         "lock_active": true,
         "lock_triggered": false,
         "lock_triggered_at": null
