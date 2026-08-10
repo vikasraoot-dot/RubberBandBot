@@ -1,0 +1,148 @@
+{
+  "date": "2026-08-10",
+  "generated_at": "2026-08-10T18:06:12.749303-04:00",
+  "account": {
+    "equity": "67980.07",
+    "cash": "51022.69",
+    "buying_power": "227687.42"
+  },
+  "summary": {
+    "total_realized_pnl": "-11.999994",
+    "total_unrealized_pnl": "-2.8",
+    "total_pnl": "-14.799994",
+    "bots_active": [
+      "WK_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-08-10",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-2.8",
+      "total_pnl": "-2.8",
+      "trades": [
+        {
+          "symbol": "QCOM260925C00160000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "14.6",
+          "filled_at": "2026-08-10T15:43:32.124644Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "QCOM260925C00160000",
+          "qty": "1",
+          "entry_price": "14.6",
+          "current_price": "11.8",
+          "unrealized_pnl": "-2.8"
+        }
+      ]
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-10",
+      "realized_pnl": "-11.999994",
+      "unrealized_pnl": "0",
+      "total_pnl": "-11.999994",
+      "trades": [
+        {
+          "symbol": "RCL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "309.12",
+          "filled_at": "2026-08-10T15:52:13.482103Z"
+        },
+        {
+          "symbol": "LUV",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "45.340714",
+          "filled_at": "2026-08-10T14:55:25.246022Z"
+        },
+        {
+          "symbol": "RCL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "307.98",
+          "filled_at": "2026-08-10T19:50:13.401626Z"
+        },
+        {
+          "symbol": "LUV",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "44.972143",
+          "filled_at": "2026-08-10T19:50:13.468311Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2430",
+      "unrealized_pl": "590"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "12",
+      "market_value": "2361.12",
+      "unrealized_pl": "500.76"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2545",
+      "unrealized_pl": "705"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2213.86",
+      "unrealized_pl": "217.79"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "645",
+      "unrealized_pl": "125"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1730",
+      "unrealized_pl": "175"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1955.4",
+      "unrealized_pl": "-29.4"
+    },
+    {
+      "symbol": "QCOM260925C00160000",
+      "qty": "1",
+      "market_value": "1180",
+      "unrealized_pl": "-280"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1897",
+      "unrealized_pl": "18.27"
+    }
+  ]
+}
