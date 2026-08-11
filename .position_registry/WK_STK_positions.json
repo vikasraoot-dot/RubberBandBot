@@ -1,35 +1,7 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-08-07T11:30:01.888330-04:00",
+  "updated_at": "2026-08-11T11:32:17.802388-04:00",
   "positions": {
-    "CRM": {
-      "symbol": "CRM",
-      "underlying": "CRM",
-      "client_order_id": "WK_STK_CRM_1781725088",
-      "order_id": "23442b49-870e-4ace-ba0b-e5a151c4a3cc",
-      "qty": 12,
-      "entry_price": 155.03,
-      "entry_date": "2026-06-17T15:38:08.630055-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "BABA": {
-      "symbol": "BABA",
-      "underlying": "BABA",
-      "client_order_id": "WK_STK_BABA_1781804729",
-      "order_id": "d7fe6ea5-8727-4c8e-b139-043dde85cce6",
-      "qty": 18,
-      "entry_price": 106.1,
-      "entry_date": "2026-06-18T13:45:30.752064-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "NFLX": {
       "symbol": "NFLX",
       "underlying": "NFLX",
@@ -280,6 +252,38 @@
       "tp_price": 0.0,
       "sl_price": 0.0,
       "exit_date": "2026-08-07T11:29:55.513336-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "BABA",
+      "underlying": "BABA",
+      "client_order_id": "WK_STK_BABA_1781804729",
+      "order_id": "d7fe6ea5-8727-4c8e-b139-043dde85cce6",
+      "qty": 18,
+      "entry_price": 106.1,
+      "entry_date": "2026-06-18T13:45:30.752064-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-08-11T11:32:05.871940-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
+    },
+    {
+      "symbol": "CRM",
+      "underlying": "CRM",
+      "client_order_id": "WK_STK_CRM_1781725088",
+      "order_id": "23442b49-870e-4ace-ba0b-e5a151c4a3cc",
+      "qty": 12,
+      "entry_price": 155.03,
+      "entry_date": "2026-06-17T15:38:08.630055-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-08-11T11:32:05.871961-04:00",
       "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
