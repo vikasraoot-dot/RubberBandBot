@@ -5,19 +5,19 @@
     "tp_r_multiple_adjustment": -0.5,
     "breakeven_trigger_r_adjustment": -0.5
   },
-  "reason": "SPY 5d ATR 5.18 < 20d ATR 8.31 x 0.8 (ratio 0.62). 13/20 bars reversed.",
+  "reason": "SPY 5d ATR 4.58 < 20d ATR 8.25 x 0.8 (ratio 0.55). 13/20 bars reversed.",
   "diagnostics": {
-    "spy_close": 770.56,
-    "sma_20": 752.3,
+    "spy_close": 772.49,
+    "sma_20": 753.19,
     "adx": 98.6,
-    "pdi": 1482.4,
-    "mdi": 15.0,
-    "atr_5": 5.18,
-    "atr_20": 8.31,
-    "atr_ratio": 0.624,
+    "pdi": 1419.8,
+    "mdi": 14.3,
+    "atr_5": 4.58,
+    "atr_20": 8.25,
+    "atr_ratio": 0.555,
     "reversal_count_20": 13
   },
-  "updated_at": "2026-08-11T22:11:25.893752+00:00",
+  "updated_at": "2026-08-12T22:10:16.975242+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-08-11T22:11:42.667635+00:00"
+    "updated_at": "2026-08-12T22:10:39.791584+00:00"
   }
 }

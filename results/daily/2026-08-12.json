@@ -1,0 +1,182 @@
+{
+  "date": "2026-08-12",
+  "generated_at": "2026-08-12T18:10:12.895375-04:00",
+  "account": {
+    "equity": "66911.29",
+    "cash": "53175.66",
+    "buying_power": "229952.39"
+  },
+  "summary": {
+    "total_realized_pnl": "-2.639999",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-2.639999",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-08-12",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "FSLR260821C00230000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "2",
+          "filled_at": "2026-08-12T15:03:19.251983Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-12",
+      "realized_pnl": "-2.639999",
+      "unrealized_pnl": "0",
+      "total_pnl": "-2.639999",
+      "trades": [
+        {
+          "symbol": "UBER",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "13",
+          "price": "75.26",
+          "filled_at": "2026-08-12T16:08:05.415336Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "173.85",
+          "filled_at": "2026-08-12T15:23:20.065263Z"
+        },
+        {
+          "symbol": "FSLR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "228.32",
+          "filled_at": "2026-08-12T15:23:09.699347Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "256.93",
+          "filled_at": "2026-08-12T14:55:07.864862Z"
+        },
+        {
+          "symbol": "BABA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "124.44",
+          "filled_at": "2026-08-12T14:54:59.009327Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "174.814",
+          "filled_at": "2026-08-12T19:50:16.367Z"
+        },
+        {
+          "symbol": "UBER",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "13",
+          "price": "75.603077",
+          "filled_at": "2026-08-12T19:50:16.435366Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "257.69",
+          "filled_at": "2026-08-12T19:50:11.071822Z"
+        },
+        {
+          "symbol": "FSLR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "225.89",
+          "filled_at": "2026-08-12T17:26:06.010905Z"
+        },
+        {
+          "symbol": "BABA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "8",
+          "price": "123.88",
+          "filled_at": "2026-08-12T15:24:31.890794Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2520",
+      "unrealized_pl": "680"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2185",
+      "unrealized_pl": "345"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2178.1262",
+      "unrealized_pl": "182.0562"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "460",
+      "unrealized_pl": "-60"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1255",
+      "unrealized_pl": "-300"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1956",
+      "unrealized_pl": "-28.8"
+    },
+    {
+      "symbol": "QCOM260925C00160000",
+      "qty": "1",
+      "market_value": "1155",
+      "unrealized_pl": "-305"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "2026.5",
+      "unrealized_pl": "147.77"
+    }
+  ]
+}
