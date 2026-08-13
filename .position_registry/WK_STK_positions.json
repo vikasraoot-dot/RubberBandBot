@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-08-12T15:42:22.345996-04:00",
+  "updated_at": "2026-08-13T11:33:37.832258-04:00",
   "positions": {
     "NFLX": {
       "symbol": "NFLX",
@@ -38,6 +38,20 @@
       "qty": 12,
       "entry_price": 165.255,
       "entry_date": "2026-08-07T11:30:01.797713-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "PDD": {
+      "symbol": "PDD",
+      "underlying": "PDD",
+      "client_order_id": "WK_STK_PDD_1786635216",
+      "order_id": "e844e54d-85a2-4f7a-99ff-4c9c2ba7506a",
+      "qty": 23,
+      "entry_price": 84.77,
+      "entry_date": "2026-08-13T11:33:37.362844-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
