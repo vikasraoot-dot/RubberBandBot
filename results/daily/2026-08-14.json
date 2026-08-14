@@ -1,0 +1,169 @@
+{
+  "date": "2026-08-14",
+  "generated_at": "2026-08-14T17:49:23.678103-04:00",
+  "account": {
+    "equity": "67640.39",
+    "cash": "51256.64",
+    "buying_power": "228165.06"
+  },
+  "summary": {
+    "total_realized_pnl": "0.790",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0.790",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-14",
+      "realized_pnl": "0.790",
+      "unrealized_pnl": "0",
+      "total_pnl": "0.790",
+      "trades": [
+        {
+          "symbol": "ANET",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "198.51",
+          "filled_at": "2026-08-14T15:23:24.616793Z"
+        },
+        {
+          "symbol": "INSM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "123.27",
+          "filled_at": "2026-08-14T15:08:47.509432Z"
+        },
+        {
+          "symbol": "VRTX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "505.23",
+          "filled_at": "2026-08-14T14:50:03.004798Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "511.1",
+          "filled_at": "2026-08-14T14:49:51.807202Z"
+        },
+        {
+          "symbol": "AVGO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "397.99",
+          "filled_at": "2026-08-14T14:49:45.319302Z"
+        },
+        {
+          "symbol": "VRTX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "505.27",
+          "filled_at": "2026-08-14T19:50:13.039597Z"
+        },
+        {
+          "symbol": "INSM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "8",
+          "price": "124.39",
+          "filled_at": "2026-08-14T19:50:12.043891Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "199.236",
+          "filled_at": "2026-08-14T19:50:13.628055Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "507.06",
+          "filled_at": "2026-08-14T19:50:09.824233Z"
+        },
+        {
+          "symbol": "AVGO",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "394.09",
+          "filled_at": "2026-08-14T15:23:17.553534Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2250",
+      "unrealized_pl": "410"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2400",
+      "unrealized_pl": "560"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2270.4071",
+      "unrealized_pl": "274.3371"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "785",
+      "unrealized_pl": "265"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1955",
+      "unrealized_pl": "5.98"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1535",
+      "unrealized_pl": "-20"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1981.3944",
+      "unrealized_pl": "-3.4056"
+    },
+    {
+      "symbol": "QCOM260925C00160000",
+      "qty": "1",
+      "market_value": "1150",
+      "unrealized_pl": "-310"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "2056.95",
+      "unrealized_pl": "178.22"
+    }
+  ]
+}
