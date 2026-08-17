@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_STK",
-  "updated_at": "2026-08-17T10:56:51.671065-04:00",
+  "updated_at": "2026-08-17T11:54:07.061888-04:00",
   "positions": {
     "NFLX": {
       "symbol": "NFLX",
@@ -52,6 +52,20 @@
       "qty": 23,
       "entry_price": 84.77,
       "entry_date": "2026-08-13T11:33:37.362844-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "EQT": {
+      "symbol": "EQT",
+      "underlying": "EQT",
+      "client_order_id": "WK_STK_EQT_1786982045",
+      "order_id": "dc04c44b-b7cd-429f-8230-8072b27ed6fc",
+      "qty": 38,
+      "entry_price": 52.575,
+      "entry_date": "2026-08-17T11:54:06.647872-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
