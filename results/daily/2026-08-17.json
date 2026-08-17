@@ -1,0 +1,234 @@
+{
+  "date": "2026-08-17",
+  "generated_at": "2026-08-17T17:49:48.759410-04:00",
+  "account": {
+    "equity": "66235.1",
+    "cash": "49236.82",
+    "buying_power": "225558.46"
+  },
+  "summary": {
+    "total_realized_pnl": "-21.519998",
+    "total_unrealized_pnl": "20.000008",
+    "total_pnl": "-1.519990",
+    "bots_active": [
+      "15M_STK",
+      "WK_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-17",
+      "realized_pnl": "-21.519998",
+      "unrealized_pnl": "0",
+      "total_pnl": "-21.519998",
+      "trades": [
+        {
+          "symbol": "NOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "120.16",
+          "filled_at": "2026-08-17T14:37:29.223895Z"
+        },
+        {
+          "symbol": "BX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "140.88",
+          "filled_at": "2026-08-17T14:37:20.271334Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "256",
+          "filled_at": "2026-08-17T14:37:13.736588Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "156.05",
+          "filled_at": "2026-08-17T14:24:19.419424Z"
+        },
+        {
+          "symbol": "KKR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "110.84",
+          "filled_at": "2026-08-17T14:24:11.358504Z"
+        },
+        {
+          "symbol": "APO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "137.83",
+          "filled_at": "2026-08-17T14:24:04.86794Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "472",
+          "filled_at": "2026-08-17T14:23:53.407851Z"
+        },
+        {
+          "symbol": "BX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "140.01",
+          "filled_at": "2026-08-17T18:18:51.591552Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "253.5",
+          "filled_at": "2026-08-17T15:18:04.446615Z"
+        },
+        {
+          "symbol": "NOW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "8",
+          "price": "118.78",
+          "filled_at": "2026-08-17T14:55:55.58908Z"
+        },
+        {
+          "symbol": "KKR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "109.587778",
+          "filled_at": "2026-08-17T14:49:18.688364Z"
+        },
+        {
+          "symbol": "APO",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "136.54",
+          "filled_at": "2026-08-17T14:37:11.400799Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "157.78",
+          "filled_at": "2026-08-17T15:51:22.782619Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "481.975",
+          "filled_at": "2026-08-17T18:51:20.478929Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "WK_STK": {
+      "bot_tag": "WK_STK",
+      "date": "2026-08-17",
+      "realized_pnl": "0",
+      "unrealized_pnl": "20.000008",
+      "total_pnl": "20.000008",
+      "trades": [
+        {
+          "symbol": "EQT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "38",
+          "price": "52.583684",
+          "filled_at": "2026-08-17T15:54:10.156439Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "EQT",
+          "qty": "38",
+          "entry_price": "52.583684",
+          "current_price": "53.11",
+          "unrealized_pnl": "20.000008"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "1780",
+      "unrealized_pl": "-60"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2045",
+      "unrealized_pl": "205"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2018.18",
+      "unrealized_pl": "20.000008"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2205.5225",
+      "unrealized_pl": "209.4525"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "595",
+      "unrealized_pl": "75"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "2000.08",
+      "unrealized_pl": "51.06"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1435",
+      "unrealized_pl": "-120"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1945.8156",
+      "unrealized_pl": "-38.9844"
+    },
+    {
+      "symbol": "QCOM260925C00160000",
+      "qty": "1",
+      "market_value": "925",
+      "unrealized_pl": "-535"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "2048.6795",
+      "unrealized_pl": "169.9495"
+    }
+  ]
+}
