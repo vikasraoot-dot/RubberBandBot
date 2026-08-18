@@ -1,0 +1,489 @@
+{
+  "date": "2026-08-18",
+  "generated_at": "2026-08-18T17:47:22.289385-04:00",
+  "account": {
+    "equity": "66116.31",
+    "cash": "42911.22",
+    "buying_power": "215822.12"
+  },
+  "summary": {
+    "total_realized_pnl": "-119.049999",
+    "total_unrealized_pnl": "-0.814501",
+    "total_pnl": "-119.864500",
+    "bots_active": [
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-08-18",
+      "realized_pnl": "0",
+      "unrealized_pnl": "2.15",
+      "total_pnl": "2.15",
+      "trades": [
+        {
+          "symbol": "FCX260828C00066000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "0.65",
+          "filled_at": "2026-08-18T15:22:09.638939Z"
+        },
+        {
+          "symbol": "TSM260828C00415000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.95",
+          "filled_at": "2026-08-18T14:39:31.914256Z"
+        },
+        {
+          "symbol": "NVDA260824C00220000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "1.15",
+          "filled_at": "2026-08-18T14:38:50.854294Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "NVDA260824C00220000",
+          "qty": "1",
+          "entry_price": "1.15",
+          "current_price": "3.3",
+          "unrealized_pnl": "2.15"
+        }
+      ]
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-18",
+      "realized_pnl": "-119.049999",
+      "unrealized_pnl": "-2.964501",
+      "total_pnl": "-122.014500",
+      "trades": [
+        {
+          "symbol": "NEM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "116.59375",
+          "filled_at": "2026-08-18T15:37:20.338926Z"
+        },
+        {
+          "symbol": "FCX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "15",
+          "price": "65.87",
+          "filled_at": "2026-08-18T15:22:34.685327Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "460.2",
+          "filled_at": "2026-08-18T15:22:28.732728Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "17",
+          "price": "55.96",
+          "filled_at": "2026-08-18T14:52:42.095172Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "322.94",
+          "filled_at": "2026-08-18T14:52:34.452286Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "436.88",
+          "filled_at": "2026-08-18T14:37:45.599748Z"
+        },
+        {
+          "symbol": "NVDA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "220.12",
+          "filled_at": "2026-08-18T14:37:39.142771Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "482.18",
+          "filled_at": "2026-08-18T14:37:31.154616Z"
+        },
+        {
+          "symbol": "SMH",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "570.65",
+          "filled_at": "2026-08-18T14:31:25.052148Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "532.39",
+          "filled_at": "2026-08-18T14:31:18.988876Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "1035.71",
+          "filled_at": "2026-08-18T14:31:12.288543Z"
+        },
+        {
+          "symbol": "TSM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "415.32",
+          "filled_at": "2026-08-18T14:30:55.714776Z"
+        },
+        {
+          "symbol": "APH",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "161.83",
+          "filled_at": "2026-08-18T14:30:46.985467Z"
+        },
+        {
+          "symbol": "AMAT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "509.45",
+          "filled_at": "2026-08-18T14:30:39.844461Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "194.18",
+          "filled_at": "2026-08-18T14:30:32.987328Z"
+        },
+        {
+          "symbol": "LRCX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "324.096667",
+          "filled_at": "2026-08-18T14:30:24.108895Z"
+        },
+        {
+          "symbol": "MRVL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "218.48",
+          "filled_at": "2026-08-18T14:30:15.722566Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "93.91",
+          "filled_at": "2026-08-18T14:30:08.450505Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "957.86",
+          "filled_at": "2026-08-18T14:30:00.957712Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "91.686667",
+          "filled_at": "2026-08-18T19:55:39.164255Z"
+        },
+        {
+          "symbol": "APH",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "158.24",
+          "filled_at": "2026-08-18T18:21:39.802325Z"
+        },
+        {
+          "symbol": "GEV",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "1012.66",
+          "filled_at": "2026-08-18T17:23:27.640381Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "468.43",
+          "filled_at": "2026-08-18T18:46:11.705124Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "523.07",
+          "filled_at": "2026-08-18T15:10:24.499557Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "933.05",
+          "filled_at": "2026-08-18T15:10:09.517051Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "17",
+          "price": "55.18",
+          "filled_at": "2026-08-18T15:07:33.416588Z"
+        },
+        {
+          "symbol": "MRVL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "212.3925",
+          "filled_at": "2026-08-18T15:01:00.736115Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "475.8",
+          "filled_at": "2026-08-18T14:59:13.019044Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "432.06",
+          "filled_at": "2026-08-18T14:59:03.980731Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "192.01",
+          "filled_at": "2026-08-18T14:44:47.859358Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "AMAT",
+          "qty": "1",
+          "entry_price": "509.45",
+          "current_price": "510.01",
+          "unrealized_pnl": "0.56"
+        },
+        {
+          "symbol": "FCX",
+          "qty": "15",
+          "entry_price": "65.87",
+          "current_price": "66.15",
+          "unrealized_pnl": "4.20"
+        },
+        {
+          "symbol": "LRCX",
+          "qty": "3",
+          "entry_price": "324.096667",
+          "current_price": "326.07",
+          "unrealized_pnl": "5.919999"
+        },
+        {
+          "symbol": "NEM",
+          "qty": "8",
+          "entry_price": "116.59375",
+          "current_price": "116",
+          "unrealized_pnl": "-4.75000"
+        },
+        {
+          "symbol": "NVDA",
+          "qty": "4",
+          "entry_price": "220.12",
+          "current_price": "219.4339",
+          "unrealized_pnl": "-2.7444"
+        },
+        {
+          "symbol": "SMH",
+          "qty": "1",
+          "entry_price": "570.65",
+          "current_price": "568.56",
+          "unrealized_pnl": "-2.09"
+        },
+        {
+          "symbol": "SNOW",
+          "qty": "3",
+          "entry_price": "322.94",
+          "current_price": "323.1679",
+          "unrealized_pnl": "0.6837"
+        },
+        {
+          "symbol": "TSM",
+          "qty": "2",
+          "entry_price": "415.32",
+          "current_price": "412.9481",
+          "unrealized_pnl": "-4.7438"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 10,
+    "fixes_applied": 8
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2040",
+      "unrealized_pl": "200"
+    },
+    {
+      "symbol": "AMAT",
+      "qty": "1",
+      "market_value": "510.01",
+      "unrealized_pl": "0.56"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "2355",
+      "unrealized_pl": "515"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2021.98",
+      "unrealized_pl": "23.800008"
+    },
+    {
+      "symbol": "FCX",
+      "qty": "15",
+      "market_value": "992.25",
+      "unrealized_pl": "4.2"
+    },
+    {
+      "symbol": "LRCX",
+      "qty": "3",
+      "market_value": "978.21",
+      "unrealized_pl": "5.919999"
+    },
+    {
+      "symbol": "NEM",
+      "qty": "8",
+      "market_value": "928",
+      "unrealized_pl": "-4.75"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2258.52",
+      "unrealized_pl": "262.45"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "590",
+      "unrealized_pl": "70"
+    },
+    {
+      "symbol": "NVDA",
+      "qty": "4",
+      "market_value": "877.7356",
+      "unrealized_pl": "-2.7444"
+    },
+    {
+      "symbol": "NVDA260824C00220000",
+      "qty": "1",
+      "market_value": "330",
+      "unrealized_pl": "-15"
+    },
+    {
+      "symbol": "NVDA260824C00222500",
+      "qty": "-1",
+      "market_value": "-222",
+      "unrealized_pl": "8"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1996.63",
+      "unrealized_pl": "47.61"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1365",
+      "unrealized_pl": "-190"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1919.9928",
+      "unrealized_pl": "-64.8072"
+    },
+    {
+      "symbol": "SMH",
+      "qty": "1",
+      "market_value": "568.56",
+      "unrealized_pl": "-2.09"
+    },
+    {
+      "symbol": "SNOW",
+      "qty": "3",
+      "market_value": "969.5037",
+      "unrealized_pl": "0.6837"
+    },
+    {
+      "symbol": "TSM",
+      "qty": "2",
+      "market_value": "825.8962",
+      "unrealized_pl": "-4.7438"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1899.8",
+      "unrealized_pl": "21.07"
+    }
+  ]
+}
