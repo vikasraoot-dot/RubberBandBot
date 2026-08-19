@@ -1,0 +1,299 @@
+{
+  "date": "2026-08-19",
+  "generated_at": "2026-08-19T17:50:09.070344-04:00",
+  "account": {
+    "equity": "68414.61",
+    "cash": "48661.85",
+    "buying_power": "226163.52"
+  },
+  "summary": {
+    "total_realized_pnl": "105.230003",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "105.230003",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-19",
+      "realized_pnl": "105.230003",
+      "unrealized_pnl": "0",
+      "total_pnl": "105.230003",
+      "trades": [
+        {
+          "symbol": "GE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "358.31",
+          "filled_at": "2026-08-19T16:08:06.950825Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "353.2",
+          "filled_at": "2026-08-19T14:37:52.096127Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "198.25",
+          "filled_at": "2026-08-19T14:37:45.856781Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "382.69",
+          "filled_at": "2026-08-19T14:30:53.054537Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "236.315",
+          "filled_at": "2026-08-19T14:30:45.151078Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "152.94",
+          "filled_at": "2026-08-19T14:30:38.524809Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "38",
+          "price": "52.318421",
+          "filled_at": "2026-08-19T14:30:30.962617Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "422.93",
+          "filled_at": "2026-08-19T14:30:23.444381Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "10",
+          "price": "185.75",
+          "filled_at": "2026-08-19T14:30:16.220318Z"
+        },
+        {
+          "symbol": "MDB",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "427.54",
+          "filled_at": "2026-08-19T14:30:10.358942Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "433.89",
+          "filled_at": "2026-08-19T14:30:00.012513Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "467.44",
+          "filled_at": "2026-08-19T14:29:53.307007Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "377.822",
+          "filled_at": "2026-08-19T19:50:31.30403Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "357.98",
+          "filled_at": "2026-08-19T19:50:24.50173Z"
+        },
+        {
+          "symbol": "MDB",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "443.59",
+          "filled_at": "2026-08-19T19:50:29.101562Z"
+        },
+        {
+          "symbol": "GE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "357",
+          "filled_at": "2026-08-19T19:50:24.878727Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "152.49",
+          "filled_at": "2026-08-19T19:50:30.357106Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "423.19",
+          "filled_at": "2026-08-19T19:50:22.80093Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "433.47",
+          "filled_at": "2026-08-19T19:50:21.763981Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "232.57",
+          "filled_at": "2026-08-19T19:50:20.179375Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "200.406667",
+          "filled_at": "2026-08-19T19:50:25.160393Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "10",
+          "price": "186.46",
+          "filled_at": "2026-08-19T19:50:22.016403Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "466.52",
+          "filled_at": "2026-08-19T19:50:18.312287Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "38",
+          "price": "53.36",
+          "filled_at": "2026-08-19T15:21:31.625086Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 3,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2840",
+      "unrealized_pl": "1000"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "3165",
+      "unrealized_pl": "1325"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2038.32",
+      "unrealized_pl": "40.140008"
+    },
+    {
+      "symbol": "FCX",
+      "qty": "15",
+      "market_value": "1037.25",
+      "unrealized_pl": "49.2"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2324.35",
+      "unrealized_pl": "328.28"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "810",
+      "unrealized_pl": "290"
+    },
+    {
+      "symbol": "NVDA260824C00220000",
+      "qty": "1",
+      "market_value": "212",
+      "unrealized_pl": "-133"
+    },
+    {
+      "symbol": "NVDA260824C00222500",
+      "qty": "-1",
+      "market_value": "-135",
+      "unrealized_pl": "95"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "2071.15",
+      "unrealized_pl": "122.13"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1605",
+      "unrealized_pl": "50"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1946.4",
+      "unrealized_pl": "-38.4"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1838.2882",
+      "unrealized_pl": "-40.4418"
+    }
+  ]
+}
