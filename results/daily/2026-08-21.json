@@ -1,0 +1,117 @@
+{
+  "date": "2026-08-21",
+  "generated_at": "2026-08-21T17:48:40.286826-04:00",
+  "account": {
+    "equity": "68964.18",
+    "cash": "49654.42",
+    "buying_power": "227037"
+  },
+  "summary": {
+    "total_realized_pnl": "6.20",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "6.20",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-21",
+      "realized_pnl": "6.20",
+      "unrealized_pnl": "0",
+      "total_pnl": "6.20",
+      "trades": [
+        {
+          "symbol": "AAPL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "308.15",
+          "filled_at": "2026-08-21T14:33:18.492902Z"
+        },
+        {
+          "symbol": "AAPL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "311.25",
+          "filled_at": "2026-08-21T15:33:16.529258Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 2,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2950",
+      "unrealized_pl": "1110"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "3455",
+      "unrealized_pl": "1615"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2041.36",
+      "unrealized_pl": "43.180008"
+    },
+    {
+      "symbol": "NFLX",
+      "qty": "29",
+      "market_value": "2309.4643",
+      "unrealized_pl": "313.3943"
+    },
+    {
+      "symbol": "NFLX260918C00071000",
+      "qty": "1",
+      "market_value": "790",
+      "unrealized_pl": "270"
+    },
+    {
+      "symbol": "NVDA260824C00220000",
+      "qty": "1",
+      "market_value": "28",
+      "unrealized_pl": "-317"
+    },
+    {
+      "symbol": "NVDA260824C00222500",
+      "qty": "-1",
+      "market_value": "-13",
+      "unrealized_pl": "217"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "2039.87",
+      "unrealized_pl": "90.85"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1950",
+      "unrealized_pl": "395"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1927.3032",
+      "unrealized_pl": "-57.4968"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1831.76",
+      "unrealized_pl": "-46.97"
+    }
+  ]
+}
