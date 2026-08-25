@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-08-24T11:10:04.241739-04:00",
+  "updated_at": "2026-08-25T11:21:30.331826-04:00",
   "positions": {
     "CRM260918C00175000": {
       "symbol": "CRM260918C00175000",
@@ -52,6 +52,20 @@
       "qty": 1,
       "entry_price": 15.69,
       "entry_date": "2026-08-07T11:26:36.743595-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "QCOM261016C00150000": {
+      "symbol": "QCOM261016C00150000",
+      "underlying": "QCOM",
+      "client_order_id": "WK_OPT_QCOM261016C00150000_1787671284",
+      "order_id": "8f11ba62-9580-4136-9d55-26c2ad36031c",
+      "qty": 1,
+      "entry_price": 15.85,
+      "entry_date": "2026-08-25T11:21:30.329791-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
