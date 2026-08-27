@@ -1,0 +1,173 @@
+{
+  "date": "2026-08-26",
+  "generated_at": "2026-08-26T20:57:26.369517-04:00",
+  "account": {
+    "equity": "68630.75",
+    "cash": "49159.96",
+    "buying_power": "223886.05"
+  },
+  "summary": {
+    "total_realized_pnl": "1.55",
+    "total_unrealized_pnl": "-0.30",
+    "total_pnl": "1.25",
+    "bots_active": [
+      "WK_OPT",
+      "15M_OPT",
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-08-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-0.30",
+      "total_pnl": "-0.30",
+      "trades": [
+        {
+          "symbol": "NFLX261016C00080000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "5.55",
+          "filled_at": "2026-08-26T16:00:31.217106Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "NFLX261016C00080000",
+          "qty": "1",
+          "entry_price": "5.55",
+          "current_price": "5.25",
+          "unrealized_pnl": "-0.30"
+        }
+      ]
+    },
+    "15M_OPT": {
+      "bot_tag": "15M_OPT",
+      "date": "2026-08-26",
+      "realized_pnl": "0",
+      "unrealized_pnl": "0",
+      "total_pnl": "0",
+      "trades": [
+        {
+          "symbol": "SCHW260904C00108000",
+          "side": "buy",
+          "is_spread": true,
+          "qty": "1",
+          "price": "0.64",
+          "filled_at": "2026-08-26T14:40:31.118475Z"
+        }
+      ],
+      "open_positions": []
+    },
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-08-26",
+      "realized_pnl": "1.55",
+      "unrealized_pnl": "0",
+      "total_pnl": "1.55",
+      "trades": [
+        {
+          "symbol": "SCHW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "108.49",
+          "filled_at": "2026-08-26T14:40:49.918405Z"
+        },
+        {
+          "symbol": "INTU",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "342.37",
+          "filled_at": "2026-08-26T14:40:41.712813Z"
+        },
+        {
+          "symbol": "INTU",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "340.64",
+          "filled_at": "2026-08-26T15:48:39.758311Z"
+        },
+        {
+          "symbol": "SCHW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "110.19",
+          "filled_at": "2026-08-26T19:39:39.499921Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "2670",
+      "unrealized_pl": "830"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1789.95",
+      "unrealized_pl": "-3.55"
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "qty": "1",
+      "market_value": "3085",
+      "unrealized_pl": "1245"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2090",
+      "unrealized_pl": "91.820008"
+    },
+    {
+      "symbol": "NFLX261016C00080000",
+      "qty": "1",
+      "market_value": "525",
+      "unrealized_pl": "-30"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1989.5",
+      "unrealized_pl": "40.48"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1720",
+      "unrealized_pl": "165"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1970.64",
+      "unrealized_pl": "-14.16"
+    },
+    {
+      "symbol": "QCOM261016C00150000",
+      "qty": "1",
+      "market_value": "1740",
+      "unrealized_pl": "155"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1890.7",
+      "unrealized_pl": "11.97"
+    }
+  ]
+}
