@@ -1,0 +1,105 @@
+{
+  "date": "2026-09-01",
+  "generated_at": "2026-09-01T19:27:49.672644-04:00",
+  "account": {
+    "equity": "74256.17",
+    "cash": "57280.33",
+    "buying_power": "256227.68"
+  },
+  "summary": {
+    "total_realized_pnl": "-4.38",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-4.38",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-09-01",
+      "realized_pnl": "-4.38",
+      "unrealized_pnl": "0",
+      "total_pnl": "-4.38",
+      "trades": [
+        {
+          "symbol": "DELL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "428.88",
+          "filled_at": "2026-09-01T18:21:59.37923Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "424.5",
+          "filled_at": "2026-09-01T19:50:10.259996Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "3180",
+      "unrealized_pl": "1340"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1853.9045",
+      "unrealized_pl": "60.4045"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2114.7",
+      "unrealized_pl": "116.520008"
+    },
+    {
+      "symbol": "NFLX261016C00080000",
+      "qty": "1",
+      "market_value": "450",
+      "unrealized_pl": "-105"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1923.26",
+      "unrealized_pl": "-25.76"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1805",
+      "unrealized_pl": "250"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1999.92",
+      "unrealized_pl": "15.12"
+    },
+    {
+      "symbol": "QCOM261016C00150000",
+      "qty": "1",
+      "market_value": "1860",
+      "unrealized_pl": "275"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1789.06",
+      "unrealized_pl": "-89.67"
+    }
+  ]
+}
