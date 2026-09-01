@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-08-26T12:00:32.275488-04:00",
+  "updated_at": "2026-09-01T13:55:12.267163-04:00",
   "positions": {
-    "CRM260918C00175000": {
-      "symbol": "CRM260918C00175000",
-      "underlying": "CRM",
-      "client_order_id": "WK_OPT_CRM260918C00175000_1785255495",
-      "order_id": "ba571064-1b0b-43c5-a579-f248ba70af13",
-      "qty": 1,
-      "entry_price": 18.46,
-      "entry_date": "2026-07-28T12:18:16.616009-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "ACN260918C00155000": {
       "symbol": "ACN260918C00155000",
       "underlying": "ACN",
@@ -831,6 +817,24 @@
       "exit_date": "2026-08-26T12:00:21.479838-04:00",
       "exit_reason": "TakeProfit",
       "pnl": 565.0
+    },
+    {
+      "symbol": "CRM260918C00175000",
+      "underlying": "CRM",
+      "client_order_id": "WK_OPT_CRM260918C00175000_1785255495",
+      "order_id": "ba571064-1b0b-43c5-a579-f248ba70af13",
+      "qty": 1,
+      "entry_price": 18.46,
+      "entry_date": "2026-07-28T12:18:16.616009-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 81.25,
+      "exit_date": "2026-09-01T13:54:58.220089-04:00",
+      "exit_reason": "TakeProfit",
+      "pnl": 6285.0
     }
   ]
 }
