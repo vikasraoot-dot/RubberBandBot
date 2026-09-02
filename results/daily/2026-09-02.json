@@ -1,0 +1,76 @@
+{
+  "date": "2026-09-02",
+  "generated_at": "2026-09-02T19:28:43.502622-04:00",
+  "account": {
+    "equity": "73830.77",
+    "cash": "57280.09",
+    "buying_power": "256184.28"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "ACN260918C00155000",
+      "qty": "1",
+      "market_value": "3110",
+      "unrealized_pl": "1270"
+    },
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1817.5",
+      "unrealized_pl": "24"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2118.5",
+      "unrealized_pl": "120.320008"
+    },
+    {
+      "symbol": "NFLX261016C00080000",
+      "qty": "1",
+      "market_value": "565",
+      "unrealized_pl": "10"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1893.36",
+      "unrealized_pl": "-55.66"
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "qty": "1",
+      "market_value": "1035",
+      "unrealized_pl": "-520"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2037.8844",
+      "unrealized_pl": "53.0844"
+    },
+    {
+      "symbol": "QCOM261016C00150000",
+      "qty": "1",
+      "market_value": "2175",
+      "unrealized_pl": "590"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1798.44",
+      "unrealized_pl": "-80.29"
+    }
+  ]
+}
