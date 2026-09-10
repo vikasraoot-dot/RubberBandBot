@@ -1,21 +1,7 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-09-09T13:55:43.092395-04:00",
+  "updated_at": "2026-09-10T13:48:17.200987-04:00",
   "positions": {
-    "PLTR260925C00165000": {
-      "symbol": "PLTR260925C00165000",
-      "underlying": "PLTR",
-      "client_order_id": "WK_OPT_PLTR260925C00165000_1786116394",
-      "order_id": "95d1a6f1-dd39-4188-b484-793285a6178c",
-      "qty": 1,
-      "entry_price": 15.69,
-      "entry_date": "2026-08-07T11:26:36.743595-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
     "QCOM261016C00150000": {
       "symbol": "QCOM261016C00150000",
       "underlying": "QCOM",
@@ -24,6 +10,20 @@
       "qty": 1,
       "entry_price": 15.85,
       "entry_date": "2026-08-25T11:21:30.329791-04:00",
+      "status": "open",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0
+    },
+    "BABA261030C00106000": {
+      "symbol": "BABA261030C00106000",
+      "underlying": "BABA",
+      "client_order_id": "WK_OPT_BABA261030C00106000_1789062493",
+      "order_id": "79bc0fb4-5c62-4eae-a8f8-e4fee2127c4b",
+      "qty": 1,
+      "entry_price": 8.79,
+      "entry_date": "2026-09-10T13:48:15.518269-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -843,6 +843,24 @@
       "exit_date": "2026-09-08T14:00:34.490825-04:00",
       "exit_reason": "StopLoss",
       "pnl": -312.0
+    },
+    {
+      "symbol": "PLTR260925C00165000",
+      "underlying": "PLTR",
+      "client_order_id": "WK_OPT_PLTR260925C00165000_1786116394",
+      "order_id": "95d1a6f1-dd39-4188-b484-793285a6178c",
+      "qty": 1,
+      "entry_price": 15.69,
+      "entry_date": "2026-08-07T11:26:36.743595-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_price": 6.8,
+      "exit_date": "2026-09-10T13:48:05.807214-04:00",
+      "exit_reason": "StopLoss",
+      "pnl": -875.0
     }
   ]
 }
