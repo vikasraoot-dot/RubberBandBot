@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-10",
+  "generated_at": "2026-09-10T19:19:28.416727-04:00",
+  "account": {
+    "equity": "74121.33",
+    "cash": "61005.38",
+    "buying_power": "270694.17"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-1.65",
+    "total_pnl": "-1.65",
+    "bots_active": [
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-09-10",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-1.65",
+      "total_pnl": "-1.65",
+      "trades": [
+        {
+          "symbol": "BABA261030C00106000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "8.7",
+          "filled_at": "2026-09-10T17:48:14.484783028Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "BABA261030C00106000",
+          "qty": "1",
+          "entry_price": "8.7",
+          "current_price": "7.05",
+          "unrealized_pnl": "-1.65"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1801.5",
+      "unrealized_pl": "8"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "705",
+      "unrealized_pl": "-165"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2075.5372",
+      "unrealized_pl": "77.357208"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1793.08",
+      "unrealized_pl": "-155.94"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2115",
+      "unrealized_pl": "130.2"
+    },
+    {
+      "symbol": "QCOM261016C00150000",
+      "qty": "1",
+      "market_value": "2885",
+      "unrealized_pl": "1300"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1740.83",
+      "unrealized_pl": "-137.9"
+    }
+  ]
+}
