@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-11",
+  "generated_at": "2026-09-11T19:28:01.598995-04:00",
+  "account": {
+    "equity": "74512.81",
+    "cash": "62855.25",
+    "buying_power": "278406.16"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "-4.35",
+    "total_pnl": "-4.35",
+    "bots_active": [
+      "WK_OPT"
+    ]
+  },
+  "bots": {
+    "WK_OPT": {
+      "bot_tag": "WK_OPT",
+      "date": "2026-09-11",
+      "realized_pnl": "0",
+      "unrealized_pnl": "-4.35",
+      "total_pnl": "-4.35",
+      "trades": [
+        {
+          "symbol": "QCOM261030C00180000",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "16.95",
+          "filled_at": "2026-09-11T17:50:17.425852185Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "QCOM261030C00180000",
+          "qty": "1",
+          "entry_price": "16.95",
+          "current_price": "12.6",
+          "unrealized_pnl": "-4.35"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1807.5",
+      "unrealized_pl": "14"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "760",
+      "unrealized_pl": "-110"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2054.66",
+      "unrealized_pl": "56.480008"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1791.24",
+      "unrealized_pl": "-157.78"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2184.6012",
+      "unrealized_pl": "199.8012"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "1260",
+      "unrealized_pl": "-435"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1799.5544",
+      "unrealized_pl": "-79.1756"
+    }
+  ]
+}

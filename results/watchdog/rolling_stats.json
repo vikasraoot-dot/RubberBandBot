@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-10T19:19:44.697345-04:00",
+  "generated_at": "2026-09-11T19:28:18.427315-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -73,17 +73,17 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 12,
-        "total_trades": 53,
+        "entries_found": 11,
+        "total_trades": 52,
         "total_winners": 19,
-        "total_losers": 34,
-        "win_rate": 35.85,
-        "avg_pnl_per_day": -4.16,
+        "total_losers": 33,
+        "win_rate": 36.54,
+        "avg_pnl_per_day": -4.03,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -49.88,
-        "sharpe": -0.09,
-        "max_drawdown": -148.48,
+        "total_pnl": -44.38,
+        "sharpe": -0.08,
+        "max_drawdown": -142.98,
         "trend": "IMPROVING"
       },
       "90d": {
@@ -117,7 +117,7 @@
     "WK_OPT": {
       "7d": {
         "window_days": 7,
-        "entries_found": 1,
+        "entries_found": 2,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -132,7 +132,7 @@
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 2,
+        "entries_found": 3,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -147,7 +147,7 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 9,
+        "entries_found": 10,
         "total_trades": 0,
         "total_winners": 0,
         "total_losers": 0,
@@ -195,16 +195,16 @@
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 8,
+        "entries_found": 7,
         "total_trades": 3,
         "total_winners": 0,
         "total_losers": 3,
         "win_rate": 0.0,
-        "avg_pnl_per_day": -6.81,
+        "avg_pnl_per_day": -7.79,
         "avg_win": 0.0,
         "avg_loss": 0.0,
         "total_pnl": -54.5,
-        "sharpe": -0.29,
+        "sharpe": -0.31,
         "max_drawdown": -65.97,
         "trend": "IMPROVING"
       },
