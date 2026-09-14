@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-14",
+  "generated_at": "2026-09-14T19:56:47.074666-04:00",
+  "account": {
+    "equity": "74237.29",
+    "cash": "62857.86",
+    "buying_power": "277805.85"
+  },
+  "summary": {
+    "total_realized_pnl": "2.75",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "2.75",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-09-14",
+      "realized_pnl": "2.75",
+      "unrealized_pnl": "0",
+      "total_pnl": "2.75",
+      "trades": [
+        {
+          "symbol": "BAC",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "59.1",
+          "filled_at": "2026-09-14T19:06:38.886599Z"
+        },
+        {
+          "symbol": "BAC",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "11",
+          "price": "59.35",
+          "filled_at": "2026-09-14T19:50:04.120503Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1730.892",
+      "unrealized_pl": "-62.608"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "810",
+      "unrealized_pl": "-60"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2021.98",
+      "unrealized_pl": "23.800008"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1830.4803",
+      "unrealized_pl": "-118.5397"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2163.36",
+      "unrealized_pl": "178.56"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "1150",
+      "unrealized_pl": "-545"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1672.72",
+      "unrealized_pl": "-206.01"
+    }
+  ]
+}
