@@ -1,6 +1,6 @@
 {
   "bot_tag": "WK_OPT",
-  "updated_at": "2026-09-11T13:50:26.852726-04:00",
+  "updated_at": "2026-09-15T14:23:40.422419-04:00",
   "positions": {
     "BABA261030C00106000": {
       "symbol": "BABA261030C00106000",
@@ -24,20 +24,6 @@
       "qty": 1,
       "entry_price": 17.28,
       "entry_date": "2026-09-11T13:50:18.501789-04:00",
-      "status": "open",
-      "tp_order_id": "",
-      "sl_order_id": "",
-      "tp_price": 0.0,
-      "sl_price": 0.0
-    },
-    "IBM261030C00240000": {
-      "symbol": "IBM261030C00240000",
-      "underlying": "IBM",
-      "client_order_id": "WK_OPT_IBM261030C00240000_1789149020",
-      "order_id": "b3a98ff4-5dbc-4d9a-b5d2-546771294029",
-      "qty": 1,
-      "entry_price": 16.17,
-      "entry_date": "2026-09-11T13:50:26.851370-04:00",
       "status": "open",
       "tp_order_id": "",
       "sl_order_id": "",
@@ -893,6 +879,22 @@
       "exit_date": "2026-09-11T13:50:04.217296-04:00",
       "exit_reason": "TakeProfit",
       "pnl": 1960.0
+    },
+    {
+      "symbol": "IBM261030C00240000",
+      "underlying": "IBM",
+      "client_order_id": "WK_OPT_IBM261030C00240000_1789149020",
+      "order_id": "b3a98ff4-5dbc-4d9a-b5d2-546771294029",
+      "qty": 1,
+      "entry_price": 16.17,
+      "entry_date": "2026-09-11T13:50:26.851370-04:00",
+      "status": "closed",
+      "tp_order_id": "",
+      "sl_order_id": "",
+      "tp_price": 0.0,
+      "sl_price": 0.0,
+      "exit_date": "2026-09-15T14:23:28.524501-04:00",
+      "exit_reason": "orphaned_reconcile_auto_clean"
     }
   ]
 }
