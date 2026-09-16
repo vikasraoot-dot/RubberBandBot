@@ -1,0 +1,93 @@
+{
+  "date": "2026-09-16",
+  "generated_at": "2026-09-16T19:43:31.991961-04:00",
+  "account": {
+    "equity": "74317.1",
+    "cash": "62870.38",
+    "buying_power": "277750.34"
+  },
+  "summary": {
+    "total_realized_pnl": "12.520002",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "12.520002",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-09-16",
+      "realized_pnl": "12.520002",
+      "unrealized_pnl": "0",
+      "total_pnl": "12.520002",
+      "trades": [
+        {
+          "symbol": "HOOD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "102.11",
+          "filled_at": "2026-09-16T19:22:02.621664Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "104.196667",
+          "filled_at": "2026-09-16T19:50:05.086439Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 0,
+    "fixes_applied": 0
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1710.45",
+      "unrealized_pl": "-83.05"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "670",
+      "unrealized_pl": "-200"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1924.32",
+      "unrealized_pl": "-73.859992"
+    },
+    {
+      "symbol": "PDD",
+      "qty": "23",
+      "market_value": "1814.24",
+      "unrealized_pl": "-134.78"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2229.96",
+      "unrealized_pl": "245.16"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "1395",
+      "unrealized_pl": "-300"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1702.75",
+      "unrealized_pl": "-175.98"
+    }
+  ]
+}
