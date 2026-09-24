@@ -92,8 +92,14 @@ def data_usable_for(first_data_date: pd.Timestamp, first_member_date: pd.Timesta
     """
     True if a symbol's price history plausibly belongs to the index member.
 
-    A reused ticker (history starting after the membership began) is rejected.
-    Histories starting at our download start are accepted.
+    A reused ticker (history starting well after the membership began, e.g. Yahoo
+    "FB" = a different instrument from 2025) is rejected.  Spin-offs that join the
+    index on their first trading day (DOW, CARR, OTIS, GEHC, ...) are accepted: a
+    history may start up to 5 days after the first membership date.  Histories
+    starting at our download start are accepted.
+
+    (QC fix: the original rule demanded history 60 days *before* membership, which
+    wrongly excluded those spin-offs from breadth.  See REPORT.md, "Audit".)
     """
     download_start = pd.Timestamp(C.DOWNLOAD_START) + pd.Timedelta(days=7)
-    return first_data_date <= max(first_member_date - pd.Timedelta(days=60), download_start)
+    return first_data_date <= max(first_member_date + pd.Timedelta(days=5), download_start)

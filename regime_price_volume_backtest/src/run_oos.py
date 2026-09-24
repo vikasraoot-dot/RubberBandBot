@@ -92,8 +92,10 @@ def portfolio_section(X: Ctx) -> pd.DataFrame:
         for name in X.frozen["top_table"] + X.frozen.get("portfolio_extra", []):
             m = X.models[name]
             for risk in C.RISK_GRID:
-                for cost in (0.0, C.COST_BPS_PER_SIDE):
-                    if (risk != C.RISK_PER_TRADE or cost == 0.0) and name not in (X.frozen["final"], X.frozen["compare"]):
+                for cost in (0.0, C.COST_BPS_PER_SIDE, 15.0):
+                    if (risk != C.RISK_PER_TRADE or cost != C.COST_BPS_PER_SIDE) and name not in (X.frozen["final"], X.frozen["compare"]):
+                        continue
+                    if risk != C.RISK_PER_TRADE and cost != C.COST_BPS_PER_SIDE:
                         continue
                     params = PortfolioParams(risk_per_trade=risk, cost_bps=cost)
                     ps = portfolio_seeds(m, X.stocks, X.reg, p, params, SEEDS)
@@ -362,7 +364,7 @@ def main() -> None:
     X = Ctx()
     log.info("frozen models: %s (fwd10 base dev %.4f / oos %.4f)", list(X.models), X.base_fwd10["dev"],
              X.base_fwd10["oos"])
-    trades_section(X).to_csv(OUT / "trades.csv", index=False)
+    trades_section(X).to_csv(OUT / "trades.csv", index=False, float_format="%.6g")
     pt = per_ticker_section(X)
     pt.to_csv(OUT / "per_ticker_results.csv", index=False)
     summ = []
