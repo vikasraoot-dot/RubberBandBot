@@ -1,0 +1,6 @@
+# Research outputs are CSV; the repo-wide .gitignore excludes *.csv, re-include them here.
+!*.csv
+!**/*.csv
+# Breadth constituent cache (~690 tickers, ~33 MB) is rebuildable with `python -m src.download`.
+data/breadth_raw/
+*.log

@@ -1,0 +1,2987 @@
+{
+  "protocol": {
+    "dev_period": [
+      "2020-01-01",
+      "2022-12-31"
+    ],
+    "oos_period": [
+      "2023-01-01",
+      "latest complete session (data/meta/data_end.json)"
+    ],
+    "selection_rules": {
+      "exit": "max seed-averaged dev portfolio Sharpe among exits with trade PF > 1.15; ties (<0.10) to simpler",
+      "regime_layer_keep": "dSharpe >= +0.10 AND max DD not worse AND expectancy not lower vs model without it"
+    },
+    "note": "Nothing below may be changed after the first OOS run."
+  },
+  "models": {
+    "FINAL": {
+      "name": "FINAL",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "SPY_only": {
+      "name": "SPY_only",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "spy200",
+      "state_rule": null
+    },
+    "SPY_VIX": {
+      "name": "SPY_VIX",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "spy200+vix_noshock",
+      "state_rule": null
+    },
+    "SPY_VIX_BREADTH": {
+      "name": "SPY_VIX_BREADTH",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "spy200+vix_noshock+br50_40",
+      "state_rule": null
+    },
+    "ONOFF": {
+      "name": "ONOFF",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": "onoff_v1"
+    },
+    "A_full_hypothesis": {
+      "name": "A_full_hypothesis",
+      "entry": {
+        "family": "A",
+        "candle": "any",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": 1.0,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": true,
+        "pb_vol_max": 1.0,
+        "ext_max": 0.05,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "spy200+vix_noshock+br50_40",
+      "state_rule": null
+    },
+    "C_breakout": {
+      "name": "C_breakout",
+      "entry": {
+        "family": "C",
+        "candle": "strong",
+        "clv_min": 0.7,
+        "trend": "full",
+        "trig_vol": 1.2,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "D_swinglow",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "spy200",
+      "state_rule": null
+    },
+    "B_failed_breakdown": {
+      "name": "B_failed_breakdown",
+      "entry": {
+        "family": "B",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "above200",
+        "trig_vol": 1.0,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "REF_random_uptrend_day": {
+      "name": "REF_random_uptrend_day",
+      "entry": {
+        "family": "CANDLE",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "REF_random_every_day": {
+      "name": "REF_random_every_day",
+      "entry": {
+        "family": "CANDLE",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "none",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_A_simple": {
+      "name": "FAM_A_simple",
+      "entry": {
+        "family": "A",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_A_full_candle_volume": {
+      "name": "FAM_A_full_candle_volume",
+      "entry": {
+        "family": "A",
+        "candle": "any",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": 1.0,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": true,
+        "pb_vol_max": 1.0,
+        "ext_max": 0.05,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_B_failed_breakdown_swing": {
+      "name": "FAM_B_failed_breakdown_swing",
+      "entry": {
+        "family": "B",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "above200",
+        "trig_vol": 1.0,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_B_reclaim_ema20": {
+      "name": "FAM_B_reclaim_ema20",
+      "entry": {
+        "family": "B",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "above200",
+        "trig_vol": 1.0,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "ema20",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_C_contraction_breakout": {
+      "name": "FAM_C_contraction_breakout",
+      "entry": {
+        "family": "C",
+        "candle": "strong",
+        "clv_min": 0.7,
+        "trend": "full",
+        "trig_vol": 1.2,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    },
+    "FAM_REF_random_uptrend_day": {
+      "name": "FAM_REF_random_uptrend_day",
+      "entry": {
+        "family": "CANDLE",
+        "candle": "none",
+        "clv_min": null,
+        "trend": "full",
+        "trig_vol": null,
+        "pb_dist": 0.02,
+        "pb_mode": "near",
+        "pb_vol": false,
+        "pb_vol_max": 1.0,
+        "ext_max": null,
+        "ext_atr_max": null,
+        "b_level": "swing",
+        "base_max_range_atr": 3.0,
+        "atr_contraction": 0.85,
+        "base_vol_decline": true
+      },
+      "exit": {
+        "rule": "B_close<EMA20",
+        "stop": "atr1.5",
+        "horizon": null
+      },
+      "gate": "none",
+      "state_rule": null
+    }
+  },
+  "final": "FINAL",
+  "compare": "SPY_only",
+  "setup_gate": "spy200",
+  "top_table": [
+    "FINAL",
+    "SPY_only",
+    "SPY_VIX",
+    "SPY_VIX_BREADTH",
+    "ONOFF",
+    "A_full_hypothesis",
+    "C_breakout",
+    "B_failed_breakdown",
+    "REF_random_uptrend_day",
+    "REF_random_every_day"
+  ],
+  "onoff_model": "ONOFF",
+  "combined": {
+    "name": "COMBINED_C_breakout+FINAL",
+    "members": [
+      "C_breakout",
+      "FINAL"
+    ]
+  },
+  "families": [
+    "FAM_A_simple",
+    "FAM_A_full_candle_volume",
+    "FAM_B_failed_breakdown_swing",
+    "FAM_B_reclaim_ema20",
+    "FAM_C_contraction_breakout",
+    "FAM_REF_random_uptrend_day"
+  ],
+  "ladder": [
+    {
+      "name": "S0_candle_only",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S0_candle_only",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "none",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A0_candle_only",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A0_candle_only",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "none",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "S1_+stock_trend",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S1_+stock_trend",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A1_+stock_trend",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A1_+stock_trend",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "S2_+volume",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S2_+volume",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A2_+volume",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A2_+volume",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "S3_+SPY_regime",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S3_+SPY_regime",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A3_+SPY_regime",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A3_+SPY_regime",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "S4_+VIX",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S4_+VIX",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200+vix_noshock",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A4_+VIX",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A4_+VIX",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200+vix_noshock",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "S5_+breadth",
+      "experiment": "ladder_no_location",
+      "model": {
+        "name": "S5_+breadth",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200+vix_noshock+br50_40",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "A5_+breadth",
+      "experiment": "ladder_with_pullback",
+      "model": {
+        "name": "A5_+breadth",
+        "entry": {
+          "family": "A",
+          "candle": "any",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": true,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "spy200+vix_noshock+br50_40",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "REF_uptrend_every_day",
+      "experiment": "ladder_reference",
+      "model": {
+        "name": "REF_random_uptrend_day",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "name": "REF_every_day",
+      "experiment": "ladder_reference",
+      "model": {
+        "name": "REF_random_every_day",
+        "entry": {
+          "family": "CANDLE",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "none",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    }
+  ],
+  "ablation": {
+    "A_full_hypothesis": [
+      {
+        "removed": "full",
+        "model": {
+          "name": "ablH_full",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_breadth",
+        "model": {
+          "name": "ablH_no_breadth",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_vix",
+        "model": {
+          "name": "ablH_no_vix",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_market_gate",
+        "model": {
+          "name": "ablH_no_market_gate",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_regime_at_all",
+        "model": {
+          "name": "ablH_no_regime_at_all",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_stock_trend",
+        "model": {
+          "name": "ablH_no_stock_trend",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "none",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_trigger_volume",
+        "model": {
+          "name": "ablH_no_trigger_volume",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_pullback_volume",
+        "model": {
+          "name": "ablH_no_pullback_volume",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_candle",
+        "model": {
+          "name": "ablH_no_candle",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "candle->plain_up_close",
+        "model": {
+          "name": "ablH_candle->plain_up_close",
+          "entry": {
+            "family": "A",
+            "candle": "upclose",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_pullback_location",
+        "model": {
+          "name": "ablH_no_pullback_location",
+          "entry": {
+            "family": "CANDLE",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "no_extension_filter",
+        "model": {
+          "name": "ablH_no_extension_filter",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+vix_noshock+br50_40",
+          "state_rule": null
+        }
+      }
+    ],
+    "FINAL": [
+      {
+        "removed": "FINAL",
+        "model": {
+          "name": "ablF_FINAL",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "remove_stock_trend",
+        "model": {
+          "name": "ablF_remove_stock_trend",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "none",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "trend_only_close>SMA200",
+        "model": {
+          "name": "ablF_trend_only_close>SMA200",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "above200",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "remove_pullback_location(=random uptrend day)",
+        "model": {
+          "name": "ablF_remove_pullback_location(=random uptrend day)",
+          "entry": {
+            "family": "CANDLE",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_any_bullish_candle",
+        "model": {
+          "name": "ablF_add_any_bullish_candle",
+          "entry": {
+            "family": "A",
+            "candle": "any",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_strong_close_candle",
+        "model": {
+          "name": "ablF_add_strong_close_candle",
+          "entry": {
+            "family": "A",
+            "candle": "strong",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_engulfing_candle",
+        "model": {
+          "name": "ablF_add_engulfing_candle",
+          "entry": {
+            "family": "A",
+            "candle": "engulf",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_plain_up_close",
+        "model": {
+          "name": "ablF_add_plain_up_close",
+          "entry": {
+            "family": "A",
+            "candle": "upclose",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_trigger_volume>=1.0",
+        "model": {
+          "name": "ablF_add_trigger_volume>=1.0",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.0,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_trigger_volume>=1.5",
+        "model": {
+          "name": "ablF_add_trigger_volume>=1.5",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": 1.5,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_pullback_volume_contraction",
+        "model": {
+          "name": "ablF_add_pullback_volume_contraction",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": true,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_extension<=5%",
+        "model": {
+          "name": "ablF_add_extension<=5%",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": 0.05,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "none",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_SPY>SMA200",
+        "model": {
+          "name": "ablF_add_SPY>SMA200",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_SPY_SMA50>SMA200",
+        "model": {
+          "name": "ablF_add_SPY_SMA50>SMA200",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "spy200+spy50_200",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_VIX_noshock",
+        "model": {
+          "name": "ablF_add_VIX_noshock",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "vix_noshock",
+          "state_rule": null
+        }
+      },
+      {
+        "removed": "add_breadth50>=40",
+        "model": {
+          "name": "ablF_add_breadth50>=40",
+          "entry": {
+            "family": "A",
+            "candle": "none",
+            "clv_min": null,
+            "trend": "full",
+            "trig_vol": null,
+            "pb_dist": 0.02,
+            "pb_mode": "near",
+            "pb_vol": false,
+            "pb_vol_max": 1.0,
+            "ext_max": null,
+            "ext_atr_max": null,
+            "b_level": "swing",
+            "base_max_range_atr": 3.0,
+            "atr_contraction": 0.85,
+            "base_vol_decline": true
+          },
+          "exit": {
+            "rule": "B_close<EMA20",
+            "stop": "atr1.5",
+            "horizon": null
+          },
+          "gate": "br50_40",
+          "state_rule": null
+        }
+      }
+    ]
+  },
+  "sensitivity": [
+    {
+      "param": "pullback_dist",
+      "value": 0.01,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_pullback_dist=0.01",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.01,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "pullback_dist",
+      "value": 0.02,
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_pullback_dist=0.02",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "pullback_dist",
+      "value": 0.03,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_pullback_dist=0.03",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.03,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "pullback_mode",
+      "value": "touch(low<=EMA20<close)",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_pullback_mode=touch(low<=EMA20<close)",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "touch",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "stock_trend",
+      "value": "above200",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_stock_trend=above200",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "above200",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "stock_trend",
+      "value": "above200_50_200",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_stock_trend=above200_50_200",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "above200_50_200",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "stock_trend",
+      "value": "full",
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_stock_trend=full",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "none",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_initial_stop=none",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "none",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "atr1.0",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_initial_stop=atr1.0",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.0",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "atr1.5",
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_initial_stop=atr1.5",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "atr2.0",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_initial_stop=atr2.0",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr2.0",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "signal_low",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_initial_stop=signal_low",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "signal_low",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "initial_stop",
+      "value": "swing_low",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_initial_stop=swing_low",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "swing_low",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "A_close<EMA9",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=A_close<EMA9",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "A_close<EMA9",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "A2_2closes<EMA9",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=A2_2closes<EMA9",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "A2_2closes<EMA9",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "W_EMA9warn+confirm",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=W_EMA9warn+confirm",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "W_EMA9warn+confirm",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "B_close<EMA20",
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_exit_rule=B_close<EMA20",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "C_EMA9xEMA20",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=C_EMA9xEMA20",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "C_EMA9xEMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "D_swinglow",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=D_swinglow",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "D_swinglow",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "E_pricevol",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=E_pricevol",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "E_pricevol",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "F_chandelier",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=F_chandelier",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "F_chandelier",
+          "stop": "atr2.0",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "T10_time",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=T10_time",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "T10_time",
+          "stop": "none",
+          "horizon": 10
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "exit_rule",
+      "value": "T20_time",
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_exit_rule=T20_time",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "T10_time",
+          "stop": "none",
+          "horizon": 20
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "trigger_volume",
+      "value": null,
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_trigger_volume=None",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "trigger_volume",
+      "value": 1.0,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_trigger_volume=1.0",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.0,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "trigger_volume",
+      "value": 1.2,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_trigger_volume=1.2",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.2,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "trigger_volume",
+      "value": 1.5,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_trigger_volume=1.5",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": 1.5,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "strong_close_clv(added)",
+      "value": 0.7,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_strong_close_clv(added)=0.7",
+        "entry": {
+          "family": "A",
+          "candle": "strong",
+          "clv_min": 0.7,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "strong_close_clv(added)",
+      "value": 0.75,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_strong_close_clv(added)=0.75",
+        "entry": {
+          "family": "A",
+          "candle": "strong",
+          "clv_min": 0.75,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "strong_close_clv(added)",
+      "value": 0.8,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_strong_close_clv(added)=0.8",
+        "entry": {
+          "family": "A",
+          "candle": "strong",
+          "clv_min": 0.8,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap",
+      "value": null,
+      "is_frozen_value": true,
+      "model": {
+        "name": "sens_extension_cap=None",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap",
+      "value": 0.03,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap=0.03",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.03,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap",
+      "value": 0.05,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap=0.05",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.05,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap",
+      "value": 0.07,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap=0.07",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": 0.07,
+          "ext_atr_max": null,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap_atr",
+      "value": 1.0,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap_atr=1.0",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": 1.0,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap_atr",
+      "value": 1.5,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap_atr=1.5",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": 1.5,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    },
+    {
+      "param": "extension_cap_atr",
+      "value": 2.0,
+      "is_frozen_value": false,
+      "model": {
+        "name": "sens_extension_cap_atr=2.0",
+        "entry": {
+          "family": "A",
+          "candle": "none",
+          "clv_min": null,
+          "trend": "full",
+          "trig_vol": null,
+          "pb_dist": 0.02,
+          "pb_mode": "near",
+          "pb_vol": false,
+          "pb_vol_max": 1.0,
+          "ext_max": null,
+          "ext_atr_max": 2.0,
+          "b_level": "swing",
+          "base_max_range_atr": 3.0,
+          "atr_contraction": 0.85,
+          "base_vol_decline": true
+        },
+        "exit": {
+          "rule": "B_close<EMA20",
+          "stop": "atr1.5",
+          "horizon": null
+        },
+        "gate": "none",
+        "state_rule": null
+      }
+    }
+  ],
+  "regime_models": [
+    "FINAL",
+    "A_full_hypothesis",
+    "C_breakout"
+  ],
+  "winner_loser_models": [
+    "FINAL",
+    "A_full_hypothesis"
+  ],
+  "trade_export_models": [
+    "FINAL",
+    "SPY_only",
+    "A_full_hypothesis",
+    "C_breakout"
+  ],
+  "provenance": {
+    "frozen_at_utc": "2026-09-24T06:15:46+00:00",
+    "git_head_before_freeze": "3d16099fd2c58c0a33235d1e068e56492093a5c9",
+    "dev_result_sha256_16": {
+      "dev_ablation.csv": "317ac7f50cb3caed",
+      "dev_benchmarks.csv": "7c4b80a90db7668e",
+      "dev_candle.csv": "61459631a7408336",
+      "dev_exits.csv": "fa6974d1e8a6ae5d",
+      "dev_extension.csv": "c611decaf8202999",
+      "dev_family.csv": "7c10e52c747bec16",
+      "dev_gates.csv": "25430b9a81db071e",
+      "dev_ladder.csv": "3e4c65baa706b587",
+      "dev_s2_benchmarks.csv": "b064df19e5743bd8",
+      "dev_s2_exits.csv": "54407e0c6e81f75e",
+      "dev_s2_gates.csv": "0715c6d169363ddc",
+      "dev_s2_gates_C.csv": "626e000d1bad1f47",
+      "dev_s2_trades_A_simple_nogate.csv": "6260951b7b28fbd9",
+      "dev_s2_trades_C_breakout_nogate.csv": "74c07f391f270bc2",
+      "dev_sensitivity.csv": "dc22fdec43e6385d",
+      "dev_trades_A_nogate.csv": "a1708143aee44c2d"
+    }
+  }
+}
