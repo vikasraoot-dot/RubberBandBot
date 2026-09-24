@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-23T19:51:42.903247-04:00",
+  "generated_at": "2026-09-24T19:57:37.787432-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -52,16 +52,16 @@
     "15M_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 2,
-        "total_trades": 2,
-        "total_winners": 2,
+        "entries_found": 1,
+        "total_trades": 1,
+        "total_winners": 1,
         "total_losers": 0,
         "win_rate": 100.0,
-        "avg_pnl_per_day": 7.73,
+        "avg_pnl_per_day": 2.94,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 15.46,
-        "sharpe": 1.14,
+        "total_pnl": 2.94,
+        "sharpe": 0.0,
         "max_drawdown": 0.0,
         "trend": "FLAT"
       },
@@ -99,7 +99,7 @@
         {
           "flag": "FILTERS_ADDING_VALUE",
           "severity": "INFO",
-          "detail": "Bot P&L $15.46 > Shadow P&L $-64736.0 over 7 days"
+          "detail": "Bot P&L $2.94 > Shadow P&L $-32368.0 over 7 days"
         }
       ]
     },
