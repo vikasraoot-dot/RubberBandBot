@@ -1,10 +1,16 @@
 name: "[BOT] 15m Stock - Live"
 on:
-  schedule:
-    # Fire 30 mins BEFORE market open (9:00 AM EST)
-    # 14:00 UTC = 9:00 AM EST (Winter) / 10:00 AM EDT (Summer)
-    # The wait guard will hold until market actually opens
-    - cron: "0 14 * * 1-5"
+  # No `schedule:` here on purpose. GitHub delivered this workflow's cron ("0 14 * * 1-5") between
+  # 3.5 and 6.5 hours late on EVERY run from 2026-09-14 to 2026-09-30: 09-28 started at 20:20 UTC,
+  # after the close, and 09-30 at 18:47 UTC with 1h13m of the session left. Scheduled events are
+  # best-effort and are delayed or dropped under load, and the wait guard below caps at 20 minutes,
+  # so it can hold an early run until the bell but cannot rescue a late one. The bot was therefore
+  # trading a random afternoon slice rather than the session it was designed and tested for.
+  #
+  # It is dispatched instead from Task Scheduler on the runner's own machine - task
+  # RB_15m_Stock_Dispatch, weekdays 06:10 PT via C:\Trades\launch_rb15m_dispatch.ps1 - which fires
+  # on time, follows local daylight saving (cron cannot), and logs a hard failure if the dispatch
+  # does not go through. workflow_dispatch is delivered immediately, unlike schedule.
   workflow_dispatch:
     inputs:
       slope_threshold:
