@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-02T20:36:58.464326-04:00",
+  "generated_at": "2026-10-05T21:50:10.991089-04:00",
   "bots": {
     "15M_OPT": {
       "7d": {
@@ -52,50 +52,56 @@
     "15M_STK": {
       "7d": {
         "window_days": 7,
-        "entries_found": 0,
-        "total_trades": 0,
-        "total_winners": 0,
-        "total_losers": 0,
-        "win_rate": 0.0,
-        "avg_pnl_per_day": 0.0,
+        "entries_found": 1,
+        "total_trades": 2,
+        "total_winners": 1,
+        "total_losers": 1,
+        "win_rate": 50.0,
+        "avg_pnl_per_day": 8.41,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 0.0,
+        "total_pnl": 8.41,
         "sharpe": 0.0,
         "max_drawdown": 0.0,
         "trend": "FLAT"
       },
       "30d": {
         "window_days": 30,
-        "entries_found": 4,
-        "total_trades": 4,
-        "total_winners": 3,
-        "total_losers": 1,
-        "win_rate": 75.0,
-        "avg_pnl_per_day": 2.75,
+        "entries_found": 5,
+        "total_trades": 6,
+        "total_winners": 4,
+        "total_losers": 2,
+        "win_rate": 66.67,
+        "avg_pnl_per_day": 3.88,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": 11.01,
-        "sharpe": 0.34,
+        "total_pnl": 19.42,
+        "sharpe": 0.52,
         "max_drawdown": -7.2,
         "trend": "IMPROVING"
       },
       "90d": {
         "window_days": 90,
-        "entries_found": 29,
-        "total_trades": 101,
-        "total_winners": 41,
-        "total_losers": 60,
-        "win_rate": 40.59,
-        "avg_pnl_per_day": -1.74,
+        "entries_found": 30,
+        "total_trades": 103,
+        "total_winners": 42,
+        "total_losers": 61,
+        "win_rate": 40.78,
+        "avg_pnl_per_day": -1.4,
         "avg_win": 0.0,
         "avg_loss": 0.0,
-        "total_pnl": -50.53,
-        "sharpe": -0.05,
+        "total_pnl": -42.12,
+        "sharpe": -0.04,
         "max_drawdown": -216.08,
         "trend": "FLAT"
       },
-      "flags": []
+      "flags": [
+        {
+          "flag": "FILTERS_ADDING_VALUE",
+          "severity": "INFO",
+          "detail": "Bot P&L $8.41 > Shadow P&L $-32368.0 over 7 days"
+        }
+      ]
     },
     "WK_OPT": {
       "7d": {
