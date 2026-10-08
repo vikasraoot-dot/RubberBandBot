@@ -1,0 +1,263 @@
+{
+  "date": "2026-10-07",
+  "generated_at": "2026-10-07T21:10:34.443003-04:00",
+  "account": {
+    "equity": "73493.29",
+    "cash": "64667.35",
+    "buying_power": "280302.03"
+  },
+  "summary": {
+    "total_realized_pnl": "46.680002",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "46.680002",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-07",
+      "realized_pnl": "46.680002",
+      "unrealized_pnl": "0",
+      "total_pnl": "46.680002",
+      "trades": [
+        {
+          "symbol": "DE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "657.74",
+          "filled_at": "2026-10-07T15:07:12.090581Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "214.9",
+          "filled_at": "2026-10-07T14:37:11.067417Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "427.08",
+          "filled_at": "2026-10-07T14:27:04.633896Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "579.906667",
+          "filled_at": "2026-10-07T14:22:39.967113Z"
+        },
+        {
+          "symbol": "PH",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "959.91",
+          "filled_at": "2026-10-07T14:22:30.476527Z"
+        },
+        {
+          "symbol": "ADI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "406.66",
+          "filled_at": "2026-10-07T14:22:23.078084Z"
+        },
+        {
+          "symbol": "META",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "724",
+          "filled_at": "2026-10-07T14:22:16.141809Z"
+        },
+        {
+          "symbol": "TXN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "286.72",
+          "filled_at": "2026-10-07T14:22:11.106536Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "410",
+          "filled_at": "2026-10-07T14:07:27.060013Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "108.165",
+          "filled_at": "2026-10-07T14:07:15.351906Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "1036.8",
+          "filled_at": "2026-10-07T14:07:06.945619Z"
+        },
+        {
+          "symbol": "COIN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "178.773333",
+          "filled_at": "2026-10-07T13:52:07.405117Z"
+        },
+        {
+          "symbol": "TXN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "289.876667",
+          "filled_at": "2026-10-07T19:50:24.082826Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "215.55",
+          "filled_at": "2026-10-07T19:50:22.346775Z"
+        },
+        {
+          "symbol": "SOXX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "583.11",
+          "filled_at": "2026-10-07T19:50:18.400734Z"
+        },
+        {
+          "symbol": "PH",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "953.02",
+          "filled_at": "2026-10-07T19:50:19.894368Z"
+        },
+        {
+          "symbol": "META",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "721.76",
+          "filled_at": "2026-10-07T19:50:19.604508Z"
+        },
+        {
+          "symbol": "HOOD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "109.21",
+          "filled_at": "2026-10-07T19:50:16.639418Z"
+        },
+        {
+          "symbol": "ETN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "430.76",
+          "filled_at": "2026-10-07T19:50:20.117179Z"
+        },
+        {
+          "symbol": "DE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "657.27",
+          "filled_at": "2026-10-07T19:50:16.482838Z"
+        },
+        {
+          "symbol": "COIN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "177.22",
+          "filled_at": "2026-10-07T19:50:16.087125Z"
+        },
+        {
+          "symbol": "ADI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "410.8",
+          "filled_at": "2026-10-07T19:50:14.855621Z"
+        },
+        {
+          "symbol": "TER",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "405.71",
+          "filled_at": "2026-10-07T14:52:17.303828Z"
+        },
+        {
+          "symbol": "MU",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "1052.08",
+          "filled_at": "2026-10-07T14:21:08.080035Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1881.6",
+      "unrealized_pl": "88.1"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "465",
+      "unrealized_pl": "-405"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1987.78",
+      "unrealized_pl": "-10.399992"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2131.2",
+      "unrealized_pl": "146.4"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "635",
+      "unrealized_pl": "-1060"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1725.36",
+      "unrealized_pl": "-153.37"
+    }
+  ]
+}
