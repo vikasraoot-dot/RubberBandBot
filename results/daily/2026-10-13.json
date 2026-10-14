@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-13",
+  "generated_at": "2026-10-13T20:28:23.324362-04:00",
+  "account": {
+    "equity": "73405.89",
+    "cash": "64661.48",
+    "buying_power": "280078.28"
+  },
+  "summary": {
+    "total_realized_pnl": "-11.56",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-11.56",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-13",
+      "realized_pnl": "-11.56",
+      "unrealized_pnl": "0",
+      "total_pnl": "-11.56",
+      "trades": [
+        {
+          "symbol": "VRTX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "497.24",
+          "filled_at": "2026-10-13T14:21:55.06445Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "203.44",
+          "filled_at": "2026-10-13T14:06:53.828548Z"
+        },
+        {
+          "symbol": "VRTX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "493",
+          "filled_at": "2026-10-13T15:30:34.527237Z"
+        },
+        {
+          "symbol": "ANET",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "201",
+          "filled_at": "2026-10-13T14:27:49.344221Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1787.1",
+      "unrealized_pl": "-6.4"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "580",
+      "unrealized_pl": "-290"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2068.34",
+      "unrealized_pl": "70.160008"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2125.554",
+      "unrealized_pl": "140.754"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "510",
+      "unrealized_pl": "-1185"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1673.42",
+      "unrealized_pl": "-205.31"
+    }
+  ]
+}
