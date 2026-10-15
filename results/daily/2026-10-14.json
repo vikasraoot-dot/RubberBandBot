@@ -1,0 +1,58 @@
+{
+  "date": "2026-10-14",
+  "generated_at": "2026-10-14T20:00:26.656683-04:00",
+  "account": {
+    "equity": "72861.82",
+    "cash": "64661.44",
+    "buying_power": "278988.82"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 1,
+    "fixes_applied": 1
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1708.976",
+      "unrealized_pl": "-84.524"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "590",
+      "unrealized_pl": "-280"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2011.6858",
+      "unrealized_pl": "13.505808"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2029.9164",
+      "unrealized_pl": "45.1164"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "345",
+      "unrealized_pl": "-1350"
+    },
+    {
+      "symbol": "VRT",
+      "qty": "7",
+      "market_value": "1514.8",
+      "unrealized_pl": "-363.93"
+    }
+  ]
+}
