@@ -1,0 +1,247 @@
+{
+  "date": "2026-10-15",
+  "generated_at": "2026-10-15T19:45:04.614175-04:00",
+  "account": {
+    "equity": "73214.08",
+    "cash": "65701.81",
+    "buying_power": "280495.6"
+  },
+  "summary": {
+    "total_realized_pnl": "91.61",
+    "total_unrealized_pnl": "5.4148",
+    "total_pnl": "97.0248",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-15",
+      "realized_pnl": "91.61",
+      "unrealized_pnl": "5.4148",
+      "total_pnl": "97.0248",
+      "trades": [
+        {
+          "symbol": "DELL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "466.81",
+          "filled_at": "2026-10-15T15:37:12.557808Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "324.47",
+          "filled_at": "2026-10-15T14:42:16.297314Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "178.42",
+          "filled_at": "2026-10-15T14:37:20.420035Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "57.86",
+          "filled_at": "2026-10-15T14:22:30.983918Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "536.94",
+          "filled_at": "2026-10-15T14:22:20.484043Z"
+        },
+        {
+          "symbol": "PLTR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "10",
+          "price": "195.32",
+          "filled_at": "2026-10-15T14:22:14.96073Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "264.52",
+          "filled_at": "2026-10-15T14:07:53.614648Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "369.56",
+          "filled_at": "2026-10-15T14:07:45.907436Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "242.735",
+          "filled_at": "2026-10-15T14:07:39.743912Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "464.62",
+          "filled_at": "2026-10-15T14:07:33.830819Z"
+        },
+        {
+          "symbol": "CEG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "270.14",
+          "filled_at": "2026-10-15T14:07:25.017443Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "466.2",
+          "filled_at": "2026-10-15T19:50:20.63Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "370.11",
+          "filled_at": "2026-10-15T19:50:15.993902Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "11",
+          "price": "58.65",
+          "filled_at": "2026-10-15T19:50:13.994327Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "181.49",
+          "filled_at": "2026-10-15T19:50:16.312701Z"
+        },
+        {
+          "symbol": "DELL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "464.41",
+          "filled_at": "2026-10-15T19:50:13.115214Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "330.96",
+          "filled_at": "2026-10-15T18:12:01.967859Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "258.99",
+          "filled_at": "2026-10-15T14:32:00.555279Z"
+        },
+        {
+          "symbol": "AMD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "554.38",
+          "filled_at": "2026-10-15T18:56:58.691002Z"
+        },
+        {
+          "symbol": "PLTR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "10",
+          "price": "199.37",
+          "filled_at": "2026-10-15T16:45:11.597347Z"
+        },
+        {
+          "symbol": "CEG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "274.83",
+          "filled_at": "2026-10-15T19:14:30.321433Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "CRWD",
+          "qty": "2",
+          "entry_price": "242.735",
+          "current_price": "245.4424",
+          "unrealized_pnl": "5.4148"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 3,
+    "fixes_applied": 3
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1709.1",
+      "unrealized_pl": "-84.4"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "620",
+      "unrealized_pl": "-250"
+    },
+    {
+      "symbol": "CRWD",
+      "qty": "2",
+      "market_value": "490.8848",
+      "unrealized_pl": "5.4148"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1992.8568",
+      "unrealized_pl": "-5.323192"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2124.4308",
+      "unrealized_pl": "139.6308"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "575",
+      "unrealized_pl": "-1120"
+    }
+  ]
+}
