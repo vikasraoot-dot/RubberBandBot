@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-16",
+  "generated_at": "2026-10-16T19:45:18.085761-04:00",
+  "account": {
+    "equity": "72650.69",
+    "cash": "65487.43",
+    "buying_power": "279780.86"
+  },
+  "summary": {
+    "total_realized_pnl": "-52.520",
+    "total_unrealized_pnl": "-15.150003",
+    "total_pnl": "-67.670003",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-16",
+      "realized_pnl": "-52.520",
+      "unrealized_pnl": "-15.150003",
+      "total_pnl": "-67.670003",
+      "trades": [
+        {
+          "symbol": "HCA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "457.03",
+          "filled_at": "2026-10-16T19:22:54.724223Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "318.65",
+          "filled_at": "2026-10-16T14:22:27.744601Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "250.59",
+          "filled_at": "2026-10-16T14:07:58.433429Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "173.81",
+          "filled_at": "2026-10-16T14:07:53.306555Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "354.02",
+          "filled_at": "2026-10-16T14:07:45.774586Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "55.877273",
+          "filled_at": "2026-10-16T14:07:40.668286Z"
+        },
+        {
+          "symbol": "HCA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "454.77",
+          "filled_at": "2026-10-16T19:30:12.303463Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "245.685",
+          "filled_at": "2026-10-16T16:03:26.096233Z"
+        },
+        {
+          "symbol": "FTNT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "169.9",
+          "filled_at": "2026-10-16T15:13:54.440208Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "347.26",
+          "filled_at": "2026-10-16T15:13:42.13149Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "311.06",
+          "filled_at": "2026-10-16T15:06:53.383639Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "HPE",
+          "qty": "11",
+          "entry_price": "55.877273",
+          "current_price": "54.5",
+          "unrealized_pnl": "-15.150003"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 3,
+    "fixes_applied": 3
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1650.05",
+      "unrealized_pl": "-143.45"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "470",
+      "unrealized_pl": "-400"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2059.5126",
+      "unrealized_pl": "61.332608"
+    },
+    {
+      "symbol": "HPE",
+      "qty": "11",
+      "market_value": "599.5",
+      "unrealized_pl": "-15.150003"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2059.2012",
+      "unrealized_pl": "74.4012"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "325",
+      "unrealized_pl": "-1370"
+    }
+  ]
+}
