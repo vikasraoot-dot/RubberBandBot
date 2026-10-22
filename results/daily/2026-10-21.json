@@ -1,0 +1,103 @@
+{
+  "date": "2026-10-21",
+  "generated_at": "2026-10-21T20:05:44.458018-04:00",
+  "account": {
+    "equity": "72538.74",
+    "cash": "64366.3",
+    "buying_power": "278609.23"
+  },
+  "summary": {
+    "total_realized_pnl": "-21.30",
+    "total_unrealized_pnl": "7.80",
+    "total_pnl": "-13.50",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-21",
+      "realized_pnl": "-21.30",
+      "unrealized_pnl": "7.80",
+      "total_pnl": "-13.50",
+      "trades": [
+        {
+          "symbol": "EXPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "290.7",
+          "filled_at": "2026-10-21T15:17:04.111749Z"
+        },
+        {
+          "symbol": "ISRG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "425.35",
+          "filled_at": "2026-10-21T14:22:00.899632Z"
+        },
+        {
+          "symbol": "EXPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "287.15",
+          "filled_at": "2026-10-21T16:26:34.485897Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ISRG",
+          "qty": "4",
+          "entry_price": "425.35",
+          "current_price": "427.3",
+          "unrealized_pnl": "7.80"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 3,
+    "fixes_applied": 3
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1672.2",
+      "unrealized_pl": "-121.3"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "181",
+      "unrealized_pl": "-689"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2054.66",
+      "unrealized_pl": "56.480008"
+    },
+    {
+      "symbol": "ISRG",
+      "qty": "4",
+      "market_value": "1709.2",
+      "unrealized_pl": "7.8"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2115.3792",
+      "unrealized_pl": "130.5792"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "440",
+      "unrealized_pl": "-1255"
+    }
+  ]
+}
