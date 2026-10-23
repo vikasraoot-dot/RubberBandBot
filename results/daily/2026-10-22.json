@@ -1,0 +1,161 @@
+{
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T20:04:01.877539-04:00",
+  "account": {
+    "equity": "72249.65",
+    "cash": "66131.89",
+    "buying_power": "280660.49"
+  },
+  "summary": {
+    "total_realized_pnl": "-0.120002",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-0.120002",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-22",
+      "realized_pnl": "-0.120002",
+      "unrealized_pnl": "0",
+      "total_pnl": "-0.120002",
+      "trades": [
+        {
+          "symbol": "PSX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "279.52",
+          "filled_at": "2026-10-22T15:37:08.431117Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.46",
+          "filled_at": "2026-10-22T14:22:34.401546Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "309.54",
+          "filled_at": "2026-10-22T14:22:28.645242Z"
+        },
+        {
+          "symbol": "AMZN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "253.39",
+          "filled_at": "2026-10-22T14:07:51.705645Z"
+        },
+        {
+          "symbol": "META",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "658.81",
+          "filled_at": "2026-10-22T14:07:46.63168Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "438.3",
+          "filled_at": "2026-10-22T14:07:40.874784Z"
+        },
+        {
+          "symbol": "PSX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "283.855714",
+          "filled_at": "2026-10-22T19:50:05.585081Z"
+        },
+        {
+          "symbol": "META",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "643.75",
+          "filled_at": "2026-10-22T18:24:25.66849Z"
+        },
+        {
+          "symbol": "AMZN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "251.035",
+          "filled_at": "2026-10-22T16:48:04.401085Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "433.12",
+          "filled_at": "2026-10-22T14:35:44.248415Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "307.56",
+          "filled_at": "2026-10-22T14:27:26.362544Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.33",
+          "filled_at": "2026-10-22T14:25:01.644623Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 2,
+    "fixes_applied": 2
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1613",
+      "unrealized_pl": "-180.5"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "96",
+      "unrealized_pl": "-774"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2077.46",
+      "unrealized_pl": "79.280008"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2071.3008",
+      "unrealized_pl": "86.5008"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "260",
+      "unrealized_pl": "-1435"
+    }
+  ]
+}
