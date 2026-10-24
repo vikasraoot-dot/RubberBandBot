@@ -17,6 +17,7 @@ import argparse
 import json
 import logging
 import os
+import re
 import sys
 from datetime import datetime, timedelta
 from decimal import Decimal
@@ -36,6 +37,7 @@ from RubberBand.src.position_registry import (
     BOT_TAGS,
     parse_client_order_id,
     ensure_all_registries_exist,
+    PositionRegistry,
 )
 from RubberBand.scripts.reconcile_broker import (
     reconcile_positions,
@@ -132,19 +134,70 @@ def get_account_info(
         return {}
 
 
+_OCC_RE = re.compile(r"^[A-Z]{1,6}\d{6}[CP]\d{8}$")
+
+
+def _contract_multiplier(symbol: str) -> Decimal:
+    """Option prices are per share; one contract is 100 shares."""
+    return Decimal("100") if _OCC_RE.match(symbol or "") else Decimal("1")
+
+
+def _registry_records(registries: Optional[Dict[str, Any]], symbol: str, target_date: str) -> Dict[str, Dict[str, Any]]:
+    """Registry records (open or closed) that held ``symbol`` on ``target_date``, keyed by bot tag.
+
+    A closed record counts if it exited on/after target_date (bracket exits are only
+    auto-cleaned from the registry on a later reconcile). Spread records (with a
+    short leg) are excluded: their entry_price is a net debit, not a single-leg price.
+    """
+    found: Dict[str, Dict[str, Any]] = {}
+    for tag, reg in (registries or {}).items():
+        recs = [(r, False) for r in getattr(reg, "positions", {}).values()]
+        recs += [(r, True) for r in getattr(reg, "closed_positions", [])]
+        for rec, closed in recs:
+            if rec.get("symbol") != symbol or rec.get("short_symbol"):
+                continue
+            entry = str(rec.get("entry_date") or "")[:10]
+            exit_ = str(rec.get("exit_date") or "")[:10]
+            if entry and entry > target_date:
+                continue
+            if closed and (not exit_ or exit_ < target_date):
+                continue
+            found[tag] = rec
+    return found
+
+
+def _same_day_buyers(orders: List[Dict[str, Any]], symbol: str, target_date: str) -> set:
+    """Bot tags with a tagged buy of ``symbol`` filled on ``target_date``."""
+    tags = set()
+    for o in orders:
+        if not str(o.get("filled_at") or "").startswith(target_date):
+            continue
+        tag = extract_bot_tag_from_order(o)
+        sym, side, _ = _extract_order_symbol_side(o)
+        if tag and sym == symbol and side == "buy":
+            tags.add(tag)
+    return tags
+
+
 def calculate_bot_pnl(
     orders: List[Dict[str, Any]],
     positions: List[Dict[str, Any]],
     bot_tag: str,
     target_date: str,
+    registries: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
     """
     Calculate PnL for a specific bot on a specific date.
-    
+
     IMPORTANT: For bracket orders, the stop-loss/take-profit child orders
-    don't have the bot tag in client_order_id. We match untagged sells
-    to tagged buys for the same symbol on the same day.
-    
+    don't have the bot tag in client_order_id. An untagged sell is attributed
+    to this bot if it bought the symbol the same day, or if this bot's position
+    registry (and no other bot's) held the symbol — multi-day holds (weekly
+    bots) are bought days or weeks before their bracket exit fires.
+    If more than one bot could claim a sell (same-day buyer or registry holder),
+    it is attributed to none. Cost basis for sells without a same-day buy comes
+    from the registry's entry_price, capped at the record's quantity. Option P&L uses the 100x contract multiplier.
+
     Args:
         orders: List of filled orders
         positions: Current open positions
@@ -199,17 +252,28 @@ def calculate_bot_pnl(
         if not sym:
             continue
 
-        # Include untagged sells for symbols we bought today
-        if side == "sell" and order_bot is None and sym in bot_buy_symbols:
-            # Check if we already have this order
-            order_id = order.get("id")
-            if not any(o.get("id") == order_id for o in bot_orders):
-                bot_orders.append(order)
+        # Include untagged sells for symbols we bought today, or that only this
+        # bot's registry held (multi-day holds exited by a bracket child order)
+        if side != "sell" or order_bot is not None:
+            continue
+        candidates = _same_day_buyers(orders, sym, target_date) | set(_registry_records(registries, sym, target_date))
+        if len(candidates) > 1:
+            logger.warning("Untagged sell %s %s claimable by several bots %s - not attributed",
+                           sym, order.get("id", "?"), sorted(candidates))
+            continue
+        if bot_tag not in candidates:
+            continue
+        order_id = order.get("id")
+        if not any(o.get("id") == order_id for o in bot_orders):
+            bot_orders.append(order)
 
     # Step 3: Group by symbol to calculate realized P&L
     symbol_trades: Dict[str, Dict[str, Any]] = {}
+    spread_syms = set()  # net-debit spread prices: no per-contract multiplier math on them
     for order in bot_orders:
         sym, side, is_spread = _extract_order_symbol_side(order)
+        if is_spread:
+            spread_syms.add(sym)
         qty = Decimal(str(order.get("filled_qty", 0)))
         price = Decimal(str(order.get("filled_avg_price", 0)))
 
@@ -237,12 +301,27 @@ def calculate_bot_pnl(
     
     # Calculate realized P&L (sells - buys for closed portions)
     for sym, stats in symbol_trades.items():
-        # Realized P&L = sell proceeds - buy cost for matched quantities
+        if stats["sell_qty"] <= 0:
+            continue
+        mult = Decimal("1") if sym in spread_syms else _contract_multiplier(sym)
+        avg_sell = stats["sell_value"] / stats["sell_qty"]
+        # Same-day round trip: matched quantity at today's average buy price
         matched_qty = min(stats["buy_qty"], stats["sell_qty"])
-        if matched_qty > 0 and stats["buy_qty"] > 0 and stats["sell_qty"] > 0:
+        if matched_qty > 0:
             avg_buy = stats["buy_value"] / stats["buy_qty"]
-            avg_sell = stats["sell_value"] / stats["sell_qty"]
-            result["realized_pnl"] += matched_qty * (avg_sell - avg_buy)
+            result["realized_pnl"] += matched_qty * (avg_sell - avg_buy) * mult
+        # Sold more than bought today: the rest closes an earlier entry -> registry basis
+        carry_qty = stats["sell_qty"] - matched_qty
+        if carry_qty > 0:
+            rec = _registry_records(registries, sym, target_date).get(bot_tag)
+            basis = Decimal(str(rec.get("entry_price") or 0)) if rec else Decimal("0")
+            priced = min(carry_qty, Decimal(str(rec.get("qty") or 0))) if basis > 0 else Decimal("0")
+            if priced > 0:
+                result["realized_pnl"] += priced * (avg_sell - basis) * mult
+            if carry_qty > priced:
+                logger.warning("%s: sell of %s %s has no cost basis (no same-day buy / registry entry)",
+                               bot_tag, carry_qty - priced, sym)
+                result.setdefault("unpriced_exits", []).append({"symbol": sym, "qty": str(carry_qty - priced)})
     
     # Find open positions for this bot
     for pos in positions:
@@ -253,7 +332,8 @@ def calculate_bot_pnl(
             if open_qty > 0:
                 entry_price = symbol_trades[sym]["buy_value"] / symbol_trades[sym]["buy_qty"]
                 current_price = Decimal(str(pos.get("current_price", 0)))
-                unrealized = (current_price - entry_price) * open_qty
+                mult = Decimal("1") if sym in spread_syms else _contract_multiplier(sym)
+                unrealized = (current_price - entry_price) * open_qty * mult
                 result["unrealized_pnl"] += unrealized
                 result["open_positions"].append({
                     "symbol": sym,
@@ -289,6 +369,11 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
     created = ensure_all_registries_exist()
     if created:
         _log(f"  Created missing registries: {created}")
+    # Snapshot registries BEFORE reconciliation: reconcile(fix=True) deletes orphaned
+    # entries (positions already exited at the broker), which are exactly the records
+    # needed to attribute today's untagged bracket exits. On CI only the committed
+    # registries (WK_OPT, WK_STK) survive between runs; the others start empty.
+    registries = {tag: PositionRegistry(bot_tag=tag) for tag in BOT_TAGS}
     reconciliation = reconcile_positions(fix=True, verbose=False)
     
     # 2. Fetch broker data
@@ -305,7 +390,7 @@ def persist_daily_results(target_date: Optional[str] = None) -> Dict[str, Any]:
     _log("Step 3: Calculating PnL by bot...")
     bot_results = {}
     for bot_tag in BOT_TAGS:
-        bot_pnl = calculate_bot_pnl(orders, positions, bot_tag, target_date)
+        bot_pnl = calculate_bot_pnl(orders, positions, bot_tag, target_date, registries=registries)
         if bot_pnl["trades"] or bot_pnl["open_positions"]:
             bot_results[bot_tag] = bot_pnl
             _log(f"  {bot_tag}: Realized ${bot_pnl['realized_pnl']}, Unrealized ${bot_pnl['unrealized_pnl']}")

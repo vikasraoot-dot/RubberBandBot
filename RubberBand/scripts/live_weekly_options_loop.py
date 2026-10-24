@@ -512,13 +512,26 @@ def manage_weekly_positions(
         opts_cfg: Options configuration
         tracker: Trade tracker
         dry_run: If True, don't actually close
-        registry: Position registry to update on successful close
+        registry: Position registry to update on successful close. Only contracts
+            recorded in this registry are managed: the account is shared with other
+            option bots (e.g. 15M_OPT spreads), and closing their legs corrupts both
+            bots' positions and P&L.
     """
-    positions = get_option_positions()
+    all_positions = get_option_positions()
     tp_pct = opts_cfg.get("tp_pct", 100.0)
     sl_pct = opts_cfg.get("sl_pct", -50.0)
-    
-    _log(f"Managing {len(positions)} weekly option positions")
+
+    if registry is None:
+        # Without a registry we cannot tell our contracts from other bots' — fail closed.
+        _log(f"No position registry - skipping exit management of {len(all_positions)} option positions")
+        return
+
+    positions = registry.filter_positions(all_positions)
+    ignored = sorted(p.get("symbol", "") for p in all_positions if p not in positions)
+    _log(f"Managing {len(positions)} weekly option positions"
+         + (f" (ignoring {len(ignored)} not in the {registry.bot_tag} registry: {ignored})" if ignored else ""))
+    # A WK_OPT contract missing from the registry (e.g. a registry commit lost to a
+    # cancelled run) is no longer managed; the names above make that visible.
     
     for pos in positions:
         symbol = pos.get("symbol", "")
