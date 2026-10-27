@@ -1,0 +1,113 @@
+{
+  "date": "2026-10-26",
+  "generated_at": "2026-10-26T20:40:26.565746-04:00",
+  "account": {
+    "equity": "72503.76",
+    "cash": "66160.51",
+    "buying_power": "281266.33"
+  },
+  "summary": {
+    "total_realized_pnl": "28.77",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "28.77",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-26",
+      "realized_pnl": "28.77",
+      "unrealized_pnl": "0",
+      "total_pnl": "28.77",
+      "trades": [
+        {
+          "symbol": "EXPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "279.52",
+          "filled_at": "2026-10-26T16:36:53.678386Z"
+        },
+        {
+          "symbol": "PYPL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.92",
+          "filled_at": "2026-10-26T16:36:46.721326Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "255.81",
+          "filled_at": "2026-10-26T16:21:41.917731Z"
+        },
+        {
+          "symbol": "PYPL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.64",
+          "filled_at": "2026-10-26T19:50:08.620085Z"
+        },
+        {
+          "symbol": "ADBE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "256.71",
+          "filled_at": "2026-10-26T19:50:07.746285Z"
+        },
+        {
+          "symbol": "EXPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "283.21",
+          "filled_at": "2026-10-26T19:31:58.718095Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 2,
+    "fixes_applied": 2
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1669.95",
+      "unrealized_pl": "-123.55"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "26",
+      "unrealized_pl": "-844"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2089.2476",
+      "unrealized_pl": "91.067608"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2178",
+      "unrealized_pl": "193.2"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "380",
+      "unrealized_pl": "-1315"
+    }
+  ]
+}
