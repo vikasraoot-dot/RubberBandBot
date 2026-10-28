@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-27",
+  "generated_at": "2026-10-27T20:38:46.990215-04:00",
+  "account": {
+    "equity": "72811.55",
+    "cash": "66149.7",
+    "buying_power": "281577.58"
+  },
+  "summary": {
+    "total_realized_pnl": "-10.70",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-10.70",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-27",
+      "realized_pnl": "-10.70",
+      "unrealized_pnl": "0",
+      "total_pnl": "-10.70",
+      "trades": [
+        {
+          "symbol": "MAR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "382.11",
+          "filled_at": "2026-10-27T14:21:58.234278Z"
+        },
+        {
+          "symbol": "PSX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "276.45",
+          "filled_at": "2026-10-27T14:21:52.374839Z"
+        },
+        {
+          "symbol": "AJG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "258.6",
+          "filled_at": "2026-10-27T14:21:45.39127Z"
+        },
+        {
+          "symbol": "HLT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "5",
+          "price": "337",
+          "filled_at": "2026-10-27T14:11:46.7475Z"
+        },
+        {
+          "symbol": "VLO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "407.23",
+          "filled_at": "2026-10-27T14:06:49.779231Z"
+        },
+        {
+          "symbol": "AJG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "256.5",
+          "filled_at": "2026-10-27T14:30:43.839451Z"
+        },
+        {
+          "symbol": "PSX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "274.24",
+          "filled_at": "2026-10-27T14:25:45.437337Z"
+        },
+        {
+          "symbol": "VLO",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "399.1",
+          "filled_at": "2026-10-27T14:23:43.136544Z"
+        },
+        {
+          "symbol": "MAR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "387.19",
+          "filled_at": "2026-10-27T15:01:31.240263Z"
+        },
+        {
+          "symbol": "HLT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "5",
+          "price": "335.23",
+          "filled_at": "2026-10-27T14:21:44.24697Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 2,
+    "fixes_applied": 2
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1719.05",
+      "unrealized_pl": "-74.45"
+    },
+    {
+      "symbol": "BABA261030C00106000",
+      "qty": "1",
+      "market_value": "18",
+      "unrealized_pl": "-852"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2128",
+      "unrealized_pl": "129.820008"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2216.7996",
+      "unrealized_pl": "231.9996"
+    },
+    {
+      "symbol": "QCOM261030C00180000",
+      "qty": "1",
+      "market_value": "580",
+      "unrealized_pl": "-1115"
+    }
+  ]
+}
