@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-29",
+  "generated_at": "2026-10-29T21:14:30.992962-04:00",
+  "account": {
+    "equity": "72383.97",
+    "cash": "65662.25",
+    "buying_power": "281469.82"
+  },
+  "summary": {
+    "total_realized_pnl": "-31.80",
+    "total_unrealized_pnl": "2.83",
+    "total_pnl": "-28.97",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-29",
+      "realized_pnl": "-31.80",
+      "unrealized_pnl": "2.83",
+      "total_pnl": "-28.97",
+      "trades": [
+        {
+          "symbol": "CRM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "228.88",
+          "filled_at": "2026-10-29T15:37:14.688322Z"
+        },
+        {
+          "symbol": "PANW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "373.81",
+          "filled_at": "2026-10-29T15:07:16.011685Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "268.1",
+          "filled_at": "2026-10-29T14:42:25.01386Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "10",
+          "price": "194.19",
+          "filled_at": "2026-10-29T14:07:27.083593Z"
+        },
+        {
+          "symbol": "DDOG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "263.1",
+          "filled_at": "2026-10-29T14:52:51.484119Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "10",
+          "price": "192.01",
+          "filled_at": "2026-10-29T14:09:24.235652Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "CRM",
+          "qty": "2",
+          "entry_price": "228.88",
+          "current_price": "228.2",
+          "unrealized_pnl": "-1.36"
+        },
+        {
+          "symbol": "PANW",
+          "qty": "1",
+          "entry_price": "373.81",
+          "current_price": "378",
+          "unrealized_pnl": "4.19"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1654.8",
+      "unrealized_pl": "-138.7"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "2",
+      "market_value": "456.4",
+      "unrealized_pl": "-1.36"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2072.52",
+      "unrealized_pl": "74.340008"
+    },
+    {
+      "symbol": "PANW",
+      "qty": "1",
+      "market_value": "378",
+      "unrealized_pl": "4.19"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "2160",
+      "unrealized_pl": "175.2"
+    }
+  ]
+}
