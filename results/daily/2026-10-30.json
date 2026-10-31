@@ -1,0 +1,193 @@
+{
+  "date": "2026-10-30",
+  "generated_at": "2026-10-30T20:56:46.917891-04:00",
+  "account": {
+    "equity": "72146.47",
+    "cash": "63958.67",
+    "buying_power": "278760.51"
+  },
+  "summary": {
+    "total_realized_pnl": "-78.8000",
+    "total_unrealized_pnl": "20.79",
+    "total_pnl": "-58.0100",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-10-30",
+      "realized_pnl": "-78.8000",
+      "unrealized_pnl": "20.79",
+      "total_pnl": "-58.0100",
+      "trades": [
+        {
+          "symbol": "WMB",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "27",
+          "price": "73.58",
+          "filled_at": "2026-10-30T18:37:55.244569Z"
+        },
+        {
+          "symbol": "ISRG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "433.97",
+          "filled_at": "2026-10-30T18:33:01.145775Z"
+        },
+        {
+          "symbol": "JCI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "151.56",
+          "filled_at": "2026-10-30T15:07:54.573423Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "12",
+          "price": "55.2625",
+          "filled_at": "2026-10-30T14:52:44.114467Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "215.76",
+          "filled_at": "2026-10-30T14:22:48.303063Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "470.72",
+          "filled_at": "2026-10-30T14:22:40.817754Z"
+        },
+        {
+          "symbol": "SHOP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "159.88",
+          "filled_at": "2026-10-30T14:08:09.292603Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "308.9",
+          "filled_at": "2026-10-30T13:52:53.914546Z"
+        },
+        {
+          "symbol": "ISRG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "432",
+          "filled_at": "2026-10-30T18:41:00.71954Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "460.08",
+          "filled_at": "2026-10-30T18:30:13.317127Z"
+        },
+        {
+          "symbol": "HPE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "12",
+          "price": "54.01",
+          "filled_at": "2026-10-30T17:32:50.878023Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "213.67",
+          "filled_at": "2026-10-30T16:46:23.448982Z"
+        },
+        {
+          "symbol": "JCI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "150.52",
+          "filled_at": "2026-10-30T15:47:12.307672Z"
+        },
+        {
+          "symbol": "SNOW",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "300.6",
+          "filled_at": "2026-10-30T14:24:18.388586Z"
+        },
+        {
+          "symbol": "SHOP",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "158.46",
+          "filled_at": "2026-10-30T14:22:12.411138Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "WMB",
+          "qty": "27",
+          "entry_price": "73.58",
+          "current_price": "74.35",
+          "unrealized_pnl": "20.79"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1635.659",
+      "unrealized_pl": "-157.841"
+    },
+    {
+      "symbol": "CRM",
+      "qty": "2",
+      "market_value": "457.047",
+      "unrealized_pl": "-0.713"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2104.041",
+      "unrealized_pl": "105.861008"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1983.6",
+      "unrealized_pl": "-1.2"
+    },
+    {
+      "symbol": "WMB",
+      "qty": "27",
+      "market_value": "2007.45",
+      "unrealized_pl": "20.79"
+    }
+  ]
+}
