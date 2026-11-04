@@ -1,0 +1,184 @@
+{
+  "date": "2026-11-03",
+  "generated_at": "2026-11-03T20:33:43.182396-05:00",
+  "account": {
+    "equity": "72089.23",
+    "cash": "63896.95",
+    "buying_power": "278526.18"
+  },
+  "summary": {
+    "total_realized_pnl": "83.6700006",
+    "total_unrealized_pnl": "25.9300",
+    "total_pnl": "109.6000006",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-03",
+      "realized_pnl": "83.6700006",
+      "unrealized_pnl": "25.9300",
+      "total_pnl": "109.6000006",
+      "trades": [
+        {
+          "symbol": "PLTR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "173.26",
+          "filled_at": "2026-11-03T15:53:26.103599Z"
+        },
+        {
+          "symbol": "IBM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "245.68",
+          "filled_at": "2026-11-03T15:08:50.28051Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "248.87",
+          "filled_at": "2026-11-03T15:08:42.372905Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "455.72",
+          "filled_at": "2026-11-03T15:08:34.901505Z"
+        },
+        {
+          "symbol": "CRM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "216.39",
+          "filled_at": "2026-11-03T14:57:58.785459Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "192.43",
+          "filled_at": "2026-11-03T14:53:41.774961Z"
+        },
+        {
+          "symbol": "SHOP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "143.4875",
+          "filled_at": "2026-11-03T14:53:26.301575Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "198.18",
+          "filled_at": "2026-11-03T20:50:25.611815Z"
+        },
+        {
+          "symbol": "PLTR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "176.01",
+          "filled_at": "2026-11-03T20:50:22.366731Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "8",
+          "price": "254.02",
+          "filled_at": "2026-11-03T15:49:43.521888Z"
+        },
+        {
+          "symbol": "SNPS",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "461.53",
+          "filled_at": "2026-11-03T16:10:35.012954Z"
+        },
+        {
+          "symbol": "CRM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "220.946667",
+          "filled_at": "2026-11-03T15:38:26.409551Z"
+        },
+        {
+          "symbol": "CRM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "218.855",
+          "filled_at": "2026-11-03T14:34:29.302259Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "IBM",
+          "qty": "8",
+          "entry_price": "245.68",
+          "current_price": "250.04",
+          "unrealized_pnl": "34.88"
+        },
+        {
+          "symbol": "SHOP",
+          "qty": "4",
+          "entry_price": "143.4875",
+          "current_price": "141.25",
+          "unrealized_pnl": "-8.9500"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1617",
+      "unrealized_pl": "-176.5"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2059.7178",
+      "unrealized_pl": "61.537808"
+    },
+    {
+      "symbol": "IBM",
+      "qty": "8",
+      "market_value": "2000.32",
+      "unrealized_pl": "34.88"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1950.24",
+      "unrealized_pl": "-34.56"
+    },
+    {
+      "symbol": "SHOP",
+      "qty": "4",
+      "market_value": "565",
+      "unrealized_pl": "-8.95"
+    }
+  ]
+}
