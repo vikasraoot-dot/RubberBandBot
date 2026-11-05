@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-04",
+  "generated_at": "2026-11-04T20:38:23.655588-05:00",
+  "account": {
+    "equity": "72058.74",
+    "cash": "66551.48",
+    "buying_power": "281626.25"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 4,
+    "fixes_applied": 4
+  },
+  "positions": [
+    {
+      "symbol": "AVGO",
+      "qty": "5",
+      "market_value": "1604",
+      "unrealized_pl": "-189.5"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "2002.22",
+      "unrealized_pl": "4.040008"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1901.04",
+      "unrealized_pl": "-83.76"
+    }
+  ]
+}
