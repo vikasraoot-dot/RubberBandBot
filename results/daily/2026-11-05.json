@@ -1,0 +1,277 @@
+{
+  "date": "2026-11-05",
+  "generated_at": "2026-11-05T20:42:11.306574-05:00",
+  "account": {
+    "equity": "71853.75",
+    "cash": "66022.57",
+    "buying_power": "280417.57"
+  },
+  "summary": {
+    "total_realized_pnl": "-57.719976",
+    "total_unrealized_pnl": "8.2552",
+    "total_pnl": "-49.464776",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-05",
+      "realized_pnl": "-57.719976",
+      "unrealized_pnl": "8.2552",
+      "total_pnl": "-49.464776",
+      "trades": [
+        {
+          "symbol": "LMT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "578.56",
+          "filled_at": "2026-11-05T19:22:48.561118Z"
+        },
+        {
+          "symbol": "DHR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "227.28",
+          "filled_at": "2026-11-05T18:52:50.233272Z"
+        },
+        {
+          "symbol": "ISRG",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "462.7",
+          "filled_at": "2026-11-05T18:38:09.86005Z"
+        },
+        {
+          "symbol": "PM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "203.03",
+          "filled_at": "2026-11-05T18:37:50.369748Z"
+        },
+        {
+          "symbol": "SPGI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "467.99",
+          "filled_at": "2026-11-05T18:08:02.142506Z"
+        },
+        {
+          "symbol": "GM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "22",
+          "price": "88.54",
+          "filled_at": "2026-11-05T18:07:55.018926Z"
+        },
+        {
+          "symbol": "IBM",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "8",
+          "price": "248.1125",
+          "filled_at": "2026-11-05T16:52:47.460398Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "209.75",
+          "filled_at": "2026-11-05T16:08:16.737647Z"
+        },
+        {
+          "symbol": "CCL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "68",
+          "price": "29.15",
+          "filled_at": "2026-11-05T16:08:06.048169Z"
+        },
+        {
+          "symbol": "CVNA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "27",
+          "price": "70.92",
+          "filled_at": "2026-11-05T16:07:59.948661Z"
+        },
+        {
+          "symbol": "ABNB",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "168.25",
+          "filled_at": "2026-11-05T15:52:53.333249Z"
+        },
+        {
+          "symbol": "NXPI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "247.25",
+          "filled_at": "2026-11-05T15:52:47.916087Z"
+        },
+        {
+          "symbol": "TXN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "295.93",
+          "filled_at": "2026-11-05T15:13:59.236913Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "217.48",
+          "filled_at": "2026-11-05T15:13:54.762906Z"
+        },
+        {
+          "symbol": "SPGI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "473.245",
+          "filled_at": "2026-11-05T20:50:33.215207Z"
+        },
+        {
+          "symbol": "PM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "201.94",
+          "filled_at": "2026-11-05T20:50:27.151269Z"
+        },
+        {
+          "symbol": "LMT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "578.48",
+          "filled_at": "2026-11-05T20:50:30.488695Z"
+        },
+        {
+          "symbol": "ISRG",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "465.5275",
+          "filled_at": "2026-11-05T20:50:34.30238Z"
+        },
+        {
+          "symbol": "IBM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "8",
+          "price": "247.99",
+          "filled_at": "2026-11-05T20:50:24.460294Z"
+        },
+        {
+          "symbol": "GM",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "22",
+          "price": "89.240455",
+          "filled_at": "2026-11-05T20:50:30.652361Z"
+        },
+        {
+          "symbol": "DHR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "226.34",
+          "filled_at": "2026-11-05T20:50:26.670891Z"
+        },
+        {
+          "symbol": "CVNA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "27",
+          "price": "70.252593",
+          "filled_at": "2026-11-05T19:25:04.303476Z"
+        },
+        {
+          "symbol": "ABNB",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "11",
+          "price": "167.09",
+          "filled_at": "2026-11-05T18:01:37.147808Z"
+        },
+        {
+          "symbol": "TEL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "207.3",
+          "filled_at": "2026-11-05T17:41:41.943038Z"
+        },
+        {
+          "symbol": "NXPI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "245",
+          "filled_at": "2026-11-05T16:07:07.569629Z"
+        },
+        {
+          "symbol": "CRWD",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "214.756667",
+          "filled_at": "2026-11-05T15:52:05.901921Z"
+        },
+        {
+          "symbol": "TXN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "290.846667",
+          "filled_at": "2026-11-05T15:26:51.117605Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "CCL",
+          "qty": "68",
+          "entry_price": "29.15",
+          "current_price": "29.2714",
+          "unrealized_pnl": "8.2552"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "CCL",
+      "qty": "68",
+      "market_value": "1990.4552",
+      "unrealized_pl": "8.2552"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1938",
+      "unrealized_pl": "-60.179992"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1902.72",
+      "unrealized_pl": "-82.08"
+    }
+  ]
+}
