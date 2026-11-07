@@ -5,19 +5,19 @@
     "tp_r_multiple_adjustment": 0.0,
     "breakeven_trigger_r_adjustment": 0.0
   },
-  "reason": "SPY 5d ATR 18.32 > 20d ATR 9.83 x 1.5 (ratio 1.86)",
+  "reason": "SPY 5d ATR 16.37 > 20d ATR 10.02 x 1.5 (ratio 1.63)",
   "diagnostics": {
-    "spy_close": 733.0,
-    "sma_20": 765.53,
-    "adx": 97.7,
-    "pdi": 942.1,
-    "mdi": 38.2,
-    "atr_5": 18.32,
-    "atr_20": 9.83,
-    "atr_ratio": 1.864,
+    "spy_close": 735.29,
+    "sma_20": 763.36,
+    "adx": 97.3,
+    "pdi": 882.5,
+    "mdi": 35.8,
+    "atr_5": 16.37,
+    "atr_20": 10.02,
+    "atr_ratio": 1.634,
     "reversal_count_20": 12
   },
-  "updated_at": "2026-11-06T01:42:12.988959+00:00",
+  "updated_at": "2026-11-07T01:01:45.450879+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-11-06T01:42:31.128462+00:00"
+    "updated_at": "2026-11-07T01:02:03.834118+00:00"
   }
 }

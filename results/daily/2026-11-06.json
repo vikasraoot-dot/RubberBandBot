@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-06",
+  "generated_at": "2026-11-06T20:01:43.895308-05:00",
+  "account": {
+    "equity": "71908.39",
+    "cash": "66022.11",
+    "buying_power": "280570.01"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "CCL",
+      "qty": "68",
+      "market_value": "2012.358",
+      "unrealized_pl": "30.158"
+    },
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1886.5974",
+      "unrealized_pl": "-111.582592"
+    },
+    {
+      "symbol": "QCOM",
+      "qty": "12",
+      "market_value": "1987.32",
+      "unrealized_pl": "2.52"
+    }
+  ]
+}
