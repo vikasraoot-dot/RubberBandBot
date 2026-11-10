@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-09",
+  "generated_at": "2026-11-09T22:42:30.552470-05:00",
+  "account": {
+    "equity": "72054.79",
+    "cash": "70155.55",
+    "buying_power": "285940.07"
+  },
+  "summary": {
+    "total_realized_pnl": "3.46",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "3.46",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-09",
+      "realized_pnl": "3.46",
+      "unrealized_pnl": "0",
+      "total_pnl": "3.46",
+      "trades": [
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "189.41",
+          "filled_at": "2026-11-09T15:37:22.464051Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "192.87",
+          "filled_at": "2026-11-09T17:50:33.388249Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 6,
+    "fixes_applied": 6
+  },
+  "positions": [
+    {
+      "symbol": "EQT",
+      "qty": "38",
+      "market_value": "1899.24",
+      "unrealized_pl": "-98.939992"
+    }
+  ]
+}
