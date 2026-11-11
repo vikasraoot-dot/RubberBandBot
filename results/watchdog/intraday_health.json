@@ -1,10 +1,10 @@
 {
   "date": "2026-11-10",
-  "updated_at": "2026-11-10T15:40:06.539176-05:00",
+  "updated_at": "2026-11-10T19:53:48.839037-05:00",
   "account": {
-    "equity": 72155.99,
+    "equity": 72168.51,
     "last_equity": 72052.03,
-    "daily_pnl_pct": 0.14,
+    "daily_pnl_pct": 0.16,
     "account_paused": false
   },
   "bots": {
@@ -24,16 +24,16 @@
     },
     "15M_STK": {
       "bot_tag": "15M_STK",
-      "daily_pnl": 29.39,
-      "status": "OK",
-      "paused": false,
-      "pause_reason": "",
+      "daily_pnl": 0.0,
+      "status": "PROFIT_LOCKED",
+      "paused": true,
+      "pause_reason": "P&L $0.0 dropped below lock floor $14.7",
       "profit_lock": {
         "peak_pnl_today": 29.39,
-        "lock_floor": 14.69,
+        "lock_floor": 14.7,
         "lock_active": true,
-        "lock_triggered": false,
-        "lock_triggered_at": null
+        "lock_triggered": true,
+        "lock_triggered_at": "2026-11-10T19:53:48.839037-05:00"
       }
     },
     "SL_ETF": {
