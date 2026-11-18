@@ -1,0 +1,227 @@
+{
+  "date": "2026-11-17",
+  "generated_at": "2026-11-17T22:02:15.918924-05:00",
+  "account": {
+    "equity": "72100.54",
+    "cash": "69248.89",
+    "buying_power": "284980.18"
+  },
+  "summary": {
+    "total_realized_pnl": "-52.510003",
+    "total_unrealized_pnl": "10.14",
+    "total_pnl": "-42.370003",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-17",
+      "realized_pnl": "-52.510003",
+      "unrealized_pnl": "10.14",
+      "total_pnl": "-42.370003",
+      "trades": [
+        {
+          "symbol": "V",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "417.885",
+          "filled_at": "2026-11-17T20:21:46.813844Z"
+        },
+        {
+          "symbol": "PEP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "141.96",
+          "filled_at": "2026-11-17T20:06:45.299277Z"
+        },
+        {
+          "symbol": "ICE",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "11",
+          "price": "173.01",
+          "filled_at": "2026-11-17T19:57:00.143708Z"
+        },
+        {
+          "symbol": "KMB",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "108.16",
+          "filled_at": "2026-11-17T19:56:53.387427Z"
+        },
+        {
+          "symbol": "ABT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "104.79",
+          "filled_at": "2026-11-17T19:56:48.3909Z"
+        },
+        {
+          "symbol": "MSI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "521.27",
+          "filled_at": "2026-11-17T19:56:41.854412Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "185.91",
+          "filled_at": "2026-11-17T15:36:37.55648Z"
+        },
+        {
+          "symbol": "SPGI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "459.75",
+          "filled_at": "2026-11-17T15:21:44.705093Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "241.75",
+          "filled_at": "2026-11-17T15:21:36.79072Z"
+        },
+        {
+          "symbol": "ADSK",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "7",
+          "price": "259.26",
+          "filled_at": "2026-11-17T15:06:48.92632Z"
+        },
+        {
+          "symbol": "INTU",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "330.11",
+          "filled_at": "2026-11-17T15:06:37.2913Z"
+        },
+        {
+          "symbol": "V",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "416.9775",
+          "filled_at": "2026-11-17T20:50:31.520059Z"
+        },
+        {
+          "symbol": "PEP",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "142.217143",
+          "filled_at": "2026-11-17T20:50:30.405963Z"
+        },
+        {
+          "symbol": "WDAY",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "182.36",
+          "filled_at": "2026-11-17T20:39:04.30232Z"
+        },
+        {
+          "symbol": "ICE",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "11",
+          "price": "172.744545",
+          "filled_at": "2026-11-17T20:21:25.734418Z"
+        },
+        {
+          "symbol": "ADSK",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "7",
+          "price": "255.99",
+          "filled_at": "2026-11-17T15:55:25.736662Z"
+        },
+        {
+          "symbol": "SPGI",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "456.05",
+          "filled_at": "2026-11-17T15:46:14.959433Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "239.6",
+          "filled_at": "2026-11-17T15:36:58.664378Z"
+        },
+        {
+          "symbol": "INTU",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "326.1",
+          "filled_at": "2026-11-17T15:24:27.28819Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "ABT",
+          "qty": "6",
+          "entry_price": "104.79",
+          "current_price": "104.3",
+          "unrealized_pnl": "-2.94"
+        },
+        {
+          "symbol": "KMB",
+          "qty": "6",
+          "entry_price": "108.16",
+          "current_price": "107.9",
+          "unrealized_pnl": "-1.56"
+        },
+        {
+          "symbol": "MSI",
+          "qty": "3",
+          "entry_price": "521.27",
+          "current_price": "526.15",
+          "unrealized_pnl": "14.64"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 10,
+    "fixes_applied": 10
+  },
+  "positions": [
+    {
+      "symbol": "ABT",
+      "qty": "6",
+      "market_value": "625.8",
+      "unrealized_pl": "-2.94"
+    },
+    {
+      "symbol": "KMB",
+      "qty": "6",
+      "market_value": "647.4",
+      "unrealized_pl": "-1.56"
+    },
+    {
+      "symbol": "MSI",
+      "qty": "3",
+      "market_value": "1578.45",
+      "unrealized_pl": "14.64"
+    }
+  ]
+}
