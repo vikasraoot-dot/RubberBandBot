@@ -1,0 +1,155 @@
+{
+  "date": "2026-11-18",
+  "generated_at": "2026-11-18T21:43:15.937920-05:00",
+  "account": {
+    "equity": "72067.07",
+    "cash": "68777.44",
+    "buying_power": "284320.72"
+  },
+  "summary": {
+    "total_realized_pnl": "-26.7300",
+    "total_unrealized_pnl": "0.53",
+    "total_pnl": "-26.2000",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-18",
+      "realized_pnl": "-26.7300",
+      "unrealized_pnl": "0.53",
+      "total_pnl": "-26.2000",
+      "trades": [
+        {
+          "symbol": "AMT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "180.8",
+          "filled_at": "2026-11-18T16:22:43.880771Z"
+        },
+        {
+          "symbol": "HCA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "486.55",
+          "filled_at": "2026-11-18T16:22:34.936118Z"
+        },
+        {
+          "symbol": "SPGI",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "444.47",
+          "filled_at": "2026-11-18T15:36:52.296191Z"
+        },
+        {
+          "symbol": "PGR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "229.01",
+          "filled_at": "2026-11-18T15:36:45.430272Z"
+        },
+        {
+          "symbol": "CVX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "208.51",
+          "filled_at": "2026-11-18T15:21:53.758974Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "232.5",
+          "filled_at": "2026-11-18T15:21:47.823866Z"
+        },
+        {
+          "symbol": "HCA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "481.2925",
+          "filled_at": "2026-11-18T18:53:41.726736Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "230.27",
+          "filled_at": "2026-11-18T18:12:19.238519Z"
+        },
+        {
+          "symbol": "AMT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "183.41",
+          "filled_at": "2026-11-18T17:20:44.88648Z"
+        },
+        {
+          "symbol": "CVX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "207.26",
+          "filled_at": "2026-11-18T15:58:41.45061Z"
+        },
+        {
+          "symbol": "PGR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "226.35",
+          "filled_at": "2026-11-18T15:53:34.815434Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "SPGI",
+          "qty": "1",
+          "entry_price": "444.47",
+          "current_price": "445",
+          "unrealized_pnl": "0.53"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 11,
+    "fixes_applied": 11
+  },
+  "positions": [
+    {
+      "symbol": "ABT",
+      "qty": "6",
+      "market_value": "626.88",
+      "unrealized_pl": "-1.86"
+    },
+    {
+      "symbol": "KMB",
+      "qty": "6",
+      "market_value": "644.16",
+      "unrealized_pl": "-4.8"
+    },
+    {
+      "symbol": "MSI",
+      "qty": "3",
+      "market_value": "1573.59",
+      "unrealized_pl": "9.78"
+    },
+    {
+      "symbol": "SPGI",
+      "qty": "1",
+      "market_value": "445",
+      "unrealized_pl": "0.53"
+    }
+  ]
+}
