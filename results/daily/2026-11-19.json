@@ -1,0 +1,251 @@
+{
+  "date": "2026-11-19",
+  "generated_at": "2026-11-19T21:29:17.234700-05:00",
+  "account": {
+    "equity": "72042.86",
+    "cash": "68737.99",
+    "buying_power": "284205.6"
+  },
+  "summary": {
+    "total_realized_pnl": "-10.949995",
+    "total_unrealized_pnl": "11.16",
+    "total_pnl": "0.210005",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-19",
+      "realized_pnl": "-10.949995",
+      "unrealized_pnl": "11.16",
+      "total_pnl": "0.210005",
+      "trades": [
+        {
+          "symbol": "CSX",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "13",
+          "price": "50.1",
+          "filled_at": "2026-11-19T16:06:51.504531Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "3",
+          "price": "220.72",
+          "filled_at": "2026-11-19T15:51:48.223482Z"
+        },
+        {
+          "symbol": "JNJ",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "266.355",
+          "filled_at": "2026-11-19T15:37:06.313157Z"
+        },
+        {
+          "symbol": "KR",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "67.11",
+          "filled_at": "2026-11-19T15:36:58.569312Z"
+        },
+        {
+          "symbol": "CCL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "23",
+          "price": "28.05",
+          "filled_at": "2026-11-19T15:36:46.179326Z"
+        },
+        {
+          "symbol": "STZ",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "14",
+          "price": "140.71",
+          "filled_at": "2026-11-19T15:22:19.327896Z"
+        },
+        {
+          "symbol": "PEP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "4",
+          "price": "138.53",
+          "filled_at": "2026-11-19T15:22:12.88959Z"
+        },
+        {
+          "symbol": "CL",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "96.441667",
+          "filled_at": "2026-11-19T15:22:06.841892Z"
+        },
+        {
+          "symbol": "UNP",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "293.96",
+          "filled_at": "2026-11-19T15:21:56.944133Z"
+        },
+        {
+          "symbol": "HLT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "364.4",
+          "filled_at": "2026-11-19T15:21:49.496982Z"
+        },
+        {
+          "symbol": "MO",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "9",
+          "price": "73.63",
+          "filled_at": "2026-11-19T15:06:56.178054Z"
+        },
+        {
+          "symbol": "HCA",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "1",
+          "price": "466.38",
+          "filled_at": "2026-11-19T15:06:47.001508Z"
+        },
+        {
+          "symbol": "STZ",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "14",
+          "price": "141.38",
+          "filled_at": "2026-11-19T20:50:25.417895Z"
+        },
+        {
+          "symbol": "PEP",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "4",
+          "price": "138.98",
+          "filled_at": "2026-11-19T20:50:25.751161Z"
+        },
+        {
+          "symbol": "KR",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "9",
+          "price": "67.656667",
+          "filled_at": "2026-11-19T20:50:27.641912Z"
+        },
+        {
+          "symbol": "CSX",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "13",
+          "price": "49.992308",
+          "filled_at": "2026-11-19T20:50:17.137813Z"
+        },
+        {
+          "symbol": "CCL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "23",
+          "price": "27.73",
+          "filled_at": "2026-11-19T17:05:55.738977Z"
+        },
+        {
+          "symbol": "HLT",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "361.36",
+          "filled_at": "2026-11-19T16:52:04.297692Z"
+        },
+        {
+          "symbol": "ACN",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "3",
+          "price": "218.18",
+          "filled_at": "2026-11-19T16:47:10.695491Z"
+        },
+        {
+          "symbol": "HCA",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "1",
+          "price": "460.02",
+          "filled_at": "2026-11-19T15:50:13.082831Z"
+        },
+        {
+          "symbol": "JNJ",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "265.525",
+          "filled_at": "2026-11-19T15:46:04.473094Z"
+        },
+        {
+          "symbol": "UNP",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "291.19",
+          "filled_at": "2026-11-19T15:42:18.29428Z"
+        },
+        {
+          "symbol": "CL",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "6",
+          "price": "97.43",
+          "filled_at": "2026-11-19T18:31:48.390301Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "MO",
+          "qty": "9",
+          "entry_price": "73.63",
+          "current_price": "74.87",
+          "unrealized_pnl": "11.16"
+        }
+      ]
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 11,
+    "fixes_applied": 11
+  },
+  "positions": [
+    {
+      "symbol": "ABT",
+      "qty": "6",
+      "market_value": "624.12",
+      "unrealized_pl": "-4.62"
+    },
+    {
+      "symbol": "MO",
+      "qty": "9",
+      "market_value": "673.83",
+      "unrealized_pl": "11.16"
+    },
+    {
+      "symbol": "MSI",
+      "qty": "3",
+      "market_value": "1565.76",
+      "unrealized_pl": "1.95"
+    },
+    {
+      "symbol": "SPGI",
+      "qty": "1",
+      "market_value": "441.162",
+      "unrealized_pl": "-3.308"
+    }
+  ]
+}
