@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-24",
+  "generated_at": "2026-11-24T00:25:44.226794-05:00",
+  "account": {
+    "equity": "72105.65",
+    "cash": "68906.16",
+    "buying_power": "284583.21"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 11,
+    "fixes_applied": 11
+  },
+  "positions": [
+    {
+      "symbol": "KR",
+      "qty": "9",
+      "market_value": "606.6",
+      "unrealized_pl": "5.4"
+    },
+    {
+      "symbol": "MSI",
+      "qty": "3",
+      "market_value": "1589.61",
+      "unrealized_pl": "25.8"
+    },
+    {
+      "symbol": "SPGI",
+      "qty": "1",
+      "market_value": "451.96",
+      "unrealized_pl": "7.49"
+    },
+    {
+      "symbol": "STZ",
+      "qty": "4",
+      "market_value": "551.32",
+      "unrealized_pl": "0.08"
+    }
+  ]
+}
