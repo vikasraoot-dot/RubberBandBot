@@ -1,6 +1,6 @@
 {
   "date": "2026-11-24",
-  "generated_at": "2026-11-24T00:26:02.614800-05:00",
+  "generated_at": "2026-11-24T23:28:04.598026-05:00",
   "bots_analysed": [],
   "filter_effectiveness": {
     "_summary": {
@@ -45,8 +45,25 @@
     "flagged_losers": []
   },
   "regime_correlation": {},
-  "giveback": {},
+  "giveback": {
+    "15M_STK": {
+      "peak_pnl": 4.79,
+      "close_pnl": 3.72,
+      "giveback": 1.07,
+      "giveback_pct": 22.34
+    }
+  },
   "auditor_vs_bot": {
+    "15M_STK": {
+      "real_pnl": 3.72,
+      "shadow_pnl": -32368.0,
+      "shadow_trades": 988,
+      "shadow_winners": 487,
+      "shadow_open_positions": 0,
+      "difference": 32371.72,
+      "verdict": "FILTERS_ADDING_VALUE",
+      "explanation": "Bot outperformed shadow by $32371.72 \u2014 filters are protecting from losses"
+    },
     "15M_OPT": {
       "real_pnl": 0.0,
       "shadow_pnl": -8085.2,
@@ -56,16 +73,6 @@
       "difference": 8085.2,
       "verdict": "FILTERS_ADDING_VALUE",
       "explanation": "Bot outperformed shadow by $8085.2 \u2014 filters are protecting from losses"
-    },
-    "15M_STK": {
-      "real_pnl": 0.0,
-      "shadow_pnl": -32368.0,
-      "shadow_trades": 988,
-      "shadow_winners": 487,
-      "shadow_open_positions": 0,
-      "difference": 32368.0,
-      "verdict": "FILTERS_ADDING_VALUE",
-      "explanation": "Bot outperformed shadow by $32368.0 \u2014 filters are protecting from losses"
     }
   },
   "signal_context": {

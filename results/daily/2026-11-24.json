@@ -1,46 +1,69 @@
 {
   "date": "2026-11-24",
-  "generated_at": "2026-11-24T00:25:44.226794-05:00",
+  "generated_at": "2026-11-24T23:27:49.382724-05:00",
   "account": {
-    "equity": "72105.65",
-    "cash": "68906.16",
-    "buying_power": "284583.21"
+    "equity": "72126.88",
+    "cash": "69408.32",
+    "buying_power": "285245.25"
   },
   "summary": {
     "total_realized_pnl": "0",
-    "total_unrealized_pnl": "0",
-    "total_pnl": "0",
-    "bots_active": []
+    "total_unrealized_pnl": "3.72",
+    "total_pnl": "3.72",
+    "bots_active": [
+      "15M_STK"
+    ]
   },
-  "bots": {},
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-24",
+      "realized_pnl": "0",
+      "unrealized_pnl": "3.72",
+      "total_pnl": "3.72",
+      "trades": [
+        {
+          "symbol": "MDT",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "6",
+          "price": "95.88",
+          "filled_at": "2026-11-24T18:36:39.596607832Z"
+        }
+      ],
+      "open_positions": [
+        {
+          "symbol": "MDT",
+          "qty": "6",
+          "entry_price": "95.88",
+          "current_price": "96.5",
+          "unrealized_pnl": "3.72"
+        }
+      ]
+    }
+  },
   "reconciliation": {
-    "discrepancies_found": 11,
-    "fixes_applied": 11
+    "discrepancies_found": 10,
+    "fixes_applied": 10
   },
   "positions": [
     {
-      "symbol": "KR",
-      "qty": "9",
-      "market_value": "606.6",
-      "unrealized_pl": "5.4"
+      "symbol": "MDT",
+      "qty": "6",
+      "market_value": "579",
+      "unrealized_pl": "3.72"
     },
     {
       "symbol": "MSI",
       "qty": "3",
-      "market_value": "1589.61",
-      "unrealized_pl": "25.8"
-    },
-    {
-      "symbol": "SPGI",
-      "qty": "1",
-      "market_value": "451.96",
-      "unrealized_pl": "7.49"
+      "market_value": "1590.24",
+      "unrealized_pl": "26.43"
     },
     {
       "symbol": "STZ",
       "qty": "4",
-      "market_value": "551.32",
-      "unrealized_pl": "0.08"
+      "market_value": "549.32",
+      "unrealized_pl": "-1.92"
     }
   ]
 }
