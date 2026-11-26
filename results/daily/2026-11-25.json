@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-25",
+  "generated_at": "2026-11-25T22:41:49.565326-05:00",
+  "account": {
+    "equity": "72154.01",
+    "cash": "71017.77",
+    "buying_power": "287252.55"
+  },
+  "summary": {
+    "total_realized_pnl": "-1.66",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "-1.66",
+    "bots_active": [
+      "15M_STK"
+    ]
+  },
+  "bots": {
+    "15M_STK": {
+      "bot_tag": "15M_STK",
+      "date": "2026-11-25",
+      "realized_pnl": "-1.66",
+      "unrealized_pnl": "0",
+      "total_pnl": "-1.66",
+      "trades": [
+        {
+          "symbol": "ADSK",
+          "side": "buy",
+          "is_spread": false,
+          "qty": "2",
+          "price": "233.84",
+          "filled_at": "2026-11-25T14:51:42.025374Z"
+        },
+        {
+          "symbol": "ADSK",
+          "side": "sell",
+          "is_spread": false,
+          "qty": "2",
+          "price": "233.01",
+          "filled_at": "2026-11-25T14:51:47.411558Z"
+        }
+      ],
+      "open_positions": []
+    }
+  },
+  "reconciliation": {
+    "discrepancies_found": 9,
+    "fixes_applied": 9
+  },
+  "positions": [
+    {
+      "symbol": "MDT",
+      "qty": "6",
+      "market_value": "576.36",
+      "unrealized_pl": "1.08"
+    },
+    {
+      "symbol": "STZ",
+      "qty": "4",
+      "market_value": "559.88",
+      "unrealized_pl": "8.64"
+    }
+  ]
+}
