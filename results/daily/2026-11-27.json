@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-27",
+  "generated_at": "2026-11-27T22:26:09.321648-05:00",
+  "account": {
+    "equity": "72154.09",
+    "cash": "71017.71",
+    "buying_power": "287252.7"
+  },
+  "summary": {
+    "total_realized_pnl": "0",
+    "total_unrealized_pnl": "0",
+    "total_pnl": "0",
+    "bots_active": []
+  },
+  "bots": {},
+  "reconciliation": {
+    "discrepancies_found": 9,
+    "fixes_applied": 9
+  },
+  "positions": [
+    {
+      "symbol": "MDT",
+      "qty": "6",
+      "market_value": "572.46",
+      "unrealized_pl": "-2.82"
+    },
+    {
+      "symbol": "STZ",
+      "qty": "4",
+      "market_value": "563.92",
+      "unrealized_pl": "12.68"
+    }
+  ]
+}

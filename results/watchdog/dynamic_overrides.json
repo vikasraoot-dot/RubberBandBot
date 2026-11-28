@@ -1,23 +1,23 @@
 {
-  "market_condition": "BREAKOUT",
+  "market_condition": "RANGE",
   "overrides": {
-    "position_size_multiplier": 0.5,
+    "position_size_multiplier": 1.0,
     "tp_r_multiple_adjustment": 0.0,
     "breakeven_trigger_r_adjustment": 0.0
   },
-  "reason": "SPY 5d ATR 25.49 > 20d ATR 16.68 x 1.5 (ratio 1.53)",
+  "reason": "No strong condition detected. ADX=95.1, ATR ratio=1.36.",
   "diagnostics": {
-    "spy_close": 716.7,
-    "sma_20": 740.33,
-    "adx": 95.5,
-    "pdi": 696.2,
-    "mdi": 39.1,
-    "atr_5": 25.49,
-    "atr_20": 16.68,
-    "atr_ratio": 1.528,
+    "spy_close": 728.32,
+    "sma_20": 738.28,
+    "adx": 95.1,
+    "pdi": 660.1,
+    "mdi": 36.8,
+    "atr_5": 23.13,
+    "atr_20": 17.02,
+    "atr_ratio": 1.359,
     "reversal_count_20": 6
   },
-  "updated_at": "2026-11-27T03:43:01.859674+00:00",
+  "updated_at": "2026-11-28T03:26:10.775232+00:00",
   "breadth": {
     "pct_above_sma100": 50.0,
     "above_count": 0,
@@ -25,6 +25,6 @@
     "total_universe": 202,
     "failed_count": 202,
     "regime": "CAUTIOUS",
-    "updated_at": "2026-11-27T03:43:14.157860+00:00"
+    "updated_at": "2026-11-28T03:26:23.079573+00:00"
   }
 }
